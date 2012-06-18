@@ -34,6 +34,44 @@ Constant Headline
 Include "Parser";
 Include "VerbLib";
 
+Constant imagealign_InlineUp $01;
+Constant imagealign_InlineDown $02;
+Constant imagealign_InlineCenter $03;
+Constant imagealign_MarginLeft $04;
+Constant imagealign_MarginRight $05;
+
+[ glk_window_get_root 
+      ret;
+@glk 34 0 ret;
+  return ret;
+];
+
+[ glk_image_draw win image val1 val2
+      ret;
+  @copy val2 sp;
+  @copy val1 sp;
+  @copy image sp;
+    @copy win sp;
+    @glk 225 4 ret;
+  return ret;
+];
+
+[ glk_image_draw_scaled win image val1 val2 width height
+      ret;
+  @copy height sp;
+  @copy width sp;
+  @copy val2 sp;
+  @copy val1 sp;
+  @copy image sp;
+  @copy win sp;
+@glk 226 6 ret;
+  return ret;
+];
+
+[ ShowImage image ;
+    glk_image_draw(glk_window_get_root(), image, imagealign_InlineDown); ];
+
+
 !!! Story objects:
 
 Object Tent "Leathern tent"
@@ -49,6 +87,7 @@ Object Tent "Leathern tent"
  has 	light;
 
 Object OutsideTent "Outside of tent"
+ has	light
  with 	description
 	    "You stand up outside the tent. It is cold, but not 
 	    frigid. The moon is full and brilliant white. The river 
@@ -56,7 +95,9 @@ Object OutsideTent "Outside of tent"
 	    The shore continues to the north and south.",
         in_to Tent,
 	n_to SandyPool,
- has 	light;
+	after
+ 	[;  Go: ShowImage("OutsideTent.png");
+ 	];
 
 Object SandyPool "Sandy pool"
  with 	description
