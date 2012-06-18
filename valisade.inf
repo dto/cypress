@@ -1,0 +1,79 @@
+!!! valisade.inf --- Inform 6 source for Valisade 
+
+!! Copyright (C) 2012  David O'Toole
+
+!! Author: David O'Toole <dto@ioforms.org>
+!! Keywords: 
+
+!! This program is free software; you can redistribute it and/or modify
+!! it under the terms of the GNU General Public License as published by
+!! the Free Software Foundation, either version 3 of the License, or
+!! (at your option) any later version.
+
+!! This program is distributed in the hope that it will be useful,
+!! but WITHOUT ANY WARRANTY; without even the implied warranty of
+!! MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+!! GNU General Public License for more details.
+
+!! You should have received a copy of the GNU General Public License
+!! along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+!!! Commentary:
+
+!! Play it with Gargoyle: http://ccxvii.net/gargoyle/
+
+!!! Preamble:
+
+Constant Story "Valisade";
+Constant Headline
+    "^A visual novella of the forest primeval.
+    ^Copyright (C) 2012 by David T. O'Toole^
+    ^This program is free software; you can redistribute it and/or modify
+    ^it under the terms of the GNU General Public License version 3.^";
+
+Include "Parser";
+Include "VerbLib";
+
+!!! Story objects:
+
+Object Tent "Leathern tent"
+ with 	description
+	    "You are sitting in a triangular tent made of Elsewood 
+	    stalks and woven leather. The interior of the tent is 
+	    warm and dry, owing to the attuned Hearthstone in the 
+	    center where you are warming your hands. The room smells 
+	    faintly of incense. The rounded stones outside the 
+	    entrance on the river bank are just barely visible by 
+	    moonlight.",
+	out_to OutsideTent,
+ has 	light;
+
+Object OutsideTent "Outside of tent"
+ with 	description
+	    "You stand up outside the tent. It is cold, but not 
+	    frigid. The moon is full and brilliant white. The river 
+	    Oulos is as shallow as a brook here, and not much wider. 
+	    The shore continues to the north and south.",
+        in_to Tent,
+	n_to SandyPool,
+ has 	light;
+
+Object SandyPool "Sandy pool"
+ with 	description
+	    "Some water has collected into a small pool here, with 
+	    sand and pebbles. To the north, a path can be seen 
+	    leading into the heavier brush. The moon is reflected on 
+	    the surface. For an instant, you see something 
+	    glimmering near one edge of the pool.",
+	s_to OutsideTent,
+ has 	light;
+     
+!!! Initialisation:
+
+[ Initialise;
+    location = Tent;
+];
+
+Include "Grammar";
+
+!!! valisade.inf ends here

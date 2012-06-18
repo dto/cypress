@@ -1,0 +1,30 @@
+
+Main character is a male bow/arrow monk with no name (increase player identification)
+Follow trail through forest of disappeared lover who is a translator/scribe.
+Cast simple spells/abilities (spark, heal, falcon, climb, kick)
+Require food, water, shelter, dry clothing
+Make arrows from wood and stones
+Recover arrows, reuse/recycle
+Simple health system with four or five prose-described states (no numeric HP)
+Bandages and salves are healing items
+Skeleton enemies, as well as a shadow man in a dark robe who follows you.
+Brigands
+Finding written letters and other things left behind by lover
+Not much NPC interaction; most conversations are remembered (such as the lover)
+Story involves cave with ancient art and inscriptions, but lover disappeared there
+You have to find the cave
+You find his body and discover how he died
+Whatever killed him has now escaped the cave but you don't see it in this story
+Sad ending, but try to make it uplifting.
+Themes of translation, make up an ancient language that you only know bits of
+GLULX images: maps, inscriptions, title screen, portraits etc
+Play lute, occasional music cues
+Discover runes
+Fight a lich
+Local plants
+Collect flowers/plants
+Climb tree
+Hear bird sounds
+Puzzle in which you find some characters that describe movements in a forest 
+Quill pen/ink for spells
+USE REAL PENCIL / PAPER for all illustrations/maps
