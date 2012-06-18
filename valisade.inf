@@ -61,13 +61,19 @@ Object OutsideTent "Outside of tent"
 Object SandyPool "Sandy pool"
  with 	description
 	    "Some water has collected into a small pool here, with 
-	    sand and pebbles. To the north, a path can be seen 
-	    leading into the heavier brush. The moon is reflected on 
-	    the surface. For an instant, you see something 
-	    glimmering near one edge of the pool.",
+	    sand and pebbles. The moon is reflected on the surface. 
+	    To the north, a path can be seen leading into the heavier
+ 	    brush. Behind you at a short distance is your tent.",
 	s_to OutsideTent,
  has 	light;
-     
+
+Object PolishedHematite "glimmering polished hematite" SandyPool
+ with 	description
+	    "The smooth, mirror-like hematite is about the size of a 
+	    grape. It feels unusually heavy.",
+	name 'hematite' 'glimmer'
+ has 	;
+ 
 !!! Initialisation:
 
 [ Initialise;
