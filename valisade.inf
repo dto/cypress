@@ -45,7 +45,9 @@ Object Tent "Leathern tent"
 	    faintly of incense. The rounded stones outside the 
 	    entrance on the river bank are just barely visible by 
 	    moonlight.",
+	name 'tent' 'stalks' 'leather' 'interior' 'stones' 'rounded',
 	out_to OutsideTent,
+        cant_go "You must go outside of the tent first."
  has 	light;
 
 Object Vademecum "vademecum" Tent
@@ -54,26 +56,30 @@ Object Vademecum "vademecum" Tent
 	    raised semicircle motif pattern, now worn with age. 
 	    Every paladin carries one as his commonplace book, to 
 	    fill with notes of the day, and to carry letters and 
-	    other documents. This one is blank except for the first 
-	    page, upon which you have written:
-	    ^^1. Visit Dr. Quine at the library in Gleyborough
-	    ^2. Meditate on the Hearthstone to prepare for the journey.
-	    ^3. Depart for Valisade
-	    ",
+	    other documents.",
 	name 'vademecum' 'vade' 'notebook' 'journal',
  has 	container openable;
 
-Object LetterFromFrancis "letter from Francis dated 8
-	    February" Vademecum
+Object Itinerary "itinerary" Vademecum
+ with 	description
+	    "1. Visit Dr. Quine at the library in Gleyborough
+	    ^2. Meditate
+	    ^3. Depart for Valisade
+	    ",
+        name 'itinerary' 'todo' 'tasks',
+ has 	;
+
+Object LetterFromFrancis "letter from Francis" Vademecum
  with   name 'letter' 'francis',
 	description 
-	    "Geoffrey, ^^Though this letter may find you in good 
-	    spirits, it brings unpleasant news. Ian's southern 
-	    expedition has not been heard from in twenty days. 
-	    Imperial ravens have been searching, but a cold front 
-	    has kept them flying far south enough to sense Ian's 
-	    team. You must come back to Valisade. I'm sorry, 
-	    brother. ^^Peace be with you. ^ Francis",
+	    "8 February 8024^Geoffrey, ^^Though this letter may find 
+	    you in good spirits, it brings unpleasant news. I've 
+	    just learned that Ian's southern expedition has not been 
+	    heard from in twenty days. Imperial ravens have been 
+	    searching, but a cold front has kept them flying far 
+	    south enough to sense Ian's team. You must come back to 
+	    Valisade. I'm sorry, brother. ^^Peace be with you. ^ 
+	    Francis",
  has	;
 
 Object OutsideTent "Outside of tent"
@@ -85,7 +91,14 @@ Object OutsideTent "Outside of tent"
 	    and not much wider. The shore continues to the north and 
 	    south.",
         in_to Tent,
+        s_to "You can't go back home now.",
 	n_to SandyPool;
+
+Object Oulos "The river Oulos" OutsideTent
+ with 	description "The river appears nearly black. You kneel down
+ 	    and take a sip of the pure water from your cupped hands.",
+	name 'oulos' 'river' 'water' 'brook' 'shore',
+ has 	concealed;
 
 Object SandyPool "Sandy pool"
  with 	description
@@ -131,6 +144,22 @@ Object Circle "circle" Clearing
 	name 'circle' 'depression' 'middle' 'center' 'grass'
  has 	concealed;
 
+[ MeditateSub;
+    print "You look upward and suddenly it is as if the sun is 
+    	at its zenith; the sun is the dot, and the circle is 
+    	the horizon around your field of view. You are 
+    	momentarily blinded, then a feeling of peace ensues.
+    	^A calm voice says, ~Look into the eye of the medicine man.~";
+];
+
+Object SunIdeogram "sun ideogram" Clearing
+ has 	static
+ with 	name 'sun' 'ideogram' 'symbol',
+	description
+	    "A circle with a point at its center is drawn in the 
+	    dust at the very center of the depression, as if by a 
+	    finger. Someone meditated here.";
+
 !!! Initialisation:
 
 [ Initialise;
@@ -138,5 +167,7 @@ Object Circle "circle" Clearing
 ];
 
 Include "Grammar";
+
+Verb 'meditate' * -> Meditate;
 
 !!! valisade.inf ends here

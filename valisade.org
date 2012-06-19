@@ -1,5 +1,5 @@
 Main character is a male bow/arrow monk with no name (increase player identification)
-Follow trail through forest of disappeared lover who is a translator/scribe.
+Follow trail through forest of disappeared friend who is a translator/scribe.
 Cast simple spells/abilities (spark, heal, falcon, climb, kick)
 Require food, water, shelter, dry clothing
 Make arrows from wood and stones
@@ -8,9 +8,9 @@ Simple health system with four or five prose-described states (no numeric HP)
 Bandages and salves are healing items
 Skeleton enemies, as well as a shadow man in a dark robe who follows you.
 Brigands
-Finding written letters and other things left behind by lover
-Not much NPC interaction; most conversations are remembered (such as the lover)
-Story involves cave with ancient art and inscriptions, but lover disappeared there
+Finding written letters and other things left behind by friend
+Not much NPC interaction; most conversations are remembered (such as the friend)
+Story involves cave with ancient art and inscriptions, but scribe disappeared there
 You have to find the cave
 You find his body and discover how he died
 Whatever killed him has now escaped the cave but you don't see it in this story
