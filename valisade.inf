@@ -26,7 +26,7 @@
    	     
 Constant Story "Valisade";
 Constant Headline
-    "^A visual novella of the forest primeval.
+    "^An interactive novella of the forest primeval
     ^Copyright (C) 2012 by David T. O'Toole^
     ^This program is free software; you can redistribute it and/or modify
     ^it under the terms of the GNU General Public License version 3.^";
@@ -34,23 +34,56 @@ Constant Headline
 Include "Parser";
 Include "VerbLib";
 
+!!! Player possessions
+
+Object Bow "bow"
+ with 	name 'bow',
+	description "An elsewood bow, with a runic inscription of your
+ 	    family name."
+ has	clothing;
+
+Object Quiver "quiver"
+ with 	name 'quiver',
+	description "The quiver is made of leather, deep brown and
+ 	    supple.",
+ has 	container open clothing;
+
+Class Arrow
+ with 	name 'arrow' 'arrows//p',
+	article "an",
+	plural "arrows",
+	description "This is an arrow of blackened mahogany. Its
+ 	    obsidian head is as sharp as a razor.";
+
+Arrow "arrow" Quiver;
+Arrow "arrow" Quiver;
+Arrow "arrow" Quiver;
+Arrow "arrow" Quiver;
+
 !!! Story objects:
 
 Object Tent "Leathern tent"
  with 	description
 	    "You are sitting in a triangular tent made of Elsewood 
 	    stalks and woven leather. The interior of the tent is 
-	    warm and dry, owing to the attuned Hearthstone in the 
-	    center where you are warming your hands. The room smells 
-	    faintly of incense. The rounded stones outside the 
-	    entrance on the river bank are just barely visible by 
-	    moonlight.",
+	    warm and dry. The room smells faintly of incense. The 
+	    rounded stones outside the entrance on the river bank 
+	    are just barely visible by moonlight.",
 	name 'tent' 'stalks' 'leather' 'interior' 'stones' 'rounded',
 	out_to OutsideTent,
         cant_go "You must go outside of the tent first."
  has 	light;
 
-Object Vademecum "vademecum" Tent
+Object Hearthstone "Hearthstone" Tent
+ with 	name 'hearthstone' 'hearth' 'stone',
+	description "This magic stone is about the size of your 
+	    fist. A deep orange glow can be seen inside the 
+	    quartz-like material, radiating heat and throwing a 
+	    modicum of light onto your surroundings. The stone is 
+	    always cool to the touch despite its ambient warming 
+	    properties.";
+
+Object 	Vademecum "vademecum" Tent
  with 	description
 	    "A fine canvas-bound vademecum whose cover bears a 
 	    raised semicircle motif pattern, now worn with age. 
@@ -87,18 +120,18 @@ Object OutsideTent "Outside of tent"
  with 	description
 	    "You are standing outside your tent on the riverbank. It 
 	    is cold, but not frigid. The moon is full and brilliant 
-	    white. The river Oulos is as shallow as a brook here, 
+	    white. The river Ouros is as shallow as a brook here, 
 	    and not much wider. The shore continues to the north and 
 	    south.",
         in_to Tent,
         s_to "You can't go back home now.",
 	n_to SandyPool;
 
-Object Oulos "The river Oulos" OutsideTent
+Object Ouros "river Ouros" OutsideTent
  with 	description "The river appears nearly black. You kneel down
  	    and take a sip of the pure water from your cupped hands.",
-	name 'oulos' 'river' 'water' 'brook' 'shore',
- has 	concealed;
+	name 'ouros' 'river' 'water' 'brook' 'shore',
+ has 	scenery;
 
 Object SandyPool "Sandy pool"
  with 	description
@@ -115,25 +148,52 @@ Object PolishedHematite "glimmering polished hematite" SandyPool
  with 	description
 	    "The smooth, mirror-like hematite is about the size of a 
 	    grape. It feels unusually heavy.",
-	name 'hematite' 'glimmer'
+	name 'hematite' 'glimmering'
  has 	;
 
 Object ForestPath "Forest path"
  with 	description
-	    "The sidereal light heralding sunrise peeks through the mostly-bare
+	    "The sidereal light, heralding sunrise, peeks through the mostly-bare
  	    branches of this forest path. It's wide enough for a small wagon, but
  	    probably too rough. To the southeast you can hear the burbling of the
- 	    Ouros; the forest path continues to the northwest.",
+ 	    Ouros; additional forest paths continue to the north and northwest.",
 	se_to SandyPool,
 	nw_to Clearing,
+        n_to SouthernGleyborough,
+ has 	light;
+
+Object RoadSign "road sign" ForestPath
+ with 	description "The top half's lettering is worn; it says 
+	    ~Gleyborough, two miles north~. The bottom half is 
+	    illegible.",
+        name 'sign',
+ has 	static;
+
+Object SouthernGleyborough "Southern Gleyborough"
+ with 	description
+	    "You are on the outskirts of town. An abandoned house 
+	    lies to the west; you can see Dr. Quine's house to the 
+	    east. There is a light in one of the windows.",
+ 	w_to "There's nothing in that house.",
+	e_to OutsideQuineResidence,
+        s_to ForestPath,
+ has 	light;
+
+Object OutsideQuineResidence "Outside Quine's house"
+ with 	description
+	    "Doctor Quine's house is surprisingly humble for such a 
+	    great man. It is painted white, with a red doorway.",
+ 	in_to "The door is locked; you can't get in this way, for
+ 	    now.",
+	w_to SouthernGleyborough,
  has 	light;
 
 Object Clearing "A clearing at sunrise"
  with description
 	    "The fury of Sol is beginning to light the East. The sky 
-	    reddens in suspicion. The scent of patchouli. You see a 
-	    wide circle at the middle of the clearing where there is 
-	    no grass.",
+	    reddens in suspicion. There is a faint rumour of 
+	    patchouli oil. You see a wide circle at the middle of the 
+	    clearing where there is no grass.",
  	se_to ForestPath,
  has	light;
 
@@ -144,14 +204,6 @@ Object Circle "circle" Clearing
 	name 'circle' 'depression' 'middle' 'center' 'grass'
  has 	concealed;
 
-[ MeditateSub;
-    print "You look upward and suddenly it is as if the sun is 
-    	at its zenith; the sun is the dot, and the circle is 
-    	the horizon around your field of view. You are 
-    	momentarily blinded, then a feeling of peace ensues.
-    	^A calm voice says, ~Look into the eye of the medicine man.~";
-];
-
 Object SunIdeogram "sun ideogram" Clearing
  has 	static
  with 	name 'sun' 'ideogram' 'symbol',
@@ -160,10 +212,31 @@ Object SunIdeogram "sun ideogram" Clearing
 	    dust at the very center of the depression, as if by a 
 	    finger. Someone meditated here.";
 
+!!! Story verbs
+
+[ MeditateSub;
+    print "You sit cross-legged on the ground and begin meditating.^";
+    if (location == Clearing)
+    	print "Your eyes fall upon the ideogram. ^You look upward 
+	    and suddenly it is as if the sun is at its zenith; the 
+	    sun is the dot at the center of the ideogram, and the 
+	    circle is the horizon around your field of view. You are 
+	    momentarily blinded, but then a feeling of peace ensues. 
+	    ^A calm voice says, ~Look into the eye of the medicine 
+	    man.~";
+];
+
 !!! Initialisation:
 
 [ Initialise;
     location = Tent;
+    lookmode = 2;
+    player.description =
+	"You wear the rugged leather-and-wool raiment of a Paladin.
+	The leather is embossed with runes at its fringes.";
+    move Bow to player;
+    move Quiver to player;
+    give Quiver worn;
 ];
 
 Include "Grammar";
