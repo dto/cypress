@@ -112,7 +112,7 @@ Object ForestPath "Forest path"
  	    probably too rough. To the southeast you can hear the burbling of the
  	    Ouros; the forest path continues to the northwest.",
 	se_to SandyPool,
-	ne_to Clearing,
+	nw_to Clearing,
  has 	light;
 
 Object Clearing "A clearing at sunrise"

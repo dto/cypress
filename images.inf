@@ -1,0 +1,40 @@
+! temporarily taken from infglk.h
+
+Constant GLK_NULL 0;
+Constant imagealign_InlineUp $01;
+Constant imagealign_InlineDown $02;
+Constant imagealign_InlineCenter $03;
+Constant imagealign_MarginLeft $04;
+Constant imagealign_MarginRight $05;
+Constant fileusage_BinaryMode $000;
+Constant fileusage_Data $00;
+
+[ glk_fileref_create_by_name usage name rock
+      ret;
+  @copy rock sp;
+  @copy name sp;
+  @copy usage sp;
+@glk 97 3 ret;
+  return ret;
+];
+
+[ glk_image_draw win image val1 val2
+      ret;
+  @copy val2 sp;
+  @copy val1 sp;
+  @copy image sp;
+    @copy win sp;
+    @glk 225 4 ret;
+  return ret;
+];
+
+[ ShowImage image ;
+    glk_image_draw(gg_mainwin, image, imagealign_InlineDown); ];
+
+[ LoadImage image ;
+    return glk_fileref_create_by_name(0, ChangeAnyToCString(image), 0); ];
+
+!!! Image resources:
+
+Global OutsideTentDrawing;
+
