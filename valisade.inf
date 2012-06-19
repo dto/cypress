@@ -54,7 +54,12 @@ Object Vademecum "vademecum" Tent
 	    raised semicircle motif pattern, now worn with age. 
 	    Every paladin carries one as his commonplace book, to 
 	    fill with notes of the day, and to carry letters and 
-	    other documents. This one is blank.",
+	    other documents. This one is blank except for the first 
+	    page, upon which you have written:
+	    ^^1. Visit Dr. Quine at the library in Gleyborough
+	    ^2. Meditate on the Hearthstone to prepare for the journey.
+	    ^3. Depart for Valisade
+	    ",
 	name 'vademecum' 'vade' 'notebook' 'journal',
  has 	container openable;
 
@@ -62,7 +67,7 @@ Object LetterFromFrancis "letter from Francis dated 8
 	    February" Vademecum
  with   name 'letter' 'francis',
 	description 
-	    "^Geoffrey, ^^Though this letter may find you in good 
+	    "Geoffrey, ^^Though this letter may find you in good 
 	    spirits, it brings unpleasant news. Ian's southern 
 	    expedition has not been heard from in twenty days. 
 	    Imperial ravens have been searching, but a cold front 
@@ -74,10 +79,11 @@ Object LetterFromFrancis "letter from Francis dated 8
 Object OutsideTent "Outside of tent"
  has	light
  with 	description
-	    "You are standing outside your tent. It is cold, but not 
-	    frigid. The moon is full and brilliant white. The river 
-	    Oulos is as shallow as a brook here, and not much wider. 
-	    The shore continues to the north and south.",
+	    "You are standing outside your tent on the riverbank. It 
+	    is cold, but not frigid. The moon is full and brilliant 
+	    white. The river Oulos is as shallow as a brook here, 
+	    and not much wider. The shore continues to the north and 
+	    south.",
         in_to Tent,
 	n_to SandyPool;
 
@@ -85,9 +91,11 @@ Object SandyPool "Sandy pool"
  with 	description
 	    "Some water has collected into a small pool here, with 
 	    sand and pebbles. The moon is reflected on the surface. 
-	    To the north, a path can be seen leading into the heavier
- 	    brush. Behind you at a short distance is your tent.",
+	    To the northwest, a path can be seen leading into the 
+	    heavier brush. Behind you at a short distance to the 
+	    south is your tent.",
 	s_to OutsideTent,
+        nw_to ForestPath,
  has 	light;
 
 Object PolishedHematite "glimmering polished hematite" SandyPool
@@ -96,7 +104,33 @@ Object PolishedHematite "glimmering polished hematite" SandyPool
 	    grape. It feels unusually heavy.",
 	name 'hematite' 'glimmer'
  has 	;
- 
+
+Object ForestPath "Forest path"
+ with 	description
+	    "The sidereal light heralding sunrise peeks through the mostly-bare
+ 	    branches of this forest path. It's wide enough for a small wagon, but
+ 	    probably too rough. To the southeast you can hear the burbling of the
+ 	    Ouros; the forest path continues to the northwest.",
+	se_to SandyPool,
+	ne_to Clearing,
+ has 	light;
+
+Object Clearing "A clearing at sunrise"
+ with description
+	    "The fury of Sol is beginning to light the East. The sky 
+	    reddens in suspicion. The scent of patchouli. You see a 
+	    wide circle at the middle of the clearing where there is 
+	    no grass.",
+ 	se_to ForestPath,
+ has	light;
+
+Object Circle "circle" Clearing
+ with	description
+            "The soil in this circular depression is greyish and appears to be 
+	    completely dry. There are no footprints anywhere.",
+	name 'circle' 'depression' 'middle' 'center' 'grass'
+ has 	concealed;
+
 !!! Initialisation:
 
 [ Initialise;
