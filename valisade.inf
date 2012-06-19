@@ -34,62 +34,6 @@ Constant Headline
 Include "Parser";
 Include "VerbLib";
 
-! temporarily taken from infglk.h
-
-Constant GLK_NULL 0;
-Constant imagealign_InlineUp $01;
-Constant imagealign_InlineDown $02;
-Constant imagealign_InlineCenter $03;
-Constant imagealign_MarginLeft $04;
-Constant imagealign_MarginRight $05;
-Constant fileusage_BinaryMode $000;
-Constant fileusage_Data $00;
-
-[ glk_window_get_root 
-      ret;
-@glk 34 0 ret;
-  return ret;
-];
-
-[ glk_fileref_create_by_name usage name rock
-      ret;
-  @copy rock sp;
-  @copy name sp;
-  @copy usage sp;
-@glk 97 3 ret;
-  return ret;
-];
-
-[ glk_image_draw win image val1 val2
-      ret;
-  @copy val2 sp;
-  @copy val1 sp;
-  @copy image sp;
-    @copy win sp;
-    @glk 225 4 ret;
-  return ret;
-];
-
-[ glk_image_draw_scaled win image val1 val2 width height
-      ret;
-  @copy height sp;
-  @copy width sp;
-  @copy val2 sp;
-  @copy val1 sp;
-  @copy image sp;
-  @copy win sp;
-@glk 226 6 ret;
-  return ret;
-];
-
-[ ShowImage image ;
-    new_line;
-    glk_image_draw(gg_mainwin, image, imagealign_InlineDown); ];
-
-!!! Image resources:
-
-Global OutsideTentDrawing;
-
 !!! Story objects:
 
 Object Tent "Leathern tent"
@@ -104,19 +48,38 @@ Object Tent "Leathern tent"
 	out_to OutsideTent,
  has 	light;
 
+Object Vademecum "vademecum" Tent
+ with 	description
+	    "A fine canvas-bound vademecum whose cover bears a 
+	    raised semicircle motif pattern, now worn with age. 
+	    Every paladin carries one as his commonplace book, to 
+	    fill with notes of the day, and to carry letters and 
+	    other documents. This one is blank.",
+	name 'vademecum' 'vade' 'notebook' 'journal',
+ has 	container openable;
+
+Object LetterFromFrancis "letter from Francis dated 8
+	    February" Vademecum
+ with   name 'letter' 'francis',
+	description 
+	    "^Geoffrey, ^^Though this letter may find you in good 
+	    spirits, it brings unpleasant news. Ian's southern 
+	    expedition has not been heard from in twenty days. 
+	    Imperial ravens have been searching, but a cold front 
+	    has kept them flying far south enough to sense Ian's 
+	    team. You must come back to Valisade. I'm sorry, 
+	    brother. ^^Peace be with you. ^ Francis",
+ has	;
+
 Object OutsideTent "Outside of tent"
  has	light
  with 	description
-	    "You stand up outside the tent. It is cold, but not 
+	    "You are standing outside your tent. It is cold, but not 
 	    frigid. The moon is full and brilliant white. The river 
 	    Oulos is as shallow as a brook here, and not much wider. 
 	    The shore continues to the north and south.",
         in_to Tent,
-	n_to SandyPool,
-	after
- 	[;  Go: 
-	    ShowImage(OutsideTentDrawing);
- 	];
+	n_to SandyPool;
 
 Object SandyPool "Sandy pool"
  with 	description
@@ -138,8 +101,6 @@ Object PolishedHematite "glimmering polished hematite" SandyPool
 
 [ Initialise;
     location = Tent;
-    OutsideTentDrawing = "OutsideTent.png";
-!    glk_fileref_create_by_name(fileusage_BinaryMode + fileusage_Data, "OUTSIDETENT", 20);
 ];
 
 Include "Grammar";
