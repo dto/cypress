@@ -23,7 +23,7 @@
 !! Play it with Gargoyle: http://ccxvii.net/gargoyle/
 
 !!! Preamble:
-
+   	     
 Constant Story "Valisade";
 Constant Headline
     "^A visual novella of the forest primeval.
@@ -34,15 +34,29 @@ Constant Headline
 Include "Parser";
 Include "VerbLib";
 
+! temporarily taken from infglk.h
+
+Constant GLK_NULL 0;
 Constant imagealign_InlineUp $01;
 Constant imagealign_InlineDown $02;
 Constant imagealign_InlineCenter $03;
 Constant imagealign_MarginLeft $04;
 Constant imagealign_MarginRight $05;
+Constant fileusage_BinaryMode $000;
+Constant fileusage_Data $00;
 
 [ glk_window_get_root 
       ret;
 @glk 34 0 ret;
+  return ret;
+];
+
+[ glk_fileref_create_by_name usage name rock
+      ret;
+  @copy rock sp;
+  @copy name sp;
+  @copy usage sp;
+@glk 97 3 ret;
   return ret;
 ];
 
@@ -69,8 +83,12 @@ Constant imagealign_MarginRight $05;
 ];
 
 [ ShowImage image ;
-    glk_image_draw(glk_window_get_root(), image, imagealign_InlineDown); ];
+    new_line;
+    glk_image_draw(gg_mainwin, image, imagealign_InlineDown); ];
 
+!!! Image resources:
+
+Global OutsideTentDrawing;
 
 !!! Story objects:
 
@@ -96,7 +114,8 @@ Object OutsideTent "Outside of tent"
         in_to Tent,
 	n_to SandyPool,
 	after
- 	[;  Go: ShowImage("OutsideTent.png");
+ 	[;  Go: 
+	    ShowImage(OutsideTentDrawing);
  	];
 
 Object SandyPool "Sandy pool"
@@ -119,6 +138,8 @@ Object PolishedHematite "glimmering polished hematite" SandyPool
 
 [ Initialise;
     location = Tent;
+    OutsideTentDrawing = "OutsideTent.png";
+!    glk_fileref_create_by_name(fileusage_BinaryMode + fileusage_Data, "OUTSIDETENT", 20);
 ];
 
 Include "Grammar";
