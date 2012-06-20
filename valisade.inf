@@ -173,7 +173,7 @@ Object SouthernGleyborough "Southern Gleyborough"
  with 	description
 	    "You are on the outskirts of town. An abandoned house 
 	    lies to the west; you can see Dr. Quine's house to the 
-	    east. There is a light in one of the windows.",
+	    east. There is a light in one of his windows.",
  	w_to "There's nothing in that house.",
 	e_to OutsideQuineResidence,
         s_to ForestPath,
@@ -212,18 +212,47 @@ Object SunIdeogram "sun ideogram" Clearing
 	    dust at the very center of the depression, as if by a 
 	    finger. Someone meditated here.";
 
+Object Raven "black raven"
+ has 	animate
+ with	name 'raven' 'black' 'bird' 'courier',
+ 	description "The raven's feathers are as black as onyx, except for the right wing 
+	    which is painted bright red as with all Imperial
+ 	    couriers. An extraordinary bird, deserving of
+ 	    veneration.",
+	life [;
+	 Ask:
+	    print "The Raven coos and chirps.";
+	    move SmallParchment to Clearing;
+	    return false;
+	];
+
+Object SmallParchment "small parchment" Raven
+ with 	name 'parchment' 'paper',
+	description "TODO: distress letter from quine";
+
 !!! Story verbs
+
+[ DoRavenEncounter;
+    print "Your eyes fall upon the ideogram. ^You look upward 
+	and suddenly it is as if the sun is at its zenith; the 
+	sun is the dot at the center of the ideogram, and the 
+	circle is the horizon around your field of view. You are 
+	momentarily blinded, but then a feeling of peace ensues. 
+	^A calm voice says, ~Look into the eye of the medicine 
+	man.~";
+    print "^A few moments pass.";
+    print "^A large raven appears in the sky above the clearing. It 
+	swoops down to land just near the ideogram, and looks at you 
+	quizzically, as if waiting for you to do something.";
+    move Raven to Clearing;
+    <<look>>;
+];
 
 [ MeditateSub;
     print "You sit cross-legged on the ground and begin meditating.^";
     if (location == Clearing)
-    	print "Your eyes fall upon the ideogram. ^You look upward 
-	    and suddenly it is as if the sun is at its zenith; the 
-	    sun is the dot at the center of the ideogram, and the 
-	    circle is the horizon around your field of view. You are 
-	    momentarily blinded, but then a feeling of peace ensues. 
-	    ^A calm voice says, ~Look into the eye of the medicine 
-	    man.~";
+    	DoRavenEncounter();
+    return false;
 ];
 
 !!! Initialisation:
