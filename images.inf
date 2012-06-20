@@ -1,4 +1,4 @@
-! temporarily taken from infglk.h
+! temporarily borrowed from infglk.h
 
 Constant GLK_NULL 0;
 Constant imagealign_InlineUp $01;
@@ -34,7 +34,4 @@ Constant fileusage_Data $00;
 [ LoadImage image ;
     return glk_fileref_create_by_name(0, ChangeAnyToCString(image), 0); ];
 
-!!! Image resources:
-
-Global OutsideTentDrawing;
-
+! file loads, draw routine doesn't error, but pic is not displayed

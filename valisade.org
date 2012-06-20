@@ -1,3 +1,10 @@
+* TODO raven messenger with 2nd letter
+* TODO Moon found_in ...
+* TODO healing herb 
+* TODO forget me nots
+* TODO simple health system 3 levels
+* TODO hear screech owl
+
 Main character is a male bow/arrow monk with no name (increase player identification)
 Follow trail through forest of disappeared friend who is a translator/scribe.
 Cast simple spells/abilities (spark, heal, falcon, climb, kick)
