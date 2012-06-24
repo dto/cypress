@@ -18,15 +18,9 @@
 !! You should have received a copy of the GNU General Public License
 !! along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-!!! Commentary:
-
-!! Play it with Gargoyle: http://ccxvii.net/gargoyle/
-
-!!! Preamble:
-   	     
 Constant Story "Valisade";
 Constant Headline
-    "^An interactive novella of the forest primeval
+    "^An interactive short story
     ^Copyright (C) 2012 by David T. O'Toole^
     ^This program is free software; you can redistribute it and/or modify
     ^it under the terms of the GNU General Public License version 3.^";
@@ -62,17 +56,29 @@ Arrow "arrow" Quiver;
 
 !!! Story objects:
 
-Object Tent "Leathern tent"
+Object Moon "moon"
+ has	static scenery
+ with 	description "The moon is absolutely full, like a silver Sun.
+	    Quine's Crater is visible just below the center.",
+	name 'moon' 'luna' 'crater',
+	found_in OutsideTent SandyPool ForestPath Clearing SouthernGleyborough;
+
+Object Sun "sun"
+ has 	static scenery
+ with	description "Sol, the source of all life; the burning spirit 
+	    of Sol is the fire that keeps existence alive.";
+
+Object Tent "Leather tent" 
  with 	description
 	    "You are sitting in a triangular tent made of Elsewood 
 	    stalks and woven leather. The interior of the tent is 
-	    warm and dry. The room smells faintly of incense. The 
-	    rounded stones outside the entrance on the river bank 
-	    are just barely visible by moonlight.",
+	    warm and dry. The room smells faintly of incense. Some 
+	    rounded stones outside the entrance to the tent are just 
+	    barely visible by moonlight.",
 	name 'tent' 'stalks' 'leather' 'interior' 'stones' 'rounded',
 	out_to OutsideTent,
         cant_go "You must go outside of the tent first."
- has 	light;
+ has 	light static;
 
 Object Hearthstone "Hearthstone" Tent
  with 	name 'hearthstone' 'hearth' 'stone',
@@ -95,7 +101,8 @@ Object 	Vademecum "vademecum" Tent
 
 Object Itinerary "itinerary" Vademecum
  with 	description
-	    "1. Visit Dr. Quine at the library in Gleyborough
+	    "February 11, 8024
+	    ^1. Visit Dr. Quine
 	    ^2. Meditate
 	    ^3. Depart for Valisade
 	    ",
@@ -105,14 +112,15 @@ Object Itinerary "itinerary" Vademecum
 Object LetterFromFrancis "letter from Francis" Vademecum
  with   name 'letter' 'francis',
 	description 
-	    "8 February 8024^Geoffrey, ^^Though this letter may find 
-	    you in good spirits, it brings unpleasant news. I've 
-	    just learned that Ian's southern expedition has not been 
-	    heard from in twenty days. Imperial ravens have been 
-	    searching, but a cold front has kept them flying far 
-	    south enough to sense Ian's team. You must come back to 
-	    Valisade. I'm sorry, brother. ^^Peace be with you. ^ 
-	    Francis",
+	    "February 8, 8024^Geoffrey, ^^Though this letter may 
+	    find you in good spirits, it brings unpleasant news. 
+	    I've just learned that Ian's southern expedition has not 
+	    been heard from in twenty days. Imperial ravens have 
+	    been searching, but a blizzard has stopped them flying 
+	    far south enough to sense Ian's team. You must come back 
+	    to Valisade. Please bring a copy of Dr. Quine's 
+	    manuscript with you. I'm sorry, brother. ^^Peace be with 
+	    you. ^ Francis",
  has	;
 
 Object OutsideTent "Outside of tent"
@@ -127,29 +135,47 @@ Object OutsideTent "Outside of tent"
         s_to "You can't go back home now.",
 	n_to SandyPool;
 
-Object Ouros "river Ouros" OutsideTent
+Object Ouros "river Ouros" 
  with 	description "The river appears nearly black. You kneel down
  	    and take a sip of the pure water from your cupped hands.",
 	name 'ouros' 'river' 'water' 'brook' 'shore',
+	found_in OutsideTent SandyPool,
  has 	scenery;
 
 Object SandyPool "Sandy pool"
  with 	description
-	    "Some water has collected into a small pool here, with 
-	    sand and pebbles. The moon is reflected on the surface. 
-	    To the northwest, a path can be seen leading into the 
-	    heavier brush. Behind you at a short distance to the 
-	    south is your tent.",
+	    "Some river water has collected into a small pool here 
+	    on the shore, with sand and pebbles. To the northwest, a 
+	    path can be seen leading into the heavier brush. Behind 
+	    you at a short distance to the south is your tent.",
+	name 'path' 'brush' 'tent',
 	s_to OutsideTent,
         nw_to ForestPath,
  has 	light;
 
-Object PolishedHematite "glimmering polished hematite" SandyPool
+Object Pool "pool of water" SandyPool
+ has 	static scenery
+ with 	description "The moon is reflected in the surface of this 
+	    little pool.",
+	name 'pool' 'water' 'sandy',
+	after [;
+	 Examine:
+	    if (Hematite in SandyPool) 
+		print "Something shiny is visible just beneath the 
+		    surface of the pool at exactly the spot where 
+		    Quine's Crater appears in the reflection; but it 
+		    could be an illusion. Looking closer, you 
+		    realize there is a polished hematite just 
+		    beneath the surface.";
+		give Hematite ~concealed;
+	];
+	    
+Object Hematite "glimmering polished hematite" SandyPool
  with 	description
 	    "The smooth, mirror-like hematite is about the size of a 
 	    grape. It feels unusually heavy.",
-	name 'hematite' 'glimmering'
- has 	;
+	name 'hematite' 'moonstone',
+ has	concealed;
 
 Object ForestPath "Forest path"
  with 	description
@@ -162,31 +188,57 @@ Object ForestPath "Forest path"
         n_to SouthernGleyborough,
  has 	light;
 
-Object RoadSign "road sign" ForestPath
+Object RoadSign "wooden road sign" ForestPath
  with 	description "The top half's lettering is worn; it says 
 	    ~Gleyborough, two miles north~. The bottom half is 
 	    illegible.",
-        name 'sign',
+        name 'sign' 'wooden',
  has 	static;
 
 Object SouthernGleyborough "Southern Gleyborough"
  with 	description
 	    "You are on the outskirts of town. An abandoned house 
-	    lies to the west; you can see Dr. Quine's house to the 
-	    east. There is a light in one of his windows.",
+	    crumbles about a hundred yards to the west of you; Dr. 
+	    Quine's house can be seen at a similar distance to the 
+	    east.^There is a light in one of his windows.",
  	w_to "There's nothing in that house.",
-	e_to OutsideQuineResidence,
-        s_to ForestPath,
+	cant_go "The rest of Gleyborough isn't relevant now; you have
+ 	    to find Dr. Quine.",
+ 	e_to OutsideQuineHouse,
+	s_to ForestPath,
  has 	light;
 
-Object OutsideQuineResidence "Outside Quine's house"
+Object OutsideQuineHouse "Outside Quine's house"
  with 	description
 	    "Doctor Quine's house is surprisingly humble for such a 
-	    great man. It is painted white, with a red doorway.",
- 	in_to "The door is locked; you can't get in this way, for
- 	    now.",
+	    great man. It is painted white, with a red door. The 
+	    door is smashed inward, broken nearly in half tallwise, 
+	    but something large is blocking the inside of the 
+	    doorway and the windows on either side. A circular path 
+	    leads either direction around the house to the southeast 
+	    and northeast.",
+	name 'house' 'door' 'windows',
+ 	in_to "The door is smashed; you can't get in this way.",
 	w_to SouthernGleyborough,
+        se_to BehindQuineHouse,
+        ne_to BehindQuineHouse,
  has 	light;
+
+Object BehindQuineHouse "Behind Quine's house"
+ has 	light,
+ with 	in_to "There's no way in from here except down through the
+ 	    cellar bulkhead door.",
+        nw_to OutsideQuineHouse,
+        sw__to OutsideQuineHouse,
+	name 'house',
+	description "You are standing behind Quine's house. The cellar
+ 	    bulkhead is padlocked.";
+ 
+!! Object CellarDoor
+
+!! Object CellarKey
+
+!! Object QuineHouse "Quine's house"
 
 Object Clearing "A clearing at sunrise"
  with description
@@ -202,7 +254,7 @@ Object Circle "circle" Clearing
             "The soil in this circular depression is greyish and appears to be 
 	    completely dry. There are no footprints anywhere.",
 	name 'circle' 'depression' 'middle' 'center' 'grass'
- has 	concealed;
+ has 	static concealed;
 
 Object SunIdeogram "sun ideogram" Clearing
  has 	static
@@ -213,24 +265,25 @@ Object SunIdeogram "sun ideogram" Clearing
 	    finger. Someone meditated here.";
 
 Object Raven "black raven"
- has 	animate
+ has 	animate static
  with	name 'raven' 'black' 'bird' 'courier',
  	description "The raven's feathers are as black as onyx, except for the right wing 
 	    which is painted bright red as with all Imperial
  	    couriers. An extraordinary bird, deserving of
  	    veneration.",
-	life [;
-	 Ask:
-	    print "The Raven coos and chirps.";
+	before [;
+	 Ask, Tell:
+	    print "Upon hearing your voice, The Raven coos and chirps.";
 	    move SmallParchment to Clearing;
-	    return false;
+	    print "The raven chirps happily, and flies away.";
+	    give Raven absent;
+	    return true;
+	 Touch:
+	    print "The raven caws and flaps away for a few moments, landing
+ 	    	again near the ideogram. She seems unsure of who you
+ 		are.";
+ 	    return true;
 	];
-
-Object SmallParchment "small parchment" Raven
- with 	name 'parchment' 'paper',
-	description "TODO: distress letter from quine";
-
-!!! Story verbs
 
 [ DoRavenEncounter;
     print "Your eyes fall upon the ideogram. ^You look upward 
@@ -242,11 +295,17 @@ Object SmallParchment "small parchment" Raven
 	man.~";
     print "^A few moments pass.";
     print "^A large raven appears in the sky above the clearing. It 
-	swoops down to land just near the ideogram, and looks at you 
-	quizzically, as if waiting for you to do something.";
+	swoops down to land just near the ideogram.^^The raven peers
+    	at you, expectantly.";
+	
     move Raven to Clearing;
-    <<look>>;
 ];
+
+Object SmallParchment "small parchment"
+ with 	name 'parchment' 'paper',
+	description "TODO: distress letter from quine";
+
+!!! Story verbs
 
 [ MeditateSub;
     print "You sit cross-legged on the ground and begin meditating.^";
