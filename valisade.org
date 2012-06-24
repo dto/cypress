@@ -1,4 +1,4 @@
-* TODO raven messenger with 2nd letter
+* TODO raven messenger with Quine letter and key to house
 * TODO Moon found_in ...
 * TODO healing herb 
 * TODO forget me nots
