@@ -1,4 +1,12 @@
-(in-package :2x0ng)
+(in-package :valisade)
+
+(defun targetp (thing)
+  (and (blockyp thing)
+       (has-tag thing :target)))
+
+(defun enemyp (thing)
+  (and (blockyp thing)
+       (has-tag thing :enemy)))
 
 (defun monkp (thing)
   (and (blockyp thing)
@@ -71,30 +79,6 @@
 	     (not (sdl-mixer:sample-playing-p *dialogue-channel*)))
     (play-dialogue)))
 
-;;; Waypoint 
-
-(define-block waypoint :image "waypoint.png" :counter 35 :collision-type :passive)
-
-(defparameter *waypoint-interval* (seconds->frames 12))
-
-(defparameter *waypoint-distance* 800)
-
-(defparameter *waypoint-clock* 0)
-
-(define-method update waypoint ()
-  (percent-of-time 30 (setf %image (random-choose '("waypoint.png" "waypoint2.png"))))
-  (decf %counter)
-  (if (zerop %counter)
-      (destroy self)
-      (let ((exit (find-exit)))
-	(if (blockyp exit)
-	    (multiple-value-bind (x y) 
-		(step-toward-heading (cursor)
-				     (heading-to-thing (cursor) exit)
-				     280)
-		(move-to self x y))
-	    (destroy self)))))
-
 ;;; A monk, either AI or human controlled
 
 (define-block monk 
@@ -126,7 +110,7 @@
   (when color (setf %body-color color)))
 
 (define-method raise-shield monk ()
-  (play-sound self "go.wav")
+  ;; (play-sound self "go.wav")
   (setf %shielded t %shield-clock (seconds->frames 3)))
 
 (define-method humanp monk () nil)
@@ -154,30 +138,35 @@
       (when (zerop walk-clock)
 	(setf walk-clock *walk-interval*)))))
 
-(defresource "monk-right.png")
-(defresource "monk-right-lstep.png")
-(defresource "monk-right.png")
-(defresource "monk-right-rstep.png")
-
-(define-method leave monk ()
-  (setf %leave-direction :down))
+(defresource "monk-right-1.png")
+(defresource "monk-right-lstep-1.png")
+(defresource "monk-right-rstep-1.png")
+(defresource "monk-right-2.png")
+(defresource "monk-right-lstep-2.png")
+(defresource "monk-right-rstep-2.png")
 
 (defparameter *walking-right* 
-  '("monk-right.png"
-    "monk-right-lstep.png"
-    "monk-right.png"
-    "monk-right-rstep.png"))
+  '("monk-right-1.png"
+    "monk-right-lstep-1.png"
+    "monk-right-lstep-2.png"
+    "monk-right-2.png"
+    "monk-right-rstep-2.png"
+    "monk-right-rstep-1.png"))
 
-(defresource "monk-up.png")
-(defresource "monk-up-lstep.png")
-(defresource "monk-up.png")
-(defresource "monk-up-rstep.png")
+(defresource "monk-up-1.png")
+(defresource "monk-up-lstep-1.png")
+(defresource "monk-up-rstep-1.png")
+(defresource "monk-up-2.png")
+(defresource "monk-up-lstep-2.png")
+(defresource "monk-up-rstep-2.png")
 
 (defparameter *walking-up* 
-  '("monk-up.png"
-    "monk-up-lstep.png"
-    "monk-up.png"
-    "monk-up-rstep.png"))
+  '("monk-up-1.png"
+    "monk-up-lstep-1.png"
+    "monk-up-lstep-2.png"
+    "monk-up-2.png"
+    "monk-up-rstep-2.png"
+    "monk-up-rstep-1.png"))
         
 (defun monk-image (direction clock)
   (let ((frames
@@ -188,7 +177,7 @@
 	     ((member direction '(:left :right :upleft :downright))
 	      *walking-right*))
 	   *walking-up*)))
-    (or (nth (truncate (* clock (/ 4 *walk-interval*)))
+    (or (nth (truncate (* clock (/ 6 *walk-interval*)))
 	     frames)
 	(if (or (eq direction :left) (eq direction :right))
 	    "monk-right.png"
@@ -216,20 +205,15 @@
 	       (monk-image %direction %walk-clock) 
 	       "monk-up.png")
 	      "skull.png")))
-    (draw-textured-rectangle %x %y %z %width %height (find-texture image) 
-			     :vertex-color %body-color)
+    (draw-textured-rectangle %x %y %z %width %height (find-texture image))
     (when %shielded 
       (multiple-value-bind (cx cy) (center-point self)
-	(draw-circle cx cy 30 :color (random-choose '("deep pink" "yellow")))))
-    (when %talking
-      (multiple-value-bind (bx by) (right-of self)
-	(draw-image (random-choose '("balloon.png" "balloon2.png"))
-		    bx (- by (units 2)))))))
+	(draw-circle cx cy 30 :color (random-choose '("deep pink" "yellow")))))))
 	  
-(define-method serve monk ()
-  (multiple-value-bind (x y) (serve-location self)
-    (make-ball %color)
-    (drop-object (current-buffer) *ball* x y)))
+;; (define-method serve monk ()
+;;   (multiple-value-bind (x y) (serve-location self)
+;;     (make-ball %color)
+;;     (drop-object (current-buffer) *ball* x y)))
 
 ;;; Cool vintage footstep and kick sounds
 
@@ -294,24 +278,15 @@
   (when (or (brickp thing) (enemyp thing) (holep thing) (cloudp thing))
     (restore-location self)))
 
-(defresource "skull.png")
+;; (defresource "skull.png")
 
-(defresource "analog-death.wav" :volume 70)
+;; (defresource "analog-death.wav" :volume 70)
 
 (define-method die monk ()
   (when (and %alive (not %shielded))
     (when (humanp self) 
-      (play-sample "analog-death.wav")
-      (play-music "nexttime.ogg")
-      (drop-object (current-buffer) 
-		   (new 'bubble 
-			(if (= *retries* 0)
-			    (format nil "You died on level ~A. GAME OVER. Press Control-R to reset at level 1." *level*)
-			    (format nil "You died on level ~A. You have ~A retries remaining. Retrying..." *level* *retries*))
-			"sans-mono-bold-16")))
-    (make-sparks %x %y %color)
-    (change-image self "skull.png")
-    (setf %alive nil)))
+      (change-image self "skull.png")
+      (setf %alive nil))))
 
 (define-method damage monk (points) (die self))
 
@@ -325,7 +300,6 @@
 	     (direction-heading (or direction %direction))
 	     strong self)
       (setf *ball-carrier* self)
-      (play-sound self "serve.wav")
       (setf %kick-clock *monk-reload-frames*))))
 
 (define-method strong-kick monk ()
@@ -336,49 +310,16 @@
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
-(define-method drop-waypoint-maybe monk (&optional force)
-  ;; possibly show waypoint
-  (let ((exit (find-exit)))
-    (when (or force (and exit (> (distance-between exit (cursor)) *waypoint-distance*)))
-	(drop self (new 'waypoint))
-	(play-sound self "shield.wav")
-	(setf *waypoint-clock* *waypoint-interval*))))
-
-(define-method retry-maybe monk ()
-  (when (and (not %alive)
-	     (humanp self)
-	     (zerop %retry-clock)
-	     (plusp *retries*))
-    (decf *retries*)
-    (setf (field-value :retrying (current-buffer)) t)))
-
 (define-method update monk ()
   (when (dialogue-playing-p) (update-dialogue))
-  (decf *waypoint-clock*)
-  (unless (plusp *waypoint-clock*)
-    (drop-waypoint-maybe self))
   ;; possibly lower shields
   (when %shielded
     (decf %shield-clock)
     (unless (plusp %shield-clock)
       (setf %shielded nil)))
-  ;; player took ball away
-  (when (and %carrying (null *ball*))
-    (setf %carrying nil)
-    (play-sound self "xplod.wav")
-    (later 2 (die self))
-    (later 7 (destroy self)))
-  ;; carry ball
-  (when (and %carrying *ball*)
-    (move-to *ball* %x %y))
-  ;; auto retry timeout
-  (when (not %alive)
-    (if (plusp %retry-clock)
-	(decf %retry-clock)
-	(retry-maybe self)))
   ;; normal update
   (when %alive
-    (resize self (* 2 *unit*) (* 2 *unit*))
+    (resize self (* 3 *unit*) (* 3 *unit*))
     (with-fields (step-clock kick-clock) self
       (when (plusp step-clock)
 	(decf step-clock))
@@ -412,9 +353,6 @@
 	    ;; yes, do it
 	    (kick self %kick-direction kick-button)))))))
 
-(define-block (thief :super monk)
-  (body-color :initform "deep pink"))
-
 ;; Player 1 drives the logic with the arrows/numpad and spacebar
 
 (define-block (player-1-monk :super monk)
@@ -430,33 +368,8 @@
 	    '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20))))
 
 (define-method collide player-1-monk (thing)
-  (when (and (exitp thing) 
-	     (exit-open-p))
-    (when (blockyp *ball*)
-      (destroy *ball*)
-      (setf *ball* nil))
-;    (destroy self)
-    (begin-game (1+ *level*)))
-  (when (or (enemyp thing) (holep thing))
-    (die self))
-  (when (brickp thing)
-    (restore-location self)))
-
-(define-method draw player-1-monk ()
-  (monk%draw self)
-  ;; possibly draw held ball 
-  (when (and %alive (null *ball*))
-    (multiple-value-bind (x y) (serve-location self)
-      (let ((width *ball-size*)
-	    (height *ball-size*))
-	(draw-box x y width height :color "white")
-	(draw-box (+ 2 x) (+ 2 y) (- width 4) (- height 4) :color %color)
-	(when *red-green-color-blindness*
-	  (let ((hash (color-hash %color)))
-	    (when hash
-	      (draw-textured-rectangle x y 0 width height 
-				       (find-texture (ball-hash-image hash))))))))))
-
+  (when (enemyp thing)
+    (die self)))
 
 (define-method strong-kick-p player-1-monk ()
   (holding-fire))
