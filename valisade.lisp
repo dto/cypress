@@ -31,7 +31,6 @@
 ;;; Main program
 
 (defun valisade (&optional (level 1))
-  (setf *level* level)
   (setf *window-title* "valisade v0.01")
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
@@ -58,8 +57,8 @@
     (index-pending-resources)
     (preload-resources)
 
-    (setf *soundtrack* (derange *soundtrack*))
-    (switch-to-buffer (new 'meadow))
+    ;;(setf *soundtrack* (derange *soundtrack*))
+    (switch-to-buffer (make-meadow))
     (start-session)))
 
 (define-buffer valisade

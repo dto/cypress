@@ -14,16 +14,18 @@
  
 ;;; Dialogue
 
-(defresource "monk-talk-1.png")
-(defresource "monk-talk-2.png")
-(defresource "monk-talk-3.png")
-(defresource "monk-talk-4.png")
+;; (defresource "monk-talk-1.png")
+;; (defresource "monk-talk-2.png")
+;; (defresource "monk-talk-3.png")
+;; (defresource "monk-talk-4.png")
 
 (defparameter *talking-images* 
   '("monk-talk-1.png" "monk-talk-2.png" "monk-talk-3.png" "monk-talk-4.png")) 
 
-(defresource "balloon.png")
-(defresource "balloon2.png")
+;; (defresource "balloon.png")
+;; (defresource "balloon2.png")
+
+(defvar *ball* nil)
 
 (defparameter *balloon-images* 
   '("balloon.png" "balloon2.png"))
@@ -180,8 +182,8 @@
     (or (nth (truncate (* clock (/ 6 *walk-interval*)))
 	     frames)
 	(if (or (eq direction :left) (eq direction :right))
-	    "monk-right.png"
-	    "monk-up.png"))))
+	    "monk-right-1.png"
+	    "monk-up-1.png"))))
 
 (define-method begin-talking monk (line)
   (setf %talking t))
@@ -217,8 +219,8 @@
 
 ;;; Cool vintage footstep and kick sounds
 
-(defresource "left-foot.wav" :volume 70)
-(defresource "right-foot.wav" :volume 70)
+(defresource "left-foot.wav" :volume 20)
+(defresource "right-foot.wav" :volume 20)
 
 (define-method footstep-sound monk ()
   (case %walk-clock
@@ -226,8 +228,14 @@
     (0 "left-foot.wav")
     ;; on 8th steps while looping 
     (1 "left-foot.wav")
-    (9 "right-foot.wav")))
-
+;    (3 "right-foot.wav")
+    (5 "left-foot.wav")
+;    (7 "right-foot.wav")
+    (9 "left-foot.wav")
+;    (11 "right-foot.wav")
+    (13 "left-foot.wav")))
+;    (15 "right-foot.wav")))
+    
 (defparameter *footstep-sound-range* 300)
 
 (define-method make-footstep-sounds monk ()
@@ -236,8 +244,8 @@
       (when (< (distance-to-cursor self) 400)
 	(play-sound self sound)))))
 
-(defresource "kick.wav" :volume 23)
-(defresource "serve.wav" :volume 23)
+;; (defresource "kick.wav" :volume 23)
+;; (defresource "serve.wav" :volume 23)
 
 (defparameter *kick-sound* "kick.wav")
 
@@ -263,8 +271,8 @@
 	(when (right-analog-stick-pressed-p)
 	  (right-analog-stick-heading)))))
 
-(define-method can-reach-ball monk ()
-  (and *ball* (colliding-with self *ball*)))
+;; (define-method can-reach-ball monk ()
+;;   (and *ball* (colliding-with self *ball*)))
 
 (define-method bounding-box monk ()
   ;; shrink bounding box by a few px to make game more forgiving
@@ -319,7 +327,7 @@
       (setf %shielded nil)))
   ;; normal update
   (when %alive
-    (resize self (* 3 *unit*) (* 3 *unit*))
+    (resize self (* 6 *unit*) (* 6 *unit*))
     (with-fields (step-clock kick-clock) self
       (when (plusp step-clock)
 	(decf step-clock))
@@ -349,7 +357,7 @@
 	  (decf kick-clock))
 	;; ready to kick?
 	(when (zerop kick-clock)
-	  (when (and (null *ball*) kick-button)
+	  (when kick-button
 	    ;; yes, do it
 	    (kick self %kick-direction kick-button)))))))
 
