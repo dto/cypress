@@ -12,78 +12,27 @@
   (and (blockyp thing)
        (has-tag thing :monk)))
  
-;;; Dialogue
-
-;; (defresource "monk-talk-1.png")
-;; (defresource "monk-talk-2.png")
-;; (defresource "monk-talk-3.png")
-;; (defresource "monk-talk-4.png")
-
-(defparameter *talking-images* 
-  '("monk-talk-1.png" "monk-talk-2.png" "monk-talk-3.png" "monk-talk-4.png")) 
-
-;; (defresource "balloon.png")
-;; (defresource "balloon2.png")
-
-(defvar *ball* nil)
-
-(defparameter *balloon-images* 
-  '("balloon.png" "balloon2.png"))
-
-(defvar *dialogue* nil)
-
-(defvar *actor* nil)
-
-(defvar *dialogue-channel* nil)
-
-(defun talkingp (thing) 
-  (and (monkp thing)
-       (field-value :talking thing))) 
-
-(defun monk-talk-image ()
-  (random-choose *talking-images*))
-
-(defun dialogue-playing-p () 
-  (and *dialogue* (integerp *dialogue-channel*)))
-
-(defun say (actor line) 
-  (setf *dialogue*
-	(append *dialogue* (list (list actor line)))))
-
-(defun act (actor method) 
-  (setf *dialogue*
-	(append *dialogue* (list (list actor method)))))
-
-(defun stop-dialogue ()
-  (setf *dialogue* nil)
-  (halt-sample *dialogue-channel*)
-  (setf *dialogue-channel* nil)
-  (setf *actor* nil))
-
-(defun play-dialogue ()
-  (if (null *dialogue*)
-      (stop-dialogue)
-      (destructuring-bind (actor line) (pop *dialogue*)
-	(when (blockyp *actor*)
-	  (stop-talking *actor*))
-	(setf *actor* actor)
-	;; is it an audio line or an action?
-	(etypecase line
-	  (string 
-	   (begin-talking *actor* line)
-	   (setf *dialogue-channel* 
-		 (play-sample line)))
-	  (keyword 
-	   (send line *actor*))))))
-
-(defun update-dialogue ()
-  (when (and (dialogue-playing-p)
-	     (not (sdl-mixer:sample-playing-p *dialogue-channel*)))
-    (play-dialogue)))
-
 ;;; A monk, either AI or human controlled
 
+(defun animation-scale (a) (getf a :scale 1.0))
+(defun animation-frames (a) (getf a :frames))
+(defun frame-image (f) (first f))
+(defun frame-delay (f) (or (second f) 1))
+
+(defparameter *casting-animation*
+  '(:scale 1.2 
+    :frames (("monk-cast-1.png" 3)
+	     ("monk-cast-2.png" 4)
+	     ("monk-cast-3.png" 4)
+	     ("monk-cast-4.png" 4))))
+;	     ("monk-cast-0.png" 8))))
+
 (define-block monk 
+  ;; animation parameters
+  (scale :initform nil)
+  (frames :initform nil)
+  (delay :initform 0)
+  ;; 
   (leave-direction :initform nil)
   (alive :initform t)
   (talking :initform nil)
@@ -104,6 +53,25 @@
   ;; we want to catch the beginning of firing, even if the input
   ;; polling in `update' misses it. (see below)
   (default-events :initform '(((:space) (strong-kick)))))
+
+(define-method animate monk (&optional animation)
+  (setf %scale (when animation (animation-scale animation)))
+  (setf %frames (when animation (animation-frames animation))))
+  
+(define-method animation-frame monk ()
+  (with-fields (frames delay) self
+    (when frames 
+      (if (zerop delay)
+	  (let ((frame (pop frames)))
+	    (setf delay (frame-delay frame))
+	    (frame-image frame))
+	  (frame-image (first frames))))))
+
+(define-method update-animation monk ()
+  (with-fields (frames delay scale) self
+    (if (null frames)
+	(setf scale nil)
+	(decf delay))))
 
 (defparameter *monk-colors* '("gold" "olive drab" "RoyalBlue3" "dark orchid"))
 
@@ -140,37 +108,23 @@
       (when (zerop walk-clock)
 	(setf walk-clock *walk-interval*)))))
 
-(defresource "monk-right-1.png")
-(defresource "monk-right-lstep-1.png")
-(defresource "monk-right-rstep-1.png")
-(defresource "monk-right-2.png")
-(defresource "monk-right-lstep-2.png")
-(defresource "monk-right-rstep-2.png")
-
 (defparameter *walking-right* 
   '("monk-right-1.png"
     "monk-right-lstep-1.png"
     "monk-right-lstep-2.png"
     "monk-right-2.png"
-    "monk-right-rstep-2.png"
-    "monk-right-rstep-1.png"))
-
-(defresource "monk-up-1.png")
-(defresource "monk-up-lstep-1.png")
-(defresource "monk-up-rstep-1.png")
-(defresource "monk-up-2.png")
-(defresource "monk-up-lstep-2.png")
-(defresource "monk-up-rstep-2.png")
+    "monk-right-rstep-1.png"
+    "monk-right-rstep-2.png"))
 
 (defparameter *walking-up* 
   '("monk-up-1.png"
     "monk-up-lstep-1.png"
     "monk-up-lstep-2.png"
     "monk-up-2.png"
-    "monk-up-rstep-2.png"
-    "monk-up-rstep-1.png"))
+    "monk-up-rstep-1.png"
+    "monk-up-rstep-2.png"))
         
-(defun monk-image (direction clock)
+(defun monk-walking-image (direction clock)
   (let ((frames
 	  (or 
 	   (cond
@@ -203,8 +157,8 @@
   (let ((image 
 	  (if %alive
 	      (or
-	       (when %talking (monk-talk-image))
-	       (monk-image %direction %walk-clock) 
+	       (animation-frame self)
+	       (monk-walking-image %direction %walk-clock) 
 	       "monk-up.png")
 	      "skull.png")))
     (draw-textured-rectangle %x %y %z %width %height (find-texture image))
@@ -300,14 +254,13 @@
 
 (define-method strong-kick-p monk () nil)
 
+(define-method cast-spell monk ()
+  (animate self *casting-animation*))
+
 (define-method kick monk (&optional direction strong)
   (when %alive
     (when (and (null *ball*) (zerop %kick-clock))
-      (serve self)
-      (impel *ball* 
-	     (direction-heading (or direction %direction))
-	     strong self)
-      (setf *ball-carrier* self)
+      (cast-spell self)
       (setf %kick-clock *monk-reload-frames*))))
 
 (define-method strong-kick monk ()
@@ -320,6 +273,7 @@
 
 (define-method update monk ()
   (when (dialogue-playing-p) (update-dialogue))
+  (update-animation self)
   ;; possibly lower shields
   (when %shielded
     (decf %shield-clock)

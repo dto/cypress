@@ -40,7 +40,7 @@
 ;;  (setf *nominal-screen-width* (* 1280 5))
 ;;  (setf *nominal-screen-height* (* 720 5))
   ;;
-  (setf *scale-output-to-window* t) 
+  (setf *scale-output-to-window* nil) 
   (setf *default-texture-filter* :mipmap)
   (setf *use-antialiased-text* t)
 
@@ -54,8 +54,8 @@
 
     (index-all-images)
     (index-all-samples)
-    (index-pending-resources)
     (preload-resources)
+    (index-pending-resources)
 
     ;;(setf *soundtrack* (derange *soundtrack*))
     (switch-to-buffer (make-meadow))

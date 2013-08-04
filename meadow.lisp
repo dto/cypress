@@ -1,19 +1,36 @@
 (in-package :valisade)
 
-(defresource "meadow.png")
-
 (defparameter *unit* 14)
 
 (defun units (n) (* n *unit*))
 
 (define-buffer meadow 
   :background-image "meadow.png"
-  :quadtree-depth 6)
-
-(defresource "wood-1.png")
-(defresource "wood-2.png")
-(defresource "wood-3.png")
-(defresource "wood-4.png")
+  :quadtree-depth 6
+  :default-events
+  '(((:pause) :transport-toggle-play)
+    ((:e :alt) :edit-word)
+    ((:x :control) :exec)
+    ((:d :control) :delete-word)
+    ((:c :control) :copy-word)
+    ((:x :alt) :command-prompt)
+    ((:g :control) :cancel)
+    ((:c :alt) :clear-stack)
+    ((:s :alt) :show-stack)
+    ((:m :alt) :show-messages)
+    ((:p :control) :paste)
+    ((:return) :enter)
+    ((:escape) :cancel)
+    ((:f1) :help)
+    ((:h :control) :help)
+    ((:x :control) :edit-cut)
+    ((:c :control) :edit-copy)
+    ((:v :control) :edit-paste)
+    ((:v :control :shift) :paste-here)
+    ((:f9) :toggle-minibuffer)
+    ((:f12) :transport-toggle-play)
+    ((:g :control) :escape)
+    ((:d :control) :drop-selection)))
 
 (defresource "wood.wav" :volume 40)
 
