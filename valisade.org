@@ -12,7 +12,7 @@
 ** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
 
-* Magic spells
+* Magic spells / commands
 ** Spark (light torches, campfires, and dry out even soaked wood)
 ** Radiance (required for dark areas. needs one white or yellow flower.)
 *** can only use crossbow in dark when not using torch
@@ -24,6 +24,8 @@
 ** Astral Body (must be cast under bright moonlight)
 ** Translation
 ** Boil grasses (make small amounts of thin gruel. requires wild grasses and water)
+** Leave area
+** Flee
 
 * Items
 ** Arrows (craft from stone chips and wood)
