@@ -271,6 +271,8 @@
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
+(defparameter *monk-size* (* 7 *unit*))
+
 (define-method update monk ()
   (when (dialogue-playing-p) (update-dialogue))
   (update-animation self)
@@ -281,7 +283,7 @@
       (setf %shielded nil)))
   ;; normal update
   (when %alive
-    (resize self (* 6 *unit*) (* 6 *unit*))
+    (resize self *monk-size* *monk-size*)
     (with-fields (step-clock kick-clock) self
       (when (plusp step-clock)
 	(decf step-clock))

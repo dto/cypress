@@ -58,12 +58,13 @@
       (snap-window-to-cursor buffer)
       (glide-window-to-cursor buffer)
 
-      (resize buffer 1533 2300)
+;
+      (resize buffer 2000 3000)
 
-      (drop-object buffer (make-wood 0) 100 1400)
-      (drop-object buffer (make-wood 1) 1100 300)
-      (drop-object buffer (make-wood 2) 1900 120)
-      (drop-object buffer (make-wood 3) 500 1300)
+      (drop-object buffer (make-wood 1) 100 900)
+      (drop-object buffer (make-wood 2) 1100 300)
+      (drop-object buffer (make-wood 3) 1900 120)
+      (drop-object buffer (make-wood 0) 500 1700)
 
       ;; allocate
        (install-quadtree buffer)

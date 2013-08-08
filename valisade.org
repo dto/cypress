@@ -1,10 +1,81 @@
-* TODO raven messenger with Quine letter and key to house
-* TODO Moon found_in ...
-* TODO healing herb 
-* TODO forget me nots
-* TODO simple health system 3 levels
-* TODO hear screech owl
+* Overview
+** Player controls an unnamed monk in several randomly varying quests
+** Ranged combat with bow-and-arrow
+** Melee combat with fists/feet
+** Magic spells, all of which require some Stamina
+** Some spells require "reagents" i.e. a supply
+** Manage limited resources: food, arrows, items/reagents
+** Exploration and nonlinearity in what you gather/fight in which order
 
+* Magic spells
+** Spark (light torches, campfires, and dry out even soaked wood)
+** Radiance (required for dark areas. needs one white or yellow flower.)
+*** can only use crossbow in dark when not using torch
+** Flame (fire attack)
+** Cure light wounds (consumes beef jerky for greater healing)
+** Wood sprite (shakes firewood off of trees and brings it to you)
+** Reclaim (turns garbage and other debris into reagents
+** Temporal Seance (see the past. requires Forget-me-nots)
+** Astral Body (must be cast under bright moonlight)
+** Translation
+** Boil grasses (make small amounts of thin gruel. requires wild grasses and water)
+
+* Items
+** Arrows (craft from stone chips and wood)
+** Torch (crafted from wood)
+*** torch cannot be used simultaneously with bow
+** Bundles of arrows (20 per)
+** Water 
+** White bread
+** Wheat bread
+** Beef jerky
+** Notebook
+** Forget-me-nots
+** Snowdrop
+** Wild violet
+** Stones, stone chips
+** Branches, wood planks, ruined wood
+** Temple Incense
+
+* Characters
+** Unnamed Monk (the player)
+** Geoffrey
+** Francis
+** Ian
+** Dr. Quine
+** good Rangers
+** evil Brigands
+** Imperial Raven
+** Skeleton wanderer
+** Skeleton soldier
+** Soulless wolves
+** Cryptghast
+** Thief
+** Skullscraper
+** Eldritch acid pool
+** Maggot hound
+** Watcher-in-the-weeds
+** Goddess 
+
+* Locations
+** Gleyborough
+** Valisade
+** Mountain pass
+** Snowy glen
+** Frozen river crossing
+** Meadow
+** Caves
+** Abandoned village (optionally with tombstones and lurking undead)
+** Forgotten cemetery
+** Dungeon, castle ruins
+** Ancient roadway
+** Skeleton hideout
+
+* Previous notes 
+
+Limited arrow supply, but can craft them from stone chips and wood. 
+Spell can shake wood branches off a tree
+Herbs 
 Main character is a male bow/arrow monk with no name (increase player identification)
 Follow trail through forest of disappeared friend who is a translator/scribe.
 Cast simple spells/abilities (spark, heal, falcon, climb, kick)
@@ -27,10 +98,31 @@ GLULX images: maps, inscriptions, title screen, portraits etc
 Play lute, occasional music cues
 Discover runes
 Fight a lich
-Local plants
-Collect flowers/plants
+Collect flowers/plants to use as healing salve 
 Climb tree
 Hear bird sounds
 Puzzle in which you find some characters that describe movements in a forest 
 Quill pen/ink for spells
 USE REAL PENCIL / PAPER for all illustrations/maps
+
+* TODO no firewood when not in forest regions
+* TODO scavenge wood and items from abandoned villages and cabins
+
+
+* Monk
+** DONE Walking animation
+** DONE Casting animation
+** TODO proper GL-rotated animations with single frame sources
+** TODO Bow + arrow combat
+** TODO Dark chambers , ADND INTV journey across landscape --- Tower of Doom
+** TODO consistent map screen, procgen for each sector though, user chooses path through map?
+** TODO reach exit of each sector and/or defeat bosses / obtain key to return to map
+
+
+* TODO paint stone houses w/4 walls, small abandoned village
+* TODO raven messenger with Quine letter and key to house
+* TODO Moon found_in ...
+* TODO healing herb 
+* TODO forget me nots
+* TODO simple health system 3 levels
+* TODO hear screech owl
