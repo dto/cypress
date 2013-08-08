@@ -5,7 +5,10 @@
 ** Magic spells, all of which require some Stamina
 ** Some spells require "reagents" i.e. a supply
 ** Manage limited resources: food, arrows, items/reagents
-** Exploration and nonlinearity in what you gather/fight in which order
+** Permadeath
+** Each quest is composed of your movements on the square sectors of a randomly generated worldmap
+** When you move into a sector you get a randomly generated level in the sector's style
+** Exploration and nonlinearity in what you gather/fight and in which order you visit squares
 
 * Magic spells
 ** Spark (light torches, campfires, and dry out even soaked wood)
