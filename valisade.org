@@ -3,12 +3,14 @@
 ** Ranged combat with bow-and-arrow
 ** Melee combat with fists/feet
 ** Magic spells, all of which require some Stamina
-** Some spells require "reagents" i.e. a supply
+*** Some spells require "reagents" i.e. a supply
 ** Manage limited resources: food, arrows, items/reagents
-** Permadeath
 ** Each quest is composed of your movements on the square sectors of a randomly generated worldmap
 ** When you move into a sector you get a randomly generated level in the sector's style
 ** Exploration and nonlinearity in what you gather/fight and in which order you visit squares
+** Permadeath
+** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
+** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
 
 * Magic spells
 ** Spark (light torches, campfires, and dry out even soaked wood)
