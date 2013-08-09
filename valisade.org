@@ -12,6 +12,27 @@
 ** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
 
+* Player characteristics
+
+** Body (0-100) (permadeath at 0)
+** Mind (0-100) (used for casting spells. cannot cast anything when less than 15%)
+** Hunger (0-100)
+** Sleep (0-100)
+** Cold (0-100)
+** Poison (0-100)
+
+* Controls
+
+** Move with the arrow keys or numeric keypad
+** Press SHIFT use the equipped weapon, item, or spell
+** Press SPACEBAR (or "X") to pick up object / perform location-specific action
+** Press ENTER (or "Z") to enter the menu and select menu options
+** Control-S to swap Z and X buttons
+** Use the arrow keys or numeric keypad to move the menu cursor 
+** Press ESCAPE (or BACKSPACE or DEL) to quit the current menu
+
+* Movement and combat
+
 * Music and sound
 
 The fantasy soundtrack employs FM synthesis and sampling to create
@@ -20,11 +41,9 @@ evoke various archaic instruments and vocal styles. Music does not
 loop in the game; most of the soundtrack's cues are short (about 1
 minute) and play once through when triggered by an event or situation.
 My overall aim is to create the musical atmosphere in which an order
-of spiritual warrior-monks utilize music for entertainment, a variety
-of religious purposes, and also incidental and improvised music played
-while traveling long distances.
-
-* Movement and combat
+of spiritual warrior-monks utilize music for a variety of religious
+purposes, and also incidental and improvised music played while
+traveling long distances.
 
 * Magic spells / commands
 ** Spark (light torches, campfires, and dry out even soaked wood)
