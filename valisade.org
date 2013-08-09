@@ -1,8 +1,12 @@
 * Overview
+
 ** Player controls an unnamed monk in several randomly varying quests
+** Several things to do on your way, which vary
+** Optional things
 ** Ranged combat with bow-and-arrow
 ** Melee combat with fists/feet
-** Magic spells, all of which require some Stamina
+** Magic spells
+*** All spells require Mind points
 *** Some spells require "reagents" i.e. a supply
 ** Manage limited resources: food, arrows, items/reagents
 ** Each quest is composed of your movements on the square sectors of a randomly generated worldmap
@@ -11,6 +15,30 @@
 ** Permadeath
 ** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
+
+* Graphical presentation
+
+All objects, evironments, and animation frames are individually
+painted with acrylic artist paints on watercolor paper, and then
+digitally composited and animated.
+
+The game's world is shown from an overhead 2-D perspective. The action
+takes place in a large window with a thin black bar across the bottom.
+This "modeline" is used for status display, inventory, and
+menu. It is mostly unobtrusive, displaying the meter bars for Body
+(blue) and Mind (red), and an icon for the currently equipped
+item. Status icons and some other messages will also be displayed
+here. The various meters and items can briefly blink when something
+requires the player's attention, such as low health or a poisoning
+event.
+
+In-game text is rendered using an appropriate TrueType font. 
+
+* Movement and combat
+
+The monk's primary means of attack is the bow and arrow with which all
+monks of the Order must acquire proficiency. Unarmed combat is less
+powerful, but still useful at times.
 
 * Player characteristics
 
@@ -31,19 +59,17 @@
 ** Use the arrow keys or numeric keypad to move the menu cursor 
 ** Press ESCAPE (or BACKSPACE or DEL) to quit the current menu
 
-* Movement and combat
-
 * Music and sound
 
 The fantasy soundtrack employs FM synthesis and sampling to create
 abstract, synthetic timbres. The sounds and melodies are meant to
 evoke various archaic instruments and vocal styles. Music does not
-loop in the game; most of the soundtrack's cues are short (about 1
-minute) and play once through when triggered by an event or situation.
-My overall aim is to create the musical atmosphere in which an order
-of spiritual warrior-monks utilize music for a variety of religious
-purposes, and also incidental and improvised music played while
-traveling long distances.
+loop in the game; most of the soundtrack's cues are short (about one
+minute in length) and play once through when triggered by an event or
+situation.  My overall aim is to create the musical atmosphere in
+which an order of spiritual warrior-monks utilize music for a variety
+of religious purposes, and also incidental and improvised music played
+while traveling long distances.
 
 * Magic spells / commands
 ** Spark (light torches, campfires, and dry out even soaked wood)
