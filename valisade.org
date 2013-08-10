@@ -15,6 +15,7 @@
 ** Permadeath
 ** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
+** Crime investigation tasks
 
 * Graphical presentation
 
@@ -26,7 +27,7 @@ The game's world is shown from an overhead 2-D perspective. The action
 takes place in a large window with a thin black bar across the bottom.
 This "modeline" is used for status display, inventory, and
 menu. It is mostly unobtrusive, displaying the meter bars for Body
-(blue) and Mind (red), and an icon for the currently equipped
+(Red) and Mind (Blue), and an icon for the currently equipped
 item. Status icons and some other messages will also be displayed
 here. The various meters and items can briefly blink when something
 requires the player's attention, such as low health or a poisoning
