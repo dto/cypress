@@ -23,15 +23,15 @@ All objects, evironments, and animation frames are individually
 painted with acrylic artist paints on watercolor paper, and then
 digitally composited and animated.
 
-The game's world is shown from an overhead 2-D perspective. The action
-takes place in a large window with a thin black bar across the bottom.
-This "modeline" is used for status display, inventory, and
-menu. It is mostly unobtrusive, displaying the meter bars for Body
-(Red) and Mind (Blue), and an icon for the currently equipped
-item. Status icons and some other messages will also be displayed
-here. The various meters and items can briefly blink when something
-requires the player's attention, such as low health or a poisoning
-event.
+The game's world is shown from an overhead 2-D perspective. The world
+view is full-frame, except for a thin black bar across the bottom
+called the "modeline". This line is used for status display,
+inventory, and menu. It is mostly unobtrusive, displaying the meter
+bars for Body (Red) and Mind (Blue), and an icon for the currently
+equipped item. Status icons and some other messages will also be
+displayed here. The various meters and items can briefly blink when
+something requires the player's attention, such as low health or a
+poisoning event.
 
 In-game text is rendered using an appropriate TrueType font. 
 
