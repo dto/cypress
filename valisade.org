@@ -12,10 +12,26 @@
 ** Each quest is composed of your movements on the square sectors of a randomly generated worldmap
 ** When you move into a sector you get a randomly generated level in the sector's style
 ** Exploration and nonlinearity in what you gather/fight and in which order you visit squares
-** Permadeath
+** Traditional RPG checkpoint save/load system
 ** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
 ** Crime investigation tasks
+
+* Gameplay flow
+
+** Overworld map grid with terrain sectors.
+*** Can open map at any time, but game does not pause. 
+*** Can only travel 1 square at a time. Requires food.
+*** Choose when to leave using map screen, unless held by conditions
+*** Can return to a sector, but requires more food. 
+** Exploration/combat as monk in a sector. This is the meat of the gameplay.
+*** Any gameplay activity can be a mission goal.
+*** Fight enemies
+*** Cannot flee or craft when nearby enemies
+*** Collect/craft resources/items
+*** Explore ruins/caves for items
+*** Discover story items
+*** Brief "scroll story" cinematics
 
 * Graphical presentation
 
@@ -139,3 +155,25 @@ while traveling long distances.
 ** Ancient roadway
 ** Skeleton hideout
 
+* Story: Episode 1
+** You are called to Valisade 
+** Travel through meadows, grassland, forest fighting mysterious wolves
+** It begins to snow/freeze. Discover ruined house.
+** Encounter nastier demon wolf miniboss
+** After the mountain pass, you hear monks singing from distant monastery
+* Story: Episode 2
+** Arrival at ruined monastery; mountains close behind you
+** Explore ruins, fight skeletons
+** Find small cache of documents in canister with dead human skeleton 
+*** Note about retrieving Expedition documents from Montecalto library, dated 5,000 years in the future
+*** Map to Montecalto 
+* Story: Episode 3
+** Explore plague lands with few human survivors
+** Points of interest along the way
+** Arrival at Montecalto
+*** Brother Lucius explains 
+*** Find abandonment docs / explosion date in Montecalto library annex basement
+* Story: Episode 4
+
+** Return to ruined hometown via other route
+** Cross the Einbridge to the sunken island, site of the explosion
