@@ -101,7 +101,8 @@
   '("monk-stand-1.png" "monk-stand-2.png" "monk-stand-3.png" "monk-stand-4.png"))
 
 (defparameter *monk-walk* 
-  '(:frames (("monk-walk-1.png" 4)
+  '(:repeat t
+    :frames (("monk-walk-1.png" 4)
 	     ("monk-walk-2.png" 4)
 	     ("monk-walk-3.png" 4)
 	     ("monk-walk-4.png" 4)
@@ -161,15 +162,17 @@
 
 (define-method update-animation monk ()
   (with-fields (animation frames delay scale repeat image) self
-    (decf delay)
-    (when (minusp delay)
-      ;; done displaying current frame. show next, if any
-      (let ((frame (pop frames)))
-	(if frame
-	    (setf delay (frame-delay frame))
-	    ;; no more frames
-	    (animate self (if repeat animation nil)))))))
-
+    (when animation
+      (decf delay)
+      (when (minusp delay)
+	;; done displaying current frame. show next, if any
+	(let ((frame (pop frames)))
+	  (if frame
+	      (setf image (frame-image frame)
+		    delay (frame-delay frame))
+	      ;; no more frames
+	      (animate self (if repeat animation nil))))))))
+    
 (define-method humanp monk () nil)
 
 ;;; Animating the monk as he walks
@@ -304,10 +307,8 @@
 (define-method update monk ()
   (when (dialogue-playing-p) (update-dialogue))
   ;; update standing/breathing anim
-;  (when (null %animation) (setf %image "monk-stand-1.png"))
-  (when (percent-of-time 5 t)
-    (setf %image (random-choose *monk-stand-images*)))
-  ;; possibly overwrite that image
+  ;; (when (null %animation)
+  ;;   (animate self *monk-stand-bow*))
   (update-animation self)
   ;; normal update
   (when %alive
@@ -318,9 +319,9 @@
       ;; find out what direction the AI or human wants to go
       (let ((direction (movement-direction self))
 	    (fire-button (strong-fire-p self)))
-	(when (null direction)
-	  (animate self nil))
-	(when (and direction (null %animation)) (animate self *monk-walk*))
+	;; (when (null direction)
+	;;   (animate self *monk-stand-bow*))
+	(when (and direction (null %animation)) (animate self *monk-walk-bow*))
 	(when direction 
 	  ;; move in the movement direction
 	  (move-toward self direction (/ *monk-speed* 2))
