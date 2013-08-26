@@ -1,5 +1,7 @@
 (in-package :f0rest)
 
+(defparameter *monk-speed* (truncate (/ *unit* 1.3)))
+
 (defun solidp (thing)
   (and (blockyp thing)
        (has-tag thing :solid)))
@@ -38,9 +40,10 @@
     :frames (("monk-stand-1.png" 19)
 	     ("monk-stand-2.png" 24)
 	     ("monk-stand-3.png" 13)
-	     ("monk-stand-4.png" 20)
-	     ("monk-stand-5.png" 17)
-	     ("monk-stand-6.png" 25))))
+	     ("monk-stand-4.png" 20))))
+
+(defparameter *monk-stand-images*
+  '("monk-stand-1.png" "monk-stand-2.png" "monk-stand-3.png" "monk-stand-4.png"))
 
 (defparameter *monk-walk* 
   '(:scale 1.0 
@@ -68,6 +71,7 @@
 
 (define-block monk 
   ;; animation parameters
+  (image :initform (random-choose *monk-stand-images*))
   (scale :initform nil)
   (frames :initform nil)
   (delay :initform 0)
@@ -77,8 +81,9 @@
   (bow-ready :initform nil)
   (alive :initform t)
   (talking :initform nil)
+  (walking :initform nil)
   (hearing-distance :initform 800)
-  (tags :initform '(:monk :colored))
+  (tags :initform '(:monk))
   (direction :initform :up)
   (fire-direction :initform :up)
   ;; timers
@@ -90,39 +95,38 @@
   ;; polling in `update' misses it. (see below)
   (default-events :initform '(((:space) (strong-fire)))))
 
+(define-method animation-frame monk ()
+  (when %animation (frame-image (first %frames))))
+
 (define-method animate monk (animation)
   (setf %scale (animation-scale animation))
   (setf %frames (animation-frames animation))
   (setf %repeat (animation-repeat animation))
-  (setf %animation animation))
-  
-(define-method animation-frame monk ()
-  (with-fields (frames delay) self
-    (when frames 
-      (if (zerop delay)
-	  ;; done displaying current frame. show next
-	  (let ((frame (pop frames)))
-	    (setf delay (frame-delay frame))
-	    (frame-image frame))
-	  ;; show current frame
-	  (frame-image (first frames))))))
+  (setf %animation animation)
+  (let ((image (animation-frame self)))
+    (when image (setf %image image))))
 
+;; (define-method initialize monk ()
+;;   (initialize%super self)
+;;   (animate self *monk-stand*))
+  
 (define-method update-animation monk ()
-  (with-fields (animation frames delay scale repeat) self
-    (if (null frames)
-	(setf scale nil)
-	(decf delay))
-    ;; possibly begin animation again
-    (when repeat 
-      (animate self animation))))
+  (with-fields (animation frames delay scale repeat image) self
+    (decf delay)
+    (when (not (plusp delay))
+      ;; done displaying current frame. show next, if any
+      (let ((frame (pop frames)))
+	(if frame
+	    (setf delay (frame-delay frame)
+		  image (frame-image frame))
+	    ;; no more frames
+	    (animate self (if repeat animation nil)))))))
 
 (define-method humanp monk () nil)
 
 ;;; Animating the monk as he walks
 
 (defparameter *monk-step-frames* 3)
-
-(defparameter *monk-speed* (truncate (/ *unit* 1.3)))
 
 (defparameter *monk-reload-frames* 10)
 
@@ -139,8 +143,8 @@
 
 (define-method draw monk ()
   (draw-textured-rectangle %x %y %z %width %height 
-			   (find-texture (animation-image self))
-			   :angle (direction-heading %direction))))
+			   (find-texture (or (animation-frame self) %image))
+			   :angle (direction-heading %direction)))
 
 (define-method cast-spell monk ()
   (animate self *monk-cast*))
@@ -223,7 +227,7 @@
     (restore-location self)))
 
 (define-method die monk ()
-  (when (and %alive (not %shielded))
+  (when %alive
     (when (humanp self) 
       (change-image self "skull.png")
       (setf %alive nil))))
@@ -247,12 +251,11 @@
 
 (define-method update monk ()
   (when (dialogue-playing-p) (update-dialogue))
+  ;; update standing/breathing anim
+  (when (percent-of-time 5 t)
+    (setf %image (random-choose *monk-stand-images*)))
+  ;; possibly overwrite that image
   (update-animation self)
-  ;; possibly lower shields
-  (when %shielded
-    (decf %shield-clock)
-    (unless (plusp %shield-clock)
-      (setf %shielded nil)))
   ;; normal update
   (when %alive
     (resize self *monk-size* *monk-size*)
@@ -262,6 +265,9 @@
       ;; find out what direction the AI or human wants to go
       (let ((direction (movement-direction self))
 	    (fire-button (strong-fire-p self)))
+	(when (null direction)
+	  (animate self nil))
+	(when (and direction (null %animation)) (animate self *monk-walk*))
 	(when direction 
 	  ;; move in the movement direction
 	  (move-toward self direction (/ *monk-speed* 2))
@@ -273,9 +279,9 @@
 	    ;; controller is pushing in a direction
 	    (when (zerop step-clock)
 	    ;; don't animate on every frame
-	      (setf step-clock *monk-step-frames*)
+	      (setf step-clock *monk-step-frames*))
 	      ;; possibly make footstep sounds
-	      (make-footstep-sounds self))
+;;	      (make-footstep-sounds self))
 	    ;; not pushing. allow movement immediately
 	    (setf step-clock 0 %walk-clock 0))
 	;; update walk counters
@@ -288,6 +294,8 @@
 	  (when fire-button
 	    ;; yes, do it
 	    (fire self %fire-direction fire-button)))))))
+
+
 
 ;; Player 1 drives the logic with the arrows/numpad and spacebar
 
