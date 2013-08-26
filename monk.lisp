@@ -36,7 +36,7 @@
 
 (defparameter *monk-stand*
   '(:scale 1.0
-    :repeat t
+    ;; :repeat t
     :frames (("monk-stand-1.png" 19)
 	     ("monk-stand-2.png" 24)
 	     ("monk-stand-3.png" 13)
@@ -47,7 +47,7 @@
 
 (defparameter *monk-walk* 
   '(:scale 1.0 
-    :repeat t
+    ;; :repeat t
     :frames (("monk-walk-1.png" 4)
 	     ("monk-walk-2.png" 4)
 	     ("monk-walk-3.png" 4)
@@ -59,7 +59,7 @@
 
 (defparameter *monk-walk-bow* 
   '(:scale 1.0 
-    :repeat t
+    ;; :repeat t
     :frames (("monk-walk-bow-1.png" 4)
 	     ("monk-walk-bow-2.png" 4)
 	     ("monk-walk-bow-3.png" 4)
@@ -113,12 +113,11 @@
 (define-method update-animation monk ()
   (with-fields (animation frames delay scale repeat image) self
     (decf delay)
-    (when (not (plusp delay))
+    (when (minusp delay)
       ;; done displaying current frame. show next, if any
       (let ((frame (pop frames)))
 	(if frame
-	    (setf delay (frame-delay frame)
-		  image (frame-image frame))
+	    (setf delay (frame-delay frame))
 	    ;; no more frames
 	    (animate self (if repeat animation nil)))))))
 
@@ -142,9 +141,12 @@
 	(setf walk-clock *walk-interval*)))))
 
 (define-method draw monk ()
-  (draw-textured-rectangle %x %y %z %width %height 
+  (draw-box %x %y %width %height :color "red" :alpha 0.2)
+  ;; (draw-textured-rectangle %x %y %z %width %height 
+  ;; 			   (find-texture (or (animation-frame self) %image)))
+  (draw-textured-rectangle-* %x %y %z %width %height 
 			   (find-texture (or (animation-frame self) %image))
-			   :angle (direction-heading %direction)))
+			   :angle (+ (direction-degrees %direction) 90)))
 
 (define-method cast-spell monk ()
   (animate self *monk-cast*))
