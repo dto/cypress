@@ -1,3 +1,8 @@
+<dto> im struggling with whether to allow time-stop during combat to issue
+      orders, so that combat has a semi-turn-based feel  [21:45]
+<dto> it might take the pressure off and allow a more thoughtful approach
+>  
+
 * Overview
 
 ** Player controls an unnamed monk in several randomly varying quests

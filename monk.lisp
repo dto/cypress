@@ -1,4 +1,8 @@
-(in-package :valisade)
+(in-package :f0rest)
+
+(defun solidp (thing)
+  (and (blockyp thing)
+       (has-tag thing :solid)))
 
 (defun targetp (thing)
   (and (blockyp thing)
@@ -15,83 +19,108 @@
 ;;; A monk, either AI or human controlled
 
 (defun animation-scale (a) (getf a :scale 1.0))
+(defun animation-repeat (a) (getf a :repeat))
 (defun animation-frames (a) (getf a :frames))
 (defun frame-image (f) (first f))
 (defun frame-delay (f) (or (second f) 1))
 
-(defparameter *casting-animation*
-  '(:scale 1.2 
+(defparameter *monk-cast*
+  '(:scale 1.0
     :frames (("monk-cast-1.png" 3)
 	     ("monk-cast-2.png" 4)
 	     ("monk-cast-3.png" 4)
-	     ("monk-cast-4.png" 4))))
-;	     ("monk-cast-0.png" 8))))
+	     ("monk-cast-4.png" 4)
+	     ("monk-cast-5.png" 8))))
+
+(defparameter *monk-stand*
+  '(:scale 1.0
+    :repeat t
+    :frames (("monk-stand-1.png" 19)
+	     ("monk-stand-2.png" 24)
+	     ("monk-stand-3.png" 13)
+	     ("monk-stand-4.png" 20)
+	     ("monk-stand-5.png" 17)
+	     ("monk-stand-6.png" 25))))
+
+(defparameter *monk-walk* 
+  '(:scale 1.0 
+    :repeat t
+    :frames (("monk-walk-1.png" 4)
+	     ("monk-walk-2.png" 4)
+	     ("monk-walk-3.png" 4)
+	     ("monk-walk-4.png" 4)
+	     ("monk-walk-5.png" 4)
+	     ("monk-walk-6.png" 4)
+	     ("monk-walk-7.png" 4)
+	     ("monk-walk-8.png" 4))))
+
+(defparameter *monk-walk-bow* 
+  '(:scale 1.0 
+    :repeat t
+    :frames (("monk-walk-bow-1.png" 4)
+	     ("monk-walk-bow-2.png" 4)
+	     ("monk-walk-bow-3.png" 4)
+	     ("monk-walk-bow-4.png" 4)
+	     ("monk-walk-bow-5.png" 4)
+	     ("monk-walk-bow-6.png" 4)
+	     ("monk-walk-bow-7.png" 4)
+	     ("monk-walk-bow-8.png" 4))))
 
 (define-block monk 
   ;; animation parameters
   (scale :initform nil)
   (frames :initform nil)
   (delay :initform 0)
+  (repeat :initform nil)
+  (animation :initform nil)
   ;; 
-  (leave-direction :initform nil)
+  (bow-ready :initform nil)
   (alive :initform t)
   (talking :initform nil)
-  (shielded :initform nil)
-  (shield-clock :initform 0)
-  (hearing-distance :initform 650)
-  (body-color :initform "white")
-  (color :initform "white")
-  (carrying :initform nil)
+  (hearing-distance :initform 800)
   (tags :initform '(:monk :colored))
   (direction :initform :up)
-  (kick-direction :initform :up)
+  (fire-direction :initform :up)
   ;; timers
   (retry-clock :initform (seconds->frames 5))
   (walk-clock :initform 0)
   (step-clock :initform 0)
-  (kick-clock :initform 0)
+  (fire-clock :initform 0)
   ;; we want to catch the beginning of firing, even if the input
   ;; polling in `update' misses it. (see below)
-  (default-events :initform '(((:space) (strong-kick)))))
+  (default-events :initform '(((:space) (strong-fire)))))
 
-(define-method animate monk (&optional animation)
-  (setf %scale (when animation (animation-scale animation)))
-  (setf %frames (when animation (animation-frames animation))))
+(define-method animate monk (animation)
+  (setf %scale (animation-scale animation))
+  (setf %frames (animation-frames animation))
+  (setf %repeat (animation-repeat animation))
+  (setf %animation animation))
   
 (define-method animation-frame monk ()
   (with-fields (frames delay) self
     (when frames 
       (if (zerop delay)
+	  ;; done displaying current frame. show next
 	  (let ((frame (pop frames)))
 	    (setf delay (frame-delay frame))
 	    (frame-image frame))
+	  ;; show current frame
 	  (frame-image (first frames))))))
 
 (define-method update-animation monk ()
-  (with-fields (frames delay scale) self
+  (with-fields (animation frames delay scale repeat) self
     (if (null frames)
 	(setf scale nil)
-	(decf delay))))
-
-(defparameter *monk-colors* '("gold" "olive drab" "RoyalBlue3" "dark orchid"))
-
-(define-method initialize monk (&optional color)
-  (initialize%super self)
-  (when color (setf %body-color color)))
-
-(define-method raise-shield monk ()
-  ;; (play-sound self "go.wav")
-  (setf %shielded t %shield-clock (seconds->frames 3)))
+	(decf delay))
+    ;; possibly begin animation again
+    (when repeat 
+      (animate self animation))))
 
 (define-method humanp monk () nil)
 
-(defvar *ball-carrier* nil)
-
-;;; Drawing the monk onscreen and animating his feet
+;;; Animating the monk as he walks
 
 (defparameter *monk-step-frames* 3)
-
-(defparameter *monk-empty-color* "white")
 
 (defparameter *monk-speed* (truncate (/ *unit* 1.3)))
 
@@ -99,7 +128,7 @@
 
 (defparameter *walk-interval* 16)
 
-(define-method animate-walk monk ()
+(define-method update-walk monk ()
   (with-fields (walk-clock step-clock) self
     ;; only when moving
     (when (plusp step-clock)
@@ -108,70 +137,33 @@
       (when (zerop walk-clock)
 	(setf walk-clock *walk-interval*)))))
 
-(defparameter *walking-right* 
-  '("monk-right-1.png"
-    "monk-right-lstep-1.png"
-    "monk-right-lstep-2.png"
-    "monk-right-2.png"
-    "monk-right-rstep-1.png"
-    "monk-right-rstep-2.png"))
-
-(defparameter *walking-up* 
-  '("monk-up-1.png"
-    "monk-up-lstep-1.png"
-    "monk-up-lstep-2.png"
-    "monk-up-2.png"
-    "monk-up-rstep-1.png"
-    "monk-up-rstep-2.png"))
-        
-(defun monk-walking-image (direction clock)
-  (let ((frames
-	  (or 
-	   (cond
-	     ((member direction '(:up :down :upright :downleft))
-	      *walking-up*)
-	     ((member direction '(:left :right :upleft :downright))
-	      *walking-right*))
-	   *walking-up*)))
-    (or (nth (truncate (* clock (/ 6 *walk-interval*)))
-	     frames)
-	(if (or (eq direction :left) (eq direction :right))
-	    "monk-right-1.png"
-	    "monk-up-1.png"))))
-
-(define-method begin-talking monk (line)
-  (setf %talking t))
-
-(define-method stop-talking monk ()
-  (setf %talking nil))
-
-(define-method serve-location monk ()
-  (with-fields (direction) self
-    (multiple-value-bind (cx cy) (center-point self)
-      (multiple-value-bind (tx ty) 
-	  (step-in-direction cx cy direction (units 0.7))
-	(values (- tx (* *ball-size* 0.4))
-		(- ty (* *ball-size* 0.4)))))))
-
 (define-method draw monk ()
-  (let ((image 
-	  (if %alive
-	      (or
-	       (animation-frame self)
-	       (monk-walking-image %direction %walk-clock) 
-	       "monk-up.png")
-	      "skull.png")))
-    (draw-textured-rectangle %x %y %z %width %height (find-texture image))
-    (when %shielded 
-      (multiple-value-bind (cx cy) (center-point self)
-	(draw-circle cx cy 30 :color (random-choose '("deep pink" "yellow")))))))
+  (draw-textured-rectangle %x %y %z %width %height 
+			   (find-texture (animation-image self))
+			   :angle (direction-heading %direction))))
+
+(define-method cast-spell monk ()
+  (animate self *monk-cast*))
 	  
 ;; (define-method serve monk ()
 ;;   (multiple-value-bind (x y) (serve-location self)
 ;;     (make-ball %color)
 ;;     (drop-object (current-buffer) *ball* x y)))
 
-;;; Cool vintage footstep and kick sounds
+;; (define-method serve-location monk ()
+;;   (with-fields (direction) self
+;;     (multiple-value-bind (cx cy) (center-point self)
+;;       (multiple-value-bind (tx ty) 
+;; 	  (step-in-direction cx cy direction (units 0.7))
+;; 	(values (- tx (* *ball-size* 0.4))
+;; 		(- ty (* *ball-size* 0.4)))))))
+
+;; (define-method begin-talking monk (line)
+;;   (setf %talking t))
+
+;; (define-method stop-talking monk ()
+;;   (setf %talking nil))
+
 
 (defresource "left-foot.wav" :volume 20)
 (defresource "right-foot.wav" :volume 20)
@@ -198,23 +190,16 @@
       (when (< (distance-to-cursor self) 400)
 	(play-sound self sound)))))
 
-;; (defresource "kick.wav" :volume 23)
+;; (defresource "fire.wav" :volume 23)
 ;; (defresource "serve.wav" :volume 23)
 
-(defparameter *kick-sound* "kick.wav")
+(defparameter *fire-sound* "fire.wav")
 
 ;;; Default AI methods. 
 
 (define-method movement-direction monk () 
-  (if %carrying
-      (opposite-direction (direction-to-cursor self))
-      (if (< (distance-to-cursor self) 400)
-  	  (if *ball*
-  	      (direction-to-thing self *ball*)
-  	      (if (> (distance-to-cursor self) 250)
-  		  (opposite-direction (direction-to-cursor self))
-  		  (or (percent-of-time 3 (setf %direction (random-choose *directions*)))
-  		      %direction))))))
+  (or (percent-of-time 3 (setf %direction (random-choose *directions*)))
+      %direction))
 
 (defvar *joystick-enabled* nil)
 
@@ -225,9 +210,6 @@
 	(when (right-analog-stick-pressed-p)
 	  (right-analog-stick-heading)))))
 
-;; (define-method can-reach-ball monk ()
-;;   (and *ball* (colliding-with self *ball*)))
-
 (define-method bounding-box monk ()
   ;; shrink bounding box by a few px to make game more forgiving
   (with-field-values (x y height width) self
@@ -237,12 +219,8 @@
 	      (+ (- margin) y height)))))
 
 (define-method collide monk (thing)
-  (when (or (brickp thing) (enemyp thing) (holep thing) (cloudp thing))
+  (when (solidp thing)
     (restore-location self)))
-
-;; (defresource "skull.png")
-
-;; (defresource "analog-death.wav" :volume 70)
 
 (define-method die monk ()
   (when (and %alive (not %shielded))
@@ -252,22 +230,16 @@
 
 (define-method damage monk (points) (die self))
 
-(define-method strong-kick-p monk () nil)
+(define-method strong-fire-p monk () nil)
 
-(define-method cast-spell monk ()
-  (animate self *casting-animation*))
-
-(define-method kick monk (&optional direction strong)
+(define-method fire monk (&optional direction strong)
   (when %alive
-    (when (and (null *ball*) (zerop %kick-clock))
+    (when (and (null *ball*) (zerop %fire-clock))
       (cast-spell self)
-      (setf %kick-clock *monk-reload-frames*))))
+      (setf %fire-clock *monk-reload-frames*))))
 
-(define-method strong-kick monk ()
-  (kick self nil t))
-
-(define-method paint monk (color)
-  (setf %color color))
+(define-method strong-fire monk ()
+  (fire self nil t))
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
@@ -284,19 +256,19 @@
   ;; normal update
   (when %alive
     (resize self *monk-size* *monk-size*)
-    (with-fields (step-clock kick-clock) self
+    (with-fields (step-clock fire-clock) self
       (when (plusp step-clock)
 	(decf step-clock))
       ;; find out what direction the AI or human wants to go
       (let ((direction (movement-direction self))
-	    (kick-button (strong-kick-p self)))
+	    (fire-button (strong-fire-p self)))
 	(when direction 
 	  ;; move in the movement direction
 	  (move-toward self direction (/ *monk-speed* 2))
 	  (setf %direction direction)
-	  ;; possibly kick, lock firing dir when held
+	  ;; possibly fire, lock firing dir when held
 	  (unless (holding-fire)
-	    (setf %kick-direction direction)))
+	    (setf %fire-direction direction)))
 	(if direction
 	    ;; controller is pushing in a direction
 	    (when (zerop step-clock)
@@ -306,16 +278,16 @@
 	      (make-footstep-sounds self))
 	    ;; not pushing. allow movement immediately
 	    (setf step-clock 0 %walk-clock 0))
-	;; update animation
-	(animate-walk self)
-	;; delay between kicks
-	(when (plusp kick-clock)
-	  (decf kick-clock))
-	;; ready to kick?
-	(when (zerop kick-clock)
-	  (when kick-button
+	;; update walk counters
+	(update-walk self)
+	;; delay between fires
+	(when (plusp fire-clock)
+	  (decf fire-clock))
+	;; ready to fire?
+	(when (zerop fire-clock)
+	  (when fire-button
 	    ;; yes, do it
-	    (kick self %kick-direction kick-button)))))))
+	    (fire self %fire-direction fire-button)))))))
 
 ;; Player 1 drives the logic with the arrows/numpad and spacebar
 
@@ -331,11 +303,11 @@
       (some #'joystick-button-pressed-p
 	    '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20))))
 
-(define-method collide player-1-monk (thing)
-  (when (enemyp thing)
-    (die self)))
+;; (define-method collide player-1-monk (thing)
+;;   (when (enemyp thing)
+;;     (restore
 
-(define-method strong-kick-p player-1-monk ()
+(define-method strong-fire-p player-1-monk ()
   (holding-fire))
 
 (define-method humanp player-1-monk () t)
