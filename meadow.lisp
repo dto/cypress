@@ -37,13 +37,20 @@
 (define-block wood :image "wood-1.png")
 
 (define-method collide wood (thing)
-  (play-sample "wood.wav")
-  (destroy self))
+  (when (monkp thing)
+    (play-sample "wood.wav")
+    (destroy self)))
 
 (defun make-wood (&optional (n 0))
   (let ((wood (new 'wood)))
     (prog1 wood
       (change-image wood (nth (mod n 4) '("wood-1.png" "wood-2.png" "wood-3.png" "wood-4.png"))))))
+
+(define-block stone1 :image "coverstone.png")
+(define-block stone2 :image "coverstone2.png")
+(define-block scroll :image "scroll.png")
+(define-block skull :image (random-choose '("skull-1.png" "skull-2.png")))
+(define-block remains :image (random-choose '("remains-1.png" "remains-2.png")))
 
 (defun make-meadow ()
     (let ((monk (new 'player-1-monk))
@@ -61,10 +68,13 @@
 ;
       (resize buffer 979 1600)
 
-      ;; (drop-object buffer (make-wood 1) 100 900)
-      ;; (drop-object buffer (make-wood 2) 1100 300)
-      ;; (drop-object buffer (make-wood 3) 1900 120)
-      ;; (drop-object buffer (make-wood 0) 500 1700)
+      (drop-object buffer (new 'scroll) 90 90)
+      (drop-object buffer (new 'stone1) 60 60)
+      (drop-object buffer (new 'stone2) 90 90)
+      (drop-object buffer (make-wood 1) 100 110)
+      (drop-object buffer (make-wood 2) 100 130)
+      (drop-object buffer (make-wood 3) 100 150)
+      (drop-object buffer (make-wood 0) 100 180)
 
       ;; allocate
        (install-quadtree buffer)

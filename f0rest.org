@@ -1,7 +1,35 @@
+* TODO basic wraith combat
+** DONE import bow stand animation
+   CLOSED: [2013-08-26 Mon 18:32]
+** DONE import bow stand ready animation
+   CLOSED: [2013-08-26 Mon 18:32]
+** DONE import bow walk animation
+   CLOSED: [2013-08-26 Mon 18:32]
+** DONE import bow ready walk animation
+   CLOSED: [2013-08-26 Mon 18:32]
+** DONE import arrows
+   CLOSED: [2013-08-26 Mon 18:32]
+** DONE import wraiths
+   CLOSED: [2013-08-26 Mon 18:32]
+
+** DONE import remains and skull
+   CLOSED: [2013-08-26 Mon 18:36]
+
+** TODO make new animations work
+** TODO autoscale frames so that scale1.0 =>> 600x600 ends up *monk-size* x *monk-size* , centered
+
+
+** TODO walk with bow 
+** TODO hold shift to ready bow
+** TODO let go of shift to fire arrow
+
+** TODO left click on background to make monk walk to that spot (later pathfind)
+** TODO left drag to move object
+** TODO right click on object for halo/action
+
 <dto> im struggling with whether to allow time-stop during combat to issue
       orders, so that combat has a semi-turn-based feel  [21:45]
 <dto> it might take the pressure off and allow a more thoughtful approach
->  
 
 * Overview
 
