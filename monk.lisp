@@ -1,5 +1,33 @@
 (in-package :f0rest)
 
+(defresource "wood.wav" :volume 40)
+(defresource "growl-1.wav" :volume 60)
+(defresource "growl-2.wav" :volume 60)
+(defresource "unh-1.wav" :volume 60)
+(defresource "unh-2.wav" :volume 60)
+(defresource "unh-3.wav" :volume 60)
+(defresource "howl.wav" :volume 50)
+(defresource "knock.wav" :volume 50)
+(defresource "bow.wav" :volume 40)
+(defresource "death.wav" :volume 40)
+(defresource "lichscream.wav" :volume 60)
+(defresource "lichdie.wav" :volume 60)
+(defresource "dead.wav" :volume 40)
+
+(define-block stone1 :image "coverstone.png")
+(define-block stone2 :image "coverstone2.png")
+(define-block scroll :image "scroll.png")
+(define-method collide scroll (thing)
+  (when (monkp thing)
+    (play-sample "wood.wav")
+    (destroy self)))
+(define-block skull :image (random-choose '("skull-1.png" "skull-2.png")))
+(define-method collide skull (thing)
+  (when (monkp thing)
+    (play-sample "wood.wav")
+    (destroy self)))
+(define-block remains :image (random-choose '("remains-1.png" "remains-2.png")))
+
 (defparameter *monk-speed* (truncate (/ *unit* 1.3)))
 
 (defun solidp (thing)
@@ -41,10 +69,48 @@
   (decf %clock)
   (if (minusp %clock)
       (destroy self)
-      (forward self 8)))
+      (forward self 15)))
 
 (define-method draw arrow ()
   (draw-as-sprite self %image %heading))
+
+;;; Wraiths
+
+(define-block wraith
+  :seen-player nil
+  :image-scale 600
+  :tags '(:enemy)
+  :hp 5
+  :image (random-choose '("wraith-1.png" "wraith-2.png" "wraith-3.png")))
+
+(define-method damage wraith (points)
+  (play-sample "knock.wav")
+  (decf %hp points)
+  (unless (plusp %hp)
+    (drop self (new 'remains))
+    (drop self (new 'skull))
+    (percent-of-time 20 (drop self (new 'scroll) 40 40))
+    (play-sample "dead.wav")
+    (destroy self)))
+
+(define-method update wraith ()
+    (resize self 130 130)
+  (when (< (distance-to-cursor self) 800)
+    (unless %seen-player
+      (play-sample "lichscream.wav")
+      (setf %seen-player t))
+    (percent-of-time 16 (setf %image (random-choose '("wraith-1.png" "wraith-2.png" "wraith-3.png"))))
+    (let ((heading (heading-to-cursor self)))
+      (percent-of-time 13 
+	(setf %heading heading))
+      (percent-of-time 30
+	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
+	(move self %heading 6)))))
+
+(define-method draw wraith ()
+  (draw-as-sprite self %image %heading))
+
+;;; Animation system
 
 (defconstant +animation-pixels-per-scale+ 600)
  
@@ -160,6 +226,7 @@
   (repeat :initform nil)
   (animation :initform nil)
   ;; 
+  (raising-bow :initform nil)
   (bow-ready :initform nil)
   (alive :initform t)
   (talking :initform nil)
@@ -172,10 +239,10 @@
   (retry-clock :initform (seconds->frames 5))
   (walk-clock :initform 0)
   (step-clock :initform 0)
-  (fire-clock :initform 0)
-  ;; we want to catch the beginning of firing, even if the input
-  ;; polling in `update' misses it. (see below)
-  (default-events :initform '(((:space) (strong-fire)))))
+  (fire-clock :initform 0))
+
+(define-method can-accept monk () t)
+(define-method accept monk (thing) (message "CUNT") t)
 
 (define-method animation-frame monk ()
   (when %animation (frame-image (first %frames))))
@@ -209,9 +276,12 @@
 
 (defparameter *monk-step-frames* 3)
 
-(defparameter *monk-reload-frames* 10)
+(defparameter *monk-reload-frames* 30)
 
 (defparameter *walk-interval* 16)
+
+(define-method raise-bow monk ()
+  (setf %raising-bow t))
 
 (define-method update-walk monk ()
   (with-fields (walk-clock step-clock) self
@@ -242,6 +312,7 @@
   (when (zerop %fire-clock)
     (setf %fire-clock *monk-reload-frames*)
     (multiple-value-bind (x y) (fire-location self)
+      (play-sample "bow.wav")
       (let ((arrow (new 'arrow (direction-heading direction))))
 	(drop-object (current-buffer) arrow x y)))))
 
@@ -306,7 +377,9 @@
 
 (define-method collide monk (thing)
   (when (solidp thing)
-    (restore-location self)))
+    (restore-location self))
+  (when (enemyp thing)
+    (percent-of-time 20 (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (define-method die monk ()
   (when %alive
@@ -316,41 +389,56 @@
 
 (define-method damage monk (points) (die self))
 
-(define-method strong-fire-p monk () nil)
+(define-method pressing-fire-p monk () nil)
 
-(define-method strong-fire monk ()
+(define-method pressing-fire monk ()
   (fire self nil t))
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
 (defparameter *monk-size* (* 8 *unit*))
 
+(define-method standing-animation monk ()
+  (if %bow-ready 
+      *monk-stand-bow-ready*
+      *monk-stand-bow*))
+
+(define-method walking-animation monk ()
+  (if %bow-ready 
+      *monk-walk-bow-ready*
+      *monk-walk-bow*))
+
 (define-method update monk ()
-  (when (dialogue-playing-p) (update-dialogue))
-  ;; normal update
+  (when (and (holding-fire) 
+	     (not %raising-bow))
+    (setf %raising-bow t))
+  (when (not (holding-fire))
+    (setf %raising-bow nil))
+  (when (and %raising-bow (zerop %fire-clock))
+    (setf %bow-ready t)
+    (setf %raising-bow nil))
   (when %alive
     (update-animation self)
     (when (null %animation)
-      (animate self *monk-stand-bow*))
+      (animate self (standing-animation self)))
     (resize self *monk-size* *monk-size*)
     (with-fields (step-clock fire-clock) self
       (when (plusp step-clock)
 	(decf step-clock))
       ;; find out what direction the AI or human wants to go
       (let ((direction (movement-direction self))
-	    (fire-button (strong-fire-p self)))
+	    (fire-button (pressing-fire-p self)))
 	(when (or (null direction)
 		  (null %animation))
-	  (animate self *monk-stand-bow*))
+	  (animate self (standing-animation self)))
 	(when direction 
-	  (unless (eq %animation *monk-walk-bow*)
-	    (animate self *monk-walk-bow*))
+	  (unless (eq %animation (walking-animation self))
+	    (animate self (walking-animation self)))
 	  ;; move in the movement direction
 	  (move-toward self direction (/ *monk-speed* 2))
 	  (setf %direction direction)
-	  ;; possibly fire, lock firing dir when held
-	  (unless (holding-fire)
-	    (setf %fire-direction direction)))
+	  ;; lock fire direction when holding fire button
+	  (unless (holding-fire) (setf %fire-direction direction)))
 	(if direction
 	    ;; controller is pushing in a direction
 	    (when (zerop step-clock)
@@ -366,9 +454,12 @@
 	(when (plusp fire-clock)
 	  (decf fire-clock))
 	;; ready to fire?
-	(when (zerop fire-clock)
-	  (when fire-button
+	(when (and (zerop fire-clock) %bow-ready)
+	  ;; did you let go? 
+	  (when (not fire-button)
 	    ;; yes, do it
+	    (setf %bow-ready nil)
+	    (setf %raising-bow nil)
 	    (fire self %fire-direction fire-button)))))))
 
 
@@ -393,7 +484,7 @@
 ;;   (when (enemyp thing)
 ;;     (restore
 
-(define-method strong-fire-p player-1-monk ()
+(define-method pressing-fire-p player-1-monk ()
   (holding-fire))
 
 (define-method humanp player-1-monk () t)
@@ -436,3 +527,71 @@
 		  (right-analog-stick-pressed-p)))
        (or (heading-direction heading) :left)))))
   
+;;; Meadow
+
+(define-buffer meadow 
+  :background-image "meadow.png"
+  :quadtree-depth 6
+  :default-events
+  '(((:pause) :transport-toggle-play)
+    ((:e :alt) :edit-word)
+    ((:x :control) :exec)
+    ((:d :control) :delete-word)
+    ((:c :control) :copy-word)
+    ((:x :alt) :command-prompt)
+    ((:g :control) :cancel)
+    ((:c :alt) :clear-stack)
+    ((:s :alt) :show-stack)
+    ((:m :alt) :show-messages)
+    ((:p :control) :transport-toggle-play)
+    ((:return) :enter)
+    ((:escape) :cancel)
+    ((:f1) :help)
+    ((:h :control) :help)
+    ((:x :control) :edit-cut)
+    ((:c :control) :edit-copy)
+    ((:v :control) :edit-paste)
+    ((:v :control :shift) :paste-here)
+    ((:f9) :toggle-minibuffer)
+    ((:f12) :transport-toggle-play)
+    ((:g :control) :escape)
+    ((:d :control) :drop-selection)))
+
+(define-block wood :image "wood-1.png")
+
+(define-method collide wood (thing)
+  (when (monkp thing)
+    (play-sample "wood.wav")
+    (destroy self)))
+
+(defun make-wood (&optional (n 0))
+  (let ((wood (new 'wood)))
+    (prog1 wood
+      (change-image wood (nth (mod n 4) '("wood-1.png" "wood-2.png" "wood-3.png" "wood-4.png"))))))
+
+(defun make-meadow ()
+    (let ((monk (new 'player-1-monk))
+	  (buffer (new 'meadow)))
+      (add-object buffer monk 400 400)
+      ;; adjust scrolling parameters 
+      (setf (%window-scrolling-speed buffer) (/ *monk-speed* 2)
+	    (%horizontal-scrolling-margin buffer) 2/5
+	    (%vertical-scrolling-margin buffer) 4/7)
+      ;;
+      (set-cursor buffer monk)
+      (snap-window-to-cursor buffer)
+      (glide-window-to-cursor buffer)
+
+;
+      (resize buffer 1285 2100)
+
+      (drop-object buffer (new 'wraith) 1700 200)
+      (drop-object buffer (new 'wraith) 2000 830)
+      ;; (drop-object buffer (make-wood 1) 100 110)
+      ;; (drop-object buffer (make-wood 2) 100 130)
+      ;; (drop-object buffer (make-wood 3) 100 150)
+      ;; (drop-object buffer (make-wood 0) 100 180)
+
+      ;; allocate
+       (install-quadtree buffer)
+      buffer))
