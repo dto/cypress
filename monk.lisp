@@ -329,7 +329,9 @@
       ;; find out what direction the AI or human wants to go
       (let ((direction (movement-direction self))
 	    (fire-button (strong-fire-p self)))
-	(when (null direction)
+	(when (and (null direction)
+		   (or (null %animation)
+		       (not (eq *monk-stand-bow* %animation))))
 	  (animate self *monk-stand-bow*))
 	(when direction 
 	  (unless (eq %animation *monk-walk-bow*)
