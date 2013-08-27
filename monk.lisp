@@ -1,42 +1,5 @@
 (in-package :f0rest)
 
-(defun simple-bounding-box (thing width &optional height)
-  (let ((hw (/ width 2))
-	(hh (/ (or height width 2))))
-    (multiple-value-bind (x y) (center-point thing)
-      (values (cfloat (- y hh))
-	      (cfloat (- x hw))
-	      (cfloat (+ x hw))
-	      (cfloat (+ y hh))))))
-
-(defconstant +animation-pixels-per-scale+ 500)
-
-(defun sprite-bounding-box (thing image &optional (scale-base +animation-pixels-per-scale+))
-  (multiple-value-bind (top left right bottom) (bounding-box thing)
-    (let* ((image-height (image-height image))
-	   (image-width (image-width image))
-	   (height (- bottom top))
-	   (width (- right left))
-	   (scale (/ (min height width)
-		     (min image-height image-width)))
-	   (scaled-width (* scale scale-base))
-	   (scaled-height (* scale scale-base))
-	   (hw (/ scaled-width 2))
-	   (hh (/ scaled-height 2)))
-      (multiple-value-bind (x y) (center-point thing)
-	(values (cfloat (- y hh))
-		(cfloat (- x hw))
-		(cfloat (+ x hw))
-		(cfloat (+ y hh)))))))
-
-(defun draw-as-sprite (thing image angle)
-  (multiple-value-bind (top left right bottom)
-      (sprite-bounding-box thing image)
-    (draw-textured-rectangle-* left top 0
-			       (- right left) (- bottom top)
-			       (find-texture image)
-			       :angle angle)))
-      
 (defparameter *monk-speed* (truncate (/ *unit* 1.3)))
 
 (defun solidp (thing)
@@ -65,43 +28,85 @@
 (define-method collide arrow (thing)
   (when (or (enemyp thing) (solidp thing))
     (destroy self)))
- 
-;;; A monk, either AI or human controlled
 
-(defun animation-scale (a) (getf a :scale 1.0))
+(defconstant +animation-pixels-per-scale+ 600)
+ 
+(defun animation-scale (a) (getf a :scale +animation-pixels-per-scale+))
 (defun animation-repeat (a) (getf a :repeat))
 (defun animation-frames (a) (getf a :frames))
 (defun frame-image (f) (first f))
 (defun frame-delay (f) (or (second f) 1))
 
+(defun simple-bounding-box (thing width &optional height)
+  (let ((hw (/ width 2))
+	(hh (/ (or height width 2))))
+    (multiple-value-bind (x y) (center-point thing)
+      (values (cfloat (- y hh))
+	      (cfloat (- x hw))
+	      (cfloat (+ x hw))
+	      (cfloat (+ y hh))))))
+
+(defun sprite-bounding-box (thing image &optional (scale-base +animation-pixels-per-scale+))
+  (multiple-value-bind (top left right bottom) (bounding-box thing)
+    (let* ((image-height (image-height image))
+	   (image-width (image-width image))
+	   (height (- bottom top))
+	   (width (- right left))
+	   (scale (/ (min height width)
+		     (min image-height image-width)))
+	   (scaled-width (* scale scale-base))
+	   (scaled-height (* scale scale-base))
+	   (hw (/ scaled-width 2))
+	   (hh (/ scaled-height 2)))
+      (multiple-value-bind (x y) (center-point thing)
+	(values (cfloat (- y hh))
+		(cfloat (- x hw))
+		(cfloat (+ x hw))
+		(cfloat (+ y hh)))))))
+
+(defun draw-as-sprite (thing animation image angle)
+  (multiple-value-bind (top left right bottom)
+      (sprite-bounding-box thing image (animation-scale animation))
+    (draw-textured-rectangle-* left top 0
+			       (- right left) (- bottom top)
+			       (find-texture image)
+			       :angle angle)))
+
+;;; A monk, either AI or human controlled
+
 (defparameter *monk-cast*
-  '(:frames (("monk-cast-1.png" 3)
+  '(:scale 950
+    :frames (("monk-cast-1.png" 3)
 	     ("monk-cast-2.png" 4)
 	     ("monk-cast-3.png" 4)
 	     ("monk-cast-4.png" 4)
-	     ("monk-cast-5.png" 8))))
+	     ("monk-cast-5.png" 6))))
 
 (defparameter *monk-stand*
-  '(:frames (("monk-stand-1.png" 19)
+  '(:scale 600
+    :frames (("monk-stand-1.png" 19)
 	     ("monk-stand-2.png" 24)
-	     ("monk-stand-3.png" 13)
+	     ("monk-stand-3.png" 18)
 	     ("monk-stand-4.png" 20))))
 
 (defparameter *monk-stand-bow*
-  '(:frames (("monk-stand-bow-1.png" 19)
+  '(:scale 1000
+    :frames (("monk-stand-bow-1.png" 19)
 	     ("monk-stand-bow-2.png" 24)
-	     ("monk-stand-bow-3.png" 13))))
+	     ("monk-stand-bow-3.png" 32))))
 
 (defparameter *monk-stand-bow-ready*
-  '(:frames (("monk-stand-bow-ready-1.png" 19)
+  '(:scale 900
+    :frames (("monk-stand-bow-ready-1.png" 19)
 	     ("monk-stand-bow-ready-2.png" 24)
-	     ("monk-stand-bow-ready-3.png" 13))))
+	     ("monk-stand-bow-ready-3.png" 32))))
 
 (defparameter *monk-stand-images*
   '("monk-stand-1.png" "monk-stand-2.png" "monk-stand-3.png" "monk-stand-4.png"))
 
 (defparameter *monk-walk* 
   '(:repeat t
+    :scale 600
     :frames (("monk-walk-1.png" 4)
 	     ("monk-walk-2.png" 4)
 	     ("monk-walk-3.png" 4)
@@ -112,13 +117,17 @@
 	     ("monk-walk-8.png" 4))))
 
 (defparameter *monk-walk-bow* 
-  '(:frames (("monk-walk-bow-1.png" 4)
-	     ("monk-walk-bow-2.png" 4)
-	     ("monk-walk-bow-3.png" 4)
-	     ("monk-walk-bow-4.png" 4))))
+  '(:repeat t
+    :scale 600
+    :frames (("monk-walk-bow-1.png" 3)
+	     ("monk-walk-bow-4.png" 3)
+	     ("monk-walk-bow-3.png" 3)
+	     ("monk-walk-bow-2.png" 1))))
 
 (defparameter *monk-walk-bow-ready* 
-  '(:frames (("monk-walk-bow-ready-1.png" 4)
+  '(:repeat t
+    :scale 900
+    :frames (("monk-walk-bow-ready-1.png" 4)
 	     ("monk-walk-bow-ready-2.png" 4)
 	     ("monk-walk-bow-ready-3.png" 4)
 	     ("monk-walk-bow-ready-4.png" 4))))
@@ -152,13 +161,14 @@
 (define-method animation-frame monk ()
   (when %animation (frame-image (first %frames))))
 
-(define-method animate monk (animation)
+(define-method animate monk (animation &optional force)
   (setf %scale (animation-scale animation))
   (setf %frames (animation-frames animation))
   (setf %repeat (animation-repeat animation))
   (setf %animation animation)
-  (let ((image (animation-frame self)))
-    (when image (setf %image image))))
+  (setf %delay (frame-delay (first %frames))))
+  ;; (let ((image (animation-frame self)))
+  ;;   (when image (setf %image image))))
 
 (define-method update-animation monk ()
   (with-fields (animation frames delay scale repeat image) self
@@ -194,6 +204,7 @@
 
 (define-method draw monk ()
   (draw-as-sprite self 
+		  %animation
 		  (or (animation-frame self) %image)
 		  (+ (direction-degrees %direction) 90)))
 
@@ -306,12 +317,11 @@
 
 (define-method update monk ()
   (when (dialogue-playing-p) (update-dialogue))
-  ;; update standing/breathing anim
-  ;; (when (null %animation)
-  ;;   (animate self *monk-stand-bow*))
-  (update-animation self)
   ;; normal update
   (when %alive
+    (update-animation self)
+    (when (null %animation)
+      (animate self *monk-stand-bow*))
     (resize self *monk-size* *monk-size*)
     (with-fields (step-clock fire-clock) self
       (when (plusp step-clock)
@@ -319,10 +329,11 @@
       ;; find out what direction the AI or human wants to go
       (let ((direction (movement-direction self))
 	    (fire-button (strong-fire-p self)))
-	;; (when (null direction)
-	;;   (animate self *monk-stand-bow*))
-	(when (and direction (null %animation)) (animate self *monk-walk-bow*))
+	(when (null direction)
+	  (animate self *monk-stand-bow*))
 	(when direction 
+	  (unless (eq %animation *monk-walk-bow*)
+	    (animate self *monk-walk-bow*))
 	  ;; move in the movement direction
 	  (move-toward self direction (/ *monk-speed* 2))
 	  (setf %direction direction)
@@ -348,6 +359,8 @@
 	  (when fire-button
 	    ;; yes, do it
 	    (fire self %fire-direction fire-button)))))))
+
+
 
 
 
