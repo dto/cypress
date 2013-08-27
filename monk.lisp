@@ -46,12 +46,13 @@
 	      (cfloat (+ x hw))
 	      (cfloat (+ y hh))))))
 
-(defun sprite-bounding-box (thing image &optional (scale-base +animation-pixels-per-scale+))
+(defun sprite-bounding-box (thing image)
   (multiple-value-bind (top left right bottom) (bounding-box thing)
     (let* ((image-height (image-height image))
 	   (image-width (image-width image))
 	   (height (- bottom top))
 	   (width (- right left))
+	   (scale-base (field-value :scale thing))
 	   (scale (/ (min height width)
 		     (min image-height image-width)))
 	   (scaled-width (* scale scale-base))
@@ -64,9 +65,9 @@
 		(cfloat (+ x hw))
 		(cfloat (+ y hh)))))))
 
-(defun draw-as-sprite (thing animation image angle)
+(defun draw-as-sprite (thing image angle)
   (multiple-value-bind (top left right bottom)
-      (sprite-bounding-box thing image (animation-scale animation))
+      (sprite-bounding-box thing image)
     (draw-textured-rectangle-* left top 0
 			       (- right left) (- bottom top)
 			       (find-texture image)
@@ -204,11 +205,8 @@
 
 (define-method draw monk ()
   (draw-as-sprite self 
-		  %animation
 		  (or (animation-frame self) %image)
 		  (+ (direction-degrees %direction) 90)))
-
-  ;; (draw-textured-rectangle-* %x %y %z %width %height 
 
 (define-method cast-spell monk ()
   (animate self *monk-cast*))
