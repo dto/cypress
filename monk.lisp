@@ -20,14 +20,31 @@
 
 ;;; Arrows, the main weapon
 
-(define-block arrow :image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png")))
+(defparameter *arrow-size* 25)
 
-(define-method bounding-box arrow () 
-  (simple-bounding-box self (units 4)))
+(define-block arrow
+  :image-scale 40
+  :image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png")))
+
+(define-method initialize arrow (heading)
+  (block%initialize self)
+  (setf %clock 400)
+  (setf %heading heading))
 
 (define-method collide arrow (thing)
-  (when (or (enemyp thing) (solidp thing))
-    (destroy self)))
+  (cond ((enemyp thing) (damage thing 1) (destroy self))
+	((solidp thing) (destroy self))))
+
+(define-method update arrow ()
+  (percent-of-time 13 (setf %image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png"))))
+  (resize self *arrow-size* *arrow-size*)
+  (decf %clock)
+  (if (minusp %clock)
+      (destroy self)
+      (forward self 8)))
+
+(define-method draw arrow ()
+  (draw-as-sprite self %image %heading))
 
 (defconstant +animation-pixels-per-scale+ 600)
  
@@ -52,7 +69,7 @@
 	   (image-width (image-width image))
 	   (height (- bottom top))
 	   (width (- right left))
-	   (scale-base (field-value :scale thing))
+	   (scale-base (or (field-value :image-scale thing) +animation-pixels-per-scale+))
 	   (scale (/ (min height width)
 		     (min image-height image-width)))
 	   (scaled-width (* scale scale-base))
@@ -65,13 +82,14 @@
 		(cfloat (+ x hw))
 		(cfloat (+ y hh)))))))
 
-(defun draw-as-sprite (thing image angle)
+(defun draw-as-sprite (thing image heading)
   (multiple-value-bind (top left right bottom)
       (sprite-bounding-box thing image)
     (draw-textured-rectangle-* left top 0
 			       (- right left) (- bottom top)
 			       (find-texture image)
-			       :angle angle)))
+			       ;; adjust angle to normalize for up-pointing sprites 
+			       :angle (+ 90 (heading-degrees heading)))))
 
 ;;; A monk, either AI or human controlled
 
@@ -136,7 +154,7 @@
 (define-block monk 
   ;; animation parameters
   (image :initform (random-choose *monk-stand-images*))
-  (scale :initform nil)
+  (image-scale :initform nil)
   (frames :initform nil)
   (delay :initform 0)
   (repeat :initform nil)
@@ -163,11 +181,12 @@
   (when %animation (frame-image (first %frames))))
 
 (define-method animate monk (animation &optional force)
-  (setf %scale (animation-scale animation))
-  (setf %frames (animation-frames animation))
-  (setf %repeat (animation-repeat animation))
-  (setf %animation animation)
-  (setf %delay (frame-delay (first %frames))))
+  (when (or force (not (eq %animation animation)))
+    (setf %image-scale (animation-scale animation))
+    (setf %frames (animation-frames animation))
+    (setf %repeat (animation-repeat animation))
+    (setf %animation animation)
+    (setf %delay (frame-delay (first %frames)))))
   ;; (let ((image (animation-frame self)))
   ;;   (when image (setf %image image))))
 
@@ -182,7 +201,7 @@
 	      (setf image (frame-image frame)
 		    delay (frame-delay frame))
 	      ;; no more frames
-	      (animate self (if repeat animation nil))))))))
+	      (animate self (if repeat animation nil) t)))))))
     
 (define-method humanp monk () nil)
 
@@ -206,12 +225,10 @@
 (define-method draw monk ()
   (draw-as-sprite self 
 		  (or (animation-frame self) %image)
-		  (+ (direction-degrees %direction) 90)))
+		  (direction-heading %direction)))
 
 (define-method cast-spell monk ()
   (animate self *monk-cast*))
-
-(defparameter *arrow-size* 25)
 
 (define-method fire-location monk ()
   (with-fields (direction) self
@@ -221,17 +238,18 @@
 	(values (- tx (* *arrow-size* 0.4))
 		(- ty (* *arrow-size* 0.4)))))))
 	  
-(define-method fire monk ()
-  (multiple-value-bind (x y) (fire-location self)
-    (let ((arrow (new 'arrow (direction-heading %direction))))
-      (drop-object (current-buffer) arrow x y))))
+(define-method fire monk (direction ignore)
+  (when (zerop %fire-clock)
+    (setf %fire-clock *monk-reload-frames*)
+    (multiple-value-bind (x y) (fire-location self)
+      (let ((arrow (new 'arrow (direction-heading direction))))
+	(drop-object (current-buffer) arrow x y)))))
 
 (define-method begin-talking monk (line)
   (setf %talking t))
 
 (define-method stop-talking monk ()
   (setf %talking nil))
-
 
 (defresource "left-foot.wav" :volume 20)
 (defresource "right-foot.wav" :volume 20)
@@ -300,12 +318,6 @@
 
 (define-method strong-fire-p monk () nil)
 
-(define-method fire monk (&optional direction strong)
-  (when %alive
-    (when (and (null *ball*) (zerop %fire-clock))
-      (cast-spell self)
-      (setf %fire-clock *monk-reload-frames*))))
-
 (define-method strong-fire monk ()
   (fire self nil t))
 
@@ -327,9 +339,8 @@
       ;; find out what direction the AI or human wants to go
       (let ((direction (movement-direction self))
 	    (fire-button (strong-fire-p self)))
-	(when (and (null direction)
-		   (or (null %animation)
-		       (not (eq *monk-stand-bow* %animation))))
+	(when (or (null direction)
+		  (null %animation))
 	  (animate self *monk-stand-bow*))
 	(when direction 
 	  (unless (eq %animation *monk-walk-bow*)
