@@ -1,7 +1,7 @@
 (in-package :f0rest)
 
 (defconstant +dots-per-inch+ 600)
-(defparameter *unit* 600) 
+(defparameter *unit* 14) 
 
 (defun units (n) (* n *unit*))
 

@@ -8,6 +8,8 @@
 ** TODO press Action to cycle auto-choose objects, Fire to confirm choice, Escape to cancel
 ** TODO also show Hand to choose object for your verbs , like ultima
 
+** TODO immobilize feet when bow is ready , then aim/release
+
 ** TODO allow z-ordering / push to front / back of objects
 *** TODO or just allow always-on-top? 
 *** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
