@@ -3,9 +3,9 @@
 (defresource "wood.wav" :volume 40)
 (defresource "growl-1.wav" :volume 60)
 (defresource "growl-2.wav" :volume 60)
-(defresource "unh-1.wav" :volume 60)
-(defresource "unh-2.wav" :volume 60)
-(defresource "unh-3.wav" :volume 60)
+(defresource "unh-1.wav" :volume 20)
+(defresource "unh-2.wav" :volume 20)
+(defresource "unh-3.wav" :volume 20)
 (defresource "howl.wav" :volume 50)
 (defresource "knock.wav" :volume 50)
 (defresource "bow.wav" :volume 40)
@@ -80,7 +80,7 @@
   :seen-player nil
   :image-scale 600
   :tags '(:enemy)
-  :hp 5
+  :hp 3
   :image (random-choose '("wraith-1.png" "wraith-2.png" "wraith-3.png")))
 
 (define-method damage wraith (points)
@@ -90,12 +90,12 @@
     (drop self (new 'remains))
     (drop self (new 'skull))
     (percent-of-time 20 (drop self (new 'scroll) 40 40))
-    (play-sample "dead.wav")
+    (play-sample "lichdie.wav")
     (destroy self)))
 
 (define-method update wraith ()
     (resize self 130 130)
-  (when (< (distance-to-cursor self) 800)
+  (when (< (distance-to-cursor self) 500)
     (unless %seen-player
       (play-sample "lichscream.wav")
       (setf %seen-player t))
@@ -105,7 +105,7 @@
 	(setf %heading heading))
       (percent-of-time 30
 	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
-	(move self %heading 6)))))
+	(move self %heading 4)))))
 
 (define-method draw wraith ()
   (draw-as-sprite self %image %heading))
@@ -205,9 +205,9 @@
   '(:repeat t
     :scale 600
     :frames (("monk-walk-bow-1.png" 3)
-	     ("monk-walk-bow-4.png" 3)
+	     ("monk-walk-bow-2.png" 3)
 	     ("monk-walk-bow-3.png" 3)
-	     ("monk-walk-bow-2.png" 1))))
+	     ("monk-walk-bow-4.png" 1))))
 
 (defparameter *monk-walk-bow-ready* 
   '(:repeat t
@@ -216,6 +216,21 @@
 	     ("monk-walk-bow-ready-2.png" 4)
 	     ("monk-walk-bow-ready-3.png" 4)
 	     ("monk-walk-bow-ready-4.png" 4))))
+
+;;; Animations for monk 2
+
+(defparameter *monk-2-walk* 
+  '(:repeat t
+    :scale 600
+    :frames (("monk-2-walk-1.png" 4)
+	     ("monk-2-walk-2.png" 4)
+	     ("monk-2-walk-3.png" 4)
+	     ("monk-2-walk-4.png" 4))))
+
+(defparameter *monk-2-stand*
+  '(:scale 600
+    :frames (("monk-2-stand-1.png" 19)
+	     ("monk-2-stand-2.png" 24))))
 
 (define-block monk 
   ;; animation parameters
@@ -241,8 +256,11 @@
   (step-clock :initform 0)
   (fire-clock :initform 0))
 
+(defmacro defmonk (name &rest body)
+  `(define-block (,name :super monk) ,@body))
+
 (define-method can-accept monk () t)
-(define-method accept monk (thing) (message "CUNT") t)
+(define-method accept monk (thing) t)
 
 (define-method animation-frame monk ()
   (when %animation (frame-image (first %frames))))
@@ -354,9 +372,7 @@
 
 ;;; Default AI methods. 
 
-(define-method movement-direction monk () 
-  (or (percent-of-time 3 (setf %direction (random-choose *directions*)))
-      %direction))
+(define-method movement-direction monk () nil)
 
 (defvar *joystick-enabled* nil)
 
@@ -391,28 +407,20 @@
 
 (define-method pressing-fire-p monk () nil)
 
-(define-method pressing-fire monk ()
-  (fire self nil t))
+(define-method pressing-fire monk ())
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
 (defparameter *monk-size* (* 8 *unit*))
 
-(define-method standing-animation monk ()
-  (if %bow-ready 
-      *monk-stand-bow-ready*
-      *monk-stand-bow*))
-
-(define-method walking-animation monk ()
-  (if %bow-ready 
-      *monk-walk-bow-ready*
-      *monk-walk-bow*))
+(define-method standing-animation monk () *monk-2-stand*)
+(define-method walking-animation monk () *monk-2-walk*)
 
 (define-method update monk ()
-  (when (and (holding-fire) 
+  (when (and (pressing-fire-p self) 
 	     (not %raising-bow))
     (setf %raising-bow t))
-  (when (not (holding-fire))
+  (when (not (pressing-fire-p self))
     (setf %raising-bow nil))
   (when (and %raising-bow (zerop %fire-clock))
     (setf %bow-ready t)
@@ -438,7 +446,7 @@
 	  (move-toward self direction (/ *monk-speed* 2))
 	  (setf %direction direction)
 	  ;; lock fire direction when holding fire button
-	  (unless (holding-fire) (setf %fire-direction direction)))
+	  (unless (pressing-fire-p self) (setf %fire-direction direction)))
 	(if direction
 	    ;; controller is pushing in a direction
 	    (when (zerop step-clock)
@@ -462,14 +470,9 @@
 	    (setf %raising-bow nil)
 	    (fire self %fire-direction fire-button)))))))
 
+;; Player 1 drives the logic with the arrows/numpad and shift
 
-
-
-
-;; Player 1 drives the logic with the arrows/numpad and spacebar
-
-(define-block (player-1-monk :super monk)
-  (body-color :initform "white"))
+(defmonk geoffrey)
 
 (defun holding-space ()
   (keyboard-down-p :space))     
@@ -480,14 +483,20 @@
       (some #'joystick-button-pressed-p
 	    '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20))))
 
-;; (define-method collide player-1-monk (thing)
-;;   (when (enemyp thing)
-;;     (restore
+(define-method standing-animation geoffrey ()
+  (if %bow-ready 
+      *monk-stand-bow-ready*
+      *monk-stand-bow*))
 
-(define-method pressing-fire-p player-1-monk ()
+(define-method walking-animation geoffrey ()
+  (if %bow-ready 
+      *monk-walk-bow-ready*
+      *monk-walk-bow*))
+
+(define-method pressing-fire-p geoffrey ()
   (holding-fire))
 
-(define-method humanp player-1-monk () t)
+(define-method humanp geoffrey () t)
 
 (defun holding-down-arrow ()
   (or (joystick-button-pressed-p :down)
@@ -509,7 +518,7 @@
       (keyboard-down-p :kp6)
       (keyboard-down-p :right)))
 
-(define-method movement-direction player-1-monk ()
+(define-method movement-direction geoffrey ()
   (or 
    (cond 
      ((and (holding-down-arrow) (holding-right-arrow)) :downright)
@@ -527,10 +536,34 @@
 		  (right-analog-stick-pressed-p)))
        (or (heading-direction heading) :left)))))
   
+
+;;; Lucius 
+
+(defmonk lucius :clock 10)
+
+(define-method update lucius ()
+  (monk%update self)
+  (decf %clock))
+
+(define-method movement-direction lucius ()
+  (with-fields (clock) self
+    (when (cursor)
+      (cond  ((> (distance-to-cursor self) 150)
+	      (unless (plusp clock)
+		(direction-to-cursor self)))
+	     ((> (distance-to-cursor self) 110)
+	      (prog1 nil (setf clock 10)))))))
+	   
+	    
+;;	(field-value :direction (cursor))))))
+
+
+
+
 ;;; Meadow
 
 (define-buffer meadow 
-  :background-image "meadow.png"
+  :background-image "meadow2.png"
   :quadtree-depth 6
   :default-events
   '(((:pause) :transport-toggle-play)
@@ -570,25 +603,26 @@
       (change-image wood (nth (mod n 4) '("wood-1.png" "wood-2.png" "wood-3.png" "wood-4.png"))))))
 
 (defun make-meadow ()
-    (let ((monk (new 'player-1-monk))
+    (let ((geoffrey (new 'geoffrey))
+	  (lucius (new 'lucius))
 	  (buffer (new 'meadow)))
-      (add-object buffer monk 400 400)
+      (add-object buffer geoffrey 320 120)
+      (add-object buffer lucius 350 80)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (/ *monk-speed* 2)
 	    (%horizontal-scrolling-margin buffer) 2/5
 	    (%vertical-scrolling-margin buffer) 4/7)
       ;;
-      (set-cursor buffer monk)
+      (set-cursor buffer geoffrey)
       (snap-window-to-cursor buffer)
       (glide-window-to-cursor buffer)
 
 ;
-      (resize buffer 1285 2100)
+      (resize buffer 878 1300)
 
-      (drop-object buffer (new 'wraith) 1700 200)
-      (drop-object buffer (new 'wraith) 2000 830)
-      ;; (drop-object buffer (make-wood 1) 100 110)
-      ;; (drop-object buffer (make-wood 2) 100 130)
+      (drop-object buffer (new 'wraith) 800 600)
+      (drop-object buffer (new 'scroll) 600 600)
+      (drop-object buffer (new 'scroll) 640 610)
       ;; (drop-object buffer (make-wood 3) 100 150)
       ;; (drop-object buffer (make-wood 0) 100 180)
 
