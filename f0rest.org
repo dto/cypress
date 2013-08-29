@@ -1,27 +1,25 @@
-* TODO basic wraith combat
-** DONE import bow stand animation
-   CLOSED: [2013-08-26 Mon 18:32]
-** DONE import bow stand ready animation
-   CLOSED: [2013-08-26 Mon 18:32]
-** DONE import bow walk animation
-   CLOSED: [2013-08-26 Mon 18:32]
-** DONE import bow ready walk animation
-   CLOSED: [2013-08-26 Mon 18:32]
-** DONE import arrows
-   CLOSED: [2013-08-26 Mon 18:32]
-** DONE import wraiths
-   CLOSED: [2013-08-26 Mon 18:32]
+* NEXT
+** TODO Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
+** TODO Escape for menu (or to exit menus)
+** TODO hold Fire to raise bow/weapon, release to fire
+** TODO Fire also chooses menu options
+** TODO click Action to freeze game and show Hand cursor (only when not bow raised)
+** TODO move Hand with cursor
+** TODO press Action to cycle auto-choose objects, Fire to confirm choice, Escape to cancel
+** TODO also show Hand to choose object for your verbs , like ultima
 
-** DONE import remains and skull
-   CLOSED: [2013-08-26 Mon 18:36]
+** TODO allow z-ordering / push to front / back of objects
+*** TODO or just allow always-on-top? 
+*** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
 
-** TODO make new animations work
-** TODO autoscale frames so that scale1.0 =>> 600x600 ends up *monk-size* x *monk-size* , centered
+** TODO fix jerkiness of main walk animation
+** TODO clean up monk code
+** TODO add joystick support
+** TODO apply color correction to one or two standing frames 
 
+** TODO import the Oldania font
 
-** TODO walk with bow 
-** TODO hold shift to ready bow
-** TODO let go of shift to fire arrow
+** TODO reconsider color schemes for objects vs people
 
 ** TODO left click on background to make monk walk to that spot (later pathfind)
 ** TODO left drag to move object
@@ -210,3 +208,42 @@ while traveling long distances.
 
 ** Return to ruined hometown via other route
 ** Cross the Einbridge to the sunken island, site of the explosion
+
+* Archived Entries
+** DONE basic wraith combat
+   CLOSED: [2013-08-28 Wed 22:38]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-08-28 Wed 22:38
+   :ARCHIVE_FILE: ~/f0rest/f0rest.org
+   :ARCHIVE_CATEGORY: f0rest
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE import bow stand animation
+    CLOSED: [2013-08-26 Mon 18:32]
+*** DONE import bow stand ready animation
+    CLOSED: [2013-08-26 Mon 18:32]
+*** DONE import bow walk animation
+    CLOSED: [2013-08-26 Mon 18:32]
+*** DONE import bow ready walk animation
+    CLOSED: [2013-08-26 Mon 18:32]
+*** DONE import arrows
+    CLOSED: [2013-08-26 Mon 18:32]
+*** DONE import wraiths
+    CLOSED: [2013-08-26 Mon 18:32]
+
+*** DONE import remains and skull
+    CLOSED: [2013-08-26 Mon 18:36]
+
+*** DONE make new animations work
+    CLOSED: [2013-08-28 Wed 22:24]
+*** DONE autoscale frames so that scale1.0 =>> 600x600 ends up *monk-size* x *monk-size* , centered
+    CLOSED: [2013-08-28 Wed 22:24]
+
+
+*** DONE walk with bow 
+    CLOSED: [2013-08-28 Wed 22:24]
+*** DONE hold shift to ready bow
+    CLOSED: [2013-08-28 Wed 22:24]
+*** DONE let go of shift to fire arrow
+    CLOSED: [2013-08-28 Wed 22:24]
+

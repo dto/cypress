@@ -1,5 +1,10 @@
 (in-package :f0rest)
 
+(defconstant +dots-per-inch+ 600)
+(defparameter *unit* 600) 
+
+(defun units (n) (* n *unit*))
+
 (defresource "wood.wav" :volume 40)
 (defresource "growl-1.wav" :volume 60)
 (defresource "growl-2.wav" :volume 60)
@@ -112,9 +117,7 @@
 
 ;;; Animation system
 
-(defconstant +animation-pixels-per-scale+ 600)
- 
-(defun animation-scale (a) (getf a :scale +animation-pixels-per-scale+))
+(defun animation-scale (a) (getf a :scale +dots-per-inch+))
 (defun animation-repeat (a) (getf a :repeat))
 (defun animation-frames (a) (getf a :frames))
 (defun frame-image (f) (first f))
@@ -135,7 +138,7 @@
 	   (image-width (image-width image))
 	   (height (- bottom top))
 	   (width (- right left))
-	   (scale-base (or (field-value :image-scale thing) +animation-pixels-per-scale+))
+	   (scale-base (or (field-value :image-scale thing) +dots-per-inch+))
 	   (scale (/ (min height width)
 		     (min image-height image-width)))
 	   (scaled-width (* scale scale-base))
@@ -181,7 +184,7 @@
 	     ("monk-stand-bow-3.png" 32))))
 
 (defparameter *monk-stand-bow-ready*
-  '(:scale 900
+  '(:scale 1000
     :frames (("monk-stand-bow-ready-1.png" 19)
 	     ("monk-stand-bow-ready-2.png" 24)
 	     ("monk-stand-bow-ready-3.png" 32))))
@@ -204,14 +207,14 @@
 (defparameter *monk-walk-bow* 
   '(:repeat t
     :scale 600
-    :frames (("monk-walk-bow-1.png" 3)
-	     ("monk-walk-bow-2.png" 3)
-	     ("monk-walk-bow-3.png" 3)
-	     ("monk-walk-bow-4.png" 1))))
+    :frames (("monk-walk-bow-3.png" 4)
+	     ("monk-walk-bow-1.png" 4)
+	     ("monk-walk-bow-2.png" 4)
+	     ("monk-walk-bow-4.png" 4))))
 
 (defparameter *monk-walk-bow-ready* 
   '(:repeat t
-    :scale 900
+    :scale 1000
     :frames (("monk-walk-bow-ready-1.png" 4)
 	     ("monk-walk-bow-ready-2.png" 4)
 	     ("monk-walk-bow-ready-3.png" 4)
