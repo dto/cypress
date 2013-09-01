@@ -1,15 +1,4 @@
-#+TITLE: The Testament of the White Cypress
-
-a deep-digging experiment of Industrialists causes a volcanic mega
-explosion, obliterating island blocking out sun for two years and
-killing crops.  spirit of the white cypress guides souls to the other
-world but the cypress herself dies during the sun blackout, and her
-spirit becomes lost, separated from the tree. the unguided souls of
-those dead from the famine, haunt the Earth for millennia and humanity
-dwindles. (Brother's soul is wandering too; seance) You go through a
-ritual of purification to become the new White Cypress and the game
-ends. Revealed that Geoffrey is the storyteller; the Testament
-combines her last wishes with his story.
+* TODO test embedding PNG files as encrypted arrays in the exe
 
  the only character stats in the game are moment-to-moment
       changing resources such as hitpoints, manapoints, cold, hunger. the
@@ -216,7 +205,21 @@ while traveling long distances.
 ** Semi-linear story campaigns intermixed with procedural terrain, side missions
 ** Release 3 good campaigns at first
 ** Release campagins one at a time, U Never Kno What U Gonna Get
-   
+
+* Story synopsis   
+
+a deep-digging experiment of Industrialists causes a volcanic mega
+explosion, obliterating island blocking out sun for two years and
+killing crops.  spirit of the white cypress guides souls to the other
+world but the cypress herself dies during the sun blackout, and her
+spirit becomes lost, separated from the tree. the unguided souls of
+those dead from the famine, haunt the Earth for millennia and humanity
+dwindles. (Brother's soul is wandering too; reunited at end) You go
+through a ritual of purification to become the new White Cypress, and
+the game ends. Revealed that Geoffrey is the storyteller; the
+Testament combines the previous, female cypress' story with his.
+
+The sequel is set in the time before the great explosion,
 
 * Story: Episode 1
 ** You are called to Valisade 
@@ -229,6 +232,7 @@ while traveling long distances.
 ** Arrival at ruined Valisade; mountains close behind you
 ** Find small cache of documents in canister with dead human skeleton 
 *** Note about retrieving Expedition documents from Montecalto library, dated 5,000 years in the future
+*** Enigmatic note about inconsistencies between two libraries' copies of texts; no inconsistency later, who changed it in interim?
 *** Map to Montecalto 
 * Story: Episode 3
 ** Explore plague lands with few human survivors
@@ -236,11 +240,17 @@ while traveling long distances.
 ** Arrival at Montecalto
 *** Brother Lucius explains 
 *** Find abandonment docs / explosion date in Montecalto library annex basement
-
+*** Secret cult changed books at night
 * Story: Episode 4
-
 ** Return to ruined hometown via other route
 ** Cross the Einbridge to the sunken island, site of the explosion
+
+* cycle
+** The Testament of The White Cypress
+** The Diamond Anvil
+** Vale of the Mindweaver
+
+
 
 * Archived Entries
 ** DONE basic wraith combat
