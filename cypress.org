@@ -1,3 +1,14 @@
+* TODO Build Chapter 1
+** You are called to Valisade 
+** Travel through meadows, grassland. Fight mysterious wolves
+** It begins to snow/freeze. Discover ruined house.
+** Explore ruins, fight skeletons
+** Encounter nastier demon wolf miniboss
+** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
+
+
+
+* TODO make/demorelease campaign 1 first
 * TODO test embedding PNG files as encrypted arrays in the exe
 
  the only character stats in the game are moment-to-moment

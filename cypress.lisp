@@ -1,4 +1,4 @@
-;;; f0rest.lisp --- the further evolution of dto rpg's
+;;; cypress.lisp --- the further evolution of dto rpg's
 
 ;; Copyright (C) 2010, 2011, 2012, 2013  David O'Toole
 
@@ -18,10 +18,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(in-package :f0rest)
+(in-package :cypress)
 
 (eval-when (:load-toplevel) 
-  (setf *window-title* "f0rest v0.1")
+  (setf *window-title* "cypress v0.1")
   (setf *default-texture-filter* :nearest)
   (setf *use-antialiased-text* nil)
   (setf *current-directory*
@@ -30,8 +30,8 @@
 
 ;;; Main program
 
-(defun f0rest (&optional (level 1))
-  (setf *window-title* "f0rest v0.1")
+(defun cypress (&optional (level 1))
+  (setf *window-title* "cypress v0.1")
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)
@@ -50,7 +50,7 @@
   
   (setf *font* "sans-mono-bold-11") 
   (with-session 
-      (load-project "f0rest" '(:with-database nil))
+      (load-project "cypress" '(:with-database nil))
 
     (index-all-images)
     (index-all-samples)
@@ -60,7 +60,7 @@
     (switch-to-buffer (make-meadow))
     (start-session)))
 
-(define-buffer f0rest
+(define-buffer cypress
   (bubble :initform nil)
   (retrying :initform nil))
   ;; (default-events 
@@ -95,10 +95,10 @@
 ;; (defun set-buffer-bubble (bubble)
 ;;   (setf (field-value :bubble (current-buffer)) bubble))
 
-;; (define-method handle-point-motion f0rest (x y))
-;; (define-method press f0rest (x y &optional button))
-;; (define-method release f0rest (x y &optional button))
-;; (define-method tap f0rest (x y))
-;; (define-method alternate-tap f0rest (x y))
+;; (define-method handle-point-motion cypress (x y))
+;; (define-method press cypress (x y &optional button))
+;; (define-method release cypress (x y &optional button))
+;; (define-method tap cypress (x y))
+;; (define-method alternate-tap cypress (x y))
       
-;;; f0rest.lisp ends here
+;;; cypress.lisp ends here

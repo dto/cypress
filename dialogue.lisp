@@ -1,4 +1,4 @@
-(in-package :f0rest)
+(in-package :cypress)
 
 ;;; Dialogue
 

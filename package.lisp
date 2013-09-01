@@ -1,3 +1,3 @@
-(defpackage #:f0rest
+(defpackage #:cypress
   (:use #:cl #:blocky)
-  (:export f0rest))
+  (:export cypress))
