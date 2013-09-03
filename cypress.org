@@ -1,10 +1,14 @@
-* TODO Bring editor/ui back to complete basic usability
-** TODO Review gui code
-** TODO 
-** TODO Revamp default keybindings 
-** TODO heading rotation halo! 
 
-* TODO basic xelf demo video with the nice game graphics
+** TODO import the Oldania font
+
+
+* TODO Bring editor/ui back to complete basic usability
+** DONE heading rotation halo! 
+   CLOSED: [2013-09-02 Mon 21:47]
+** TODO Review gui code
+** TODO Review default keybindings 
+** TODO Minibuffer
+** TODO basic xelf demo video with the nice game graphics
 
 * Control design
 ** TODO Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
@@ -20,11 +24,10 @@
 ** TODO allow z-ordering / push to front / back of objects
 *** TODO or just allow always-on-top? 
 *** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
-** TODO fix jerkiness of main walk animation
-** TODO add joystick support
 
+* Fixes
+** TODO fix jerkiness of main walk animation
 ** TODO apply color correction to one or two standing frames 
-** TODO import the Oldania font
 ** TODO reconsider color schemes for objects vs people
 
 ** TODO left click on background to make monk walk to that spot (later pathfind)
