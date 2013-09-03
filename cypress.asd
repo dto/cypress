@@ -1,5 +1,5 @@
 (asdf:defsystem #:cypress
-  :depends-on (:blocky)
+  :depends-on (:xelf)
   :components ((:file "package")
 	       (:file "mission" :depends-on ("package"))
 	       (:file "meadow" :depends-on ("mission"))

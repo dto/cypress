@@ -52,7 +52,7 @@
   (if (null *dialogue*)
       (stop-dialogue)
       (destructuring-bind (actor line) (pop *dialogue*)
-	(when (blockyp *actor*)
+	(when (xelfp *actor*)
 	  (stop-talking *actor*))
 	(setf *actor* actor)
 	;; is it an audio line or an action?

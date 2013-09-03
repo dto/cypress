@@ -28,6 +28,20 @@
 	(make-pathname
 	 :directory (pathname-directory #.#P"./"))))
 
+(defresource "wood.wav" :volume 40)
+(defresource "growl-1.wav" :volume 60)
+(defresource "growl-2.wav" :volume 60)
+(defresource "unh-1.wav" :volume 20)
+(defresource "unh-2.wav" :volume 20)
+(defresource "unh-3.wav" :volume 20)
+(defresource "howl.wav" :volume 50)
+(defresource "knock.wav" :volume 50)
+(defresource "bow.wav" :volume 40)
+(defresource "death.wav" :volume 40)
+(defresource "lichscream.wav" :volume 60)
+(defresource "lichdie.wav" :volume 60)
+(defresource "dead.wav" :volume 40)
+
 ;;; Main program
 
 (defun cypress (&optional (level 1))
@@ -60,45 +74,4 @@
     (switch-to-buffer (make-meadow))
     (start-session)))
 
-(define-buffer cypress
-  (bubble :initform nil)
-  (retrying :initform nil))
-  ;; (default-events 
-  ;;    :initform
-  ;;    '(((:r :control) :reset-game)
-  ;;      ((:q :control) :quit-game)
-  ;;      ;; ((:y :control) :show-waypoint)
-  ;;      ((:h :control) :help)
-  ;;      ;; ((:m :control) :toggle-music) 
-  ;;      ;; ((:p :control) :toggle-pause)
-  ;;      ((:leftbracket) :toggle-red-green-color-blindness)
-  ;;      ((:j :control) :toggle-joystick)
-  ;;      ;;       ((:f8) :cheat)
-  ;;      ((:n :control) :next-joystick)
-  ;;      ;;
-  ;;      ;; ((:x :alt) :command-prompt)
-  ;;      ;; ((:g :control) :escape)
-  ;;      ((:f6 :control) :regenerate))))
-  ;;      ;;
-  ;;      ;; ((:x :alt) :command-prompt)
-  ;;      ;; ((:x :control) :edit-cut)
-  ;;      ;; ((:c :control) :edit-copy)
-  ;;      ;; ((:v :control) :edit-paste)
-  ;;      ;; ((:v :control :shift) :paste-here)
-  ;;      ;; ((:f9) :toggle-minibuffer)
-  ;;      ;; ((:f12) :transport-toggle-play)
-  ;;      ;; ((:g :control) :escape)
-  ;;      ;; ((:d :control) :drop-selection))))
-
-;; ;;; Disable mouse editing
-
-;; (defun set-buffer-bubble (bubble)
-;;   (setf (field-value :bubble (current-buffer)) bubble))
-
-;; (define-method handle-point-motion cypress (x y))
-;; (define-method press cypress (x y &optional button))
-;; (define-method release cypress (x y &optional button))
-;; (define-method tap cypress (x y))
-;; (define-method alternate-tap cypress (x y))
-      
 ;;; cypress.lisp ends here

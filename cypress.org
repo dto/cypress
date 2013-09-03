@@ -1,14 +1,44 @@
-* TODO Build Chapter 1
-** You are called to Valisade 
-** Travel through meadows, grassland. Fight mysterious wolves
-** It begins to snow/freeze. Discover ruined house.
-** Explore ruins, fight skeletons
-** Encounter nastier demon wolf miniboss
-** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
+* TODO Bring editor/ui back to complete basic usability
+** TODO Review gui code
+** TODO 
+** TODO Revamp default keybindings 
+** TODO heading rotation halo! 
 
+* TODO basic xelf demo video with the nice game graphics
 
+* Control design
+** TODO Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
+** TODO Escape for menu (or to exit menus)
+** TODO hold Fire to raise bow/weapon, release to fire
+** TODO Fire also chooses menu options
+** TODO click Action to freeze game and show Hand cursor (only when not bow raised)
+** TODO move Hand with cursor
+** TODO press Action to cycle auto-choose objects, Fire to confirm choice, Escape to cancel
+** TODO also show Hand to choose object for your verbs , like ultima
+** TODO immobilize feet when bow is ready , then aim/release
 
-* TODO make/demorelease campaign 1 first
+** TODO allow z-ordering / push to front / back of objects
+*** TODO or just allow always-on-top? 
+*** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
+** TODO fix jerkiness of main walk animation
+** TODO add joystick support
+
+** TODO apply color correction to one or two standing frames 
+** TODO import the Oldania font
+** TODO reconsider color schemes for objects vs people
+
+** TODO left click on background to make monk walk to that spot (later pathfind)
+** TODO left drag to move object
+** TODO right click on object for halo/action
+** TODO BUILD CHAPTER 1 -------------------------------------------
+*** TODO Paint graphics for tent/camp
+*** TODO You are called to Valisade 
+*** Travel through meadows, grassland. Fight mysterious wolves
+*** It begins to snow/freeze. Discover ruined house.
+*** Explore ruins, fight skeletons
+*** Encounter nastier demon wolf miniboss
+*** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
+
 * TODO test embedding PNG files as encrypted arrays in the exe
 
  the only character stats in the game are moment-to-moment
@@ -18,39 +48,6 @@
       case i think each episode's guy should start with a reasonable equipment
  also i think there should be episodes where you are not Geoffrey but
       instead his brother, in a prequel
-
-* NEXT
-** TODO Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
-** TODO Escape for menu (or to exit menus)
-** TODO hold Fire to raise bow/weapon, release to fire
-** TODO Fire also chooses menu options
-** TODO click Action to freeze game and show Hand cursor (only when not bow raised)
-** TODO move Hand with cursor
-** TODO press Action to cycle auto-choose objects, Fire to confirm choice, Escape to cancel
-** TODO also show Hand to choose object for your verbs , like ultima
-
-** TODO immobilize feet when bow is ready , then aim/release
-
-** TODO allow z-ordering / push to front / back of objects
-*** TODO or just allow always-on-top? 
-*** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
-
-** TODO fix jerkiness of main walk animation
-** TODO clean up monk code
-** TODO add joystick support
-** TODO apply color correction to one or two standing frames 
-
-** TODO import the Oldania font
-
-** TODO reconsider color schemes for objects vs people
-
-** TODO left click on background to make monk walk to that spot (later pathfind)
-** TODO left drag to move object
-** TODO right click on object for halo/action
-
-<dto> im struggling with whether to allow time-stop during combat to issue
-      orders, so that combat has a semi-turn-based feel  [21:45]
-<dto> it might take the pressure off and allow a more thoughtful approach
 
 * Overview
 
@@ -219,16 +216,19 @@ while traveling long distances.
 
 * Story synopsis   
 
-a deep-digging experiment of Industrialists causes a volcanic mega
-explosion, obliterating island blocking out sun for two years and
-killing crops.  spirit of the white cypress guides souls to the other
-world but the cypress herself dies during the sun blackout, and her
-spirit becomes lost, separated from the tree. the unguided souls of
-those dead from the famine, haunt the Earth for millennia and humanity
-dwindles. (Brother's soul is wandering too; reunited at end) You go
-through a ritual of purification to become the new White Cypress, and
-the game ends. Revealed that Geoffrey is the storyteller; the
-Testament combines the previous, female cypress' story with his.
+a deep-digging experiment of Industrialists create a device called The
+Diamond Anvil in order to reach remains of an ancient civilization. it
+causes a volcanic mega explosion, obliterating island blocking out sun
+for two years and killing crops.  spirit of the white cypress guides
+souls to the other world but the cypress herself dies during the sun
+blackout, and her spirit becomes lost, separated from the tree. the
+unguided souls of those dead from the famine, some fall into a fitful
+slumber, or haunt the Earth for millennia; and humanity
+dwindles. (Brother's soul is wandering too; reunited at end) After
+figuring this all out over the course of the game, you go through a
+ritual of purification to become the new White Cypress, and the game
+ends. Revealed that Geoffrey is the storyteller; the Testament
+combines the previous, female cypress' story with his.
 
 The sequel is set in the time before the great explosion,
 

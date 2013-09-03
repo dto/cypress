@@ -2,118 +2,7 @@
 
 (defconstant +dots-per-inch+ 600)
 (defparameter *unit* 14) 
-
 (defun units (n) (* n *unit*))
-
-(defresource "wood.wav" :volume 40)
-(defresource "growl-1.wav" :volume 60)
-(defresource "growl-2.wav" :volume 60)
-(defresource "unh-1.wav" :volume 20)
-(defresource "unh-2.wav" :volume 20)
-(defresource "unh-3.wav" :volume 20)
-(defresource "howl.wav" :volume 50)
-(defresource "knock.wav" :volume 50)
-(defresource "bow.wav" :volume 40)
-(defresource "death.wav" :volume 40)
-(defresource "lichscream.wav" :volume 60)
-(defresource "lichdie.wav" :volume 60)
-(defresource "dead.wav" :volume 40)
-
-(define-block stone1 :image "coverstone.png")
-(define-block stone2 :image "coverstone2.png")
-(define-block scroll :image "scroll.png")
-(define-method collide scroll (thing)
-  (when (monkp thing)
-    (play-sample "wood.wav")
-    (destroy self)))
-(define-block skull :image (random-choose '("skull-1.png" "skull-2.png")))
-(define-method collide skull (thing)
-  (when (monkp thing)
-    (play-sample "wood.wav")
-    (destroy self)))
-(define-block remains :image (random-choose '("remains-1.png" "remains-2.png")))
-
-(defparameter *monk-speed* (truncate (/ *unit* 1.3)))
-
-(defun solidp (thing)
-  (and (blockyp thing)
-       (has-tag thing :solid)))
-
-(defun targetp (thing)
-  (and (blockyp thing)
-       (has-tag thing :target)))
-
-(defun enemyp (thing)
-  (and (blockyp thing)
-       (has-tag thing :enemy)))
-
-(defun monkp (thing)
-  (and (blockyp thing)
-       (has-tag thing :monk)))
-
-;;; Arrows, the main weapon
-
-(defparameter *arrow-size* 25)
-
-(define-block arrow
-  :image-scale 40
-  :image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png")))
-
-(define-method initialize arrow (heading)
-  (block%initialize self)
-  (setf %clock 400)
-  (setf %heading heading))
-
-(define-method collide arrow (thing)
-  (cond ((enemyp thing) (damage thing 1) (destroy self))
-	((solidp thing) (destroy self))))
-
-(define-method update arrow ()
-  (percent-of-time 13 (setf %image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png"))))
-  (resize self *arrow-size* *arrow-size*)
-  (decf %clock)
-  (if (minusp %clock)
-      (destroy self)
-      (forward self 15)))
-
-(define-method draw arrow ()
-  (draw-as-sprite self %image %heading))
-
-;;; Wraiths
-
-(define-block wraith
-  :seen-player nil
-  :image-scale 600
-  :tags '(:enemy)
-  :hp 3
-  :image (random-choose '("wraith-1.png" "wraith-2.png" "wraith-3.png")))
-
-(define-method damage wraith (points)
-  (play-sample "knock.wav")
-  (decf %hp points)
-  (unless (plusp %hp)
-    (drop self (new 'remains))
-    (drop self (new 'skull))
-    (percent-of-time 20 (drop self (new 'scroll) 40 40))
-    (play-sample "lichdie.wav")
-    (destroy self)))
-
-(define-method update wraith ()
-    (resize self 130 130)
-  (when (< (distance-to-cursor self) 500)
-    (unless %seen-player
-      (play-sample "lichscream.wav")
-      (setf %seen-player t))
-    (percent-of-time 16 (setf %image (random-choose '("wraith-1.png" "wraith-2.png" "wraith-3.png"))))
-    (let ((heading (heading-to-cursor self)))
-      (percent-of-time 13 
-	(setf %heading heading))
-      (percent-of-time 30
-	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
-	(move self %heading 4)))))
-
-(define-method draw wraith ()
-  (draw-as-sprite self %image %heading))
 
 ;;; Animation system
 
@@ -132,7 +21,7 @@
 	      (cfloat (+ x hw))
 	      (cfloat (+ y hh))))))
 
-(defun sprite-bounding-box (thing image)
+(defun sprite-image-bounding-box (thing image)
   (multiple-value-bind (top left right bottom) (bounding-box thing)
     (let* ((image-height (image-height image))
 	   (image-width (image-width image))
@@ -153,12 +42,125 @@
 
 (defun draw-as-sprite (thing image heading)
   (multiple-value-bind (top left right bottom)
-      (sprite-bounding-box thing image)
+      (sprite-image-bounding-box thing image)
     (draw-textured-rectangle-* left top 0
 			       (- right left) (- bottom top)
 			       (find-texture image)
 			       ;; adjust angle to normalize for up-pointing sprites 
 			       :angle (+ 90 (heading-degrees heading)))))
+
+(define-block thing 
+  ;; world parameters
+  (weight :initform 0)
+  (hit-points :initform nil)
+  ;; animation parameters
+  (image-scale :initform +dots-per-inch+)
+  (frames :initform nil)
+  (delay :initform 0)
+  (repeat :initform nil)
+  (animation :initform nil)
+  (image-scale :initform nil))
+
+(defmacro defthing (name &body body)
+  `(define-block (,name :super thing) ,@body))
+
+(define-block (sprite :super thing))
+
+(define-method draw sprite ()
+  (draw-as-sprite self %image %heading))
+
+(defmacro defsprite (name &body body)
+  `(define-block (,name :super sprite) ,@body))
+
+(defthing stone1 :image "coverstone.png")
+(defthing stone2 :image "coverstone2.png")
+(defthing scroll :image "scroll.png")
+(define-method collide scroll (thing)
+  (when (monkp thing)
+    (play-sample "wood.wav")
+    (destroy self)))
+(defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
+(define-method collide skull (thing)
+  (when (monkp thing)
+    (play-sample "wood.wav")
+    (destroy self)))
+(defthing remains :image (random-choose '("remains-1.png" "remains-2.png")))
+
+(defun solidp (thing)
+  (and (xelfp thing)
+       (has-tag thing :solid)))
+
+(defun targetp (thing)
+  (and (xelfp thing)
+       (has-tag thing :target)))
+
+(defun enemyp (thing)
+  (and (xelfp thing)
+       (has-tag thing :enemy)))
+
+(defun monkp (thing)
+  (and (xelfp thing)
+       (has-tag thing :monk)))
+
+;;; Arrows, the main weapon
+
+(defparameter *arrow-size* 25)
+
+(defsprite arrow
+  :image-scale 40
+  :image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png")))
+
+(define-method initialize arrow (heading)
+  (block%initialize self)
+  (setf %clock 400)
+  (setf %heading heading))
+
+(define-method collide arrow (thing)
+  (cond ((enemyp thing) (damage thing 1) (destroy self))
+	((solidp thing) (destroy self))))
+
+(define-method update arrow ()
+  (percent-of-time 13 (setf %image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png"))))
+  (resize self *arrow-size* *arrow-size*)
+  (decf %clock)
+  (if (minusp %clock)
+      (destroy self)
+      (forward self 15)))
+
+;;; Wraiths
+
+(defparameter *wraith-images* '("wraith-1.png" "wraith-2.png" "wraith-3.png"))
+
+(defsprite wraith
+  :seen-player nil
+  :image-scale 600
+  :tags '(:enemy)
+  :hp 3
+  :image (random-choose *wraith-images*))
+
+(define-method damage wraith (points)
+  (play-sample "knock.wav")
+  (decf %hp points)
+  (unless (plusp %hp)
+    (drop self (new 'remains))
+    (drop self (new 'skull))
+    (percent-of-time 20 (drop self (new 'scroll) 40 40))
+    (play-sample "lichdie.wav")
+    (destroy self)))
+
+(define-method update wraith ()
+    (resize self 130 130)
+  (when (< (distance-to-cursor self) 500)
+    (unless %seen-player
+      (play-sample "lichscream.wav")
+      (setf %seen-player t))
+    (percent-of-time 16 (setf %image (random-choose *wraith-images*)))
+    (let ((heading (heading-to-cursor self)))
+      (percent-of-time 13 
+	(setf %heading heading))
+      (percent-of-time 30
+	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
+	(move self %heading 4)))))
 
 ;;; A monk, either AI or human controlled
 
@@ -235,15 +237,8 @@
     :frames (("monk-2-stand-1.png" 19)
 	     ("monk-2-stand-2.png" 24))))
 
-(define-block monk 
-  ;; animation parameters
+(defsprite monk
   (image :initform (random-choose *monk-stand-images*))
-  (image-scale :initform nil)
-  (frames :initform nil)
-  (delay :initform 0)
-  (repeat :initform nil)
-  (animation :initform nil)
-  ;; 
   (raising-bow :initform nil)
   (bow-ready :initform nil)
   (alive :initform t)
@@ -262,8 +257,8 @@
 (defmacro defmonk (name &rest body)
   `(define-block (,name :super monk) ,@body))
 
-(define-method can-accept monk () t)
-(define-method accept monk (thing) t)
+;; (define-method can-accept monk () t)
+;; (define-method accept monk (thing) t)
 
 (define-method animation-frame monk ()
   (when %animation (frame-image (first %frames))))
@@ -377,7 +372,7 @@
 
 (define-method movement-direction monk () nil)
 
-(defvar *joystick-enabled* nil)
+(defvar *joystick-enabled* t)
 
 (define-method stick-heading monk () 
   (when (humanp self)
@@ -386,13 +381,13 @@
 	(when (right-analog-stick-pressed-p)
 	  (right-analog-stick-heading)))))
 
-(define-method bounding-box monk ()
-  ;; shrink bounding box by a few px to make game more forgiving
-  (with-field-values (x y height width) self
-    (let ((margin 2))
-      (values (+ margin y) (+ margin x)
-	      (+ (- margin) x width)
-	      (+ (- margin) y height)))))
+;; (define-method bounding-box monk ()
+;;   ;; shrink bounding box by a few px to make game more forgiving
+;;   (with-field-values (x y height width) self
+;;     (let ((margin 2))
+;;       (values (+ margin y) (+ margin x)
+;; 	      (+ (- margin) x width)
+;; 	      (+ (- margin) y height)))))
 
 (define-method collide monk (thing)
   (when (solidp thing)
@@ -415,6 +410,8 @@
 ;;; Control logic driven by the above (possibly overridden) methods.
 
 (defparameter *monk-size* (* 8 *unit*))
+
+(defparameter *monk-speed* (truncate (/ *unit* 1.3)))
 
 (define-method standing-animation monk () *monk-2-stand*)
 (define-method walking-animation monk () *monk-2-walk*)
@@ -473,33 +470,13 @@
 	    (setf %raising-bow nil)
 	    (fire self %fire-direction fire-button)))))))
 
-;; Player 1 drives the logic with the arrows/numpad and shift
+;; As Geoffrey, the player drives the logic with the arrows/numpad
+;; and the shift key
 
-(defmonk geoffrey)
-
-(defun holding-space ()
-  (keyboard-down-p :space))     
-
-(defun holding-fire ()
-  (or (holding-space)
-      (holding-shift)
+(defun holding-fire-button ()
+  (or (holding-shift)
       (some #'joystick-button-pressed-p
 	    '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20))))
-
-(define-method standing-animation geoffrey ()
-  (if %bow-ready 
-      *monk-stand-bow-ready*
-      *monk-stand-bow*))
-
-(define-method walking-animation geoffrey ()
-  (if %bow-ready 
-      *monk-walk-bow-ready*
-      *monk-walk-bow*))
-
-(define-method pressing-fire-p geoffrey ()
-  (holding-fire))
-
-(define-method humanp geoffrey () t)
 
 (defun holding-down-arrow ()
   (or (joystick-button-pressed-p :down)
@@ -521,6 +498,23 @@
       (keyboard-down-p :kp6)
       (keyboard-down-p :right)))
 
+(defmonk geoffrey)
+
+(define-method standing-animation geoffrey ()
+  (if %bow-ready 
+      *monk-stand-bow-ready*
+      *monk-stand-bow*))
+
+(define-method walking-animation geoffrey ()
+  (if %bow-ready 
+      *monk-walk-bow-ready*
+      *monk-walk-bow*))
+
+(define-method pressing-fire-p geoffrey ()
+  (holding-fire-button))
+
+(define-method humanp geoffrey () t)
+
 (define-method movement-direction geoffrey ()
   (or 
    (cond 
@@ -539,7 +533,6 @@
 		  (right-analog-stick-pressed-p)))
        (or (heading-direction heading) :left)))))
   
-
 ;;; Lucius 
 
 (defmonk lucius :clock 10)
@@ -593,7 +586,7 @@
     ((:g :control) :escape)
     ((:d :control) :drop-selection)))
 
-(define-block wood :image "wood-1.png")
+(defthing wood :image "wood-1.png")
 
 (define-method collide wood (thing)
   (when (monkp thing)
@@ -619,6 +612,7 @@
       (set-cursor buffer geoffrey)
       (snap-window-to-cursor buffer)
       (glide-window-to-cursor buffer)
+      (follow-with-camera buffer geoffrey)
 
 ;
       (resize buffer 878 1300)
