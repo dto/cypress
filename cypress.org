@@ -1,4 +1,5 @@
 * Overview
+
 ** Player controls a monk named Geoffrey as he explores the wilderness, fights monsters, and unravels the mystery of his brothers' disappearance.
 ** Ranged combat with bow-and-arrow
 ** Melee combat with fists/feet
@@ -10,7 +11,7 @@
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
 
 * Gameplay flow
-** Traditional RPG checkpoint save/load system. Campfire or bed.
+
 ** Overworld map grid with terrain sectors
 *** Each quest is composed of your movements on the symbols of a randomly generated worldmap
 *** When you move into a sector you get a randomly generated (and/or procedural) level in the sector's style
@@ -19,30 +20,47 @@
 *** Can only travel 1 square at a time. Requires food.
 *** Choose when to leave using map screen, unless held by conditions
 *** Can return to a sector, but requires more food. 
-** Exploration/combat as monk in a sector
 *** Any gameplay activity can be a mission goal.
+
+** Exploration/combat as monk in a sector
 *** Fight enemies
-*** Cannot flee or craft when nearby enemies
 *** Collect/craft resources/items
+*** Cannot flee or craft when nearby enemies
 *** Explore ruins/caves for items
 *** Discover story items
 *** Brief "scroll story" cinematics
 *** Modal gumps for close-ups of scrolls, books, maps
 
+** Traditional RPG checkpoint save/load system. Campfire or bed.
+
 * Player characteristics
+
 ** Statistics. Higher is better.
 *** Body (0-100) (death at 0)
 *** Mind (0-100) (used for casting spells. cannot cast anything when less than 15%)
+
 ** Conditions. Lower is better.
 *** Hunger (0-100)
 *** Fatigue (0-100)
 *** Cold (0-100)
 *** Poison (0-100)
 
+* Controls
+
+** Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
+** Escape for menu (or to exit menus)
+** hold Fire to raise bow/weapon, release to fire
+** Fire also chooses menu options
+** click Action to freeze game and show Hand cursor (only when not bow raised)
+** move Hand with cursor
+** press Action to cycle auto-choose objects, Fire to confirm choice, Escape to cancel
+** also show Hand to choose object for your verbs , like ultima
+** immobilize feet when bow is ready , then aim/release
+
 * Actions, Commands, and Magic Spells
+
 ** Spark (light torches, campfires, and dry out even soaked wood)
 ** Radiance (required for dark areas. needs one white or yellow flower.)
-*** can only use crossbow in dark when not using torch
 ** Flame (fire attack)
 ** Cure light wounds (consumes beef jerky for greater healing)
 ** Wood sprite (shakes firewood off of trees and brings it to you)
@@ -56,6 +74,7 @@
 ** Hold creature
 
 * Items
+
 ** Arrows (craft from stone chips and wood)
 ** Bundles of arrows (20 per)
 ** Water 
@@ -72,8 +91,8 @@
 ** Torch (crafted from wood)
 *** torch cannot be used simultaneously with bow
 
-
 * Locations
+
 ** Meadow
 ** Abandoned village (optionally with tombstones and lurking undead)
 ** Snowy glen
@@ -86,7 +105,6 @@
 ** Dungeon, castle ruins
 ** Ancient roadway
 ** Skeleton hideout
-
 
 * Characters
 ** Geoffrey (the player)
@@ -120,23 +138,10 @@
 *** TODO or just allow always-on-top? 
 *** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
 
-* Controls
-** Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
-** Escape for menu (or to exit menus)
-** hold Fire to raise bow/weapon, release to fire
-** Fire also chooses menu options
-** click Action to freeze game and show Hand cursor (only when not bow raised)
-** move Hand with cursor
-** press Action to cycle auto-choose objects, Fire to confirm choice, Escape to cancel
-** also show Hand to choose object for your verbs , like ultima
-** immobilize feet when bow is ready , then aim/release
-
 * Fixes
 ** TODO fix jerkiness of main walk animation
 ** TODO apply color correction to one or two standing frames 
 ** TODO reconsider color schemes for objects vs people
-
-
 
 ** TODO BUILD CHAPTER 1 -------------------------------------------
 *** TODO Paint graphics for tent/camp
@@ -147,9 +152,7 @@
 *** Encounter nastier demon wolf miniboss
 *** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
 
-
 * TODO test embedding PNG files as encrypted arrays in the exe
-
 * Graphical presentation
 
 All objects, evironments, and animation frames are individually
