@@ -1,38 +1,143 @@
+* Overview
+** Player controls a monk named Geoffrey as he explores the wilderness, fights monsters, and unravels the mystery of his brothers' disappearance.
+** Ranged combat with bow-and-arrow
+** Melee combat with fists/feet
+** Manage limited resources: food, arrows, items/reagents
+** Magic spells
+*** All spells require Mind points
+*** Some spells require "reagents" i.e. a supply
+** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
+** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
 
-** TODO import the Oldania font
+* Gameplay flow
+** Traditional RPG checkpoint save/load system. Campfire or bed.
+** Overworld map grid with terrain sectors
+*** Each quest is composed of your movements on the symbols of a randomly generated worldmap
+*** When you move into a sector you get a randomly generated (and/or procedural) level in the sector's style
+*** Exploration and nonlinearity in what you gather/fight and in which order you visit squares
+*** Can open map at any time, but game does not pause. 
+*** Can only travel 1 square at a time. Requires food.
+*** Choose when to leave using map screen, unless held by conditions
+*** Can return to a sector, but requires more food. 
+** Exploration/combat as monk in a sector
+*** Any gameplay activity can be a mission goal.
+*** Fight enemies
+*** Cannot flee or craft when nearby enemies
+*** Collect/craft resources/items
+*** Explore ruins/caves for items
+*** Discover story items
+*** Brief "scroll story" cinematics
+*** Modal gumps for close-ups of scrolls, books, maps
+
+* Player characteristics
+** Statistics. Higher is better.
+*** Body (0-100) (death at 0)
+*** Mind (0-100) (used for casting spells. cannot cast anything when less than 15%)
+** Conditions. Lower is better.
+*** Hunger (0-100)
+*** Fatigue (0-100)
+*** Cold (0-100)
+*** Poison (0-100)
+
+* Actions, Commands, and Magic Spells
+** Spark (light torches, campfires, and dry out even soaked wood)
+** Radiance (required for dark areas. needs one white or yellow flower.)
+*** can only use crossbow in dark when not using torch
+** Flame (fire attack)
+** Cure light wounds (consumes beef jerky for greater healing)
+** Wood sprite (shakes firewood off of trees and brings it to you)
+** Reclaim (turns garbage and other debris into reagents
+** Temporal Seance (see the past. requires Forget-me-nots)
+** Astral Body (must be cast under bright moonlight)
+** Translation
+** Boil grasses (make small amounts of thin gruel. requires wild grasses and water)
+** Leave area
+** Flee
+** Hold creature
+
+* Items
+** Arrows (craft from stone chips and wood)
+** Bundles of arrows (20 per)
+** Water 
+** White bread
+** Wheat bread
+** Beef jerky
+** Notebook
+** Forget-me-nots
+** Snowdrop
+** Wild violet
+** Stones, stone chips
+** Branches, wood planks, ruined wood
+** Temple Incense
+** Torch (crafted from wood)
+*** torch cannot be used simultaneously with bow
+
+
+* Locations
+** Meadow
+** Abandoned village (optionally with tombstones and lurking undead)
+** Snowy glen
+** Valisade
+** Forgotten cemetery
+** Gleyborough
+** Mountain pass
+** Frozen river crossing
+** Caves
+** Dungeon, castle ruins
+** Ancient roadway
+** Skeleton hideout
+
+
+* Characters
+** Geoffrey (the player)
+** Lucius
+** Francis
+** Dr. Quine
+** good Rangers
+** evil Brigands
+** Imperial Raven
+** Skeleton wanderer
+** Skeleton soldier
+** Soulless wolves
+** Cryptghast
+** Thief
+** Skullscraper
+** Eldritch acid pool
+** Maggot hound
+** Watcher-in-the-weeds
+** Goddess 
+
+
 
 
 * TODO Bring editor/ui back to complete basic usability
-** DONE heading rotation halo! 
-   CLOSED: [2013-09-02 Mon 21:47]
 ** TODO Review gui code
 ** TODO Review default keybindings 
 ** TODO Minibuffer
 ** TODO basic xelf demo video with the nice game graphics
 
-* Control design
-** TODO Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
-** TODO Escape for menu (or to exit menus)
-** TODO hold Fire to raise bow/weapon, release to fire
-** TODO Fire also chooses menu options
-** TODO click Action to freeze game and show Hand cursor (only when not bow raised)
-** TODO move Hand with cursor
-** TODO press Action to cycle auto-choose objects, Fire to confirm choice, Escape to cancel
-** TODO also show Hand to choose object for your verbs , like ultima
-** TODO immobilize feet when bow is ready , then aim/release
-
-** TODO allow z-ordering / push to front / back of objects
+* TODO allow z-ordering / push to front / back of objects
 *** TODO or just allow always-on-top? 
 *** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
+
+* Controls
+** Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
+** Escape for menu (or to exit menus)
+** hold Fire to raise bow/weapon, release to fire
+** Fire also chooses menu options
+** click Action to freeze game and show Hand cursor (only when not bow raised)
+** move Hand with cursor
+** press Action to cycle auto-choose objects, Fire to confirm choice, Escape to cancel
+** also show Hand to choose object for your verbs , like ultima
+** immobilize feet when bow is ready , then aim/release
 
 * Fixes
 ** TODO fix jerkiness of main walk animation
 ** TODO apply color correction to one or two standing frames 
 ** TODO reconsider color schemes for objects vs people
 
-** TODO left click on background to make monk walk to that spot (later pathfind)
-** TODO left drag to move object
-** TODO right click on object for halo/action
+
+
 ** TODO BUILD CHAPTER 1 -------------------------------------------
 *** TODO Paint graphics for tent/camp
 *** TODO You are called to Valisade 
@@ -42,50 +147,8 @@
 *** Encounter nastier demon wolf miniboss
 *** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
 
+
 * TODO test embedding PNG files as encrypted arrays in the exe
-
- the only character stats in the game are moment-to-moment
-      changing resources such as hitpoints, manapoints, cold, hunger. the
-      monk's body does not actually upgrade and there are no
-      XP/levels. instead atk/defense are upgraded by equipping new. in which
-      case i think each episode's guy should start with a reasonable equipment
- also i think there should be episodes where you are not Geoffrey but
-      instead his brother, in a prequel
-
-* Overview
-
-** Player controls an unnamed monk in several randomly varying quests
-** Several things to do on your way, which vary
-** Optional things
-** Ranged combat with bow-and-arrow
-** Melee combat with fists/feet
-** Magic spells
-*** All spells require Mind points
-*** Some spells require "reagents" i.e. a supply
-** Manage limited resources: food, arrows, items/reagents
-** Each quest is composed of your movements on the symbols of a randomly generated worldmap
-** When you move into a sector you get a randomly generated level in the sector's style
-** Exploration and nonlinearity in what you gather/fight and in which order you visit squares
-** Traditional RPG checkpoint save/load system
-** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
-** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
-** Crime investigation tasks
-
-* Gameplay flow
-
-** Overworld map grid with terrain sectors.
-*** Can open map at any time, but game does not pause. 
-*** Can only travel 1 square at a time. Requires food.
-*** Choose when to leave using map screen, unless held by conditions
-*** Can return to a sector, but requires more food. 
-** Exploration/combat as monk in a sector. This is the meat of the gameplay.
-*** Any gameplay activity can be a mission goal.
-*** Fight enemies
-*** Cannot flee or craft when nearby enemies
-*** Collect/craft resources/items
-*** Explore ruins/caves for items
-*** Discover story items
-*** Brief "scroll story" cinematics
 
 * Graphical presentation
 
@@ -111,25 +174,6 @@ The monk's primary means of attack is the bow and arrow with which all
 monks of the Order must acquire proficiency. Unarmed combat is less
 powerful, but still useful at times.
 
-* Player characteristics
-
-** Body (0-100) (permadeath at 0)
-** Mind (0-100) (used for casting spells. cannot cast anything when less than 15%)
-** Hunger (0-100)
-** Sleep (0-100)
-** Cold (0-100)
-** Poison (0-100)
-
-* Controls
-
-** Move with the arrow keys or numeric keypad
-** Press SHIFT use the equipped weapon, item, or spell
-** Press SPACEBAR (or "X") to pick up object / perform location-specific action
-** Press ENTER (or "Z") to enter the menu and select menu options
-** Control-S to swap Z and X buttons
-** Use the arrow keys or numeric keypad to move the menu cursor 
-** Press ESCAPE (or BACKSPACE or DEL) to quit the current menu
-
 * Music and sound
 
 The fantasy soundtrack employs FM synthesis and sampling to create
@@ -141,81 +185,6 @@ situation.  My overall aim is to create the musical atmosphere in
 which an order of spiritual warrior-monks utilize music for a variety
 of religious purposes, and also incidental and improvised music played
 while traveling long distances.
-
-* Magic spells / commands
-** Spark (light torches, campfires, and dry out even soaked wood)
-** Radiance (required for dark areas. needs one white or yellow flower.)
-*** can only use crossbow in dark when not using torch
-** Flame (fire attack)
-** Cure light wounds (consumes beef jerky for greater healing)
-** Wood sprite (shakes firewood off of trees and brings it to you)
-** Reclaim (turns garbage and other debris into reagents
-** Temporal Seance (see the past. requires Forget-me-nots)
-** Astral Body (must be cast under bright moonlight)
-** Translation
-** Boil grasses (make small amounts of thin gruel. requires wild grasses and water)
-** Leave area
-** Flee
-** Hold creature
-
-* Items
-** Arrows (craft from stone chips and wood)
-** Torch (crafted from wood)
-*** torch cannot be used simultaneously with bow
-** Bundles of arrows (20 per)
-** Water 
-** White bread
-** Wheat bread
-** Beef jerky
-** Notebook
-** Forget-me-nots
-** Snowdrop
-** Wild violet
-** Stones, stone chips
-** Branches, wood planks, ruined wood
-** Temple Incense
-
-* Characters
-** Unnamed Monk (the player)
-** Geoffrey
-** Francis
-** Lucius
-** Dr. Quine
-** good Rangers
-** evil Brigands
-** Imperial Raven
-** Skeleton wanderer
-** Skeleton soldier
-** Soulless wolves
-** Cryptghast
-** Thief
-** Skullscraper
-** Eldritch acid pool
-** Maggot hound
-** Watcher-in-the-weeds
-** Goddess 
-
-* Locations
-** Gleyborough
-** Valisade
-** Mountain pass
-** Snowy glen
-** Frozen river crossing
-** Meadow
-** Caves
-** Abandoned village (optionally with tombstones and lurking undead)
-** Forgotten cemetery
-** Dungeon, castle ruins
-** Ancient roadway
-** Skeleton hideout
-
-* Checkpoint save system
-* Campaigns
-** Non-linear campaign, mostly procedural with embedded story elements
-*** Order chosen by campaign management code
-** Semi-linear story campaigns intermixed with procedural terrain, side missions
-** Release 3 good campaigns at first
-** Release campagins one at a time, U Never Kno What U Gonna Get
 
 * Story synopsis   
 
@@ -233,7 +202,7 @@ ritual of purification to become the new White Cypress, and the game
 ends. Revealed that Geoffrey is the storyteller; the Testament
 combines the previous, female cypress' story with his.
 
-The sequel is set in the time before the great explosion,
+In the sequel you turn the diamond anvil back on to reach another world.
 
 * Story: Episode 1
 ** You are called to Valisade 
@@ -264,43 +233,4 @@ The sequel is set in the time before the great explosion,
 ** The Diamond Anvil
 ** Vale of the Mindweaver
 
-
-
-* Archived Entries
-** DONE basic wraith combat
-   CLOSED: [2013-08-28 Wed 22:38]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2013-08-28 Wed 22:38
-   :ARCHIVE_FILE: ~/f0rest/f0rest.org
-   :ARCHIVE_CATEGORY: f0rest
-   :ARCHIVE_TODO: DONE
-   :END:
-*** DONE import bow stand animation
-    CLOSED: [2013-08-26 Mon 18:32]
-*** DONE import bow stand ready animation
-    CLOSED: [2013-08-26 Mon 18:32]
-*** DONE import bow walk animation
-    CLOSED: [2013-08-26 Mon 18:32]
-*** DONE import bow ready walk animation
-    CLOSED: [2013-08-26 Mon 18:32]
-*** DONE import arrows
-    CLOSED: [2013-08-26 Mon 18:32]
-*** DONE import wraiths
-    CLOSED: [2013-08-26 Mon 18:32]
-
-*** DONE import remains and skull
-    CLOSED: [2013-08-26 Mon 18:36]
-
-*** DONE make new animations work
-    CLOSED: [2013-08-28 Wed 22:24]
-*** DONE autoscale frames so that scale1.0 =>> 600x600 ends up *monk-size* x *monk-size* , centered
-    CLOSED: [2013-08-28 Wed 22:24]
-
-
-*** DONE walk with bow 
-    CLOSED: [2013-08-28 Wed 22:24]
-*** DONE hold shift to ready bow
-    CLOSED: [2013-08-28 Wed 22:24]
-*** DONE let go of shift to fire arrow
-    CLOSED: [2013-08-28 Wed 22:24]
 
