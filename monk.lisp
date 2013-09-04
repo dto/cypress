@@ -1,6 +1,6 @@
 (in-package :cypress)
 
-(defconstant +dots-per-inch+ 300)
+(defconstant +dots-per-inch+ 600)
 (defparameter *unit* 14) 
 (defun units (n) (* n *unit*))
 
@@ -107,7 +107,7 @@
 (defparameter *arrow-size* 25)
 
 (defsprite arrow
-  :image-scale 20
+  :image-scale 40
   :image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png")))
 
 (define-method initialize arrow (heading)
@@ -133,7 +133,7 @@
 
 (defsprite wraith
   :seen-player nil
-  :image-scale 300
+  :image-scale 600
   :tags '(:enemy)
   :hp 3
   :image (random-choose *wraith-images*))
@@ -165,7 +165,7 @@
 ;;; A monk, either AI or human controlled
 
 (defparameter *monk-cast*
-  '(:scale 475
+  '(:scale 950
     :frames (("monk-cast-1.png" 3)
 	     ("monk-cast-2.png" 4)
 	     ("monk-cast-3.png" 4)
@@ -173,20 +173,20 @@
 	     ("monk-cast-5.png" 6))))
 
 (defparameter *monk-stand*
-  '(:scale 300
+  '(:scale 600
     :frames (("monk-stand-1.png" 19)
 	     ("monk-stand-2.png" 24)
 	     ("monk-stand-3.png" 18)
 	     ("monk-stand-4.png" 20))))
 
 (defparameter *monk-stand-bow*
-  '(:scale 500
+  '(:scale 1000
     :frames (("monk-stand-bow-1.png" 19)
 	     ("monk-stand-bow-2.png" 24)
 	     ("monk-stand-bow-3.png" 32))))
 
 (defparameter *monk-stand-bow-ready*
-  '(:scale 500
+  '(:scale 1000
     :frames (("monk-stand-bow-ready-1.png" 19)
 	     ("monk-stand-bow-ready-2.png" 24)
 	     ("monk-stand-bow-ready-3.png" 32))))
@@ -196,7 +196,7 @@
 
 (defparameter *monk-walk* 
   '(:repeat t
-    :scale 300
+    :scale 600
     :frames (("monk-walk-1.png" 4)
 	     ("monk-walk-2.png" 4)
 	     ("monk-walk-3.png" 4)
@@ -208,7 +208,7 @@
 
 (defparameter *monk-walk-bow* 
   '(:repeat t
-    :scale 300
+    :scale 600
     :frames (("monk-walk-bow-3.png" 4)
 	     ("monk-walk-bow-1.png" 4)
 	     ("monk-walk-bow-2.png" 4)
@@ -216,7 +216,7 @@
 
 (defparameter *monk-walk-bow-ready* 
   '(:repeat t
-    :scale 500
+    :scale 1000
     :frames (("monk-walk-bow-ready-1.png" 4)
 	     ("monk-walk-bow-ready-2.png" 4)
 	     ("monk-walk-bow-ready-3.png" 4)
@@ -226,14 +226,14 @@
 
 (defparameter *monk-2-walk* 
   '(:repeat t
-    :scale 300
+    :scale 600
     :frames (("monk-2-walk-1.png" 4)
 	     ("monk-2-walk-2.png" 4)
 	     ("monk-2-walk-3.png" 4)
 	     ("monk-2-walk-4.png" 4))))
 
 (defparameter *monk-2-stand*
-  '(:scale 300
+  '(:scale 600
     :frames (("monk-2-stand-1.png" 19)
 	     ("monk-2-stand-2.png" 24))))
 

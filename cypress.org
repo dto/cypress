@@ -177,9 +177,12 @@ while traveling long distances.
 * Milestone 1: Chapter one demo
 scanimage --resolution 300 --batch=out-%d.pnm --batch-prompt
 
+
+** Bring paper background up to white 
+
 for i in *.pnm
 do
-convert $i -brightness-contrast 0x10 `basename $i .pnm`-adjusted.png
+convert $i -brightness-contrast 0x16 `basename $i .pnm`-adjusted.png
 done
 
 *** TODO Paint graphics for tent/camp
