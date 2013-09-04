@@ -609,7 +609,7 @@
       (follow-with-camera buffer geoffrey)
 
 ;
-      (resize buffer 878 1300)
+      (resize buffer 1254 2000)
 
       (drop-object buffer (new 'wraith) 800 600)
       (drop-object buffer (new 'scroll) 600 600)
