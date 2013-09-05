@@ -3,6 +3,8 @@
 * TODO Move to completely mouse based world interaction / walk
 ** TODO cypress world captures mouse events when minibuffer closed
 
+** TODO fix pick coordinates when window resized
+
 ** TODO Bring editor/ui back to complete basic usability
 *** TODO Review gui code
 *** TODO Review default keybindings 

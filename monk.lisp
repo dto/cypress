@@ -1,85 +1,5 @@
 (in-package :cypress)
 
-
-;; scroll
-;; top 214  bottom 1029
-;; left 142  right 894
-;;; Now some objects
-
-(defthing book :image (random-choose *book-images*))
-
-(defthing scroll :image (random-choose *scroll-images*))
-(define-method collide scroll (thing)
-  (when (monkp thing)
-    (play-sample "wood.wav")
-    (destroy self)))
-
-(defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
-
-(define-method collide skull (thing)
-  (when (monkp thing)
-    (play-sample "wood.wav")
-    (destroy self)))
-(defthing remains :image (random-choose '("remains-1.png" "remains-2.png")))
-
-;;; Arrows, the main weapon
-
-(defparameter *arrow-size* 25)
-
-(defsprite arrow
-  :image-scale 40
-  :image (random-choose *arrow-images*))
-
-(define-method initialize arrow (heading)
-  (block%initialize self)
-  (setf %clock 400)
-  (setf %heading heading))
-
-(define-method collide arrow (thing)
-  (cond ((enemyp thing) (damage thing 1) (destroy self))
-	((solidp thing) (destroy self))))
-
-(define-method update arrow ()
-  (percent-of-time 13 (setf %image (random-choose *arrow-images*)))
-  (resize self *arrow-size* *arrow-size*)
-  (decf %clock)
-  (if (minusp %clock)
-      (destroy self)
-      (forward self 15)))
-
-;;; Wraiths
-
-(defsprite wraith
-  :seen-player nil
-  :image-scale 600
-  :tags '(:enemy)
-  :hp 3
-  :image (random-choose *wraith-images*))
-
-(define-method damage wraith (points)
-  (play-sample "knock.wav")
-  (decf %hp points)
-  (unless (plusp %hp)
-    (drop self (new 'remains))
-    (drop self (new 'skull))
-    (percent-of-time 20 (drop self (new 'scroll) 40 40))
-    (play-sample "lichdie.wav")
-    (destroy self)))
-
-(define-method update wraith ()
-    (resize self 130 130)
-  (when (< (distance-to-cursor self) 500)
-    (unless %seen-player
-      (play-sample "lichscream.wav")
-      (setf %seen-player t))
-    (percent-of-time 16 (setf %image (random-choose *wraith-images*)))
-    (let ((heading (heading-to-cursor self)))
-      (percent-of-time 13 
-	(setf %heading heading))
-      (percent-of-time 30
-	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
-	(move self %heading 4)))))
-
 ;;; A monk, either AI or human controlled
 
 (defparameter *monk-cast*
@@ -170,13 +90,23 @@
   (retry-clock :initform (seconds->frames 5))
   (walk-clock :initform 0)
   (step-clock :initform 0)
-  (fire-clock :initform 0))
+  (fire-clock :initform 0)
+  ;;
+  (goal-x :initform nil)
+  (goal-y :initform nil))
 
 (defmacro defmonk (name &rest body)
   `(define-block (,name :super monk) ,@body))
 
-;; (define-method can-accept monk () t)
-;; (define-method accept monk (thing) t)
+(define-method can-accept monk () t)
+(define-method accept monk (thing)
+  (push thing %inventory))
+
+(define-method walk-to monk (x y)
+  (setf %goal-x x %goal-y y))
+
+(define-method stop-walking monk ()
+  (setf %goal-x nil %goal-y nil))
 
 (define-method animation-frame monk ()
   (when %animation (frame-image (first %frames))))
@@ -229,7 +159,7 @@
 (define-method draw monk ()
   (draw-as-sprite self 
 		  (or (animation-frame self) %image)
-		  (direction-heading %direction)))
+		  %heading))
 
 (define-method cast-spell monk ()
   (animate self *monk-cast*))
@@ -289,6 +219,8 @@
 ;;; Default AI methods. 
 
 (define-method movement-direction monk () nil)
+
+(define-method movement-heading monk () nil)
 
 (defvar *joystick-enabled* t)
 
@@ -352,20 +284,18 @@
       (when (plusp step-clock)
 	(decf step-clock))
       ;; find out what direction the AI or human wants to go
-      (let ((direction (movement-direction self))
+      (let ((heading (movement-heading self))
 	    (fire-button (pressing-fire-p self)))
-	(when (or (null direction)
+	(when (or (null heading)
 		  (null %animation))
 	  (animate self (standing-animation self)))
-	(when direction 
+	(when heading 
 	  (unless (eq %animation (walking-animation self))
 	    (animate self (walking-animation self)))
 	  ;; move in the movement direction
-	  (move-toward self direction (/ *monk-speed* 2))
-	  (setf %direction direction)
-	  ;; lock fire direction when holding fire button
-	  (unless (pressing-fire-p self) (setf %fire-direction direction)))
-	(if direction
+	  (move self heading (/ *monk-speed* 2))
+	  (setf %heading heading))
+	(if heading
 	    ;; controller is pushing in a direction
 	    (when (zerop step-clock)
 	    ;; don't animate on every frame
@@ -433,6 +363,13 @@
 
 (define-method humanp geoffrey () t)
 
+(define-method movement-heading geoffrey ()
+  (with-fields (goal-x goal-y) self
+    (when (and goal-x goal-y)
+      (multiple-value-bind (x y) (center-point self)
+	(when (< 15 (distance x y goal-x goal-y))
+	  (find-heading x y goal-x goal-y))))))
+
 (define-method movement-direction geoffrey ()
   (or 
    (cond 
@@ -446,9 +383,9 @@
      ((holding-right-arrow) :right))
    (let ((heading (stick-heading self)))
      (when 
-	 (and *joystick-enabled*
-	      (or (left-analog-stick-pressed-p)
-		  (right-analog-stick-pressed-p)))
+  	 (and *joystick-enabled*
+  	      (or (left-analog-stick-pressed-p)
+  		  (right-analog-stick-pressed-p)))
        (or (heading-direction heading) :left)))))
   
 ;;; Lucius 
@@ -459,12 +396,12 @@
   (monk%update self)
   (decf %clock))
 
-(define-method movement-direction lucius ()
+(define-method movement-heading lucius ()
   (with-fields (clock) self
     (when (cursor)
       (cond  ((> (distance-to-cursor self) 150)
 	      (unless (plusp clock)
-		(direction-to-cursor self)))
+		(heading-to-cursor self)))
 	     ((> (distance-to-cursor self) 110)
 	      (prog1 nil (setf clock 10)))))))
 	   
@@ -498,6 +435,9 @@
     ((:g :control) :escape)
     ((:d :control) :drop-selection)))
 
+(define-method tap meadow (x y)
+  (walk-to (cursor) x y))
+
 (defthing wood :image "wood-1.png")
 
 (define-method collide wood (thing)
@@ -528,11 +468,11 @@
 
       (resize buffer 1254 2000)
 
-      (drop-object buffer (new 'wraith) 800 600)
-      (dotimes (n 10)
+      ;; (drop-object buffer (new 'wraith) 800 600)
+      (dotimes (n 4)
 	(let ((x (+ 600 (random 300)))
 	      (y (+ 600 (random 300))))
-	  (drop-object buffer (new 'book) x y)))
+	  (drop-object buffer (new 'scroll) x y)))
       ;; (drop-object buffer (make-wood 3) 100 150)
       ;; (drop-object buffer (make-wood 0) 100 180)
 

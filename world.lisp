@@ -91,6 +91,7 @@
 (define-block thing 
   ;; world parameters
   (weight :initform 0)
+  (inventory :initform nil)
   (hit-points :initform nil)
   (description :initform nil)
   (inscription :initform nil)
@@ -127,3 +128,77 @@
 (defmacro defsprite (name &body body)
   `(define-block (,name :super sprite) ,@body))
 
+;;; Now some objects
+
+(defthing book :image (random-choose *book-images*))
+
+(defthing scroll :image (random-choose *scroll-images*))
+(define-method tap scroll (x y)
+  (drop self (new 'scroll-gump *letter-text*)))
+
+
+(defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
+
+(define-method collide skull (thing)
+  (when (monkp thing)
+    (play-sample "wood.wav")
+    (destroy self)))
+(defthing remains :image (random-choose '("remains-1.png" "remains-2.png")))
+
+;;; Arrows, the main weapon
+
+(defparameter *arrow-size* 25)
+
+(defsprite arrow
+  :image-scale 40
+  :image (random-choose *arrow-images*))
+
+(define-method initialize arrow (heading)
+  (block%initialize self)
+  (setf %clock 400)
+  (setf %heading heading))
+
+(define-method collide arrow (thing)
+  (cond ((enemyp thing) (damage thing 1) (destroy self))
+	((solidp thing) (destroy self))))
+
+(define-method update arrow ()
+  (percent-of-time 13 (setf %image (random-choose *arrow-images*)))
+  (resize self *arrow-size* *arrow-size*)
+  (decf %clock)
+  (if (minusp %clock)
+      (destroy self)
+      (forward self 15)))
+
+;;; Wraiths
+
+(defsprite wraith
+  :seen-player nil
+  :image-scale 600
+  :tags '(:enemy)
+  :hp 3
+  :image (random-choose *wraith-images*))
+
+(define-method damage wraith (points)
+  (play-sample "knock.wav")
+  (decf %hp points)
+  (unless (plusp %hp)
+    (drop self (new 'remains))
+    (drop self (new 'skull))
+    (percent-of-time 20 (drop self (new 'scroll) 40 40))
+    (play-sample "lichdie.wav")
+    (destroy self)))
+
+(define-method update wraith ()
+    (resize self 130 130)
+  (when (< (distance-to-cursor self) 500)
+    (unless %seen-player
+      (play-sample "lichscream.wav")
+      (setf %seen-player t))
+    (percent-of-time 16 (setf %image (random-choose *wraith-images*)))
+    (let ((heading (heading-to-cursor self)))
+      (percent-of-time 13 
+	(setf %heading heading))
+      (percent-of-time 30
+	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
+	(move self %heading 4)))))
