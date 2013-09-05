@@ -38,11 +38,7 @@
     :frames (("monk-walk-1.png" 4)
 	     ("monk-walk-2.png" 4)
 	     ("monk-walk-3.png" 4)
-	     ("monk-walk-4.png" 4)
-	     ("monk-walk-5.png" 4)
-	     ("monk-walk-6.png" 4)
-	     ("monk-walk-7.png" 4)
-	     ("monk-walk-8.png" 4))))
+	     ("monk-walk-4.png" 4))))
 
 (defparameter *monk-walk-bow* 
   '(:repeat t
@@ -241,7 +237,8 @@
 
 (define-method collide monk (thing)
   (when (solidp thing)
-    (restore-location self))
+    (restore-location self)
+    (stop-walking self))
   (when (enemyp thing)
     (percent-of-time 20 (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
@@ -349,17 +346,23 @@
 (defmonk geoffrey)
 
 (define-method standing-animation geoffrey ()
-  (if %bow-ready 
-      *monk-stand-bow-ready*
-      *monk-stand-bow*))
+  *monk-stand*)
 
 (define-method walking-animation geoffrey ()
-  (if %bow-ready 
-      *monk-walk-bow-ready*
-      *monk-walk-bow*))
+ *monk-walk*)
 
-(define-method pressing-fire-p geoffrey ()
-  (holding-fire-button))
+;; (define-method standing-animation geoffrey ()
+;;   (if %bow-ready 
+;;       *monk-stand-bow-ready*
+;;       *monk-stand-bow*))
+
+;; (define-method walking-animation geoffrey ()
+;;   (if %bow-ready 
+;;       *monk-walk-bow-ready*
+;;       *monk-walk-bow*))
+
+(define-method pressing-fire-p geoffrey () nil)
+;  (holding-fire-button))
 
 (define-method humanp geoffrey () t)
 
@@ -466,13 +469,14 @@
       (glide-window-to-cursor buffer)
       (follow-with-camera buffer geoffrey)
 
-      (resize buffer 1254 2000)
+      (resize buffer 1157 1700)
 
       ;; (drop-object buffer (new 'wraith) 800 600)
-      (dotimes (n 4)
+      (drop-object buffer (new 'scroll) 600 600)
+      (dotimes (n 6)
 	(let ((x (+ 600 (random 300)))
 	      (y (+ 600 (random 300))))
-	  (drop-object buffer (new 'scroll) x y)))
+	  (drop-object buffer (new 'book) x y)))
       ;; (drop-object buffer (make-wood 3) 100 150)
       ;; (drop-object buffer (make-wood 0) 100 180)
 

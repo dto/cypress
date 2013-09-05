@@ -30,6 +30,7 @@
   (loop for n from start to count
 	collect (format nil "~A-~S.png" name n)))
 
+(defparameter *ruin-wall-images* (image-set "ruin-wall" 4))
 (defparameter *book-images* (image-set "book" 10))
 (defparameter *skull-images* (image-set "skull" 3))
 (defparameter *wolf-skull-images* (image-set "wolf-skull" 3))
@@ -105,7 +106,7 @@
 (defmacro defthing (name &body body)
   `(define-block (,name :super thing) ,@body))
 
-(defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 100)))
+(defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 130)))
 
 (define-method layout thing ()
   (resize self 
@@ -132,10 +133,14 @@
 
 (defthing book :image (random-choose *book-images*))
 
-(defthing scroll :image (random-choose *scroll-images*))
+(define-method collide book (thing)
+  (when (monkp thing)
+    (play-sample "wood.wav")
+    (destroy self)))
+
+(defthing scroll :image (random-choose *scroll-images*) :z 20)
 (define-method tap scroll (x y)
   (drop self (new 'scroll-gump *letter-text*)))
-
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
 
@@ -169,6 +174,16 @@
   (if (minusp %clock)
       (destroy self)
       (forward self 15)))
+
+;;; ruin walls
+
+(defthing ruin-wall 
+  :image-scale 1000
+  :image (random-choose *ruin-wall-images*)
+  :tags '(:solid))
+
+(defthing coverstone :image "coverstone.png" :z 10)
+(defthing item-box :image "item-box.png" :z 1)
 
 ;;; Wraiths
 
