@@ -1,8 +1,39 @@
 (in-package :cypress)
 
+(defun image-set (name count &optional (start 1))
+  (loop for n from start to count
+	collect (format nil "~A-~S.png" name n)))
+
+(defparameter *book-images* (image-set "book" 10))
+(defparameter *skull-images* (image-set "skull" 3))
+(defparameter *wolf-skull-images* (image-set "wolf-skull" 3))
+(defparameter *scroll-images* (image-set "scroll" 5))
+(defparameter *remains-images* (image-set "remains" 2))
+(defparameter *notebook-images* (image-set "notebook" 3))
+(defparameter *wood-images* (image-set "wood" 4))
+(defparameter *wraith-images* (image-set "wraith" 3))
+(defparameter *arrow-images* (image-set "arrow" 3))
+(defparameter *fire-pit-images* (image-set "fire-pit" 3))
+
 (defconstant +dots-per-inch+ 600)
 (defparameter *unit* 14) 
 (defun units (n) (* n *unit*))
+
+(defun solidp (thing)
+  (and (xelfp thing)
+       (has-tag thing :solid)))
+
+(defun targetp (thing)
+  (and (xelfp thing)
+       (has-tag thing :target)))
+
+(defun enemyp (thing)
+  (and (xelfp thing)
+       (has-tag thing :enemy)))
+
+(defun monkp (thing)
+  (and (xelfp thing)
+       (has-tag thing :monk)))
 
 ;;; Animation system
 
@@ -58,11 +89,19 @@
   (frames :initform nil)
   (delay :initform 0)
   (repeat :initform nil)
-  (animation :initform nil)
-  (image-scale :initform nil))
+  (animation :initform nil))
 
 (defmacro defthing (name &body body)
   `(define-block (,name :super thing) ,@body))
+
+(defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 100)))
+
+(define-method layout thing ()
+  (resize self 
+	  (* (image-width %image) *default-thing-scale*)
+	  (* (image-height %image) *default-thing-scale*)))
+	  
+;;; Sprites
 
 (define-block (sprite :super thing))
 
@@ -74,35 +113,19 @@
 (defmacro defsprite (name &body body)
   `(define-block (,name :super sprite) ,@body))
 
-(defthing stone1 :image "coverstone.png")
-(defthing stone2 :image "coverstone2.png")
 (defthing scroll :image "scroll.png")
 (define-method collide scroll (thing)
   (when (monkp thing)
     (play-sample "wood.wav")
     (destroy self)))
+
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
+
 (define-method collide skull (thing)
   (when (monkp thing)
     (play-sample "wood.wav")
     (destroy self)))
 (defthing remains :image (random-choose '("remains-1.png" "remains-2.png")))
-
-(defun solidp (thing)
-  (and (xelfp thing)
-       (has-tag thing :solid)))
-
-(defun targetp (thing)
-  (and (xelfp thing)
-       (has-tag thing :target)))
-
-(defun enemyp (thing)
-  (and (xelfp thing)
-       (has-tag thing :enemy)))
-
-(defun monkp (thing)
-  (and (xelfp thing)
-       (has-tag thing :monk)))
 
 ;;; Arrows, the main weapon
 
@@ -110,7 +133,7 @@
 
 (defsprite arrow
   :image-scale 40
-  :image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png")))
+  :image (random-choose *arrow-images*))
 
 (define-method initialize arrow (heading)
   (block%initialize self)
@@ -122,7 +145,7 @@
 	((solidp thing) (destroy self))))
 
 (define-method update arrow ()
-  (percent-of-time 13 (setf %image (random-choose '("arrow-1.png" "arrow-2.png" "arrow-3.png"))))
+  (percent-of-time 13 (setf %image (random-choose *arrow-images*)))
   (resize self *arrow-size* *arrow-size*)
   (decf %clock)
   (if (minusp %clock)
@@ -130,8 +153,6 @@
       (forward self 15)))
 
 ;;; Wraiths
-
-(defparameter *wraith-images* '("wraith-1.png" "wraith-2.png" "wraith-3.png"))
 
 (defsprite wraith
   :seen-player nil
