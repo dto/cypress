@@ -100,20 +100,12 @@
   (resize self 
 	  (* (image-width %image) *default-thing-scale*)
 	  (* (image-height %image) *default-thing-scale*)))
-	  
-;;; Sprites
 
-(define-block (sprite :super thing))
+(define-method initialize thing ()
+  (block%initialize self)
+  (layout self))
 
-(define-method draw sprite ()
-  (draw-as-sprite self %image %heading))
-
-(define-method layout sprite () nil)
-
-(defmacro defsprite (name &body body)
-  `(define-block (,name :super sprite) ,@body))
-
-(defthing scroll :image "scroll.png")
+(defthing scroll :image (random-choose *scroll-images*))
 (define-method collide scroll (thing)
   (when (monkp thing)
     (play-sample "wood.wav")
@@ -126,6 +118,19 @@
     (play-sample "wood.wav")
     (destroy self)))
 (defthing remains :image (random-choose '("remains-1.png" "remains-2.png")))
+
+	  
+;;; Sprites
+
+(define-block (sprite :super thing))
+
+(define-method draw sprite ()
+  (draw-as-sprite self %image %heading))
+
+(define-method layout sprite () nil)
+
+(defmacro defsprite (name &body body)
+  `(define-block (,name :super sprite) ,@body))
 
 ;;; Arrows, the main weapon
 
