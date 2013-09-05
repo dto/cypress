@@ -1,3 +1,13 @@
+* Tasks
+** TODO Bring editor/ui back to complete basic usability
+*** TODO Review gui code
+*** TODO Review default keybindings 
+*** TODO Minibuffer
+*** TODO basic xelf demo video with the nice game graphics
+** TODO allow z-ordering / push to front / back of objects
+*** TODO or just allow always-on-top? 
+*** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
+
 * Overview
 ** Player controls a monk named Geoffrey as he explores the wilderness, fights monsters, and unravels the mystery of his brothers' disappearance.
 ** Ranged combat with bow-and-arrow
@@ -160,19 +170,6 @@ situation.  My overall aim is to create the musical atmosphere in
 which an order of spiritual warrior-monks utilize music for a variety
 of religious purposes, and also incidental and improvised music played
 while traveling long distances.
-
-* TODO Bring editor/ui back to complete basic usability
-** TODO Review gui code
-** TODO Review default keybindings 
-** TODO Minibuffer
-** TODO basic xelf demo video with the nice game graphics
-* TODO allow z-ordering / push to front / back of objects
-*** TODO or just allow always-on-top? 
-*** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
-* Fixes
-** TODO fix jerkiness of main walk animation
-** TODO apply color correction to one or two standing frames 
-** TODO reconsider color schemes for objects vs people
 
 * Milestone 1: Chapter one demo
 scanimage --resolution 300 --batch=out-%d.pnm --batch-prompt

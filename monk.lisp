@@ -69,6 +69,8 @@
 (define-method draw sprite ()
   (draw-as-sprite self %image %heading))
 
+(define-method layout sprite () nil)
+
 (defmacro defsprite (name &body body)
   `(define-block (,name :super sprite) ,@body))
 
@@ -608,7 +610,6 @@
       (glide-window-to-cursor buffer)
       (follow-with-camera buffer geoffrey)
 
-;
       (resize buffer 1254 2000)
 
       (drop-object buffer (new 'wraith) 800 600)
