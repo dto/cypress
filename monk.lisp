@@ -425,7 +425,7 @@
     ((:s :alt) :show-stack)
     ((:m :alt) :show-messages)
     ((:p :control) :transport-toggle-play)
-    ((:return) :enter)
+    ;; ((:return) :enter)
     ((:escape) :cancel)
     ((:f1) :help)
     ((:h :control) :help)
@@ -438,7 +438,7 @@
     ((:g :control) :escape)
     ((:d :control) :drop-selection)))
 
-(define-method tap meadow (x y)
+(define-method alternate-tap meadow (x y)
   (walk-to (cursor) x y))
 
 (defthing wood :image "wood-1.png")
@@ -453,6 +453,9 @@
     (prog1 wood
       (change-image wood (nth (mod n 4) '("wood-1.png" "wood-2.png" "wood-3.png" "wood-4.png"))))))
 
+(defthing tent :image (random-choose '("tent-1.png" "tent-2.png")))
+(defthing campfire :image "fire-pit-3.png")
+
 (defun make-meadow ()
     (let ((geoffrey (new 'geoffrey))
 	  (lucius (new 'lucius))
@@ -464,15 +467,18 @@
 	    (%horizontal-scrolling-margin buffer) 2/5
 	    (%vertical-scrolling-margin buffer) 4/7)
       ;;
+      (resize buffer 1700 1157)
       (set-cursor buffer geoffrey)
       (snap-window-to-cursor buffer)
       (glide-window-to-cursor buffer)
       (follow-with-camera buffer geoffrey)
 
-      (resize buffer 1157 1700)
 
       ;; (drop-object buffer (new 'wraith) 800 600)
       (drop-object buffer (new 'scroll) 600 600)
+      (drop-object buffer (new 'tent) 400 400)
+      (drop-object buffer (new 'tent) 420 700)
+      (drop-object buffer (new 'campfire) 420 850)
       (dotimes (n 6)
 	(let ((x (+ 600 (random 300)))
 	      (y (+ 600 (random 300))))
