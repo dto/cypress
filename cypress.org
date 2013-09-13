@@ -1,5 +1,28 @@
 * Tasks
 
+** TODO disable cursor in game window
+** TODO USEing can require an argument to apply verb to; this pauses and changes cursor
+** TODO click on object to show name as small tag (no scroll)
+** TODO contextual modeline verb buttons
+** TODO double left click to use, or choose button verb from modeline
+** TODO decide how to deal with collision detection of walls underground
+*** TODO use editor to add invisible walls and entry/exit points
+** TODO working locks and keys
+** TODO doors controlled by nearby locks
+** TODO stairwells
+*** TODO double click stairwell to enter / leave while standing on it
+*** TODO stairwells on both buffers match up 
+** TODO 
+*** look
+*** describe
+*** talk 
+*** use
+*** attack
+*** get (or drag)
+*** drop (or drag)
+
+** TODO video with conversation, letter, roads/ruins, basement exploration. 
+** TODO new buffer methods wrap monk actions with *shell-open-p* check
 
 ** TODO allow z-ordering / push to front / back of objects
 *** TODO or just allow always-on-top? 

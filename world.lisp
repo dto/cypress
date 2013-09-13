@@ -24,6 +24,47 @@
   (and (xelfp thing)
        (has-tag thing :monk)))
 
+(defun bubblep (thing)
+  (and (xelfp thing)
+       (has-tag thing :bubble)))
+
+;;; Simple temporary tooltip bubble
+
+(define-block bubble 
+  (tags :initform '(:bubble))
+  (text :initform nil) 
+  (font :initform "oldania")
+  (collision-type :initform nil))
+
+(define-method initialize bubble (text &optional (font "oldania"))
+  (block%initialize self)
+  (setf %text text)
+  (setf %font font)
+  ;; (set-buffer-bubble self)
+  (later 7.0 (destroy self)))
+
+;; (define-method destroy bubble ()
+;;   ;; (set-buffer-bubble nil)
+;;   (block%destroy self))
+
+(define-method draw bubble ()
+  (with-field-values (x y text font) self
+    (let ((skew 2))
+      (draw-string text x y 
+		   :color "black"
+		   :font font)
+      (draw-string text 
+		   (+ x skew)
+		   (+ y skew)
+		   :color "white"
+		   :font font))))
+
+;; (define-method update bubble ()
+;;   (when (cursor)
+;;     (multiple-value-bind (x y)
+;; 	(right-of (cursor))
+;;       (move-to self x y))))
+
 ;;; Easily defining sets of images
 
 (defun image-set (name count &optional (start 1))
@@ -90,6 +131,7 @@
 ;;; Fundamental object attributes in the world of Cypress
 
 (define-block thing 
+  (last-tap-time :initform nil)
   ;; world parameters
   (weight :initform 0)
   (inventory :initform nil)
@@ -117,6 +159,42 @@
   (block%initialize self)
   (layout self))
 
+(defun auto-describe (thing)
+  (let ((name (object-name (find-object (find-super (find-object thing))))))
+    (pretty-string (subseq name (1+ (position (character ":") name))))))
+
+(define-method find-description thing ()
+  (or %description
+      (auto-describe self)))
+
+(define-method look thing ()
+  (drop self (new 'bubble (find-description self))))
+
+(define-method use thing ())
+
+(define-method run thing ())
+
+(defparameter *double-tap-time* 8)
+
+(define-method tap thing (x y)
+  (with-fields (last-tap-time) self
+    (let* ((time *updates*)
+	   (elapsed-time (- time (or last-tap-time 0))))
+      (cond ((null last-tap-time)
+	     (setf last-tap-time time))
+	    ((<= elapsed-time *double-tap-time*)
+	     (setf last-tap-time nil)
+	     (use self))))))
+
+(define-method update thing ()
+  (with-fields (last-tap-time) self
+    (when (and last-tap-time
+	       (> (- *updates* last-tap-time)
+		  *double-tap-time*))
+      (setf last-tap-time nil)
+      (look self))
+    (run self)))
+
 ;;; Sprites
 
 (define-block (sprite :super thing))
@@ -139,7 +217,8 @@
     (destroy self)))
 
 (defthing scroll :image (random-choose *scroll-images*) :z 20)
-(define-method tap scroll (x y)
+
+(define-method use scroll ()
   (drop self (new 'scroll-gump *letter-text*)))
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
