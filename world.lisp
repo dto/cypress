@@ -44,12 +44,7 @@
   (block%initialize self)
   (setf %text text)
   (setf %font font)
-  ;; (set-buffer-bubble self)
   (later 5.0 (destroy self)))
-
-;; (define-method destroy bubble ()
-;;   ;; (set-buffer-bubble nil)
-;;   (block%destroy self))
 
 (define-method draw bubble ()
   (with-field-values (x y text font) self
@@ -57,18 +52,12 @@
       (draw-box x y
 		(+ (font-text-width text font) margin margin)
 		(+ (font-height font) margin margin)
-		:color "corns")
+		:color "cornsilk")
       (draw-string text 
-		   (+ x margin)
-		   (+ y margin)
+		   (round (+ x margin))
+		   (round (+ y margin))
 		   :color "saddle brown"
 		   :font font))))
-
-;; (define-method update bubble ()
-;;   (when (cursor)
-;;     (multiple-value-bind (x y)
-;; 	(right-of (cursor))
-;;       (move-to self x y))))
 
 ;;; Easily defining sets of images
 
@@ -203,12 +192,16 @@
 
 ;;; Sprites
 
-(define-block (sprite :super thing))
+(define-block (sprite :super thing)
+  (sprite-height :initform nil)
+  (sprite-width :initform nil))
 
 (define-method draw sprite ()
   (draw-as-sprite self %image %heading))
 
-(define-method layout sprite () nil)
+(define-method layout sprite ()
+  (setf %height %sprite-height)
+  (setf %width %sprite-width))
 
 (defmacro defsprite (name &body body)
   `(define-block (,name :super sprite) ,@body))
@@ -275,6 +268,8 @@
 (defsprite wraith
   :seen-player nil
   :image-scale 600
+  :sprite-height 130
+  :sprite-width 130
   :tags '(:enemy)
   :hp 3
   :image (random-choose *wraith-images*))
@@ -290,7 +285,6 @@
     (destroy self)))
 
 (define-method update wraith ()
-    (resize self 130 130)
   (when (< (distance-to-cursor self) 500)
     (unless %seen-player
       (play-sample "lichscream.wav")

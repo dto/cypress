@@ -11,7 +11,7 @@
 	     ("monk-cast-5.png" 6))))
 
 (defparameter *monk-stand*
-  '(:scale 600
+  '(:scale 900
     :frames (("monk-stand-1.png" 19)
 	     ("monk-stand-2.png" 24)
 	     ("monk-stand-3.png" 18)
@@ -34,7 +34,7 @@
 
 (defparameter *monk-walk* 
   '(:repeat t
-    :scale 600
+    :scale 900
     :frames (("monk-walk-1.png" 4)
 	     ("monk-walk-2.png" 4)
 	     ("monk-walk-3.png" 4)
@@ -60,18 +60,20 @@
 
 (defparameter *monk-2-walk* 
   '(:repeat t
-    :scale 600
+    :scale 900
     :frames (("monk-2-walk-1.png" 4)
 	     ("monk-2-walk-2.png" 4)
 	     ("monk-2-walk-3.png" 4)
 	     ("monk-2-walk-4.png" 4))))
 
 (defparameter *monk-2-stand*
-  '(:scale 600
+  '(:scale 900
     :frames (("monk-2-stand-1.png" 19)
 	     ("monk-2-stand-2.png" 24))))
 
 (defsprite monk
+  (sprite-height :initform (units 4))
+  (sprite-width :initform (units 4))
   (image :initform (random-choose *monk-stand-images*))
   (raising-bow :initform nil)
   (bow-ready :initform nil)
@@ -256,14 +258,12 @@
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
-(defparameter *monk-size* (* 8 *unit*))
-
 (defparameter *monk-speed* (truncate (/ *unit* 1.3)))
 
 (define-method standing-animation monk () *monk-2-stand*)
 (define-method walking-animation monk () *monk-2-walk*)
 
-(define-method update monk ()
+(define-method run monk ()
   (when (and (pressing-fire-p self) 
 	     (not %raising-bow))
     (setf %raising-bow t))
@@ -276,7 +276,6 @@
     (update-animation self)
     (when (null %animation)
       (animate self (standing-animation self)))
-    (resize self *monk-size* *monk-size*)
     (with-fields (step-clock fire-clock) self
       (when (plusp step-clock)
 	(decf step-clock))
@@ -395,8 +394,8 @@
 
 (defmonk lucius :clock 10)
 
-(define-method update lucius ()
-  (monk%update self)
+(define-method run lucius ()
+  (monk%run self)
   (decf %clock))
 
 (define-method movement-heading lucius ()
