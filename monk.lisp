@@ -72,8 +72,8 @@
 	     ("monk-2-stand-2.png" 24))))
 
 (defsprite monk
-  (sprite-height :initform (units 4))
-  (sprite-width :initform (units 4))
+  (sprite-height :initform (units 5))
+  (sprite-width :initform (units 5))
   (image :initform (random-choose *monk-stand-images*))
   (raising-bow :initform nil)
   (bow-ready :initform nil)
@@ -410,7 +410,7 @@
 ;;; Meadow
 
 (define-buffer meadow 
-  :background-image "meadow2.png"
+  :background-image "meadow3.png"
   :quadtree-depth 6
   :default-events
   '(((:pause) :transport-toggle-play)
@@ -466,7 +466,7 @@
 	    (%horizontal-scrolling-margin buffer) 2/5
 	    (%vertical-scrolling-margin buffer) 4/7)
       ;;
-      (resize buffer 1700 1157)
+      (resize-to-background-image buffer)
       (set-cursor buffer geoffrey)
       (snap-window-to-cursor buffer)
       (glide-window-to-cursor buffer)

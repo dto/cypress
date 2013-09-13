@@ -5,6 +5,12 @@
 ** DONE double left click to use
    CLOSED: [2013-09-12 Thu 22:00]
 
+** TODO use sorted vector and custom code to make z-depth work
+
+** TODO procedurally generated 
+
+** TODO basic dialogue system
+
 ** TODO disable cursor in game window?
 ** TODO USEing can require an argument to apply verb to; this pauses and changes cursor
 ** TODO contextual modeline verb buttons

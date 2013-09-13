@@ -76,6 +76,9 @@
 (defparameter *wraith-images* (image-set "wraith" 3))
 (defparameter *arrow-images* (image-set "arrow" 3))
 (defparameter *fire-pit-images* (image-set "fire-pit" 3))
+(defparameter *dead-tree-images* (image-set "dead-tree" 7))
+(defparameter *gray-rock-images* (image-set "gray-rock" 8))
+(defparameter *gray-stairwell-images* (image-set "gray-stairwell" 2))
 
 ;;; Animation system
 
@@ -210,11 +213,6 @@
 
 (defthing book :image (random-choose *book-images*))
 
-(define-method collide book (thing)
-  (when (monkp thing)
-    (play-sample "wood.wav")
-    (destroy self)))
-
 (defthing scroll :image (random-choose *scroll-images*) :z 20)
 
 (define-method use scroll ()
@@ -222,10 +220,6 @@
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
 
-(define-method collide skull (thing)
-  (when (monkp thing)
-    (play-sample "wood.wav")
-    (destroy self)))
 (defthing remains :image (random-choose '("remains-1.png" "remains-2.png")))
 
 ;;; Arrows, the main weapon
