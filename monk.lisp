@@ -452,8 +452,12 @@
     (prog1 wood
       (change-image wood (nth (mod n 4) '("wood-1.png" "wood-2.png" "wood-3.png" "wood-4.png"))))))
 
-(defthing tent :image (random-choose '("tent-1.png" "tent-2.png")))
 (defthing campfire :image "fire-pit-3.png")
+(defthing tent :image (random-choose '("tent-1.png" "tent-2.png")))
+(defthing dead-tree 
+  :tags '(:solid) 
+  :image (random-choose *dead-tree-images*)
+  :scale 2)
 
 (defun make-meadow ()
     (let ((geoffrey (new 'geoffrey))
@@ -474,14 +478,14 @@
 
 
       ;; (drop-object buffer (new 'wraith) 800 600)
-      (drop-object buffer (new 'scroll) 600 600)
-      (drop-object buffer (new 'tent) 400 400)
-      (drop-object buffer (new 'tent) 420 700)
-      (drop-object buffer (new 'campfire) 420 850)
+      ;; (drop-object buffer (new 'scroll) 600 600)
+      ;; (drop-object buffer (new 'tent) 400 400)
+      ;; (drop-object buffer (new 'tent) 420 700)
+      ;; (drop-object buffer (new 'campfire) 420 850)
       (dotimes (n 6)
-	(let ((x (+ 600 (random 300)))
-	      (y (+ 600 (random 300))))
-	  (drop-object buffer (new 'book) x y)))
+	(let ((x (+ 300 (random 1500)))
+	      (y (+ 300 (random 1000))))
+	  (drop-object buffer (new 'dead-tree) x y)))
       ;; (drop-object buffer (make-wood 3) 100 150)
       ;; (drop-object buffer (make-wood 0) 100 180)
 

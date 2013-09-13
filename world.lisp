@@ -76,7 +76,7 @@
 (defparameter *wraith-images* (image-set "wraith" 3))
 (defparameter *arrow-images* (image-set "arrow" 3))
 (defparameter *fire-pit-images* (image-set "fire-pit" 3))
-(defparameter *dead-tree-images* (image-set "dead-tree" 7))
+(defparameter *dead-tree-images* (image-set "dead-tree" 5))
 (defparameter *gray-rock-images* (image-set "gray-rock" 8))
 (defparameter *gray-stairwell-images* (image-set "gray-stairwell" 2))
 
@@ -137,6 +137,7 @@
   (inscription :initform nil)
   ;; animation parameters
   (image-scale :initform +dots-per-inch+)
+  (scale :initform 1)
   (frames :initform nil)
   (delay :initform 0)
   (repeat :initform nil)
@@ -149,8 +150,8 @@
 
 (define-method layout thing ()
   (resize self 
-	  (* (image-width %image) *default-thing-scale*)
-	  (* (image-height %image) *default-thing-scale*)))
+	  (* %scale (image-width %image) *default-thing-scale*)
+	  (* %scale (image-height %image) *default-thing-scale*)))
 
 (define-method initialize thing ()
   (block%initialize self)
