@@ -30,18 +30,22 @@
 
 ;;; Simple temporary tooltip bubble
 
+(defparameter *bubble-font* "oldania-bubble")
+
+(defresource (:name "oldania-bubble" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 18)))
+
 (define-block bubble 
   (tags :initform '(:bubble))
   (text :initform nil) 
-  (font :initform "oldania")
+  (font :initform *bubble-font*)
   (collision-type :initform nil))
 
-(define-method initialize bubble (text &optional (font "oldania"))
+(define-method initialize bubble (text &optional (font *bubble-font*))
   (block%initialize self)
   (setf %text text)
   (setf %font font)
   ;; (set-buffer-bubble self)
-  (later 7.0 (destroy self)))
+  (later 5.0 (destroy self)))
 
 ;; (define-method destroy bubble ()
 ;;   ;; (set-buffer-bubble nil)
@@ -49,14 +53,15 @@
 
 (define-method draw bubble ()
   (with-field-values (x y text font) self
-    (let ((skew 2))
-      (draw-string text x y 
-		   :color "black"
-		   :font font)
+    (let ((margin 2))
+      (draw-box x y
+		(+ (font-text-width text font) margin margin)
+		(+ (font-height font) margin margin)
+		:color "corns")
       (draw-string text 
-		   (+ x skew)
-		   (+ y skew)
-		   :color "white"
+		   (+ x margin)
+		   (+ y margin)
+		   :color "saddle brown"
 		   :font font))))
 
 ;; (define-method update bubble ()
@@ -168,7 +173,8 @@
       (auto-describe self)))
 
 (define-method look thing ()
-  (drop self (new 'bubble (find-description self))))
+  (drop self (new 'bubble (find-description self))
+	%width 0))
 
 (define-method use thing ())
 
