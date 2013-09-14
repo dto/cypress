@@ -8,9 +8,17 @@
 
 ;;; Object predicates
 
+(defun containerp (thing)
+  (and (xelfp thing)
+       (has-tag thing :container)))
+
 (defun solidp (thing)
   (and (xelfp thing)
        (has-tag thing :solid)))
+
+(defun fixedp (thing)
+  (and (xelfp thing)
+       (has-tag thing :fixed)))
 
 (defun targetp (thing)
   (and (xelfp thing)
@@ -44,11 +52,11 @@
   (block%initialize self)
   (setf %text text)
   (setf %font font)
-  (later 5.0 (destroy self)))
+  (later 4.0 (destroy self)))
 
 (define-method draw bubble ()
   (with-field-values (x y text font) self
-    (let ((margin 2))
+    (let ((margin 4))
       (draw-box x y
 		(+ (font-text-width text font) margin margin)
 		(+ (font-height font) margin margin)
@@ -142,6 +150,12 @@
   (delay :initform 0)
   (repeat :initform nil)
   (animation :initform nil))
+
+(define-method can-pick thing ()
+  (or (shell-open-p)
+      (not (fixedp self))))
+
+(define-method pick thing () self)
 
 (defmacro defthing (name &body body)
   `(define-block (,name :super thing) ,@body))
@@ -253,7 +267,7 @@
 (defthing ruin-wall 
   :image-scale 1000
   :image (random-choose *ruin-wall-images*)
-  :tags '(:solid))
+  :tags '(:fixed :solid))
 
 (defthing coverstone :image "coverstone.png" :z 10)
 (defthing item-box :image "item-box.png" :z 1)

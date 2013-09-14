@@ -410,7 +410,7 @@
 ;;; Meadow
 
 (define-buffer meadow 
-  :background-image "meadow3.png"
+  :background-image "meadow4.png"
   :quadtree-depth 6
   :default-events
   '(((:pause) :transport-toggle-play)
@@ -440,31 +440,42 @@
 (define-method alternate-tap meadow (x y)
   (walk-to (cursor) x y))
 
-(defthing wood :image "wood-1.png")
+(defthing warrior-key :image "warrior-key.png")
+(defthing triangle-key :image "triangle-key.png")
+(defthing circle-key :image "circle-key.png")
 
-(define-method collide wood (thing)
-  (when (monkp thing)
-    (play-sample "wood.wav")
-    (destroy self)))
+(defthing xalcium-leggings :image "xalcium-leggings.png")
+(defthing xalcium-armor :image "xalcium-armor.png")
+(defthing xalcium-mail :image "xalcium-mail.png")
 
-(defun make-wood (&optional (n 0))
-  (let ((wood (new 'wood)))
-    (prog1 wood
-      (change-image wood (nth (mod n 4) '("wood-1.png" "wood-2.png" "wood-3.png" "wood-4.png"))))))
+(defparameter *copper-lock-images* (image-set "copper-lock" 5))
+
+(defthing copper-lock :image (random-choose *copper-lock-images*))
+(defthing gray-stairwell :image (random-choose *gray-stairwell-images*))
+(defthing copper-stairwell :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
+(defthing copper-plate :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
 
 (defthing campfire :image "fire-pit-3.png")
-(defthing tent :image (random-choose '("tent-1.png" "tent-2.png")))
+(defthing tent 
+  :image (random-choose '("tent-1.png" "tent-2.png"))
+  :tags '(:solid :fixed))
+   
 (defthing dead-tree 
-  :tags '(:solid) 
+  :tags '(:solid :fixed) 
   :image (random-choose *dead-tree-images*)
-  :scale 2)
+  :scale 2.5)
+
+(defthing gray-rock 
+  :tags '(:solid :fixed) 
+  :image (random-choose *gray-rock-images*)
+  :scale 1.7)
 
 (defun make-meadow ()
     (let ((geoffrey (new 'geoffrey))
-	  (lucius (new 'lucius))
+;	  (lucius (new 'lucius))
 	  (buffer (new 'meadow)))
       (add-object buffer geoffrey 320 120)
-      (add-object buffer lucius 350 80)
+;      (add-object buffer lucius 350 80)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (/ *monk-speed* 2)
 	    (%horizontal-scrolling-margin buffer) 2/5
@@ -477,17 +488,19 @@
       (follow-with-camera buffer geoffrey)
 
 
-      ;; (drop-object buffer (new 'wraith) 800 600)
-      ;; (drop-object buffer (new 'scroll) 600 600)
-      ;; (drop-object buffer (new 'tent) 400 400)
-      ;; (drop-object buffer (new 'tent) 420 700)
-      ;; (drop-object buffer (new 'campfire) 420 850)
+      (drop-object buffer (new 'copper-stairwell) 800 600)
+      (drop-object buffer (new 'warrior-key) 400 400)
+      (drop-object buffer (new 'circle-key) 420 700)
+      (drop-object buffer (new 'triangle-key) 420 850)
+      (drop-object buffer (new 'xalcium-leggings) 400 400)
+      (drop-object buffer (new 'xalcium-armor) 420 700)
+      (drop-object buffer (new 'xalcium-mail) 420 850)
       (dotimes (n 6)
-	(let ((x (+ 300 (random 1500)))
-	      (y (+ 300 (random 1000))))
-	  (drop-object buffer (new 'dead-tree) x y)))
-      ;; (drop-object buffer (make-wood 3) 100 150)
-      ;; (drop-object buffer (make-wood 0) 100 180)
+      	(let ((x (+ 300 (random 1500)))
+      	      (y (+ 300 (random 1000))))
+      	  (drop-object buffer (new 'copper-plate) x y)
+	  (drop-object buffer (new 'copper-lock) (+ x 40) (+ y 40))))
+
 
       ;; allocate
        (install-quadtree buffer)

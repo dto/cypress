@@ -1,26 +1,72 @@
 * Tasks
 
-** DONE click on object to show name as small tag (no scroll)
-   CLOSED: [2013-09-12 Thu 22:00]
-** DONE double left click to use
-   CLOSED: [2013-09-12 Thu 22:00]
+*** TODO IDENTIFY sentence schemata for level generation
 
-** TODO use sorted vector and custom code to make z-depth work
+** TODO allow z-ordering / push to front / back of objects
+*** TODO or just allow always-on-top? 
+*** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
 
-** TODO procedurally generated 
+*** TODO use sorted vector and custom code to make z-depth work
 
+** TODO generic inventory gump with expanded name/image of container
+** TODO make player inventory work
 ** TODO basic dialogue system
+
+** TODO equip normal bow during prologue
+** TODO Check dx7 patches for cool analogue sfx. 
 
 ** TODO disable cursor in game window?
 ** TODO USEing can require an argument to apply verb to; this pauses and changes cursor
 ** TODO contextual modeline verb buttons
-** TODO decide how to deal with collision detection of walls underground
-*** TODO use editor to add invisible walls and entry/exit points
 ** TODO working locks and keys
 ** TODO doors controlled by nearby locks
 ** TODO stairwells
 *** TODO double click stairwell to enter / leave while standing on it
 *** TODO stairwells on both buffers match up 
+
+** TODO decide how to deal with collision detection of walls underground
+*** TODO use editor to add invisible walls and entry/exit points
+
+** TODO procedurally generated maps
+
+** TODO don't halo objects when shell not open
+** TODO [#A] fix diagonal scrolling jitter
+** TODO [#A] clean up main guy walk animation
+
+** TODO Things to draw
+*** TODO draw more trees, sickly trees, 
+*** TODO draw herbs, refer to herbal book
+*** TODO draw grass patches
+*** TODO xalcium books
+*** TODO stone chips
+*** TODO wood chips
+*** TODO animated flame with additive blending
+*** TODO night forest scene with light halo and slight flicker
+
+** TODO inventory art book and do import checklist 
+*** TODO slate gray columns/tiles
+*** TODO flowers/herbs (draw new?)
+*** TODO more firewood
+*** TODO [#B] map symbols
+*** TODO stylized autumn trees
+*** TODO gravestones
+*** TODO leather armor 
+*** TODO spell/action icons
+*** TODO bone ash
+*** TODO interior dark rooms
+*** TODO yellow ochre tiled cracked road remains, 
+*** TODO metal boxes and wooden chests
+*** TODO copper doors
+*** TODO stone monk
+
+
+
+
+** DONE click on object to show name as small tag (no scroll)
+   CLOSED: [2013-09-12 Thu 22:00]
+** DONE double left click to use
+   CLOSED: [2013-09-12 Thu 22:00]
+
 ** TODO 
 *** look
 *** describe
@@ -32,10 +78,6 @@
 
 ** TODO video with conversation, letter, roads/ruins, basement exploration. 
 ** TODO new buffer methods wrap monk actions with *shell-open-p* check
-
-** TODO allow z-ordering / push to front / back of objects
-*** TODO or just allow always-on-top? 
-*** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
 
 ** TODO Improve command shell interface
 *** TODO print error messages to simple messenger widget
