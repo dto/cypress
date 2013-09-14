@@ -162,11 +162,11 @@
 	  (* %scale (image-height %image) *default-thing-scale*))
   (arrange self))
 
-(define-method begin thing ())
+(define-method create thing ())
 
 (define-method initialize thing (&rest args)
   (block%initialize self)
-  (apply #'xelf:send :begin self args)
+  (apply #'xelf:send :create self args)
   (layout self))
 
 (defun auto-describe (thing)
@@ -225,7 +225,7 @@
   (font :initform *bubble-font*)
   (collision-type :initform nil))
 
-(define-method begin bubble (text &optional (font *bubble-font*))
+(define-method create bubble (text &optional (font *bubble-font*))
   (setf %text text)
   (setf %font font)
   (later 4.0 (destroy self)))
