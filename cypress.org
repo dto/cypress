@@ -1,6 +1,22 @@
-* Tasks
+* Episode 1 video demo
+** You are called to Valisade 
+*** Lucius visits you and delivers a letter.
+**** TODO create riverside camp/tent level
+**** TODO say "a nice place to camp while I do my laundry. i think i'll look around for some
+**** TODO collect wood/herbs 
+**** TODO after a while Lucius comes by
+**** TODO lucius initiates conversation.
 
-** TODO gumps stay screen relative
+** Travel through meadows, grassland. Fight mysterious wolves
+** It begins to snow/freeze. Discover ruined house.
+** Explore ruins, fight skeletons
+** Encounter nastier demon wolf miniboss
+** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
+
+
+* Tasks
+** TODO fix wraith texture bounding box squishness
+
 ** TODO generic inventory gump with expanded name/image of container
 ** TODO make player inventory work
 ** TODO basic dialogue system
@@ -348,6 +364,16 @@ In the sequel you turn the diamond anvil back on to reach another world.
    CLOSED: [2013-09-14 Sat 11:59]
    :PROPERTIES:
    :ARCHIVE_TIME: 2013-09-14 Sat 11:59
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE gumps stay screen relative
+   CLOSED: [2013-09-14 Sat 12:23]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-14 Sat 12:26
    :ARCHIVE_FILE: ~/cypress/cypress.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: cypress

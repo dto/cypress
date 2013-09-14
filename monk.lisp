@@ -36,8 +36,8 @@
   '(:repeat t
     :scale 900
     :frames (("monk-walk-1.png" 4)
-	     ("monk-walk-2.png" 4)
 	     ("monk-walk-3.png" 4)
+	     ("monk-walk-2.png" 4)
 	     ("monk-walk-4.png" 4))))
 
 (defparameter *monk-walk-bow* 
