@@ -149,6 +149,9 @@
 
 (define-method pick thing () self)
 
+(define-method after-drag-hook thing ()
+  (setf %z (1+ (maximum-z-value (current-buffer)))))
+
 (defmacro defthing (name &body body)
   `(define-block (,name :super thing) ,@body))
 
@@ -216,3 +219,78 @@
 (defmacro defsprite (name &body body)
   `(define-block (,name :super sprite) ,@body))
 
+;;; Cypress
+
+(define-buffer cypress 
+  :background-image "meadow5.png"
+  :quadtree-depth 8
+  :default-events
+  '(((:pause) :transport-toggle-play)
+    ((:e :alt) :edit-word)
+    ((:x :control) :exec)
+    ((:d :control) :delete-word)
+    ((:c :control) :copy-word)
+    ((:x :alt) :command-prompt)
+    ((:g :control) :cancel)
+    ((:c :alt) :clear-stack)
+    ((:s :alt) :show-stack)
+    ((:m :alt) :show-messages)
+    ((:p :control) :transport-toggle-play)
+    ;; ((:return) :enter)
+    ((:escape) :cancel)
+    ((:f1) :help)
+    ((:h :control) :help)
+    ((:x :control) :edit-cut)
+    ((:c :control) :edit-copy)
+    ((:v :control) :edit-paste)
+    ((:v :control :shift) :paste-here)
+    ((:f9) :toggle-minibuffer)
+    ((:f12) :transport-toggle-play)
+    ((:g :control) :escape)
+    ((:d :control) :drop-selection)))
+
+(define-method alternate-tap cypress (x y)
+  (walk-to (cursor) x y))
+
+(define-method draw-object-layer cypress () 
+  (multiple-value-bind (top left right bottom) (window-bounding-box self)
+    (dolist (object (z-sort (get-objects self)))
+      ;; only draw onscreen objects
+      (when (colliding-with-bounding-box object top left right bottom)
+	(draw object)
+	(after-draw-object self object)))))
+
+(defun make-meadow ()
+    (let ((geoffrey (new 'geoffrey))
+;	  (lucius (new 'lucius))
+	  (buffer (new 'cypress)))
+      (add-object buffer geoffrey 320 120)
+;      (add-object buffer lucius 350 80)
+      ;; adjust scrolling parameters 
+      (setf (%window-scrolling-speed buffer) (/ *monk-speed* 2)
+	    (%horizontal-scrolling-margin buffer) 2/5
+	    (%vertical-scrolling-margin buffer) 4/7)
+      ;;
+      (resize-to-background-image buffer)
+      (set-cursor buffer geoffrey)
+      (snap-window-to-cursor buffer)
+      (glide-window-to-cursor buffer)
+      (follow-with-camera buffer geoffrey)
+
+
+      ;; (drop-object buffer (new 'copper-stairwell) 800 600)
+      ;; (drop-object buffer (new 'warrior-key) 400 400)
+      ;; (drop-object buffer (new 'circle-key) 420 700)
+      ;; (drop-object buffer (new 'triangle-key) 420 850)
+      ;; (drop-object buffer (new 'xalcium-leggings) 400 400)
+      ;; (drop-object buffer (new 'xalcium-armor) 420 700)
+      ;; (drop-object buffer (new 'xalcium-mail) 420 850)
+      (dotimes (n 8)
+      	(let ((x (+ 300 (random 1500)))
+      	      (y (+ 300 (random 1000))))
+	  (drop-object buffer (new (random-choose '(dead-tree gray-rock))) x y)))
+
+
+      ;; allocate
+       (install-quadtree buffer)
+      buffer))
