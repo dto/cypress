@@ -40,47 +40,11 @@
   (and (xelfp thing)
        (has-tag thing :bubble)))
 
-;;; Simple temporary tooltip bubble
-
-(defparameter *bubble-font* "oldania-bubble")
-
-(defresource (:name "oldania-bubble" 
-	      :type :ttf 
-	      :file "OldaniaADFStd-Regular.otf" 
-	      :properties (:size 18)))
-
-(define-block bubble 
-  (tags :initform '(:bubble :ethereal))
-  (text :initform nil) 
-  (font :initform *bubble-font*)
-  (collision-type :initform nil))
-
-(define-method initialize bubble (text &optional (font *bubble-font*))
-  (block%initialize self)
-  (setf %text text)
-  (setf %font font)
-  (later 4.0 (destroy self)))
-
-(define-method draw bubble ()
-  (with-field-values (x y text font) self
-    (let ((margin 4))
-      (draw-box x y
-		(+ (font-text-width text font) margin margin)
-		(+ (font-height font) margin margin)
-		:color "cornsilk")
-      (draw-string text 
-		   (round (+ x margin))
-		   (round (+ y margin))
-		   :color "saddle brown"
-		   :font font))))
-
-;;; Easily defining sets of images
+;;; Animation system
 
 (defun image-set (name count &optional (start 1))
   (loop for n from start to count
 	collect (format nil "~A-~S.png" name n)))
-
-;;; Animation system
 
 (defun animation-scale (a) (getf a :scale +dots-per-inch+))
 (defun animation-repeat (a) (getf a :repeat))
@@ -143,14 +107,49 @@
   (repeat :initform nil)
   (animation :initform nil))
 
+(define-method animation-frame thing ()
+  (when %animation (frame-image (first %frames))))
+
+(define-method animate thing (animation &optional force)
+  (when (or force (not (eq %animation animation)))
+    (setf %image-scale (animation-scale animation))
+    (setf %frames (animation-frames animation))
+    (setf %repeat (animation-repeat animation))
+    (setf %animation animation)
+    (setf %delay (frame-delay (first %frames)))))
+  ;; (let ((image (animation-frame self)))
+  ;;   (when image (setf %image image))))
+
+(define-method update-animation thing ()
+  (with-fields (animation frames delay scale repeat image) self
+    (when animation
+      (decf delay)
+      (when (minusp delay)
+	;; done displaying current frame. show next, if any
+	(let ((frame (pop frames)))
+	  (if frame
+	      (setf image (frame-image frame)
+		    delay (frame-delay frame))
+	      ;; no more frames
+	      (animate self (if repeat animation nil) t)))))))
+
 (define-method can-pick thing ()
   (or (shell-open-p)
-      (not (fixedp self))))
+      (and (not (fixedp self))
+	   (not (etherealp self)))))
 
 (define-method pick thing () self)
 
+(define-method can-accept thing () 
+  (containerp self))
+
+(define-method accept thing (thing)
+  (push thing %inventory))
+
 (define-method after-drag-hook thing ()
-  (setf %z (1+ (maximum-z-value (current-buffer)))))
+  (setf %z 
+	(max %z
+	     (1+ (maximum-z-value (current-buffer))))))
 
 (defmacro defthing (name &body body)
   `(define-block (,name :super thing) ,@body))
@@ -160,7 +159,8 @@
 (define-method layout thing ()
   (resize self 
 	  (* %scale (image-width %image) *default-thing-scale*)
-	  (* %scale (image-height %image) *default-thing-scale*)))
+	  (* %scale (image-height %image) *default-thing-scale*))
+  (arrange self))
 
 (define-method initialize thing ()
   (block%initialize self)
@@ -171,8 +171,7 @@
     (pretty-string (subseq name (1+ (position (character ":") name))))))
 
 (define-method find-description thing ()
-  (or %description
-      (auto-describe self)))
+  (or %description (auto-describe self)))
 
 (define-method look thing ()
   (drop self (new 'bubble (find-description self))
@@ -181,6 +180,8 @@
 (define-method use thing ())
 
 (define-method run thing ())
+
+(define-method arrange thing ())
 
 (defparameter *double-tap-time* 8)
 
@@ -196,12 +197,49 @@
 
 (define-method update thing ()
   (with-fields (last-tap-time) self
+    ;; we actually catch the end of single-click here.
     (when (and last-tap-time
 	       (> (- *updates* last-tap-time)
 		  *double-tap-time*))
       (setf last-tap-time nil)
       (look self))
+    ;; now run the object's in-gameworld update.
+    (arrange self)
     (run self)))
+
+;;; Simple temporary tooltip bubble
+
+(defparameter *bubble-font* "oldania-bubble")
+
+(defresource (:name "oldania-bubble" 
+	      :type :ttf 
+	      :file "OldaniaADFStd-Regular.otf" 
+	      :properties (:size 18)))
+
+(defthing bubble 
+  (tags :initform '(:bubble :ethereal))
+  (text :initform nil) 
+  (font :initform *bubble-font*)
+  (collision-type :initform nil))
+
+(define-method initialize bubble (text &optional (font *bubble-font*))
+  (block%initialize self)
+  (setf %text text)
+  (setf %font font)
+  (later 4.0 (destroy self)))
+
+(define-method draw bubble ()
+  (with-field-values (x y text font) self
+    (let ((margin 4))
+      (draw-box x y
+		(+ (font-text-width text font) margin margin)
+		(+ (font-height font) margin margin)
+		:color "cornsilk")
+      (draw-string text 
+		   (round (+ x margin))
+		   (round (+ y margin))
+		   :color "saddle brown"
+		   :font font))))
 
 ;;; Sprites
 
@@ -214,7 +252,8 @@
 
 (define-method layout sprite ()
   (setf %height %sprite-height)
-  (setf %width %sprite-width))
+  (setf %width %sprite-width)
+  (arrange self))
 
 (defmacro defsprite (name &body body)
   `(define-block (,name :super sprite) ,@body))

@@ -1,11 +1,13 @@
 * Tasks
 
-** TODO allow z-ordering / push to front / back of objects
-*** TODO use sorted vector and custom code to make z-depth work
-
+** TODO gumps stay screen relative
 ** TODO generic inventory gump with expanded name/image of container
 ** TODO make player inventory work
 ** TODO basic dialogue system
+
+** TODO isometric style tree bounding boxes
+** TODO possibly circle collision test to avoid corner annoyances
+** TODO proper pathfinding
 
 ** TODO equip normal bow during prologue
 ** TODO Check dx7 patches for cool analogue sfx. 
@@ -74,7 +76,6 @@
 *** TODO Mouse wheel scrolling through world
 *** TODO Control S to save as buffername.xelf
 
-** TODO fix pick coordinates when window scaled
 
 * Overview
 ** Player controls a monk named Geoffrey as he explores the wilderness, fights monsters, and unravels the mystery of his brothers' disappearance.
@@ -259,6 +260,7 @@ done
 *** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
 
 ** TODO test embedding PNG files as encrypted arrays in the exe
+*** pkhuong: use unboxed vectors
 
 * Story   
 
@@ -318,6 +320,34 @@ In the sequel you turn the diamond anvil back on to reach another world.
    CLOSED: [2013-09-12 Thu 22:00]
    :PROPERTIES:
    :ARCHIVE_TIME: 2013-09-13 Fri 21:46
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+** DONE allow z-ordering / push to front / back of objects
+   CLOSED: [2013-09-13 Fri 22:44]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-14 Sat 11:59
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+** DONE fix pick coordinates when window scaled
+   CLOSED: [2013-09-14 Sat 11:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-14 Sat 11:59
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE fix font texture scaling
+   CLOSED: [2013-09-14 Sat 11:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-14 Sat 11:59
    :ARCHIVE_FILE: ~/cypress/cypress.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: cypress

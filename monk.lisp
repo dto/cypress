@@ -81,7 +81,7 @@
   (talking :initform nil)
   (walking :initform nil)
   (hearing-distance :initform 800)
-  (tags :initform '(:monk))
+  (tags :initform '(:monk :fixed :container))
   (direction :initform :up)
   (fire-direction :initform :up)
   ;; timers
@@ -96,41 +96,11 @@
 (defmacro defmonk (name &rest body)
   `(define-block (,name :super monk) ,@body))
 
-(define-method can-accept monk () t)
-(define-method accept monk (thing)
-  (push thing %inventory))
-
 (define-method walk-to monk (x y)
   (setf %goal-x x %goal-y y))
 
 (define-method stop-walking monk ()
   (setf %goal-x nil %goal-y nil))
-
-(define-method animation-frame monk ()
-  (when %animation (frame-image (first %frames))))
-
-(define-method animate monk (animation &optional force)
-  (when (or force (not (eq %animation animation)))
-    (setf %image-scale (animation-scale animation))
-    (setf %frames (animation-frames animation))
-    (setf %repeat (animation-repeat animation))
-    (setf %animation animation)
-    (setf %delay (frame-delay (first %frames)))))
-  ;; (let ((image (animation-frame self)))
-  ;;   (when image (setf %image image))))
-
-(define-method update-animation monk ()
-  (with-fields (animation frames delay scale repeat image) self
-    (when animation
-      (decf delay)
-      (when (minusp delay)
-	;; done displaying current frame. show next, if any
-	(let ((frame (pop frames)))
-	  (if frame
-	      (setf image (frame-image frame)
-		    delay (frame-delay frame))
-	      ;; no more frames
-	      (animate self (if repeat animation nil) t)))))))
     
 (define-method humanp monk () nil)
 

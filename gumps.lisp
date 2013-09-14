@@ -3,9 +3,22 @@
 (defresource (:name "oldania" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 16)))
 
 (defparameter *gump-font* "oldania")
-(defparameter *gump-color* "saddle brown")
+(defparameter *gump-color* '(#x52 #x2e #x00)) 
 
-(defthing scroll-gump 
+(defthing gump
+  (target-x :initform 0)
+  (target-y :initform 0))
+
+(define-method drag gump (x y)
+  (with-fields (target-x target-y) self
+    (setf target-x (- x (window-x)))
+    (setf target-y (- y (window-y)))
+    (move-to self x y)))
+      
+(defmacro defgump (name &body body)
+  `(define-block (,name :super gump) ,@body))
+
+(defgump scroll-gump 
   :image "scroll-gump.png"
   :image-scale 300
   :pages nil
@@ -45,10 +58,14 @@
 (define-method alternate-tap scroll-gump (x y)
   (destroy self))
 
-(define-method layout scroll-gump ()
+(define-method arrange scroll-gump ()
   (resize self 
 	  (* (image-width %image) *scroll-scale*)
-	  (* (image-height %image) *scroll-scale*)))
+	  (* (image-height %image) *scroll-scale*))
+  (with-fields (target-x target-y) self
+    (move-to self 
+	     (+ target-x (window-x))
+	     (+ target-y (window-y)))))
   
 (define-method draw scroll-gump ()
   (draw%super self)
@@ -66,7 +83,33 @@
 			   :font *gump-font*)
 	  (incf y0 (font-height *gump-font*)))))))
 
-(defparameter *letter-text* 
+(defparameter *letter-text*
+"to reconstruct what happened in the
+centuries after our disappearance. It
+would seem that Valisade became the seat
+of a vast imperial power due to its
+harnessing of the magic mineral
+Xalcium. Valisade's warrior-priest kings
+ruled over Ildran for a thousand years,
+but this was disrupted by a sudden
+catastrophe whose cause and nature are
+not yet fully clear to us. An explosion
+of some kind, perhaps a volcanic
+eruption, obliterated completely the
+isles of Ein and Mir; much of the
+surrounding coastal areas were laid
+waste. 
+
+A rain of ash fell over the entire
+continent; this was followed by a year
+of perpetual dusk, in which the sun was
+barely visible through the black
+clouds. The pollution of the water
+supply and failure of their crops led to
+widespread famine, disease, and death.
+")
+
+(defparameter *letter-text-2* 
 "Dear Geoffrey,
 
 Our fondest hope is that this letter

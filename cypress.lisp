@@ -54,7 +54,9 @@
 ;;  (setf *nominal-screen-width* (* 1280 5))
 ;;  (setf *nominal-screen-height* (* 720 5))
   ;;
-  (setf *scale-output-to-window* nil) 
+  (setf *scale-output-to-window* t) 
+  (setf *font-texture-filter* :linear)
+  (setf *font-texture-scale* 2)
   (setf *default-texture-filter* :mipmap)
   (setf *use-antialiased-text* t)
 
