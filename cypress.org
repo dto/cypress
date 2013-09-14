@@ -1,11 +1,6 @@
 * Tasks
 
-*** TODO IDENTIFY sentence schemata for level generation
-
 ** TODO allow z-ordering / push to front / back of objects
-*** TODO or just allow always-on-top? 
-*** TODO select particular objects to redraw with z-ordering, such as those nearby the player (layer tags?)
-
 *** TODO use sorted vector and custom code to make z-depth work
 
 ** TODO generic inventory gump with expanded name/image of container
@@ -59,13 +54,8 @@
 *** TODO copper doors
 *** TODO stone monk
 
-
-
-
-** DONE click on object to show name as small tag (no scroll)
-   CLOSED: [2013-09-12 Thu 22:00]
-** DONE double left click to use
-   CLOSED: [2013-09-12 Thu 22:00]
+*** TODO wrap xelf with defblock and regular CLOS defmethod
+*** TODO IDENTIFY sentence schemata for level generation
 
 ** TODO 
 *** look
@@ -311,3 +301,26 @@ In the sequel you turn the diamond anvil back on to reach another world.
 ** Episode 4
 *** Return to ruined hometown via other route
 *** Cross the Einbridge to the sunken island, site of the explosion
+
+* Archived Entries
+** DONE double left click to use
+   CLOSED: [2013-09-12 Thu 22:00]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-13 Fri 21:46
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+
+
+** DONE click on object to show name as small tag (no scroll)
+   CLOSED: [2013-09-12 Thu 22:00]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-13 Fri 21:46
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+

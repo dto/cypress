@@ -12,6 +12,10 @@
   (and (xelfp thing)
        (has-tag thing :container)))
 
+(defun etherealp (thing)
+  (and (xelfp thing)
+       (has-tag thing :ethereal)))
+
 (defun solidp (thing)
   (and (xelfp thing)
        (has-tag thing :solid)))
@@ -40,7 +44,10 @@
 
 (defparameter *bubble-font* "oldania-bubble")
 
-(defresource (:name "oldania-bubble" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 18)))
+(defresource (:name "oldania-bubble" 
+	      :type :ttf 
+	      :file "OldaniaADFStd-Regular.otf" 
+	      :properties (:size 18)))
 
 (define-block bubble 
   (tags :initform '(:bubble :ethereal))
@@ -72,21 +79,6 @@
 (defun image-set (name count &optional (start 1))
   (loop for n from start to count
 	collect (format nil "~A-~S.png" name n)))
-
-(defparameter *ruin-wall-images* (image-set "ruin-wall" 4))
-(defparameter *book-images* (image-set "book" 10))
-(defparameter *skull-images* (image-set "skull" 3))
-(defparameter *wolf-skull-images* (image-set "wolf-skull" 3))
-(defparameter *scroll-images* (image-set "scroll" 5))
-(defparameter *remains-images* (image-set "remains" 2))
-(defparameter *notebook-images* (image-set "notebook" 3))
-(defparameter *wood-images* (image-set "wood" 4))
-(defparameter *wraith-images* (image-set "wraith" 3))
-(defparameter *arrow-images* (image-set "arrow" 3))
-(defparameter *fire-pit-images* (image-set "fire-pit" 3))
-(defparameter *dead-tree-images* (image-set "dead-tree" 5))
-(defparameter *gray-rock-images* (image-set "gray-rock" 8))
-(defparameter *gray-stairwell-images* (image-set "gray-stairwell" 2))
 
 ;;; Animation system
 

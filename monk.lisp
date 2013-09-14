@@ -440,36 +440,6 @@
 (define-method alternate-tap meadow (x y)
   (walk-to (cursor) x y))
 
-(defthing warrior-key :image "warrior-key.png")
-(defthing triangle-key :image "triangle-key.png")
-(defthing circle-key :image "circle-key.png")
-
-(defthing xalcium-leggings :image "xalcium-leggings.png")
-(defthing xalcium-armor :image "xalcium-armor.png")
-(defthing xalcium-mail :image "xalcium-mail.png")
-
-(defparameter *copper-lock-images* (image-set "copper-lock" 5))
-
-(defthing copper-lock :image (random-choose *copper-lock-images*))
-(defthing gray-stairwell :image (random-choose *gray-stairwell-images*))
-(defthing copper-stairwell :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
-(defthing copper-plate :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
-
-(defthing campfire :image "fire-pit-3.png")
-(defthing tent 
-  :image (random-choose '("tent-1.png" "tent-2.png"))
-  :tags '(:solid :fixed))
-   
-(defthing dead-tree 
-  :tags '(:solid :fixed) 
-  :image (random-choose *dead-tree-images*)
-  :scale 2.5)
-
-(defthing gray-rock 
-  :tags '(:solid :fixed) 
-  :image (random-choose *gray-rock-images*)
-  :scale 1.7)
-
 (defun make-meadow ()
     (let ((geoffrey (new 'geoffrey))
 ;	  (lucius (new 'lucius))
