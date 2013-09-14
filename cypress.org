@@ -2,6 +2,7 @@
 ** You are called to Valisade 
 *** Lucius visits you and delivers a letter.
 **** TODO create riverside camp/tent level
+**** TODO simple scroll gump for 3 lines of text and some scroll entry buttons
 **** TODO say "a nice place to camp while I do my laundry. i think i'll look around for some
 **** TODO collect wood/herbs 
 **** TODO after a while Lucius comes by
