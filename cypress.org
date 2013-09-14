@@ -16,25 +16,30 @@
 
 
 * Tasks
-** TODO fix wraith texture bounding box squishness
 
-** TODO generic inventory gump with expanded name/image of container
 ** TODO make player inventory work
+*** TODO generic inventory gump with expanded name/image of container
+*** TODO move into/out of containers
 ** TODO basic dialogue system
+*** TODO design simple convo system, options invoking methods that return either a string or a new gump?  
+**** TODO write macro to use in those method bodies
 
-** TODO isometric style tree bounding boxes
-** TODO possibly circle collision test to avoid corner annoyances
-** TODO proper pathfinding
+** TODO proper pathfinding and movement
+*** TODO possibly circle collision test to avoid corner annoyances
 
-** TODO equip normal bow during prologue
-** TODO Check dx7 patches for cool analogue sfx. 
+*** TODO isometric style tree bounding boxes
 
-** TODO disable cursor in game window?
-** TODO USEing can require an argument to apply verb to; this pauses and changes cursor
-** TODO contextual modeline verb buttons
-** TODO working locks and keys
-** TODO doors controlled by nearby locks
-** TODO stairwells
+** TODO [#B] USEing can require an argument to apply verb to; this pauses and changes cursor
+** TODO [#B] fix diagonal scrolling jitter
+** TODO [#B] equip normal bow during prologue
+** TODO [#B] fix wraith texture bounding box squishness
+** TODO [#B] Check dx7 patches for cool analogue sfx. 
+
+** TODO [#B] disable cursor in game window?
+** TODO [#B] contextual modeline verb buttons
+** TODO [#B] working locks and keys
+** TODO [#B] doors controlled by nearby locks
+** TODO [#B] stairwells
 *** TODO double click stairwell to enter / leave while standing on it
 *** TODO stairwells on both buffers match up 
 
@@ -42,10 +47,6 @@
 *** TODO use editor to add invisible walls and entry/exit points
 
 ** TODO procedurally generated maps
-
-** TODO don't halo objects when shell not open
-** TODO [#A] fix diagonal scrolling jitter
-** TODO [#A] clean up main guy walk animation
 
 ** TODO Things to draw
 *** TODO draw more trees, sickly trees, 
@@ -375,6 +376,25 @@ In the sequel you turn the diamond anvil back on to reach another world.
    CLOSED: [2013-09-14 Sat 12:23]
    :PROPERTIES:
    :ARCHIVE_TIME: 2013-09-14 Sat 12:26
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE don't halo objects when shell not open
+   CLOSED: [2013-09-14 Sat 15:44]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-14 Sat 15:44
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+** DONE [#A] clean up main guy walk animation
+   CLOSED: [2013-09-14 Sat 15:44]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-14 Sat 15:44
    :ARCHIVE_FILE: ~/cypress/cypress.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: cypress

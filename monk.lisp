@@ -377,3 +377,20 @@
 	     ((> (distance-to-cursor self) 110)
 	      (prog1 nil (setf clock 10)))))))
 	   
+(define-topic self lucius 
+  (make-talk-gump 
+   "I am your friend Lucius."))
+
+(define-topic weather lucius 
+  (make-talk-gump
+   "Beautiful day isn't it? But I feel
+as if it's a bit cold."))
+
+(define-topic letter lucius 
+  (make-talk-gump
+   "I wonder what it says? It comes
+straight from Dr. Quine at the
+monastery."))
+
+(define-method use lucius ()
+  (discuss self :weather))

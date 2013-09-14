@@ -93,6 +93,7 @@
 
 (define-block thing 
   (last-tap-time :initform nil)
+  (gump :initform nil)
   ;; world parameters
   (weight :initform 0)
   (inventory :initform nil)
@@ -133,6 +134,33 @@
 	      ;; no more frames
 	      (animate self (if repeat animation nil) t)))))))
 
+(define-method get-gump thing () %gump)
+
+(define-method set-gump thing (gump) 
+  (setf %gump gump)
+  (drop self gump %width))
+
+(define-method destroy-gump thing () 
+  (when (xelfp %gump)
+    (destroy %gump)
+    (setf %gump nil)))
+
+(define-method replace-gump thing (gump) 
+  (when %gump (destroy %gump))
+  (set-gump self gump))
+
+(defun discussion-method (topic)
+  (make-keyword (format nil "discuss/~A" (symbol-name topic))))
+
+(defmacro define-topic (topic super &body body)
+  `(define-method ,(make-non-keyword (discussion-method topic)) ,super () ,@body))
+
+(define-method discuss thing (topic) 
+  (let ((method (discussion-method topic)))
+    (let ((gump (send method self)))
+      (when gump
+	(replace-gump self gump)))))
+    
 (define-method can-pick thing ()
   (or (shell-open-p)
       (and (not (fixedp self))
@@ -157,9 +185,10 @@
 (defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 130)))
 
 (define-method layout thing ()
-  (resize self 
-	  (* %scale (image-width %image) *default-thing-scale*)
-	  (* %scale (image-height %image) *default-thing-scale*))
+  (when %image 
+    (resize self 
+	    (* %scale (image-width %image) *default-thing-scale*)
+	    (* %scale (image-height %image) *default-thing-scale*)))
   (arrange self))
 
 (define-method create thing ())
@@ -303,10 +332,10 @@
 
 (defun make-meadow ()
     (let ((geoffrey (new 'geoffrey))
-;	  (lucius (new 'lucius))
+	  (lucius (new 'lucius))
 	  (buffer (new 'cypress)))
       (add-object buffer geoffrey 320 120)
-;      (add-object buffer lucius 350 80)
+      (add-object buffer lucius 350 80)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (/ *monk-speed* 2)
 	    (%horizontal-scrolling-margin buffer) 2/5

@@ -22,12 +22,6 @@
 	     (+ target-x (window-x))
 	     (+ target-y (window-y)))))
 
-(define-method arrange scroll-gump ()
-  (resize self 
-	  (* (image-width %image) *scroll-scale*)
-	  (* (image-height %image) *scroll-scale*))
-  (move-to-target self))
-
 (define-method after-add-hook gump ()
   (set-target self %x %y))
 
@@ -95,15 +89,21 @@
 			   :font *gump-font*)
 	  (incf y0 (font-height *gump-font*)))))))
 
+(define-method arrange scroll-gump ()
+  (resize self 
+	  (* (image-width %image) *scroll-scale*)
+	  (* (image-height %image) *scroll-scale*))
+  (move-to-target self))
+
 ;;; The talk gump 
 
 (defparameter *button-margin* 2)
 
 (defthing button
-  ((method :initform nil)
-   (target :initform nil)
-   (label :initform "foo")
-   (arguments :initform nil)))
+  (method :initform nil)
+  (target :initform nil)
+  (label :initform "foo")
+  (arguments :initform nil))
 
 (define-method create button (&key label method target arguments font)
   (setf %label label %method method %target target %arguments arguments))
@@ -123,11 +123,85 @@
   (when (xelfp %target)
     (apply #'xelf:send %method %target %arguments)))
 
-(define-block-macro talk-gump 
-    (:super gump
-     :fields ((
+(defun make-talk-gump-text (data)
+  (let ((text (new 'text data)))
+    (prog1 text
+      (set-font text *gump-font*)
+      (set-background-color text nil)
+      (set-read-only text t))))
 
+(defparameter *lines-per-talk-gump* 3)
 
+(defgump talk-gump 
+  (topic :initform nil)
+   (pages :initform nil)
+   (page-number :initform 0))
+
+(defparameter *talk-gump-scale* (/ 1 3))
+
+(define-method create talk-gump ()
+  (setf %inputs (list 
+		 (make-talk-gump-text "hello")
+		 (make-sentence nil)))
+  (update-parent-links self)
+  (mapc #'pin %inputs))
+
+(define-method flip talk-gump (&optional p)
+  (with-fields (inputs pages page-number) self
+    (setf page-number 
+	  (mod (or p (1+ page-number))
+	       (length pages)))
+    (setf (first inputs)
+	  (make-talk-gump-text (nth page-number pages)))
+    (update-parent-links self)))
+
+(define-method buttons talk-gump ()
+  (second %inputs))
+
+(define-method text talk-gump ()
+  (first %inputs))
+
+(define-method insert-button talk-gump (item)
+  (unfreeze (buttons self))
+  (accept (buttons self) item)
+  (freeze (buttons self)))
+
+(define-method destroy-buttons talk-gump ()
+  (mapc #'destroy (%inputs (buttons self)))
+  (setf (%inputs (buttons self)) nil))
+
+(define-method replace-buttons talk-gump (items)
+  (destroy-buttons self)
+  (dolist (item items)
+    (insert-button self item)))
+
+(define-method number-of-buttons talk-gump ()
+  (length (%inputs (buttons self))))
+
+(define-method draw talk-gump ()
+  (draw-image "talk-scroll.png" %x %y :width %width :height %height)
+  (mapc #'draw %inputs))
+
+(define-method arrange talk-gump ()
+  (move-to-target self)
+  (when (xelfp (text self))
+    (let ((x0 (+ %x (* 0.13 %width)))
+	  (y0 (+ %y (* 0.14 %height))))
+      (resize-to-fit (text self))
+      (move-to (text self) x0 y0)
+      (move-to (buttons self) x0 (+ y0 (%height (text self)))))
+    (resize self 
+	    (* (image-width "talk-scroll.png") *talk-gump-scale*)
+	    (* (image-height "talk-scroll.png") *talk-gump-scale*))))
+
+(define-method configure talk-gump (text buttons)
+  (setf %pages (split-into-pages text *lines-per-talk-gump*))
+  (when buttons (replace-buttons self buttons))
+  (flip self 0))
+
+(defun make-talk-gump (text &optional buttons)
+  (let ((gump (new 'talk-gump)))
+    (prog1 gump (configure gump text buttons))))
 
 
 
