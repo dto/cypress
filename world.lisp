@@ -43,7 +43,7 @@
 (defresource (:name "oldania-bubble" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 18)))
 
 (define-block bubble 
-  (tags :initform '(:bubble))
+  (tags :initform '(:bubble :ethereal))
   (text :initform nil) 
   (font :initform *bubble-font*)
   (collision-type :initform nil))
@@ -224,84 +224,3 @@
 (defmacro defsprite (name &body body)
   `(define-block (,name :super sprite) ,@body))
 
-;;; Now some objects
-
-(defthing book :image (random-choose *book-images*))
-
-(defthing scroll :image (random-choose *scroll-images*) :z 20)
-
-(define-method use scroll ()
-  (drop self (new 'scroll-gump *letter-text*)))
-
-(defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
-
-(defthing remains :image (random-choose '("remains-1.png" "remains-2.png")))
-
-;;; Arrows, the main weapon
-
-(defparameter *arrow-size* 25)
-
-(defsprite arrow
-  :image-scale 40
-  :image (random-choose *arrow-images*))
-
-(define-method initialize arrow (heading)
-  (block%initialize self)
-  (setf %clock 400)
-  (setf %heading heading))
-
-(define-method collide arrow (thing)
-  (cond ((enemyp thing) (damage thing 1) (destroy self))
-	((solidp thing) (destroy self))))
-
-(define-method update arrow ()
-  (percent-of-time 13 (setf %image (random-choose *arrow-images*)))
-  (resize self *arrow-size* *arrow-size*)
-  (decf %clock)
-  (if (minusp %clock)
-      (destroy self)
-      (forward self 15)))
-
-;;; ruin walls
-
-(defthing ruin-wall 
-  :image-scale 1000
-  :image (random-choose *ruin-wall-images*)
-  :tags '(:fixed :solid))
-
-(defthing coverstone :image "coverstone.png" :z 10)
-(defthing item-box :image "item-box.png" :z 1)
-
-;;; Wraiths
-
-(defsprite wraith
-  :seen-player nil
-  :image-scale 600
-  :sprite-height 130
-  :sprite-width 130
-  :tags '(:enemy)
-  :hp 3
-  :image (random-choose *wraith-images*))
-
-(define-method damage wraith (points)
-  (play-sample "knock.wav")
-  (decf %hp points)
-  (unless (plusp %hp)
-    (drop self (new 'remains))
-    (drop self (new 'skull))
-    (percent-of-time 20 (drop self (new 'scroll) 40 40))
-    (play-sample "lichdie.wav")
-    (destroy self)))
-
-(define-method update wraith ()
-  (when (< (distance-to-cursor self) 500)
-    (unless %seen-player
-      (play-sample "lichscream.wav")
-      (setf %seen-player t))
-    (percent-of-time 16 (setf %image (random-choose *wraith-images*)))
-    (let ((heading (heading-to-cursor self)))
-      (percent-of-time 13 
-	(setf %heading heading))
-      (percent-of-time 30
-	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
-	(move self %heading 4)))))
