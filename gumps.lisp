@@ -137,7 +137,7 @@
    (pages :initform nil)
    (page-number :initform 0))
 
-(defparameter *talk-gump-scale* (/ 1 3))
+(defparameter *talk-gump-scale* (/ 1 2.3))
 
 (define-method create talk-gump ()
   (setf %inputs (list 
@@ -155,6 +155,12 @@
 	  (make-talk-gump-text (nth page-number pages)))
     (update-parent-links self)))
 
+(define-method tap talk-gump (x y)
+  (flip self))
+
+(define-method alternate-tap talk-gump (x y)
+  (destroy self))
+  
 (define-method buttons talk-gump ()
   (second %inputs))
 

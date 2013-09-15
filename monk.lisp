@@ -383,8 +383,14 @@
 
 (define-topic weather lucius 
   (make-talk-gump
-   "Beautiful day isn't it? But I feel
-as if it's a bit cold."))
+"If we read these charts aright, then by
+the time you read these words your
+brother and I will have been dead for
+more than five thousand years. For when
+we crossed into Valisade, each of us
+fell prey to magicks involving Time,
+such that a delay in one day's departure
+meant the passage of five millennia."))
 
 (define-topic letter lucius 
   (make-talk-gump
