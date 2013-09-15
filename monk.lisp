@@ -378,25 +378,28 @@
 	      (prog1 nil (setf clock 10)))))))
 
 (define-topic hello lucius 
-    ("Good morning Geoffrey! A Raven just
+   "Good morning Geoffrey! A Raven just
 delivered this letter for you."
-     :letter :weather :name :job :bye))
+   :letter :weather :name :job :bye)
 	   
 (define-topic name lucius 
-    ("I am your friend Lucius, of course."))
+  "I am your friend Lucius, of course.")
 
 (define-topic job lucius 
-    ("You know perfectly well that I work
-at the Nothbess Library."))
+  "You know perfectly well that I work
+at the Nothbess Library. My duties
+include dusting and organizing books.
+And else have you forgotten today?
+Something must be wrong with you.")
 
 (define-topic weather lucius 
-    ("It's nice out today, but I feel as if
-it's been a bit colder than usual."))
+"It's nice out today, but I feel as if
+it's been a bit colder than usual.")
 
 (define-topic letter lucius 
-    ("I wonder what it says? It comes
+   "I wonder what it says? It comes
 straight from Dr. Quine at the
-monastery. Open it, open it!"))
+monastery. Open it, open it!")
 
 (define-method activate lucius ()
   (discuss self :hello))

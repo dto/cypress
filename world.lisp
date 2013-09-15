@@ -152,18 +152,18 @@
 (defun discussion-method (topic)
   (make-keyword (format nil "discuss/~A" (symbol-name topic))))
 
-(defmacro define-topic (name super gump-forms &body body)
-  (let ((gump (gensym)))
-    (destructuring-bind (text &rest topics) gump-forms
-      `(define-method ,(make-non-keyword (discussion-method name)) ,super ()
-	 (let ((,gump (make-talk-gump self ,text ,@topics)))
-	   (prog1 ,gump
-	     ,@body))))))
-
+(defmacro define-topic (name super &body forms)
+  `(define-method ,(make-non-keyword (discussion-method name)) ,super ()
+     ,@(if (stringp (first forms))
+	   (list (append 
+		  (list 'make-talk-gump 'self (first forms))
+		  (rest forms)))
+	   forms)))
+	  
 (define-method discuss thing (topic) 
   (let ((method (discussion-method topic)))
     (let ((gump (send method self)))
-      (when gump
+      (when (xelfp gump)
 	(replace-gump self gump)))))
     
 (define-method can-pick thing ()

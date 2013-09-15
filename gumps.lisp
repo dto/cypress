@@ -131,11 +131,17 @@
 
 (defun make-topic-button (target topic)
   (new 'button :label (pretty-string (make-keyword topic))
-	       :method (discussion-method topic)
-	       :target target))
+	       :method :discuss
+	       :target target
+	       :arguments (list topic)))
+
+(define-block (scroll-text :super text))
+
+(define-method tap scroll-text (x y) (flip %parent))
+(define-method alternate-tap scroll-text (x y) (destroy %parent))
 
 (defun make-talk-gump-text (data)
-  (let ((text (new 'text data)))
+  (let ((text (new 'scroll-text data)))
     (prog1 text
       (set-font text *gump-font*)
       (set-background-color text nil)
