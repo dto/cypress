@@ -7,22 +7,21 @@
 **** TODO collect wood/herbs 
 **** TODO after a while Lucius comes by
 **** TODO lucius initiates conversation.
-
 ** Travel through meadows, grassland. Fight mysterious wolves
 ** It begins to snow/freeze. Discover ruined house.
 ** Explore ruins, fight skeletons
 ** Encounter nastier demon wolf miniboss
 ** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
 
-
 * Tasks
+
+** TODO basic dialogue system
+*** TODO design simple convo system, options invoking methods that return either a string or a new gump?  
+**** TODO write macro to use in those method bodies
 
 ** TODO make player inventory work
 *** TODO generic inventory gump with expanded name/image of container
 *** TODO move into/out of containers
-** TODO basic dialogue system
-*** TODO design simple convo system, options invoking methods that return either a string or a new gump?  
-**** TODO write macro to use in those method bodies
 
 ** TODO proper pathfinding and movement
 *** TODO possibly circle collision test to avoid corner annoyances

@@ -152,8 +152,13 @@
 (defun discussion-method (topic)
   (make-keyword (format nil "discuss/~A" (symbol-name topic))))
 
-(defmacro define-topic (topic super &body body)
-  `(define-method ,(make-non-keyword (discussion-method topic)) ,super () ,@body))
+(defmacro define-topic (name super gump-forms &body body)
+  (let ((gump (gensym)))
+    (destructuring-bind (text &rest topics) gump-forms
+      `(define-method ,(make-non-keyword (discussion-method name)) ,super ()
+	 (let ((,gump (make-talk-gump self ,text ,@topics)))
+	   (prog1 ,gump
+	     ,@body))))))
 
 (define-method discuss thing (topic) 
   (let ((method (discussion-method topic)))
@@ -209,7 +214,7 @@
   (drop self (new 'bubble (find-description self))
 	%width 0))
 
-(define-method use thing ())
+(define-method activate thing ())
 
 (define-method run thing ())
 
@@ -225,7 +230,7 @@
 	     (setf last-tap-time time))
 	    ((<= elapsed-time *double-tap-time*)
 	     (setf last-tap-time nil)
-	     (use self))))))
+	     (activate self))))))
 
 (define-method update thing ()
   (with-fields (last-tap-time) self

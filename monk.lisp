@@ -376,27 +376,27 @@
 		(heading-to-cursor self)))
 	     ((> (distance-to-cursor self) 110)
 	      (prog1 nil (setf clock 10)))))))
+
+(define-topic hello lucius 
+    ("Good morning Geoffrey! A Raven just
+delivered this letter for you."
+     :letter :weather :name :job :bye))
 	   
-(define-topic self lucius 
-  (make-talk-gump 
-   "I am your friend Lucius."))
+(define-topic name lucius 
+    ("I am your friend Lucius, of course."))
+
+(define-topic job lucius 
+    ("You know perfectly well that I work
+at the Nothbess Library."))
 
 (define-topic weather lucius 
-  (make-talk-gump
-"If we read these charts aright, then by
-the time you read these words your
-brother and I will have been dead for
-more than five thousand years. For when
-we crossed into Valisade, each of us
-fell prey to magicks involving Time,
-such that a delay in one day's departure
-meant the passage of five millennia."))
+    ("It's nice out today, but I feel as if
+it's been a bit colder than usual."))
 
 (define-topic letter lucius 
-  (make-talk-gump
-   "I wonder what it says? It comes
+    ("I wonder what it says? It comes
 straight from Dr. Quine at the
-monastery."))
+monastery. Open it, open it!"))
 
-(define-method use lucius ()
-  (discuss self :weather))
+(define-method activate lucius ()
+  (discuss self :hello))
