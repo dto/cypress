@@ -146,7 +146,7 @@
     (setf %gump nil)))
 
 (define-method replace-gump thing (gump) 
-  (when %gump (destroy %gump))
+  (when (xelfp %gump) (destroy %gump))
   (set-gump self gump))
 
 (defun discussion-method (topic)
@@ -163,8 +163,15 @@
 (define-method discuss thing (topic) 
   (let ((method (discussion-method topic)))
     (let ((gump (send method self)))
-      (when (xelfp gump)
-	(replace-gump self gump)))))
+      (if (xelfp gump)
+	  (if (or (null %gump)
+		  (%inputs (buttons gump)))
+	      ;; replace whole gump 
+	      (replace-gump self gump)
+	      ;; just replace text in existing gump
+	      (replace-gump-text %gump gump))
+	  ;; no gump. quit conversation
+	  (destroy-gump self)))))
     
 (define-method can-pick thing ()
   (or (shell-open-p)
@@ -352,9 +359,9 @@
       (glide-window-to-cursor buffer)
       (follow-with-camera buffer geoffrey)
 
-
-      ;; (drop-object buffer (new 'copper-stairwell) 800 600)
-      ;; (drop-object buffer (new 'warrior-key) 400 400)
+      (drop-object buffer (new 'tent) 400 400)
+      (drop-object buffer (new 'tent) 800 800)
+      
       ;; (drop-object buffer (new 'circle-key) 420 700)
       ;; (drop-object buffer (new 'triangle-key) 420 850)
       ;; (drop-object buffer (new 'xalcium-leggings) 400 400)
@@ -363,7 +370,7 @@
       (dotimes (n 8)
       	(let ((x (+ 300 (random 1500)))
       	      (y (+ 300 (random 1000))))
-	  (drop-object buffer (new (random-choose '(dead-tree gray-rock))) x y)))
+	  (drop-object buffer (new 'gray-rock))) x y)
 
 
       ;; allocate

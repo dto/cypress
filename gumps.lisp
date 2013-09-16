@@ -186,6 +186,10 @@
 (define-method text talk-gump ()
   (first %inputs))
 
+(define-method replace-gump-text talk-gump (gump)
+  (setf %pages (%pages gump))
+  (flip self 0))
+
 (define-method insert-button talk-gump (item)
   (unfreeze (buttons self))
   (accept (buttons self) item)

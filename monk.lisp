@@ -90,17 +90,23 @@
   (step-clock :initform 0)
   (fire-clock :initform 0)
   ;;
+  (path :initform nil)
+  (waypoints :initform nil)
   (goal-x :initform nil)
   (goal-y :initform nil))
 
 (defmacro defmonk (name &rest body)
   `(define-block (,name :super monk) ,@body))
 
-(define-method walk-to monk (x y)
-  (setf %goal-x x %goal-y y))
-
+(define-method walk-to monk (x1 y1)
+  (with-fields (x y waypoints path) self
+    (when (null path) 
+      (setf path (create-path self :buffer (current-buffer))))
+    (setf waypoints (find-path-waypoints path x y x1 y1))))
+  
 (define-method stop-walking monk ()
-  (setf %goal-x nil %goal-y nil))
+  (setf %path nil)
+  (setf %waypoints nil))
     
 (define-method humanp monk () nil)
 
@@ -336,11 +342,17 @@
 (define-method humanp geoffrey () t)
 
 (define-method movement-heading geoffrey ()
-  (with-fields (goal-x goal-y) self
-    (when (and goal-x goal-y)
-      (multiple-value-bind (x y) (center-point self)
-	(when (< 15 (distance x y goal-x goal-y))
-	  (find-heading x y goal-x goal-y))))))
+  (with-fields (goal-x goal-y waypoints) self
+    (when (or waypoints (and goal-x goal-y))
+	(multiple-value-bind (x y) (center-point self)
+	  (if (< 4 (distance x y goal-x goal-y))
+	      ;; keep walking 
+	      (find-heading x y goal-x goal-y)
+	      (if waypoints
+		  (destructuring-bind (wx wy) (pop waypoints)
+		    (message "goalxy: ~A" (list wx wy))
+		    (setf goal-x wx goal-y wy))
+		  (setf goal-x nil goal-y nil)))))))
 
 (define-method movement-direction geoffrey ()
   (or 
@@ -389,17 +401,25 @@ delivered this letter for you."
   "You know perfectly well that I work
 at the Nothbess Library. My duties
 include dusting and organizing books.
-And else have you forgotten today?
+And what else have you forgotten today?
 Something must be wrong with you.")
 
 (define-topic weather lucius 
 "It's nice out today, but I feel as if
-it's been a bit colder than usual.")
+it's been a bit colder than usual."
+  :colder :letter :name :job :bye)
+
+(define-topic bye lucius () nil)
+
+(define-topic colder lucius 
+"Yes. The leaves seem to be turning early.")
 
 (define-topic letter lucius 
-   "I wonder what it says? It comes
+  (drop self (new 'scroll) 0 %height)
+  (make-talk-gump self "I wonder what it says? It comes
 straight from Dr. Quine at the
-monastery. Open it, open it!")
+monastery. Here you go. I'm so curious
+to know what it says. Open it, open it!" :bye))
 
 (define-method activate lucius ()
   (discuss self :hello))

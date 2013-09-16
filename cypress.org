@@ -1,8 +1,11 @@
 * Episode 1 video demo
 ** You are called to Valisade 
 *** Lucius visits you and delivers a letter.
-**** TODO create riverside camp/tent level
-**** TODO simple scroll gump for 3 lines of text and some scroll entry buttons
+**** DONE create riverside camp/tent level
+     CLOSED: [2013-09-15 Sun 16:23]
+**** DONE simple scroll gump for 3 lines of text and some scroll entry buttons
+     CLOSED: [2013-09-15 Sun 16:23]
+**** TODO all gumps halt action, but updates still run
 **** TODO say "a nice place to camp while I do my laundry. i think i'll look around for some
 **** TODO collect wood/herbs 
 **** TODO after a while Lucius comes by
@@ -15,10 +18,6 @@
 
 * Tasks
 
-** TODO basic dialogue system
-*** TODO design simple convo system, options invoking methods that return either a string or a new gump?  
-**** TODO write macro to use in those method bodies
-
 ** TODO make player inventory work
 *** TODO generic inventory gump with expanded name/image of container
 *** TODO move into/out of containers
@@ -26,10 +25,14 @@
 ** TODO proper pathfinding and movement
 *** TODO possibly circle collision test to avoid corner annoyances
 
-*** TODO isometric style tree bounding boxes
+** TODO basic level generation
+*** TODO decide on backgrounds / structure of levels
+*** TODO terrain declaration macros
+*** TODO place declarations
 
-** TODO [#B] USEing can require an argument to apply verb to; this pauses and changes cursor
-** TODO [#B] fix diagonal scrolling jitter
+** TODO [#A] isometric style tree bounding boxes
+** TODO [#A] USEing can require an argument to apply verb to; this pauses and changes cursor
+** TODO [#A] fix diagonal scrolling jitter
 ** TODO [#B] equip normal bow during prologue
 ** TODO [#B] fix wraith texture bounding box squishness
 ** TODO [#B] Check dx7 patches for cool analogue sfx. 
@@ -48,6 +51,7 @@
 ** TODO procedurally generated maps
 
 ** TODO Things to draw
+*** TODO elsewood bow 
 *** TODO draw more trees, sickly trees, 
 *** TODO draw herbs, refer to herbal book
 *** TODO draw grass patches
@@ -399,4 +403,18 @@ In the sequel you turn the diamond anvil back on to reach another world.
    :ARCHIVE_CATEGORY: cypress
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE basic dialogue system
+   CLOSED: [2013-09-15 Sun 16:24]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2013-09-15 Sun 16:42
+   :ARCHIVE_FILE: ~/cypress/cypress.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: cypress
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE design simple convo system, options invoking methods that return either a string or a new gump?  
+    CLOSED: [2013-09-15 Sun 16:24]
+**** DONE write macro to use in those method bodies
+     CLOSED: [2013-09-15 Sun 16:24]
 

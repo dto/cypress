@@ -17,9 +17,9 @@
 (defparameter *copper-lock-images* (image-set "copper-lock" 5))
 
 (defthing copper-lock :image (random-choose *copper-lock-images*))
-(defthing gray-stairwell :image (random-choose *gray-stairwell-images*))
-(defthing copper-stairwell :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
-(defthing copper-plate :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
+(defthing gray-stairwell :tags '(:fixed) :image (random-choose *gray-stairwell-images*))
+(defthing copper-stairwell  :tags '(:fixed) :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
+(defthing copper-plate :tags '(:fixed) :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
 
 (defthing campfire :image "fire-pit-3.png")
 (defthing tent 
@@ -40,8 +40,8 @@
 
 (defthing scroll :image (random-choose *scroll-images*) :z 20)
 
-(define-method use scroll ()
-  (drop self (new 'scroll-gump *letter-text*)))
+(define-method activate scroll ()
+  (drop self (new 'scroll-gump *quine-summons*)))
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
 

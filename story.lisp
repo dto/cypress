@@ -1,7 +1,24 @@
 (in-package :cypress)
 
+(defparameter *quine-summons*
+"Dear Geoffrey,
+
+Francis and I are leaving for Valisade
+immediately. We should have arrived by
+the time you receive this letter. Please
+meet us at the Cathedral as soon as you
+possibly can. This is an urgent matter
+but I cannot commit more to writing, as
+I must depart at once. 
+
+Make haste to Valisade, and be safe, my
+friend.
+
+--- Dr. Quine
+")
+
 (defparameter *letter-text*
-"to reconstruct what happened in the
+  "to reconstruct what happened in the
 centuries after our disappearance. It
 would seem that Valisade became the seat
 of a vast imperial power due to its
@@ -27,7 +44,7 @@ widespread famine, disease, and death.
 ")
 
 (defparameter *letter-text-2* 
-"Dear Geoffrey,
+  "Dear Geoffrey,
 
 Our fondest hope is that this letter
 finds you, and in good health. For the
