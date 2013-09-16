@@ -98,16 +98,6 @@
 (defmacro defmonk (name &rest body)
   `(define-block (,name :super monk) ,@body))
 
-(define-method walk-to monk (x1 y1)
-  (with-fields (x y waypoints path) self
-    (when (null path) 
-      (setf path (create-path self :buffer (current-buffer))))
-    (setf waypoints (find-path-waypoints path x y x1 y1))))
-  
-(define-method stop-walking monk ()
-  (setf %path nil)
-  (setf %waypoints nil))
-    
 (define-method humanp monk () nil)
 
 ;;; Animating the monk as he walks
@@ -194,8 +184,6 @@
 
 (define-method movement-direction monk () nil)
 
-(define-method movement-heading monk () nil)
-
 (defvar *joystick-enabled* t)
 
 (define-method stick-heading monk () 
@@ -238,6 +226,36 @@
 
 (define-method standing-animation monk () *monk-2-stand*)
 (define-method walking-animation monk () *monk-2-walk*)
+
+(define-method next-waypoint monk ()
+  (destructuring-bind (wx wy) (pop %waypoints)
+    (setf %goal-x wx %goal-y wy)))
+
+(define-method movement-heading monk ()
+  (with-fields (x y goal-x goal-y waypoints) self
+      (if (and goal-x goal-y)
+	  (if (< 6 (distance x y goal-x goal-y))
+	      ;; keep walking 
+	      (find-heading x y goal-x goal-y)
+	      (if waypoints 
+		  (progn (next-waypoint self)
+			 (find-heading x y goal-x goal-y))
+		  (setf goal-x nil goal-y nil)))
+	  (when waypoints
+	    (next-waypoint self)
+	    (find-heading x y goal-x goal-y)))))
+
+(define-method walk-to monk (x1 y1)
+  (with-fields (x y waypoints path) self
+    (when (null path) 
+      (setf path (create-path self :buffer (current-buffer))))
+    (setf waypoints (rest (rest (find-path-waypoints path x y x1 y1))))
+    (when (null waypoints) (stop-walking self))))
+  
+(define-method stop-walking monk ()
+;;  (setf %path nil)
+  (setf %waypoints nil)
+  (setf %goal-x nil %goal-y nil))
 
 (define-method run monk ()
   (when (and (pressing-fire-p self) 
@@ -341,19 +359,6 @@
 
 (define-method humanp geoffrey () t)
 
-(define-method movement-heading geoffrey ()
-  (with-fields (goal-x goal-y waypoints) self
-    (when (or waypoints (and goal-x goal-y))
-	(multiple-value-bind (x y) (center-point self)
-	  (if (< 4 (distance x y goal-x goal-y))
-	      ;; keep walking 
-	      (find-heading x y goal-x goal-y)
-	      (if waypoints
-		  (destructuring-bind (wx wy) (pop waypoints)
-		    (message "goalxy: ~A" (list wx wy))
-		    (setf goal-x wx goal-y wy))
-		  (setf goal-x nil goal-y nil)))))))
-
 (define-method movement-direction geoffrey ()
   (or 
    (cond 
@@ -378,16 +383,15 @@
 
 (define-method run lucius ()
   (monk%run self)
-  (decf %clock))
-
-(define-method movement-heading lucius ()
+  (decf %clock)
   (with-fields (clock) self
     (when (cursor)
       (cond  ((> (distance-to-cursor self) 150)
 	      (unless (plusp clock)
-		(heading-to-cursor self)))
+		(multiple-value-bind (x y) (center-point (cursor))
+		  (walk-to self x y))))
 	     ((> (distance-to-cursor self) 110)
-	      (prog1 nil (setf clock 10)))))))
+	      (prog1 nil (stop-walking self) (setf clock 10)))))))
 
 (define-topic hello lucius 
    "Good morning Geoffrey! A Raven just
