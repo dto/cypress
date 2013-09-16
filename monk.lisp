@@ -202,7 +202,7 @@
 ;; 	      (+ (- margin) y height)))))
 
 (define-method collide monk (thing)
-  (when (solidp thing)
+  (when (and (solidp thing) (null %waypoints))
     (restore-location self)
     (stop-walking self))
   (when (enemyp thing)
@@ -234,7 +234,7 @@
 (define-method movement-heading monk ()
   (with-fields (x y goal-x goal-y waypoints) self
       (if (and goal-x goal-y)
-	  (if (< 6 (distance x y goal-x goal-y))
+	  (if (< 4 (distance x y goal-x goal-y))
 	      ;; keep walking 
 	      (find-heading x y goal-x goal-y)
 	      (if waypoints 
@@ -387,8 +387,8 @@
   (with-fields (clock) self
     (when (cursor)
       (cond  ((> (distance-to-cursor self) 150)
-	      (unless (plusp clock)
-		(multiple-value-bind (x y) (center-point (cursor))
+	      (unless (or %waypoints (plusp clock))
+		(multiple-value-bind (x y) (at (cursor))
 		  (walk-to self x y))))
 	     ((> (distance-to-cursor self) 110)
 	      (prog1 nil (stop-walking self) (setf clock 10)))))))
