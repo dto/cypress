@@ -1,3 +1,18 @@
+* turn left when you hear the Screech Owl
+
+* Horror
+** Wax cylinder recordings were invented after Geoffrey's disappearance
+** In seances, an evil voice communicates with the spirits via EVP.
+** You must read a letter aloud and then burn it while the wax is recorded. Will hear voice on playback.
+** Thus it became imperative for the original followers to destroy the cylinders after use
+** The voice is actually one of many wicked spirits trapped beneath the dormant volcano.
+** The voices promise unlimited energy and power to those who can successfully drill to their domain and release them
+** This results in the creation of the diamond anvil and the explosion/release of the demons
+** First you find a cylinder and then later you assemble a playback device.
+*** MAYBE? Later , a jump scare with the voice speaking without recorder. "I don't need that toy anymore."
+*** The voice occasionally taunts you and threatens punishment
+*** After the famine , he spent ages feasting on the wickedest souls that wandered, and is more powerful now
+
 * Episode 1 video demo
 ** You are called to Valisade 
 *** Lucius visits you and delivers a letter.
@@ -5,7 +20,7 @@
      CLOSED: [2013-09-15 Sun 16:23]
 **** DONE simple scroll gump for 3 lines of text and some scroll entry buttons
      CLOSED: [2013-09-15 Sun 16:23]
-**** TODO all gumps halt action, but updates still run
+**** TODO all gumps halt action, but updates still happen (RUNs do not)
 **** TODO say "a nice place to camp while I do my laundry. i think i'll look around for some
 **** TODO collect wood/herbs 
 **** TODO after a while Lucius comes by
@@ -22,8 +37,8 @@
 *** TODO generic inventory gump with expanded name/image of container
 *** TODO move into/out of containers
 
-** TODO proper pathfinding and movement
-*** TODO possibly circle collision test to avoid corner annoyances
+** DONE proper pathfinding and movement
+   CLOSED: [2013-09-23 Mon 01:26
 
 ** TODO basic level generation
 *** TODO decide on backgrounds / structure of levels
