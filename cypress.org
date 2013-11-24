@@ -1,119 +1,5 @@
-* turn left when you hear the Screech Owl
-
-* Horror
-** Wax cylinder recordings were invented after Geoffrey's disappearance
-** In seances, an evil voice communicates with the spirits via EVP.
-** You must read a letter aloud and then burn it while the wax is recorded. Will hear voice on playback.
-** Thus it became imperative for the original followers to destroy the cylinders after use
-** The voice is actually one of many wicked spirits trapped beneath the dormant volcano.
-** The voices promise unlimited energy and power to those who can successfully drill to their domain and release them
-** This results in the creation of the diamond anvil and the explosion/release of the demons
-** First you find a cylinder and then later you assemble a playback device.
-*** MAYBE? Later , a jump scare with the voice speaking without recorder. "I don't need that toy anymore."
-*** The voice occasionally taunts you and threatens punishment
-*** After the famine , he spent ages feasting on the wickedest souls that wandered, and is more powerful now
-
-* Episode 1 video demo
-** You are called to Valisade 
-*** Lucius visits you and delivers a letter.
-**** DONE create riverside camp/tent level
-     CLOSED: [2013-09-15 Sun 16:23]
-**** DONE simple scroll gump for 3 lines of text and some scroll entry buttons
-     CLOSED: [2013-09-15 Sun 16:23]
-**** TODO all gumps halt action, but updates still happen (RUNs do not)
-**** TODO say "a nice place to camp while I do my laundry. i think i'll look around for some
-**** TODO collect wood/herbs 
-**** TODO after a while Lucius comes by
-**** TODO lucius initiates conversation.
-** Travel through meadows, grassland. Fight mysterious wolves
-** It begins to snow/freeze. Discover ruined house.
-** Explore ruins, fight skeletons
-** Encounter nastier demon wolf miniboss
-** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
-
-* Tasks
-
-** TODO make player inventory work
-*** TODO generic inventory gump with expanded name/image of container
-*** TODO move into/out of containers
-
-** DONE proper pathfinding and movement
-   CLOSED: [2013-09-23 Mon 01:26
-
-** TODO basic level generation
-*** TODO decide on backgrounds / structure of levels
-*** TODO terrain declaration macros
-*** TODO place declarations
-
-** TODO [#A] isometric style tree bounding boxes
-** TODO [#A] USEing can require an argument to apply verb to; this pauses and changes cursor
-** TODO [#A] fix diagonal scrolling jitter
-** TODO [#B] equip normal bow during prologue
-** TODO [#B] fix wraith texture bounding box squishness
-** TODO [#B] Check dx7 patches for cool analogue sfx. 
-
-** TODO [#B] disable cursor in game window?
-** TODO [#B] contextual modeline verb buttons
-** TODO [#B] working locks and keys
-** TODO [#B] doors controlled by nearby locks
-** TODO [#B] stairwells
-*** TODO double click stairwell to enter / leave while standing on it
-*** TODO stairwells on both buffers match up 
-
-** TODO decide how to deal with collision detection of walls underground
-*** TODO use editor to add invisible walls and entry/exit points
-
-** TODO procedurally generated maps
-
-** TODO Things to draw
-*** TODO elsewood bow 
-*** TODO draw more trees, sickly trees, 
-*** TODO draw herbs, refer to herbal book
-*** TODO draw grass patches
-*** TODO xalcium books
-*** TODO stone chips
-*** TODO wood chips
-*** TODO animated flame with additive blending
-*** TODO night forest scene with light halo and slight flicker
-
-** TODO inventory art book and do import checklist 
-*** TODO slate gray columns/tiles
-*** TODO flowers/herbs (draw new?)
-*** TODO more firewood
-*** TODO [#B] map symbols
-*** TODO stylized autumn trees
-*** TODO gravestones
-*** TODO leather armor 
-*** TODO spell/action icons
-*** TODO bone ash
-*** TODO interior dark rooms
-*** TODO yellow ochre tiled cracked road remains, 
-*** TODO metal boxes and wooden chests
-*** TODO copper doors
-*** TODO stone monk
-
-*** TODO wrap xelf with defblock and regular CLOS defmethod
-*** TODO IDENTIFY sentence schemata for level generation
-
-** TODO 
-*** look
-*** describe
-*** talk 
-*** use
-*** attack
-*** get (or drag)
-*** drop (or drag)
-
-** TODO video with conversation, letter, roads/ruins, basement exploration. 
-** TODO new buffer methods wrap monk actions with *shell-open-p* check
-
-** TODO Improve command shell interface
-*** TODO print error messages to simple messenger widget
-*** TODO Mouse wheel scrolling through world
-*** TODO Control S to save as buffername.xelf
-
-
 * Overview
+
 ** Player controls a monk named Geoffrey as he explores the wilderness, fights monsters, and unravels the mystery of his brothers' disappearance.
 ** Ranged combat with bow-and-arrow
 ** Melee combat with fists/feet
@@ -159,7 +45,7 @@
 *** Cold (0-100)
 *** Poison (0-100)
 
-* Controls
+* Controls (OBSOLETE)
 ** Directional and A B C  <--- Action Fire Escape === Alt Shift Escape?
 ** Escape for menu (or to exit menus)
 ** hold Fire to raise bow/weapon, release to fire
@@ -276,31 +162,9 @@ which an order of spiritual warrior-monks utilize music for a variety
 of religious purposes, and also incidental and improvised music played
 while traveling long distances.
 
-* Milestone 1: Chapter one demo
-scanimage --resolution 300 --batch=out-%d.pnm --batch-prompt
-
-
-** Bring paper background up to white 
-
-for i in *.pnm
-do
-convert $i -brightness-contrast 0x16 `basename $i .pnm`-adjusted.png
-done
-
-*** TODO Paint graphics for tent/camp
-*** TODO You are called to Valisade 
-*** Travel through meadows, grassland. Fight mysterious wolves
-*** It begins to snow/freeze. Discover ruined house.
-*** Explore ruins, fight skeletons
-*** Encounter nastier demon wolf miniboss
-*** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
-
-** TODO test embedding PNG files as encrypted arrays in the exe
-*** pkhuong: use unboxed vectors
-
 * Story   
 
-a deep-digging experiment of Industrialists create a device called The
+A deep-digging experiment of Industrialists create a device called The
 Diamond Anvil in order to reach remains of an ancient civilization. it
 causes a volcanic mega explosion, obliterating island blocking out sun
 for two years and killing crops.  spirit of the white cypress guides
@@ -339,6 +203,170 @@ In the sequel you turn the diamond anvil back on to reach another world.
 ** Episode 4
 *** Return to ruined hometown via other route
 *** Cross the Einbridge to the sunken island, site of the explosion
+
+* Old lady voice intro
+
+My name is Amalia.
+
+I am the spirit who lives in the White Cypress.
+Like those who dwelt therein before, 
+I guide the souls of Ildran 
+as they pass between worlds.
+
+I will tell you now 
+of an ancient time,
+
+When ash and smoke concealed 
+the fury of Sol.
+
+When famine and despair
+swept over Ildran.
+
+When the Cypress died, 
+leaving souls to wander
+without rest.
+
+When a man of humility,
+with little more than robe and longbow, passed 
+into the history of Heroes.
+
+* Horror
+
+** Wax cylinder recordings were invented after Geoffrey's disappearance
+** In seances, an evil voice communicates with the spirits via EVP.
+** You must read a letter aloud and then burn it while the wax is recorded. Will hear voice on playback.
+** Thus it became imperative for the original followers to destroy the cylinders after use
+** The voice is actually one of many wicked spirits trapped beneath the dormant volcano.
+** The voices promise unlimited energy and power to those who can successfully drill to their domain and release them
+** This results in the creation of the diamond anvil and the explosion/release of the demons
+** First you find a cylinder and then later you assemble a playback device.
+*** MAYBE? Later , a jump scare with the voice speaking without recorder. "I don't need that toy anymore."
+*** The voice occasionally taunts you and threatens punishment
+*** After the famine , he spent ages feasting on the wickedest souls that wandered, and is more powerful now
+
+* Scan scripts
+
+** Scan a page
+scanimage --resolution 300 --batch=out-%d.pnm --batch-prompt
+
+** Bring paper background up to white 
+
+for i in *.pnm
+do
+convert $i -brightness-contrast 0x16 `basename $i .pnm`-adjusted.png
+done
+
+* Tasks
+
+** TODO make player inventory work
+*** TODO generic inventory gump with expanded name/image of container
+*** TODO move into/out of containers
+
+** DONE proper pathfinding and movement
+   CLOSED: [2013-09-23 Mon 01:26
+
+** TODO basic level generation
+*** TODO decide on backgrounds / structure of levels
+*** TODO terrain declaration macros
+*** TODO place declarations
+
+** TODO [#A] isometric style tree bounding boxes
+** TODO [#A] USEing can require an argument to apply verb to; this pauses and changes cursor
+** TODO [#A] fix diagonal scrolling jitter
+** TODO [#B] equip normal bow during prologue
+** TODO [#B] fix wraith texture bounding box squishness
+** TODO [#B] Check dx7 patches for cool analogue sfx. 
+
+** TODO [#B] disable cursor in game window?
+** TODO [#B] contextual modeline verb buttons
+** TODO [#B] working locks and keys
+** TODO [#B] doors controlled by nearby locks
+** TODO [#B] stairwells
+*** TODO double click stairwell to enter / leave while standing on it
+*** TODO stairwells on both buffers match up 
+
+** TODO decide how to deal with collision detection of walls underground
+*** TODO use editor to add invisible walls and entry/exit points
+
+** TODO procedurally generated maps
+
+** TODO Things to draw
+*** TODO elsewood bow 
+*** TODO draw more trees, sickly trees, 
+*** TODO draw herbs, refer to herbal book
+*** TODO draw grass patches
+*** TODO xalcium books
+*** TODO stone chips
+*** TODO wood chips
+*** TODO animated flame with additive blending
+*** TODO night forest scene with light halo and slight flicker
+
+** TODO inventory art book and do import checklist 
+*** TODO slate gray columns/tiles
+*** TODO flowers/herbs (draw new?)
+*** TODO more firewood
+*** TODO [#B] map symbols
+*** TODO stylized autumn trees
+*** TODO gravestones
+*** TODO leather armor 
+*** TODO spell/action icons
+*** TODO bone ash
+*** TODO interior dark rooms
+*** TODO yellow ochre tiled cracked road remains, 
+*** TODO metal boxes and wooden chests
+*** TODO copper doors
+*** TODO stone monk
+
+*** TODO wrap xelf with defblock and regular CLOS defmethod
+*** TODO IDENTIFY sentence schemata for level generation
+
+** TODO 
+*** look
+*** describe
+*** talk 
+*** use
+*** attack
+*** get (or drag)
+*** drop (or drag)
+
+** TODO video with conversation, letter, roads/ruins, basement exploration. 
+** TODO new buffer methods wrap monk actions with *shell-open-p* check
+
+** TODO Improve command shell interface
+*** TODO print error messages to simple messenger widget
+*** TODO Mouse wheel scrolling through world
+*** TODO Control S to save as buffername.xelf
+
+
+
+* Episode 1 video demo
+** You are called to Valisade 
+*** Lucius visits you and delivers a letter.
+**** DONE create riverside camp/tent level
+     CLOSED: [2013-09-15 Sun 16:23]
+**** DONE simple scroll gump for 3 lines of text and some scroll entry buttons
+     CLOSED: [2013-09-15 Sun 16:23]
+**** TODO all gumps halt action, but updates still happen (RUNs do not)
+**** TODO say "a nice place to camp while I do my laundry. i think i'll look around for some
+**** TODO collect wood/herbs 
+**** TODO after a while Lucius comes by
+**** TODO lucius initiates conversation.
+** Travel through meadows, grassland. Fight mysterious wolves
+** It begins to snow/freeze. Discover ruined house.
+** Explore ruins, fight skeletons
+** Encounter nastier demon wolf miniboss
+** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
+
+*** TODO Paint graphics for tent/camp
+*** TODO You are called to Valisade 
+*** Travel through meadows, grassland. Fight mysterious wolves
+*** It begins to snow/freeze. Discover ruined house.
+*** Explore ruins, fight skeletons
+*** Encounter nastier demon wolf miniboss
+*** After the mountain pass, you enter a meadow and hear monks singing from the distance; valisade is shrouded in sunrise fog
+
+** TODO test embedding PNG files as encrypted arrays in the exe
+*** pkhuong: use unboxed vectors
 
 * Archived Entries
 ** DONE double left click to use
