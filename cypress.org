@@ -1,3 +1,9 @@
+
+* Tasks
+
+** TODO Watch original sanctuary playthrough vid
+** TODO decide how combat is going to work w/mouse
+** TODO Complete episode 1 plan
 ** TODO Things to draw
 
 *** TODO wolf and carcass
@@ -12,11 +18,6 @@
 *** TODO night forest scene with light halo and slight flicker
 
 
-* Tasks
-
-** TODO Watch original sanctuary playthrough vid
-** TODO decide how combat is going to work w/mouse
-
 * Episode 1: Call to Valisade
 
 One day Geoffrey (you, the player) is collecting herbs near the camp
@@ -25,13 +26,19 @@ summoning you to the monastery. Lucius tells you to retrieve your
 sword and spellbook from the tent before you leave, and gives some
 other advice about the journey.
 
-** Campsite is entry/exit point to most levels
+** Four entry points to a sector: north, south, east, and west
+** Depends on direction of previous map square occupied
+
+** Game pauses when any gump is open, can give orders w gump
+
 ** Simple status bar
 ** One scroll gump for text
 ** One inventory gump with 16 slots and :stacking items
 ** One equipped item (usually sword)
 
 ** Locations
+*** Nothbess
+**** Campsite, sword, spellbook, Lucius
 *** Meadow
 **** Grass, bushes, weeds
 **** Trees

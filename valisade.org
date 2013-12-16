@@ -1,0 +1,190 @@
+** Sort of like Dungeons and Dragons cloudy mountain
+
+* Tasks
+
+** TODO Watch original sanctuary playthrough vid
+** TODO make player inventory work
+*** TODO generic inventory gump with expanded name/image of container
+*** TODO move into/out of containers
+** TODO [#A] USEing can require an argument to apply verb to; this pauses and changes cursor
+** TODO [#A] fix diagonal scrolling jitter
+** TODO [#B] fix wraith texture bounding box squishness
+
+
+* Things to draw
+
+** TODO wolf and carcass
+** TODO elsewood bow 
+** TODO draw more trees, sickly trees, 
+** TODO draw herbs, refer to herbal book
+** TODO draw grass patches
+** TODO xalcium books
+** TODO stone chips
+** TODO wood chips
+** TODO animated flame with additive blending
+** TODO night forest scene with light halo and slight flicker
+
+* Overview
+
+** Player controls a monk named Geoffrey as he travels through the wilderness
+** Ranged combat with bow-and-arrow
+** Manage health limited food/resources 
+** Magic spells
+*** All spells require Mind points
+*** Some spells require "reagents" i.e. a supply
+** Story is exposed through the notebook, written letters/scrolls
+** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
+
+* Player characteristics
+
+** Statistics. Higher is better.
+*** Body (0-100) (death at 0)
+*** Mind (0-100) (used for casting spells. cannot cast anything when less than 15%)
+
+** Conditions. Lower is better.
+*** Hunger (0-100)
+*** Fatigue (0-100)
+*** Cold (0-100)
+*** Poison (0-100)
+  
+** Equipped item
+  
+* Gameplay screens
+
+The game's world is shown from an overhead 2-D perspective. The world
+view is full-frame, except for a thin black bar across the bottom
+called the "modeline". This line is used for status display,
+inventory, and menu. It is mostly unobtrusive, displaying the meter
+bars for Body (Red) and Mind (Blue), and an icon for the currently
+equipped item/weapon. Status icons and some other messages will also be
+displayed here. The various meters and items can briefly blink when
+something requires the player's attention, such as low health or a
+poisoning event.
+
+** Overworld map grid with terrain sectors
+*** Each quest is composed of your movements on the symbols of a randomly generated grid map
+**** Some mountain (impassable) squares
+*** Four entry points to a sector: north, south, east, and west
+**** Depends on direction of previous map square occupied
+*** When you move into a sector you get a randomly generated (and/or procedural) level in the sector's style
+*** Can open map at any time, but game does not pause. 
+*** Can only travel 1 square at a time. Requires food.
+*** Choose when to leave using map screen, unless held by conditions
+*** Can return to a sector, but requires more food. 
+
+** Exploration/combat as monk in a sector
+*** Look around
+**** Left click to see name of object
+*** Move around
+**** Right click open space to move there
+*** Collect items 
+**** Mouse-drag onto character or into inventory gump
+*** Fight enemies
+**** Double-click enemy to fire arrow
+*** Cast spells
+**** Double click Geoffrey to open action menu (inventory, spells, etc)
+**** Camp
+*** Modal gumps for close-ups of scrolls, books, maps
+**** Gumps halt action, but updates still happen (RUNs do not)
+
+** Menu with traditional RPG checkpoint save/load system.
+*** Should only be able to save at campfire when no enemies present.
+
+* Actions and Spells
+
+** Spark (light torches, campfires, and dry out even soaked wood)
+** Make camp (puts out the tent and firepit)
+** Leave area
+** Hold creature
+** Radiance (required for dark areas. needs one white or yellow flower.)
+** Cause Fear (enemy flees)
+** Flame (fire attack)
+** Cure meat (create jerky from animal carcasses)
+** Cure light wounds (consumes beef/wolf jerky for greater healing)
+** Boil grasses (make small amounts of thin gruel. requires wild grasses and water)
+
+* Locations
+** Nothbess
+*** Campsite, sword, spellbook, Lucius
+** Meadow
+*** Grass, bushes, weeds
+*** Trees
+*** Flowers
+*** Some herbs
+** Field
+*** Grass, weeds
+*** Wolves
+*** Flowers
+** Ancient roadway
+*** Grass, ochre-toned rock road
+*** Stone chips
+*** Watcher in the weeds
+** Glen
+*** Dirt, grass, bushes, weeds
+*** Herbs
+*** Firewood
+*** Flowers
+*** Wood chips
+** Forest
+*** Evergreen trees
+*** Wraiths
+*** Firewood
+*** Herbs
+*** Wood chips
+*** Pinecones
+** Cold Meadow
+*** Snow, dead grass, dead bushes
+*** Precipitation/wetness
+*** Wolves
+*** Wraiths
+** Snowy glen
+*** Snowy evergreens (turning brown)
+*** Firewood 
+*** Wood chips
+*** Pinecones
+*** Wolves
+*** Skeleton soldiers
+** Ruins 
+*** Snow, dirt, dead grass
+*** Waterlogged areas
+*** Item boxes with scrolls w/ dried herbs/flowers
+*** Stone chips
+*** Story scroll pieces
+*** Skeleton soldiers
+*** Wraiths
+** ----------NIGHTFALL------------
+** Forgotten cemetery
+*** Snow with gravestones
+*** Old metal fences
+*** Wraiths
+*** Stone chips
+*** Bone dust
+** Frozen crossing
+*** Skeleton archers
+*** Icy crossing with broken ice/water areas
+** Dead forest hills
+*** Dead trees
+*** Firewood
+*** Skeleton soldiers
+*** Skeleton archers
+** Mountain pass
+*** Wolves
+** Road to Valisade
+
+
+* Items
+
+** Arrows (craft from stone chips and wood)
+** Bundles of arrows (20 per)
+** Water 
+** White bread
+** Wheat bread
+** Beef jerky
+** Notebook
+** Forget-me-nots
+** Snowdrop
+** Wild violet
+** Stones, stone chips
+** Branches, wood planks, ruined wood
+** Temple Incense
+
