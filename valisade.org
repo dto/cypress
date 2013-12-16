@@ -1,5 +1,3 @@
-** Sort of like Dungeons and Dragons cloudy mountain
-
 * Tasks
 
 ** TODO Watch original sanctuary playthrough vid
@@ -10,23 +8,10 @@
 ** TODO [#A] fix diagonal scrolling jitter
 ** TODO [#B] fix wraith texture bounding box squishness
 
-
-* Things to draw
-
-** TODO wolf and carcass
-** TODO elsewood bow 
-** TODO draw more trees, sickly trees, 
-** TODO draw herbs, refer to herbal book
-** TODO draw grass patches
-** TODO xalcium books
-** TODO stone chips
-** TODO wood chips
-** TODO animated flame with additive blending
-** TODO night forest scene with light halo and slight flicker
-
 * Overview
 
 ** Player controls a monk named Geoffrey as he travels through the wilderness
+** Point-and-click interface
 ** Ranged combat with bow-and-arrow
 ** Manage health limited food/resources 
 ** Magic spells
@@ -34,6 +19,7 @@
 *** Some spells require "reagents" i.e. a supply
 ** Story is exposed through the notebook, written letters/scrolls
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
+** Automatic night darkness halo
 
 * Player characteristics
 
@@ -46,7 +32,7 @@
 *** Fatigue (0-100)
 *** Cold (0-100)
 *** Poison (0-100)
-  
+
 ** Equipped item
   
 * Gameplay screens
@@ -102,6 +88,30 @@ poisoning event.
 ** Cure meat (create jerky from animal carcasses)
 ** Cure light wounds (consumes beef/wolf jerky for greater healing)
 ** Boil grasses (make small amounts of thin gruel. requires wild grasses and water)
+
+* Items
+
+** Arrows (craft from stone chips and wood)
+** Bundles of arrows (20 per)
+** Water 
+** White bread
+** Wheat bread
+** Beef jerky
+** Notebook
+** Forget-me-nots
+** Snowdrop
+** Wild violet
+** Stones, stone chips
+** Branches, wood planks, ruined wood
+** Temple Incense
+
+* Enemies
+** Wolf
+** Watcher-in-the-weeds
+** Wraith
+** Skeleton soldier
+** Skeleton archer
+** 
 
 * Locations
 ** Nothbess
@@ -171,20 +181,16 @@ poisoning event.
 *** Wolves
 ** Road to Valisade
 
+* Things to draw
 
-* Items
-
-** Arrows (craft from stone chips and wood)
-** Bundles of arrows (20 per)
-** Water 
-** White bread
-** Wheat bread
-** Beef jerky
-** Notebook
-** Forget-me-nots
-** Snowdrop
-** Wild violet
-** Stones, stone chips
-** Branches, wood planks, ruined wood
-** Temple Incense
+** TODO wolf and carcass
+** TODO elsewood bow 
+** TODO draw more trees, sickly trees, 
+** TODO draw herbs, refer to herbal book
+** TODO draw grass patches
+** TODO xalcium books
+** TODO stone chips
+** TODO wood chips
+** TODO animated flame with additive blending
+** TODO night forest scene with light halo and slight flicker
 
