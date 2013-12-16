@@ -82,15 +82,26 @@ or fatigue.
 *** Collect items 
 **** Mouse-drag onto character or into inventory gump
 *** Fight enemies
-**** Double-click enemy to fire arrow
+**** Double-click (or control-click) enemy to fire arrow
 *** Cast spells
-**** Double click Geoffrey to open action menu (inventory, spells, etc)
-**** Camp
+**** Double click (or control-click) Geoffrey to open action menu (inventory, spells, etc)
 *** Modal gumps for close-ups of scrolls, books, maps
 **** Gumps halt action, but updates still happen (RUNs do not)
+**** Right click to close gump
 
 ** Menu with traditional RPG checkpoint save/load system.
 *** Should only be able to save at campfire when no enemies present.
+
+* Crafting items 
+
+** Craft arrows (1 mana) (3 fatigue) (stone chips, wood) 
+*** Create bundle of 20 arrows
+** Craft silver arrows (1 mana) (8 fatigue) (stone chips, silverwood)
+*** Create 10 3x-powerful arrows
+
+** Boil grasses (2 fatigue) (3 grasses)
+*** Make small amounts of thin gruel. requires wild grasses and water)
+
 
 * Geoffrey's initial Spells
 
@@ -100,10 +111,6 @@ or fatigue.
 *** Heat up stone chips held in the hand
 *** Reduces cold by 5pts
 *** Does not consume the chips
-** Craft arrows (3 mana) (stone chips, wood)
-*** Create bundle of 20 arrows
-** Craft silver arrows (8 mana) (stone chips, silverwood)
-*** Create 10 3x-powerful arrows
 ** Light (2 mana)
 *** Casts light with medium radius
 *** Lasts for 4 minutes 
@@ -112,22 +119,25 @@ or fatigue.
 *** Certain enemies can negate magic spell effects, dousing your light
 ** Cure meat (5 mana)  
 *** Create healing-jerky from animal carcasses
-** Boil grasses (3 mana) (3 grasses)
-*** Make small amounts of thin gruel. requires wild grasses and water)
 ** Cure light wounds (25 mana) (2 salvia) 
 *** Heals between 10-15 mana
-** Hold creature (8 mana) (2 parathorn weed)
+** Hold creature (8 mana) (2 thornweed)
 *** 80% chance of briefly paralyzing target so they cannot move or attack
 
 * Spells found in ruins or on dead travelers
 
+** Craft crystal arrow (20 mana) (snow)
+** Phantom Scythe (10 mana)
+*** Creates white or wheat bread
+** Protection (15 mana) (1 salvia, 1 thornweed)
+*** Temporary 35% reduction in combat damage received
 ** Cause Fear (15 mana) (1 nightshade)
 *** 80% chance of enemy fleeing
 ** Dispel magic (20 mana) (1 salvia)
 *** 60% chance of removing ordinary spell effects. 
 ** Cure heavy wounds (50 mana) (2 salvia)
 *** Heals between 40-60 mana
-** Explosion (20 mana) (2 stone chips) 
+** Explosion (20 mana) (1 nightshade, 2 stone chips)
 *** 90% chance of scorching several enemies in target area
 
 * Actions
@@ -137,37 +147,48 @@ or fatigue.
 *** can also double-click enemy 
 ** Open inventory
 *** shows the inventory gump
-** Make camp (3 firewood)
+** Make camp (1 fatigue) (3 firewood)
 *** puts out the small tent and firepit
 *** can only craft items at camp
-** Leave area (can only do this at one of the 4 entry/exit points)
 
 * Items
 
 ** Arrows
-** Bundles of arrows (20 per)
+*** Wood: 5 damage
+*** Silver: 15 damage
+*** Crystal: 50 damage
 ** White bread
 *** Hunger -10
 *** HP +5
 ** Wheat bread
-** Beef jerky
-** Notebook
-** Forget-me-nots
-** Snowdrop
-** Wild violet
+*** Hunger -15
+*** HP +8
+** Dried Jerky
+*** Hunger -30
+*** HP +14
 ** Elixir
+*** Mana +50
 ** Stones, stone chips
+** Charcoal (from other campsites too)
 ** Branches, wood planks, ruined wood
 ** Temple Incense
+** Nightshade
+** Salvia
+** Silverwood 
 
 * Enemies
 ** Dead travelers (raid for items)
 ** Wolf
+*** 20 HP
 ** Watcher-in-the-weeds
 ** Wraith
+*** 10 or 15 HP
 ** Skeleton soldier
+*** 15 or 20 HP
 ** Skeleton archer
+*** 20-30 HP
 ** Grave hag
+*** 10 HP
 
 * Locations
 ** Nothbess
