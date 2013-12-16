@@ -10,7 +10,20 @@
 
 * Overview
 
-** Player controls a monk named Geoffrey as he travels through the wilderness
+The player controls a storybook-like animated monk named Geoffrey as
+he travels through the wilderness fighting monsters and collecting
+items.
+
+The game's world is shown from an overhead 2-D perspective. The world
+view is full-frame, except for a thin black bar across the bottom
+called the "modeline". This line is used for status display and
+triggering the menu. It is mostly unobtrusive, displaying the meter
+bars for Body (Red) and Mind (Blue), and an icon for the currently
+equipped item/weapon. Status icons and some other messages will also
+be displayed here. The various meters and items can briefly blink when
+something requires the player's attention, such as wounding , hunger,
+or fatigue.
+
 ** Point-and-click interface
 ** Ranged combat with bow-and-arrow
 ** Manage health limited food/resources 
@@ -18,45 +31,48 @@
 *** All spells require Mind points
 *** Some spells require "reagents" i.e. a supply
 ** Story is exposed through the notebook, written letters/scrolls
+*** I found two wraiths, but vanquished them. 
+*** I collected skulls for making bone dust.
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
-** Automatic night darkness halo
 
-* Player characteristics
+* Player attributes
+
+** Equipped item. 
+*** Supplies the verb for double clicking objects in the world 
+*** Usually the bow is equipped, so the verb is "attack"
+*** When a spell is selected, the spell is cast on the clicked target, etc
+
+** Inventory. 16 stacking item slots
 
 ** Statistics. Higher is better.
 *** Body (0-100) (death at 0)
 *** Mind (0-100) (used for casting spells. cannot cast anything when less than 15%)
+**** Slowly recharges
 
 ** Conditions. Lower is better.
-*** Hunger (0-100)
-*** Fatigue (0-100)
+*** Hunger (0-100) 
+**** You must eat periodically. When hunger < 20 your health drains
 *** Cold (0-100)
-*** Poison (0-100)
-
-** Equipped item
+**** When cold reaches 65% your health will drain small amounts (2-5 hp)
+**** When cold reaches 80% your health will drain faster 
+**** Reduce cold with camp or dry with Warmth
+*** Fatigue (0-100)
+**** You must eventually sleep. Cannot cast spells when Fatigue < 10
   
 * Gameplay screens
-
-The game's world is shown from an overhead 2-D perspective. The world
-view is full-frame, except for a thin black bar across the bottom
-called the "modeline". This line is used for status display,
-inventory, and menu. It is mostly unobtrusive, displaying the meter
-bars for Body (Red) and Mind (Blue), and an icon for the currently
-equipped item/weapon. Status icons and some other messages will also be
-displayed here. The various meters and items can briefly blink when
-something requires the player's attention, such as low health or a
-poisoning event.
 
 ** Overworld map grid with terrain sectors
 *** Each quest is composed of your movements on the symbols of a randomly generated grid map
 **** Some mountain (impassable) squares
-*** Four entry points to a sector: north, south, east, and west
+*** Four entry/exit points to a sector: north, south, east, and west
 **** Depends on direction of previous map square occupied
 *** When you move into a sector you get a randomly generated (and/or procedural) level in the sector's style
-*** Can open map at any time, but game does not pause. 
-*** Can only travel 1 square at a time. Requires food.
-*** Choose when to leave using map screen, unless held by conditions
-*** Can return to a sector, but requires more food. 
+*** Choose when to leave with "Leave Area" unless held by conditions (presence of enemies)
+*** Can only travel 1 square at a time.
+**** Expends 10 hunger
+**** Expends 20 fatigue
+*** Player should have a choice of sectors to move to
+**** If he/she wants more herbs, move to glen etc
 
 ** Exploration/combat as monk in a sector
 *** Look around
@@ -76,42 +92,82 @@ poisoning event.
 ** Menu with traditional RPG checkpoint save/load system.
 *** Should only be able to save at campfire when no enemies present.
 
-* Actions and Spells
+* Geoffrey's initial Spells
 
-** Spark (light torches, campfires, and dry out even soaked wood)
-** Make camp (puts out the tent and firepit)
-** Leave area
-** Hold creature
-** Radiance (required for dark areas. needs one white or yellow flower.)
-** Cause Fear (enemy flees)
-** Flame (fire attack)
-** Cure meat (create jerky from animal carcasses)
-** Cure light wounds (consumes beef/wolf jerky for greater healing)
-** Boil grasses (make small amounts of thin gruel. requires wild grasses and water)
+** Spark (2 mana)
+*** Light torches, campfires, and dry out even soaked wood
+** Hearth stone (2 mana) (stone chips)
+*** Heat up stone chips held in the hand
+*** Reduces cold by 5pts
+*** Does not consume the chips
+** Craft arrows (3 mana) (stone chips, wood)
+*** Create bundle of 20 arrows
+** Craft silver arrows (8 mana) (stone chips, silverwood)
+*** Create 10 3x-powerful arrows
+** Light (2 mana)
+*** Casts light with medium radius
+*** Lasts for 4 minutes 
+*** Very slight flicker of circle
+*** Required in dark areas
+*** Certain enemies can negate magic spell effects, dousing your light
+** Cure meat (5 mana)  
+*** Create healing-jerky from animal carcasses
+** Boil grasses (3 mana) (3 grasses)
+*** Make small amounts of thin gruel. requires wild grasses and water)
+** Cure light wounds (25 mana) (2 salvia) 
+*** Heals between 10-15 mana
+** Hold creature (8 mana) (2 parathorn weed)
+*** 80% chance of briefly paralyzing target so they cannot move or attack
+
+* Spells found in ruins or on dead travelers
+
+** Cause Fear (15 mana) (1 nightshade)
+*** 80% chance of enemy fleeing
+** Dispel magic (20 mana) (1 salvia)
+*** 60% chance of removing ordinary spell effects. 
+** Cure heavy wounds (50 mana) (2 salvia)
+*** Heals between 40-60 mana
+** Explosion (20 mana) (2 stone chips) 
+*** 90% chance of scorching several enemies in target area
+
+* Actions
+
+** Fire bow (1 fatigue, 1 arrow)
+*** choose target while action paused
+*** can also double-click enemy 
+** Open inventory
+*** shows the inventory gump
+** Make camp (3 firewood)
+*** puts out the small tent and firepit
+*** can only craft items at camp
+** Leave area (can only do this at one of the 4 entry/exit points)
 
 * Items
 
-** Arrows (craft from stone chips and wood)
+** Arrows
 ** Bundles of arrows (20 per)
-** Water 
 ** White bread
+*** Hunger -10
+*** HP +5
 ** Wheat bread
 ** Beef jerky
 ** Notebook
 ** Forget-me-nots
 ** Snowdrop
 ** Wild violet
+** Elixir
 ** Stones, stone chips
 ** Branches, wood planks, ruined wood
 ** Temple Incense
 
 * Enemies
+** Dead travelers (raid for items)
 ** Wolf
 ** Watcher-in-the-weeds
 ** Wraith
 ** Skeleton soldier
 ** Skeleton archer
-** 
+** Grave hag
 
 * Locations
 ** Nothbess
@@ -129,10 +185,18 @@ poisoning event.
 *** Grass, ochre-toned rock road
 *** Stone chips
 *** Watcher in the weeds
+** Forgotten cemetery
+*** Snow with gravestones
+*** Old metal fences
+*** Grave hags
+*** Silverwood
+*** Stone chips
+*** Bone dust
 ** Glen
 *** Dirt, grass, bushes, weeds
 *** Herbs
 *** Firewood
+*** Silverwood
 *** Flowers
 *** Wood chips
 ** Forest
@@ -142,10 +206,12 @@ poisoning event.
 *** Herbs
 *** Wood chips
 *** Pinecones
-** Cold Meadow
+*** Dead travellers
+** Frozen Meadow
 *** Snow, dead grass, dead bushes
 *** Precipitation/wetness
 *** Wolves
+*** Silverwood
 *** Wraiths
 ** Snowy glen
 *** Snowy evergreens (turning brown)
@@ -163,12 +229,6 @@ poisoning event.
 *** Skeleton soldiers
 *** Wraiths
 ** ----------NIGHTFALL------------
-** Forgotten cemetery
-*** Snow with gravestones
-*** Old metal fences
-*** Wraiths
-*** Stone chips
-*** Bone dust
 ** Frozen crossing
 *** Skeleton archers
 *** Icy crossing with broken ice/water areas
