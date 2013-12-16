@@ -1,8 +1,106 @@
+** TODO Things to draw
+
+*** TODO wolf and carcass
+*** TODO elsewood bow 
+*** TODO draw more trees, sickly trees, 
+*** TODO draw herbs, refer to herbal book
+*** TODO draw grass patches
+*** TODO xalcium books
+*** TODO stone chips
+*** TODO wood chips
+*** TODO animated flame with additive blending
+*** TODO night forest scene with light halo and slight flicker
+
+
+* Tasks
+
+** TODO Watch original sanctuary playthrough vid
+** TODO decide how combat is going to work w/mouse
+
+* Episode 1: Call to Valisade
+
+One day Geoffrey (you, the player) is collecting herbs near the camp
+site, when Lucius comes running and delivers a letter from Dr. Quine,
+summoning you to the monastery. Lucius tells you to retrieve your
+sword and spellbook from the tent before you leave, and gives some
+other advice about the journey.
+
+** Campsite is entry/exit point to most levels
+** Simple status bar
+** One scroll gump for text
+** One inventory gump with 16 slots and :stacking items
+** One equipped item (usually sword)
+
+** Locations
+*** Meadow
+**** Grass, bushes, weeds
+**** Trees
+**** Flowers
+**** Some herbs
+*** Field
+**** Grass, weeds
+**** Wolves
+**** Flowers
+*** Ancient roadway
+**** Grass, ochre-toned rock road
+**** Stone chips
+**** Watcher in the weeds
+*** Glen
+**** Dirt, grass, bushes, weeds
+**** Herbs
+**** Firewood
+**** Flowers
+**** Wood chips
+*** Forest
+**** Evergreen trees
+**** Wraiths
+**** Firewood
+**** Herbs
+**** Wood chips
+**** Pinecones
+*** Cold Meadow
+**** Snow, dead grass, dead bushes
+**** Precipitation/wetness
+**** Wolves
+**** Wraiths
+*** Snowy glen
+**** Snowy evergreens (turning brown)
+**** Firewood 
+**** Wood chips
+**** Pinecones
+**** Wolves
+**** Skeleton soldiers
+*** Ruins 
+**** Snow, dirt, dead grass
+**** Waterlogged areas
+**** Item boxes with scrolls w/ dried herbs/flowers
+**** Stone chips
+**** Story scroll pieces
+**** Skeleton soldiers
+**** Wraiths
+*** Forgotten cemetery
+**** Snow with gravestones
+**** Old metal fences
+**** Wraiths
+**** Stone chips
+**** Bone dust
+*** Frozen crossing
+**** Skeleton archers
+**** Icy crossing with broken ice/water areas
+*** Dead forest hills
+**** Dead trees
+**** Firewood
+**** Skeleton soldiers
+**** Skeleton archers
+*** Mountain pass
+**** Wolves
+*** Road to Valisade
+
 * Overview
 
 ** Player controls a monk named Geoffrey as he explores the wilderness, fights monsters, and unravels the mystery of his brothers' disappearance.
 ** Ranged combat with bow-and-arrow
-** Melee combat with fists/feet
+** Melee combat with swords
 ** Manage limited resources: food, arrows, items/reagents
 ** Magic spells
 *** All spells require Mind points
@@ -10,7 +108,7 @@
 ** Story is exposed through the notebook, written letters/scrolls, NPC conversations, and the Astral Body spell
 ** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
 
-* Gameplay flow
+* Gameplay screens
 
 ** Overworld map grid with terrain sectors
 *** Each quest is composed of your movements on the symbols of a randomly generated worldmap
@@ -30,6 +128,7 @@
 *** Discover story items
 *** Brief "scroll story" cinematics
 *** Modal gumps for close-ups of scrolls, books, maps
+**** Use the same grid inventory scroll-gump for all containers
 
 ** Traditional RPG checkpoint save/load system. Campfire or bed.
 
@@ -61,7 +160,8 @@
 ** Spark (light torches, campfires, and dry out even soaked wood)
 ** Radiance (required for dark areas. needs one white or yellow flower.)
 ** Flame (fire attack)
-** Cure light wounds (consumes beef jerky for greater healing)
+** Cure meat (create jerky from animal carcasses)
+** Cure light wounds (consumes beef/wolf jerky for greater healing)
 ** Wood sprite (shakes firewood off of trees and brings it to you)
 ** Reclaim (turns garbage and other debris into reagents
 ** Temporal Seance (see the past. requires Forget-me-nots)
@@ -93,17 +193,17 @@
 * Locations
 
 ** Meadow
-** Abandoned village (optionally with tombstones and lurking undead)
+** Ancient roadway
+** Ruins (optionally with tombstones and lurking undead)
 ** Snowy glen
-** Valisade
 ** Forgotten cemetery
+** Frozen river crossing
 ** Gleyborough
 ** Mountain pass
-** Frozen river crossing
 ** Caves
 ** Dungeon, castle ruins
-** Ancient roadway
 ** Skeleton hideout
+** Valisade
 
 * Characters
 ** Geoffrey (the player)
@@ -116,6 +216,7 @@
 ** Skeleton wanderer
 ** Skeleton soldier
 ** Soulless wolves
+** Hag of the Mist
 ** Cryptghast
 ** Thief
 ** Skullscraper
@@ -289,33 +390,6 @@ done
 *** TODO use editor to add invisible walls and entry/exit points
 
 ** TODO procedurally generated maps
-
-** TODO Things to draw
-*** TODO elsewood bow 
-*** TODO draw more trees, sickly trees, 
-*** TODO draw herbs, refer to herbal book
-*** TODO draw grass patches
-*** TODO xalcium books
-*** TODO stone chips
-*** TODO wood chips
-*** TODO animated flame with additive blending
-*** TODO night forest scene with light halo and slight flicker
-
-** TODO inventory art book and do import checklist 
-*** TODO slate gray columns/tiles
-*** TODO flowers/herbs (draw new?)
-*** TODO more firewood
-*** TODO [#B] map symbols
-*** TODO stylized autumn trees
-*** TODO gravestones
-*** TODO leather armor 
-*** TODO spell/action icons
-*** TODO bone ash
-*** TODO interior dark rooms
-*** TODO yellow ochre tiled cracked road remains, 
-*** TODO metal boxes and wooden chests
-*** TODO copper doors
-*** TODO stone monk
 
 *** TODO wrap xelf with defblock and regular CLOS defmethod
 *** TODO IDENTIFY sentence schemata for level generation

@@ -41,7 +41,7 @@
 (defthing scroll :image (random-choose *scroll-images*) :z 20)
 
 (define-method activate scroll ()
-  (drop self (new 'scroll-gump *quine-summons*)))
+  (drop self (new 'scroll-gump *letter-text-2*)))
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
 
