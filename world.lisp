@@ -68,6 +68,7 @@
 	   (height (- bottom top))
 	   (width (- right left))
 	   (scale-base (or (field-value :image-scale thing) +dots-per-inch+))
+	   ;; TODO compute separate scales
 	   (scale (/ (min height width)
 		     (min image-height image-width)))
 	   (scaled-width (* scale scale-base))
@@ -371,7 +372,6 @@
       	(let ((x (+ 300 (random 1500)))
       	      (y (+ 300 (random 1000))))
 	  (drop-object buffer (new 'gray-rock))) x y)
-
 
       ;; allocate
        (install-quadtree buffer)

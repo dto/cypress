@@ -1,43 +1,96 @@
 * Tasks
 
 ** TODO Watch original sanctuary playthrough vid
-** TODO make player inventory work
-*** TODO generic inventory gump with expanded name/image of container
-*** TODO move into/out of containers
-** TODO [#A] USEing can require an argument to apply verb to; this pauses and changes cursor
-** TODO [#A] fix diagonal scrolling jitter
-** TODO [#B] fix wraith texture bounding box squishness
+** TODO Inventory art book to see some things already painted for episode 1
+
+** TODO Paint and Animate an Imperial Raven.
+** TODO Import map symbols
+** TODO Import leather overworld map
+** TODO Import spell/action symbols
+*** TODO Create background gump for spell/action symbols
+*** TODO Identify whether other symbols are needed
+*** TODO Are the symbols really needed? 
+** TODO Identify how many raw snow/dirt backgrounds are needed
+** TODO Paint mouse cursors
+*** TODO Normal 
+*** TODO Target
+*** TODO Error
+** TODO Paint wolves 
+*** TODO Possibly re-use other wolves
+*** TODO Wolf carcass
+** TODO Paint skeleton soldiers
+** TODO Paint skeleton archers
+** TODO Paint arrows
+*** TODO Wood
+*** TODO Silver
+*** TODO Crystal
+** TODO Paint items
+*** TODO firewood
+*** TODO silverwood
+*** TODO stone chips
+*** TODO wood chips
+*** TODO Hold Creature symbol
+*** TODO Elixir
+*** TODO Silver Elixir
+*** TODO Charcoal
+*** TODO Nightshade
+*** TODO Pinecones
+*** TODO Salvia
+*** TODO Thornweed
+** TODO Paint elsewood bow
+** TODO Paint more trees
+*** TODO Evergreens
+*** TODO Dying evergreens
+*** TODO Dead trees
+** TODO Paint watery snow pool decals
+** TODO Paint dead traveler bodies
+** TODO Paint silver item boxes
+** TODO Paint grave hag
+** TODO Paint rushes, weeds, branches
+** TODO Paint ruined wood
+** TODO Import gravestones
+** TODO Paint bone dust
+** TODO Paint various snow decals
+** TODO Paint meadow grass background and some decals
+** TODO Paint ruins pieces
+*** TODO Basic blocks
+*** TODO Broken basic blocks
+*** TODO Stone chips
+*** TODO Horizontal wall sections
+*** TODO Vertical wall sections
+*** TODO Wall junctions
+*** TODO Clogged stairwells
+** TODO Paint glowing campfire and halo for night scenes (crafting, rest)
+
+** TODO Create generic inventory gump
+*** TODO Paint this gump background
+*** TODO Display container's name and icon in the corner
+*** TODO Drag into/out of containers
+** TODO Improve camera scrolling smoothness
+** TODO Fix wraith texture bounding box squishness
 
 * Overview
 
 The player controls a storybook-like animated monk named Geoffrey as
 he travels through the wilderness fighting monsters and collecting
-items.
+items. A point-and-click interface allows the player to travel to
+different areas of the wilderness, move Geoffrey around the
+environment, attack enemies, and cast spells.
 
-The game's world is shown from an overhead 2-D perspective. The world
-view is full-frame, except for a thin black bar across the bottom
-called the "modeline". This line is used for status display and
-triggering the menu. It is mostly unobtrusive, displaying the meter
-bars for Body (Red) and Mind (Blue), and an icon for the currently
-equipped item/weapon. Status icons and some other messages will also
-be displayed here. The various meters and items can briefly blink when
-something requires the player's attention, such as wounding , hunger,
-or fatigue.
+Combat will consist of ranged attacks by the player, using a bow and
+several different kinds of arrows. 
 
-** Point-and-click interface
-** Ranged combat with bow-and-arrow
-** Manage health limited food/resources 
+** Manage health, hunger, cold, and scarce food/resources 
 ** Magic spells
 *** All spells require Mind points
 *** Some spells require "reagents" i.e. a supply
 ** Story is exposed through the notebook, written letters/scrolls
 *** I found two wraiths, but vanquished them. 
 *** I collected skulls for making bone dust.
-** Story pieces are randomly chosen (somewhat akin to special events or "vaults" in a roguelike)
 
 * Player attributes
 
-** Equipped item. 
+** Equipped item
 *** Supplies the verb for double clicking objects in the world 
 *** Usually the bow is equipped, so the verb is "attack"
 *** When a spell is selected, the spell is cast on the clicked target, etc
@@ -58,21 +111,37 @@ or fatigue.
 **** Reduce cold with camp or dry with Warmth
 *** Fatigue (0-100)
 **** You must eventually sleep. Cannot cast spells when Fatigue < 10
+
+* Modeline status display
+
+** " Equip [ITEMNAME]       Body 100   Mind 100        Hunger 0   Cold 20   Fatigue 30 "
+** Can also show single-line message briefly
+** Allow light-up color alarm when stat is low or condition is high
   
 * Gameplay screens
+
+The game's world is shown from an overhead 2-D perspective. The world
+view is full-frame, except for a thin black bar across the bottom
+called the "modeline". This line is used for status display and
+triggering the menu. It is mostly unobtrusive, displaying the meter
+bars for Body (Red) and Mind (Blue), and an icon for the currently
+equipped item/weapon. Status icons and some other messages will also
+be displayed here. The various meters and items can briefly blink when
+something requires the player's attention, such as wounding , hunger,
+or fatigue.
 
 ** Overworld map grid with terrain sectors
 *** Each quest is composed of your movements on the symbols of a randomly generated grid map
 **** Some mountain (impassable) squares
-*** Four entry/exit points to a sector: north, south, east, and west
-**** Depends on direction of previous map square occupied
-*** When you move into a sector you get a randomly generated (and/or procedural) level in the sector's style
-*** Choose when to leave with "Leave Area" unless held by conditions (presence of enemies)
 *** Can only travel 1 square at a time.
 **** Expends 10 hunger
 **** Expends 20 fatigue
 *** Player should have a choice of sectors to move to
 **** If he/she wants more herbs, move to glen etc
+*** When you move into a sector you get a randomly generated (and/or procedural) level in the sector's style
+*** Four entry/exit points to a sector: north, south, east, and west
+**** Depends on direction of previous map square occupied
+*** Choose when to leave with "Leave Area" unless held by conditions (presence of enemies)
 
 ** Exploration/combat as monk in a sector
 *** Look around
@@ -92,16 +161,20 @@ or fatigue.
 ** Menu with traditional RPG checkpoint save/load system.
 *** Should only be able to save at campfire when no enemies present.
 
-* Crafting items 
+* Actions
 
-** Craft arrows (1 mana) (3 fatigue) (stone chips, wood) 
-*** Create bundle of 20 arrows
-** Craft silver arrows (1 mana) (8 fatigue) (stone chips, silverwood)
-*** Create 10 3x-powerful arrows
-
-** Boil grasses (2 fatigue) (3 grasses)
-*** Make small amounts of thin gruel. requires wild grasses and water)
-
+** Fire bow (1 fatigue, 1 arrow)
+*** choose target while action paused
+*** can also double-click enemy 
+** Open inventory
+*** Shows the inventory gump
+*** Can eat food, use other items
+** Cast spell
+*** Shows spell list
+** Make camp (1 fatigue) (3 firewood)
+*** puts out the small tent and firepit
+*** camp provides good healing and mana restoration.
+*** can only craft items at camp
 
 * Geoffrey's initial Spells
 
@@ -123,9 +196,16 @@ or fatigue.
 *** Heals between 10-15 mana
 ** Hold creature (8 mana) (2 thornweed)
 *** 80% chance of briefly paralyzing target so they cannot move or attack
+** Craft arrows (1 mana) (3 fatigue) (stone chips, wood) 
+*** Create bundle of 20 arrows
+** Boil grasses (2 fatigue) (3 grasses)
+*** Make small amounts of thin gruel. requires wild grasses and water)
 
-* Spells found in ruins or on dead travelers
+* Spell scrolls found in ruins or on dead travelers
 
+** Vault on roadway, raven delivers story note or magic spell
+** Craft silver arrows (1 mana) (8 fatigue) (stone chips, silverwood)
+*** Create 10 3x-powerful arrows
 ** Craft crystal arrow (20 mana) (snow)
 ** Phantom Scythe (10 mana)
 *** Creates white or wheat bread
@@ -139,17 +219,6 @@ or fatigue.
 *** Heals between 40-60 mana
 ** Explosion (20 mana) (1 nightshade, 2 stone chips)
 *** 90% chance of scorching several enemies in target area
-
-* Actions
-
-** Fire bow (1 fatigue, 1 arrow)
-*** choose target while action paused
-*** can also double-click enemy 
-** Open inventory
-*** shows the inventory gump
-** Make camp (1 fatigue) (3 firewood)
-*** puts out the small tent and firepit
-*** can only craft items at camp
 
 * Items
 
@@ -167,7 +236,9 @@ or fatigue.
 *** Hunger -30
 *** HP +14
 ** Elixir
-*** Mana +50
+*** Mana +40
+** Silver Elixir
+*** Mana +100
 ** Stones, stone chips
 ** Charcoal (from other campsites too)
 ** Branches, wood planks, ruined wood
@@ -177,6 +248,7 @@ or fatigue.
 ** Silverwood 
 
 * Enemies
+
 ** Dead travelers (raid for items)
 ** Wolf
 *** 20 HP
@@ -192,7 +264,7 @@ or fatigue.
 
 * Locations
 ** Nothbess
-*** Campsite, sword, spellbook, Lucius
+*** Campsite, Lucius
 ** Meadow
 *** Grass, bushes, weeds
 *** Trees
@@ -261,17 +333,3 @@ or fatigue.
 ** Mountain pass
 *** Wolves
 ** Road to Valisade
-
-* Things to draw
-
-** TODO wolf and carcass
-** TODO elsewood bow 
-** TODO draw more trees, sickly trees, 
-** TODO draw herbs, refer to herbal book
-** TODO draw grass patches
-** TODO xalcium books
-** TODO stone chips
-** TODO wood chips
-** TODO animated flame with additive blending
-** TODO night forest scene with light halo and slight flicker
-
