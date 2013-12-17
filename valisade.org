@@ -104,13 +104,13 @@ several different kinds of arrows.
 
 ** Conditions. Lower is better.
 *** Hunger (0-100) 
-**** You must eat periodically. When hunger < 20 your health drains
+**** You must eat periodically. When hunger > 80 your health drains
 *** Cold (0-100)
 **** When cold reaches 65% your health will drain small amounts (2-5 hp)
 **** When cold reaches 80% your health will drain faster 
 **** Reduce cold with camp or dry with Warmth
 *** Fatigue (0-100)
-**** You must eventually sleep. Cannot cast spells when Fatigue < 10
+**** You must eventually sleep. Cannot cast spells when Fatigue > 90
 
 * Modeline status display
 
@@ -148,12 +148,13 @@ or fatigue.
 **** Left click to see name of object
 *** Move around
 **** Right click open space to move there
+*** Double click (or control-click) Geoffrey to open action menu (inventory, spells, etc)
+**** Can also click modeline
 *** Collect items 
 **** Mouse-drag onto character or into inventory gump
 *** Fight enemies
 **** Double-click (or control-click) enemy to fire arrow
 *** Cast spells
-**** Double click (or control-click) Geoffrey to open action menu (inventory, spells, etc)
 *** Modal gumps for close-ups of scrolls, books, maps
 **** Gumps halt action, but updates still happen (RUNs do not)
 **** Right click to close gump
@@ -278,6 +279,7 @@ or fatigue.
 *** Grass, ochre-toned rock road
 *** Stone chips
 *** Watcher in the weeds
+*** Xalcium bead
 ** Forgotten cemetery
 *** Snow with gravestones
 *** Old metal fences
