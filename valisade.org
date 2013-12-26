@@ -1,5 +1,23 @@
+<dto> my concept for this is that on some playthroughs you might find magic
+      potions and spells in the item boxes and on dead travelers, and that'd
+      be a somewhat more magical playthrough, whereas on other playthroughs
+      you'd randomly get silver and crystal arrows.  [11:29]
+<dto> and similarly, you'd find different story fragments, so that by the time
+      you've had enough and got through to the ending, you've seen a pretty
+      good share of the content.   [11:30]
+<dto> this also means that the early and mid game can vary more than the
+      endgame areas, since they'll be played less often
+
+SHOULD be able to solve endgame both ways, most magic supplements combat
+
+ALSO have a stealth spell, a way to avoid confrontation
+
+FORGET-ME-NOTS and Temporal Seance
+
 * Tasks
 
+** TODO IDENTIFY all level gen parameters (difficulty, background, terrain, decals, items, enemies)
+** TODO Draw individual trees and also clusters of trees
 ** TODO Watch original sanctuary playthrough vid
 ** TODO Inventory art book to see some things already painted for episode 1
 
@@ -66,8 +84,9 @@
 *** TODO Paint this gump background
 *** TODO Display container's name and icon in the corner
 *** TODO Drag into/out of containers
-** TODO Improve camera scrolling smoothness
+** TODO Fix camera scrolling jitter
 ** TODO Fix wraith texture bounding box squishness
+** TODO Fix jittery rotation of monk at corners of paths
 
 * Overview
 
@@ -217,7 +236,7 @@ or fatigue.
 ** Dispel magic (20 mana) (1 salvia)
 *** 60% chance of removing ordinary spell effects. 
 ** Cure heavy wounds (50 mana) (2 salvia)
-*** Heals between 40-60 mana
+*** Heals between 40-60 HP
 ** Explosion (20 mana) (1 nightshade, 2 stone chips)
 *** 90% chance of scorching several enemies in target area
 
