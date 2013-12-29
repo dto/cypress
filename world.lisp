@@ -10,35 +10,35 @@
 
 (defun containerp (thing)
   (and (xelfp thing)
-       (has-tag thing :container)))
+       (has-tag (find-object thing) :container)))
 
 (defun etherealp (thing)
   (and (xelfp thing)
-       (has-tag thing :ethereal)))
+       (has-tag (find-object thing) :ethereal)))
 
 (defun solidp (thing)
   (and (xelfp thing)
-       (has-tag thing :solid)))
+       (has-tag (find-object thing) :solid)))
 
 (defun fixedp (thing)
   (and (xelfp thing)
-       (has-tag thing :fixed)))
+       (has-tag (find-object thing) :fixed)))
 
 (defun targetp (thing)
   (and (xelfp thing)
-       (has-tag thing :target)))
+       (has-tag (find-object thing) :target)))
 
 (defun enemyp (thing)
   (and (xelfp thing)
-       (has-tag thing :enemy)))
+       (has-tag (find-object thing) :enemy)))
 
 (defun monkp (thing)
   (and (xelfp thing)
-       (has-tag thing :monk)))
+       (has-tag (find-object thing) :monk)))
 
 (defun bubblep (thing)
   (and (xelfp thing)
-       (has-tag thing :bubble)))
+       (has-tag (find-object thing) :bubble)))
 
 ;;; Animation system
 
@@ -92,7 +92,7 @@
 
 ;;; Fundamental object attributes in the world of Cypress
 
-(define-block thing 
+(defblock thing 
   (last-tap-time :initform nil)
   (gump :initform nil)
   ;; world parameters
@@ -193,7 +193,7 @@
 	     (1+ (maximum-z-value (current-buffer))))))
 
 (defmacro defthing (name &body body)
-  `(define-block (,name :super thing) ,@body))
+  `(defblock (,name :super thing) ,@body))
 
 (defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 130)))
 
@@ -201,14 +201,9 @@
   (when %image 
     (resize self 
 	    (* %scale (image-width %image) *default-thing-scale*)
-	    (* %scale (image-height %image) *default-thing-scale*)))
-  (arrange self))
+	    (* %scale (image-height %image) *default-thing-scale*))))
 
-(define-method create thing ())
-
-(define-method initialize thing (&rest args)
-  (block%initialize self)
-  (apply #'xelf:send :create self args)
+(defmethod initialize-instance :after ((self thing) &key)
   (layout self))
 
 (defun auto-describe (thing)
@@ -267,10 +262,11 @@
   (font :initform *bubble-font*)
   (collision-type :initform nil))
 
-(define-method create bubble (text &optional (font *bubble-font*))
-  (setf %text text)
-  (setf %font font)
-  (later 4.0 (destroy self)))
+(defmethod initialize ((self bubble) &key text (font *bubble-font*))
+  (with-local-fields 
+    (setf %text text)
+    (setf %font font)
+    (later 4.0 (destroy self))))
 
 (define-method draw bubble ()
   (with-field-values (x y text font) self
@@ -287,7 +283,7 @@
 
 ;;; Sprites
 
-(define-block (sprite :super thing)
+(defblock (sprite :super thing)
   (sprite-height :initform nil)
   (sprite-width :initform nil))
 
@@ -300,7 +296,7 @@
   (arrange self))
 
 (defmacro defsprite (name &body body)
-  `(define-block (,name :super sprite) ,@body))
+  `(defblock (,name :super sprite) ,@body))
 
 ;;; Cypress
 
@@ -337,7 +333,7 @@
 
 (define-method draw-object-layer cypress () 
   (multiple-value-bind (top left right bottom) (window-bounding-box self)
-    (dolist (object (z-sort (get-objects self)))
+    (dolist (object (mapcar #'find-object (z-sort (get-objects self))))
       ;; only draw onscreen objects
       (when (colliding-with-bounding-box object top left right bottom)
 	(draw object)

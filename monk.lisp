@@ -96,7 +96,7 @@
   (goal-y :initform nil))
 
 (defmacro defmonk (name &rest body)
-  `(define-block (,name :super monk) ,@body))
+  `(defblock (,name :super monk) ,@body))
 
 (define-method humanp monk () nil)
 
@@ -382,7 +382,7 @@
 (defmonk lucius :clock 10)
 
 (define-method run lucius ()
-  (monk%run self)
+  (call-next-method)
   (decf %clock)
   (with-fields (clock) self
     (when (cursor)

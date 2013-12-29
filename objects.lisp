@@ -63,10 +63,10 @@
   :image-scale 40
   :image (random-choose *arrow-images*))
 
-(define-method initialize arrow (heading)
-  (block%initialize self)
-  (setf %clock 400)
-  (setf %heading heading))
+(defmethod initialize ((self arrow) &key heading)
+  (with-local-fields 
+    (setf %clock 400)
+    (setf %heading heading)))
 
 (define-method collide arrow (thing)
   (cond ((enemyp thing) (damage thing 1) (destroy self))

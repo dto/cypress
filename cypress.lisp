@@ -28,20 +28,6 @@
 	(make-pathname
 	 :directory (pathname-directory #.#P"./"))))
 
-(defresource "wood.wav" :volume 40)
-(defresource "growl-1.wav" :volume 60)
-(defresource "growl-2.wav" :volume 60)
-(defresource "unh-1.wav" :volume 20)
-(defresource "unh-2.wav" :volume 20)
-(defresource "unh-3.wav" :volume 20)
-(defresource "howl.wav" :volume 50)
-(defresource "knock.wav" :volume 50)
-(defresource "bow.wav" :volume 40)
-(defresource "death.wav" :volume 40)
-(defresource "lichscream.wav" :volume 60)
-(defresource "lichdie.wav" :volume 60)
-(defresource "dead.wav" :volume 40)
-
 ;;; Main program
 
 (defun cypress (&optional (level 1))

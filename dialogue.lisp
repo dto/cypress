@@ -34,9 +34,9 @@
 (defun dialogue-playing-p () 
   (and *dialogue* (integerp *dialogue-channel*)))
 
-(defun say (actor line) 
-  (setf *dialogue*
-	(append *dialogue* (list (list actor line)))))
+;; (defun say (actor line) 
+;;   (setf *dialogue*
+;; 	(append *dialogue* (list (list actor line)))))
 
 (defun act (actor method) 
   (setf *dialogue*

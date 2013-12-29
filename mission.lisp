@@ -29,7 +29,7 @@
 
 (defvar *mission* nil)
 
-(define-block mission
+(defblock mission
   name 
   title
   description

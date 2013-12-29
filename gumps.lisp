@@ -30,7 +30,7 @@
   (move-to self x y))
       
 (defmacro defgump (name &body body)
-  `(define-block (,name :super gump) ,@body))
+  `(defblock (,name :super gump) ,@body))
 
 ;;; The scroll gump is for reading pages of text.
 
@@ -63,9 +63,10 @@
 	  (mod (or p (1+ page-number))
 	       (length pages)))))
 
-(define-method create scroll-gump (text)
-  (setf %pages (split-into-pages text *lines-per-scroll*))
-  (flip self 0))
+(defmethod initialize ((self scroll-gump) &key text)
+  (with-local-fields
+    (setf %pages (split-into-pages text *lines-per-scroll*))
+    (flip self 0)))
 
 (define-method tap scroll-gump (x y)
   (flip self))
@@ -105,11 +106,12 @@
   (label :initform "foo")
   (arguments :initform nil))
 
-(define-method create button (&key label method target arguments font)
-  (setf %label (format nil "* ~A " label)
-	%method method 
-	%target target 
-	%arguments arguments))
+(defmethod initialize ((self button) &key label method target arguments font)
+  (with-local-fields 
+    (setf %label (format nil "* ~A " label)
+	  %method method 
+	  %target target 
+	  %arguments arguments)))
 
 (define-method arrange button ()
   (with-fields (label) self
@@ -135,7 +137,7 @@
 	       :target target
 	       :arguments (list topic)))
 
-(define-block (scroll-text :super text))
+(defblock (scroll-text :super text))
 
 (define-method tap scroll-text (x y) (flip %parent))
 (define-method alternate-tap scroll-text (x y) (destroy %parent))
@@ -156,11 +158,12 @@
 
 (defparameter *talk-gump-scale* (/ 1 2.3))
 
-(define-method create talk-gump ()
-  (setf %inputs (list 
-		 (make-talk-gump-text "hello")
-		 (make-sentence nil)))
-  (update-parent-links self))
+(defmethod initialize ((self talk-gump) &key)
+  (with-local-fields
+    (setf %inputs (list 
+		   (make-talk-gump-text "hello")
+		   (make-sentence nil)))
+    (update-parent-links self)))
 
 (define-method flip talk-gump (&optional p)
   (with-fields (inputs pages page-number) self
