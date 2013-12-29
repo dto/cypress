@@ -53,7 +53,7 @@ FORGET-ME-NOTS and Temporal Seance
 *** TODO Charcoal
 *** TODO Nightshade
 *** TODO Pinecones
-*** TODO Salvia
+*** TODO Ginseng
 *** TODO Thornweed
 ** TODO Paint elsewood bow
 ** TODO Paint more trees
@@ -212,7 +212,7 @@ or fatigue.
 *** Certain enemies can negate magic spell effects, dousing your light
 ** Cure meat (5 mana)  
 *** Create healing-jerky from animal carcasses
-** Cure light wounds (25 mana) (2 salvia) 
+** Cure light wounds (25 mana) (2 ginseng) 
 *** Heals between 10-15 mana
 ** Hold creature (8 mana) (2 thornweed)
 *** 80% chance of briefly paralyzing target so they cannot move or attack
@@ -229,13 +229,13 @@ or fatigue.
 ** Craft crystal arrow (20 mana) (snow)
 ** Phantom Scythe (10 mana)
 *** Creates white or wheat bread
-** Protection (15 mana) (1 salvia, 1 thornweed)
+** Protection (15 mana) (1 ginseng, 1 thornweed)
 *** Temporary 35% reduction in combat damage received
 ** Cause Fear (15 mana) (1 nightshade)
 *** 80% chance of enemy fleeing
-** Dispel magic (20 mana) (1 salvia)
+** Dispel magic (20 mana) (1 ginseng)
 *** 60% chance of removing ordinary spell effects. 
-** Cure heavy wounds (50 mana) (2 salvia)
+** Cure heavy wounds (50 mana) (2 ginseng)
 *** Heals between 40-60 HP
 ** Explosion (20 mana) (1 nightshade, 2 stone chips)
 *** 90% chance of scorching several enemies in target area
@@ -264,7 +264,7 @@ or fatigue.
 ** Branches, wood planks, ruined wood
 ** Temple Incense
 ** Nightshade
-** Salvia
+** Ginseng
 ** Silverwood 
 
 * Enemies
