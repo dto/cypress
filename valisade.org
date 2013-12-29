@@ -110,7 +110,7 @@ several different kinds of arrows.
 * Player attributes
 
 ** Equipped item
-*** Supplies the verb for double clicking objects in the world 
+*** Supplies the verb for double clicking objects in the world ?
 *** Usually the bow is equipped, so the verb is "attack"
 *** When a spell is selected, the spell is cast on the clicked target, etc
 

@@ -72,6 +72,7 @@
 	     ("monk-2-stand-2.png" 24))))
 
 (defsprite monk
+  (inventory :initform (list (quantity-of 'arrow 10)))
   (sprite-height :initform (units 5))
   (sprite-width :initform (units 5))
   (image :initform (random-choose *monk-stand-images*))
@@ -100,6 +101,8 @@
 
 (defmethod humanp ((self monk)) nil)
 
+(defmethod can-accept ((self monk)) t)
+
 ;;; Animating the monk as he walks
 
 (defparameter *monk-step-frames* 3)
@@ -108,8 +111,9 @@
 
 (defparameter *walk-interval* 16)
 
-(defmethod raise-bow ((self monk))
-  (setf (field-value :raising-bow self) t))
+(defmethod raise-bow ((monk monk))
+  (when (has-quantity monk 'arrow)
+    (setf (field-value :raising-bow monk) t)))
 
 (defmethod update-walk ((self monk))
   (with-fields (walk-clock step-clock) self
@@ -123,11 +127,11 @@
 (defmethod draw ((self monk))
   (with-local-fields 
     (draw-as-sprite self 
-		    (or (animation-frame self) %image)
+		    (or (current-animation-frame self) %image)
 		    %heading)))
 
 (defmethod cast-spell ((self monk))
-  (animate self *monk-cast*))
+  (begin-animation self *monk-cast*))
 
 (defmethod fire-location ((self monk))
   (with-fields (direction) self
@@ -139,12 +143,13 @@
 	  
 (defmethod fire ((self monk) direction)
   (with-fields (fire-clock) self
-  (when (zerop fire-clock)
-    (setf fire-clock *monk-reload-frames*)
-    (multiple-value-bind (x y) (fire-location self)
-      (play-sample "bow.wav")
-      (let ((arrow (new 'arrow (direction-heading direction))))
-	(drop-object (current-buffer) arrow x y))))))
+    (when (zerop fire-clock)
+      (setf fire-clock *monk-reload-frames*)
+      (multiple-value-bind (x y) (fire-location self)
+	(when (has-quantity self 'arrow)
+	  (consume-quantity self 'arrow)
+	  (let ((arrow (new 'arrow (direction-heading direction))))
+	    (drop-object (current-buffer) arrow x y)))))))
 
 (defmethod begin-talking ((self monk) line)
   (setf (field-value :talking self) t))
@@ -269,7 +274,7 @@
     (when %alive
       (update-animation self)
       (when (null %animation)
-	(animate self (standing-animation self)))
+	(begin-animation self (standing-animation self)))
       (with-fields (step-clock fire-clock) self
 	(when (plusp step-clock)
 	  (decf step-clock))
@@ -278,10 +283,10 @@
 	      (fire-button (pressing-fire-p self)))
 	  (when (or (null heading)
 		    (null %animation))
-	    (animate self (standing-animation self)))
+	    (begin-animation self (standing-animation self)))
 	  (when heading 
 	    (unless (eq %animation (walking-animation self))
-	      (animate self (walking-animation self)))
+	      (begin-animation self (walking-animation self)))
 	    ;; move in the movement direction
 	    (move self heading (/ *monk-speed* 2))
 	    (setf %heading heading))

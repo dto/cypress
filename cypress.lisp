@@ -20,45 +20,26 @@
 
 (in-package :cypress)
 
-(eval-when (:load-toplevel) 
-  (setf *window-title* "cypress v0.1")
-  (setf *default-texture-filter* :nearest)
-  (setf *use-antialiased-text* nil)
-  (setf *current-directory*
-	(make-pathname
-	 :directory (pathname-directory #.#P"./"))))
-
-;;; Main program
-
 (defun cypress (&optional (level 1))
   (setf *window-title* "cypress v0.1")
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)
   (setf *nominal-screen-height* 720)
-  ;; zoomout 
-;;  (setf *nominal-screen-width* (* 1280 5))
-;;  (setf *nominal-screen-height* (* 720 5))
-  ;;
   (setf *scale-output-to-window* t) 
+  (setf *use-antialiased-text* t)
   (setf *font-texture-filter* :linear)
   (setf *font-texture-scale* 2)
   (setf *default-texture-filter* :mipmap)
-  (setf *use-antialiased-text* t)
-
   (setf *frame-rate* 30)
-  
-  (disable-key-repeat) 
   
   (setf *font* "sans-mono-bold-11") 
   (with-session 
-      (load-project "cypress" '(:with-database nil))
-
+    (load-project "cypress" '(:with-database nil))
     (index-all-images)
     (index-all-samples)
     (preload-resources)
     (index-pending-resources)
-
     (switch-to-buffer (make-meadow))
     (start-session)))
 

@@ -9,7 +9,6 @@
 (defparameter *notebook-images* (image-set "notebook" 3))
 (defparameter *wood-images* (image-set "wood" 4))
 (defparameter *wraith-images* (image-set "wraith" 3))
-(defparameter *arrow-images* (image-set "arrow" 3))
 (defparameter *fire-pit-images* (image-set "fire-pit" 3))
 (defparameter *dead-tree-images* (image-set "dead-tree" 5))
 (defparameter *gray-rock-images* (image-set "gray-rock" 8))
@@ -58,6 +57,7 @@
 ;;; Arrows, the main weapon
 
 (defparameter *arrow-size* 25)
+(defparameter *arrow-images* (image-set "arrow" 3))
 
 (defsprite arrow
   :image-scale 40
