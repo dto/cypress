@@ -1,5 +1,56 @@
 (in-package :cypress)
 
+;;; Arrows, the monk's main weapon
+
+(defparameter *arrow-size* 25)
+(defparameter *arrow-images* (image-set "arrow" 2))
+(defparameter *silver-arrow-images* (image-set "silver-arrow" 2))
+(defparameter *crystal-arrow-images* (image-set "crystal-arrow" 2))
+
+(defthing (arrow sprite)
+  :image-scale 40
+  :clock 400
+  :images *arrow-images*
+  :image (random-choose *arrow-images*))
+
+(defmethod initialize ((self arrow) &key heading)
+  (setf (field-value :heading self) heading))
+
+(defmethod run ((self arrow))
+  (with-local-fields 
+    (percent-of-time 13 (setf %image (random-choose %images)))
+    (resize self *arrow-size* *arrow-size*)
+    (decf %clock)
+    (if (minusp %clock)
+	(destroy self)
+	(forward self 15))))
+
+(defmethod collide ((self arrow) (thing thing))
+  (when (solidp thing) 
+    (destroy self)))
+
+(defthing (wooden-arrow arrow))
+
+(defmethod collide ((self wooden-arrow) (enemy enemy))
+  (modify-hit-points enemy -5)
+  (destroy self))
+
+(defthing (silver-arrow arrow)
+  :images *silver-arrow-images*
+  :image (random-choose *silver-arrow-images*))
+
+(defmethod collide ((self silver-arrow) (enemy enemy))
+  (modify-hit-points enemy -10)
+  (destroy self))
+
+(defthing (crystal-arrow arrow)
+  :images *crystal-arrow-images*
+  :image (random-choose *crystal-arrow-images*))
+
+(defmethod collide ((self crystal-arrow) (enemy enemy))
+  (modify-hit-points enemy -15)
+  (destroy self))
+
 ;;; A monk, either AI or human controlled
 
 (defparameter *monk-cast*
@@ -80,7 +131,7 @@
   (hunger-points :initform 0)
   (fatigue-points :initform 0)
   (cold-points :initform 0)
-  (inventory :initform (quantity-of 'arrow 10))
+  (inventory :initform (quantity-of 'wooden-arrow 10))
   (sprite-height :initform (units 5))
   (sprite-width :initform (units 5))
   (image :initform (random-choose *monk-stand-images*))
@@ -232,58 +283,7 @@
 	      (begin-animation self (walking-animation self)))
 	    ;; move in the movement direction
 	    (move self heading (/ *monk-speed* 2))
-	    (setf %heading heading))
-	  ;; update walk counters
-	  (update-walk self)))))
-
-;;; Arrows, the main weapon
-
-(defparameter *arrow-size* 25)
-(defparameter *arrow-images* (image-set "arrow" 2))
-(defparameter *silver-arrow-images* (image-set "silver-arrow" 2))
-(defparameter *crystal-arrow-images* (image-set "crystal-arrow" 2))
-
-(defthing (arrow sprite)
-  :image-scale 40
-  :clock 400
-  :images *arrow-images*
-  :image (random-choose *arrow-images*))
-
-(defmethod initialize ((self arrow) &key heading)
-  (setf (field-value :heading self) heading))
-
-(defmethod run ((self arrow))
-  (with-local-fields 
-    (percent-of-time 13 (setf %image (random-choose %images)))
-    (resize self *arrow-size* *arrow-size*)
-    (decf %clock)
-    (if (minusp %clock)
-	(destroy self)
-	(forward self 15))))
-
-(defmethod collide ((self arrow) (thing thing))
-  (when (solidp thing) 
-    (destroy self)))
-
-(defmethod collide ((self arrow) (enemy enemy))
-  (modify-hit-points enemy -5)
-  (destroy self))
-
-(defthing (silver-arrow arrow)
-  :images *silver-arrow-images*
-  :image (random-choose *silver-arrow-images*))
-
-(defmethod collide ((self silver-arrow) (enemy enemy))
-  (modify-hit-points enemy -10)
-  (destroy self))
-
-(defthing (crystal-arrow arrow)
-  :images *crystal-arrow-images*
-  :image (random-choose *crystal-arrow-images*))
-
-(defmethod collide ((self crystal-arrow) (enemy enemy))
-  (modify-hit-points enemy -15)
-  (destroy self))
+	    (setf %heading heading))))))
 
 ;;; Firing arrows
 
@@ -294,12 +294,11 @@
   (field-value :aim-heading self))
 
 (defmethod fire-location ((self monk))
-  (with-fields (direction) self
-    (multiple-value-bind (cx cy) (center-point self)
-      (multiple-value-bind (tx ty) 
-	  (step-in-direction cx cy direction (units 0.7))
+  (multiple-value-bind (cx cy) (center-point self)
+    (multiple-value-bind (tx ty) 
+	(step-toward-heading cx cy (aim-heading self) (units 0.7))
 	(values (- tx (* *arrow-size* 0.4))
-		(- ty (* *arrow-size* 0.4)))))))
+		(- ty (* *arrow-size* 0.4))))))
 
 (defmethod fire ((monk monk) (arrow arrow))
   (with-fields (fire-clock) monk
@@ -314,7 +313,15 @@
 		  :heading (aim-heading monk)))
   (modify-quantity arrow -1))
 
-;; (defmethod attack ((monk monk) (enemy enemy))
+(defmethod find-arrow ((monk monk))
+  (or (find-inventory-item monk 'wooden-arrow)
+      (find-inventory-item monk 'silver-arrow)
+      (find-inventory-item monk 'crystal-arrow)))
+
+(defmethod attack ((monk monk) (enemy enemy))
+  (aim monk (heading-to-thing monk enemy))
+  (use monk (or (equipped-item monk)
+		(find-arrow monk))))
 
 ;;; As the monk Geoffrey, the player drives the action
   
