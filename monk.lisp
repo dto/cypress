@@ -98,7 +98,7 @@
 (defmacro defmonk (name &rest body)
   `(defblock (,name :super monk) ,@body))
 
-(define-method humanp monk () nil)
+(defmethod humanp ((self monk)) nil)
 
 ;;; Animating the monk as he walks
 
@@ -108,10 +108,10 @@
 
 (defparameter *walk-interval* 16)
 
-(define-method raise-bow monk ()
-  (setf %raising-bow t))
+(defmethod raise-bow ((self monk))
+  (setf (field-value :raising-bow self) t))
 
-(define-method update-walk monk ()
+(defmethod update-walk ((self monk))
   (with-fields (walk-clock step-clock) self
     ;; only when moving
     (when (plusp step-clock)
@@ -120,15 +120,16 @@
       (when (zerop walk-clock)
 	(setf walk-clock *walk-interval*)))))
 
-(define-method draw monk ()
-  (draw-as-sprite self 
-		  (or (animation-frame self) %image)
-		  %heading))
+(defmethod draw ((self monk))
+  (with-local-fields 
+    (draw-as-sprite self 
+		    (or (animation-frame self) %image)
+		    %heading)))
 
-(define-method cast-spell monk ()
+(defmethod cast-spell ((self monk))
   (animate self *monk-cast*))
 
-(define-method fire-location monk ()
+(defmethod fire-location ((self monk))
   (with-fields (direction) self
     (multiple-value-bind (cx cy) (center-point self)
       (multiple-value-bind (tx ty) 
@@ -136,25 +137,26 @@
 	(values (- tx (* *arrow-size* 0.4))
 		(- ty (* *arrow-size* 0.4)))))))
 	  
-(define-method fire monk (direction ignore)
-  (when (zerop %fire-clock)
-    (setf %fire-clock *monk-reload-frames*)
+(defmethod fire ((self monk) direction)
+  (with-fields (fire-clock) self
+  (when (zerop fire-clock)
+    (setf fire-clock *monk-reload-frames*)
     (multiple-value-bind (x y) (fire-location self)
       (play-sample "bow.wav")
       (let ((arrow (new 'arrow (direction-heading direction))))
-	(drop-object (current-buffer) arrow x y)))))
+	(drop-object (current-buffer) arrow x y))))))
 
-(define-method begin-talking monk (line)
-  (setf %talking t))
+(defmethod begin-talking ((self monk) line)
+  (setf (field-value :talking self) t))
 
-(define-method stop-talking monk ()
-  (setf %talking nil))
+(defmethod stop-talking ((self monk))
+  (setf (field-value :ttalking self) nil))
 
 (defresource "left-foot.wav" :volume 20)
 (defresource "right-foot.wav" :volume 20)
 
-(define-method footstep-sound monk ()
-  (case %walk-clock
+(defmethod footstep-sound ((self monk))
+  (case (field-value :walk-clock self)
     ;; on first step
     (0 "left-foot.wav")
     ;; on 8th steps while looping 
@@ -169,7 +171,7 @@
     
 (defparameter *footstep-sound-range* 300)
 
-(define-method make-footstep-sounds monk ()
+(defmethod make-footstep-sounds ((self monk))
   (let ((sound (footstep-sound self)))
     (when sound 
       (when (< (distance-to-cursor self) 400)
@@ -182,56 +184,53 @@
 
 ;;; Default AI methods. 
 
-(define-method movement-direction monk () nil)
+(defmethod movement-direction ((self monk)) nil)
 
 (defvar *joystick-enabled* t)
 
-(define-method stick-heading monk () 
+(defmethod stick-heading ((self monk))
   (when (humanp self)
     (or (when (left-analog-stick-pressed-p)
 	  (left-analog-stick-heading))
 	(when (right-analog-stick-pressed-p)
 	  (right-analog-stick-heading)))))
 
-;; (define-method bounding-box monk ()
-;;   ;; shrink bounding box by a few px to make game more forgiving
-;;   (with-field-values (x y height width) self
-;;     (let ((margin 2))
-;;       (values (+ margin y) (+ margin x)
-;; 	      (+ (- margin) x width)
-;; 	      (+ (- margin) y height)))))
-
-(define-method collide monk (thing)
-  (when (and (solidp thing) (null %waypoints))
+(defmethod collide ((self monk) thing)
+  (when (and (solidp thing) 
+	     (null (field-value :waypoints self)))
     (restore-location self)
     (stop-walking self))
   (when (enemyp thing)
     (percent-of-time 20 (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
-(define-method die monk ()
-  (when %alive
+(defmethod die ((self monk))
+  (when (field-value :alive self)
     (when (humanp self) 
       (change-image self "skull.png")
-      (setf %alive nil))))
+      (setf (field-value :alive self) nil))))
 
-(define-method damage monk (points) (die self))
+(defmethod damage ((self monk) points)
+  (die self))
 
-(define-method pressing-fire-p monk () nil)
+(defmethod pressing-fire-p ((self monk)) 
+  nil)
 
-(define-method pressing-fire monk ())
+(defmethod pressing-fire ((self monk))
+  nil)
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
 (defparameter *monk-speed* (truncate (/ *unit* 1.3)))
 
-(define-method standing-animation monk () *monk-2-stand*)
-(define-method walking-animation monk () *monk-2-walk*)
+(defmethod standing-animation ((self monk)) *monk-2-stand*)
+(defmethod walking-animation ((self monk)) *monk-2-walk*)
 
-(define-method next-waypoint monk ()
-  (destructuring-bind (wx wy) (pop %waypoints)
-    (setf %goal-x wx %goal-y wy)))
+(defmethod next-waypoint ((self monk))
+  (with-local-fields 
+    (destructuring-bind (wx wy) (pop %waypoints)
+      (setf %goal-x wx %goal-y wy))))
 
-(define-method movement-heading monk ()
+(defmethod movement-heading ((self monk))
   (with-fields (x y goal-x goal-y waypoints) self
       (if (and goal-x goal-y)
 	  (if (< 4 (distance x y goal-x goal-y))
@@ -245,69 +244,70 @@
 	    (next-waypoint self)
 	    (find-heading x y goal-x goal-y)))))
 
-(define-method walk-to monk (x1 y1)
+(defmethod walk-to ((self monk) x1 y1)
   (with-fields (x y waypoints path) self
     (when (null path) 
       (setf path (create-path self :buffer (current-buffer))))
     (setf waypoints (rest (rest (find-path-waypoints path x y x1 y1))))
     (when (null waypoints) (stop-walking self))))
   
-(define-method stop-walking monk ()
-;;  (setf %path nil)
-  (setf %waypoints nil)
-  (setf %goal-x nil %goal-y nil))
+(defmethod stop-walking ((self monk))
+  (with-fields (waypoints goal-x goal-y) self
+    (setf waypoints nil)
+    (setf goal-x nil goal-y nil)))
 
-(define-method run monk ()
-  (when (and (pressing-fire-p self) 
-	     (not %raising-bow))
-    (setf %raising-bow t))
-  (when (not (pressing-fire-p self))
-    (setf %raising-bow nil))
-  (when (and %raising-bow (zerop %fire-clock))
-    (setf %bow-ready t)
-    (setf %raising-bow nil))
-  (when %alive
-    (update-animation self)
-    (when (null %animation)
-      (animate self (standing-animation self)))
-    (with-fields (step-clock fire-clock) self
-      (when (plusp step-clock)
-	(decf step-clock))
-      ;; find out what direction the AI or human wants to go
-      (let ((heading (movement-heading self))
-	    (fire-button (pressing-fire-p self)))
-	(when (or (null heading)
-		  (null %animation))
-	  (animate self (standing-animation self)))
-	(when heading 
-	  (unless (eq %animation (walking-animation self))
-	    (animate self (walking-animation self)))
-	  ;; move in the movement direction
-	  (move self heading (/ *monk-speed* 2))
-	  (setf %heading heading))
-	(if heading
-	    ;; controller is pushing in a direction
-	    (when (zerop step-clock)
-	    ;; don't animate on every frame
-	      (setf step-clock *monk-step-frames*))
+(defmethod run ((self monk))
+  (with-local-fields 
+    (when (and (pressing-fire-p self) 
+	       (not %raising-bow))
+      (setf %raising-bow t))
+    (when (not (pressing-fire-p self))
+      (setf %raising-bow nil))
+    (when (and %raising-bow (zerop %fire-clock))
+      (setf %bow-ready t)
+      (setf %raising-bow nil))
+    (when %alive
+      (update-animation self)
+      (when (null %animation)
+	(animate self (standing-animation self)))
+      (with-fields (step-clock fire-clock) self
+	(when (plusp step-clock)
+	  (decf step-clock))
+	;; find out what direction the AI or human wants to go
+	(let ((heading (movement-heading self))
+	      (fire-button (pressing-fire-p self)))
+	  (when (or (null heading)
+		    (null %animation))
+	    (animate self (standing-animation self)))
+	  (when heading 
+	    (unless (eq %animation (walking-animation self))
+	      (animate self (walking-animation self)))
+	    ;; move in the movement direction
+	    (move self heading (/ *monk-speed* 2))
+	    (setf %heading heading))
+	  (if heading
+	      ;; controller is pushing in a direction
+	      (when (zerop step-clock)
+		;; don't animate on every frame
+		(setf step-clock *monk-step-frames*))
 	      ;; possibly make footstep sounds
-;;	      (make-footstep-sounds self))
-	    ;; not pushing. allow movement immediately
-	    (setf step-clock 0 %walk-clock 0))
-	;; update walk counters
-	(update-walk self)
-	;; delay between fires
-	(when (plusp fire-clock)
-	  (decf fire-clock))
-	;; ready to fire?
-	(when (and (zerop fire-clock) %bow-ready)
-	  ;; did you let go? 
-	  (when (not fire-button)
-	    ;; yes, do it
-	    (setf %bow-ready nil)
-	    (setf %raising-bow nil)
-	    (fire self %fire-direction fire-button)))))))
-
+	      ;;	      (make-footstep-sounds self))
+	      ;; not pushing. allow movement immediately
+	      (setf step-clock 0 %walk-clock 0))
+	  ;; update walk counters
+	  (update-walk self)
+	  ;; delay between fires
+	  (when (plusp fire-clock)
+	    (decf fire-clock))
+	  ;; ready to fire?
+	  (when (and (zerop fire-clock) %bow-ready)
+	    ;; did you let go? 
+	    (when (not fire-button)
+	      ;; yes, do it
+	      (setf %bow-ready nil)
+	      (setf %raising-bow nil)
+	      (fire self %fire-direction fire-button))))))))
+  
 ;; As Geoffrey, the player drives the logic with the arrows/numpad
 ;; and the shift key
 
@@ -338,28 +338,27 @@
 
 (defmonk geoffrey)
 
-(define-method standing-animation geoffrey ()
+(defmethod standing-animation ((self geoffrey))
   *monk-stand*)
 
-(define-method walking-animation geoffrey ()
+(defmethod walking-animation ((self geoffrey))
  *monk-walk*)
 
-;; (define-method standing-animation geoffrey ()
+;; (defmethod standing-animation ((self geoffrey))
 ;;   (if %bow-ready 
 ;;       *monk-stand-bow-ready*
 ;;       *monk-stand-bow*))
 
-;; (define-method walking-animation geoffrey ()
+;; (defmethod walking-animation ((self geoffrey))
 ;;   (if %bow-ready 
 ;;       *monk-walk-bow-ready*
 ;;       *monk-walk-bow*))
 
-(define-method pressing-fire-p geoffrey () nil)
-;  (holding-fire-button))
+(defmethod pressing-fire-p ((self geoffrey)) nil)
 
-(define-method humanp geoffrey () t)
+(defmethod humanp ((self geoffrey)) t)
 
-(define-method movement-direction geoffrey ()
+(defmethod movement-direction ((self geoffrey))
   (or 
    (cond 
      ((and (holding-down-arrow) (holding-right-arrow)) :downright)
@@ -381,13 +380,13 @@
 
 (defmonk lucius :clock 10)
 
-(define-method run lucius ()
+(defmethod run ((self lucius))
   (call-next-method)
-  (decf %clock)
   (with-fields (clock) self
+    (decf clock)
     (when (cursor)
       (cond  ((> (distance-to-cursor self) 150)
-	      (unless (or %waypoints (plusp clock))
+	      (unless (or (field-value :waypoints self) (plusp clock))
 		(multiple-value-bind (x y) (at (cursor))
 		  (walk-to self x y))))
 	     ((> (distance-to-cursor self) 110)
@@ -419,11 +418,11 @@ it's been a bit colder than usual."
 "Yes. The leaves seem to be turning early.")
 
 (define-topic letter lucius 
-  (drop self (new 'scroll) 0 %height)
+  (drop self (new 'scroll) 0 (field-value :height self))
   (make-talk-gump self "I wonder what it says? It comes
 straight from Dr. Quine at the
 monastery. Here you go. I'm so curious
 to know what it says. Open it, open it!" :bye))
 
-(define-method activate lucius ()
+(defmethod activate ((self lucius))
   (discuss self :hello))

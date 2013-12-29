@@ -37,11 +37,11 @@
   universe
   variables)
 
-(define-method set-variable mission (var value)
-  (setf (gethash var %variables) value))
+(defmethod set-variable ((self mission) var value)
+  (setf (gethash var (field-value :variables self)) value))
 
-(define-method get-variable mission (var)
-  (gethash var %variables))
+(defmethod get-variable ((self mission) var)
+  (gethash var (field-value :variables self)))
 
 (defun mission-variable-value (var-name)
   (get-variable *mission* var-name))
@@ -58,7 +58,7 @@
 	   (clauses (mapcar #'make-clause symbols)))
       `(symbol-macrolet ,clauses ,@body))))
 
-(define-method completedp mission ()
+(defmethod completedp ((self mission))
   "Return T if all goal-valued mission variables are achieved."
   (with-fields (variables) self
     (block checking 
@@ -69,7 +69,7 @@
 	(maphash #'check variables)
 	(return-from checking t)))))
 	       
-;; (define-method begin mission (player)
+;; (defmethod begin mission (player)
 ;;   (assert (object-p player))
 ;;   (with-fields (name description address universe variables) self
 ;;     (assert (listp address))
@@ -82,15 +82,15 @@
 ;;     (play universe :player player :address address)
 ;;     (do-prologue self)))
       
-(define-method do-prologue mission ())
+(defmethod do-prologue ((self mission)) ())
 
-(define-method win mission ())
+(defmethod win ((self mission)) ())
 
-(define-method lose mission ())
+(defmethod lose ((self mission)) ())
 
-(define-method end mission ())
+(defmethod end ((self mission)) ())
 
-(define-method run mission ())
+(defmethod run ((self mission)) ())
 
 ;; (defmacro defmission (name (&key title description address)
 ;; 		      &rest goals)

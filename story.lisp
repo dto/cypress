@@ -1,5 +1,40 @@
 (in-package :cypress)
 
+(defun make-meadow ()
+    (let ((geoffrey (new 'geoffrey))
+	  (lucius (new 'lucius))
+	  (buffer (new 'cypress)))
+      (add-object buffer geoffrey 320 120)
+      (add-object buffer lucius 350 80)
+      (add-object buffer (new 'scroll) 800 500)
+      ;; adjust scrolling parameters 
+      (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
+	    (%horizontal-scrolling-margin buffer) 2/5
+	    (%vertical-scrolling-margin buffer) 4/7)
+      ;;
+      (resize-to-background-image buffer)
+      (set-cursor buffer geoffrey)
+      (snap-window-to-cursor buffer)
+      (glide-window-to-cursor buffer)
+      (follow-with-camera buffer geoffrey)
+
+      (drop-object buffer (new 'tent) 400 400)
+      (drop-object buffer (new 'tent) 800 800)
+      
+      ;; (drop-object buffer (new 'circle-key) 420 700)
+      ;; (drop-object buffer (new 'triangle-key) 420 850)
+      ;; (drop-object buffer (new 'xalcium-leggings) 400 400)
+      ;; (drop-object buffer (new 'xalcium-armor) 420 700)
+      ;; (drop-object buffer (new 'xalcium-mail) 420 850)
+      ;; (dotimes (n 8)
+      ;; 	(let ((x (+ 300 (random 1500)))
+      ;; 	      (y (+ 300 (random 1000))))
+      ;; 	  (drop-object buffer (new 'gray-rock))) x y)
+
+      ;; allocate
+       (install-quadtree buffer)
+      buffer))
+
 (defparameter *quine-summons*
 "Dear Geoffrey,
 
@@ -80,3 +115,4 @@ You stand on the soil of of a continent
 ten thousand years older than the land
 you left.
 ")
+

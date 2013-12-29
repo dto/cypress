@@ -23,7 +23,7 @@
 	     (+ target-y (window-y)))))
 
 (defmethod after-add-hook ((self gump))
-  (set-target self %x %y))
+  (set-target self (field-value :x self) (field-value :y self)))
 
 (defmethod drag ((self gump) x y)
   (set-target self x y)
@@ -68,10 +68,10 @@
 	(split-into-pages text *lines-per-scroll*))
   (flip self 0))
 
-(defmethod tap ((self scroll-gump) (x y))
+(defmethod tap ((self scroll-gump) x y)
   (flip self))
 
-(defmethod alternate-tap ((self scroll-gump) (x y))
+(defmethod alternate-tap ((self scroll-gump) x y)
   (destroy self))
   
 (defmethod draw ((self scroll-gump))
@@ -142,11 +142,11 @@
 
 (defblock (scroll-text :super text))
 
-(defmethod tap ((self scroll-text) (x y))
+(defmethod tap ((self scroll-text) x y)
   (with-fields (parent) self
-    (flip parent))
+    (flip parent)))
 
-(defmethod alternate-tap ((self scroll-text) (x y))
+(defmethod alternate-tap ((self scroll-text) x y)
   (with-fields (parent) self
     (destroy parent)))
 
@@ -191,7 +191,7 @@
 (defmethod tap ((self talk-gump) x y)
   (flip self))
 
-(defmethod alternate-tap ((self talk-gump) (x y))
+(defmethod alternate-tap ((self talk-gump) x y)
   (destroy self))
   
 (defmethod buttons ((self talk-gump))
@@ -226,7 +226,7 @@
 (defmethod draw ((self talk-gump))
   (with-fields (x y width height inputs) self
     (draw-image "talk-scroll.png" x y :width width :height height)
-    (mapc #'draw inputs))
+    (mapc #'draw inputs)))
 
 (defmethod arrange ((self talk-gump))
   (with-local-fields

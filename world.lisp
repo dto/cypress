@@ -139,9 +139,9 @@
 (defmethod get-gump ((self thing)) 
   (field-value :gump self))
 
-(defmethod set-gump ((self thing) (gump gump))
+(defmethod set-gump ((self thing) gump)
   (setf gump (find-object gump))
-  (drop self gump width))
+  (drop self gump (field-value :width self)))
 
 (defmethod destroy-gump ((self thing))
   (with-fields (gump) self
@@ -149,7 +149,7 @@
       (destroy gump)
       (setf gump nil))))
 
-(defmethod replace-gump ((self thing) (gump gump))
+(defmethod replace-gump ((self thing) gump)
   (destroy-gump self)
   (set-gump self gump))
 
@@ -177,7 +177,7 @@
 	  ;; no gump. quit conversation
 	  (destroy-gump self)))))
     
-(defmethod can-pick thing ((self thing))
+(defmethod can-pick ((self thing))
   (or (shell-open-p)
       (and (not (fixedp self))
 	   (not (etherealp self)))))
@@ -201,7 +201,7 @@
 (defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 130)))
 
 (defmethod layout ((self thing))
-  (with-fields (image) self
+  (with-fields (image scale) self
     (when image 
       (resize self 
 	      (* scale (image-width image) *default-thing-scale*)
@@ -211,18 +211,17 @@
   (layout self))
 
 (defun auto-describe (thing)
-  (let ((name (object-name (find-object (find-super (find-object thing))))))
-    (pretty-string (subseq name (1+ (position (character ":") name))))))
+  (pretty-string (class-name (class-of (find-object thing)))))
 
 (defmethod find-description ((self thing)) 
   (or (field-value :description self)
       (auto-describe self)))
 
-(defmethod look ((self thing)
+(defmethod look ((self thing))
   (drop self 
 	(new 'bubble :text (find-description self))
 	;; just to the right of object
-	width 0))
+	(field-value :width self) 0))
 
 (defmethod activate ((self thing)))
 
@@ -244,7 +243,7 @@
 	     (setf last-tap-time nil)
 	     (activate self))))))
 
-(defmethod update ((self thing)
+(defmethod update ((self thing))
   (with-fields (last-tap-time) self
     ;; we actually catch the end of single-click here.
     (when (and last-tap-time
@@ -273,8 +272,8 @@
 
 (defmethod initialize ((self bubble) &key text (font *bubble-font*))
   (with-local-fields 
-    (setf text text)
-    (setf font font)
+    (setf (field-value :text self) text)
+    (setf (field-value :font self) font)
     (later 4.0 (destroy self))))
 
 (defmethod draw ((self bubble))
@@ -314,30 +313,30 @@
 (define-buffer cypress 
   :background-image "meadow5.png"
   :quadtree-depth 8
-  :default-events
-  '(((:pause) :transport-toggle-play)
-    ((:e :alt) :edit-word)
-    ((:x :control) :exec)
-    ((:d :control) :delete-word)
-    ((:c :control) :copy-word)
-    ((:x :alt) :command-prompt)
-    ((:g :control) :cancel)
-    ((:c :alt) :clear-stack)
-    ((:s :alt) :show-stack)
-    ((:m :alt) :show-messages)
-    ((:p :control) :transport-toggle-play)
-    ;; ((:return) :enter)
-    ((:escape) :cancel)
-    ((:f1) :help)
-    ((:h :control) :help)
-    ((:x :control) :edit-cut)
-    ((:c :control) :edit-copy)
-    ((:v :control) :edit-paste)
-    ((:v :control :shift) :paste-here)
-    ((:f9) :toggle-minibuffer)
-    ((:f12) :transport-toggle-play)
-    ((:g :control) :escape)
-    ((:d :control) :drop-selection)))
+  :default-events nil)
+  ;; '(((:pause) :transport-toggle-play)
+  ;;   ((:e :alt) :edit-word)
+  ;;   ((:x :control) :exec)
+  ;;   ((:d :control) :delete-word)
+  ;;   ((:c :control) :copy-word)
+  ;;   ((:x :alt) :command-prompt)
+  ;;   ((:g :control) :cancel)
+  ;;   ((:c :alt) :clear-stack)
+  ;;   ((:s :alt) :show-stack)
+  ;;   ((:m :alt) :show-messages)
+  ;;   ((:p :control) :transport-toggle-play)
+  ;;   ;; ((:return) :enter)
+  ;;   ((:escape) :cancel)
+  ;;   ((:f1) :help)
+  ;;   ((:h :control) :help)
+  ;;   ((:x :control) :edit-cut)
+  ;;   ((:c :control) :edit-copy)
+  ;;   ((:v :control) :edit-paste)
+  ;;   ((:v :control :shift) :paste-here)
+  ;;   ((:f9) :toggle-minibuffer)
+  ;;   ((:f12) :transport-toggle-play)
+  ;;   ((:g :control) :escape)
+  ;;   ((:d :control) :drop-selection)))
 
 (defmethod alternate-tap ((self cypress) x y)
   (walk-to (cursor) x y))
@@ -350,36 +349,3 @@
 	(draw object)
 	(after-draw-object self object)))))
 
-(defun make-meadow ()
-    (let ((geoffrey (new 'geoffrey))
-	  (lucius (new 'lucius))
-	  (buffer (new 'cypress)))
-      (add-object buffer geoffrey 320 120)
-      (add-object buffer lucius 350 80)
-      ;; adjust scrolling parameters 
-      (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
-	    (%horizontal-scrolling-margin buffer) 2/5
-	    (%vertical-scrolling-margin buffer) 4/7)
-      ;;
-      (resize-to-background-image buffer)
-      (set-cursor buffer geoffrey)
-      (snap-window-to-cursor buffer)
-      (glide-window-to-cursor buffer)
-      (follow-with-camera buffer geoffrey)
-
-      (drop-object buffer (new 'tent) 400 400)
-      (drop-object buffer (new 'tent) 800 800)
-      
-      ;; (drop-object buffer (new 'circle-key) 420 700)
-      ;; (drop-object buffer (new 'triangle-key) 420 850)
-      ;; (drop-object buffer (new 'xalcium-leggings) 400 400)
-      ;; (drop-object buffer (new 'xalcium-armor) 420 700)
-      ;; (drop-object buffer (new 'xalcium-mail) 420 850)
-      (dotimes (n 8)
-      	(let ((x (+ 300 (random 1500)))
-      	      (y (+ 300 (random 1000))))
-	  (drop-object buffer (new 'gray-rock))) x y)
-
-      ;; allocate
-       (install-quadtree buffer)
-      buffer))

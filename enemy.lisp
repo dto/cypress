@@ -34,4 +34,4 @@
 	(setf heading heading0))
       (percent-of-time 30
 	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
-	(move self heading0 4)))))
+	(move self heading0 4))))))

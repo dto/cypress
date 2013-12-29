@@ -38,10 +38,10 @@
 
 (defthing book :image (random-choose *book-images*))
 
-(defthing scroll :image (random-choose *scroll-images*) :z 20)
+(defthing scroll :image (random-choose *scroll-images*))
 
 (defmethod activate ((self scroll))
-  (drop self (new 'scroll-gump *letter-text-2*)))
+  (drop self (new 'scroll-gump :text *letter-text-2*)))
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
 
