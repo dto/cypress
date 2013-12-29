@@ -72,7 +72,7 @@
   (cond ((enemyp thing) (damage thing 1) (destroy self))
 	((solidp thing) (destroy self))))
 
-(defmethod update ((self arrow))
+(defmethod run ((self arrow))
   (with-local-fields 
     (percent-of-time 13 (setf %image (random-choose *arrow-images*)))
     (resize self *arrow-size* *arrow-size*)

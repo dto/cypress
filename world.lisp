@@ -243,6 +243,9 @@
 	     (setf last-tap-time nil)
 	     (activate self))))))
 
+;;; The system update function does its own work, then invokes the
+;;; gameworld
+
 (defmethod update ((self thing))
   (with-fields (last-tap-time) self
     ;; we actually catch the end of single-click here.
