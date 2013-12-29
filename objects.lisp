@@ -91,3 +91,6 @@
 (defthing coverstone :image "coverstone.png" :z 10)
 (defthing item-box :image "item-box.png" :z 1)
 
+
+
+

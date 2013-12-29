@@ -13,8 +13,11 @@
   (quantity :initform 1)
   (weight :initform nil)
   (inventory :initform nil)
-  (hit-points :initform nil)
-  (magic-points :initform nil)
+  (hit-points :initform 0)
+  (magic-points :initform 0)
+  (hunger-points :initform 0)
+  (fatigue-points :initform 0)
+  (cold-points :initform 0)
   (description :initform nil)
   (inscription :initform nil)
   ;; animation fields
@@ -115,6 +118,15 @@
   (let ((item (find-inventory-item container item-class)))
     (when item (modify-quantity item quantity))))
 
+(defmethod merge-inventory-item ((container thing) item)
+  (let* ((item-class (class-name (class-of item)))
+	 (item (find-inventory-item container item-class)))
+    (if item 
+	(progn 
+	  (add-quantity container item-class (quantity item))
+	  (destroy item))
+	(add-inventory-item container item))))
+
 (defmethod remove-quantity ((container thing) item-class &optional (quantity 1))
   (let ((item (find-inventory-item container item-class)))
     (when item (modify-quantity item (- quantity)))))
@@ -138,8 +150,9 @@
 (defun quantity-of (item-class new-quantity)
   (assert (plusp new-quantity))
   (let ((item (new item-class)))
-    (with-fields (quantity) item
-      (setf quantity new-quantity))))
+    (prog1 item
+      (with-fields (quantity) item
+	(setf quantity new-quantity)))))
 
 (defmethod take-one ((container thing) item-class)
   (first (take-quantity container item-class 1)))
@@ -162,6 +175,18 @@
 (defmethod modify-magic-points ((self thing) points)
   (with-fields (magic-points) self
     (incf magic-points points)))
+
+(defmethod modify-fatigue-points ((self thing) points)
+  (with-fields (fatigue-points) self
+    (incf fatigue-points points)))
+
+(defmethod modify-hunger-points ((self thing) points)
+  (with-fields (hunger-points) self
+    (incf hunger-points points)))
+
+(defmethod modify-cold-points ((self thing) points)
+  (with-fields (cold-points) self
+    (incf cold-points points)))
 
 ;;; Attaching gumps to things
 
@@ -196,6 +221,7 @@
 (defmethod accept ((container thing) (item thing))
   (prog1 t
     (add-inventory-item container item)
+    (destroy-gump item)
     (remove-object (current-buffer) item)))
 
 (defmethod after-drag-hook ((self thing))
@@ -249,6 +275,7 @@
 	       (> (- *updates* last-tap-time)
 		  *double-tap-time*))
       (setf last-tap-time nil)
+      ;; display object's class name (by default on single click)
       (look self))
     (arrange self)
     (run self)))

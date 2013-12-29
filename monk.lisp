@@ -71,7 +71,14 @@
     :frames (("monk-2-stand-1.png" 19)
 	     ("monk-2-stand-2.png" 24))))
 
+(defparameter *maximum-points* 100)
+
 (defsprite monk
+  (hit-points :initform *maximum-points*)
+  (magic-points :initform *maximum-points*)
+  (hunger-points :initform 0)
+  (fatigue-points :initform 0)
+  (cold-points :initform 0)
   (inventory :initform (list (quantity-of 'arrow 10)))
   (sprite-height :initform (units 5))
   (sprite-width :initform (units 5))
@@ -100,8 +107,6 @@
   `(defblock (,name :super monk) ,@body))
 
 (defmethod humanp ((self monk)) nil)
-
-(defmethod can-accept ((self monk)) t)
 
 ;;; Animating the monk as he walks
 
@@ -397,37 +402,64 @@
 	     ((> (distance-to-cursor self) 110)
 	      (prog1 nil (stop-walking self) (setf clock 10)))))))
 
-(define-topic hello lucius 
-   "Good morning Geoffrey! A Raven just
-delivered this letter for you."
-   :letter :weather :name :job :bye)
+;;; Monk food
+
+(defthing white-bread :image "white-bread.png")
+
+(defmethod consume ((monk monk) (bread white-bread))
+  (modify-hit-points monk +5)
+  (modify-hunger monk -10))
+
+(defthing wheat-bread :image "wheat-bread.png")
+
+(defmethod consume ((monk monk) (bread wheat-bread))
+  (modify-hit-points monk +10)
+  (modify-hunger monk -15))
+
+(defmethod consume :after ((monk geoffrey) (bread wheat-bread))
+  (message "BURP!"))
+
+(defthing jerky :image "beef-jerky.png")
+
+(defmethod consume ((monk monk) (jerky jerky))
+  (modify-hit-points monk +15)
+  (modify-hunger monk -30))
+
+
+
+
+;; (defmethod activate ((self lucius))
+;;   (discuss self :hello))
+
+
+;; (define-topic hello lucius 
+;;    "Good morning Geoffrey! A Raven just
+;; delivered this letter for you."
+;;    :letter :weather :name :job :bye)
 	   
-(define-topic name lucius 
-  "I am your friend Lucius, of course.")
+;; (define-topic name lucius 
+;;   "I am your friend Lucius, of course.")
 
-(define-topic job lucius 
-  "You know perfectly well that I work
-at the Nothbess Library. My duties
-include dusting and organizing books.
-And what else have you forgotten today?
-Something must be wrong with you.")
+;; (define-topic job lucius 
+;;   "You know perfectly well that I work
+;; at the Nothbess Library. My duties
+;; include dusting and organizing books.
+;; And what else have you forgotten today?
+;; Something must be wrong with you.")
 
-(define-topic weather lucius 
-"It's nice out today, but I feel as if
-it's been a bit colder than usual."
-  :colder :letter :name :job :bye)
+;; (define-topic weather lucius 
+;; "It's nice out today, but I feel as if
+;; it's been a bit colder than usual."
+;;   :colder :letter :name :job :bye)
 
-(define-topic bye lucius () nil)
+;; (define-topic bye lucius () nil)
 
-(define-topic colder lucius 
-"Yes. The leaves seem to be turning early.")
+;; (define-topic colder lucius 
+;; "Yes. The leaves seem to be turning early.")
 
-(define-topic letter lucius 
-  (drop self (new 'scroll) 0 (field-value :height self))
-  (make-talk-gump self "I wonder what it says? It comes
-straight from Dr. Quine at the
-monastery. Here you go. I'm so curious
-to know what it says. Open it, open it!" :bye))
-
-(defmethod activate ((self lucius))
-  (discuss self :hello))
+;; (define-topic letter lucius 
+;;   (drop self (new 'scroll) 0 (field-value :height self))
+;;   (make-talk-gump self "I wonder what it says? It comes
+;; straight from Dr. Quine at the
+;; monastery. Here you go. I'm so curious
+;; to know what it says. Open it, open it!" :bye))

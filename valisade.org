@@ -16,6 +16,16 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
+** TODO Implement more game logic/rules/lore as CLOS
+
+** TODO Create generic paged inventory/spells gump
+*** TODO Container gump might be a single horizontal strip along the bottom, instead of laying out?
+*** TODO Paint this gump background, or re-use existing?
+*** TODO Display container's name and icon in the corner
+*** TODO Drag into/out of containers
+
+** TODO Fix conversation gump; design real convo system (inform manual)
+
 ** TODO IDENTIFY all level gen parameters (difficulty, background, terrain, decals, items, enemies)
 ** TODO Draw individual trees and also clusters of trees
 ** TODO Watch original sanctuary playthrough vid
@@ -79,11 +89,6 @@ FORGET-ME-NOTS and Temporal Seance
 *** TODO Wall junctions
 *** TODO Clogged stairwells
 ** TODO Paint glowing campfire and halo for night scenes (crafting, rest)
-
-** TODO Create generic inventory gump
-*** TODO Paint this gump background
-*** TODO Display container's name and icon in the corner
-*** TODO Drag into/out of containers
 ** TODO Fix camera scrolling jitter
 ** TODO Fix wraith texture bounding box squishness
 ** TODO Fix jittery rotation of monk at corners of paths
@@ -174,6 +179,7 @@ or fatigue.
 *** Fight enemies
 **** Double-click (or control-click) enemy to fire arrow
 *** Cast spells
+**** Click background of inventory gump to flip page to Spells/Stats
 *** Modal gumps for close-ups of scrolls, books, maps
 **** Gumps halt action, but updates still happen (RUNs do not)
 **** Right click to close gump
