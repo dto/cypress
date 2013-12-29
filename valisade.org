@@ -16,6 +16,8 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
+** TODO Implement simple modeline
+** TODO Space to shuffle equipped item
 ** TODO Implement more game logic/rules/lore as CLOS
 
 ** TODO Create generic paged inventory/spells gump
@@ -140,7 +142,8 @@ several different kinds of arrows.
 
 ** " Equip [ITEMNAME]       Body 100   Mind 100        Hunger 0   Cold 20   Fatigue 30 "
 ** Can also show single-line message briefly
-** Allow light-up color alarm when stat is low or condition is high
+** Allow light-up color alarm when stat is low or condition is high or new message
+*** Queue messages when there are multiples
   
 * Gameplay screens
 
@@ -206,7 +209,7 @@ or fatigue.
 
 ** Spark (2 mana)
 *** Light torches, campfires, and dry out even soaked wood
-** Hearth stone (2 mana) (stone chips)
+** Hearth stone (2 mana) (1 stone chips)
 *** Heat up stone chips held in the hand
 *** Reduces cold by 5pts
 *** Does not consume the chips
@@ -250,6 +253,8 @@ or fatigue.
 
 ** Arrows
 *** Wood: 5 damage
+**** TODO "Use" method fires arrow at current target
+**** TODO "Collide" method applies damage to target, if it hits
 *** Silver: 15 damage
 *** Crystal: 50 damage
 ** White bread

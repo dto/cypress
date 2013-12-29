@@ -74,12 +74,13 @@
 (defparameter *maximum-points* 100)
 
 (defsprite monk
+  (equipped-item :initform nil)
   (hit-points :initform *maximum-points*)
   (magic-points :initform *maximum-points*)
   (hunger-points :initform 0)
   (fatigue-points :initform 0)
   (cold-points :initform 0)
-  (inventory :initform (list (quantity-of 'arrow 10)))
+  (inventory :initform (quantity-of 'arrow 10))
   (sprite-height :initform (units 5))
   (sprite-width :initform (units 5))
   (image :initform (random-choose *monk-stand-images*))
@@ -104,6 +105,15 @@
   (goal-y :initform nil))
 
 (defmethod humanp ((self monk)) nil)
+
+(defmethod equipped-item ((self monk))
+  (with-fields (equipped-item) self
+    (setf equipped-item
+	  (or equipped-item
+	      (find-inventory-item self 'arrow)))))
+
+(defmethod equip ((self monk) (item thing))
+  (setf (field-value :equipped-item self) item))
 
 ;;; Animating the monk as he walks
 
@@ -431,12 +441,20 @@
   (modify-hit-points monk +15)
   (modify-hunger-points monk -30))
 
+(defthing (elixir food)
+  :image "elixir.png")
 
+(defmethod consume ((monk monk) (elixir elixir))
+  (modify-magic-points monk +40))
 
+(defthing (silver-elixir food)
+  :image "silver-elixir.png")
+
+(defmethod consume ((monk monk) (silver-elixir elixir))
+  (modify-magic-points monk +100))
 
 ;; (defmethod activate ((self lucius))
 ;;   (discuss self :hello))
-
 
 ;; (define-topic hello lucius 
 ;;    "Good morning Geoffrey! A Raven just

@@ -429,6 +429,23 @@
   (and (xelfp thing)
        (has-tag (find-object thing) :bubble)))
 
+;; ;;; Actions
+
+;; (defthing action)
+
+;; (defmethod use ((target thing) (spell action)))
+
+;; (defthing (fire action))
+
+;; (defthing (spell action))
+
+;; (defmethod use ((target thing) (spell spell))
+
+;; (defthing (spark spell)
+;; (defthing (light spell)
+
+
+
 ;;; Cypress
 
 (define-buffer cypress 
