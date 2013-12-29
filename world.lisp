@@ -32,7 +32,9 @@
   (gump :initform nil))
 
 (defmacro defthing (name &body body)
-  `(defblock (,name :super thing) ,@body))
+  (if (symbolp name) 
+      `(defblock (,name thing) ,@body)
+      `(defblock ,name ,@body)))
 
 ;;; Default resizing to image
 
@@ -260,7 +262,10 @@
 
 ;;; Double-clicking an object causes it to activate.
 
-(defmethod activate ((self thing)))
+(defmethod use ((self thing) (object thing)))
+
+(defmethod activate ((self thing))
+  (use (cursor) self))
 
 ;;; The system update function does its own work, then invokes the
 ;;; gameworld's RUN method.
@@ -344,7 +349,7 @@
 			       ;; adjust angle to normalize for up-pointing sprites 
 			       :angle (+ 90 (heading-degrees heading)))))
 
-(defblock (sprite :super thing)
+(defblock (sprite thing)
   (sprite-height :initform nil)
   (sprite-width :initform nil))
 
@@ -358,7 +363,7 @@
     (setf %width %sprite-width)))
 
 (defmacro defsprite (name &body body)
-  `(defblock (,name :super sprite) ,@body))
+  `(defblock (,name sprite) ,@body))
 
 ;;; Simple temporary tooltip bubble
 
@@ -369,7 +374,7 @@
 	      :file "OldaniaADFStd-Regular.otf" 
 	      :properties (:size 18)))
 
-(defthing bubble 
+(defblock (bubble thing)
   (tags :initform '(:bubble :ethereal))
   (text :initform nil) 
   (font :initform *bubble-font*)
@@ -428,31 +433,31 @@
 
 (define-buffer cypress 
   :background-image "meadow5.png"
-  :quadtree-depth 8
-  :default-events
-  '(((:pause) :transport-toggle-play)
-    ((:e :alt) :edit-word)
-    ((:x :control) :exec)
-    ((:d :control) :delete-word)
-    ((:c :control) :copy-word)
-    ((:x :alt) :command-prompt)
-    ((:g :control) :cancel)
-    ((:c :alt) :clear-stack)
-    ((:s :alt) :show-stack)
-    ((:m :alt) :show-messages)
-    ((:p :control) :transport-toggle-play)
-    ;; ((:return) :enter)
-    ((:escape) :cancel)
-    ((:f1) :help)
-    ((:h :control) :help)
-    ((:x :control) :edit-cut)
-    ((:c :control) :edit-copy)
-    ((:v :control) :edit-paste)
-    ((:v :control :shift) :paste-here)
-    ((:f9) :toggle-minibuffer)
-    ((:f12) :transport-toggle-play)
-    ((:g :control) :escape)
-    ((:d :control) :drop-selection)))
+  :quadtree-depth 8)
+  ;; :default-events
+  ;; '(((:pause) :transport-toggle-play)
+  ;;   ((:e :alt) :edit-word)
+  ;;   ((:x :control) :exec)
+  ;;   ((:d :control) :delete-word)
+  ;;   ((:c :control) :copy-word)
+  ;;   ((:x :alt) :command-prompt)
+  ;;   ((:g :control) :cancel)
+  ;;   ((:c :alt) :clear-stack)
+  ;;   ((:s :alt) :show-stack)
+  ;;   ((:m :alt) :show-messages)
+  ;;   ((:p :control) :transport-toggle-play)
+  ;;   ;; ((:return) :enter)
+  ;;   ((:escape) :cancel)
+  ;;   ((:f1) :help)
+  ;;   ((:h :control) :help)
+  ;;   ((:x :control) :edit-cut)
+  ;;   ((:c :control) :edit-copy)
+  ;;   ((:v :control) :edit-paste)
+  ;;   ((:v :control :shift) :paste-here)
+  ;;   ((:f9) :toggle-minibuffer)
+  ;;   ((:f12) :transport-toggle-play)
+  ;;   ((:g :control) :escape)
+  ;;   ((:d :control) :drop-selection)))
 
 (defmethod alternate-tap ((self cypress) x y)
   (walk-to (cursor) x y))

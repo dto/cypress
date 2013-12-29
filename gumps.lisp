@@ -32,9 +32,6 @@
 (defmethod run ((self gump))
   (arrange self))
       
-(defmacro defgump (name &body body)
-  `(defblock (,name :super gump) ,@body))
-
 ;;; The scroll gump is for reading pages of text.
 
 (defun split-into-pages (text lines-per-page)
@@ -50,7 +47,7 @@
 	    (setf lines (subseq lines lines-per-page)))))
     (reverse pages)))
 
-(defgump scroll-gump 
+(defthing (scroll-gump gump) 
   :image "scroll-gump.png"
   :image-scale 300
   :pages nil
@@ -143,7 +140,7 @@
 	       :target target
 	       :arguments (list topic)))
 
-(defblock (scroll-text :super text))
+(defblock (scroll-text text))
 
 (defmethod tap ((self scroll-text) x y)
   (with-fields (parent) self
@@ -162,7 +159,7 @@
 
 (defparameter *lines-per-talk-gump* 3)
 
-(defgump talk-gump 
+(defthing (talk-gump gump)
   (topic :initform nil)
    (pages :initform nil)
    (page-number :initform 0))

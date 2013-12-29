@@ -103,9 +103,6 @@
   (goal-x :initform nil)
   (goal-y :initform nil))
 
-(defmacro defmonk (name &rest body)
-  `(defblock (,name :super monk) ,@body))
-
 (defmethod humanp ((self monk)) nil)
 
 ;;; Animating the monk as he walks
@@ -346,7 +343,7 @@
       (keyboard-down-p :kp6)
       (keyboard-down-p :right)))
 
-(defmonk geoffrey)
+(defthing (geoffrey monk))
 
 (defmethod standing-animation ((self geoffrey))
   *monk-stand*)
@@ -388,7 +385,7 @@
   
 ;;; Lucius 
 
-(defmonk lucius :clock 10)
+(defthing (lucius monk) :clock 10)
 
 (defmethod run ((self lucius))
   (call-next-method)
@@ -404,26 +401,35 @@
 
 ;;; Monk food
 
-(defthing white-bread :image "white-bread.png")
+(defthing food)
+
+(defmethod use ((monk monk) (food food))
+  (consume monk food)
+  (destroy food))
+
+(defthing (white-bread food)
+  :image "white-bread.png")
 
 (defmethod consume ((monk monk) (bread white-bread))
   (modify-hit-points monk +5)
-  (modify-hunger monk -10))
+  (modify-hunger-points monk -10))
 
-(defthing wheat-bread :image "wheat-bread.png")
+(defthing (wheat-bread food)
+  :image "wheat-bread.png")
 
 (defmethod consume ((monk monk) (bread wheat-bread))
   (modify-hit-points monk +10)
-  (modify-hunger monk -15))
+  (modify-hunger-points monk -15))
 
 (defmethod consume :after ((monk geoffrey) (bread wheat-bread))
   (message "BURP!"))
 
-(defthing jerky :image "beef-jerky.png")
+(defthing (jerky food)
+  :image "beef-jerky.png")
 
 (defmethod consume ((monk monk) (jerky jerky))
   (modify-hit-points monk +15)
-  (modify-hunger monk -30))
+  (modify-hunger-points monk -30))
 
 
 
