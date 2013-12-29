@@ -28,6 +28,9 @@
 (defmethod drag ((self gump) x y)
   (set-target self x y)
   (move-to self x y))
+
+(defmethod run ((self gump))
+  (arrange self))
       
 (defmacro defgump (name &body body)
   `(defblock (,name :super gump) ,@body))
@@ -151,7 +154,7 @@
     (destroy parent)))
 
 (defun make-talk-gump-text (data)
-  (let ((text (new 'scroll-text data)))
+  (let ((text (new 'scroll-text :text data)))
     (prog1 text
       (set-font text *gump-font*)
       (set-background-color text nil)

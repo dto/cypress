@@ -157,7 +157,7 @@
   (make-keyword (format nil "discuss/~A" (symbol-name topic))))
 
 (defmacro define-topic (name super &body forms)
-  `(defmethod ,(make-non-keyword (discussion-method name)) ((self ,super))
+  `(define-method ,(make-non-keyword (discussion-method name)) ,super ()
      ,@(if (stringp (first forms))
 	   (list (append 
 		  (list 'make-talk-gump 'self (first forms))
@@ -169,7 +169,7 @@
     (let ((gump (send method self)))
       (if (xelfp gump)
 	  (if (or (null gump)
-		  (inputs (field-value :buttons gump)))
+		  (%inputs (buttons gump)))
 	      ;; replace whole gump 
 	      (replace-gump self gump)
 	      ;; just replace text in existing gump
