@@ -86,6 +86,7 @@
   (image :initform (random-choose *monk-stand-images*))
   (raising-bow :initform nil)
   (bow-ready :initform nil)
+  (aim-heading :initform nil)
   (alive :initform t)
   (talking :initform nil)
   (walking :initform nil)
@@ -117,24 +118,7 @@
 
 ;;; Animating the monk as he walks
 
-(defparameter *monk-step-frames* 3)
-
 (defparameter *monk-reload-frames* 30)
-
-(defparameter *walk-interval* 16)
-
-(defmethod raise-bow ((monk monk))
-  (when (has-quantity monk 'arrow)
-    (setf (field-value :raising-bow monk) t)))
-
-(defmethod update-walk ((self monk))
-  (with-fields (walk-clock step-clock) self
-    ;; only when moving
-    (when (plusp step-clock)
-      (when (plusp walk-clock)
-	(decf walk-clock))
-      (when (zerop walk-clock)
-	(setf walk-clock *walk-interval*)))))
 
 (defmethod draw ((self monk))
   (with-local-fields 
@@ -145,29 +129,13 @@
 (defmethod cast-spell ((self monk))
   (begin-animation self *monk-cast*))
 
-(defmethod fire-location ((self monk))
-  (with-fields (direction) self
-    (multiple-value-bind (cx cy) (center-point self)
-      (multiple-value-bind (tx ty) 
-	  (step-in-direction cx cy direction (units 0.7))
-	(values (- tx (* *arrow-size* 0.4))
-		(- ty (* *arrow-size* 0.4)))))))
-	  
-(defmethod fire ((self monk) direction)
-  (with-fields (fire-clock) self
-    (when (zerop fire-clock)
-      (setf fire-clock *monk-reload-frames*)
-      (multiple-value-bind (x y) (fire-location self)
-	(when (has-quantity self 'arrow)
-	  (consume-quantity self 'arrow)
-	  (let ((arrow (new 'arrow (direction-heading direction))))
-	    (drop-object (current-buffer) arrow x y)))))))
-
 (defmethod begin-talking ((self monk) line)
   (setf (field-value :talking self) t))
 
 (defmethod stop-talking ((self monk))
   (setf (field-value :ttalking self) nil))
+
+;;; Footstep sounds
 
 (defresource "left-foot.wav" :volume 20)
 (defresource "right-foot.wav" :volume 20)
@@ -194,23 +162,7 @@
       (when (< (distance-to-cursor self) 400)
 	(play-sound self sound)))))
 
-;; (defresource "fire.wav" :volume 23)
-;; (defresource "serve.wav" :volume 23)
-
-(defparameter *fire-sound* "fire.wav")
-
-;;; Default AI methods. 
-
-(defmethod movement-direction ((self monk)) nil)
-
-(defvar *joystick-enabled* t)
-
-(defmethod stick-heading ((self monk))
-  (when (humanp self)
-    (or (when (left-analog-stick-pressed-p)
-	  (left-analog-stick-heading))
-	(when (right-analog-stick-pressed-p)
-	  (right-analog-stick-heading)))))
+;;; Default collision methods
 
 (defmethod collide ((self monk) thing)
   (when (and (solidp thing) 
@@ -225,15 +177,6 @@
     (when (humanp self) 
       (change-image self "skull.png")
       (setf (field-value :alive self) nil))))
-
-(defmethod damage ((self monk) points)
-  (die self))
-
-(defmethod pressing-fire-p ((self monk)) 
-  nil)
-
-(defmethod pressing-fire ((self monk))
-  nil)
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
@@ -275,24 +218,12 @@
 
 (defmethod run ((self monk))
   (with-local-fields 
-    (when (and (pressing-fire-p self) 
-	       (not %raising-bow))
-      (setf %raising-bow t))
-    (when (not (pressing-fire-p self))
-      (setf %raising-bow nil))
-    (when (and %raising-bow (zerop %fire-clock))
-      (setf %bow-ready t)
-      (setf %raising-bow nil))
     (when %alive
       (update-animation self)
       (when (null %animation)
 	(begin-animation self (standing-animation self)))
-      (with-fields (step-clock fire-clock) self
-	(when (plusp step-clock)
-	  (decf step-clock))
 	;; find out what direction the AI or human wants to go
-	(let ((heading (movement-heading self))
-	      (fire-button (pressing-fire-p self)))
+	(let ((heading (movement-heading self)))
 	  (when (or (null heading)
 		    (null %animation))
 	    (begin-animation self (standing-animation self)))
@@ -302,57 +233,91 @@
 	    ;; move in the movement direction
 	    (move self heading (/ *monk-speed* 2))
 	    (setf %heading heading))
-	  (if heading
-	      ;; controller is pushing in a direction
-	      (when (zerop step-clock)
-		;; don't animate on every frame
-		(setf step-clock *monk-step-frames*))
-	      ;; possibly make footstep sounds
-	      ;;	      (make-footstep-sounds self))
-	      ;; not pushing. allow movement immediately
-	      (setf step-clock 0 %walk-clock 0))
 	  ;; update walk counters
-	  (update-walk self)
-	  ;; delay between fires
-	  (when (plusp fire-clock)
-	    (decf fire-clock))
-	  ;; ready to fire?
-	  (when (and (zerop fire-clock) %bow-ready)
-	    ;; did you let go? 
-	    (when (not fire-button)
-	      ;; yes, do it
-	      (setf %bow-ready nil)
-	      (setf %raising-bow nil)
-	      (fire self %fire-direction fire-button))))))))
+	  (update-walk self)))))
+
+;;; Arrows, the main weapon
+
+(defparameter *arrow-size* 25)
+(defparameter *arrow-images* (image-set "arrow" 2))
+(defparameter *silver-arrow-images* (image-set "silver-arrow" 2))
+(defparameter *crystal-arrow-images* (image-set "crystal-arrow" 2))
+
+(defthing (arrow sprite)
+  :image-scale 40
+  :clock 400
+  :images *arrow-images*
+  :image (random-choose *arrow-images*))
+
+(defmethod initialize ((self arrow) &key heading)
+  (setf (field-value :heading self) heading))
+
+(defmethod run ((self arrow))
+  (with-local-fields 
+    (percent-of-time 13 (setf %image (random-choose %images)))
+    (resize self *arrow-size* *arrow-size*)
+    (decf %clock)
+    (if (minusp %clock)
+	(destroy self)
+	(forward self 15))))
+
+(defmethod collide ((self arrow) (thing thing))
+  (when (solidp thing) 
+    (destroy self)))
+
+(defmethod collide ((self arrow) (enemy enemy))
+  (modify-hit-points enemy -5)
+  (destroy self))
+
+(defthing (silver-arrow arrow)
+  :images *silver-arrow-images*
+  :image (random-choose *silver-arrow-images*))
+
+(defmethod collide ((self silver-arrow) (enemy enemy))
+  (modify-hit-points enemy -10)
+  (destroy self))
+
+(defthing (crystal-arrow arrow)
+  :images *crystal-arrow-images*
+  :image (random-choose *crystal-arrow-images*))
+
+(defmethod collide ((self crystal-arrow) (enemy enemy))
+  (modify-hit-points enemy -15)
+  (destroy self))
+
+;;; Firing arrows
+
+(defmethod aim ((self monk) heading)
+  (setf (field-value :aim-heading self) heading))
+
+(defmethod aim-heading ((self monk))
+  (field-value :aim-heading self))
+
+(defmethod fire-location ((self monk))
+  (with-fields (direction) self
+    (multiple-value-bind (cx cy) (center-point self)
+      (multiple-value-bind (tx ty) 
+	  (step-in-direction cx cy direction (units 0.7))
+	(values (- tx (* *arrow-size* 0.4))
+		(- ty (* *arrow-size* 0.4)))))))
+
+(defmethod fire ((monk monk) (arrow arrow))
+  (with-fields (fire-clock) monk
+    (when (zerop fire-clock)
+      (setf fire-clock *monk-reload-frames*)
+      (multiple-value-bind (x y) 
+	  (fire-location monk)
+	(drop-object (current-buffer) arrow x y)))))
+
+(defmethod use ((monk monk) (arrow arrow))
+  (fire monk (new (class-of arrow) 
+		  :heading (aim-heading monk)))
+  (modify-quantity arrow -1))
+
+;; (defmethod attack ((monk monk) (enemy enemy))
+
+;;; As the monk Geoffrey, the player drives the action
   
-;; As Geoffrey, the player drives the logic with the arrows/numpad
-;; and the shift key
-
-(defun holding-fire-button ()
-  (or (holding-shift)
-      (some #'joystick-button-pressed-p
-	    '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20))))
-
-(defun holding-down-arrow ()
-  (or (joystick-button-pressed-p :down)
-      (keyboard-down-p :kp2)
-      (keyboard-down-p :down)))
-
-(defun holding-up-arrow ()
-  (or (joystick-button-pressed-p :up)
-      (keyboard-down-p :kp8)
-      (keyboard-down-p :up)))
-
-(defun holding-left-arrow ()
-  (or (joystick-button-pressed-p :left)
-      (keyboard-down-p :kp4)
-      (keyboard-down-p :left)))
-
-(defun holding-right-arrow ()
-  (or (joystick-button-pressed-p :right)
-      (keyboard-down-p :kp6)
-      (keyboard-down-p :right)))
-
 (defthing (geoffrey monk))
 
 (defmethod standing-animation ((self geoffrey))
@@ -371,28 +336,6 @@
 ;;       *monk-walk-bow-ready*
 ;;       *monk-walk-bow*))
 
-(defmethod pressing-fire-p ((self geoffrey)) nil)
-
-(defmethod humanp ((self geoffrey)) t)
-
-(defmethod movement-direction ((self geoffrey))
-  (or 
-   (cond 
-     ((and (holding-down-arrow) (holding-right-arrow)) :downright)
-     ((and (holding-down-arrow) (holding-left-arrow)) :downleft)
-     ((and (holding-up-arrow) (holding-right-arrow)) :upright)
-     ((and (holding-up-arrow) (holding-left-arrow)) :upleft)
-     ((holding-down-arrow) :down)
-     ((holding-up-arrow) :up)
-     ((holding-left-arrow) :left)
-     ((holding-right-arrow) :right))
-   (let ((heading (stick-heading self)))
-     (when 
-  	 (and *joystick-enabled*
-  	      (or (left-analog-stick-pressed-p)
-  		  (right-analog-stick-pressed-p)))
-       (or (heading-direction heading) :left)))))
-  
 ;;; Lucius 
 
 (defthing (lucius monk) :clock 10)
@@ -487,3 +430,11 @@
 ;; straight from Dr. Quine at the
 ;; monastery. Here you go. I'm so curious
 ;; to know what it says. Open it, open it!" :bye))
+
+    ;;   (when (not %raising-bow))
+    ;;   (setf %raising-bow t))
+    ;; (when (not (pressing-fire-p self))
+    ;;   (setf %raising-bow nil))
+    ;; (when (and %raising-bow (zerop %fire-clock))
+    ;;   (setf %bow-ready t)
+    ;;   (setf %raising-bow nil))

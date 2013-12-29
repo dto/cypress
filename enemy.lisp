@@ -2,7 +2,9 @@
 
 ;;; Wraiths
 
-(defsprite wraith
+(defsprite enemy)
+
+(defthing (wraith enemy)
   :seen-player nil
   :image-scale 600
   :sprite-height 130

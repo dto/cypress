@@ -54,33 +54,6 @@
 (defthing xalcium-armor :image "xalcium-armor.png")
 (defthing xalcium-mail :image "xalcium-mail.png")
 
-;;; Arrows, the main weapon
-
-(defparameter *arrow-size* 25)
-(defparameter *arrow-images* (image-set "arrow" 3))
-
-(defsprite arrow
-  :image-scale 40
-  :image (random-choose *arrow-images*))
-
-(defmethod initialize ((self arrow) &key heading)
-  (with-local-fields 
-    (setf %clock 400)
-    (setf %heading heading)))
-
-(defmethod collide ((self arrow) thing)
-  (cond ((enemyp thing) (damage thing 1) (destroy self))
-	((solidp thing) (destroy self))))
-
-(defmethod run ((self arrow))
-  (with-local-fields 
-    (percent-of-time 13 (setf %image (random-choose *arrow-images*)))
-    (resize self *arrow-size* *arrow-size*)
-    (decf %clock)
-    (if (minusp %clock)
-	(destroy self)
-	(forward self 15))))
-
 ;;; ruin walls
 
 (defthing ruin-wall 
