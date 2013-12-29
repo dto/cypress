@@ -40,7 +40,7 @@
 
 (defthing scroll :image (random-choose *scroll-images*) :z 20)
 
-(define-method activate scroll ()
+(defmethod activate ((self scroll))
   (drop self (new 'scroll-gump *letter-text-2*)))
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
@@ -68,17 +68,18 @@
     (setf %clock 400)
     (setf %heading heading)))
 
-(define-method collide arrow (thing)
+(defmethod collide ((self arrow) thing)
   (cond ((enemyp thing) (damage thing 1) (destroy self))
 	((solidp thing) (destroy self))))
 
-(define-method update arrow ()
-  (percent-of-time 13 (setf %image (random-choose *arrow-images*)))
-  (resize self *arrow-size* *arrow-size*)
-  (decf %clock)
-  (if (minusp %clock)
-      (destroy self)
-      (forward self 15)))
+(defmethod update ((self arrow))
+  (with-local-fields 
+    (percent-of-time 13 (setf %image (random-choose *arrow-images*)))
+    (resize self *arrow-size* *arrow-size*)
+    (decf %clock)
+    (if (minusp %clock)
+	(destroy self)
+	(forward self 15))))
 
 ;;; ruin walls
 

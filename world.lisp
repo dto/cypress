@@ -109,20 +109,21 @@
   (repeat :initform nil)
   (animation :initform nil))
 
-(define-method animation-frame thing ()
-  (when %animation (frame-image (first %frames))))
+(defmethod animation-frame ((self thing))
+  (with-fields (animation frames) self
+    (when animation (frame-image (first frames)))))
 
-(define-method animate thing (animation &optional force)
-  (when (or force (not (eq %animation animation)))
-    (setf %image-scale (animation-scale animation))
-    (setf %frames (animation-frames animation))
-    (setf %repeat (animation-repeat animation))
-    (setf %animation animation)
-    (setf %delay (frame-delay (first %frames)))))
-  ;; (let ((image (animation-frame self)))
-  ;;   (when image (setf %image image))))
+(defmethod animate ((self thing) animation &optional force)
+  (with-fields (image-scale frames repeat delay) self
+    (when (or force (not (eq (field-value :animation self)
+			     animation)))
+      (setf image-scale (animation-scale animation))
+      (setf frames (animation-frames animation))
+      (setf repeat (animation-repeat animation))
+      (setf (field-value :animation self) animation)
+      (setf delay (frame-delay (first frames))))))
 
-(define-method update-animation thing ()
+(defmethod update-animation ((self thing))
   (with-fields (animation frames delay scale repeat image) self
     (when animation
       (decf delay)
@@ -135,73 +136,76 @@
 	      ;; no more frames
 	      (animate self (if repeat animation nil) t)))))))
 
-(define-method get-gump thing () %gump)
+(defmethod get-gump ((self thing)) 
+  (field-value :gump self))
 
-(define-method set-gump thing (gump) 
-  (setf %gump gump)
-  (drop self gump %width))
+(defmethod set-gump ((self thing) (gump gump))
+  (setf gump (find-object gump))
+  (drop self gump width))
 
-(define-method destroy-gump thing () 
-  (when (xelfp %gump)
-    (destroy %gump)
-    (setf %gump nil)))
+(defmethod destroy-gump ((self thing))
+  (with-fields (gump) self
+    (when (xelfp gump)
+      (destroy gump)
+      (setf gump nil))))
 
-(define-method replace-gump thing (gump) 
-  (when (xelfp %gump) (destroy %gump))
+(defmethod replace-gump ((self thing) (gump gump))
+  (destroy-gump self)
   (set-gump self gump))
 
 (defun discussion-method (topic)
   (make-keyword (format nil "discuss/~A" (symbol-name topic))))
 
 (defmacro define-topic (name super &body forms)
-  `(define-method ,(make-non-keyword (discussion-method name)) ,super ()
+  `(defmethod ,(make-non-keyword (discussion-method name)) ((self ,super))
      ,@(if (stringp (first forms))
 	   (list (append 
 		  (list 'make-talk-gump 'self (first forms))
 		  (rest forms)))
 	   forms)))
 	  
-(define-method discuss thing (topic) 
+(defmethod discuss ((self thing) topic)
   (let ((method (discussion-method topic)))
     (let ((gump (send method self)))
       (if (xelfp gump)
-	  (if (or (null %gump)
-		  (%inputs (buttons gump)))
+	  (if (or (null gump)
+		  (inputs (field-value :buttons gump)))
 	      ;; replace whole gump 
 	      (replace-gump self gump)
 	      ;; just replace text in existing gump
-	      (replace-gump-text %gump gump))
+	      (replace-gump-text gump gump))
 	  ;; no gump. quit conversation
 	  (destroy-gump self)))))
     
-(define-method can-pick thing ()
+(defmethod can-pick thing ((self thing))
   (or (shell-open-p)
       (and (not (fixedp self))
 	   (not (etherealp self)))))
 
-(define-method pick thing () self)
+(defmethod pick ((self thing)) self)
 
-(define-method can-accept thing () 
+(defmethod can-accept ((self thing)) () 
   (containerp self))
 
-(define-method accept thing (thing)
-  (push thing %inventory))
+(defmethod accept ((self thing) thing)
+  (push thing (field-value :inventory self)))
 
-(define-method after-drag-hook thing ()
-  (setf %z 
-	(max %z
-	     (1+ (maximum-z-value (current-buffer))))))
+(defmethod after-drag-hook ((self thing))
+  (with-fields (z) self
+    (setf z (max z
+		 (1+ (maximum-z-value (current-buffer)))))))
 
 (defmacro defthing (name &body body)
   `(defblock (,name :super thing) ,@body))
 
 (defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 130)))
 
-(define-method layout thing ()
-  (when %image 
-    (resize self 
-	    (* %scale (image-width %image) *default-thing-scale*)
-	    (* %scale (image-height %image) *default-thing-scale*))))
+(defmethod layout ((self thing))
+  (with-fields (image) self
+    (when image 
+      (resize self 
+	      (* scale (image-width image) *default-thing-scale*)
+	      (* scale (image-height image) *default-thing-scale*)))))
 
 (defmethod initialize-instance :after ((self thing) &key)
   (layout self))
@@ -210,22 +214,27 @@
   (let ((name (object-name (find-object (find-super (find-object thing))))))
     (pretty-string (subseq name (1+ (position (character ":") name))))))
 
-(define-method find-description thing ()
-  (or %description (auto-describe self)))
+(defmethod find-description ((self thing)) 
+  (or (field-value :description self)
+      (auto-describe self)))
 
-(define-method look thing ()
-  (drop self (new 'bubble (find-description self))
-	%width 0))
+(defmethod look ((self thing)
+  (drop self 
+	(new 'bubble :text (find-description self))
+	;; just to the right of object
+	width 0))
 
-(define-method activate thing ())
+(defmethod activate ((self thing)))
 
-(define-method run thing ())
+(defmethod run ((self thing)))
 
-(define-method arrange thing ())
+(defmethod arrange ((self thing)))
+
+;;; Detecting click and double-click
 
 (defparameter *double-tap-time* 8)
 
-(define-method tap thing (x y)
+(defmethod tap ((self thing) x y)
   (with-fields (last-tap-time) self
     (let* ((time *updates*)
 	   (elapsed-time (- time (or last-tap-time 0))))
@@ -235,7 +244,7 @@
 	     (setf last-tap-time nil)
 	     (activate self))))))
 
-(define-method update thing ()
+(defmethod update ((self thing)
   (with-fields (last-tap-time) self
     ;; we actually catch the end of single-click here.
     (when (and last-tap-time
@@ -264,11 +273,11 @@
 
 (defmethod initialize ((self bubble) &key text (font *bubble-font*))
   (with-local-fields 
-    (setf %text text)
-    (setf %font font)
+    (setf text text)
+    (setf font font)
     (later 4.0 (destroy self))))
 
-(define-method draw bubble ()
+(defmethod draw ((self bubble))
   (with-field-values (x y text font) self
     (let ((margin 4))
       (draw-box x y
@@ -287,13 +296,15 @@
   (sprite-height :initform nil)
   (sprite-width :initform nil))
 
-(define-method draw sprite ()
-  (draw-as-sprite self %image %heading))
+(defmethod draw ((self sprite))
+  (with-field-values (image heading) self
+    (draw-as-sprite self image heading)))
 
-(define-method layout sprite ()
-  (setf %height %sprite-height)
-  (setf %width %sprite-width)
-  (arrange self))
+(defmethod layout ((self sprite))
+  (with-local-fields 
+    (setf %height %sprite-height)
+    (setf %width %sprite-width)
+    (arrange self)))
 
 (defmacro defsprite (name &body body)
   `(defblock (,name :super sprite) ,@body))
@@ -328,10 +339,10 @@
     ((:g :control) :escape)
     ((:d :control) :drop-selection)))
 
-(define-method alternate-tap cypress (x y)
+(defmethod alternate-tap ((self cypress) x y)
   (walk-to (cursor) x y))
 
-(define-method draw-object-layer cypress () 
+(defmethod draw-object-layer ((self cypress))
   (multiple-value-bind (top left right bottom) (window-bounding-box self)
     (dolist (object (mapcar #'find-object (z-sort (get-objects self))))
       ;; only draw onscreen objects
