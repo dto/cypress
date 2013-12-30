@@ -4,6 +4,8 @@
 
 (defsprite enemy)
 
+(defmethod can-pick ((enemy enemy)) nil)
+
 (defmethod activate ((enemy enemy))
   (attack (cursor) enemy))
 

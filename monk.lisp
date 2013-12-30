@@ -17,19 +17,23 @@
   (setf (field-value :heading self) heading))
 
 (defmethod run ((self arrow))
-  (with-local-fields 
-    (percent-of-time 13 (setf %image (random-choose %images)))
+  (with-fields (clock image images) self
+    (percent-of-time 13 (setf image (random-choose images)))
     (resize self *arrow-size* *arrow-size*)
-    (decf %clock)
-    (if (minusp %clock)
+    (decf clock)
+    (if (minusp clock)
 	(destroy self)
 	(forward self 15))))
+
+;; Default collision method
 
 (defmethod collide ((self arrow) (thing thing))
   (when (solidp thing) 
     (destroy self)))
 
 (defthing (wooden-arrow arrow))
+
+;; Specific collision methods
 
 (defmethod collide ((self wooden-arrow) (enemy enemy))
   (modify-hit-points enemy -5)
@@ -149,12 +153,7 @@
   (retry-clock :initform (seconds->frames 5))
   (walk-clock :initform 0)
   (step-clock :initform 0)
-  (fire-clock :initform 0)
-  ;;
-  (path :initform nil)
-  (waypoints :initform nil)
-  (goal-x :initform nil)
-  (goal-y :initform nil))
+  (fire-clock :initform 0))
 
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (quantity-of 'wooden-arrow 10)))
@@ -236,37 +235,6 @@
 (defmethod standing-animation ((self monk)) *monk-2-stand*)
 (defmethod walking-animation ((self monk)) *monk-2-walk*)
 
-(defmethod next-waypoint ((self monk))
-  (with-local-fields 
-    (destructuring-bind (wx wy) (pop %waypoints)
-      (setf %goal-x wx %goal-y wy))))
-
-(defmethod movement-heading ((self monk))
-  (with-fields (x y goal-x goal-y waypoints) self
-      (if (and goal-x goal-y)
-	  (if (< 4 (distance x y goal-x goal-y))
-	      ;; keep walking 
-	      (find-heading x y goal-x goal-y)
-	      (if waypoints 
-		  (progn (next-waypoint self)
-			 (find-heading x y goal-x goal-y))
-		  (setf goal-x nil goal-y nil)))
-	  (when waypoints
-	    (next-waypoint self)
-	    (find-heading x y goal-x goal-y)))))
-
-(defmethod walk-to ((self monk) x1 y1)
-  (with-fields (x y waypoints path) self
-    (when (null path) 
-      (setf path (create-path self :buffer (current-buffer))))
-    (setf waypoints (rest (rest (find-path-waypoints path x y x1 y1))))
-    (when (null waypoints) (stop-walking self))))
-  
-(defmethod stop-walking ((self monk))
-  (with-fields (waypoints goal-x goal-y) self
-    (setf waypoints nil)
-    (setf goal-x nil goal-y nil)))
-
 (defmethod run ((self monk))
   (with-local-fields 
     (when %alive
@@ -307,6 +275,7 @@
 (defmethod use ((monk monk) (arrow arrow))
   (fire monk (new (class-name (class-of arrow))
 		  :heading (aim-heading monk)))
+  (modify-fatigue-points monk 1)
   (modify-quantity arrow -1))
 
 (defmethod find-arrow ((monk monk))
@@ -316,7 +285,6 @@
 
 (defmethod attack ((monk monk) (enemy enemy))
   (when (has-quantity monk 'arrow)
-    (modify-fatigue-points monk 1)
     (aim monk (heading-to-thing monk enemy))
     (use monk (or (equipped-item monk)
 		  (find-arrow monk)))))

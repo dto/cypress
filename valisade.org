@@ -16,7 +16,9 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
-** TODO Gumps should rise to z-top when opening
+** TODO Pause game with key or mouse-wheel to issue orders
+** DONE Gumps should rise to z-top when opening
+   CLOSED: [2013-12-30 Mon 16:37]
 ** TODO Add arrow to indicate drag-hover candidate
 ** TODO Use general collision with z-order as drag-hover choice
 ** TODO Implement simple modeline

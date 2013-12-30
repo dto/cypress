@@ -29,7 +29,12 @@
   (animation :initform nil)
   ;; system fields
   (last-tap-time :initform nil)
-  (gump :initform nil))
+  (gump :initform nil)
+  ;; pathfinding
+  (path :initform nil)
+  (waypoints :initform nil)
+  (goal-x :initform nil)
+  (goal-y :initform nil))
 
 (defmacro defthing (name &body body)
   (if (symbolp name) 
@@ -52,6 +57,8 @@
 
 (defmethod initialize-instance :after ((self thing) &key)
   (layout self))
+
+;;; Animation system
 
 (defun animation-scale (a) (getf a :scale +dots-per-inch+))
 (defun animation-repeat (a) (getf a :repeat))
@@ -89,6 +96,39 @@
 		    delay (frame-delay frame))
 	      ;; no more frames
 	      (begin-animation self (if repeat animation nil) t)))))))
+
+;;; Pathfinding 
+
+(defmethod next-waypoint ((self thing))
+  (with-local-fields 
+    (destructuring-bind (wx wy) (pop %waypoints)
+      (setf %goal-x wx %goal-y wy))))
+
+(defmethod movement-heading ((self thing))
+  (with-fields (x y goal-x goal-y waypoints) self
+      (if (and goal-x goal-y)
+	  (if (< 4 (distance x y goal-x goal-y))
+	      ;; keep walking 
+	      (find-heading x y goal-x goal-y)
+	      (if waypoints 
+		  (progn (next-waypoint self)
+			 (find-heading x y goal-x goal-y))
+		  (setf goal-x nil goal-y nil)))
+	  (when waypoints
+	    (next-waypoint self)
+	    (find-heading x y goal-x goal-y)))))
+
+(defmethod walk-to ((self thing) x1 y1)
+  (with-fields (x y waypoints path) self
+    (when (null path) 
+      (setf path (create-path self :buffer (current-buffer))))
+    (setf waypoints (rest (rest (find-path-waypoints path x y x1 y1))))
+    (when (null waypoints) (stop-walking self))))
+  
+(defmethod stop-walking ((self thing))
+  (with-fields (waypoints goal-x goal-y) self
+    (setf waypoints nil)
+    (setf goal-x nil goal-y nil)))
 
 ;;; Inventory management
 
