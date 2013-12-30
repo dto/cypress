@@ -4,6 +4,9 @@
 
 (defsprite enemy)
 
+(defmethod activate ((enemy enemy))
+  (attack (cursor) enemy))
+
 (defthing (wraith enemy)
   :seen-player nil
   :image-scale 600

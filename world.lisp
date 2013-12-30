@@ -101,9 +101,9 @@
     (setf inventory (remove item inventory :test 'eq))))
 
 (defmethod find-inventory-item ((container thing) &optional (class 'thing))
-  (some #'(lambda (item)
-	    (typep item class))
-	(inventory-items container)))
+  (dolist (item (inventory-items container))
+    (when (typep item class)
+      (return item))))
 
 (defmethod consume ((consumer thing) (consumed thing))) ;;; possibly nothing
 

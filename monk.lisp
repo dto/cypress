@@ -131,7 +131,7 @@
   (hunger-points :initform 0)
   (fatigue-points :initform 0)
   (cold-points :initform 0)
-  (inventory :initform (quantity-of 'wooden-arrow 10))
+  (inventory :initform nil)
   (sprite-height :initform (units 5))
   (sprite-width :initform (units 5))
   (image :initform (random-choose *monk-stand-images*))
@@ -156,13 +156,13 @@
   (goal-x :initform nil)
   (goal-y :initform nil))
 
+(defmethod initialize :after ((monk monk) &key)
+  (add-inventory-item monk (quantity-of 'wooden-arrow 10)))
+
 (defmethod humanp ((self monk)) nil)
 
 (defmethod equipped-item ((self monk))
-  (with-fields (equipped-item) self
-    (setf equipped-item
-	  (or equipped-item
-	      (find-inventory-item self 'arrow)))))
+  (field-value :equipped-item self))
 
 (defmethod equip ((self monk) (item thing))
   (setf (field-value :equipped-item self) item))
@@ -294,11 +294,10 @@
   (field-value :aim-heading self))
 
 (defmethod fire-location ((self monk))
-  (multiple-value-bind (cx cy) (center-point self)
-    (multiple-value-bind (tx ty) 
-	(step-toward-heading cx cy (aim-heading self) (units 0.7))
-	(values (- tx (* *arrow-size* 0.4))
-		(- ty (* *arrow-size* 0.4))))))
+  (multiple-value-bind (tx ty) 
+      (step-toward-heading self (aim-heading self) (units 0.7))
+    (values (- tx (* *arrow-size* 0.4))
+	    (- ty (* *arrow-size* 0.4)))))
 
 (defmethod fire ((monk monk) (arrow arrow))
   (with-fields (fire-clock) monk
@@ -309,7 +308,7 @@
 	(drop-object (current-buffer) arrow x y)))))
 
 (defmethod use ((monk monk) (arrow arrow))
-  (fire monk (new (class-of arrow) 
+  (fire monk (new (class-name (class-of arrow))
 		  :heading (aim-heading monk)))
   (modify-quantity arrow -1))
 
@@ -319,9 +318,11 @@
       (find-inventory-item monk 'crystal-arrow)))
 
 (defmethod attack ((monk monk) (enemy enemy))
-  (aim monk (heading-to-thing monk enemy))
-  (use monk (or (equipped-item monk)
-		(find-arrow monk))))
+  (when (has-quantity monk 'arrow)
+    (modify-fatigue-points monk 1)
+    (aim monk (heading-to-thing monk enemy))
+    (use monk (or (equipped-item monk)
+		  (find-arrow monk)))))
 
 ;;; As the monk Geoffrey, the player drives the action
   

@@ -9,6 +9,7 @@
       (add-object buffer (new 'scroll) 800 500)
       (add-object buffer (new 'white-bread) 860 600)
       (add-object buffer (new 'wheat-bread) 900 700)
+      (add-object buffer (new 'wraith) 1000 900)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	    (%horizontal-scrolling-margin buffer) 2/5

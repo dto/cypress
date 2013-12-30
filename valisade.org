@@ -16,6 +16,7 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
+** TODO Add arrow to indicate drag-hover candidate
 ** TODO Implement simple modeline
 ** TODO Space to shuffle equipped item
 ** TODO Implement more game logic/rules/lore as CLOS
