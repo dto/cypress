@@ -32,6 +32,9 @@
 (defmethod run ((self gump))
   (arrange self))
       
+(defmethod drop-object :after ((buffer buffer) (gump gump) &optional x y z)
+  (bring-to-front gump))
+
 ;;; The scroll gump is for reading pages of text.
 
 (defun split-into-pages (text lines-per-page)

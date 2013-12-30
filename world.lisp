@@ -47,6 +47,9 @@
 	      (* scale (image-width image) *default-thing-scale*)
 	      (* scale (image-height image) *default-thing-scale*)))))
 
+(defmethod die ((self thing))
+  (destroy self))
+
 (defmethod initialize-instance :after ((self thing) &key)
   (layout self))
 
@@ -172,7 +175,9 @@
 	
 (defmethod modify-hit-points ((self thing) points)
   (with-fields (hit-points) self
-    (incf hit-points points)))
+    (incf hit-points points)
+    (when (not (plusp hit-points))
+      (die self))))
 
 (defmethod modify-magic-points ((self thing) points)
   (with-fields (magic-points) self
@@ -226,10 +231,13 @@
     (destroy-gump item)
     (remove-object (current-buffer) item)))
 
-(defmethod after-drag-hook ((self thing))
+(defmethod bring-to-front ((self thing))
   (with-fields (z) self
     (setf z (max z
 		 (1+ (maximum-z-value (current-buffer)))))))
+
+(defmethod after-drag-hook ((self thing))
+  (bring-to-front self))
 
 ;;; Describing and naming objects 
 

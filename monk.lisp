@@ -300,12 +300,9 @@
 	    (- ty (* *arrow-size* 0.4)))))
 
 (defmethod fire ((monk monk) (arrow arrow))
-  (with-fields (fire-clock) monk
-    (when (zerop fire-clock)
-      (setf fire-clock *monk-reload-frames*)
-      (multiple-value-bind (x y) 
-	  (fire-location monk)
-	(drop-object (current-buffer) arrow x y)))))
+  (multiple-value-bind (x y) 
+      (fire-location monk)
+    (drop-object (current-buffer) arrow x y)))
 
 (defmethod use ((monk monk) (arrow arrow))
   (fire monk (new (class-name (class-of arrow))

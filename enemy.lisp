@@ -13,19 +13,13 @@
   :sprite-height 130
   :sprite-width 130
   :tags '(:enemy)
-  :hp 3
+  :hit-points 15
   :image (random-choose *wraith-images*))
 
-(defmethod damage ((self wraith) points)
-  (with-fields (hp) self 
-    (play-sample "knock.wav")
-    (decf hp points)
-    (unless (plusp hp)
-      (drop self (new 'remains))
-      (drop self (new 'skull))
-      (percent-of-time 20 (drop self (new 'scroll) 40 40))
-      (play-sample "lichdie.wav")
-      (destroy self))))
+(defmethod die ((self wraith))
+  (drop self (new 'remains))
+  (drop self (new 'skull))
+  (destroy self))
 
 (defmethod run ((self wraith))
   (with-fields (image heading seen-player) self

@@ -16,7 +16,9 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
+** TODO Gumps should rise to z-top when opening
 ** TODO Add arrow to indicate drag-hover candidate
+** TODO Use general collision with z-order as drag-hover choice
 ** TODO Implement simple modeline
 ** TODO Space to shuffle equipped item
 ** TODO Implement more game logic/rules/lore as CLOS
