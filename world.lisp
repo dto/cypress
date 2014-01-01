@@ -13,11 +13,11 @@
   (quantity :initform 1)
   (weight :initform nil)
   (inventory :initform nil)
-  (hit-points :initform 0)
-  (magic-points :initform 0)
-  (hunger-points :initform 0)
-  (fatigue-points :initform 0)
-  (cold-points :initform 0)
+  (health :initform 0)
+  (magic :initform 0)
+  (hunger :initform 0)
+  (fatigue :initform 0)
+  (cold :initform 0)
   (description :initform nil)
   (inscription :initform nil)
   ;; animation fields
@@ -132,16 +132,18 @@
 
 ;;; Inventory management
 
+(defparameter *maximum-inventory-size* 16)
+
 (defmethod inventory-items ((container thing))
   (field-value :inventory container))
 
 (defmethod add-inventory-item ((container thing) (item thing))
   (with-fields (inventory) container
-    (pushnew item inventory :test 'eq)))
+    (pushnew (find-object item) inventory :test 'eq)))
 
 (defmethod remove-inventory-item ((container thing) (item thing))
   (with-fields (inventory) container
-    (setf inventory (remove item inventory :test 'eq))))
+    (setf inventory (remove (find-object item) inventory :test 'eq))))
 
 (defmethod find-inventory-item ((container thing) &optional (class 'thing))
   (dolist (item (inventory-items container))
@@ -213,27 +215,27 @@
 	(consume container item))
       (error "Not enough.")))
 	
-(defmethod modify-hit-points ((self thing) points)
-  (with-fields (hit-points) self
-    (incf hit-points points)
-    (when (not (plusp hit-points))
+(defmethod modify-health ((self thing) points)
+  (with-fields (health) self
+    (incf health points)
+    (when (not (plusp health))
       (die self))))
 
-(defmethod modify-magic-points ((self thing) points)
-  (with-fields (magic-points) self
-    (incf magic-points points)))
+(defmethod modify-magic ((self thing) points)
+  (with-fields (magic) self
+    (incf magic points)))
 
-(defmethod modify-fatigue-points ((self thing) points)
-  (with-fields (fatigue-points) self
-    (incf fatigue-points points)))
+(defmethod modify-fatigue ((self thing) points)
+  (with-fields (fatigue) self
+    (incf fatigue points)))
 
-(defmethod modify-hunger-points ((self thing) points)
-  (with-fields (hunger-points) self
-    (incf hunger-points points)))
+(defmethod modify-hunger ((self thing) points)
+  (with-fields (hunger) self
+    (incf hunger points)))
 
-(defmethod modify-cold-points ((self thing) points)
-  (with-fields (cold-points) self
-    (incf cold-points points)))
+(defmethod modify-cold ((self thing) points)
+  (with-fields (cold) self
+    (incf cold points)))
 
 ;;; Attaching gumps to things
 
@@ -263,7 +265,11 @@
 
 (defmethod pick ((self thing)) self)
 
-(defmethod can-accept ((self thing)))
+(defmethod fullp (inventory)
+  (>= (length inventory) 
+      *maximum-inventory-size*))
+
+(defmethod can-accept ((self thing)) nil)
 
 (defmethod accept ((container thing) (item thing))
   (prog1 t
@@ -272,21 +278,22 @@
     (remove-object (current-buffer) item)))
 
 (defmethod bring-to-front ((self thing))
-  (with-fields (z) self
-    (setf z (max z
-		 (1+ (maximum-z-value (current-buffer)))))))
+  (when (current-buffer)
+    (with-fields (z) self
+      (setf z (max (or z 1)
+		   (1+ (maximum-z-value (current-buffer))))))))
 
-(defmethod after-drag-hook ((self thing))
+(defmethod drop-object :after ((buffer buffer) (self thing) &optional x y z)
   (bring-to-front self))
 
 ;;; Describing and naming objects 
 
-(defun auto-describe (thing)
+(defun fancy-description (thing)
   (pretty-string (class-name (class-of (find-object thing)))))
 
 (defmethod find-description ((self thing)) 
   (or (field-value :description self)
-      (auto-describe self)))
+      (fancy-description self)))
 
 (defmethod look ((self thing))
   (drop self 
@@ -496,6 +503,8 @@
 
 ;;; Cypress
 
+(defvar *status-line* nil)
+
 (define-buffer cypress 
   :background-image "meadow5.png"
   :quadtree-depth 8)
@@ -524,14 +533,29 @@
   ;;   ((:g :control) :escape)
   ;;   ((:d :control) :drop-selection)))
 
-(defmethod alternate-tap ((self cypress) x y)
+(defmethod initialize :after ((buffer cypress) &key)
+  (setf *status-line* (new 'status-line)))
+
+(defmethod alternate-tap ((buffer cypress) x y)
   (walk-to (cursor) x y))
 
-(defmethod draw-object-layer ((self cypress))
-  (multiple-value-bind (top left right bottom) (window-bounding-box self)
-    (dolist (object (mapcar #'find-object (z-sort (get-objects self))))
+(defmethod draw-object-layer ((buffer cypress))
+  (multiple-value-bind (top left right bottom) 
+      (window-bounding-box buffer)
+    (dolist (object (mapcar #'find-object (z-sort (get-objects buffer))))
       ;; only draw onscreen objects
       (when (colliding-with-bounding-box object top left right bottom)
 	(draw object)
-	(after-draw-object self object)))))
+	(after-draw-object buffer object)))))
+
+(defmethod update :after ((self cypress))
+  (layout *status-line*)
+  (update *status-line*))
+
+(defmethod draw :after ((self cypress))
+  (with-fields (drag) self
+    (when drag (draw drag)))
+  (draw *status-line*))
+  
+
 

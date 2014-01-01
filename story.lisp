@@ -1,5 +1,7 @@
 (in-package :cypress)
 
+(defresource "xolaros3.ogg" :volume 20)
+
 (defun make-meadow ()
     (let ((geoffrey (new 'geoffrey))
 	  (lucius (new 'lucius))
@@ -9,7 +11,7 @@
       (add-object buffer (new 'scroll) 800 500)
       (add-object buffer (new 'white-bread) 860 600)
       (add-object buffer (new 'wheat-bread) 900 700)
-      (add-object buffer (new 'wraith) 1000 900)
+      (add-object buffer (new 'wraith) 1300 850)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	    (%horizontal-scrolling-margin buffer) 2/5
@@ -36,6 +38,7 @@
 
       ;; allocate
        (install-quadtree buffer)
+;      (play-music "xolaros3.ogg" :loop t)
       buffer))
 
 (defparameter *quine-summons*
@@ -82,6 +85,29 @@ widespread famine, disease, and death.
 ")
 
 (defparameter *letter-text-2* 
+  "
+Dear Geoffrey,
+
+I'm sending this letter by Raven to my
+camp so that you'll know what happened.
+I had to leave quite suddenly, and left
+a few things behind!
+
+You will find in my tent a spare
+Hearthstone, my expedition journal, and
+a few more things in a satchel beneath
+my bed. I'll be back tomorrow evening
+and can meet you at the Library
+then. Can you bring my things with you?
+Although you can keep the Hearthstone as
+a gift.
+
+I've got to get moving! See you soon.
+
+ -- Dr. Quine
+")
+
+(defparameter *letter-text-3* 
   "Dear Geoffrey,
 
 Our fondest hope is that this letter

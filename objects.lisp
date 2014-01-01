@@ -1,10 +1,20 @@
 (in-package :cypress)
 
 (defparameter *ruin-wall-images* (image-set "ruin-wall" 4))
-(defparameter *book-images* (image-set "book" 10))
 (defparameter *skull-images* (image-set "skull" 3))
 (defparameter *wolf-skull-images* (image-set "wolf-skull" 3))
+
+(defparameter *book-images* (image-set "book" 10))
+
+(defthing book :image (random-choose *book-images*))
+
 (defparameter *scroll-images* (image-set "scroll" 5))
+
+(defthing scroll :image (random-choose *scroll-images*))
+
+(defmethod activate ((self scroll))
+  (drop self (new 'scroll-gump :text *letter-text-2*)))
+
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *notebook-images* (image-set "notebook" 3))
 (defparameter *wood-images* (image-set "wood" 4))
@@ -35,12 +45,6 @@
   :image (random-choose *gray-rock-images*)
   :scale 1.7)
 
-(defthing book :image (random-choose *book-images*))
-
-(defthing scroll :image (random-choose *scroll-images*))
-
-(defmethod activate ((self scroll))
-  (drop self (new 'scroll-gump :text *letter-text-2*)))
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
 

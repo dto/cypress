@@ -33,14 +33,15 @@
   (setf *default-texture-filter* :mipmap)
   (setf *frame-rate* 30)
   
-  (setf *font* "sans-mono-bold-11") 
+  ;;  (setf *font* "sans-mono-bold-11") 
   (with-session 
     (load-project "cypress" '(:with-database nil))
     (index-all-images)
     (index-all-samples)
-    (preload-resources)
     (index-pending-resources)
+    ;; (preload-resources)
     (switch-to-buffer (make-meadow))
+  (setf *font* "oldania")
     (start-session)))
 
 ;;; cypress.lisp ends here

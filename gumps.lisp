@@ -11,30 +11,28 @@
   (target-x :initform 0)
   (target-y :initform 0))
 
-(defmethod set-target ((self gump) x y)
+(defmethod set-target-position ((self gump) x y)
   (with-fields (target-x target-y) self
     (setf target-x (- x (window-x)))
     (setf target-y (- y (window-y)))))
 
-(defmethod move-to-target ((self gump))
+(defmethod move-to-target-position ((self gump))
   (with-fields (target-x target-y) self
     (move-to self 
 	     (+ target-x (window-x))
 	     (+ target-y (window-y)))))
 
-(defmethod after-add-hook ((self gump))
-  (set-target self (field-value :x self) (field-value :y self)))
+(defmethod drop-object :after ((buffer buffer) (gump gump) &optional x y z)
+  (set-target-position gump (field-value :x gump) (field-value :y gump))
+  (bring-to-front gump))
 
 (defmethod drag ((self gump) x y)
-  (set-target self x y)
+  (set-target-position self x y)
   (move-to self x y))
 
 (defmethod run ((self gump))
   (arrange self))
       
-(defmethod drop-object :after ((buffer buffer) (gump gump) &optional x y z)
-  (bring-to-front gump))
-
 ;;; The scroll gump is for reading pages of text.
 
 (defun split-into-pages (text lines-per-page)
@@ -98,8 +96,155 @@
     (resize self 
 	    (* (image-width image) *scroll-scale*)
 	    (* (image-height image) *scroll-scale*))
-    (move-to-target self)))
+    (move-to-target-position self)))
 
+;;; Generic object icons representing items in inventories.
+
+(defparameter *icon-height* 60)
+(defparameter *icon-width* 60)
+
+(defthing icon target)
+
+(defmethod initialize ((icon icon) &key target)
+  (with-fields (height width) icon
+    (setf height *icon-height*)
+    (setf width *icon-width*)
+    (setf (field-value :target icon) target)))
+
+(defmethod draw ((icon icon))
+  (with-fields (x y height width target) icon
+    (with-fields (image) target
+      (let ((image-width (image-width image))
+	    (image-height (image-height image)))
+      ;; fit to square without distorting
+	(if (> image-width image-height)
+	    (draw-image image x y 
+			:width width
+			:height (- height (/ 1 (/ width image-width))))
+	    (draw-image image x y
+			:height height
+			:width (- width (/ 1 (/ height image-height)))))))))
+
+(defparameter *icon-spacing* (units 1))
+
+;;; Container browser gump
+
+(defparameter *browser-top-margin* (units 5.5))
+
+(defparameter *browser-left-margin* (units 2.0))
+
+(defthing (browser gump) 
+  :image "scroll-gump.png"
+  :image-scale 300
+  :target nil
+  :icons nil
+  :rows 4
+  :columns 4)
+
+(defparameter *browser-scale* (/ 1 3))
+
+(defmethod run ((browser browser))
+  (arrange browser))
+
+(defmethod clear ((browser browser))
+  (with-fields (icons) browser
+    (mapc #'destroy icons)
+    (setf icons nil)))
+
+(defmethod can-accept ((browser browser))
+  (can-accept (field-value :target browser)))
+
+(defmethod accept ((browser browser) thing)
+  (accept (field-value :target browser) thing)
+  (refresh browser))
+
+
+(defmethod arrange ((browser browser))
+  ;; stay in same spot onscreen
+  (with-fields (image) browser
+    (resize browser 
+	    (* (image-width image) *browser-scale*)
+	    (* (image-height image) *browser-scale*))
+    (move-to-target-position browser))
+  ;; lay out the items
+  (with-fields (x y rows columns) browser
+    (let ((x0 (+ x *browser-left-margin*))
+	  (y0 (+ y *browser-top-margin*))
+	  (icons (field-value :icons browser)))
+      (block spacing
+	(dotimes (row rows)
+	  (dotimes (column columns)
+	    (let ((icon (pop icons)))
+	      (if icon
+		  (move-to icon 
+			   (+ x0 
+			      (* column (+ *icon-width* *icon-spacing*)))
+			   (+ y0 
+			      (* row (+ *icon-height* *icon-spacing*))))
+		  (return-from spacing)))))))))
+
+(defmethod draw ((self browser))
+  (call-next-method)
+  (with-fields (x y icons target) self
+    (mapc #'draw icons)
+    (draw-string (find-description target)
+		 (+ x (units 7))
+		 (+ y (units 1.5))
+		 :color "saddle brown" 
+		 :font "oldania-title")))
+
+(defmethod destroy :before ((self browser))
+  (mapc #'destroy (field-value :icons self)))
+
+(defun item-icon (item)
+  (new 'icon :target item))
+
+(defmethod refresh ((browser browser))
+  (clear browser)
+  (with-fields (target icons rows columns) browser
+    (with-fields (inventory) target
+      ;; only take max items
+      (let ((items (subseq inventory 0 (min *maximum-inventory-size* (length inventory)))))
+	(setf icons (mapcar #'item-icon items)))))
+  (layout browser))
+
+(defmethod initialize ((browser browser) &key container)
+  (with-fields (target) browser
+    (setf target container)
+    (refresh browser)))
+
+(defmethod hit-icons ((browser browser) x y)
+  (with-fields (icons) browser
+    (labels ((try (icon)
+	       (hit icon x y)))
+      (some #'try icons))))
+
+;; (defmethod tap ((browser browser) x y)
+;;   (let ((icon (hit-icons browser x y)))
+;;     (when icon (tap (field-value :target icon) x y))))
+
+(defmethod can-pick ((browser browser))
+  (let ((x (window-pointer-x))
+	(y (window-pointer-y)))
+    (let ((icon (hit-icons browser x y)))
+      (if icon (can-pick icon) browser))))
+
+(defmethod pick ((browser browser))
+  (with-fields (target) browser
+    (let ((x (window-pointer-x))
+	  (y (window-pointer-y)))
+      (let ((icon (hit-icons browser x y)))
+	(if icon
+	    (let ((item (field-value :target icon)))
+	      (prog1 item
+		(move-to item x y)
+		(remove-inventory-item target item)
+		(refresh browser)))
+	    browser)))))
+
+(defmethod alternate-tap ((self browser) x y)
+  (destroy self))
+  
 ;;; The talk gump 
 
 (defparameter *button-margin* 2)
@@ -233,7 +378,7 @@
 
 (defmethod arrange ((self talk-gump))
   (with-local-fields
-    (move-to-target self)
+    (move-to-target-position self)
     (when (xelfp (text self))
       (let ((x0 (+ %x (* 0.13 %width)))
 	    (y0 (+ %y (* 0.14 %height))))
@@ -257,6 +402,4 @@
 			 button-keys))
 	(gump (new 'talk-gump)))
       (prog1 gump (configure gump text buttons))))
-
-
 

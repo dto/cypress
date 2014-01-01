@@ -1,5 +1,7 @@
 (in-package :cypress)
 
+(defresource "knock.wav" :volume 20)
+
 ;;; Wraiths
 
 (defsprite enemy)
@@ -15,12 +17,13 @@
   :sprite-height 130
   :sprite-width 130
   :tags '(:enemy)
-  :hit-points 15
+  :health 15
   :image (random-choose *wraith-images*))
 
 (defmethod die ((self wraith))
   (drop self (new 'remains))
   (drop self (new 'skull))
+  (play-sound self "lichscream.wav")
   (destroy self))
 
 (defmethod run ((self wraith))

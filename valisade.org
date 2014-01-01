@@ -16,29 +16,35 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
-** TODO Pause game with key or mouse-wheel to issue orders
-** DONE Gumps should rise to z-top when opening
-   CLOSED: [2013-12-30 Mon 16:37]
-** TODO Add arrow to indicate drag-hover candidate
-** TODO Use general collision with z-order as drag-hover choice
-** TODO Implement simple modeline
-** TODO Space to shuffle equipped item
-** TODO Implement more game logic/rules/lore as CLOS
-
-** TODO Create generic paged inventory/spells gump
-*** TODO Container gump might be a single horizontal strip along the bottom, instead of laying out?
-*** TODO Paint this gump background, or re-use existing?
-*** TODO Display container's name and icon in the corner
+** TODO Create generic inventory/spellbook gump
+*** TODO Display container's name in the corner
 *** TODO Drag into/out of containers
+*** DONE Re-use existing gump background 
+    CLOSED: [2013-12-31 Tue 19:11]
+** TODO Add arrow to indicate drag-hover candidate
+*** TODO Use general collision with z-order as drag-hover choice?
+** TODO Make sure bread can't accept objects 
+*** TODO wrap "can-accept" with somehting that has a better name?
+
+** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
+** TODO Space to shuffle equipped item
 
 ** TODO Fix conversation gump; design real convo system (inform manual)
+** DONE Implement simple modeline
+   CLOSED: [2013-12-30 Mon 19:35]
+** DONE Gumps should rise to z-top when opening
+   CLOSED: [2013-12-30 Mon 16:37]
+** DONE Implement more game logic/rules/lore as CLOS
+   CLOSED: [2013-12-30 Mon 16:59]
+
 
 ** TODO IDENTIFY all level gen parameters (difficulty, background, terrain, decals, items, enemies)
-** TODO Draw individual trees and also clusters of trees
 ** TODO Watch original sanctuary playthrough vid
 ** TODO Inventory art book to see some things already painted for episode 1
 
 ** TODO Paint and Animate an Imperial Raven.
+
+** TODO Draw individual trees and also clusters of trees
 ** TODO Import map symbols
 ** TODO Import leather overworld map
 ** TODO Import spell/action symbols

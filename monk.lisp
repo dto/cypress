@@ -10,11 +10,13 @@
 (defthing (arrow sprite)
   :image-scale 40
   :clock 400
+  :heading (/ pi 2)
   :images *arrow-images*
   :image (random-choose *arrow-images*))
 
 (defmethod initialize ((self arrow) &key heading)
-  (setf (field-value :heading self) heading))
+  (when heading
+    (setf (field-value :heading self) heading)))
 
 (defmethod run ((self arrow))
   (with-fields (clock image images) self
@@ -25,18 +27,17 @@
 	(destroy self)
 	(forward self 15))))
 
-;; Default collision method
-
 (defmethod collide ((self arrow) (thing thing))
   (when (solidp thing) 
     (destroy self)))
 
+(defmethod collide :after ((self arrow) (thing thing))
+  (play-sample "knock.wav"))
+
 (defthing (wooden-arrow arrow))
 
-;; Specific collision methods
-
 (defmethod collide ((self wooden-arrow) (enemy enemy))
-  (modify-hit-points enemy -5)
+  (modify-health enemy -5)
   (destroy self))
 
 (defthing (silver-arrow arrow)
@@ -44,7 +45,7 @@
   :image (random-choose *silver-arrow-images*))
 
 (defmethod collide ((self silver-arrow) (enemy enemy))
-  (modify-hit-points enemy -10)
+  (modify-health enemy -10)
   (destroy self))
 
 (defthing (crystal-arrow arrow)
@@ -52,7 +53,7 @@
   :image (random-choose *crystal-arrow-images*))
 
 (defmethod collide ((self crystal-arrow) (enemy enemy))
-  (modify-hit-points enemy -15)
+  (modify-health enemy -15)
   (destroy self))
 
 ;;; A monk, either AI or human controlled
@@ -130,11 +131,11 @@
 
 (defsprite monk
   (equipped-item :initform nil)
-  (hit-points :initform *maximum-points*)
-  (magic-points :initform *maximum-points*)
-  (hunger-points :initform 0)
-  (fatigue-points :initform 0)
-  (cold-points :initform 0)
+  (health :initform *maximum-points*)
+  (magic :initform *maximum-points*)
+  (hunger :initform 0)
+  (fatigue :initform 0)
+  (cold :initform 0)
   (inventory :initform nil)
   (sprite-height :initform (units 5))
   (sprite-width :initform (units 5))
@@ -156,12 +157,14 @@
   (fire-clock :initform 0))
 
 (defmethod initialize :after ((monk monk) &key)
+  (add-inventory-item monk (new 'jerky))
   (add-inventory-item monk (quantity-of 'wooden-arrow 10)))
 
 (defmethod humanp ((self monk)) nil)
 
 (defmethod equipped-item ((self monk))
-  (field-value :equipped-item self))
+  (or (field-value :equipped-item self)
+      (find-arrow self)))
 
 (defmethod equip ((self monk) (item thing))
   (setf (field-value :equipped-item self) item))
@@ -218,9 +221,12 @@
   (when (and (solidp thing) 
 	     (null (field-value :waypoints self)))
     (restore-location self)
-    (stop-walking self))
-  (when (enemyp thing)
-    (percent-of-time 20 (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
+    (stop-walking self)))
+
+(defmethod collide ((self monk) (enemy enemy))
+  (percent-of-time 10
+    (modify-health self -3)
+    (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))))
 
 (defmethod die ((self monk))
   (when (field-value :alive self)
@@ -272,10 +278,13 @@
       (fire-location monk)
     (drop-object (current-buffer) arrow x y)))
 
+(defresource "bow.wav" :volume 20)
+
 (defmethod use ((monk monk) (arrow arrow))
   (fire monk (new (class-name (class-of arrow))
 		  :heading (aim-heading monk)))
-  (modify-fatigue-points monk 1)
+  (play-sound monk "bow.wav")
+  (modify-fatigue monk 1)
   (modify-quantity arrow -1))
 
 (defmethod find-arrow ((monk monk))
@@ -289,9 +298,16 @@
     (use monk (or (equipped-item monk)
 		  (find-arrow monk)))))
 
+(defmethod can-accept ((self monk))
+  (with-fields (inventory) self
+    (not (fullp inventory))))
+
 ;;; As the monk Geoffrey, the player drives the action
   
-(defthing (geoffrey monk))
+(defthing (geoffrey monk) :description "Geoffrey")
+
+(defmethod activate ((monk monk))
+  (replace-gump monk (new 'browser :container monk)))
 
 (defmethod standing-animation ((self geoffrey))
   *monk-stand*)
@@ -311,7 +327,7 @@
 
 ;;; Lucius 
 
-(defthing (lucius monk) :clock 10)
+(defthing (lucius monk) :clock 10 :description "Lucius")
 
 (defmethod run ((self lucius))
   (call-next-method)
@@ -337,15 +353,15 @@
   :image "white-bread.png")
 
 (defmethod consume ((monk monk) (bread white-bread))
-  (modify-hit-points monk +5)
-  (modify-hunger-points monk -10))
+  (modify-health monk +5)
+  (modify-hunger monk -10))
 
 (defthing (wheat-bread food)
   :image "wheat-bread.png")
 
 (defmethod consume ((monk monk) (bread wheat-bread))
-  (modify-hit-points monk +10)
-  (modify-hunger-points monk -15))
+  (modify-health monk +10)
+  (modify-hunger monk -15))
 
 (defmethod consume :after ((monk geoffrey) (bread wheat-bread))
   (message "BURP!"))
@@ -354,20 +370,20 @@
   :image "beef-jerky.png")
 
 (defmethod consume ((monk monk) (jerky jerky))
-  (modify-hit-points monk +15)
-  (modify-hunger-points monk -30))
+  (modify-health monk +15)
+  (modify-hunger monk -30))
 
 (defthing (elixir food)
   :image "elixir.png")
 
 (defmethod consume ((monk monk) (elixir elixir))
-  (modify-magic-points monk +40))
+  (modify-magic monk +40))
 
 (defthing (silver-elixir food)
   :image "silver-elixir.png")
 
 (defmethod consume ((monk monk) (silver-elixir elixir))
-  (modify-magic-points monk +100))
+  (modify-magic monk +100))
 
 ;; (defmethod activate ((self lucius))
 ;;   (discuss self :hello))
