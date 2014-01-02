@@ -13,7 +13,7 @@
 
 (defthing (wraith enemy)
   :seen-player nil
-  :image-scale 600
+  :image-scale 1200
   :sprite-height 130
   :sprite-width 130
   :tags '(:enemy)
@@ -21,7 +21,25 @@
   :image (random-choose *wraith-images*))
 
 (defmethod die ((self wraith))
-  (drop self (new 'remains))
+  (let ((remains (new 'remains)))
+    (if (percent-of-time 50 t)
+	(progn 
+	  (add-inventory-item remains
+			      (random-choose (list 
+					      (new 'warrior-key)
+					      (new 'triangle-key))))
+	  (add-inventory-item remains (random-choose (list 
+						      (new 'xalcium-mail)
+						      (new 'copper-lock)
+						      (new 'skull)))))
+	(progn
+	  (add-inventory-item remains
+			      (random-choose (list 
+					      (new 'xalcium-armor)
+					      (new 'xalcium-leggings))))
+	  (add-inventory-item remains (new 'wolf-skull))))
+
+    (drop self remains))
   (drop self (new 'skull))
   (play-sound self "lichscream.wav")
   (destroy self))

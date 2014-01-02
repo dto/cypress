@@ -1,6 +1,28 @@
 (in-package :cypress)
 
-(defresource "xolaros3.ogg" :volume 20)
+(defresource "3-against-2.ogg" :volume 30)
+
+(defresource "old-map.png")
+
+(defparameter *map-scroll-speed* 0.3)
+(defparameter *map-zoom-speed* 0.9)
+
+(defthing old-map :image "old-map.png" :width (* 3200 0.9) :height (* 2502 0.9))
+
+(define-method run old-map ()
+  (move-toward self :left *map-scroll-speed*)
+  (resize self 
+	  (- %width *map-zoom-speed*)
+	  (- %height *map-zoom-speed*)))
+
+(defresource "dusk.ogg" :volume 40)
+
+(defun show-old-map ()
+  (switch-to-buffer (new 'buffer))
+  (resize (current-buffer) 3000 3000)
+  (let ((map (new 'old-map)))
+    (insert map -400 0))
+  (play-music "dusk.ogg" :loop t))
 
 (defun make-meadow ()
     (let ((geoffrey (new 'geoffrey))
@@ -8,10 +30,16 @@
 	  (buffer (new 'cypress)))
       (add-object buffer geoffrey 320 120)
       (add-object buffer lucius 350 80)
-      (add-object buffer (new 'scroll) 800 500)
-      (add-object buffer (new 'white-bread) 860 600)
-      (add-object buffer (new 'wheat-bread) 900 700)
-      (add-object buffer (new 'wraith) 1300 850)
+      (let ((tent (new 'tent)))
+	(add-object buffer tent 600 500)
+	(add-object buffer (new 'campfire) 620 700)
+	(add-inventory-item tent (new 'atlas))
+	(add-inventory-item tent (new 'white-bread))
+	(add-inventory-item tent (new 'wheat-bread))
+	(add-inventory-item tent (new 'scroll))
+	(add-inventory-item tent (new 'book)))
+      (add-object buffer (new 'wraith) 1800 1000)
+      (add-object buffer (new 'wraith) 1500 850)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	    (%horizontal-scrolling-margin buffer) 2/5
@@ -23,9 +51,6 @@
       (glide-window-to-cursor buffer)
       (follow-with-camera buffer geoffrey)
 
-      (drop-object buffer (new 'tent) 400 400)
-      (drop-object buffer (new 'tent) 800 800)
-      
       ;; (drop-object buffer (new 'circle-key) 420 700)
       ;; (drop-object buffer (new 'triangle-key) 420 850)
       ;; (drop-object buffer (new 'xalcium-leggings) 400 400)
@@ -38,7 +63,7 @@
 
       ;; allocate
        (install-quadtree buffer)
-;      (play-music "xolaros3.ogg" :loop t)
+      (play-music "3-against-2.ogg")
       buffer))
 
 (defparameter *quine-summons*
@@ -84,9 +109,19 @@ supply and failure of their crops led to
 widespread famine, disease, and death.
 ")
 
-(defparameter *letter-text-2* 
-  "
-Dear Geoffrey,
+(defparameter *letter-text-2*
+  "Dear Geoffrey, I have to abandon my
+second camp near the ruins! Take what
+you like from my tent, and follow me to
+the south. But watch out for Wraiths!
+
+Sorry for the wild goose-chase. 
+
+-- Dr. Quine
+")
+
+(defparameter *letter-text-4* 
+  "Dear Geoffrey,
 
 I'm sending this letter by Raven to my
 camp so that you'll know what happened.

@@ -158,7 +158,6 @@
   (accept (field-value :target browser) thing)
   (refresh browser))
 
-
 (defmethod arrange ((browser browser))
   ;; stay in same spot onscreen
   (with-fields (image) browser

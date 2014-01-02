@@ -156,6 +156,9 @@
   (step-clock :initform 0)
   (fire-clock :initform 0))
 
+(defmethod walk-to :before ((monk monk) x y)
+  (bring-to-front monk))
+
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'jerky))
   (add-inventory-item monk (quantity-of 'wooden-arrow 10)))
@@ -222,6 +225,10 @@
 	     (null (field-value :waypoints self)))
     (restore-location self)
     (stop-walking self)))
+
+(defresource "unh-1.wav" :volume 20)
+(defresource "unh-2.wav" :volume 20)
+(defresource "unh-3.wav" :volume 20)
 
 (defmethod collide ((self monk) (enemy enemy))
   (percent-of-time 10

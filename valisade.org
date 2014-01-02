@@ -16,11 +16,15 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
-** TODO Create generic inventory/spellbook gump
-*** TODO Display container's name in the corner
-*** TODO Drag into/out of containers
+** DONE Create generic inventory/spellbook gump
+   CLOSED: [2014-01-01 Wed 20:43]
+*** DONE Display container's name in the corner
+    CLOSED: [2014-01-01 Wed 20:43]
+*** DONE Drag into/out of containers
+    CLOSED: [2014-01-01 Wed 20:43]
 *** DONE Re-use existing gump background 
     CLOSED: [2013-12-31 Tue 19:11]
+
 ** TODO Add arrow to indicate drag-hover candidate
 *** TODO Use general collision with z-order as drag-hover choice?
 ** TODO Make sure bread can't accept objects 

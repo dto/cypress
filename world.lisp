@@ -549,13 +549,15 @@
 	(after-draw-object buffer object)))))
 
 (defmethod update :after ((self cypress))
-  (layout *status-line*)
-  (update *status-line*))
+  (when (cursor)
+    (layout *status-line*)
+    (update *status-line*)))
 
 (defmethod draw :after ((self cypress))
   (with-fields (drag) self
     (when drag (draw drag)))
-  (draw *status-line*))
+  (when (cursor)
+    (draw *status-line*)))
   
 
 
