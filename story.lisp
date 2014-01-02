@@ -7,7 +7,7 @@
 (defparameter *map-scroll-speed* 0.3)
 (defparameter *map-zoom-speed* 0.9)
 
-(defthing old-map :image "old-map.png" :width (* 3200 0.9) :height (* 2502 0.9))
+(defthing old-map :image "nice-map.png" :width (* 3200 0.9) :height (* 2502 0.9))
 
 (define-method run old-map ()
   (move-toward self :left *map-scroll-speed*)
