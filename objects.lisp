@@ -61,7 +61,6 @@
   :image (random-choose *gray-rock-images*)
   :scale 1.7)
 
-
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
 (defthing wolf-skull :image (random-choose '("wolf-skull-1.png" "wolf-skull-2.png")))
 
