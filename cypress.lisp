@@ -39,7 +39,7 @@
     (index-all-images)
     (index-all-samples)
     (index-pending-resources)
-    ;; (preload-resources)
+    (preload-resources)
     (switch-to-buffer (make-meadow))
   (setf *font* "oldania")
     (start-session)))

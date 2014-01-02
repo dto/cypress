@@ -2,7 +2,7 @@
 
 (defresource "3-against-2.ogg" :volume 30)
 
-(defresource "old-map.png")
+(defresource "nice-map.png")
 
 (defparameter *map-scroll-speed* 0.3)
 (defparameter *map-zoom-speed* 0.9)
