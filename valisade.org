@@ -16,8 +16,8 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
-** TODO Write several scroll items to find
-
+** DONE Write several scroll items to find
+   CLOSED: [2014-01-03 Fri 01:29]
 ** DONE fix pathfinding timeout for unreachable areas (expand first bounding box)
    CLOSED: [2014-01-02 Thu 19:04]
 ** DONE refresh inventory after drop on container
@@ -32,18 +32,21 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2014-01-02 Thu 20:16]
 *** DONE wrap "can-accept" with somehting that has a better name?
     CLOSED: [2014-01-02 Thu 20:16]
-
 ** DONE Lengthen double click time
    CLOSED: [2014-01-02 Thu 20:16]
-** TODO 
+
+** TODO Fix crash when trying to move remains
 ** TODO Allow to identify objects in gumps
 ** TODO Allow to use objects in gumps
 ** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
-** TODO Space to shuffle equipped item
-** TODO Fix conversation gump; design real convo system (inform manual)
-** TODO make screen not scroll during combat?
-** TODO switch to tactical combat
+*** TODO switch to tactical combat
 
+** TODO Implement spell-actions and reagents
+*** TODO cold, hunger
+*** TODO camping
+** TODO Space to shuffle equipped item
+
+** TODO Fix conversation gump; design real convo system (inform manual)
 
 ** DONE Create generic inventory/spellbook gump
    CLOSED: [2014-01-01 Wed 20:43]
