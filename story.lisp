@@ -56,10 +56,10 @@
       ;; (drop-object buffer (new 'xalcium-leggings) 400 400)
       ;; (drop-object buffer (new 'xalcium-armor) 420 700)
       ;; (drop-object buffer (new 'xalcium-mail) 420 850)
-      ;; (dotimes (n 8)
-      ;; 	(let ((x (+ 300 (random 1500)))
-      ;; 	      (y (+ 300 (random 1000))))
-      ;; 	  (drop-object buffer (new 'gray-rock))) x y)
+      (dotimes (n 8)
+      	(let ((x (+ 300 (random 1500)))
+      	      (y (+ 300 (random 1000))))
+      	  (drop-object buffer (new 'gray-rock))) x y)
 
       ;; allocate
        (install-quadtree buffer)

@@ -16,14 +16,13 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
-** DONE Create generic inventory/spellbook gump
-   CLOSED: [2014-01-01 Wed 20:43]
-*** DONE Display container's name in the corner
-    CLOSED: [2014-01-01 Wed 20:43]
-*** DONE Drag into/out of containers
-    CLOSED: [2014-01-01 Wed 20:43]
-*** DONE Re-use existing gump background 
-    CLOSED: [2013-12-31 Tue 19:11]
+** TODO fix pathfinding timeout for unreachable areas (expand first bounding box)
+** TODO refresh inventory after drop on container
+** TODO Lengthen double click time
+** TODO Don't allow multiple browsers on one object
+** TODO make screen not scroll during combat?
+** TODO switch to tactical combat
+** TODO Don't allow to drop gumps into containers
 
 ** TODO Add arrow to indicate drag-hover candidate
 *** TODO Use general collision with z-order as drag-hover choice?
@@ -34,6 +33,15 @@ FORGET-ME-NOTS and Temporal Seance
 ** TODO Space to shuffle equipped item
 
 ** TODO Fix conversation gump; design real convo system (inform manual)
+
+** DONE Create generic inventory/spellbook gump
+   CLOSED: [2014-01-01 Wed 20:43]
+*** DONE Display container's name in the corner
+    CLOSED: [2014-01-01 Wed 20:43]
+*** DONE Drag into/out of containers
+    CLOSED: [2014-01-01 Wed 20:43]
+*** DONE Re-use existing gump background 
+    CLOSED: [2013-12-31 Tue 19:11]
 ** DONE Implement simple modeline
    CLOSED: [2013-12-30 Mon 19:35]
 ** DONE Gumps should rise to z-top when opening
