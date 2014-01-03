@@ -16,6 +16,8 @@ FORGET-ME-NOTS and Temporal Seance
 
 * Tasks
 
+** TODO Write several scroll items to find
+
 ** DONE fix pathfinding timeout for unreachable areas (expand first bounding box)
    CLOSED: [2014-01-02 Thu 19:04]
 ** DONE refresh inventory after drop on container

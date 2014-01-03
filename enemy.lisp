@@ -1,6 +1,8 @@
 (in-package :cypress)
 
 (defresource "knock.wav" :volume 20)
+(defresource "death.wav" :volume 20)
+(defresource "lichscream.wav" :volume 20)
 
 ;;; Wraiths
 
@@ -23,10 +25,17 @@
 (defmethod die ((self wraith))
   (let ((remains (new 'remains)))
     (when (percent-of-time 50 t)
-      (add-inventory-item remains (grab-bag)))
+      (when (percent-of-time 40 t)
+	(add-inventory-item remains (new 'scroll-fragment)))
+      (add-inventory-item remains (new (random-choose '(skull wolf-skull stone stone item-box))))
+      (if (percent-of-time 50 t)
+	  (if (percent-of-time 50 t)
+	      (add-inventory-item remains (make-box))
+	      (add-inventory-item remains (grab-bag)))
+	  (add-inventory-item remains (new 'stone))))
     (drop self remains))
   (drop self (new 'skull))
-  (play-sound self "lichscream.wav")
+  (play-sound self "death.wav")
   (destroy self))
 
 (defmethod run ((self wraith))
@@ -58,12 +67,13 @@
   :sprite-height 130
   :sprite-width 130
   :tags '(:enemy)
-  :health 22
+  :health 20
   :image (random-choose *wolf-images*))
 
 (defmethod die ((self wolf))
-  (drop self (new 'wolf-skull))
   (let ((remains (new 'remains)))
+    (add-inventory-item remains (new 'wolf-skull))
+    (percent-of-time 30 (add-inventory-item remains (new 'jerky)))
     (drop self remains))
   (destroy self))
 

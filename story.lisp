@@ -1,56 +1,5 @@
 (in-package :cypress)
 
-(defresource "passageway.ogg" :volume 20)
-
-(defresource "nice-map.png")
-
-(defparameter *map-scroll-speed* 0.3)
-(defparameter *map-zoom-speed* 0.9)
-
-(defthing old-map :image "nice-map.png" :width (* 3200 0.9) :height (* 2502 0.9))
-
-(define-method run old-map ()
-  (move-toward self :left *map-scroll-speed*)
-  (resize self 
-	  (- %width *map-zoom-speed*)
-	  (- %height *map-zoom-speed*)))
-
-(defresource "dusk.ogg" :volume 40)
-
-(defun show-old-map ()
-  (switch-to-buffer (new 'buffer))
-  (resize (current-buffer) 3000 3000)
-  (let ((map (new 'old-map)))
-    (insert map -400 0))
-  (play-music "dusk.ogg" :loop t))
-
-(defun make-meadow ()
-    (let ((geoffrey (new 'geoffrey))
-	  (lucius (new 'lucius))
-	  (buffer (new 'cypress))
-	  (forest (trim (make-forest))))
-      (let ((height (field-value :height forest))
-	    (width (field-value :width forest)))
-	(paste-from buffer (with-border 250 forest))
-	(resize buffer (+ width 100) (+ height 100)))
-      (add-object buffer geoffrey 120 120)
-      (add-object buffer lucius 180 80)
-
-      ;; adjust scrolling parameters 
-      (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
-	    (%horizontal-scrolling-margin buffer) 2/5
-	    (%vertical-scrolling-margin buffer) 4/7)
-      ;;
-      (set-cursor buffer geoffrey)
-      (snap-window-to-cursor buffer)
-      (glide-window-to-cursor buffer)
-      (follow-with-camera buffer geoffrey)
-
-      ;; allocate
-       (install-quadtree buffer)
-      (play-music "passageway.ogg")
-      buffer))
-
 (defparameter *quine-summons*
 "Dear Geoffrey,
 
@@ -69,21 +18,21 @@ friend.
 ")
 
 (defparameter *letter-text*
-  "to reconstruct what happened in the
-centuries after our disappearance. It
-would seem that Valisade became the seat
-of a vast imperial power due to its
-harnessing of the magic mineral
-Xalcium. Valisade's warrior-priest kings
-ruled over Ildran for a thousand years,
-but this was disrupted by a sudden
-catastrophe whose cause and nature are
-not yet fully clear to us. An explosion
-of some kind, perhaps a volcanic
-eruption, obliterated completely the
-isles of Einhold and Mir; much of the
-surrounding coastal areas were laid
-waste. 
+  "...to reconstruct what happened in
+the centuries after our
+disappearance. It would seem that
+Valisade became the seat of a vast
+imperial power due to its harnessing of
+the magic mineral Xalcium. Valisade's
+warrior-priest kings ruled over Ildran
+for a thousand years, but this was
+disrupted by a sudden catastrophe whose
+cause and nature are not yet fully clear
+to us. An explosion of some kind,
+perhaps a volcanic eruption, obliterated
+completely the isles of Einhold and Mir;
+much of the surrounding coastal areas
+were laid waste.
 
 A rain of ash fell over the entire
 continent; this was followed by a year
@@ -92,6 +41,8 @@ barely visible through the black
 clouds. The pollution of the water
 supply and failure of their crops led to
 widespread famine, disease, and death.
+
+ (the rest of the scroll is unreadable.)
 ")
 
 (defparameter *letter-text-2*
@@ -126,6 +77,52 @@ I've got to get moving! See you soon.
 
  -- Dr. Quine
 ")
+
+(defparameter *help-text* 
+"Welcome to Cypress. 
+
+Press Control-R to get a new forest.
+Single-click object to show its name.
+Right-click destination to move around.
+Drag objects to move them.
+Double-click monster to attack.
+Drag object onto monks to take item.
+Double click container for inventory.
+Double click remains, look for stuff.
+Right click scrolls to close.
+Drag items into/out of inventory.")
+
+(defparameter *poem-1*
+"My name is Amalia.
+
+I am the spirit who lives 
+ in the White Cypress.
+Like those who dwelt therein before, 
+I guide the souls of Ildran 
+ as they pass between worlds.
+
+I will tell you now 
+of an ancient time,
+
+When ash and smoke concealed 
+the fury of Sol.")
+
+(defparameter *poem-2*
+"When ash and smoke concealed 
+the fury of Sol.
+
+When famine and despair
+swept over Ildran.
+
+When the Cypress died, 
+leaving souls to wander
+without rest.
+
+When a man of humility,
+with little more than
+robe and longbow, 
+passed into the history
+of Heroes.")
 
 (defparameter *letter-text-3* 
   "Dear Geoffrey,
@@ -163,5 +160,80 @@ meant the passage of five millennia.
 You stand on the soil of of a continent
 ten thousand years older than the land
 you left.
+
+ (the rest of the scroll has crumbled)
 ")
+
+(defthing scroll-fragment
+  :image (random-choose *scroll-images*) 
+  :text  (random-choose
+	  (list *letter-text*
+		*poem-1*
+		*poem-2*
+		*letter-text-3*)))
+
+(defmethod activate ((self scroll-fragment))
+  (drop self (new 'scroll-gump
+		  :text (field-value :text self))))
+
+(defresource "passageway.ogg" :volume 20)
+(defresource "home.ogg" :volume 20)
+(defresource "kosmium.ogg" :volume 20)
+(defresource "believe-me2.ogg" :volume 20)
+(defresource "nightbird.ogg" :volume 40)
+(defresource "xolaros3.ogg" :volume 20)
+
+(defparameter *soundtrack*
+'("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "nightbird.ogg" "xolaros3.ogg"))
+
+(defresource "nice-map.png")
+
+(defparameter *map-scroll-speed* 0.3)
+(defparameter *map-zoom-speed* 0.9)
+
+(defthing old-map :image "nice-map.png" :width (* 3200 0.9) :height (* 2502 0.9))
+
+(define-method run old-map ()
+  (move-toward self :left *map-scroll-speed*)
+  (resize self 
+	  (- %width *map-zoom-speed*)
+	  (- %height *map-zoom-speed*)))
+
+(defresource "dusk.ogg" :volume 40)
+
+(defun show-old-map ()
+  (switch-to-buffer (new 'buffer))
+  (resize (current-buffer) 3000 3000)
+  (let ((map (new 'old-map)))
+    (insert map -400 0))
+  (play-music "dusk.ogg" :loop t))
+
+(defun make-meadow ()
+    (let ((geoffrey (new 'geoffrey))
+	  (lucius (new 'lucius))
+	  (buffer (new 'cypress))
+	  (forest (trim (make-forest))))
+      (let ((height (field-value :height forest))
+	    (width (field-value :width forest)))
+	(paste-from buffer (with-border 250 forest))
+	(resize buffer (+ width 600) (+ height 400)))
+      (add-object buffer geoffrey 120 120)
+      (add-object buffer lucius 180 80)
+      (add-object buffer (new 'scroll) 270 100)
+
+      ;; adjust scrolling parameters 
+      (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
+	    (%horizontal-scrolling-margin buffer) 2/5
+	    (%vertical-scrolling-margin buffer) 4/7)
+      ;;
+      (set-cursor buffer geoffrey)
+      (snap-window-to-cursor buffer)
+      (glide-window-to-cursor buffer)
+      (follow-with-camera buffer geoffrey)
+
+      ;; allocate
+       (install-quadtree buffer)
+      (play-music (random-choose *soundtrack*))
+      buffer))
+
 

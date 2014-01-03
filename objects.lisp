@@ -10,6 +10,9 @@
 
 (defmethod can-accept ((box item-box)) t)
 
+(defmethod activate ((item-box item-box))
+  (replace-gump item-box (new 'browser :container item-box)))
+
 (defparameter *chest-images* (image-set "chest" 2))
 
 (defthing chest :image (random-choose *chest-images*))
@@ -19,6 +22,9 @@
 (defparameter *bag-images* (image-set "bag" 3))
 
 (defthing bag :image (random-choose *bag-images*))
+
+(defmethod activate ((bag bag))
+  (replace-gump bag (new 'browser :container bag)))
 
 (defmethod can-accept ((bag bag)) t)
 
@@ -38,10 +44,10 @@
 
 (defparameter *scroll-images* (image-set "scroll" 5))
 
-(defthing scroll :image (random-choose *scroll-images*))
+(defthing scroll :image (random-choose *scroll-images*) :description "Scroll of Helping")
 
 (defmethod activate ((self scroll))
-  (drop self (new 'scroll-gump :text *letter-text-2*)))
+  (drop self (new 'scroll-gump :text *help-text*)))
 
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *wood-images* (image-set "wood" 4))
@@ -121,7 +127,6 @@
   :tags '(:fixed :solid))
 
 (defthing coverstone :image "coverstone.png" :z 10)
-(defthing item-box :image "item-box.png" :z 1)
 
 
 

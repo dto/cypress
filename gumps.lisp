@@ -210,7 +210,6 @@
   (with-fields (target icons rows columns) browser
     (with-fields (inventory) target
       ;; only take max items
-      (message "~S items: ~S" (length inventory) inventory)
       (let ((items (subseq inventory 0 (min *maximum-inventory-size* (length inventory)))))
 	(setf icons (mapcar #'item-icon items)))))
   (layout browser))
@@ -226,9 +225,23 @@
 	       (hit icon x y)))
       (some #'try icons))))
 
-;; (defmethod tap ((browser browser) x y)
-;;   (let ((icon (hit-icons browser x y)))
-;;     (when icon (tap (field-value :target icon) x y))))
+(defmethod tap :after ((browser browser) x y)
+  (let ((icon (hit-icons browser x y)))
+    (when icon 
+      (drop browser 
+	    (new 'bubble 
+		 :text (find-description 
+			(field-value :target icon)))
+	    (+ x (units 2))
+	    y))))
+
+(defmethod activate ((browser browser))
+  (let ((x (window-pointer-x))
+	(y (window-pointer-y)))
+    (let ((icon (hit-icons browser x y)))
+      (when icon 
+	(activate (field-value :target icon))
+	(refresh browser)))))
 
 (defmethod can-pick ((browser browser))
   (let ((x (window-pointer-x))

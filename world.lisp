@@ -20,6 +20,7 @@
   (cold :initform 0)
   (description :initform nil)
   (inscription :initform nil)
+  (container :initform nil)
   ;; animation fields
   (image-scale :initform +dots-per-inch+)
   (scale :initform 1)
@@ -139,11 +140,19 @@
 
 (defmethod add-inventory-item ((container thing) (item thing))
   (with-fields (inventory) container
-    (pushnew (find-object item) inventory :test 'eq)))
+    (let ((the-item (find-object item)))
+      (pushnew the-item inventory :test 'eq)
+      (setf (field-value :container the-item) container))))
 
 (defmethod remove-inventory-item ((container thing) (item thing))
   (with-fields (inventory) container
-    (setf inventory (remove (find-object item) inventory :test 'eq))))
+    (setf inventory (remove (find-object item) inventory :test 'eq))
+    (setf (field-value :container (find-object item)) nil)))
+
+(defmethod destroy :before ((self thing))
+  (with-fields (container) self
+    (when container
+      (remove-inventory-item container self))))
 
 (defmethod find-inventory-item ((container thing) &optional (class 'thing))
   (dolist (item (inventory-items container))
@@ -314,7 +323,7 @@
 
 ;;; Detecting click and double-click
 
-(defparameter *double-tap-time* 10)
+(defparameter *double-tap-time* 8)
 
 (defmethod tap ((self thing) x y)
   (with-fields (last-tap-time) self
@@ -462,6 +471,9 @@
     (setf (field-value :font self) font)
     (later 4.0 (destroy self))))
 
+(defmethod add-object :after ((buffer buffer) (self bubble) &optional x y z)
+  (bring-to-front self))
+
 (defmethod draw ((self bubble))
   (with-field-values (x y text font) self
     (let ((margin 4))
@@ -527,32 +539,13 @@
 (defvar *status-line* nil)
 
 (define-buffer cypress 
-  :background-image "stone-road.png"
+  :background-image (random-choose '("stone-road.png" "paynes-meadow.png"))
   :quadtree-depth 8
   :default-events
   '(((:pause) :transport-toggle-play)
-    ((:e :alt) :edit-word)
-    ((:x :control) :exec)
-    ((:d :control) :delete-word)
-    ((:c :control) :copy-word)
-    ((:x :alt) :command-prompt)
-    ((:g :control) :cancel)
-    ((:c :alt) :clear-stack)
-    ((:s :alt) :show-stack)
-    ((:m :alt) :show-messages)
-    ((:p :control) :transport-toggle-play)
-    ;; ((:return) :enter)
-    ((:escape) :cancel)
-    ((:f1) :help)
-    ((:h :control) :help)
-    ((:x :control) :edit-cut)
-    ((:c :control) :edit-copy)
-    ((:v :control) :edit-paste)
-    ((:v :control :shift) :paste-here)
-    ((:f9) :toggle-minibuffer)
-    ((:f12) :transport-toggle-play)
-    ((:g :control) :escape)
-    ((:d :control) :drop-selection)))
+    ((:r :control) :reset-game)
+    ((:space) :transport-toggle-play)
+    ((:p :control) :transport-toggle-play)))
 
 (defmethod initialize :after ((buffer cypress) &key)
   (setf *status-line* (new 'status-line)))
@@ -584,9 +577,11 @@
 (defmethod draw :after ((self cypress))
   (with-fields (drag hover) self
     (when drag (draw drag))
-    (when hover (draw-hover (find-object hover))))
-  (when (cursor)
-    (draw *status-line*)))
-  
+    (when hover (draw-hover (find-object hover)))))
+  ;; (when (cursor)
+  ;;   (draw *status-line*)))
+
+(define-method reset-game cypress ()
+  (switch-to-buffer (make-meadow)))
 
 
