@@ -141,6 +141,10 @@
   :rows 4
   :columns 4)
 
+;; Don't allow browsers to be dropped into other inventories
+
+(defmethod accept ((container thing) (gump gump)) nil)
+
 (defparameter *browser-scale* (/ 1 3))
 
 (defmethod run ((browser browser))
@@ -203,6 +207,7 @@
   (with-fields (target icons rows columns) browser
     (with-fields (inventory) target
       ;; only take max items
+      (message "~S items: ~S" (length inventory) inventory)
       (let ((items (subseq inventory 0 (min *maximum-inventory-size* (length inventory)))))
 	(setf icons (mapcar #'item-icon items)))))
   (layout browser))

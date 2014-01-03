@@ -243,7 +243,8 @@
   (field-value :gump self))
 
 (defmethod set-gump ((self thing) gump)
-  (setf gump (find-object gump))
+  (setf (field-value :gump self) 
+	(find-object gump))
   (drop self gump (field-value :width self)))
 
 (defmethod destroy-gump ((self thing))
@@ -269,13 +270,20 @@
   (>= (length inventory) 
       *maximum-inventory-size*))
 
+(defmethod refresh ((self thing)) nil)
+
 (defmethod can-accept ((self thing)) nil)
 
 (defmethod accept ((container thing) (item thing))
   (prog1 t
-    (add-inventory-item container item)
-    (destroy-gump item)
-    (remove-object (current-buffer) item)))
+    (with-fields (gump) container
+      (destroy-gump item)
+      (remove-object (current-buffer) item)
+      (add-inventory-item container item)
+      (if (null gump)
+	  (message "No gump for ~S" container)
+	  (progn (message "Refreshing ~S of ~S" gump container)
+		 (refresh gump))))))
 
 (defmethod bring-to-front ((self thing))
   (when (current-buffer)
