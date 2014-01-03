@@ -22,23 +22,8 @@
 
 (defmethod die ((self wraith))
   (let ((remains (new 'remains)))
-    (if (percent-of-time 50 t)
-	(progn 
-	  (add-inventory-item remains
-			      (random-choose (list 
-					      (new 'warrior-key)
-					      (new 'triangle-key))))
-	  (add-inventory-item remains (random-choose (list 
-						      (new 'xalcium-mail)
-						      (new 'copper-lock)
-						      (new 'skull)))))
-	(progn
-	  (add-inventory-item remains
-			      (random-choose (list 
-					      (new 'xalcium-armor)
-					      (new 'xalcium-leggings))))
-	  (add-inventory-item remains (new 'wolf-skull))))
-
+    (when (percent-of-time 50 t)
+      (add-inventory-item remains (grab-bag)))
     (drop self remains))
   (drop self (new 'skull))
   (play-sound self "lichscream.wav")
@@ -57,3 +42,55 @@
       (percent-of-time 30
 	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
 	(move self heading0 4))))))
+
+;;; Wolf
+
+(defparameter *wolf-images* (image-set "wolf" 3))
+
+(defresource "yelp.wav" :volume 20)
+(defresource "howl.wav" :volume 20)
+(defresource "bark.wav" :volume 20)
+(defresource "yelp.wav" :volume 20)
+
+(defthing (wolf enemy)
+  :seen-player nil
+  :image-scale 1500
+  :sprite-height 130
+  :sprite-width 130
+  :tags '(:enemy)
+  :health 22
+  :image (random-choose *wolf-images*))
+
+(defmethod die ((self wolf))
+  (drop self (new 'wolf-skull))
+  (let ((remains (new 'remains)))
+    (drop self remains))
+  (destroy self))
+
+(defmethod modify-health :after ((wolf wolf) points)
+  (play-sound wolf (random-choose '("bark.wav" "yelp.wav"))))
+
+(defmethod run ((self wolf))
+  (when (> (distance-to-cursor self) 700) 
+    (setf (field-value :waypoints self) nil))
+  (with-fields (image heading seen-player) self
+    (percent-of-time 17 (setf image (random-choose *wolf-images*)))
+    (when (< (distance-to-cursor self) 700)
+      (unless seen-player
+	(with-fields (x y) (cursor)
+	  (walk-to self x y)
+	  (play-sample "howl.wav")
+	  (setf seen-player t)))
+      (if (< (distance-to-cursor self) 200)
+	  (progn 
+	    (percent-of-time 3 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
+	    (let ((heading0 (heading-to-cursor self)))
+	      (percent-of-time 25 
+		(setf heading heading0))
+	      (percent-of-time 70
+		(move self heading0 2.2))))
+	  (when (movement-heading self)
+	    (setf (field-value :heading self) (movement-heading self))
+	    (move self (movement-heading self) 2.5))))))
+
+	    

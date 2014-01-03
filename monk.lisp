@@ -161,7 +161,7 @@
 
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'jerky))
-  (add-inventory-item monk (quantity-of 'wooden-arrow 10)))
+  (add-inventory-item monk (quantity-of 'wooden-arrow 60)))
 
 (defmethod humanp ((self monk)) nil)
 

@@ -214,7 +214,7 @@
       (dolist (item (take-quantity container item-class quantity))
 	(consume container item))
       (error "Not enough.")))
-	
+
 (defmethod modify-health ((self thing) points)
   (with-fields (health) self
     (incf health points)
@@ -274,6 +274,9 @@
 
 (defmethod can-accept ((self thing)) nil)
 
+(defmethod will-accept ((container thing) (item thing))
+  (can-accept container))
+
 (defmethod accept ((container thing) (item thing))
   (prog1 t
     (with-fields (gump) container
@@ -311,7 +314,7 @@
 
 ;;; Detecting click and double-click
 
-(defparameter *double-tap-time* 8)
+(defparameter *double-tap-time* 10)
 
 (defmethod tap ((self thing) x y)
   (with-fields (last-tap-time) self
@@ -428,6 +431,16 @@
 (defmacro defsprite (name &body body)
   `(defblock (,name sprite) ,@body))
 
+;;; Highlighting the object to be dropped upon
+
+(defresource "check-button.png")
+(defresource "x-button.png")
+
+(defmethod draw-hover ((self thing))
+  (with-fields (x y) self
+    (when (will-accept self (field-value :drag (current-buffer)))
+      (draw-image "check-button.png" x y :height 25 :width 25))))
+
 ;;; Simple temporary tooltip bubble
 
 (defparameter *bubble-font* "oldania-bubble")
@@ -514,7 +527,7 @@
 (defvar *status-line* nil)
 
 (define-buffer cypress 
-  :background-image "meadow5.png"
+  :background-image "stone-road.png"
   :quadtree-depth 8
   :default-events
   '(((:pause) :transport-toggle-play)
@@ -569,8 +582,9 @@
     (update *status-line*)))
 
 (defmethod draw :after ((self cypress))
-  (with-fields (drag) self
-    (when drag (draw drag)))
+  (with-fields (drag hover) self
+    (when drag (draw drag))
+    (when hover (draw-hover (find-object hover))))
   (when (cursor)
     (draw *status-line*)))
   

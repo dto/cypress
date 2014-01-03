@@ -8,6 +8,7 @@
 	       (:file "gumps" :depends-on ("enemy"))
 	       (:file "dialogue" :depends-on ("gumps"))
 	       (:file "monk" :depends-on ("dialogue"))
-	       (:file "story" :depends-on ("monk"))
+	       (:file "forest" :depends-on ("monk"))
+	       (:file "story" :depends-on ("forest"))
 	       (:file "status" :depends-on ("story"))
 	       (:file "cypress" :depends-on ("status"))))

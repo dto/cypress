@@ -28,7 +28,8 @@
 
 (defmethod drag ((self gump) x y)
   (set-target-position self x y)
-  (move-to self x y))
+  (move-to self x y)
+  (bring-to-front self))
 
 (defmethod run ((self gump))
   (arrange self))
@@ -144,6 +145,8 @@
 ;; Don't allow browsers to be dropped into other inventories
 
 (defmethod accept ((container thing) (gump gump)) nil)
+
+(defmethod will-accept ((container thing) (gump gump)) nil)
 
 (defparameter *browser-scale* (/ 1 3))
 

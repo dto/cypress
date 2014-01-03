@@ -1,6 +1,6 @@
 (in-package :cypress)
 
-(defresource "3-against-2.ogg" :volume 30)
+(defresource "passageway.ogg" :volume 20)
 
 (defresource "nice-map.png")
 
@@ -27,43 +27,28 @@
 (defun make-meadow ()
     (let ((geoffrey (new 'geoffrey))
 	  (lucius (new 'lucius))
-	  (buffer (new 'cypress)))
-      (add-object buffer geoffrey 320 120)
-      (add-object buffer lucius 350 80)
-      (let ((tent (new 'tent)))
-	(add-object buffer tent 600 500)
-	(add-object buffer (new 'campfire) 620 700)
-	(add-inventory-item tent (new 'atlas))
-	(add-inventory-item tent (new 'white-bread))
-	(add-inventory-item tent (new 'wheat-bread))
-	(add-inventory-item tent (new 'scroll))
-	(add-inventory-item tent (new 'book)))
-      (add-object buffer (new 'wraith) 1800 1000)
-      (add-object buffer (new 'wraith) 1500 850)
+	  (buffer (new 'cypress))
+	  (forest (trim (make-forest))))
+      (let ((height (field-value :height forest))
+	    (width (field-value :width forest)))
+	(paste-from buffer (with-border 250 forest))
+	(resize buffer (+ width 100) (+ height 100)))
+      (add-object buffer geoffrey 120 120)
+      (add-object buffer lucius 180 80)
+
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	    (%horizontal-scrolling-margin buffer) 2/5
 	    (%vertical-scrolling-margin buffer) 4/7)
       ;;
-      (resize-to-background-image buffer)
       (set-cursor buffer geoffrey)
       (snap-window-to-cursor buffer)
       (glide-window-to-cursor buffer)
       (follow-with-camera buffer geoffrey)
 
-      ;; (drop-object buffer (new 'circle-key) 420 700)
-      ;; (drop-object buffer (new 'triangle-key) 420 850)
-      ;; (drop-object buffer (new 'xalcium-leggings) 400 400)
-      ;; (drop-object buffer (new 'xalcium-armor) 420 700)
-      ;; (drop-object buffer (new 'xalcium-mail) 420 850)
-      (dotimes (n 8)
-      	(let ((x (+ 300 (random 1500)))
-      	      (y (+ 300 (random 1000))))
-      	  (drop-object buffer (new 'gray-rock))) x y)
-
       ;; allocate
        (install-quadtree buffer)
-      (play-music "3-against-2.ogg")
+      (play-music "passageway.ogg")
       buffer))
 
 (defparameter *quine-summons*
