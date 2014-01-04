@@ -447,8 +447,10 @@
 
 (defmethod draw-hover ((self thing))
   (with-fields (x y) self
-    (when (will-accept self (field-value :drag (current-buffer)))
-      (draw-image "check-button.png" x y :height 25 :width 25))))
+    (with-fields (drag) (current-buffer)
+      (when drag
+	(when (will-accept self drag)
+	  (draw-image "check-button.png" x y :height 25 :width 25))))))
 
 ;;; Simple temporary tooltip bubble
 
