@@ -106,7 +106,7 @@
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
 (defthing wolf-skull :image (random-choose '("wolf-skull-1.png" "wolf-skull-2.png")))
 
-(defthing remains :image (random-choose '("remains-1.png" "remains-2.png")))
+(defthing remains :tags '(:fixed) :image (random-choose '("remains-1.png" "remains-2.png")))
 
 (defmethod activate ((remains remains))
   (replace-gump remains (new 'browser :container remains)))
