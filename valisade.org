@@ -1,7 +1,4 @@
 * Tasks
-** TODO Fix crash when trying to move remains
-** TODO Fix misaligned text bubbles when identifying objects in gumps and window is not at 0,0
-** TODO Allow to activate objects in gumps
 ** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
 ** TODO Implement spell-actions and reagents
 *** TODO cold, hunger, etc
@@ -364,6 +361,14 @@ SHOULD be able to solve endgame both ways, most magic supplements combat
 ALSO have a stealth spell, a way to avoid confrontation
 
 FORGET-ME-NOTS and Temporal Seance
+
+** DONE Fix crash when trying to move remains
+   CLOSED: [2014-01-04 Sat 03:02]
+** DONE Fix misaligned text bubbles when identifying objects in gumps and window is not at 0,0
+   CLOSED: [2014-01-04 Sat 03:02]
+** DONE Allow to activate objects in gumps
+   CLOSED: [2014-01-04 Sat 03:00]
+
 
 ** DONE Write several scroll items to find
    CLOSED: [2014-01-03 Fri 01:29]
