@@ -228,12 +228,14 @@
 (defmethod tap :after ((browser browser) x y)
   (let ((icon (hit-icons browser x y)))
     (when icon 
-      (drop browser 
-	    (new 'bubble 
-		 :text (find-description 
-			(field-value :target icon)))
-	    (+ x (units 2))
-	    y))))
+      (drop-object (current-buffer)
+		   (new 'bubble 
+			:text (find-description 
+			       (field-value :target icon)))
+		   (+ (units 2) x)
+		   y))))
+
+(defmethod look ((browser browser)))
 
 (defmethod activate ((browser browser))
   (let ((x (window-pointer-x))
