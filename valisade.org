@@ -1,34 +1,14 @@
-<dto> my concept for this is that on some playthroughs you might find magic
-      potions and spells in the item boxes and on dead travelers, and that'd
-      be a somewhat more magical playthrough, whereas on other playthroughs
-      you'd randomly get silver and crystal arrows.  [11:29]
-<dto> and similarly, you'd find different story fragments, so that by the time
-      you've had enough and got through to the ending, you've seen a pretty
-      good share of the content.   [11:30]
-<dto> this also means that the early and mid game can vary more than the
-      endgame areas, since they'll be played less often
-
-SHOULD be able to solve endgame both ways, most magic supplements combat
-
-ALSO have a stealth spell, a way to avoid confrontation
-
-FORGET-ME-NOTS and Temporal Seance
-
 * Tasks
 ** TODO Fix crash when trying to move remains
-** TODO Allow to identify objects in gumps
 ** TODO Fix misaligned text bubbles when identifying objects in gumps and window is not at 0,0
-** TODO Allow to use objects in gumps
+** TODO Allow to activate objects in gumps
 ** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
-*** TODO switch to tactical combat
-
 ** TODO Implement spell-actions and reagents
-*** TODO cold, hunger
+*** TODO cold, hunger, etc
 *** TODO camping
 ** TODO Space to shuffle equipped item
 
 ** TODO Fix conversation gump; design real convo system (inform manual)
-
 ** TODO IDENTIFY all level gen parameters (difficulty, background, terrain, decals, items, enemies)
 ** TODO Watch original sanctuary playthrough vid
 ** TODO Inventory art book to see some things already painted for episode 1
@@ -369,6 +349,21 @@ or fatigue.
 ** Road to Valisade
 
 
+<dto> my concept for this is that on some playthroughs you might find magic
+      potions and spells in the item boxes and on dead travelers, and that'd
+      be a somewhat more magical playthrough, whereas on other playthroughs
+      you'd randomly get silver and crystal arrows.  [11:29]
+<dto> and similarly, you'd find different story fragments, so that by the time
+      you've had enough and got through to the ending, you've seen a pretty
+      good share of the content.   [11:30]
+<dto> this also means that the early and mid game can vary more than the
+      endgame areas, since they'll be played less often
+
+SHOULD be able to solve endgame both ways, most magic supplements combat
+
+ALSO have a stealth spell, a way to avoid confrontation
+
+FORGET-ME-NOTS and Temporal Seance
 
 ** DONE Write several scroll items to find
    CLOSED: [2014-01-03 Fri 01:29]
