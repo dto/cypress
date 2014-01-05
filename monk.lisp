@@ -3,7 +3,7 @@
 ;;; Arrows, the monk's main weapon
 
 (defparameter *arrow-size* 25)
-(defparameter *arrow-images* (image-set "arrow" 2))
+(defparameter *wooden-arrow-images* (image-set "wooden-arrow" 2))
 (defparameter *silver-arrow-images* (image-set "silver-arrow" 2))
 (defparameter *crystal-arrow-images* (image-set "crystal-arrow" 2))
 
@@ -11,8 +11,8 @@
   :image-scale 40
   :clock 400
   :heading (/ pi 2)
-  :images *arrow-images*
-  :image (random-choose *arrow-images*))
+  :images *wooden-arrow-images*
+  :image (random-choose *wooden-arrow-images*))
 
 (defmethod initialize ((self arrow) &key heading)
   (when heading
@@ -381,17 +381,23 @@
   (modify-health monk +15)
   (modify-hunger monk -30))
 
+(defparameter *elixir-images* (image-set "elixir" 2))
+
 (defthing (elixir food)
-  :image "elixir.png")
+  :image (random-choose *elixir-images*))
 
 (defmethod consume ((monk monk) (elixir elixir))
   (modify-magic monk +40))
 
+(defparameter *silver-elixir-images* (image-set "silver-elixir" 2))
+
 (defthing (silver-elixir food)
-  :image "silver-elixir.png")
+  :image (random-choose *silver-elixir-images*))
 
 (defmethod consume ((monk monk) (silver-elixir elixir))
   (modify-magic monk +100))
+
+
 
 ;; (defmethod activate ((self lucius))
 ;;   (discuss self :hello))

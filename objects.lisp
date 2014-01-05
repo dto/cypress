@@ -58,6 +58,27 @@
 (defparameter *gray-stairwell-images* (image-set "gray-stairwell" 2))
 (defparameter *copper-lock-images* (image-set "copper-lock" 5))
 
+(defparameter *branch-images* (image-set "branch" 9))
+(defthing branch :image (random-choose *branch-images*)) 
+
+(defparameter *nightshade-images* (image-set "nightshade" 7))
+(defthing nightshade :image (random-choose *nightshade-images*)) 
+
+(defparameter *ginseng-images* (image-set "ginseng" 4))
+(defthing ginseng :image (random-choose *ginseng-images*)) 
+
+(defparameter *silverwood-images* (image-set "silverwood" 9))
+(defthing silverwood :image (random-choose *silverwood-images*)) 
+
+(defparameter *thornweed-images* (image-set "thornweed" 8))
+(defthing thornweed :image (random-choose *thornweed-images*)) 
+
+(defparameter *silverwood-images* (image-set "silverwood" 9))
+(defthing silverwood :image (random-choose *silverwood-images*)) 
+
+(defparameter *twig-images* (image-set "twig" 9))
+(defthing twig :image (random-choose *twig-images*))
+
 (defparameter *snowdrop-images* (image-set "snowdrop" 3))
 (defparameter *violet-images* (image-set "violet" 3))
 (defparameter *forget-me-not-images* (image-set "forget-me-not" 3))
@@ -91,7 +112,7 @@
   :image (random-choose *dead-tree-images*)
   :scale 2.5)
 
-(defparameter *leafy-tree-images* (image-set "leafy-tree" 9))
+(defparameter *leafy-tree-images* (image-set "leafy-tree" 13))
 
 (defthing leafy-tree 
   :tags '(:solid :fixed) 

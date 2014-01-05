@@ -1,7 +1,18 @@
 * Tasks
-** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
+
+** DONE Indicate non-pathfindable spot with "error X honk"
+   CLOSED: [2014-01-04 Sat 19:31]
+
+** DONE Fix crash when double click arrow in inventory
+   CLOSED: [2014-01-04 Sat 19:45]
+
+** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
+
+** TODO Implement tactical combat
+*** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
+
 ** TODO Implement spell-actions and reagents
-*** TODO cold, hunger, etc
+*** TODO cold, hunger, life-death
 *** TODO camping
 ** TODO Space to shuffle equipped item
 
