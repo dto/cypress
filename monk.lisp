@@ -8,7 +8,7 @@
 (defparameter *crystal-arrow-images* (image-set "crystal-arrow" 2))
 
 (defthing (arrow sprite)
-  :image-scale 40
+  :image-scale 700
   :clock 400
   :heading (/ pi 2)
   :images *wooden-arrow-images*

@@ -59,7 +59,8 @@
 (defparameter *copper-lock-images* (image-set "copper-lock" 5))
 
 (defparameter *branch-images* (image-set "branch" 9))
-(defthing branch :image (random-choose *branch-images*)) 
+
+(defthing branch :image (random-choose *branch-images*) :scale 1.2) 
 
 (defparameter *nightshade-images* (image-set "nightshade" 6))
 (defthing nightshade :image (random-choose *nightshade-images*)) 
@@ -77,7 +78,7 @@
 (defthing silverwood :scale 1.2 :image (random-choose *silverwood-images*)) 
 
 (defparameter *twig-images* (image-set "twig" 9))
-(defthing twig :scale 0.8 :image (random-choose *twig-images*))
+(defthing twig :scale 1.8 :image (random-choose *twig-images*))
 
 (defparameter *snowdrop-images* (image-set "snowdrop" 3))
 (defparameter *violet-images* (image-set "violet" 3))
