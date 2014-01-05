@@ -124,7 +124,9 @@
     (when (null path) 
       (setf path (create-path self :buffer (current-buffer))))
     (setf waypoints (rest (rest (find-path-waypoints path x y x1 y1))))
-    (when (null waypoints) (stop-walking self))))
+    (when (null waypoints) 
+      (stop-walking self)
+      (show-error self x1 y1))))
   
 (defmethod stop-walking ((self thing))
   (with-fields (waypoints goal-x goal-y) self
@@ -447,18 +449,6 @@
 (defmacro defsprite (name &body body)
   `(defblock (,name sprite) ,@body))
 
-;;; Highlighting the object to be dropped upon
-
-(defresource "check-button.png")
-(defresource "x-button.png")
-
-(defmethod draw-hover ((self thing))
-  (with-fields (x y) self
-    (with-fields (drag) (current-buffer)
-      (when drag
-	(when (will-accept self drag)
-	  (draw-image "check-button.png" x y :height 25 :width 25))))))
-
 ;;; Simple temporary tooltip bubble
 
 (defparameter *bubble-font* "oldania-bubble")
@@ -468,7 +458,7 @@
 	      :file "OldaniaADFStd-Regular.otf" 
 	      :properties (:size 18)))
 
-(defblock (bubble thing)
+(defthing bubble
   (tags :initform '(:bubble :ethereal))
   (text :initform nil) 
   (font :initform *bubble-font*)
@@ -580,8 +570,6 @@
 
 ;; (defthing (spark spell)
 ;; (defthing (light spell)
-
-
 
 ;;; Cypress
 
