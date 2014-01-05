@@ -292,10 +292,10 @@
       (destroy-gump item)
       (remove-object (current-buffer) item)
       (add-inventory-item container item)
-      (if (null gump)
-	  (message "No gump for ~S" container)
-	  (progn (message "Refreshing ~S of ~S" gump container)
-		 (refresh gump))))))
+      (when gump (refresh gump)))))
+
+(defmethod accept :before ((container thing) (item thing))
+  (play-sample "ok.wav"))
 
 (defmethod bring-to-front ((self thing))
   (when (current-buffer)
@@ -305,6 +305,10 @@
 
 (defmethod drop-object :after ((buffer buffer) (self thing) &optional x y z)
   (bring-to-front self))
+ 
+(defmethod finish-drag ((self thing))
+  (bring-to-front self)
+  (play-sample "ok.wav"))
 
 ;;; Describing and naming objects 
 
@@ -341,6 +345,9 @@
 
 (defmethod activate ((self thing))
   (use (cursor) self))
+
+(defmethod activate :before ((thing thing))
+  (play-sample "activate.wav"))
 
 ;;; The system update function does its own work, then invokes the
 ;;; gameworld's RUN method.
@@ -488,6 +495,46 @@
 		   (round (+ y margin))
 		   :color "saddle brown"
 		   :font font))))
+
+;;; User interface audio/visual icons
+
+(defresource "check-button.png")
+(defresource "x-button.png")
+
+(defresource "activate.wav" :volume 7)
+(defresource "error.wav" :volume 8)
+(defresource "ok.wav" :volume 7)
+(defresource "close.wav" :volume 8)
+
+;;; Highlighting the object to be dropped upon
+
+(defparameter *indicator-size* 30)
+
+(defmethod draw-hover ((self thing))
+  (with-fields (x y) self
+    (with-fields (drag) (current-buffer)
+      (when drag
+	(when (will-accept self drag)
+	  (draw-image "check-button.png" x y 
+		      :height *indicator-size* :width *indicator-size*))))))
+
+;;; Indicating that an action has failed
+
+(defthing error-bubble
+  :tags '(:ethereal)
+  :image "x-button.png")
+
+(defmethod look ((self error-bubble)) nil)
+
+(defmethod initialize ((self error-bubble) &key)
+  (resize self *indicator-size* *indicator-size*)
+  (later 2.0 (destroy self)))
+
+(defmethod show-error ((thing thing) &optional x0 y0)
+  (with-field-values (x y) thing
+    (play-sample "error.wav")
+    (drop-object (current-buffer) (new 'error-bubble)
+		 (or x0 x) (or y0 y))))
 
 ;;; Object predicates
 

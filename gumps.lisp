@@ -33,7 +33,13 @@
 
 (defmethod run ((self gump))
   (arrange self))
-      
+
+;;; Right click to close gumps
+
+(defmethod alternate-tap ((self gump) x y)
+  (play-sample "close.wav")
+  (destroy self))
+       
 ;;; The scroll gump is for reading pages of text.
 
 (defun split-into-pages (text lines-per-page)
@@ -73,9 +79,6 @@
 (defmethod tap ((self scroll-gump) x y)
   (flip self))
 
-(defmethod alternate-tap ((self scroll-gump) x y)
-  (destroy self))
-  
 (defmethod draw ((self scroll-gump))
   (call-next-method)
   (with-fields (x y z height width page-number pages) self
@@ -264,9 +267,6 @@
 		(refresh browser)))
 	    browser)))))
 
-(defmethod alternate-tap ((self browser) x y)
-  (destroy self))
-  
 ;;; The talk gump 
 
 (defparameter *button-margin* 2)
@@ -361,9 +361,6 @@
 (defmethod tap ((self talk-gump) x y)
   (flip self))
 
-(defmethod alternate-tap ((self talk-gump) x y)
-  (destroy self))
-  
 (defmethod buttons ((self talk-gump))
   (second (field-value :inputs self)))
 
