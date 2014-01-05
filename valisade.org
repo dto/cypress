@@ -1,12 +1,17 @@
 * Tasks
 
-** TODO IDENTIFY all level gen parameters (day/night, difficulty, background, terrain, decals, items, enemies)
+** TODO RELEASE version 0.3
 
-
-
+** TODO Identify all scene parameters 
+*** TODO time (day, night)
+*** TODO background-image
+*** TODO height
+*** TODO width
+*** TODO terrain
+*** TODO decals
+*** TODO items
+*** TODO enemies
 *** TODO Rewrite forest generator based on this parameterization
-
-** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
 
 ** TODO Implement tactical combat
 *** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
@@ -16,12 +21,11 @@
 *** TODO Write function that checks that given required reagents/quantities/conditions are present
 **** TODO Implement player status conditions via these checks
 *** TODO Implement camp/ "magic tent" and other basic spells
-
+** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
 ** TODO Write overworld map system
 *** TODO Import map symbols
 *** TODO Import blank overworld map
 ** TODO Paint and Animate an Imperial Raven.
-
 ** TODO Fix conversation gump; design real convo system (inform manual)
 
 ** TODO Paint more characters

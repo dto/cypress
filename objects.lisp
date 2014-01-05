@@ -59,25 +59,25 @@
 (defparameter *copper-lock-images* (image-set "copper-lock" 5))
 
 (defparameter *branch-images* (image-set "branch" 9))
-(defthing branch :image (random-choose *branch-images*)) 
+(defthing branch :scale 1.8 :image (random-choose *branch-images*)) 
 
-(defparameter *nightshade-images* (image-set "nightshade" 7))
-(defthing nightshade :image (random-choose *nightshade-images*)) 
+(defparameter *nightshade-images* (image-set "nightshade" 6))
+(defthing nightshade :scale 1.8 :image (random-choose *nightshade-images*)) 
 
 (defparameter *ginseng-images* (image-set "ginseng" 4))
-(defthing ginseng :image (random-choose *ginseng-images*)) 
+(defthing ginseng :scale 1.8 :image (random-choose *ginseng-images*)) 
 
 (defparameter *silverwood-images* (image-set "silverwood" 9))
-(defthing silverwood :image (random-choose *silverwood-images*)) 
+(defthing silverwood :scale 1.8 :image (random-choose *silverwood-images*)) 
 
 (defparameter *thornweed-images* (image-set "thornweed" 8))
-(defthing thornweed :image (random-choose *thornweed-images*)) 
+(defthing thornweed :scale 1.8 :image (random-choose *thornweed-images*)) 
 
 (defparameter *silverwood-images* (image-set "silverwood" 9))
-(defthing silverwood :image (random-choose *silverwood-images*)) 
+(defthing silverwood :scale 1.8 :image (random-choose *silverwood-images*)) 
 
 (defparameter *twig-images* (image-set "twig" 9))
-(defthing twig :image (random-choose *twig-images*))
+(defthing twig :scale 1.8 :image (random-choose *twig-images*))
 
 (defparameter *snowdrop-images* (image-set "snowdrop" 3))
 (defparameter *violet-images* (image-set "violet" 3))
@@ -110,9 +110,9 @@
 (defthing dead-tree 
   :tags '(:solid :fixed) 
   :image (random-choose *dead-tree-images*)
-  :scale 2.5)
+  :scale 1.9)
 
-(defparameter *leafy-tree-images* (image-set "leafy-tree" 13))
+(defparameter *leafy-tree-images* (image-set "leafy-tree" 12))
 
 (defthing leafy-tree 
   :tags '(:solid :fixed) 
@@ -148,7 +148,4 @@
   :tags '(:fixed :solid))
 
 (defthing coverstone :image "coverstone.png" :z 10)
-
-
-
 

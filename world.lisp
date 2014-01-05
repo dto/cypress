@@ -161,6 +161,12 @@
     (when (typep item class)
       (return item))))
 
+(defun make-container (class contents)
+  (let ((bag (new class)))
+    (dolist (item contents)
+      (add-inventory-item bag item))
+    bag))
+
 (defmethod consume ((consumer thing) (consumed thing))) ;;; possibly nothing
 
 (defmethod quantity ((self thing))
@@ -571,11 +577,11 @@
 ;; (defthing (spark spell)
 ;; (defthing (light spell)
 
-;;; Cypress
+;;; Scene
 
 (defvar *status-line* nil)
 
-(define-buffer cypress 
+(define-buffer scene 
   :background-image (random-choose '("stone-road.png" "paynes-meadow.png"))
   :quadtree-depth 8
   :default-events
@@ -584,10 +590,10 @@
     ((:space) :transport-toggle-play)
     ((:p :control) :transport-toggle-play)))
 
-(defmethod initialize :after ((buffer cypress) &key)
+(defmethod initialize :after ((buffer scene) &key)
   (setf *status-line* (new 'status-line)))
 
-(defmethod alternate-tap ((buffer cypress) x y)
+(defmethod alternate-tap ((buffer scene) x y)
   (multiple-value-bind (top left right bottom)
       (bounding-box (cursor))
     ;; walk the monk's center point to the destination point
@@ -597,7 +603,7 @@
 	       (- x (/ width 2))
 	       (- y (/ height 2))))))
 
-(defmethod draw-object-layer ((buffer cypress))
+(defmethod draw-object-layer ((buffer scene))
   (multiple-value-bind (top left right bottom) 
       (window-bounding-box buffer)
     (dolist (object (mapcar #'find-object (z-sort (get-objects buffer))))
@@ -606,19 +612,18 @@
 	(draw object)
 	(after-draw-object buffer object)))))
 
-(defmethod update :after ((self cypress))
+(defmethod update :after ((self scene))
   (when (cursor)
     (layout *status-line*)
     (update *status-line*)))
 
-(defmethod draw :after ((self cypress))
+(defmethod draw :after ((self scene))
   (with-fields (drag hover) self
     (when drag (draw drag))
     (when hover (draw-hover (find-object hover)))))
   ;; (when (cursor)
   ;;   (draw *status-line*)))
 
-(define-method reset-game cypress ()
+(define-method reset-game scene ()
   (switch-to-buffer (make-meadow)))
-
 
