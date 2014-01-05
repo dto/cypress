@@ -31,7 +31,7 @@
   (when (solidp thing) 
     (destroy self)))
 
-(defmethod collide :after ((self arrow) (thing thing))
+(defmethod destroy :before ((self arrow))
   (play-sample "knock.wav"))
 
 (defthing (wooden-arrow arrow))
@@ -272,7 +272,8 @@
   (setf (field-value :aim-heading self) heading))
 
 (defmethod aim-heading ((self monk))
-  (field-value :aim-heading self))
+  (with-fields (heading aim-heading) self 
+    (or aim-heading heading)))
 
 (defmethod fire-location ((self monk))
   (multiple-value-bind (tx ty) 
