@@ -2,7 +2,7 @@
 
 ;;; Various prizes
 
-(defparameter *grab-bag-items* '(skull skull wolf-skull ruined-book ruined-book stone stone stone stone bag notebook forget-me-not forget-me-not forget-me-not violet warrior-key triangle-key))
+(defparameter *grab-bag-items* '(skull skull wolf-skull ruined-book ruined-book stone stone stone stone bag notebook forget-me-not forget-me-not snowdrop forget-me-not violet warrior-key triangle-key))
 
 (defparameter *boxed-items* '(white-bread wheat-bread xalcium-armor skull ruined-book atlas))
 
@@ -17,6 +17,15 @@
 
 (defun make-box ()
   (make-container 'item-box (grab *boxed-items*)))
+
+(defparameter *forest-debris-items* '(stone stone stone twig twig twig branch branch thornweed silverwood silverwood nightshade snowdrop snowdrop))
+
+(defparameter *flowers* '(violet forget-me-not snowdrop))
+
+(defparameter *reagents* '(ginseng thornweed silverwood nightshade stone))
+
+(defun reagent-bag ()
+  (make-container 'bag (grab *reagents* (1+ (random 3)))))
 
 ;;; Context-free generation rules
 
@@ -123,12 +132,29 @@
       (setf patch (randomly patch (singleton (new class)))))
     patch))
 
-(defun group-of (&optional class (n (1+ (random 7))))
+(defun group-of (&optional class (n (1+ (random 5))))
   (let ((patch (singleton (new class))))
     (dotimes (i n)
-      (setf patch (bordered-randomly 
+      (trim patch)
+      (setf patch (with-border (units (1+ (random 3)))
 		   (randomly patch (singleton (new class))))))
     patch))
+
+(defun spray (class-or-classes 
+	      &key trim 
+	      (count (1+ (random 5))))
+  (labels ((get-class ()
+	     (etypecase class-or-classes
+	       (symbol class-or-classes)
+	       (cons (random-choose class-or-classes)))))
+    (let ((patch (singleton (new (get-class)))))
+      (dotimes (i count)
+	(when trim (trim patch))
+	(let ((class (get-class)))
+	  (setf patch 
+		(with-border (units (1+ (random 3)))
+		  (randomly patch (singleton (new class)))))))
+      patch)))
 
 (defun lone-wolf ()
   (singleton (new 'wolf)))
@@ -137,27 +163,48 @@
   (with-border (units 5) 
     (randomly (lone-wolf) (lone-wolf))))
 
+(defun debris () 
+  (spray *forest-debris-items*
+	 :count (1+ (random 4))
+	 :trim nil))
+
+(defun reagents ()
+  (spray (random-choose *reagents*)
+	 :count 3
+	 :trim nil))
+
+(defun enemy ()
+  (singleton (new (random-choose '(wraith wraith wolf)))))
+
+(defun stuff ()
+  (if (percent-of-time 60 t)
+      (debris)
+      (if (percent-of-time 20 t)
+	  (reagents)
+	  (enemy))))
+
 (defun trees-or-clearing ()
    (if (percent-of-time 50 t)
        (some-trees)
        (if (percent-of-time 70 t)
 	   (with-border (units (+ 2 (random 3)))
-	     (if (percent-of-time 50 t)
+	     (if (percent-of-time 40 t)
 		 (single-tree)
-		 (if (percent-of-time 80 t)
-		     (patch-of (random-choose 
-				'(stone stone forget-me-not branch violet twig twig twig)))
-		     (patch-of (random-choose '(nightshade ginseng silverwood thornweed))))))
+		 (if (percent-of-time 50 t)
+		     (debris)
+		     (reagents))))
 	   (patch-of 'gray-rock))))
 
 (defun some-trees ()
-  (patch-of 'leafy-tree (random-choose '(2 2 3 3 4))))
+  (spray (list 'leafy-tree 'leafy-tree (random-choose *forest-debris-items*))
+	 :trim t
+	 :count (random-choose '(2 2 3 4))))
     
 (defun dense-trees ()
-  (with-border (units 3)
+  (with-border (units (+ 1 (random 7)))
     (vertically 
-     (horizontally (some-trees) (trees-or-clearing))
-     (horizontally (trees-or-clearing) (some-trees)))))
+     (horizontally (some-trees) (horizontally (stuff) (trees-or-clearing)))
+     (horizontally (stuff) (horizontally (trees-or-clearing) (some-trees))))))
 
 (defun make-forest ()
   (with-border (units 3)

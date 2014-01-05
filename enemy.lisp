@@ -30,7 +30,7 @@
       (add-inventory-item remains (new (random-choose '(skull wolf-skull stone stone item-box))))
       (if (percent-of-time 50 t)
 	  (if (percent-of-time 50 t)
-	      (add-inventory-item remains (make-box))
+	      (add-inventory-item remains (reagent-bag))
 	      (add-inventory-item remains (grab-bag)))
 	  (add-inventory-item remains (new 'stone))))
     (drop self remains))

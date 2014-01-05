@@ -1,5 +1,7 @@
 * Tasks
 
+** TODO fix arrows not rendering
+
 ** TODO RELEASE version 0.3
 
 ** TODO Identify all scene parameters 

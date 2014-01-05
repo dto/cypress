@@ -311,8 +311,8 @@
       (setf z (max (or z 1)
 		   (1+ (maximum-z-value (current-buffer))))))))
 
-(defmethod drop-object :after ((buffer buffer) (self thing) &optional x y z)
-  (bring-to-front self))
+(defmethod drop-object :after ((buffer buffer) (thing thing) &optional x y z)
+  (bring-to-front thing))
  
 (defmethod finish-drag ((self thing))
   (bring-to-front self)
