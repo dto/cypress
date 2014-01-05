@@ -1,31 +1,28 @@
 * Tasks
 
-** DONE Indicate non-pathfindable spot with "error X honk"
-   CLOSED: [2014-01-04 Sat 19:31]
+** TODO IDENTIFY all level gen parameters (day/night, difficulty, background, terrain, decals, items, enemies)
 
-** DONE Fix crash when double click arrow in inventory
-   CLOSED: [2014-01-04 Sat 19:45]
-
+** TODO Fix inventory icon squishness by padding image-rect to a square before scaling to icon size
 ** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
 
 ** TODO Implement tactical combat
 *** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
 
+** TODO Import spell/action icons
+
+** TODO Import map symbols
+** TODO Import blank overworld map
+
 ** TODO Implement spell-actions and reagents
 *** TODO cold, hunger, life-death
 *** TODO camping
-** TODO Space to shuffle equipped item
-
-** TODO Fix conversation gump; design real convo system (inform manual)
-** TODO IDENTIFY all level gen parameters (difficulty, background, terrain, decals, items, enemies)
-** TODO Watch original sanctuary playthrough vid
-** TODO Inventory art book to see some things already painted for episode 1
-
 ** TODO Paint and Animate an Imperial Raven.
 
+** TODO Fix conversation gump; design real convo system (inform manual)
+
+** TODO Paint various meadow/snow decals
+
 ** TODO Draw individual trees and also clusters of trees
-** TODO Import map symbols
-** TODO Import leather overworld map
 ** TODO Import spell/action symbols
 *** TODO Create background gump for spell/action symbols
 *** TODO Identify whether other symbols are needed
@@ -35,43 +32,17 @@
 *** TODO Normal 
 *** TODO Target
 *** TODO Error
-** TODO Paint wolves 
-*** TODO Possibly re-use other wolves
-*** TODO Wolf carcass
 ** TODO Paint skeleton soldiers
 ** TODO Paint skeleton archers
-** TODO Paint arrows
-*** TODO Wood
-*** TODO Silver
-*** TODO Crystal
-** TODO Paint items
-*** TODO firewood
-*** TODO silverwood
-*** TODO stone chips
-*** TODO wood chips
-*** TODO Hold Creature symbol
-*** TODO Elixir
-*** TODO Silver Elixir
 *** TODO Charcoal
-*** TODO Nightshade
 *** TODO Pinecones
-*** TODO Ginseng
-*** TODO Thornweed
-** TODO Paint elsewood bow
-** TODO Paint more trees
-*** TODO Evergreens
-*** TODO Dying evergreens
-*** TODO Dead trees
 ** TODO Paint watery snow pool decals
 ** TODO Paint dead traveler bodies
-** TODO Paint silver item boxes
 ** TODO Paint grave hag
 ** TODO Paint rushes, weeds, branches
 ** TODO Paint ruined wood
 ** TODO Import gravestones
 ** TODO Paint bone dust
-** TODO Paint various snow decals
-** TODO Paint meadow grass background and some decals
 ** TODO Paint ruins pieces
 *** TODO Basic blocks
 *** TODO Broken basic blocks
@@ -80,9 +51,8 @@
 *** TODO Vertical wall sections
 *** TODO Wall junctions
 *** TODO Clogged stairwells
+** TODO Paint meadow grass background and some decals
 ** TODO Paint glowing campfire and halo for night scenes (crafting, rest)
-** TODO Fix camera scrolling jitter
-** TODO Fix wraith texture bounding box squishness
 ** TODO Fix jittery rotation of monk at corners of paths
 
 * Overview
@@ -414,3 +384,205 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2013-12-30 Mon 16:37]
 ** DONE Implement more game logic/rules/lore as CLOS
    CLOSED: [2013-12-30 Mon 16:59]
+
+* Archived Entries
+
+** DONE Watch original sanctuary playthrough vid
+   CLOSED: [2014-01-05 Sun 10:25]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Inventory art book to see some things already painted for episode 1
+   CLOSED: [2014-01-05 Sun 10:25]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Indicate non-pathfindable spot with "error X honk"
+   CLOSED: [2014-01-04 Sat 19:31]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Fix crash when double click arrow in inventory
+   CLOSED: [2014-01-04 Sat 19:45]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Paint wolves
+   CLOSED: [2014-01-05 Sun 10:26]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Paint arrows
+   CLOSED: [2014-01-05 Sun 10:26]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE Wood
+    CLOSED: [2014-01-05 Sun 10:26]
+*** DONE Silver
+    CLOSED: [2014-01-05 Sun 10:26]
+*** DONE Crystal
+    CLOSED: [2014-01-05 Sun 10:26]
+
+** DONE firewood
+   CLOSED: [2014-01-05 Sun 10:26]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint items
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE silverwood
+   CLOSED: [2014-01-05 Sun 10:26]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint items
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE stone chips
+   CLOSED: [2014-01-05 Sun 10:26]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint items
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Hold Creature symbol
+   CLOSED: [2014-01-05 Sun 10:26]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint items
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Elixir
+   CLOSED: [2014-01-05 Sun 10:26]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint skeleton archers
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Silver Elixir
+   CLOSED: [2014-01-05 Sun 10:27]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint skeleton archers
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Nightshade
+   CLOSED: [2014-01-05 Sun 10:27]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint skeleton archers
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Ginseng
+   CLOSED: [2014-01-05 Sun 10:27]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint skeleton archers
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Thornweed
+   CLOSED: [2014-01-05 Sun 10:27]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint skeleton archers
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Paint more trees
+   CLOSED: [2014-01-05 Sun 10:27]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE Evergreens
+    CLOSED: [2014-01-05 Sun 10:27]
+*** TODO Dying evergreens
+*** TODO Dead trees
+
+** DONE Paint silver item boxes
+   CLOSED: [2014-01-05 Sun 10:27]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Fix camera scrolling jitter
+   CLOSED: [2014-01-05 Sun 10:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Fix wraith texture bounding box squishness
+   CLOSED: [2014-01-05 Sun 10:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
