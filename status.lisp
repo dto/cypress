@@ -10,9 +10,9 @@
     (:key #'identity :test 'equal :validator #'identity)
   (format nil "Magic: ~S     " n))
 
-(defun-memo status-line-magic-string (n)
+(defun-memo status-line-equipment-string (n)
     (:key #'identity :test 'equal :validator #'identity)
-  (format nil "Magic: ~S     " n))
+  (format nil "Equipment: ~A       " n))
 
 (defparameter *status-line-font* "oldania-bold")
 
@@ -31,10 +31,13 @@
   (set-value %%health (status-line-health-string (field-value :health (cursor))))
   (set-value %%magic (status-line-magic-string (field-value :magic (cursor))))
   (set-value %%equipment 
-	     (if (equipped-item (cursor))
-		 (fancy-description (equipped-item (cursor)))
-		 "Nothing equipped."))
-  (set-value %%message "       No message."))
+	     (status-line-equipment-string 
+	      (if (equipped-item (cursor))
+		  (fancy-description (equipped-item (cursor)))
+		  "None")))
+  (set-value %%message (if (field-value :paused (current-buffer))
+			   "Game is paused."
+			   " ")))
 
 (defparameter *status-line-height* (units 1.8))
 (defparameter *status-line-background-color* "black")
