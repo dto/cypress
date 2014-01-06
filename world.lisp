@@ -218,14 +218,6 @@
   (dotimes (n quantity)
     (consume-single container item-class)))
 
-;; (defmethod take-one ((container thing) item-class)
-;;   (let ((item (find-inventory-item container item-class)))
-;;     (when item
-;;       (consume-single container item-class)
-;;       (if (find-inventory-item container item-class)
-;; 	  (new item-class)
-;; 	  item))))
-
 (defun quantity-of (item-class new-quantity)
   (assert (plusp new-quantity))
   (let ((item (new item-class)))
