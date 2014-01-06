@@ -1,20 +1,25 @@
 * Tasks
 
+
+
 ** TODO Implement magic spells 
-*** TODO Import spell/action icons
-*** TODO Write function that checks that given required reagents/quantities/conditions are present
+*** DONE Import spell/action icons
+    CLOSED: [2014-01-06 Mon 13:59]
+*** DONE Write function that checks that given required reagents/quantities/conditions are present
+    CLOSED: [2014-01-06 Mon 13:58]
 **** TODO Implement player status conditions via these checks
+
 *** TODO Implement camp/ "magic tent" and other basic spells
 
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
 
 ** TODO RESUME after issuing order
-** TODO Merge items whe adding to inventory
+*** TODO Merge items when adding to inventory
 *** TODO Show quantity in container
 
-
 ** TODO Implement tactical combat
+*** TODO Aim arrow at center of enemy, not corner
 *** TODO indicate PAUSED status in lower-right corner
 *** TODO implement PAUSE and RESUME functions
 *** TODO toggle pause with middle-click
@@ -26,15 +31,22 @@
 ** TODO Animate bow according to status
 ** TODO Add jitter to aim when cold/exhausted
 ** TODO Right click self to toggle combat
-
-** TODO Remove Lucius for now
+** TODO Fix player can run over gumps
+*** TODO Z-sort function should always let gumps last?
 
 ** TODO Implement status conditions
-*** TODO Starving
-*** TODO Exhausted
+*** TODO [#A] Freezing 
+*** TODO [#A] Dying
+*** TODO [#A] Dead
+*** TODO [#B] Exhausted
 **** TODO Hunger causes exhaustion before really causing starvation
-*** TODO Freezing 
-*** TODO Dying
+*** TODO [#B] Starving
+
+
+** TODO Fix showing any items on top of gumps
+
+** DONE Remove Lucius for now
+   CLOSED: [2014-01-06 Mon 15:33]
 
 ** TODO Write overworld map system
 *** TODO Import map symbols

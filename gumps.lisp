@@ -121,19 +121,32 @@
 
 (defmethod draw ((icon icon))
   (with-fields (x y height width target) icon
-    (with-fields (image) target
+    (with-fields (image quantity) target
       (let ((image-width (image-width image))
 	    (image-height (image-height image)))
-      ;; fit to square without distorting
+	;; fit to square without distorting
 	(if (> image-width image-height)
 	    (draw-image image x y 
 			:width width
 			:height (- height (/ 1 (/ width image-width))))
 	    (draw-image image x y
 			:height height
-			:width (- width (/ 1 (/ height image-height)))))))))
+			:width (- width (/ 1 (/ height image-height)))))
+	;; now possibly draw quantity
+	(when (> quantity 1)
+	  (draw-string (format nil "~S" quantity)
+		       (+ x *icon-width* (- (units 1)))
+		       (+ y *icon-width* (- (units 0.3)))
+		       :color "saddle brown"
+		       :font "oldania-bold"))))))
 
 (defparameter *icon-spacing* (units 1))
+
+(defmethod icon-drop ((icon icon))
+  (with-fields (target) icon
+    (with-fields (container) target
+      (let ((class (class-name (class-of target))))
+	(consume-single container class)))))
 
 ;;; Container browser gump
 
@@ -261,17 +274,17 @@
       (if icon (can-pick icon) browser))))
 
 (defmethod pick ((browser browser))
-  (with-fields (target) browser
-    (let ((x (window-pointer-x))
-	  (y (window-pointer-y)))
-      (let ((icon (hit-icons browser x y)))
-	(if icon
-	    (let ((item (field-value :target icon)))
-	      (prog1 item
-		(move-to item x y)
-		(remove-inventory-item target item)
-		(refresh browser)))
-	    browser)))))
+  (block checking
+    (with-fields (target) browser
+      (let ((x (window-pointer-x))
+	    (y (window-pointer-y)))
+	(let ((icon (hit-icons browser x y)))
+	  (if icon
+	      (let ((drop (icon-drop icon)))
+		(refresh browser)
+		(move-to drop x y)
+		drop)
+	      browser))))))
 
 ;;; The talk gump 
 

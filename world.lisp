@@ -141,11 +141,27 @@
 (defmethod inventory-items ((container thing))
   (field-value :inventory container))
 
-(defmethod add-inventory-item ((container thing) (item thing))
+(defmethod find-inventory-item ((container thing) item-class)
+  (dolist (item (inventory-items container))
+    (when (typep item (find-class item-class))
+      (return item))))
+
+(defmethod merge-inventory-item ((container thing) (item thing))
+  (let* ((item-class (class-name (class-of item)))
+	 (existing-item (find-inventory-item container item-class)))
+    (assert existing-item)
+    (add-quantity container item-class (quantity item))))
+;;    (destroy item)))
+
+(defmethod add-inventory-item ((container thing) (item thing) &optional (merge t))
   (with-fields (inventory) container
-    (let ((the-item (find-object item)))
-      (pushnew the-item inventory :test 'eq)
-      (setf (field-value :container the-item) container))))
+    (if (or (not merge)
+	    (not (find-inventory-item container 
+				      (class-name (class-of item)))))
+	(progn 
+	  (pushnew item inventory :test 'eq)
+	  (setf (field-value :container item) container))
+	(merge-inventory-item container item))))
 
 (defmethod remove-inventory-item ((container thing) (item thing))
   (with-fields (inventory) container
@@ -156,11 +172,6 @@
   (with-fields (container) self
     (when container
       (remove-inventory-item container self))))
-
-(defmethod find-inventory-item ((container thing) &optional (class 'thing))
-  (dolist (item (inventory-items container))
-    (when (typep item class)
-      (return item))))
 
 (defun make-container (class contents)
   (let ((bag (new class)))
@@ -174,23 +185,13 @@
   (field-value :quantity self))
 
 (defmethod modify-quantity ((self thing) points)
-  (prog1 self 
-    (with-fields (quantity) self
-      (setf quantity 
-	    (max 0 (+ quantity points))))))
+  (with-fields (quantity) self
+    (setf quantity 
+	  (max 0 (+ quantity points)))))
 
 (defmethod add-quantity ((container thing) item-class &optional (quantity 1))
   (let ((item (find-inventory-item container item-class)))
     (when item (modify-quantity item quantity))))
-
-(defmethod merge-inventory-item ((container thing) item)
-  (let* ((item-class (class-name (class-of item)))
-	 (item (find-inventory-item container item-class)))
-    (if item 
-	(progn 
-	  (add-quantity container item-class (quantity item))
-	  (destroy item))
-	(add-inventory-item container item))))
 
 (defmethod remove-quantity ((container thing) item-class &optional (quantity 1))
   (let ((item (find-inventory-item container item-class)))
@@ -199,16 +200,29 @@
 (defmethod consume-single ((container thing) item-class)
   (let ((item (find-inventory-item container item-class)))
     (when item 
-      (when (plusp (quantity item))
-	(modify-quantity item -1)
-	;; remove the ghosts of departed quantities
-	(when (not (plusp (quantity item)))
-	  (remove-inventory-item container item))
-	(prog1 nil (destroy item))))))
+	(when (plusp (quantity item))
+	  (modify-quantity item -1)
+	  (let ((new-item (new item-class)))
+	    (prog1 new-item
+	      ;; ensure new item has quantity one
+	      (setf (field-value :quantity new-item) 1)
+	      (layout new-item)
+	      ;; remove the ghosts of departed quantities
+	      (when (not (plusp (quantity item)))
+		(remove-inventory-item container item)
+		(destroy item))))))))
 
 (defmethod consume-quantity ((container thing) item-class &optional (quantity 1))
   (dotimes (n quantity)
     (consume-single container item-class)))
+
+;; (defmethod take-one ((container thing) item-class)
+;;   (let ((item (find-inventory-item container item-class)))
+;;     (when item
+;;       (consume-single container item-class)
+;;       (if (find-inventory-item container item-class)
+;; 	  (new item-class)
+;; 	  item))))
 
 (defun quantity-of (item-class new-quantity)
   (assert (plusp new-quantity))
@@ -289,7 +303,7 @@
 	(keyword (modify-condition self name (- value)))
 	(symbol
 	 (dotimes (n value)
-	   (consume-single self name)))))))
+	   (destroy (consume-single self name))))))))
 
 ;;; Attaching gumps to things
 
