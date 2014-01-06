@@ -2,37 +2,16 @@
 
 
 
-** TODO Implement magic spells 
-*** DONE Import spell/action icons
-    CLOSED: [2014-01-06 Mon 13:59]
-*** DONE Write function that checks that given required reagents/quantities/conditions are present
-    CLOSED: [2014-01-06 Mon 13:58]
-**** TODO Implement player status conditions via these checks
-
-*** TODO Implement camp/ "magic tent" and other basic spells
-
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
 
-** TODO RESUME after issuing order
-*** TODO Merge items when adding to inventory
-*** TODO Show quantity in container
-
-** TODO Implement tactical combat
-*** TODO Aim arrow at center of enemy, not corner
-*** TODO indicate PAUSED status in lower-right corner
-*** TODO implement PAUSE and RESUME functions
+** TODO Increase combat tactics
+*** TODO Require raise-time for bow
+*** TODO Require rest-time for bow
 *** TODO toggle pause with middle-click
-*** TODO toggle pause with SPACEBAR
-*** TODO toggle pause with TAB
-** TODO Require raise-time for bow
-** TODO Require rest-time for bow
-*** TODO modify combat speed with spell/item
-** TODO Animate bow according to status
-** TODO Add jitter to aim when cold/exhausted
-** TODO Right click self to toggle combat
-** TODO Fix player can run over gumps
-*** TODO Z-sort function should always let gumps last?
+*** TODO Animate bow according to status
+*** TODO Add jitter to aim when cold/exhausted
+*** TODO Right click self to toggle combat
 
 ** TODO Implement status conditions
 *** TODO [#A] Freezing 
@@ -42,17 +21,15 @@
 **** TODO Hunger causes exhaustion before really causing starvation
 *** TODO [#B] Starving
 
+** TODO Make inventory of existing terrain backgrounds and import 
 
-** TODO Fix showing any items on top of gumps
-
-** DONE Remove Lucius for now
-   CLOSED: [2014-01-06 Mon 15:33]
+** TODO Fix player can run over gumps
+*** TODO Z-sort function should always let gumps last?
 
 ** TODO Write overworld map system
 *** TODO Import map symbols
 *** TODO Import blank overworld map
 
-** TODO Make inventory of existing terrain backgrounds and import 
 ** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
 
 ** TODO Identify all scene parameters 
@@ -676,4 +653,74 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** TODO Implement magic spells
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-06 Mon 17:38
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+*** DONE Import spell/action icons
+    CLOSED: [2014-01-06 Mon 13:59]
+*** DONE Write function that checks that given required reagents/quantities/conditions are present
+    CLOSED: [2014-01-06 Mon 13:58]
+
+*** TODO Implement player status conditions via reagent
+
+*** TODO Implement camp/ "magic tent" and other basic spells
+
+** DONE Show quantity in container
+   CLOSED: [2014-01-06 Mon 17:38]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-06 Mon 17:38
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/RESUME after issuing order
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Merge items when adding to inventory
+   CLOSED: [2014-01-06 Mon 17:38]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-06 Mon 17:38
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/RESUME after issuing order
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE indicate PAUSED status in lower-right corner
+   CLOSED: [2014-01-06 Mon 18:14]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-06 Mon 18:14
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Implement tactical combat
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE toggle pause with SPACEBAR
+   CLOSED: [2014-01-06 Mon 18:11]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-06 Mon 18:14
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Implement tactical combat/implement PAUSE and RESUME functions
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+
+** TODO Fix showing any items on top of gumps
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-06 Mon 18:15
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Remove Lucius for now
+   CLOSED: [2014-01-06 Mon 15:33]
 
