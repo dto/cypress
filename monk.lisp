@@ -329,7 +329,7 @@
 
 (defmethod attack ((monk monk) (enemy enemy))
   (when (has-quantity monk 'arrow)
-    (aim monk (heading-to-thing monk enemy))
+    (aim monk (heading-between monk enemy))
     (use monk (or (equipped-item monk)
 		  (find-arrow monk)))))
 
