@@ -2,9 +2,10 @@
 
 ;;; Various prizes
 
-(defparameter *grab-bag-items* '(skull skull wolf-skull ruined-book ruined-book stone stone stone stone bag notebook forget-me-not forget-me-not snowdrop forget-me-not violet warrior-key triangle-key))
+(defparameter *grab-bag-items* '(skull skull wolf-skull ruined-book
+ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread))
 
-(defparameter *boxed-items* '(white-bread wheat-bread xalcium-armor skull ruined-book atlas))
+(defparameter *boxed-items* '(xalcium-armor skull ruined-book atlas))
 
 (defun grab (bag &optional (count (1+ (random 4))))
   (let (items)
@@ -18,11 +19,11 @@
 (defun make-box ()
   (make-container 'item-box (grab *boxed-items*)))
 
-(defparameter *forest-debris-items* '(stone stone stone twig twig twig branch branch thornweed silverwood silverwood nightshade snowdrop snowdrop))
+(defparameter *forest-debris-items* '(stone stone twig twig branch branch ginseng silverwood))
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 
-(defparameter *reagents* '(ginseng thornweed silverwood nightshade stone))
+(defparameter *reagents* '(ginseng stone))
 
 (defun reagent-bag ()
   (make-container 'bag (grab *reagents* (1+ (random 3)))))
@@ -123,7 +124,7 @@
   
 (defun single-tree () 
    (singleton 
-    (new (or (percent-of-time 95 'leafy-tree)
+    (new (or (percent-of-time 70 'leafy-tree)
 	     'dead-tree))))
 
 (defun patch-of (&optional class (n (1+ (random 4))))
@@ -166,12 +167,12 @@
 
 (defun debris () 
   (spray *forest-debris-items*
-	 :count (1+ (random 4))
+	 :count (+ 1 (random 6))
 	 :trim nil))
 
 (defun reagents ()
   (spray (random-choose *reagents*)
-	 :count 3
+	 :count (+ 1 (random 5))
 	 :trim nil))
 
 (defun enemy ()
@@ -184,28 +185,35 @@
 	  (reagents)
 	  (enemy))))
 
+(defun some-trees ()
+  (spray (list 'leafy-tree (random-choose *forest-debris-items*))
+	 :trim t
+	 :count (random-choose '(2 3 4 5))))
+
+(defun stuff-cluster ()
+  (randomly (stuff) (spray 'ginseng :count (1+ (random 3)))))
+
 (defun trees-or-clearing ()
    (if (percent-of-time 50 t)
        (some-trees)
        (if (percent-of-time 70 t)
 	   (with-border (units (+ 2 (random 3)))
 	     (if (percent-of-time 40 t)
-		 (single-tree)
+		 (some-trees)
 		 (if (percent-of-time 50 t)
 		     (debris)
 		     (reagents))))
 	   (patch-of 'gray-rock))))
 
-(defun some-trees ()
-  (spray (list 'leafy-tree 'leafy-tree (random-choose *forest-debris-items*))
-	 :trim t
-	 :count (random-choose '(2 2 3 4))))
-    
 (defun dense-trees ()
   (with-border (units (+ 1 (random 7)))
     (vertically 
-     (horizontally (some-trees) (horizontally (stuff) (trees-or-clearing)))
-     (horizontally (stuff) (horizontally (trees-or-clearing) (some-trees))))))
+     (vertically
+      (vertically 
+       (horizontally (some-trees) (horizontally (stuff) (trees-or-clearing)))
+       (horizontally (some-trees) (horizontally (stuff-cluster) (trees-or-clearing))))
+      (horizontally (enemy) (some-trees)))
+     (horizontally (enemy) (horizontally (trees-or-clearing) (some-trees))))))
 
 (defun make-forest ()
   (with-border (units 3)
