@@ -21,7 +21,7 @@
 
 (defparameter *bag-images* (image-set "bag" 3))
 
-(defthing bag :image (random-choose *bag-images*))
+(defthing bag :scale 1.2 :image (random-choose *bag-images*))
 
 (defmethod activate ((bag bag))
   (replace-gump bag (new 'browser :container bag)))
@@ -63,7 +63,7 @@
 (defthing branch :image (random-choose *branch-images*) :scale 1.2) 
 
 (defparameter *nightshade-images* (image-set "nightshade" 6))
-(defthing nightshade :image (random-choose *nightshade-images*)) 
+(defthing nightshade :scale 1.1 :image (random-choose *nightshade-images*)) 
 
 (defparameter *ginseng-images* (image-set "ginseng" 4))
 (defthing ginseng :image (random-choose *ginseng-images*)) 
@@ -78,7 +78,7 @@
 (defthing silverwood :scale 1.2 :image (random-choose *silverwood-images*)) 
 
 (defparameter *twig-images* (image-set "twig" 9))
-(defthing twig :scale 1.8 :image (random-choose *twig-images*))
+(defthing twig :scale 1.5 :image (random-choose *twig-images*))
 
 (defparameter *snowdrop-images* (image-set "snowdrop" 3))
 (defparameter *violet-images* (image-set "violet" 3))
@@ -88,7 +88,7 @@
 (defthing snowdrop :image (random-choose *snowdrop-images*))
 (defthing violet :image (random-choose *violet-images*))
 (defthing forget-me-not :image (random-choose *forget-me-not-images*))
-(defthing stone :image (random-choose *stone-images*))
+(defthing stone :scale 0.8 :image (random-choose *stone-images*))
 
 (defthing copper-lock :image (random-choose *copper-lock-images*))
 (defthing gray-stairwell :tags '(:fixed) :image (random-choose *gray-stairwell-images*))
@@ -118,7 +118,7 @@
 (defthing leafy-tree 
   :tags '(:solid :fixed) 
   :image (random-choose *leafy-tree-images*)
-  :scale 1.7)
+  :scale 2.0)
 
 (defthing gray-rock 
   :tags '(:solid :fixed) 

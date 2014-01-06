@@ -209,18 +209,18 @@ you left.
   (play-music "dusk.ogg" :loop t))
 
 (defun make-meadow ()
-    (let ((geoffrey (new 'geoffrey))
-	  (lucius (new 'lucius))
-	  (buffer (new 'scene))
-	  (forest (trim (make-forest))))
+  (let ((geoffrey (new 'geoffrey))
+	(lucius (new 'lucius))
+	(buffer (new 'scene))
+	(forest (trim (make-forest))))
+    (with-buffer buffer
       (let ((height (field-value :height forest))
 	    (width (field-value :width forest)))
 	(paste-from buffer (with-border 250 forest))
 	(resize buffer (+ width 600) (+ height 400)))
-      (add-object buffer geoffrey 120 120)
-      (add-object buffer lucius 180 80)
-      (add-object buffer (new 'scroll) 270 100)
-
+      (drop-object buffer geoffrey 120 120)
+      (drop-object buffer lucius 180 80)
+      (drop-object buffer (new 'scroll) 270 100)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	    (%horizontal-scrolling-margin buffer) 2/5
@@ -230,10 +230,10 @@ you left.
       (snap-window-to-cursor buffer)
       (glide-window-to-cursor buffer)
       (follow-with-camera buffer geoffrey)
-
+      
       ;; allocate
-       (install-quadtree buffer)
-;;      (play-music (random-choose *soundtrack*))
-      buffer))
+      (install-quadtree buffer)
+      ;;      (play-music (random-choose *soundtrack*))
+      (current-buffer))))
 
 

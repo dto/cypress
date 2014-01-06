@@ -1,8 +1,21 @@
 * Tasks
 
-** TODO fix arrows not rendering
+** TODO fix checkbox not appearing after reset
 
-** TODO RELEASE version 0.3
+** TODO bring back modeline
+
+** TODO bow-raising reload time
+** TODO show bow raising
+
+** TODO Implement tactical combat
+*** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
+
+** TODO Implement spells and actions
+*** TODO Import spell/action icons
+*** TODO Write function that checks that given required reagents/quantities/conditions are present
+**** TODO Implement player status conditions via these checks
+*** TODO Implement camp/ "magic tent" and other basic spells
+
 
 ** TODO Identify all scene parameters 
 *** TODO time (day, night)
@@ -14,15 +27,6 @@
 *** TODO items
 *** TODO enemies
 *** TODO Rewrite forest generator based on this parameterization
-
-** TODO Implement tactical combat
-*** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
-
-** TODO Implement spells and actions
-*** TODO Import spell/action icons
-*** TODO Write function that checks that given required reagents/quantities/conditions are present
-**** TODO Implement player status conditions via these checks
-*** TODO Implement camp/ "magic tent" and other basic spells
 ** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
 ** TODO Write overworld map system
 *** TODO Import map symbols
@@ -592,6 +596,26 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2014-01-05 Sun 10:28]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-05 Sun 10:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE fix arrows not rendering
+   CLOSED: [2014-01-05 Sun 18:27]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 18:33
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE fix some image squishness
+   CLOSED: [2014-01-05 Sun 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-05 Sun 18:33
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade

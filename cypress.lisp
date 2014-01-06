@@ -21,7 +21,7 @@
 (in-package :cypress)
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "cypress v0.2")
+  (setf *window-title* "cypress v0.3") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)
@@ -41,9 +41,9 @@
     (index-all-images)
     (index-all-samples)
     (index-pending-resources)
-;;    (preload-resources)
+    (preload-resources)
     (switch-to-buffer (make-meadow))
-  (setf *font* "oldania")
+    (setf *font* "oldania")
     (start-session)))
 
 ;;; cypress.lisp ends here

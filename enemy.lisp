@@ -24,11 +24,11 @@
 
 (defmethod die ((self wraith))
   (let ((remains (new 'remains)))
-    (when (percent-of-time 50 t)
-      (when (percent-of-time 40 t)
+    (when (percent-of-time 70 t)
+      (when (percent-of-time 60 t)
 	(add-inventory-item remains (new 'scroll-fragment)))
-      (add-inventory-item remains (new (random-choose '(skull wolf-skull stone stone item-box))))
-      (if (percent-of-time 50 t)
+      (add-inventory-item remains (new (random-choose '(skull wolf-skull stone item-box))))
+      (if (percent-of-time 70 t)
 	  (if (percent-of-time 50 t)
 	      (add-inventory-item remains (reagent-bag))
 	      (add-inventory-item remains (grab-bag)))
@@ -40,7 +40,7 @@
 
 (defmethod run ((self wraith))
   (with-fields (image heading seen-player) self
-  (when (< (distance-to-cursor self) 500)
+  (when (< (distance-to-cursor self) 640)
     (unless seen-player
       (play-sample "lichscream.wav")
       (setf seen-player t))

@@ -579,9 +579,8 @@
 
 ;;; Scene
 
-(defvar *status-line* nil)
-
 (define-buffer scene 
+  :status-line nil
   :background-image (random-choose '("stone-road.png" "paynes-meadow.png"))
   :quadtree-depth 8
   :default-events
@@ -590,8 +589,11 @@
     ((:space) :transport-toggle-play)
     ((:p :control) :transport-toggle-play)))
 
+(defun status-line () (field-value :status-line (current-buffer)))
+
 (defmethod initialize :after ((buffer scene) &key)
-  (setf *status-line* (new 'status-line)))
+  (setf (field-value :status-line buffer) 
+	(find-object (new 'status-line))))
 
 (defmethod alternate-tap ((buffer scene) x y)
   (multiple-value-bind (top left right bottom)
@@ -613,17 +615,21 @@
 	(after-draw-object buffer object)))))
 
 (defmethod update :after ((self scene))
-  (when (cursor)
-    (layout *status-line*)
-    (update *status-line*)))
+  (when (xelfp (cursor))
+    (layout (status-line))
+    (update (status-line))))
 
 (defmethod draw :after ((self scene))
   (with-fields (drag hover) self
     (when drag (draw drag))
-    (when hover (draw-hover (find-object hover)))))
-  ;; (when (cursor)
-  ;;   (draw *status-line*)))
+    (when hover (draw-hover (find-object hover))))
+  (when (xelfp (cursor))
+    (draw (status-line))))
 
 (define-method reset-game scene ()
-  (switch-to-buffer (make-meadow)))
+  (let ((buffer (current-buffer)))
+    (at-next-update 
+      (switch-to-buffer (make-meadow))
+      (destroy buffer))))
+
 

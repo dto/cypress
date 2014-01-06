@@ -4,21 +4,27 @@
 
 (defun-memo status-line-health-string (n)
     (:key #'identity :test 'equal :validator #'identity)
-  (format nil "Health: ~S" n))
+  (format nil "Health: ~S    " n))
 
 (defun-memo status-line-magic-string (n)
     (:key #'identity :test 'equal :validator #'identity)
-  (format nil "Magic: ~S" n))
+  (format nil "Magic: ~S     " n))
+
+(defun-memo status-line-magic-string (n)
+    (:key #'identity :test 'equal :validator #'identity)
+  (format nil "Magic: ~S     " n))
+
+(defparameter *status-line-font* "oldania-bold")
 
 (define-block-macro status-line
     (:super phrase
      :fields 
      ((orientation :initform :horizontal)
       (no-background :initform t))
-     :inputs (:health (new 'label :read-only t)
-	      :magic (new 'label :read-only t)
-	      :equipment (new 'label :read-only t)
-	      :message (new 'label :read-only t))))
+     :inputs (:health (new 'label :read-only t :font *status-line-font*)
+	      :magic (new 'label :read-only t :font *status-line-font*)
+	      :equipment (new 'label :read-only t :font *status-line-font*)
+	      :message (new 'label :read-only t :font *status-line-font*))))
 
 (define-method update status-line ()
   (mapc #'pin %inputs)
@@ -28,9 +34,9 @@
 	     (if (equipped-item (cursor))
 		 (fancy-description (equipped-item (cursor)))
 		 "Nothing equipped."))
-  (set-value %%message "No message."))
+  (set-value %%message "       No message."))
 
-(defparameter *status-line-height* (units 1.5))
+(defparameter *status-line-height* (units 1.8))
 (defparameter *status-line-background-color* "black")
 (defparameter *status-line-foreground-color* "white")
 

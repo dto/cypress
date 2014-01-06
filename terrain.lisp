@@ -70,13 +70,13 @@
 
 (defun horizontally (a b)
   (percent-of-time 50 (rotatef a b))
-  (beside 
+  (place-beside 
    (padded-horizontally (random-padding) a)
    (padded-horizontally (random-padding) b)))
 
 (defun vertically (a b)
   (percent-of-time 50 (rotatef a b))
-  (below 
+  (place-below 
    (padded-vertically (random-padding) a)
    (padded-vertically (random-padding) b)))
 
@@ -84,24 +84,24 @@
   (funcall (random-choose '(#'horizontally #'vertically))
 	   a b))
 
-(defun beside (a b)
+(defun place-beside (a b)
   (arrange-beside a b))
 
-(defun below (a b)
+(defun place-below (a b)
   (arrange-below a b))
 
 (defun stacked-up (&rest things)
   (assert things)
   (if (= 1 (length things))
       (first things)
-      (below (first things) 
+      (place-below (first things) 
 	     (apply #'stacked-up (rest things)))))
 
 (defun lined-up (&rest things)
   (assert things)
   (if (= 1 (length things))
       (first things)
-      (beside (first things) 
+      (place-beside (first things) 
 	      (apply #'lined-up (rest things)))))
 
 (defun stacked-up-randomly (&rest things)
@@ -118,6 +118,7 @@
 (defun singleton (x) 
   (with-new-buffer
     (drop-object (current-buffer) (find-object x))
+    (layout (find-object x))
     (trim (current-buffer))))
   
 (defun single-tree () 
