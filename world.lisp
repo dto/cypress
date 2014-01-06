@@ -1,5 +1,7 @@
 (in-package :cypress)
 
+(defun resume () (play))
+
 ;;; Spatial parameters
 
 (defconstant +dots-per-inch+ 600)
