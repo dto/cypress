@@ -217,10 +217,21 @@
       (with-fields (quantity) item
 	(setf quantity new-quantity)))))
 
+(defmethod search-inventory ((container thing) &optional (class 'thing))
+  (labels ((match (item)
+	       (when (typep item class)
+		 (list item))))
+    (mapcan #'match (inventory-items container))))
+
+(defmethod compute-quantity ((container thing) item-class)
+  (let ((items (search-inventory container item-class)))
+    (if items 
+	(reduce #'+ items :key #'quantity)
+	0)))
+
 (defmethod has-quantity ((container thing) item-class &optional (quantity 1))
-  (let ((item (find-inventory-item container item-class)))
-    (when item
-      (>= (quantity item) quantity))))
+  (>= (compute-quantity container item-class)
+      quantity))
 
 (defmethod modify-health ((self thing) points)
   (with-fields (health) self
@@ -276,7 +287,9 @@
       (assert (and name value))
       (etypecase name
 	(keyword (modify-condition self name (- value)))
-	(symbol (consume-single self name value))))))
+	(symbol
+	 (dotimes (n value)
+	   (consume-single self name)))))))
 
 ;;; Attaching gumps to things
 
