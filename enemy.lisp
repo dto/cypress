@@ -11,6 +11,7 @@
 (defmethod can-pick ((enemy enemy)) nil)
 
 (defmethod activate ((enemy enemy))
+  (resume)
   (attack (cursor) enemy))
 
 (defthing (wraith enemy)
