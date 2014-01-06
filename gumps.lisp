@@ -116,6 +116,9 @@
     (setf width *icon-width*)
     (setf (field-value :target icon) target)))
 
+(defmethod can-pick ((icon icon))
+  (can-pick (field-value :target icon)))
+
 (defmethod draw ((icon icon))
   (with-fields (x y height width target) icon
     (with-fields (image) target
@@ -212,11 +215,13 @@
 (defmethod refresh ((browser browser))
   (clear browser)
   (with-fields (target icons rows columns) browser
-    (with-fields (inventory) target
-      ;; only take max items
-      (let ((items (subseq inventory 0 (min *maximum-inventory-size* (length inventory)))))
-	(setf icons (mapcar #'item-icon items)))))
-  (layout browser))
+    (with-fields (inventory spells) target
+      (let ((things (append spells inventory)))
+	;; only take max items
+	(let ((items (subseq things
+			     0 (min *maximum-inventory-size* (length things)))))
+	  (setf icons (mapcar #'item-icon items)))))
+    (layout browser)))
 
 (defmethod initialize ((browser browser) &key container)
   (with-fields (target) browser

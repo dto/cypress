@@ -15,6 +15,7 @@
   (inventory :initform nil)
   (health :initform 0)
   (magic :initform 0)
+  (spells :initform nil)
   (hunger :initform 0)
   (fatigue :initform 0)
   (cold :initform 0)
@@ -195,21 +196,19 @@
   (let ((item (find-inventory-item container item-class)))
     (when item (modify-quantity item (- quantity)))))
 
-(defmethod take-quantity ((container thing) item-class &optional (quantity 1))
-  (assert (plusp quantity))
+(defmethod consume-single ((container thing) item-class)
   (let ((item (find-inventory-item container item-class)))
     (when item 
       (when (plusp (quantity item))
-	(modify-quantity item quantity)
+	(modify-quantity item -1)
 	;; remove the ghosts of departed quantities
 	(when (not (plusp (quantity item)))
-	  (remove-inventory-item container item)
-	  (destroy item))
-	;; send back the separated quantities
-	(let (items)
-	  (dotimes (n quantity)
-	    (push (new item-class) items))
-	  items)))))
+	  (remove-inventory-item container item))
+	(prog1 nil (destroy item))))))
+
+(defmethod consume-quantity ((container thing) item-class &optional (quantity 1))
+  (dotimes (n quantity)
+    (consume-single container item-class)))
 
 (defun quantity-of (item-class new-quantity)
   (assert (plusp new-quantity))
@@ -218,19 +217,10 @@
       (with-fields (quantity) item
 	(setf quantity new-quantity)))))
 
-(defmethod take-one ((container thing) item-class)
-  (first (take-quantity container item-class 1)))
-
 (defmethod has-quantity ((container thing) item-class &optional (quantity 1))
   (let ((item (find-inventory-item container item-class)))
     (when item
       (>= (quantity item) quantity))))
-
-(defmethod consume-quantity ((container thing) item-class &optional (quantity 1))
-  (if (has-quantity container item-class quantity)
-      (dolist (item (take-quantity container item-class quantity))
-	(consume container item))
-      (error "Not enough.")))
 
 (defmethod modify-health ((self thing) points)
   (with-fields (health) self
@@ -253,6 +243,40 @@
 (defmethod modify-cold ((self thing) points)
   (with-fields (cold) self
     (incf cold points)))
+
+(defmethod has-condition ((self thing) field points)
+  (assert (keywordp field))
+  (let ((p (field-value field self)))
+    (assert (numberp p))
+    (>= p points)))
+
+(defmethod modify-condition ((self thing) field points)
+  (assert (keywordp field))
+  (incf (field-value field self) points))
+
+;;; General status checks
+
+(defmethod have-reagents ((self thing) reagents)
+  (block checking
+    (prog1 t
+      (loop while reagents do
+	(let* ((name (pop reagents))
+	       (value (pop reagents)))
+	  (assert (and name value))
+	  (or
+	   (etypecase name
+	     (keyword (has-condition self name value))
+	     (symbol (has-quantity self name value)))
+	   (return-from checking nil)))))))
+
+(defmethod expend-reagents ((self thing) reagents)
+  (loop while reagents do
+    (let* ((name (pop reagents))
+	   (value (pop reagents)))
+      (assert (and name value))
+      (etypecase name
+	(keyword (modify-condition self name (- value)))
+	(symbol (consume-single self name value))))))
 
 ;;; Attaching gumps to things
 
@@ -561,21 +585,6 @@
 (defun bubblep (thing)
   (and (xelfp thing)
        (has-tag (find-object thing) :bubble)))
-
-;; ;;; Actions
-
-;; (defthing action)
-
-;; (defmethod use ((target thing) (spell action)))
-
-;; (defthing (fire action))
-
-;; (defthing (spell action))
-
-;; (defmethod use ((target thing) (spell spell))
-
-;; (defthing (spark spell)
-;; (defthing (light spell)
 
 ;;; Scene
 

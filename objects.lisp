@@ -50,7 +50,6 @@
   (drop self (new 'scroll-gump :text *help-text*)))
 
 (defparameter *remains-images* (image-set "remains" 2))
-(defparameter *wood-images* (image-set "wood" 4))
 (defparameter *wraith-images* (image-set "wraith" 3))
 (defparameter *fire-pit-images* (image-set "fire-pit" 3))
 (defparameter *dead-tree-images* (image-set "dead-tree" 5))
@@ -58,27 +57,14 @@
 (defparameter *gray-stairwell-images* (image-set "gray-stairwell" 2))
 (defparameter *copper-lock-images* (image-set "copper-lock" 5))
 
-(defparameter *branch-images* (image-set "branch" 9))
-
-(defthing branch :image (random-choose *branch-images*) :scale 1.2) 
-
 (defparameter *nightshade-images* (image-set "nightshade" 6))
 (defthing nightshade :scale 1.1 :image (random-choose *nightshade-images*)) 
 
 (defparameter *ginseng-images* (image-set "ginseng" 4))
 (defthing ginseng :image (random-choose *ginseng-images*)) 
 
-(defparameter *silverwood-images* (image-set "silverwood" 9))
-(defthing silverwood :scale 1.2 :image (random-choose *silverwood-images*)) 
-
 (defparameter *thornweed-images* (image-set "thornweed" 8))
 (defthing thornweed :scale 1.2 :image (random-choose *thornweed-images*)) 
-
-(defparameter *silverwood-images* (image-set "silverwood" 9))
-(defthing silverwood :scale 1.2 :image (random-choose *silverwood-images*)) 
-
-(defparameter *twig-images* (image-set "twig" 9))
-(defthing twig :scale 1.5 :image (random-choose *twig-images*))
 
 (defparameter *snowdrop-images* (image-set "snowdrop" 3))
 (defparameter *violet-images* (image-set "violet" 3))

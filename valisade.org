@@ -1,21 +1,47 @@
 * Tasks
 
-** TODO fix checkbox not appearing after reset
-
-** TODO bring back modeline
-
-** TODO bow-raising reload time
-** TODO show bow raising
-
-** TODO Implement tactical combat
-*** TODO Pause game with key or mouse-wheel to issue orders, mouse-clicks-modeline? pause
-
-** TODO Implement spells and actions
+** TODO Implement magic spells 
 *** TODO Import spell/action icons
 *** TODO Write function that checks that given required reagents/quantities/conditions are present
 **** TODO Implement player status conditions via these checks
 *** TODO Implement camp/ "magic tent" and other basic spells
 
+** TODO Write some simple level scenarios as property lists, i.e. UserStories
+*** TODO UserStories should use simple spells requiring local reagents 
+
+** TODO RESUME after issuing order
+** TODO Merge items whe adding to inventory
+*** TODO Show quantity in container
+
+
+** TODO Implement tactical combat
+*** TODO indicate PAUSED status in lower-right corner
+*** TODO implement PAUSE and RESUME functions
+*** TODO toggle pause with middle-click
+*** TODO toggle pause with SPACEBAR
+*** TODO toggle pause with TAB
+** TODO Require raise-time for bow
+** TODO Require rest-time for bow
+*** TODO modify combat speed with spell/item
+** TODO Animate bow according to status
+** TODO Add jitter to aim when cold/exhausted
+** TODO Right click self to toggle combat
+
+** TODO Remove Lucius for now
+
+** TODO Implement status conditions
+*** TODO Starving
+*** TODO Exhausted
+**** TODO Hunger causes exhaustion before really causing starvation
+*** TODO Freezing 
+*** TODO Dying
+
+** TODO Write overworld map system
+*** TODO Import map symbols
+*** TODO Import blank overworld map
+
+** TODO Make inventory of existing terrain backgrounds and import 
+** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
 
 ** TODO Identify all scene parameters 
 *** TODO time (day, night)
@@ -27,10 +53,7 @@
 *** TODO items
 *** TODO enemies
 *** TODO Rewrite forest generator based on this parameterization
-** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
-** TODO Write overworld map system
-*** TODO Import map symbols
-*** TODO Import blank overworld map
+
 ** TODO Paint and Animate an Imperial Raven.
 ** TODO Fix conversation gump; design real convo system (inform manual)
 
@@ -621,3 +644,24 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE fix checkbox not appearing after reset
+   CLOSED: [2014-01-06 Mon 04:20]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-06 Mon 04:21
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE bring back modeline
+   CLOSED: [2014-01-06 Mon 04:20]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-06 Mon 04:21
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+

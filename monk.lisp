@@ -1,5 +1,26 @@
 (in-package :cypress)
 
+(defthing wood)
+
+(defparameter *twig-images* (image-set "twig" 9))
+
+(defthing (twig wood) 
+  :scale 1.4
+  :image (random-choose *twig-images*))
+
+(defparameter *branch-images* (image-set "branch" 9))
+
+(defthing (branch wood) 
+  :quantity 3 
+  :image (random-choose *branch-images*) 
+  :scale 1.2)
+
+(defparameter *silverwood-images* (image-set "silverwood" 9))
+
+(defthing silverwood
+  :scale 1.2 
+  :image (random-choose *silverwood-images*))
+
 ;;; Arrows, the monk's main weapon
 
 (defparameter *arrow-size* 25)
@@ -133,6 +154,7 @@
   (equipped-item :initform nil)
   (health :initform *maximum-points*)
   (magic :initform *maximum-points*)
+  (spells :initform nil)
   (hunger :initform 0)
   (fatigue :initform 0)
   (cold :initform 0)
@@ -161,8 +183,13 @@
 
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'jerky))
-  (add-inventory-item monk (quantity-of 'wooden-arrow 60)))
-
+  (add-inventory-item monk (new 'stone))
+  (add-inventory-item monk (quantity-of 'wooden-arrow 10))
+  (setf (field-value :spells monk)
+	(list (new 'spark)
+	      (new 'cure)
+	      (new 'craft-wooden-arrows))))
+  
 (defmethod humanp ((self monk)) nil)
 
 (defmethod equipped-item ((self monk))
