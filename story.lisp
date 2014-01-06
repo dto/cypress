@@ -82,13 +82,13 @@ I've got to get moving! See you soon.
 "Welcome to Cypress. 
 
 Press Control-R to get a new forest.
-Single-click object to show its name.
-Right-click destination to move around.
+Press Spacebar to pause the action.
+Single-click an object to show its name.
+Right-click a destination to move there.
 Drag objects to move them.
-Double-click monster to attack.
+Double-click monster to attack it.
 Drag object onto monks to take item.
 Double click container for inventory.
-Double click remains, look for stuff.
 Right click scrolls to close.
 Drag items into/out of inventory.")
 
