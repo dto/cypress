@@ -6,9 +6,11 @@
 
 (defmethod use ((caster thing) (spell spell))
   (with-fields (reagents) spell
-    (when (have-reagents caster reagents)
-      (expend-reagents caster reagents)
-      (cast caster spell))))
+    (if (have-reagents caster reagents)
+	(progn 
+	  (expend-reagents caster reagents)
+	  (cast caster spell))
+	(show-error caster (window-pointer-x) (window-pointer-y)))))
 
 (defmethod cast ((caster thing) (spell spell)))
 
