@@ -19,7 +19,7 @@ ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread)
 (defun make-box ()
   (make-container 'item-box (grab *boxed-items*)))
 
-(defparameter *forest-debris-items* '(stone stone twig twig branch branch ginseng silverwood))
+(defparameter *forest-debris-items* '(stone stone twig branch branch ginseng silverwood))
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 
@@ -36,7 +36,7 @@ ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread)
   (assert (xelfp x))
   (with-border (forest-border) x))
 
-(defun random-border () (units (1+ (random 15))))
+(defun random-border () (units (1+ (random 5))))
 
 (defun bordered-randomly (x) 
   (with-border (random-border) x))
@@ -121,6 +121,10 @@ ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread)
     (drop-object (current-buffer) (find-object x))
     (layout (find-object x))
     (trim (current-buffer))))
+
+(defun bordered-singleton (x)
+  (with-border (units (+ 4 (random 8)))
+    (singleton x)))
   
 (defun single-tree () 
    (singleton 
@@ -149,7 +153,7 @@ ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread)
 	     (etypecase class-or-classes
 	       (symbol class-or-classes)
 	       (cons (random-choose class-or-classes)))))
-    (let ((patch (singleton (new (get-class)))))
+    (let ((patch (bordered-singleton (new (get-class)))))
       (dotimes (i count)
 	(when trim (trim patch))
 	(let ((class (get-class)))
@@ -168,12 +172,12 @@ ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread)
 (defun debris () 
   (spray *forest-debris-items*
 	 :count (+ 1 (random 6))
-	 :trim nil))
+	 :trim t))
 
 (defun reagents ()
   (spray (random-choose *reagents*)
 	 :count (+ 1 (random 5))
-	 :trim nil))
+	 :trim t))
 
 (defun enemy ()
   (singleton (new (random-choose '(wraith wraith wolf)))))
@@ -186,34 +190,32 @@ ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread)
 	  (enemy))))
 
 (defun some-trees ()
-  (spray (list 'leafy-tree (random-choose *forest-debris-items*))
-	 :trim t
-	 :count (random-choose '(2 3 4 5))))
+  (randomly 
+   (spray *forest-debris-items* :trim t :count (+ 2 (random 4)))
+   (spray 'leafy-tree
+	  :trim nil
+	  :count (random-choose '(4 5)))))
 
-(defun stuff-cluster ()
-  (randomly (stuff) (spray 'ginseng :count (1+ (random 3)))))
+(defun ginseng-garden ()
+  (spray '(dead-tree ruin-wall ginseng) :trim nil :count (+ 5 (random 5))))
 
-(defun trees-or-clearing ()
-   (if (percent-of-time 50 t)
-       (some-trees)
-       (if (percent-of-time 70 t)
-	   (with-border (units (+ 2 (random 3)))
-	     (if (percent-of-time 40 t)
-		 (some-trees)
-		 (if (percent-of-time 50 t)
-		     (debris)
-		     (reagents))))
-	   (patch-of 'gray-rock))))
+(defun rock-outcropping ()
+  (spray '(gray-rock stone stone)
+	 :trim t :count (+ 5 (random 4))))
+
+(defun wood-pile ()
+  (spray '(twig twig branch leafy-tree)
+	 :trim t :count (+ 3 (random 4))))
 
 (defun dense-trees ()
-  (with-border (units (+ 1 (random 7)))
-    (vertically 
-     (vertically
-      (vertically 
-       (horizontally (some-trees) (horizontally (stuff) (trees-or-clearing)))
-       (horizontally (some-trees) (horizontally (stuff-cluster) (trees-or-clearing))))
-      (horizontally (enemy) (some-trees)))
-     (horizontally (enemy) (horizontally (trees-or-clearing) (some-trees))))))
+  (with-border (units 8)
+    (stacked-up-randomly
+     (lined-up-randomly (some-trees) (ginseng-garden) (enemy))
+     (lined-up-randomly (some-trees) (wood-pile) (enemy) (enemy)))))
+
+(defun stuff-cluster ()
+  (randomly (rock-outcropping) (spray '(dead-tree ruin-wall ginseng) :count (+ 5 (random 5)))))
+
 
 (defun make-forest ()
   (with-border (units 3)

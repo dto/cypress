@@ -1,7 +1,5 @@
 * Tasks
 
-
-
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
 

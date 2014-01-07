@@ -611,7 +611,7 @@
 
 (define-buffer scene 
   :status-line nil
-  :background-image (random-choose '("stone-road.png" "paynes-meadow.png"))
+  :background-image (random-choose '("stone-road.png" "cloudy-meadow.png" "golden-meadow.png"))
   :quadtree-depth 8
   :default-events
   '(((:pause) :transport-toggle-play)
