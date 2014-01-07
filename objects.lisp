@@ -97,7 +97,7 @@
 (defthing dead-tree 
   :tags '(:solid :fixed) 
   :image (random-choose *dead-tree-images*)
-  :scale 1.9)
+  :scale 3.0)
 
 (defparameter *leafy-tree-images* (image-set "leafy-tree" 12))
 
