@@ -384,7 +384,7 @@
 
 (defmethod use ((monk monk) (food food))
   (consume monk food)
-  (destroy food))
+  (consume-single monk (class-name (class-of food))))
 
 (defthing (white-bread food)
   :image "white-bread.png")
