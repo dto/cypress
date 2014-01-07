@@ -1,8 +1,11 @@
 * Tasks
 
-** TODO containers should not stack
-** TODO only consume one beef 
-
+** TODO make new scrolls always open on top
+*** TODO Z-sort function should always let gumps last?
+*** TODO Fix player can run over gumps
+** TODO Add heuristic to try to choose a decent spot, when target space isn't occupiable
+** TODO make container drop zone larger so that it's easier to grab stuff 
+** TODO disallow container to be dropped into self :)
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
 
@@ -23,9 +26,6 @@
 *** TODO [#B] Starving
 
 ** TODO Make inventory of existing terrain backgrounds and import 
-
-** TODO Fix player can run over gumps
-*** TODO Z-sort function should always let gumps last?
 
 ** TODO Write overworld map system
 *** TODO Import map symbols
@@ -724,4 +724,22 @@ FORGET-ME-NOTS and Temporal Seance
 
 ** DONE Remove Lucius for now
    CLOSED: [2014-01-06 Mon 15:33]
+
+** TODO containers should not stack
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-07 Tue 13:25
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO only consume one beef
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-07 Tue 13:25
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
 
