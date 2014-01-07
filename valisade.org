@@ -1,5 +1,8 @@
 * Tasks
 
+** TODO containers should not stack
+** TODO only consume one beef 
+
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
 
