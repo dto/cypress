@@ -21,13 +21,15 @@
 (in-package :cypress)
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "cypress v0.3") 
+  (setf *window-title* "cypress v0.4") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)
   (setf *nominal-screen-height* 720)
+
   ;; (setf *nominal-screen-width* (* 1280 4))
   ;; (setf *nominal-screen-height* (* 720 4))
+
   (setf *scale-output-to-window* t) 
   (setf *use-antialiased-text* t)
   (setf *font-texture-filter* :linear)
