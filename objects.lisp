@@ -130,7 +130,7 @@
 ;;; ruin walls
 
 (defthing ruin-wall 
-  :image-scale 1000
+  :scale 2.0
   :image (random-choose *ruin-wall-images*)
   :tags '(:fixed :solid))
 
