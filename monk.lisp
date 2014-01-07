@@ -179,7 +179,8 @@
   (fire-clock :initform 0))
 
 (defmethod walk-to :before ((monk monk) x y)
-  (bring-to-front monk))
+  (bring-to-front monk)
+  (resume))
 
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'jerky))
@@ -342,6 +343,7 @@
 (defthing (geoffrey monk) :description "Geoffrey")
 
 (defmethod activate ((monk monk))
+  (resume)
   (replace-gump monk (new 'browser :container monk)))
 
 (defmethod standing-animation ((self geoffrey))
