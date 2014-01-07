@@ -116,6 +116,8 @@
 
 (defthing remains :tags '(:fixed) :image (random-choose '("remains-1.png" "remains-2.png")))
 
+(defmethod can-accept ((remains remains)) t)
+
 (defmethod activate ((remains remains))
   (replace-gump remains (new 'browser :container remains)))
 
