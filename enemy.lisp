@@ -95,16 +95,21 @@
 	  (walk-to self x y)
 	  (play-sample "howl.wav")
 	  (setf seen-player t)))
-      (if (< (distance-to-cursor self) 200)
-	  (progn 
-	    (percent-of-time 3 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
-	    (let ((heading0 (heading-to-cursor self)))
-	      (percent-of-time 25 
-		(setf heading heading0))
-	      (percent-of-time 70
-		(move self heading0 2.2))))
-	  (when (movement-heading self)
-	    (setf (field-value :heading self) (movement-heading self))
-	    (move self (movement-heading self) 3.2))))))
+      (when seen-player
+	(if (< (distance-to-cursor self) 200)
+	    (progn 
+	      (percent-of-time 3 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
+	      (let ((heading0 (heading-to-cursor self)))
+		(percent-of-time 25 
+		  (setf heading heading0))
+		(percent-of-time 70
+		  (move self heading0 2.2))))
+	    (progn
+	      (percent-of-time 1
+		(with-fields (x y) (cursor)
+		  (walk-to self x y)))
+	      (when (movement-heading self)
+		(setf (field-value :heading self) (movement-heading self))
+		(move self (movement-heading self) 3.2))))))))
 
 	    
