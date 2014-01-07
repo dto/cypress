@@ -209,12 +209,11 @@
 (defun dense-trees ()
   (with-border (units 8)
     (stacked-up-randomly
-     (lined-up-randomly (some-trees) (ginseng-garden) (enemy))
+     (lined-up-randomly (enemy) (some-trees) (ginseng-garden) (enemy))
      (lined-up-randomly (some-trees) (wood-pile) (enemy) (enemy)))))
 
 (defun stuff-cluster ()
   (randomly (rock-outcropping) (spray '(dead-tree ruin-wall ginseng) :count (+ 5 (random 5)))))
-
 
 (defun make-forest ()
   (with-border (units 3)
