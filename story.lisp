@@ -177,14 +177,19 @@ you left.
 		  :text (field-value :text self))))
 
 (defresource "passageway.ogg" :volume 20)
-(defresource "home.ogg" :volume 20)
+(defresource "home.ogg" :volume 10)
 (defresource "kosmium.ogg" :volume 20)
 (defresource "believe-me2.ogg" :volume 20)
-(defresource "nightbird.ogg" :volume 40)
+(defresource "3-against-2.ogg" :volume 20)
 (defresource "xolaros3.ogg" :volume 20)
+(defresource "dusk.ogg" :volume 20)
+(defresource "ruins.ogg" :volume 10)
+(defresource "standing-by-the-river.ogg" :volume 10)
+(defresource "spiritus.ogg" :volume 20)
 
 (defparameter *soundtrack*
-'("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "nightbird.ogg" "xolaros3.ogg"))
+'("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg"
+  "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
 
 (defresource "nice-map.png")
 
@@ -233,7 +238,7 @@ you left.
       
       ;; allocate
       (install-quadtree buffer)
-      ;;      (play-music (random-choose *soundtrack*))
+      (play-music (random-choose *soundtrack*))
       (current-buffer))))
 
 
