@@ -3,6 +3,8 @@
 (defresource "knock.wav" :volume 20)
 (defresource "death.wav" :volume 20)
 (defresource "lichscream.wav" :volume 20)
+(defresource "lichdeath.wav" :volume 20)
+(defresource "lichdie.wav" :volume 20)
 
 ;;; Wraiths
 
@@ -41,17 +43,17 @@
 
 (defmethod run ((self wraith))
   (with-fields (image heading seen-player) self
-  (when (< (distance-to-cursor self) 640)
+  (when (< (distance-to-cursor self) 680)
     (unless seen-player
-      (play-sample "lichscream.wav")
+      (play-sample (random-choose '("lichscream.wav" "lichdie.wav")))
       (setf seen-player t))
-    (percent-of-time 16 (setf image (random-choose *wraith-images*)))
+    (percent-of-time 22 (setf image (random-choose *wraith-images*)))
     (let ((heading0 (heading-to-cursor self)))
-      (percent-of-time 13 
+      (percent-of-time 30 
 	(setf heading heading0))
       (percent-of-time 30
-	(percent-of-time 12 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
-	(move self heading0 4))))))
+	(percent-of-time 10 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
+	(move self heading0 6))))))
 
 ;;; Wolf
 
@@ -74,7 +76,7 @@
 (defmethod die ((self wolf))
   (let ((remains (new 'remains)))
     (add-inventory-item remains (new 'wolf-skull))
-    (percent-of-time 30 (add-inventory-item remains (new 'jerky)))
+    (percent-of-time 60 (add-inventory-item remains (new 'jerky)))
     (drop self remains))
   (destroy self))
 
@@ -83,7 +85,8 @@
 
 (defmethod run ((self wolf))
   (when (> (distance-to-cursor self) 700) 
-    (setf (field-value :waypoints self) nil))
+    (setf (field-value :waypoints self) nil)
+    (setf (field-value :seen-player self) nil))
   (with-fields (image heading seen-player) self
     (percent-of-time 17 (setf image (random-choose *wolf-images*)))
     (when (< (distance-to-cursor self) 700)
@@ -102,6 +105,6 @@
 		(move self heading0 2.2))))
 	  (when (movement-heading self)
 	    (setf (field-value :heading self) (movement-heading self))
-	    (move self (movement-heading self) 2.5))))))
+	    (move self (movement-heading self) 3.2))))))
 
 	    
