@@ -2,12 +2,12 @@
 
 ;;; Various prizes
 
-(defparameter *grab-bag-items* '(skull skull wolf-skull ruined-book
-ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread))
+(defparameter *grab-bag-items* '(elixir elixir skull wolf-skull ruined-book silver-elixir
+ stone stone thornweed nightshade white-bread wheat-bread))
 
-(defparameter *boxed-items* '(xalcium-armor skull ruined-book atlas))
+(defparameter *boxed-items* '(silver-elixir xalcium-armor atlas))
 
-(defun grab (bag &optional (count (1+ (random 4))))
+(defun grab (bag &optional (count (+ 2 (random 5))))
   (let (items)
     (dotimes (n count)
       (push (new (random-choose bag)) items))
@@ -36,7 +36,7 @@ ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread)
   (assert (xelfp x))
   (with-border (forest-border) x))
 
-(defun random-border () (units (1+ (random 5))))
+(defun random-border () (units (1+ (random 3))))
 
 (defun bordered-randomly (x) 
   (with-border (random-border) x))
@@ -158,8 +158,7 @@ ruined-book stone stone stone twig thornweed nightshade white-bread wheat-bread)
 	(when trim (trim patch))
 	(let ((class (get-class)))
 	  (setf patch 
-		(with-border (units (1+ (random 3)))
-		  (randomly patch (singleton (new class)))))))
+		(randomly patch (singleton (new class))))))
       patch)))
 
 (defun lone-wolf ()
