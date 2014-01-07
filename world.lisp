@@ -158,6 +158,8 @@
 (defmethod add-inventory-item ((container thing) (item thing) &optional (merge t))
   (with-fields (inventory) container
     (if (or (not merge)
+	    ;; don't allow container items themselves to stack, ever
+	    (field-value :inventory item)
 	    (not (find-inventory-item container 
 				      (class-name (class-of item)))))
 	(progn 

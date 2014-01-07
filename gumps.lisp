@@ -144,9 +144,14 @@
 
 (defmethod icon-drop ((icon icon))
   (with-fields (target) icon
-    (with-fields (container) target
-      (let ((class (class-name (class-of target))))
-	(consume-single container class)))))
+    (with-fields (container inventory) target
+      (if inventory 
+	  ;; don't split up containers
+	  (prog1 target 
+	    (remove-inventory-item container target))
+	  ;; consume single quantity, splitting if needed
+	  (let ((class (class-name (class-of target))))
+	    (consume-single container class))))))
 
 ;;; Container browser gump
 
