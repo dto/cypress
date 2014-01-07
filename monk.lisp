@@ -416,6 +416,7 @@
   :image (random-choose *elixir-images*))
 
 (defmethod consume ((monk monk) (elixir elixir))
+  (modify-health monk +30)
   (modify-magic monk +40))
 
 (defparameter *silver-elixir-images* (image-set "silver-elixir" 2))
@@ -424,6 +425,7 @@
   :image (random-choose *silver-elixir-images*))
 
 (defmethod consume ((monk monk) (silver-elixir elixir))
+  (modify-health monk +60)
   (modify-magic monk +100))
 
 
