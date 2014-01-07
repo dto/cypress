@@ -17,7 +17,7 @@
 (defmethod can-pick ((spell spell)) nil)
 
 (defthing (spark spell)
-  :description "Spark: light a fire"
+  :description "Spark (2 mp)"
   :reagents '(:magic 2)
   :image "spark.png")
 
@@ -25,7 +25,7 @@
   (message "Nothing happens."))
 
 (defthing (cure spell)
-  :description "Cure light wounds"
+  :description "Cure light wounds (25 mp, 1 ginseng)"
   :reagents '(:magic 25 ginseng 1)
   :image "fancy-heart.png")
 
@@ -34,7 +34,7 @@
   (modify-health caster (random-choose '(15 20 20 25))))
       
 (defthing (craft-wooden-arrows spell)
-  :description "Craft wooden arrows"
+  :description "Craft arrows (2 mp, 2 wood, 1 stone)"
   :reagents '(:magic 2 wood 2 stone 1)
   :image "craft-arrows.png")
   
