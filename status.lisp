@@ -5,15 +5,21 @@
 
 (defvar *status-messages* nil)
 
-(defparameter *status-message-time* (seconds->frames 7))
+(defparameter *status-message-time* (seconds->frames 4.8))
 
 (defparameter *last-status-message-time* 0)
 
 (defun narrate (format-string &rest args)
-  (pushnew (apply #'format nil format-string args)
-	   *status-messages*
-	   :test 'equal)
-  (setf *last-status-message-time* *updates*))
+  (let ((message (apply #'format nil format-string args)))
+    (unless (find message *status-messages* :test 'equal)
+      (setf *status-messages*
+	    (append *status-messages* (list message)))
+      (setf *last-status-message-time* *updates*))))
+
+(defun narrate-now (format-string &rest args)
+  (let ((message (apply #'format nil format-string args)))
+      (setf *status-messages* (list message))
+      (setf *last-status-message-time* *updates*)))
 
 (defun current-status-message ()
   (when *status-messages* 
@@ -37,7 +43,9 @@
     (:key #'identity :test 'equal :validator #'identity)
   (format nil "Equipment: ~A       " n))
 
-(defparameter *status-line-font* "oldania-bold")
+(defresource (:name "oldania-medium-bold" :type :ttf :file "OldaniaADFStd-Bold.otf" :properties (:size 18)))
+
+(defparameter *status-line-font* "oldania-medium-bold")
 
 (define-block-macro status-line
     (:super phrase
@@ -65,7 +73,7 @@
 			   *paused-status-message*
 			   (or (current-status-message) " "))))
 
-(defparameter *status-line-height* (units 1.8))
+(defparameter *status-line-height* (units 2))
 (defparameter *status-line-background-color* "black")
 (defparameter *status-line-foreground-color* "white")
 
