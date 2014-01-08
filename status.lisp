@@ -1,5 +1,26 @@
 (in-package :cypress)
 
+(defparameter *paused-status-message* 
+  "GAME IS PAUSED. Press the spacebar (or issue a command) to continue...")
+
+(defvar *status-message* nil)
+
+(defparameter *status-message-time* (seconds->frames 7))
+
+(defparameter *last-status-message-time* 0)
+
+(defun narrate (format-string &rest args)
+  (setf *status-message* 
+	(apply #'format nil format-string args))
+  (setf *last-status-message-time* *updates*))
+
+(defun current-status-message ()
+  (when *status-message* 
+    (if (< *status-message-time* 
+	   (- *updates* *last-status-message-time*))
+	(setf *status-message* nil)
+	*status-message*)))
+
 ;;; Status-Line
 
 (defun-memo status-line-health-string (n)
