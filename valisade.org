@@ -1,22 +1,11 @@
 * Tasks
 
-** TODO [#A] Make new scrolls always open on top
-** DONE [#A] disallow container to be dropped into self :)
-   CLOSED: [2014-01-08 Wed 00:42]
-** DONE [#B] make container drop zone larger so that it's easier to grab stuff 
-   CLOSED: [2014-01-08 Wed 00:00]
-** DONE [#B] don't allow multiple text gumps on one scroll
-   CLOSED: [2014-01-07 Tue 23:32]
-
+** TODO Some objects should not stack.
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 
-** TODO don't show pathfind error for non-geoffrey
-
-** TODO [#C] Fix inventory icon squishness by padding image-rect to a square before scaling to icon size
 ** TODO [#C] Fix giant arrow when dragging arrow/sprite out
 ** TODO [#C] Fix non-impelled arrows moving on their own 
-** TODO [#B] Z-sort function should always let gumps last?
 ** TODO [#B] Fix player can run over gumps
 
 
@@ -754,5 +743,64 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#A] Make new scrolls always open on top
+   CLOSED: [2014-01-08 Wed 01:46]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-08 Wed 01:46
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] disallow container to be dropped into self :)
+   CLOSED: [2014-01-08 Wed 00:42]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-08 Wed 01:46
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] make container drop zone larger so that it's easier to grab stuff
+   CLOSED: [2014-01-08 Wed 00:00]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-08 Wed 01:46
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] don't allow multiple text gumps on one scroll
+   CLOSED: [2014-01-07 Tue 23:32]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-08 Wed 01:46
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO don't show pathfind error for non-geoffrey
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-08 Wed 01:48
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#C] Fix inventory icon squishness by padding image-rect to a square before scaling to icon size
+   CLOSED: [2014-01-08 Wed 01:46]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-08 Wed 01:48
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
    :END:
 

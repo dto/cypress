@@ -165,6 +165,7 @@ you left.
 ")
 
 (defthing scroll-fragment
+  :stacking nil
   :image (random-choose *scroll-images*) 
   :text  (random-choose
 	  (list *letter-text*

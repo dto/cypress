@@ -30,8 +30,8 @@
 
 (defparameter *book-images* (image-set "book" 10))
 
-(defthing book :image (random-choose *book-images*))
-(defthing ruined-book :image (random-choose *book-images*))
+(defthing book :stacking nil :image (random-choose *book-images*))
+(defthing ruined-book :stacking nil :image (random-choose *book-images*))
 
 (defparameter *notebook-images* (image-set "notebook" 3))
 
@@ -44,7 +44,10 @@
 
 (defparameter *scroll-images* (image-set "scroll" 5))
 
-(defthing scroll :image (random-choose *scroll-images*) :description "Scroll of Helping")
+(defthing scroll 
+  :stacking nil
+  :image (random-choose *scroll-images*) 
+  :description "Scroll of Helping")
 
 (defmethod activate ((self scroll))
   (replace-gump self (new 'scroll-gump :text *help-text*)))

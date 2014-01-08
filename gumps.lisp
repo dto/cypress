@@ -145,9 +145,9 @@
 
 (defmethod icon-drop ((icon icon))
   (with-fields (target) icon
-    (with-fields (container inventory) target
-      (if inventory 
-	  ;; don't split up containers
+    (with-fields (container inventory stacking) target
+      (if (or inventory (not stacking))
+	  ;; don't split up containers or non-stackable items.
 	  (prog1 target 
 	    (remove-inventory-item container target))
 	  ;; consume single quantity, splitting if needed

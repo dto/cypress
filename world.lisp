@@ -13,6 +13,7 @@
 (defblock thing 
   ;; world fields
   (quantity :initform 1)
+  (stacking :initform t)
   (weight :initform nil)
   (inventory :initform nil)
   (health :initform 0)
@@ -162,6 +163,9 @@
     (if (or (not merge)
 	    ;; don't allow container items themselves to stack, ever
 	    (field-value :inventory item)
+	    ;; don't allow non-stackable items to stack
+	    (not (field-value :stacking item))
+	    ;; we don't already have something
 	    (not (find-inventory-item container 
 				      (class-name (class-of item)))))
 	(progn 
