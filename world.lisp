@@ -249,27 +249,31 @@
   (>= (compute-quantity container item-class)
       quantity))
 
+(defparameter *maximum-points* 100)
+
+(defmethod modify-points ((self thing) field points)
+  (setf (field-value field self)
+	(max 0
+	     (min *maximum-points* 
+		  (+ points
+		     (field-value field self))))))
+
 (defmethod modify-health ((self thing) points)
-  (with-fields (health) self
-    (incf health points)
-    (when (not (plusp health))
-      (die self))))
+  (modify-points self :health points)
+  (when (not (plusp (field-value :health self)))
+    (die self)))
 
 (defmethod modify-magic ((self thing) points)
-  (with-fields (magic) self
-    (incf magic points)))
+  (modify-points self :magic points))
 
 (defmethod modify-fatigue ((self thing) points)
-  (with-fields (fatigue) self
-    (incf fatigue points)))
+  (modify-points self :fatigue points))
 
 (defmethod modify-hunger ((self thing) points)
-  (with-fields (hunger) self
-    (incf hunger points)))
+  (modify-points self :hunger points))
 
 (defmethod modify-cold ((self thing) points)
-  (with-fields (cold) self
-    (incf cold points)))
+  (modify-points self :cold points))
 
 (defmethod has-condition ((self thing) field points)
   (assert (keywordp field))
@@ -403,7 +407,8 @@
 
 ;;; Double-clicking an object causes it to activate.
 
-(defmethod use ((self thing) (object thing)))
+(defmethod use ((self thing) (object thing))
+  (narrate-now "Nothing happens."))
 
 (defmethod activate ((self thing))
   (use (cursor) self))

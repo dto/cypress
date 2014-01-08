@@ -1,5 +1,14 @@
 * Tasks
 
+** TODO Increase combat tactics
+*** TODO Require raise-time for bow
+*** TODO Require rest-time for bow
+*** TODO toggle pause with middle-click
+*** TODO Animate bow according to status
+*** TODO Add jitter to aim when cold/exhausted
+*** TODO Right click self to toggle combat
+
+
 ** TODO Add narration to existing events
 
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
@@ -10,14 +19,6 @@
 
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
-
-** TODO Increase combat tactics
-*** TODO Require raise-time for bow
-*** TODO Require rest-time for bow
-*** TODO toggle pause with middle-click
-*** TODO Animate bow according to status
-*** TODO Add jitter to aim when cold/exhausted
-*** TODO Right click self to toggle combat
 
 ** TODO Implement status conditions
 *** TODO [#A] Freezing 
