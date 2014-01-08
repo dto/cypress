@@ -1,15 +1,34 @@
 * Tasks
 
+
+** TODO Choose what else goes in tonight's 0.5 release
+*** TODO [#A] Spellcast animation
+*** TODO [#B] Implement low HP warning
+
 ** TODO Increase combat tactics
-*** TODO Require raise-time for bow
-*** TODO Require rest-time for bow
-*** TODO toggle pause with middle-click
+*** TODO Require raise-time for bow, during which you cannot move. 
+*** TODO Require rest-time for bow, during which you cannot fire again
 *** TODO Animate bow according to status
 *** TODO Add jitter to aim when cold/exhausted
 *** TODO Right click self to toggle combat
+*** TODO toggle pause with middle-click?
 
 
-** TODO Add narration to existing events
+** TODO Implement status conditions
+*** TODO [#A] Dying
+*** TODO [#B] Starving
+*** TODO [#A] Freezing 
+*** DONE [#A] Dead
+    CLOSED: [2014-01-08 Wed 15:51]
+*** TODO [#B] Exhausted
+**** TODO Hunger causes exhaustion before really causing starvation
+     
+
+---------------------------------
+
+** TODO Abstractify the sounds and ifnd new ones     
+** DONE Add narration to existing events
+   CLnOSED: [2014-01-08 Wed 15:51]
 
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
@@ -19,14 +38,6 @@
 
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
-
-** TODO Implement status conditions
-*** TODO [#A] Freezing 
-*** TODO [#B] Starving
-*** TODO [#A] Dying
-*** TODO [#A] Dead
-*** TODO [#B] Exhausted
-**** TODO Hunger causes exhaustion before really causing starvation
 
 ** TODO Make inventory of existing terrain backgrounds and import 
 
@@ -200,9 +211,9 @@ or fatigue.
 ** Spark (2 mana)
 *** Light torches, campfires, and dry out even soaked wood
 ** Hearth stone (2 mana) (1 stone chips)
-*** Heat up stone chips held in the hand
+*** Heat up stone held in the hand
 *** Reduces cold by 5pts
-*** Does not consume the chips
+*** Does not consume the stone
 ** Light (2 mana)
 *** Casts light with medium radius
 *** Lasts for 4 minutes 
@@ -211,6 +222,7 @@ or fatigue.
 *** Certain enemies can negate magic spell effects, dousing your light
 ** Cure meat (5 mana)  
 *** Create healing-jerky from animal carcasses
+*** TODO Paint meat
 ** Cure light wounds (25 mana) (2 ginseng) 
 *** Heals between 10-15 mana
 ** Hold creature (8 mana) (2 thornweed)
@@ -218,7 +230,7 @@ or fatigue.
 ** Craft arrows (1 mana) (3 fatigue) (stone chips, wood) 
 *** Create bundle of 20 arrows
 ** Boil grasses (2 fatigue) (3 grasses)
-*** Make small amounts of thin gruel. requires wild grasses and water)
+**** Make small amounts of thin gruel. requires wild grasses and water)
 
 * Spell scrolls found in ruins or on dead travelers
 

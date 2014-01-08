@@ -12,10 +12,13 @@
 	  (cast caster spell))
 	(progn
 	  (show-error caster (window-pointer-x) (window-pointer-y))
-	  (narrate "You don't have enough ingredients to cast ~A"
+	  (narrate-now "You don't have enough ingredients to cast ~A"
 		   (find-description spell))))))
 
 (defmethod cast ((caster thing) (spell spell)))
+
+(defmethod cast :after ((monk monk) (spell spell))
+  (begin-animation monk *monk-cast*))
 
 (defmethod can-pick ((spell spell)) nil)
 

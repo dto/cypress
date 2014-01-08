@@ -36,6 +36,7 @@
   :image (random-choose *wooden-arrow-images*))
 
 (defmethod initialize ((self arrow) &key heading)
+  (layout self)
   (when heading
     (setf (field-value :heading self) heading)))
 
@@ -95,13 +96,13 @@
 	     ("monk-stand-4.png" 20))))
 
 (defparameter *monk-stand-bow*
-  '(:scale 1000
+  '(:scale 1400
     :frames (("monk-stand-bow-1.png" 19)
 	     ("monk-stand-bow-2.png" 24)
 	     ("monk-stand-bow-3.png" 32))))
 
 (defparameter *monk-stand-bow-ready*
-  '(:scale 1000
+  '(:scale 1400
     :frames (("monk-stand-bow-ready-1.png" 19)
 	     ("monk-stand-bow-ready-2.png" 24)
 	     ("monk-stand-bow-ready-3.png" 32))))
@@ -119,7 +120,7 @@
 
 (defparameter *monk-walk-bow* 
   '(:repeat t
-    :scale 600
+    :scale 850
     :frames (("monk-walk-bow-3.png" 4)
 	     ("monk-walk-bow-1.png" 4)
 	     ("monk-walk-bow-2.png" 4)
@@ -162,21 +163,24 @@
   (sprite-height :initform (units 5))
   (sprite-width :initform (units 5))
   (image :initform (random-choose *monk-stand-images*))
-  (raising-bow :initform nil)
+  ;; weapon
+  (load-time :initform (seconds->frames 1.4))
+  (load-clock :initform 0)
+  (reload-time :initform (seconds->frames 1.4))
+  (reload-clock :initform 0)
+  (aiming-bow :initform nil)
   (bow-ready :initform nil)
   (aim-heading :initform nil)
+  (fire-direction :initform :up)
+  ;; human status
   (alive :initform t)
   (talking :initform nil)
   (walking :initform nil)
   (hearing-distance :initform 800)
   (tags :initform '(:monk :fixed :container))
   (direction :initform :up)
-  (fire-direction :initform :up)
   ;; timers
-  (retry-clock :initform (seconds->frames 5))
-  (walk-clock :initform 0)
-  (step-clock :initform 0)
-  (fire-clock :initform 0))
+  (walk-clock :initform 0))
 
 (defmethod walk-to :before ((monk monk) x y)
   (bring-to-front monk)
@@ -201,25 +205,19 @@
 (defmethod humanp ((self monk)) nil)
 
 (defmethod equipped-item ((self monk))
-  (or (field-value :equipped-item self)
-      (find-arrow self)))
+  (field-value :equipped-item self))
 
 (defmethod equip ((self monk) (item thing))
   (setf (field-value :equipped-item self) item))
 
 ;;; Animating the monk as he walks
 
-(defparameter *monk-reload-frames* 30)
-
 (defmethod draw ((self monk))
   (with-local-fields 
     (when %alive
       (draw-as-sprite self 
 		      (or (current-animation-frame self) %image)
-		      %heading))))
-
-(defmethod cast-spell ((self monk))
-  (begin-animation self *monk-cast*))
+		      (if %aiming-bow %aim-heading %heading)))))
 
 (defmethod begin-talking ((self monk) line)
   (setf (field-value :talking self) t))
@@ -284,33 +282,56 @@
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
-(defparameter *monk-speed* (truncate (/ *unit* 1.3)))
+(defparameter *monk-speed* 12)
 
 (defmethod standing-animation ((self monk)) *monk-2-stand*)
 (defmethod walking-animation ((self monk)) *monk-2-walk*)
+
+(defmethod update-bow ((monk monk))
+  (with-fields (aiming-bow load-clock load-time bow-ready reload-time reload-clock) monk
+    (if (plusp reload-clock)
+	;; we're reloading. 
+	(when (plusp reload-clock)
+	  (decf reload-clock))
+	;; not reloading; ready to load
+	(if (aiming-bow monk)
+	    ;; ready to fire? 
+	    (if (plusp load-clock)
+		;; no, still reloading
+		(progn 
+		  (decf load-clock)
+		  (setf bow-ready nil))
+		;; yes
+		(setf bow-ready t
+		      aiming-bow nil))))))
 
 (defmethod run ((self monk))
   (with-local-fields 
     (when %alive
       (update-animation self)
-      (when (null %animation)
-	(begin-animation self (standing-animation self)))
-	;; find out what direction the AI or human wants to go
-	(let ((heading (movement-heading self)))
-	  (when (or (null heading)
-		    (null %animation))
-	    (begin-animation self (standing-animation self)))
-	  (when heading 
-	    (unless (eq %animation (walking-animation self))
-	      (begin-animation self (walking-animation self)))
-	    ;; move in the movement direction
-	    (move self heading (/ *monk-speed* 2))
-	    (setf %heading heading))))))
+      (update-bow self)
+      (when (field-value :bow-ready self)
+	(fire self (find-arrow self)))
+      ;; find out what direction the AI or human wants to go
+      (let ((heading 
+	      ;; don't allow movement when aiming
+	      (when (not (aiming-bow self))
+		(movement-heading self))))
+	(when (or (null heading)
+		  (null %animation))
+	  (begin-animation self (standing-animation self)))
+	(when heading 
+	  (unless (eq %animation (walking-animation self))
+	    (begin-animation self (walking-animation self)))
+	  ;; move in the movement direction
+	  (move self heading (/ *monk-speed* 2))
+	  (setf %heading heading))))))
 
 ;;; Firing arrows
 
 (defmethod aim ((self monk) heading)
-  (setf (field-value :aim-heading self) heading))
+  (with-fields (aim-heading) self
+    (setf aim-heading heading)))
 
 (defmethod aim-heading ((self monk))
   (with-fields (heading aim-heading) self 
@@ -318,34 +339,58 @@
 
 (defmethod fire-location ((self monk))
   (multiple-value-bind (tx ty) 
-      (step-toward-heading self (aim-heading self) (units 0.7))
+      (step-toward-heading self (aim-heading self) (units 0.9))
     (values (- tx (* *arrow-size* 0.4))
 	    (- ty (* *arrow-size* 0.4)))))
 
-(defmethod fire ((monk monk) (arrow arrow))
-  (multiple-value-bind (x y) 
-      (fire-location monk)
-    (drop-object (current-buffer) arrow x y)))
+(defmethod aiming-bow ((self monk))
+  (field-value :aiming-bow self))
+
+(defmethod reloading-bow ((self monk))
+  (plusp (field-value :reload-clock self)))
 
 (defresource "bow.wav" :volume 20)
 
-(defmethod use ((monk monk) (arrow arrow))
-  (fire monk (new (class-name (class-of arrow))
-		  :heading (aim-heading monk)))
-  (play-sound monk "bow.wav")
-  (modify-fatigue monk 1)
-  (modify-quantity arrow -1))
+(defmethod fire ((monk monk) (arrow arrow))
+  (with-fields (reload-time reload-clock bow-ready aiming-bow) monk
+    (setf reload-clock reload-time)
+    (setf aiming-bow nil bow-ready nil)
+    (play-sound monk "bow.wav")
+    (narrate-now "Fire!")
+    (multiple-value-bind (x y) 
+	(fire-location monk)
+      (drop-object (current-buffer) 
+		   (new (class-name (class-of arrow)) 
+			:heading (aim-heading monk) )
+		   x y))))
+
+(defmethod begin-firing ((monk monk))
+  (stop-walking monk)
+  (narrate-now "You take aim... Ready.... Set...")
+  (with-fields (load-time aiming-bow load-clock bow-ready) monk
+    (setf bow-ready nil)
+    (setf aiming-bow t)
+    (setf load-clock load-time)))
 
 (defmethod find-arrow ((monk monk))
-  (or (find-inventory-item monk 'wooden-arrow)
-      (find-inventory-item monk 'silver-arrow)
-      (find-inventory-item monk 'crystal-arrow)))
+  (or 
+   (when (typep (equipped-item monk) 'arrow)
+     (equipped-item monk))
+   (find-inventory-item monk 'wooden-arrow)
+   (find-inventory-item monk 'silver-arrow)
+   (find-inventory-item monk 'crystal-arrow)))
 
 (defmethod attack ((monk monk) (enemy enemy))
-  (when (has-quantity monk 'arrow)
-    (aim monk (heading-between monk enemy))
-    (use monk (or (equipped-item monk)
-		  (find-arrow monk)))))
+  (with-fields (bow-ready) monk
+    (if (reloading-bow monk) 
+	(progn
+	  (show-error enemy)
+	  (narrate-now "Cannot fire while reloading."))
+	(progn 
+	  (aim monk (heading-between monk enemy))
+	  (begin-firing monk)
+	  (modify-fatigue monk 1)
+	  (consume-single monk 'arrow)))))
 
 (defmethod can-accept ((self monk))
   (with-fields (inventory) self
@@ -361,11 +406,11 @@
   (resume)
   (replace-gump monk (new 'browser :container monk)))
 
-(defmethod standing-animation ((self geoffrey))
-  *monk-stand*)
+;; (defmethod standing-animation ((self geoffrey))
+;;   *monk-stand*)
 
-(defmethod walking-animation ((self geoffrey))
- *monk-walk*)
+;; (defmethod walking-animation ((self geoffrey))
+;;  *monk-walk*)
 
 (defmethod modify-health :after ((monk geoffrey) points)
   (with-fields (alive health) monk
@@ -376,15 +421,15 @@
   ;;     (narrate "You suffered ~A health points of damage." points)
   ;;     (narrate "You recovered ~A health points." points)))
 
-;; (defmethod standing-animation ((self geoffrey))
-;;   (if %bow-ready 
-;;       *monk-stand-bow-ready*
-;;       *monk-stand-bow*))
+(defmethod standing-animation ((self geoffrey))
+  (if (field-value :aiming-bow self)
+      *monk-stand-bow-ready*
+      *monk-stand-bow*))
 
-;; (defmethod walking-animation ((self geoffrey))
-;;   (if %bow-ready 
-;;       *monk-walk-bow-ready*
-;;       *monk-walk-bow*))
+(defmethod walking-animation ((self geoffrey))
+  (if (field-value :aiming-bow self)
+      *monk-walk-bow-ready*
+      *monk-walk-bow*))
 
 ;;; Lucius 
 
@@ -494,10 +539,3 @@
 ;; monastery. Here you go. I'm so curious
 ;; to know what it says. Open it, open it!" :bye))
 
-    ;;   (when (not %raising-bow))
-    ;;   (setf %raising-bow t))
-    ;; (when (not (pressing-fire-p self))
-    ;;   (setf %raising-bow nil))
-    ;; (when (and %raising-bow (zerop %fire-clock))
-    ;;   (setf %bow-ready t)
-    ;;   (setf %raising-bow nil))
