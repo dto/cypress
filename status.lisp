@@ -52,13 +52,17 @@
   (set-value %%health (status-line-health-string (field-value :health (cursor))))
   (set-value %%magic (status-line-magic-string (field-value :magic (cursor))))
   (set-value %%equipment 
-	     (status-line-equipment-string 
-	      (if (equipped-item (cursor))
-		  (fancy-description (equipped-item (cursor)))
-		  "None")))
+	     (let ((item (equipped-item (cursor))))
+	       (status-line-equipment-string 
+		(if item
+		    (format nil " ~A x ~A "
+			    (fancy-description item)
+			    (quantity item))
+		  "None"))))
   (set-value %%message (if (field-value :paused (current-buffer))
-			   "Game is paused."
-			   " ")))
+			   *paused-status-message*
+			   (or (current-status-message) " "))))
+
 
 (defparameter *status-line-height* (units 1.8))
 (defparameter *status-line-background-color* "black")
@@ -75,6 +79,14 @@
 	       *gl-screen-height*
 	       (- *status-line-height*)))
     (call-next-method)
+    ;; manually adjust layout a bit to prevent jitter caused by
+    ;; changing stat numbers in proportional font
+    (move-to %%equipment 
+	     (+ x (* 0.18 *gl-screen-width*))
+	     (field-value :y %%message))
+    (move-to %%message 
+	     (+ x (* 0.43 *gl-screen-width*))
+	     (field-value :y %%message))
     (setf height *status-line-height*)
     (setf width *gl-screen-width*)))
 

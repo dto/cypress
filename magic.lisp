@@ -39,7 +39,8 @@
   :image "craft-arrows.png")
   
 (defmethod cast ((caster thing) (spell craft-wooden-arrows))
-  (add-inventory-item caster (quantity-of 'wooden-arrow 10)))
+  (add-inventory-item caster (quantity-of 'wooden-arrow 10))
+  (narrate "You crafted ten wooden arrows."))
 
 
 
