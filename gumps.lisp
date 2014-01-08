@@ -184,7 +184,14 @@
     (setf icons nil)))
 
 (defmethod can-accept ((browser browser))
-  (can-accept (field-value :target browser)))
+  (with-fields (target) browser
+    (can-accept target)))
+
+(defmethod will-accept ((browser browser) (thing thing))
+  (with-fields (target) browser
+    (if (eq thing target)
+	nil
+	(will-accept target thing))))
 
 (defmethod accept ((browser browser) thing)
   (accept (field-value :target browser) thing)

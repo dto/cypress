@@ -342,7 +342,8 @@
 (defmethod can-accept ((self thing)) nil)
 
 (defmethod will-accept ((container thing) (item thing))
-  (can-accept container))
+  (unless (eq container item)
+    (can-accept container)))
 
 (defmethod accept ((container thing) (item thing))
   (prog1 t
