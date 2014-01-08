@@ -1,13 +1,15 @@
 * Tasks
 
-** TODO Some objects should not stack.
+** TODO general message changer function
+
+** DONE Some objects should not stack.
+   CLOSED: [2014-01-08 Wed 09:52]
+
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-
 ** TODO [#C] Fix giant arrow when dragging arrow/sprite out
 ** TODO [#C] Fix non-impelled arrows moving on their own 
 ** TODO [#B] Fix player can run over gumps
-
 
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
@@ -22,11 +24,11 @@
 
 ** TODO Implement status conditions
 *** TODO [#A] Freezing 
+*** TODO [#B] Starving
 *** TODO [#A] Dying
 *** TODO [#A] Dead
 *** TODO [#B] Exhausted
 **** TODO Hunger causes exhaustion before really causing starvation
-*** TODO [#B] Starving
 
 ** TODO Make inventory of existing terrain backgrounds and import 
 
