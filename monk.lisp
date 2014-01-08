@@ -384,7 +384,12 @@
 
 (defmethod use ((monk monk) (food food))
   (consume monk food)
-  (consume-single monk (class-name (class-of food))))
+  (let ((container (find-container food)))
+    (if container
+	;; we're in a container. update the container's quantity
+	(consume-single container (class-name (class-of food)))
+	;; not in container.
+	(destroy food))))
 
 (defthing (white-bread food)
   :image "white-bread.png")

@@ -143,6 +143,9 @@
 (defmethod inventory-items ((container thing))
   (field-value :inventory container))
 
+(defmethod find-container ((item thing))
+  (field-value :container item))
+
 (defmethod find-inventory-item ((container thing) item-class)
   (dolist (item (inventory-items container))
     (when (typep item (find-class item-class))
