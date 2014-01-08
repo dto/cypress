@@ -128,9 +128,8 @@
       (setf path (create-path self :buffer (current-buffer))))
     (setf waypoints (rest (rest (find-path-waypoints path x y x1 y1))))
     (when (null waypoints) 
-      (stop-walking self)
-      (show-error self x1 y1))))
-  
+      (stop-walking self))))
+
 (defmethod stop-walking ((self thing))
   (with-fields (waypoints goal-x goal-y) self
     (setf waypoints nil)

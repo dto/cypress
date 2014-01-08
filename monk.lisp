@@ -182,6 +182,12 @@
   (bring-to-front monk)
   (resume))
 
+(defmethod walk-to :after ((monk monk) x y)
+  (with-fields (waypoints) monk
+    (when (null waypoints)
+      ;; pathfinding failed
+      (show-error monk x y))))
+
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'jerky))
   (add-inventory-item monk (new 'stone))
