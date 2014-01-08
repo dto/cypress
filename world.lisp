@@ -650,6 +650,14 @@
 	(draw object)
 	(after-draw-object buffer object)))))
 
+(defmethod drag-candidate ((scene scene) (drag thing) x y)
+  (let ((objects (z-sorted-objects scene)))
+    (block searching
+      (dolist (object objects)
+	(when (and (colliding-with drag object)
+		   (not (eq drag object)))
+	  (return-from searching object))))))
+
 (defmethod update :after ((self scene))
   (when (xelfp (cursor))
     (layout (status-line))
