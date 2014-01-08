@@ -275,7 +275,7 @@
 (defmethod die ((self monk))
   (when (field-value :alive self)
     (when (humanp self) 
-      (narrate "You died. Press Control-R to restart the game.")
+      (narrate-now "You died. Press Control-R to restart the game.")
       (change-image self (random-choose *remains-images*))
       (drop self (new 'remains))
       (drop self (new 'skull))
@@ -407,7 +407,7 @@
 (defthing food)
 
 (defmethod use ((monk monk) (food food))
-  (consume monk food)
+  (eat monk food)
   (let ((container (find-container food)))
     (if container
 	;; we're in a container. update the container's quantity
@@ -418,24 +418,24 @@
 (defthing (white-bread food)
   :image "white-bread.png")
 
-(defmethod consume ((monk monk) (bread white-bread))
+(defmethod eat ((monk monk) (bread white-bread))
   (modify-health monk +5)
   (modify-hunger monk -10))
 
 (defthing (wheat-bread food)
   :image "wheat-bread.png")
 
-(defmethod consume ((monk monk) (bread wheat-bread))
+(defmethod eat ((monk monk) (bread wheat-bread))
   (modify-health monk +10)
   (modify-hunger monk -15))
 
-(defmethod consume :after ((monk geoffrey) (bread wheat-bread))
+(defmethod eat :after ((monk geoffrey) (food food))
   (narrate "Very good! You feel better."))
 
 (defthing (jerky food)
   :image "beef-jerky.png")
 
-(defmethod consume ((monk monk) (jerky jerky))
+(defmethod eat ((monk monk) (jerky jerky))
   (modify-health monk +15)
   (modify-hunger monk -30))
 
@@ -444,7 +444,7 @@
 (defthing (elixir food)
   :image (random-choose *elixir-images*))
 
-(defmethod consume ((monk monk) (elixir elixir))
+(defmethod eat ((monk monk) (elixir elixir))
   (modify-health monk +30)
   (modify-magic monk +40))
 
@@ -453,7 +453,7 @@
 (defthing (silver-elixir food)
   :image (random-choose *silver-elixir-images*))
 
-(defmethod consume ((monk monk) (silver-elixir elixir))
+(defmethod eat ((monk monk) (silver-elixir elixir))
   (modify-health monk +60)
   (modify-magic monk +100))
 
