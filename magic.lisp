@@ -13,15 +13,15 @@
 	(progn
 	  (show-error caster (window-pointer-x) (window-pointer-y))
 	  (narrate "You don't have enough ingredients to cast ~A"
-		   (fancy-description spell))))))
+		   (find-description spell))))))
 
 (defmethod cast ((caster thing) (spell spell)))
 
 (defmethod can-pick ((spell spell)) nil)
 
 (defthing (spark spell)
-  :description "Spark (2 mp)"
-  :reagents '(:magic 2)
+  :description "Spark (5 mp)"
+  :reagents '(:magic 5)
   :image "spark.png")
 
 (defmethod cast ((caster thing) (spell spark))
@@ -37,13 +37,13 @@
   (modify-health caster (random-choose '(15 20 20 25))))
       
 (defthing (craft-wooden-arrows spell)
-  :description "Craft arrows (2 mp, 2 wood, 1 stone)"
-  :reagents '(:magic 2 wood 2 stone 1)
+  :description "Craft arrows (5 mp, 2 wood, 1 stone)"
+  :reagents '(:magic 5 wood 2 stone 1)
   :image "craft-arrows.png")
   
 (defmethod cast ((caster thing) (spell craft-wooden-arrows))
-  (add-inventory-item caster (quantity-of 'wooden-arrow 10))
-  (narrate "You crafted ten wooden arrows."))
+  (add-inventory-item caster (quantity-of 'wooden-arrow 12))
+  (narrate-now "You crafted 12 wooden arrows."))
 
 
 
