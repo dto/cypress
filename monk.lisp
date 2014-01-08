@@ -186,7 +186,8 @@
   (with-fields (waypoints) monk
     (when (null waypoints)
       ;; pathfinding failed
-      (show-error monk x y))))
+      (show-error monk x y)
+      (narrate "That destination is obstructed."))))
 
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'jerky))
@@ -412,7 +413,7 @@
   (modify-hunger monk -15))
 
 (defmethod consume :after ((monk geoffrey) (bread wheat-bread))
-  (message "BURP!"))
+  (narrate "Very good! You feel better."))
 
 (defthing (jerky food)
   :image "beef-jerky.png")

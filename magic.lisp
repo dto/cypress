@@ -10,7 +10,10 @@
 	(progn 
 	  (expend-reagents caster reagents)
 	  (cast caster spell))
-	(show-error caster (window-pointer-x) (window-pointer-y)))))
+	(progn
+	  (show-error caster (window-pointer-x) (window-pointer-y))
+	  (narrate "You don't have enough ingredients to cast ~A"
+		   (fancy-description spell))))))
 
 (defmethod cast ((caster thing) (spell spell)))
 

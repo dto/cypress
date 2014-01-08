@@ -3,23 +3,25 @@
 (defparameter *paused-status-message* 
   "GAME IS PAUSED. Press the spacebar (or issue a command) to continue...")
 
-(defvar *status-message* nil)
+(defvar *status-messages* nil)
 
 (defparameter *status-message-time* (seconds->frames 7))
 
 (defparameter *last-status-message-time* 0)
 
 (defun narrate (format-string &rest args)
-  (setf *status-message* 
-	(apply #'format nil format-string args))
+  (pushnew (apply #'format nil format-string args)
+	   *status-messages*
+	   :test 'equal)
   (setf *last-status-message-time* *updates*))
 
 (defun current-status-message ()
-  (when *status-message* 
+  (when *status-messages* 
     (if (< *status-message-time* 
 	   (- *updates* *last-status-message-time*))
-	(setf *status-message* nil)
-	*status-message*)))
+	(prog1 (pop *status-messages*)
+	  (setf *last-status-message-time* *updates*))
+	(first *status-messages*))))
 
 ;;; Status-Line
 
@@ -63,12 +65,13 @@
 			   *paused-status-message*
 			   (or (current-status-message) " "))))
 
-
 (defparameter *status-line-height* (units 1.8))
 (defparameter *status-line-background-color* "black")
 (defparameter *status-line-foreground-color* "white")
 
 (defmethod initialize :after ((self status-line) &key)
+  (setf *status-messages* nil)
+  (setf *last-status-message-time* 0)
   (dolist (input (field-value :inputs self))
     (setf (field-value :text-color input) *status-line-foreground-color*)))
 
