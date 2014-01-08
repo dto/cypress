@@ -1,15 +1,12 @@
 * Tasks
 
-** TODO general message changer function
-
-** DONE Some objects should not stack.
-   CLOSED: [2014-01-08 Wed 09:52]
+** TODO Add narration to existing events
 
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
+** TODO [#B] Fix player can run over gumps
 ** TODO [#C] Fix giant arrow when dragging arrow/sprite out
 ** TODO [#C] Fix non-impelled arrows moving on their own 
-** TODO [#B] Fix player can run over gumps
 
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
@@ -800,6 +797,25 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2014-01-08 Wed 01:46]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-08 Wed 01:48
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO general message changer function
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-08 Wed 11:01
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE Some objects should not stack.
+   CLOSED: [2014-01-08 Wed 09:52]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-08 Wed 11:01
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade

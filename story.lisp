@@ -226,7 +226,7 @@ you left.
 	(resize buffer (+ width 600) (+ height 400)))
       (drop-object buffer geoffrey 120 120)
 ;;      (drop-object buffer lucius 180 80)
-      (drop-object buffer (new 'scroll) 270 100)
+      (drop-object buffer (new 'scroll) 270 100 0)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	    (%horizontal-scrolling-margin buffer) 2/5
