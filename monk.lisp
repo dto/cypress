@@ -120,7 +120,7 @@
 
 (defparameter *monk-walk-bow* 
   '(:repeat t
-    :scale 850
+    :scale 800
     :frames (("monk-walk-bow-3.png" 4)
 	     ("monk-walk-bow-1.png" 4)
 	     ("monk-walk-bow-2.png" 4)
@@ -128,7 +128,7 @@
 
 (defparameter *monk-walk-bow-ready* 
   '(:repeat t
-    :scale 1000
+    :scale 750
     :frames (("monk-walk-bow-ready-1.png" 4)
 	     ("monk-walk-bow-ready-2.png" 4)
 	     ("monk-walk-bow-ready-3.png" 4)
