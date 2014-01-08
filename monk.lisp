@@ -213,9 +213,10 @@
 
 (defmethod draw ((self monk))
   (with-local-fields 
-    (draw-as-sprite self 
-		    (or (current-animation-frame self) %image)
-		    %heading)))
+    (when %alive
+      (draw-as-sprite self 
+		      (or (current-animation-frame self) %image)
+		      %heading))))
 
 (defmethod cast-spell ((self monk))
   (begin-animation self *monk-cast*))
@@ -266,14 +267,19 @@
 (defresource "unh-3.wav" :volume 20)
 
 (defmethod collide ((self monk) (enemy enemy))
-  (percent-of-time 10
-    (modify-health self -3)
-    (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))))
+  (when (field-value :alive self)
+    (percent-of-time 10
+      (modify-health self (- (random-choose '(2 3 3 5 7))))
+      (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod die ((self monk))
   (when (field-value :alive self)
     (when (humanp self) 
-      (change-image self "skull.png")
+      (narrate "You died. Press Control-R to restart the game.")
+      (change-image self (random-choose *remains-images*))
+      (drop self (new 'remains))
+      (drop self (new 'skull))
+      (play-sample "death.wav")
       (setf (field-value :alive self) nil))))
 
 ;;; Control logic driven by the above (possibly overridden) methods.
@@ -349,6 +355,8 @@
   
 (defthing (geoffrey monk) :description "Geoffrey")
 
+(defmethod humanp ((monk geoffrey)) t)
+
 (defmethod activate ((monk monk))
   (resume)
   (replace-gump monk (new 'browser :container monk)))
@@ -358,6 +366,15 @@
 
 (defmethod walking-animation ((self geoffrey))
  *monk-walk*)
+
+(defmethod modify-health :after ((monk geoffrey) points)
+  (with-fields (alive health) monk
+    (when (and alive
+	       (not (plusp health)))
+      (die monk))))
+  ;; (if (minusp points)
+  ;;     (narrate "You suffered ~A health points of damage." points)
+  ;;     (narrate "You recovered ~A health points." points)))
 
 ;; (defmethod standing-animation ((self geoffrey))
 ;;   (if %bow-ready 
