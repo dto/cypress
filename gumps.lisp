@@ -128,10 +128,11 @@
 	(if (> image-width image-height)
 	    (draw-image image x y 
 			:width width
-			:height (- height (/ 1 (/ width image-width))))
+			:height (- height 
+				   (* height (/ width image-width))))
 	    (draw-image image x y
 			:height height
-			:width (- width (/ 1 (/ height image-height)))))
+			:width (- width (* width (/ height image-height)))))
 	;; now possibly draw quantity
 	(when (> quantity 1)
 	  (draw-string (format nil "~S" quantity)
