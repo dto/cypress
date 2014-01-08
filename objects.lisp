@@ -47,7 +47,7 @@
 (defthing scroll :image (random-choose *scroll-images*) :description "Scroll of Helping")
 
 (defmethod activate ((self scroll))
-  (drop self (new 'scroll-gump :text *help-text*)))
+  (replace-gump self (new 'scroll-gump :text *help-text*)))
 
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *wraith-images* (image-set "wraith" 3))
