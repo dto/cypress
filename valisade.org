@@ -1,9 +1,6 @@
 * Tasks
 
 ** TODO [#A] Make new scrolls always open on top
-*** TODO Z-sort function should always let gumps last?
-*** TODO Fix player can run over gumps
-
 ** DONE [#A] disallow container to be dropped into self :)
    CLOSED: [2014-01-08 Wed 00:42]
 ** DONE [#B] make container drop zone larger so that it's easier to grab stuff 
@@ -19,6 +16,9 @@
 ** TODO [#C] Fix inventory icon squishness by padding image-rect to a square before scaling to icon size
 ** TODO [#C] Fix giant arrow when dragging arrow/sprite out
 ** TODO [#C] Fix non-impelled arrows moving on their own 
+** TODO [#B] Z-sort function should always let gumps last?
+** TODO [#B] Fix player can run over gumps
+
 
 ** TODO Write some simple level scenarios as property lists, i.e. UserStories
 *** TODO UserStories should use simple spells requiring local reagents 
