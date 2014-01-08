@@ -238,7 +238,7 @@ you left.
       
       ;; allocate
       (install-quadtree buffer)
-      (play-music (random-choose *soundtrack*) :loop t)
+      ;; (play-music (random-choose *soundtrack*) :loop t)
       (current-buffer))))
 
 
