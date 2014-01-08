@@ -36,9 +36,11 @@
   :image (random-choose *wooden-arrow-images*))
 
 (defmethod initialize ((self arrow) &key heading)
-  (layout self)
   (when heading
     (setf (field-value :heading self) heading)))
+
+(defmethod initialize :after ((self arrow) &key heading)
+  (layout self))
 
 (defmethod run ((self arrow))
   (with-fields (clock image images) self
@@ -59,7 +61,7 @@
 (defthing (wooden-arrow arrow))
 
 (defmethod collide ((self wooden-arrow) (enemy enemy))
-  (modify-health enemy -5)
+  (modify-health enemy (random-choose '(-3 -5 -7)))
   (destroy self))
 
 (defthing (silver-arrow arrow)
@@ -197,6 +199,7 @@
   (add-inventory-item monk (new 'jerky))
   (add-inventory-item monk (new 'stone))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
+  (equip monk (find-arrow monk))
   (setf (field-value :spells monk)
 	(list (new 'spark)
 	      (new 'cure)
@@ -286,6 +289,8 @@
 
 (defmethod standing-animation ((self monk)) *monk-2-stand*)
 (defmethod walking-animation ((self monk)) *monk-2-walk*)
+
+(defmethod casting-animation ((self monk)) *monk-2-stand*)
 
 (defmethod update-bow ((monk monk))
   (with-fields (aiming-bow load-clock load-time bow-ready reload-time reload-clock) monk
@@ -406,12 +411,6 @@
   (resume)
   (replace-gump monk (new 'browser :container monk)))
 
-;; (defmethod standing-animation ((self geoffrey))
-;;   *monk-stand*)
-
-;; (defmethod walking-animation ((self geoffrey))
-;;  *monk-walk*)
-
 (defmethod modify-health :after ((monk geoffrey) points)
   (with-fields (alive health) monk
     (when (and alive
@@ -430,6 +429,8 @@
   (if (field-value :aiming-bow self)
       *monk-walk-bow-ready*
       *monk-walk-bow*))
+
+(defmethod casting-animation ((self monk)) *monk-cast*)
 
 ;;; Lucius 
 

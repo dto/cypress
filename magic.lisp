@@ -18,7 +18,7 @@
 (defmethod cast ((caster thing) (spell spell)))
 
 (defmethod cast :after ((monk monk) (spell spell))
-  (begin-animation monk *monk-cast*))
+  (begin-animation monk (casting-animation monk)))
 
 (defmethod can-pick ((spell spell)) nil)
 
@@ -37,7 +37,8 @@
 
 (defmethod cast ((caster thing) (spell cure))
   (modify-fatigue caster -1)
-  (modify-health caster (random-choose '(15 20 20 25))))
+  (modify-health caster (random-choose '(15 20 20 25)))
+  (narrate-now "Some of your wounds have been healed. You feel better."))
       
 (defthing (craft-wooden-arrows spell)
   :description "Craft arrows (5 mp, 2 wood, 1 stone)"
