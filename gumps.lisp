@@ -33,6 +33,7 @@
   (bring-to-front self))
 
 (defmethod run ((self gump))
+  (bring-to-front self)
   (arrange self))
 
 ;;; Right click to close gumps

@@ -367,7 +367,7 @@
   (when (current-buffer)
     (with-fields (z) self
       (setf z (max (or z 1)
-		   (+ 2.1 (maximum-z-value (current-buffer))))))))
+		   (+ 1 (maximum-z-value (current-buffer))))))))
 
 (defmethod drop-object :after ((buffer buffer) (thing thing) &optional x y z)
   (bring-to-front thing))

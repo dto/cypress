@@ -35,11 +35,15 @@
   :images *wooden-arrow-images*
   :image (random-choose *wooden-arrow-images*))
 
+(defmethod drop-object :after ((buffer buffer) (arrow arrow) &optional x y z )
+  (layout arrow))
+
 (defmethod initialize ((self arrow) &key heading)
   (when heading
     (setf (field-value :heading self) heading)))
 
 (defmethod initialize :after ((self arrow) &key heading)
+  (resize self *arrow-size* *arrow-size*)
   (layout self))
 
 (defmethod run ((self arrow))
@@ -166,9 +170,9 @@
   (sprite-width :initform (units 5))
   (image :initform (random-choose *monk-stand-images*))
   ;; weapon
-  (load-time :initform (seconds->frames 1.4))
+  (load-time :initform (seconds->frames 1.2))
   (load-clock :initform 0)
-  (reload-time :initform (seconds->frames 1.4))
+  (reload-time :initform (seconds->frames 1.5))
   (reload-clock :initform 0)
   (aiming-bow :initform nil)
   (bow-ready :initform nil)
@@ -366,7 +370,7 @@
 	(fire-location monk)
       (drop-object (current-buffer) 
 		   (new (class-name (class-of arrow)) 
-			:heading (aim-heading monk) )
+			:heading (aim-heading monk))
 		   x y))))
 
 (defmethod begin-firing ((monk monk))
