@@ -1,17 +1,11 @@
 * Tasks
 
 
-** TODO Choose what else goes in tonight's 0.5 release
-*** TODO [#A] Spellcast animation
-*** TODO [#B] Implement low HP warning
+** TODO Press ESCAPE to close all gumps and unpause
+** TODO Spellcast animation
+** TODO Implement low HP warning
 
 ** TODO Increase combat tactics
-*** DONE Require raise-time for bow, during which you cannot move. 
-    CLOSED: [2014-01-08 Wed 19:17]
-*** DONE Require rest-time for bow, during which you cannot fire again
-    CLOSED: [2014-01-08 Wed 19:17]
-*** DONE Animate bow according to status
-    CLOSED: [2014-01-08 Wed 19:17]
 *** TODO Add jitter to aim when cold/exhausted
 *** TODO Right click self to toggle combat
 *** TODO toggle pause with middle-click?
@@ -20,8 +14,6 @@
 *** TODO [#A] Dying
 *** TODO [#B] Starving
 *** TODO [#A] Freezing 
-*** DONE [#A] Dead
-    CLOSED: [2014-01-08 Wed 15:51]
 *** TODO [#B] Exhausted
 **** TODO Hunger causes exhaustion before really causing starvation
      
@@ -29,9 +21,6 @@
 ---------------------------------
 
 ** TODO Abstractify the sounds and ifnd new ones     
-** DONE Add narration to existing events
-   CLnOSED: [2014-01-08 Wed 15:51]
-
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 ** TODO [#B] Fix player can run over gumps
@@ -838,4 +827,54 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE Require raise-time for bow, during which you cannot move.
+   CLOSED: [2014-01-08 Wed 19:17]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-09 Thu 05:27
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Increase combat tactics
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Require rest-time for bow, during which you cannot fire again
+   CLOSED: [2014-01-08 Wed 19:17]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-09 Thu 05:27
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Increase combat tactics
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Animate bow according to status
+   CLOSED: [2014-01-08 Wed 19:17]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-09 Thu 05:27
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Increase combat tactics
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Dead
+   CLOSED: [2014-01-08 Wed 15:51]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-09 Thu 05:27
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Implement status conditions
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Add narration to existing events
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-09 Thu 05:27
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+   CLnOSED: [2014-01-08 Wed 15:51]
 
