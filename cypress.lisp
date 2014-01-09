@@ -21,7 +21,7 @@
 (in-package :cypress)
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "cypress v0.4") 
+  (setf *window-title* "cypress v0.5") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)

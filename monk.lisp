@@ -172,7 +172,7 @@
   ;; weapon
   (load-time :initform (seconds->frames 1.2))
   (load-clock :initform 0)
-  (reload-time :initform (seconds->frames 0.8))
+  (reload-time :initform (seconds->frames 0.5))
   (reload-clock :initform 0)
   (aiming-bow :initform nil)
   (bow-ready :initform nil)
@@ -373,7 +373,8 @@
       (drop-object (current-buffer) 
 		   (new (class-name (class-of arrow)) 
 			:heading (aim-heading monk))
-		   x y))))
+		   x y)
+      (consume-single monk (class-name (class-of arrow))))))
 
 (defmethod begin-firing ((monk monk))
   (stop-walking monk)
@@ -385,23 +386,23 @@
 
 (defmethod find-arrow ((monk monk))
   (or 
-   (when (typep (equipped-item monk) 'arrow)
-     (equipped-item monk))
    (find-inventory-item monk 'wooden-arrow)
    (find-inventory-item monk 'silver-arrow)
    (find-inventory-item monk 'crystal-arrow)))
 
 (defmethod attack ((monk monk) (enemy enemy))
-  (with-fields (bow-ready) monk
-    (if (reloading-bow monk) 
-	(progn
-	  (show-error enemy)
-	  (narrate-now "Cannot fire while reloading."))
-	(progn 
-	  (aim monk (heading-between monk enemy))
-	  (begin-firing monk)
-	  (modify-fatigue monk 1)
-	  (consume-single monk 'arrow)))))
+  (if (not (find-arrow monk))
+      (progn (show-error enemy)
+	     (narrate-now "You don't have any arrows!"))
+      (with-fields (bow-ready) monk
+	(if (reloading-bow monk) 
+	    (progn
+	      (show-error enemy)
+	      (narrate-now "Cannot fire while reloading."))
+	    (progn 
+	      (aim monk (heading-between monk enemy))
+	      (begin-firing monk)
+	      (modify-fatigue monk 1))))))
 
 (defmethod can-accept ((self monk))
   (with-fields (inventory) self

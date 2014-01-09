@@ -47,6 +47,7 @@
   
 (defmethod cast ((caster thing) (spell craft-wooden-arrows))
   (add-inventory-item caster (quantity-of 'wooden-arrow 12))
+  (equip caster (find-arrow caster))
   (narrate-now "You crafted 12 wooden arrows."))
 
 

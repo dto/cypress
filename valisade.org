@@ -728,8 +728,8 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_TODO: DONE
    :END:
 
-
-** TODO Fix showing any items on top of gumps
+** DONE Fix showing any items on top of gumps
+   CLOSED: [2014-01-08 Wed 19:56]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-06 Mon 18:15
    :ARCHIVE_FILE: ~/cypress/valisade.org
@@ -741,7 +741,8 @@ FORGET-ME-NOTS and Temporal Seance
 ** DONE Remove Lucius for now
    CLOSED: [2014-01-06 Mon 15:33]
 
-** TODO containers should not stack
+** DONE containers should not stack
+   CLOSED: [2014-01-08 Wed 19:56]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-07 Tue 13:25
    :ARCHIVE_FILE: ~/cypress/valisade.org
@@ -750,7 +751,8 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_TODO: TODO
    :END:
 
-** TODO only consume one beef
+** DONE only consume one beef
+   CLOSED: [2014-01-08 Wed 19:56]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-07 Tue 13:25
    :ARCHIVE_FILE: ~/cypress/valisade.org
