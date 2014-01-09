@@ -172,7 +172,7 @@
   ;; weapon
   (load-time :initform (seconds->frames 1.2))
   (load-clock :initform 0)
-  (reload-time :initform (seconds->frames 1.2))
+  (reload-time :initform (seconds->frames 0.8))
   (reload-clock :initform 0)
   (aiming-bow :initform nil)
   (bow-ready :initform nil)

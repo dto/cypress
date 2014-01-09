@@ -196,7 +196,9 @@
 	  :count (random-choose '(4 5)))))
 
 (defun ginseng-garden ()
-  (spray '(dead-tree ruin-wall ginseng) :trim nil :count (+ 5 (random 5))))
+  (lined-up-randomly (singleton (new (random-choose '(stone-stairwell copper-plate))))
+		     (spray '(dead-tree ruin-wall ginseng) :trim nil :count (+ 5 (random 5)))))
+  
 
 (defun rock-outcropping ()
   (spray '(gray-rock stone stone)
