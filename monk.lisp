@@ -95,7 +95,7 @@
 	     ("monk-cast-5.png" 6))))
 
 (defparameter *monk-stand*
-  '(:scale 900
+  '(:scale 850
     :frames (("monk-stand-1.png" 19)
 	     ("monk-stand-2.png" 24)
 	     ("monk-stand-3.png" 18)
@@ -172,12 +172,13 @@
   ;; weapon
   (load-time :initform (seconds->frames 1.2))
   (load-clock :initform 0)
-  (reload-time :initform (seconds->frames 1.5))
+  (reload-time :initform (seconds->frames 1.2))
   (reload-clock :initform 0)
   (aiming-bow :initform nil)
   (bow-ready :initform nil)
   (aim-heading :initform nil)
   (fire-direction :initform :up)
+  (last-fire-time :initform 0)
   ;; human status
   (alive :initform t)
   (talking :initform nil)
@@ -361,7 +362,8 @@
 (defresource "bow.wav" :volume 20)
 
 (defmethod fire ((monk monk) (arrow arrow))
-  (with-fields (reload-time reload-clock bow-ready aiming-bow) monk
+  (with-fields (reload-time reload-clock bow-ready aiming-bow last-fire-time) monk
+    (setf last-fire-time *updates*)
     (setf reload-clock reload-time)
     (setf aiming-bow nil bow-ready nil)
     (play-sound monk "bow.wav")
@@ -424,15 +426,25 @@
   ;;     (narrate "You suffered ~A health points of damage." points)
   ;;     (narrate "You recovered ~A health points." points)))
 
+(defparameter *monk-hide-weapon-time* (seconds->frames 10))
+
 (defmethod standing-animation ((self geoffrey))
-  (if (field-value :aiming-bow self)
-      *monk-stand-bow-ready*
-      *monk-stand-bow*))
+  (with-fields (aiming-bow last-fire-time) self
+      (if aiming-bow
+	  *monk-stand-bow-ready*
+	  (if (> *monk-hide-weapon-time* 
+		 (- *updates* last-fire-time))
+	      *monk-stand-bow*
+	      *monk-stand*))))
 
 (defmethod walking-animation ((self geoffrey))
-  (if (field-value :aiming-bow self)
-      *monk-walk-bow-ready*
-      *monk-walk-bow*))
+  (with-fields (aiming-bow last-fire-time) self
+      (if aiming-bow
+	  *monk-walk-bow-ready*
+	  (if (> *monk-hide-weapon-time* 
+		 (- *updates* last-fire-time))
+	      *monk-walk-bow*
+	      *monk-walk*))))
 
 (defmethod casting-animation ((self monk)) *monk-cast*)
 

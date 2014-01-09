@@ -6,13 +6,15 @@
 *** TODO [#B] Implement low HP warning
 
 ** TODO Increase combat tactics
-*** TODO Require raise-time for bow, during which you cannot move. 
-*** TODO Require rest-time for bow, during which you cannot fire again
-*** TODO Animate bow according to status
+*** DONE Require raise-time for bow, during which you cannot move. 
+    CLOSED: [2014-01-08 Wed 19:17]
+*** DONE Require rest-time for bow, during which you cannot fire again
+    CLOSED: [2014-01-08 Wed 19:17]
+*** DONE Animate bow according to status
+    CLOSED: [2014-01-08 Wed 19:17]
 *** TODO Add jitter to aim when cold/exhausted
 *** TODO Right click self to toggle combat
 *** TODO toggle pause with middle-click?
-
 
 ** TODO Implement status conditions
 *** TODO [#A] Dying
