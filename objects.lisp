@@ -128,6 +128,13 @@
   :image (random-choose *leafy-tree-images*)
   :scale 2.0)
 
+(defparameter *pine-tree-images* (image-set "pine-tree" 15))
+
+(defthing pine-tree 
+  :tags '(:solid :fixed) 
+  :image (random-choose *pine-tree-images*)
+  :scale 2.0)
+
 (defthing gray-rock 
   :tags '(:solid :fixed) 
   :image (random-choose *gray-rock-images*)
