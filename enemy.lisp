@@ -112,4 +112,11 @@
 		(setf (field-value :heading self) (movement-heading self))
 		(move self (movement-heading self) 3.2))))))))
 
+
+;;; Grave hags
+
+(defparameter *grave-hag-corpse-image* "grave-hag-corpse.png")
+(defparameter *grave-hag-stalk-images* (image-set "grave-hag-stalk" 2))
+(defparameter *grave-hag-attack-images* (image-set "grave-hag-attack" 3))
+
 	    

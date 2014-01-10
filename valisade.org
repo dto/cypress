@@ -1,42 +1,17 @@
 * Tasks
 
-
-** TODO Press ESCAPE to close all gumps and unpause
-** TODO Spellcast animation
-** TODO Implement low HP warning
-
-** TODO Increase combat tactics
-*** TODO Add jitter to aim when cold/exhausted
-*** TODO Right click self to toggle combat
-*** TODO toggle pause with middle-click?
-
-** TODO Implement status conditions
-*** TODO [#A] Dying
-*** TODO [#B] Starving
-*** TODO [#A] Freezing 
-*** TODO [#B] Exhausted
-**** TODO Hunger causes exhaustion before really causing starvation
-     
-
----------------------------------
-
-** TODO Abstractify the sounds and ifnd new ones     
-** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
-*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#B] Fix player can run over gumps
-** TODO [#C] Fix giant arrow when dragging arrow/sprite out
-** TODO [#C] Fix non-impelled arrows moving on their own 
-
-** TODO Write some simple level scenarios as property lists, i.e. UserStories
-*** TODO UserStories should use simple spells requiring local reagents 
-
-** TODO Make inventory of existing terrain backgrounds and import 
+** TODO Forgotten cemetery
 
 ** TODO Write overworld map system
 *** TODO Import map symbols
 *** TODO Import blank overworld map
 
-** TODO Write method CAN-REACH to allow checking player distance from manipulated objets
+** TODO Make inventory of existing terrain backgrounds and import 
+
+** TODO Press ESCAPE to close all gumps and unpause
+** TODO Move spells into spellbook
+** TODO Spellcast animation
+** TODO Implement low HP warning, i.e. Dying condition
 
 ** TODO Identify all scene parameters 
 *** TODO time (day, night)
@@ -49,6 +24,33 @@
 *** TODO enemies
 *** TODO Rewrite forest generator based on this parameterization
 
+** TODO [#A] Implement cold
+*** TODO + 20 you are getting cold
+*** TODO + 40 you are very cold, and shivering (arrow accuracy)
+*** TODO + 70 you are extremely cold, shivering a lot
+*** TODO + 80 you are freezing to death
+** TODO [#A] Implement hunger
+*** TODO + 35 you are getting hungry
+*** TODO + 50 you are getting hungry
+*** TODO + 70 you are beginning to feel weak from hunger
+*** TODO + 80 you are beginning to starve
+*** TODO + 90 you are starving to death
+** TODO [#B] Implement camping
+** TODO [#B] Write method CAN-REACH to allow checking player distance from manipulated objets
+*** TODO Check CAN-REACH in CAN-PICK etc
+
+** TODO [#B] Add jitter to aim when cold/exhausted
+
+** TODO [#C] Implement bleeding
+** TODO [#C] Implement exhaustion
+** TODO [#C] Floating eyes that glide and dart
+** TODO [#B] Abstractify the sounds and/or find new ones in archive
+** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
+*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
+** TODO [#B] Fix player can run over gumps
+** TODO [#C] Fix giant arrow when dragging arrow/sprite out
+** TODO [#C] Fix non-impelled arrows moving on their own 
+
 ** TODO Paint and Animate an Imperial Raven.
 ** TODO Fix conversation gump; design real convo system (inform manual)
 
@@ -57,14 +59,17 @@
 *** TODO Paint skeleton archers
 **** TODO Charcoal
 **** TODO Pinecones
-*** TODO Paint grave hag
+*** DONE Paint grave hag
+    CLOSED: [2014-01-10 Fri 15:37]
 *** TODO Paint dead traveler bodies
 
 ** TODO Paint more terrain
 *** TODO Paint meadow grass and meadow decals
-*** TODO Paint watery snow pool decals
+*** DONE Paint watery snow pool decals
+    CLOSED: [2014-01-10 Fri 15:37]
 *** TODO Paint rushes, weeds, branches
-*** TODO Import gravestones
+*** DONE Import gravestones
+    CLOSED: [2014-01-10 Fri 15:37]
 
 *** TODO Paint ruins pieces
 **** TODO Basic blocks
@@ -78,7 +83,8 @@
 ** TODO Paint other objects
 *** TODO Paint ruined wood
 *** TODO Paint bone dust
-*** TODO Paint glowing campfire and halo for night scenes (crafting, rest)
+*** DONE Paint glowing campfire and halo for night scenes (crafting, rest)
+    CLOSED: [2014-01-10 Fri 15:37]
 
 ** TODO Paint mouse cursors
 *** TODO Normal 

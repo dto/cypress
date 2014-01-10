@@ -1,5 +1,19 @@
 (in-package :cypress)
 
+(defparameter *ancient-road-images* (image-set "ancient-road" 10))
+(defparameter *ancient-road-debris-images* (image-set "ancient-road-debris" 5))
+
+(defparameter *black-wolf-images* (image-set "black-wolf" 2))
+(defparameter *campfire-image* "campfire.png")
+(defparameter *fire-images* (image-set "fire" 4))
+(defparameter *crack-images* (image-set "crack" 6))
+(defparameter *large-crack-images* (image-set "large-crack" 3))
+
+(defparameter *gravestone-images* (image-set "gravestone" 12))
+
+(defparameter *spellbook-image* "spellbook.png")
+(defparameter *puddle-images* (image-set "puddle" 10))
+
 (defparameter *ruin-wall-images* (image-set "ruin-wall" 4))
 (defparameter *skull-images* (image-set "skull" 3))
 (defparameter *wolf-skull-images* (image-set "wolf-skull" 3))
