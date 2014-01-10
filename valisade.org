@@ -1,10 +1,32 @@
 * Tasks
 
-** TODO Forgotten cemetery
+** TODO Paint white snow backgrounds / decals 
+** TODO Paint one or two more nice green/brown meadows
+** TODO Paint "nightshade's nanny" bushes
+** TODO Find or paint "bone dust"
+
+** TODO New build 0.6 with three or four scenarios
+*** TODO Sunny meadow 
+**** TODO Sprinkle wildflowers
+*** TODO Forgotten cemetery
+**** TODO gravestones, crumbled walls, grave hags, bone dust, silverwood
+*** TODO Dry meadow
+**** TODO Ginseng, twigs, dead trees
+*** TODO Ancient road
+**** TODO Sometimes ruins by side of road with item box
+**** TODO dynamic ancient road decal tiling
+**** TODO wildflowers, sometimes
+***** TODO sometimes snow instead of meadow
+*** TODO Green forest
+**** TODO Green trees
+*** TODO Frozen crossing
+**** TODO Very white background
+**** TODO Crack and puddle decals
 
 ** TODO Write overworld map system
 *** TODO Import map symbols
 *** TODO Import blank overworld map
+*** TODO MOUNTAIN SQUARES IMPASSABLE
 
 ** TODO Make inventory of existing terrain backgrounds and import 
 
