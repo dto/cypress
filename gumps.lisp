@@ -23,9 +23,12 @@
 	     (+ target-x (window-x))
 	     (+ target-y (window-y)))))
 
-(defmethod drop-object :after ((buffer buffer) (gump gump) &optional x y z)
+(defmethod drop-object :after ((buffer scene) (gump gump) &optional x y z)
   (set-target-position gump (field-value :x gump) (field-value :y gump))
   (bring-to-front gump))
+
+(defmethod add-object :after ((buffer buffer) (self gump) &optional x y z)
+  (bring-to-front self))
 
 (defmethod drag ((self gump) x y)
   (set-target-position self x y)
@@ -33,7 +36,6 @@
   (bring-to-front self))
 
 (defmethod run ((self gump))
-  (bring-to-front self)
   (arrange self))
 
 ;;; Right click to close gumps
@@ -159,7 +161,7 @@
 
 (defparameter *browser-top-margin* (units 5.5))
 
-(defparameter *browser-left-margin* (units 2.0))
+(defparameter *browser-left-margin* (units 2.3))
 
 (defthing (browser gump) 
   :image "scroll-gump.png"
