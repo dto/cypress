@@ -12,7 +12,13 @@
 (defthing berry-bush 
   :tags '(:solid :fixed)
   :image (random-choose *berry-bush-images*)
-  :scale 1.2)
+  :scale 1.4)
+
+(defmethod initialize ((bush berry-bush) &key)
+  (percent-of-time 70 (add-inventory-item bush (quantity-of 'thornweed (1+ (random 3))))))
+
+(defmethod activate ((berry-bush berry-bush))
+  (replace-gump berry-bush (new 'browser :container berry-bush)))
 
 (defparameter *bone-dust-images* (image-set "bone-dust" 4))
 
@@ -44,7 +50,7 @@
 
 (defthing large-crack :tags '(:fixed) :image (random-choose *large-crack-images*))
 
-(defparameter *gravestone-images* (image-set "gravestone" 12))
+(defparameter *gravestone-images* (image-set "gravestone" 11))
 
 (defthing gravestone :tags '(:solid :fixed) :image (random-choose *gravestone-images*))
 

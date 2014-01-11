@@ -192,13 +192,14 @@ you left.
 '("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg"
   "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
 
-(defun make-quest (&optional (terrain-class 'meadow))
+(defun make-quest (&optional (terrain-class 'forest))
   (let ((geoffrey (new 'geoffrey))
 	(buffer (new terrain-class)))
     (setf *map-row* 0)
     (setf *map-column* 0)
     (with-buffer buffer
-;;      (play-music (random-choose *soundtrack*) :loop t)
+      (drop-object buffer (new 'scroll) (units 10) (units 4))
+      (play-music (random-choose *soundtrack*) :loop t)
      (current-buffer))))
 
 

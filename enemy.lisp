@@ -6,8 +6,6 @@
 (defresource "lichdeath.wav" :volume 20)
 (defresource "lichdie.wav" :volume 20)
 
-;;; Wraiths
-
 (defsprite enemy)
 
 (defmethod can-pick ((enemy enemy)) nil)
@@ -15,6 +13,8 @@
 (defmethod activate ((enemy enemy))
   (resume)
   (attack (cursor) enemy))
+
+;;; Wraiths
 
 (defthing (wraith enemy)
   :seen-player nil
@@ -54,6 +54,53 @@
       (percent-of-time 30
 	(percent-of-time 10 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
 	(move self heading0 6))))))
+
+
+;;; Grave hags
+
+(defparameter *grave-hag-corpse-image* "grave-hag-corpse.png")
+(defparameter *grave-hag-stalk-images* (image-set "grave-hag-stalk" 2))
+(defparameter *grave-hag-attack-images* (image-set "grave-hag-attack" 3))
+
+(defthing (grave-hag enemy)
+  :seen-player nil
+  :image-scale 2000
+  :sprite-height 180
+  :sprite-width 180
+  :tags '(:enemy)
+  :health 15
+  :image (random-choose *grave-hag-stalk-images*))
+
+(defmethod die ((self grave-hag))
+  (let ((remains (new 'remains)))
+    (when (percent-of-time 70 t)
+      (when (percent-of-time 60 t)
+	(add-inventory-item remains (new 'scroll-fragment)))
+      (add-inventory-item remains (new (random-choose '(skull wolf-skull stone item-box))))
+      (if (percent-of-time 70 t)
+	  (if (percent-of-time 50 t)
+	      (add-inventory-item remains (reagent-bag))
+	      (add-inventory-item remains (grab-bag)))
+	  (add-inventory-item remains (new 'stone))))
+    (drop self remains))
+  (drop self (new 'skull))
+  (play-sound self "death.wav")
+  (destroy self))
+
+(defmethod run ((self grave-hag))
+  (with-fields (image heading seen-player) self
+    (when (< (distance-to-cursor self) 700)
+      (unless seen-player
+	(setf seen-player t))
+      (let ((heading0 (heading-to-cursor self)))
+	(percent-of-time 30 
+	  (setf heading heading0))
+	(percent-of-time 30
+	  (move self heading0 8)))
+      (if (< (distance-to-cursor self) 250)
+	  (percent-of-time 15 (setf image (random-choose *grave-hag-attack-images*)))
+	  (percent-of-time 12 (setf image (random-choose *grave-hag-stalk-images*)))))))
+
 
 ;;; Wolf
 
@@ -112,11 +159,5 @@
 		(setf (field-value :heading self) (movement-heading self))
 		(move self (movement-heading self) 3.2))))))))
 
-
-;;; Grave hags
-
-(defparameter *grave-hag-corpse-image* "grave-hag-corpse.png")
-(defparameter *grave-hag-stalk-images* (image-set "grave-hag-stalk" 2))
-(defparameter *grave-hag-attack-images* (image-set "grave-hag-attack" 3))
 
 	    

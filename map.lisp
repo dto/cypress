@@ -95,9 +95,11 @@
 			  :width (- width (* width (/ width image-width))))))))))
 
 (defmethod can-travel-to ((sector sector))
-  (with-fields (row column) sector
-    (and (<= 1 (abs (- row *map-row*)))
-	 (<= 1 (abs (- column *map-column*))))))
+  (member (field-value :terrain sector)
+	  '(meadow cold-meadow grassy-meadow forest cemetery ruins)))
+  ;; (with-fields (row column) sector
+  ;;   (and (<= 1 (abs (- row *map-row*)))
+  ;; 	 (<= 1 (abs (- column *map-column*))))))
 
 (defmethod activate ((sector sector))
   (if (can-travel-to sector)

@@ -166,28 +166,25 @@
 	  :trim nil
 	  :count (random-choose '(4 5)))))
 
-(defun ginseng-garden ()
-  (lined-up-randomly (singleton (new (random-choose '(stone-stairwell copper-plate))))
-		     (spray '(dead-tree ruin-wall ginseng) :trim nil :count (+ 5 (random 5)))))
+;; (defun ginseng-garden ()
+;;   (lined-up-randomly (singleton (new (random-choose '(stone-stairwell copper-plate))))
+;; 		     (spray '(dead-tree ruin-wall ginseng) :trim nil :count (+ 5 (random 5)))))
   
 
 (defun rock-outcropping ()
   (spray '(gray-rock stone stone)
 	 :trim t :count (+ 5 (random 4))))
 
-(defun wood-pile ()
-  (spray '(twig twig branch leafy-tree)
-	 :trim t :count (+ 3 (random 4))))
 
-(defun dense-trees ()
-  (with-border (units 8)
-    (stacked-up-randomly
-     (lined-up-randomly (enemy) (some-trees) (ginseng-garden) (enemy))
-     (lined-up-randomly (some-trees) (wood-pile) (enemy) (enemy)))))
+;; (defun dense-trees ()
+;;   (with-border (units 8)
+;;     (stacked-up-randomly
+;;      (lined-up-randomly (enemy) (some-trees) (ginseng-garden) (enemy))
+;;      (lined-up-randomly (some-trees) (wood-pile) (enemy) (enemy)))))
 
-(defun stuff-cluster ()
-  (randomly (rock-outcropping) (spray '(dead-tree ruin-wall ginseng) :count (+ 5 (random 5)))))
+;; (defun stuff-cluster ()
+;;   (randomly (rock-outcropping) (spray '(dead-tree ruin-wall ginseng) :count (+ 5 (random 5)))))
 
-(defun make-forest ()
-  (with-border (units 3)
-    (dense-trees)))
+;; (defun make-forest ()
+;;   (with-border (units 3)
+;;     (dense-trees)))

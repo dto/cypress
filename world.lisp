@@ -370,13 +370,13 @@
   (play-sample "ok.wav"))
 
 (defmethod bring-to-front ((self thing))
-  (when (current-buffer)
+  (when (xelfp (current-buffer))
     (with-fields (z) self
       (setf z (max (or z 1)
 		   (+ 1 (maximum-z-value (current-buffer))))))))
 
-(defmethod drop-object :after ((buffer buffer) (thing thing) &optional x y z)
-  (bring-to-front thing))
+;; (defmethod drop-object :after ((buffer buffer) (thing thing) &optional x y z)
+;;   (bring-to-front thing))
  
 (defmethod finish-drag ((self thing))
   (bring-to-front self)
@@ -541,7 +541,7 @@
     (setf (field-value :font self) font)
     (later 4.0 (destroy self))))
 
-(defmethod add-object :after ((buffer buffer) (self bubble) &optional x y z)
+(defmethod drop-object :after ((buffer buffer) (self bubble) &optional x y z)
   (bring-to-front self))
 
 (defmethod draw ((self bubble))
