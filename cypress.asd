@@ -11,5 +11,6 @@
 	       (:file "monk" :depends-on ("dialogue"))
 	       (:file "magic" :depends-on ("monk"))
 	       (:file "terrain" :depends-on ("magic"))
-	       (:file "story" :depends-on ("terrain"))
+	       (:file "map" :depends-on ("terrain"))
+	       (:file "story" :depends-on ("map"))
 	       (:file "cypress" :depends-on ("story"))))

@@ -1,11 +1,5 @@
 (in-package :cypress) 
 
-;;; Meadows 
-
-(defparameter *snowy-meadow-images* '("cloudy-meadow.png" "paynes-meadow.png" "purple-meadow.png" "forgotten-meadow.png"))
-
-(defparameter *grassy-meadow-images* '("golden-meadow.png" "stone-road.png" "bright-meadow.png"))
-
 ;;; Various prizes
 
 (defparameter *grab-bag-items* '(elixir elixir skull wolf-skull ruined-book silver-elixir

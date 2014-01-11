@@ -59,10 +59,10 @@
 
 (define-method update status-line ()
   (mapc #'pin %inputs)
-  (set-value %%health (status-line-health-string (field-value :health (cursor))))
-  (set-value %%magic (status-line-magic-string (field-value :magic (cursor))))
+  (set-value %%health (status-line-health-string (field-value :health (geoffrey))))
+  (set-value %%magic (status-line-magic-string (field-value :magic (geoffrey))))
   (set-value %%equipment 
-	     (let ((item (equipped-item (cursor))))
+	     (let ((item (equipped-item (geoffrey))))
 	       (status-line-equipment-string 
 		(if item
 		    (format nil " ~A x ~A "

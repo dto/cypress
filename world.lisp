@@ -640,14 +640,15 @@
 	(find-object (new 'status-line))))
 
 (defmethod alternate-tap ((buffer scene) x y)
-  (multiple-value-bind (top left right bottom)
-      (bounding-box (cursor))
-    ;; walk the monk's center point to the destination point
-    (let ((height (- bottom top))
-	  (width (- right left)))
-      (walk-to (cursor)
-	       (- x (/ width 2))
-	       (- y (/ height 2))))))
+  (when (xelfp (cursor))
+    (multiple-value-bind (top left right bottom)
+	(bounding-box (cursor))
+      ;; walk the monk's center point to the destination point
+      (let ((height (- bottom top))
+	    (width (- right left)))
+	(walk-to (cursor)
+		 (- x (/ width 2))
+		 (- y (/ height 2)))))))
 
 (defmethod draw-object-layer ((buffer scene))
   (multiple-value-bind (top left right bottom) 

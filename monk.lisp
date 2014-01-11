@@ -409,8 +409,15 @@
     (not (fullp inventory))))
 
 ;;; As the monk Geoffrey, the player drives the action
+
+(defvar *geoffrey* nil)
+
+(defun geoffrey () *geoffrey*)
   
 (defthing (geoffrey monk) :description "Geoffrey")
+
+(defmethod initialize :after ((monk geoffrey) &key)
+  (setf *geoffrey* monk))
 
 (defmethod humanp ((monk geoffrey)) t)
 

@@ -3,22 +3,6 @@
 (defparameter *iron-fence-images* (image-set "iron-fence" 7))
 (defparameter *berry-bush-images* (image-set "berry-bush" 5))
 (defparameter *bone-dust-images* (image-set "bone-dust" 4))
-(defparameter *frozen-meadow-images* (image-set "frozen-meadow" 3))
-
-(defparameter *castle-images* (image-set "castle" 2))
-(defparameter *cold-meadow-images* (image-set "cold-meadow" 2))
-(defparameter *danger-images* (image-set "danger" 2))
-(defparameter *forest-images* (image-set "forest" 6))
-(defparameter *grassland-images* (image-set "grassland" 3))
-(defparameter *grassy-meadow-images* (image-set "grassy-meadow" 2))
-(defparameter *large-mountain-images* (image-set "large-mountain" 3))
-(defparameter *meadow-images* (image-set "meadow" 2))
-(defparameter *mountain-images* (image-set "mountain" 5))
-(defparameter *ruins-images* (image-set "ruins" 2))
-(defparameter *river-images* (image-set "river" 2))
-
-(defparameter *home-image* "home.png")
-
 (defparameter *ancient-road-images* (image-set "ancient-road" 10))
 (defparameter *ancient-road-debris-images* (image-set "ancient-road-debris" 5))
 
