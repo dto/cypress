@@ -175,6 +175,10 @@
 	  (setf (field-value :container item) container))
 	(merge-inventory-item container item))))
 
+(defmethod add-inventory-item :after ((container thing) (item thing) &optional (merge t))
+  (let ((gump (get-gump container)))
+    (when gump (refresh gump))))
+  
 (defmethod remove-inventory-item ((container thing) (item thing))
   (with-fields (inventory) container
     (setf inventory (remove (find-object item) inventory :test 'eq))

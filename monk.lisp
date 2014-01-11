@@ -35,6 +35,11 @@
   :images *wooden-arrow-images*
   :image (random-choose *wooden-arrow-images*))
 
+(defmethod use ((monk monk) (arrow arrow))
+  (let ((arrow (class-name (class-of arrow))))
+    (equip monk (find-inventory-item monk arrow))
+    (narrate-now "Equipped ~A." (fancy-description arrow))))
+
 (defmethod drop-object :after ((buffer buffer) (arrow arrow) &optional x y z )
   (layout arrow))
 
@@ -73,7 +78,7 @@
   :image (random-choose *silver-arrow-images*))
 
 (defmethod collide ((self silver-arrow) (enemy enemy))
-  (modify-health enemy -10)
+  (modify-health enemy (random-choose '(-10 -12 -15)))
   (destroy self))
 
 (defthing (crystal-arrow arrow)
@@ -81,7 +86,7 @@
   :image (random-choose *crystal-arrow-images*))
 
 (defmethod collide ((self crystal-arrow) (enemy enemy))
-  (modify-health enemy -15)
+  (modify-health enemy -20)
   (destroy self))
 
 ;;; A monk, either AI or human controlled
@@ -381,8 +386,13 @@
     (setf aiming-bow t)
     (setf load-clock load-time)))
 
+(defmethod equipped-arrow ((monk monk))
+  (when (typep (equipped-item monk) 'arrow)
+    (equipped-item monk)))
+
 (defmethod find-arrow ((monk monk))
   (or 
+   (equipped-arrow monk)
    (find-inventory-item monk 'wooden-arrow)
    (find-inventory-item monk 'silver-arrow)
    (find-inventory-item monk 'crystal-arrow)))

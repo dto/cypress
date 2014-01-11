@@ -56,8 +56,18 @@
   
 (defmethod cast ((caster thing) (spell craft-wooden-arrows))
   (add-inventory-item caster (quantity-of 'wooden-arrow 12))
-  (equip caster (find-arrow caster))
   (narrate-now "You crafted 12 wooden arrows."))
+
+;;; Craft silver arrows
+      
+(defthing (craft-silver-arrows spell)
+  :description "Craft silver arrows (8 mp, 2 silverwood, 1 stone)"
+  :reagents '(:magic 10 silverwood 2 stone 1)
+  :image "craft-silver-arrows.png")
+  
+(defmethod cast ((caster thing) (spell craft-silver-arrows))
+  (add-inventory-item caster (quantity-of 'silver-arrow 6))
+  (narrate-now "You crafted 6 silver arrows."))
 
 ;;; Travel
 
@@ -74,7 +84,7 @@
 
 ;;; Spellbook 
 
-(defthing spellbook :ima'ge "spellbook.png")
+(defthing spellbook :image "spellbook.png")
 
 (defmethod find-description ((book spellbook))
   "Geoffrey's spellbook")
@@ -83,7 +93,8 @@
   (dolist (spell (list (new 'spark)
 		       (new 'travel)
 		       (new 'cure)
-		       (new 'craft-wooden-arrows)))
+		       (new 'craft-wooden-arrows)
+		       (new 'craft-silver-arrows)))
     (add-inventory-item book spell)))
 
 (defmethod can-pick ((book spellbook))
@@ -95,5 +106,4 @@
 
 (defmethod activate ((spellbook spellbook))
   (replace-gump spellbook (new 'browser :container spellbook)))
-
 
