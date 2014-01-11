@@ -79,9 +79,9 @@ I've got to get moving! See you soon.
 ")
 
 (defparameter *help-text* 
-"Welcome to Cypress. 
+"Welcome to Cypress v0.6. 
 
-Press Control-R to get a new forest.
+Press Control-R to get a new quest.
 Press Spacebar to pause the action.
 Single-click an object to show its name.
 Right-click a destination to move there.
@@ -90,7 +90,9 @@ Double-click monster to attack it.
 Drag object onto monks to take item.
 Double click container for inventory.
 Right click scrolls to close.
-Drag items into/out of inventory.")
+Drag items into/out of inventory.
+Double click spells in spellbook.
+Use Travel spell to explore land.")
 
 (defparameter *poem-1*
 "My name is Amalia.
@@ -192,14 +194,13 @@ you left.
 '("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg"
   "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
 
-(defun make-quest (&optional (terrain-class 'forest))
+(defun make-quest (&optional (terrain-class 'meadow))
   (let ((geoffrey (new 'geoffrey))
 	(buffer (new terrain-class)))
     (setf *map-row* 0)
     (setf *map-column* 0)
     (with-buffer buffer
       (drop-object buffer (new 'scroll) (units 10) (units 4))
-      (play-music (random-choose *soundtrack*) :loop t)
      (current-buffer))))
 
 

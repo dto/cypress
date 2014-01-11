@@ -18,6 +18,8 @@
 (defmethod cast ((caster thing) (spell spell)))
 
 (defmethod cast :after ((monk monk) (spell spell))
+  (let ((browser (get-gump monk)))
+    (when browser (refresh browser)))
   (begin-animation monk (casting-animation monk)))
 
 (defmethod can-pick ((spell spell)) nil)
@@ -78,9 +80,10 @@
 (defmethod cast ((caster thing) (spell travel))
   (modify-fatigue caster 15)
   (modify-hunger caster 10)
-  (let ((old-buffer (current-buffer)))
-    (new 'map-screen)
-    (switch-to-buffer *map-screen*)))
+  (at-next-update
+    (let ((old-buffer (current-buffer)))
+      (remove-object (current-buffer) (geoffrey))
+      (switch-to-buffer (new 'map-screen)))))
 
 ;;    (destroy old-buffer)))
 

@@ -105,7 +105,7 @@
   (if (can-travel-to sector)
       (with-fields (terrain row column) sector 
 	(setf *map-row* row *map-column* column)
-	(switch-to-buffer (new terrain)))
+	(switch-to-scene (new terrain)))
       (show-error sector)))
 
 (defun make-sector (key)

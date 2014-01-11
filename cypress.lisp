@@ -21,7 +21,7 @@
 (in-package :cypress)
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "cypress v0.5") 
+  (setf *window-title* "cypress v0.6") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)
@@ -44,7 +44,7 @@
     (index-all-samples)
     (index-pending-resources)
     ;; (preload-resources)
-    (switch-to-buffer (make-quest))
+    (switch-to-scene (make-quest))
     (setf *font* "oldania")
     (start-session)))
 

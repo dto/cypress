@@ -207,7 +207,7 @@
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'spellbook))
   (add-inventory-item monk (new 'camp))
-  (add-inventory-item monk (new 'ginseng))
+  (add-inventory-item monk (quantity-of 'ginseng 2))
   (add-inventory-item monk (new 'stone))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
   (equip monk (find-arrow monk)))
@@ -387,7 +387,8 @@
     (setf load-clock load-time)))
 
 (defmethod equipped-arrow ((monk monk))
-  (when (typep (equipped-item monk) 'arrow)
+  (when (and (typep (equipped-item monk) 'arrow)
+	     (and (find-inventory-item monk (class-name (class-of (equipped-item monk))))))
     (equipped-item monk)))
 
 (defmethod find-arrow ((monk monk))

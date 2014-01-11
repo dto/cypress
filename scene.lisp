@@ -2,8 +2,20 @@
 
 ;;; Scene
 
+(defvar *status-line* nil)
+
+(defun status-line () *status-line*)
+
+(defvar *current-scene* nil)
+
+(defun current-scene () *current-scene*)
+
+(defun switch-to-scene (buffer)
+  (play-music (random-choose *soundtrack*) :loop t)
+  (setf *current-scene* buffer)
+  (switch-to-buffer buffer))
+
 (define-buffer scene 
-  :status-line nil
   :background-image "stone-road.png"
   :quadtree-depth 8
   :time :day
@@ -14,8 +26,6 @@
     ((:space) :transport-toggle-play)
     ((:p :control) :transport-toggle-play)))
 
-(defun status-line () (field-value :status-line (current-buffer)))
-
 (defmethod make-terrain ((buffer scene)))
 
 (defmethod starting-location ((buffer scene))
@@ -23,38 +33,39 @@
   ;; (values (units 5) (/ (field-value :height buffer) 2)))
 
 (defmethod initialize :after ((buffer scene) &key (player (geoffrey)))
-  (setf (field-value :status-line buffer) 
-	(find-object (new 'status-line)))
-  (let ((terrain (make-terrain buffer)))
-    (when terrain
-      (paste-from buffer terrain)
-      (resize buffer (field-value :width terrain) (field-value :height terrain))))
-  ;; adjust scrolling parameters 
-  (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 2.5))
-	(%horizontal-scrolling-margin buffer) 3/5
-	(%vertical-scrolling-margin buffer) 4/7)
-  ;;
-  (set-cursor buffer (geoffrey))
-;;  (glide-window-to-cursor buffer)
-  (follow-with-camera buffer (geoffrey))
-;;  (snap-window-to-cursor buffer)
-  ;; allocate
-  (install-quadtree buffer)
-  ;; drop player at start point
-  (when player
-    (multiple-value-bind (x y) (starting-location buffer)
-      (drop-object buffer player x y)))
-  ;; return buffer
-  buffer)
+  (with-buffer buffer
+    (setf *status-line*
+	  (find-object (new 'status-line)))
+    (let ((terrain (make-terrain buffer)))
+      (when terrain
+	(paste-from buffer terrain)
+	(resize buffer (field-value :width terrain) (field-value :height terrain))))
+    ;; adjust scrolling parameters 
+    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 2.5))
+	  (%horizontal-scrolling-margin buffer) 3/5
+	  (%vertical-scrolling-margin buffer) 4/7)
+    ;;
+    (set-cursor buffer (geoffrey))
+    ;;  (glide-window-to-cursor buffer)
+    (follow-with-camera buffer (geoffrey))
+    ;;  (snap-window-to-cursor buffer)
+    ;; allocate
+    (install-quadtree buffer)
+    ;; drop player at start point
+    (when player
+      (multiple-value-bind (x y) (starting-location buffer)
+	(drop-object buffer player x y)))
+    ;; return buffer
+    buffer))
 
 (defmethod alternate-tap ((buffer scene) x y)
-  (when (xelfp (cursor))
+  (when (xelfp (geoffrey))
     (multiple-value-bind (top left right bottom)
-	(bounding-box (cursor))
+	(bounding-box (geoffrey))
       ;; walk the monk's center point to the destination point
       (let ((height (- bottom top))
 	    (width (- right left)))
-	(walk-to (cursor)
+	(walk-to (geoffrey)
 		 (- x (/ width 2))
 		 (- y (/ height 2)))))))
 
@@ -76,7 +87,7 @@
 	  (return-from searching object))))))
 
 (defmethod update :after ((self scene))
-  (when (xelfp (cursor))
+  (when (xelfp (geoffrey))
     (layout (status-line))
     (update (status-line))))
 
@@ -84,13 +95,13 @@
   (with-fields (drag hover) self
     (when drag (draw drag))
     (when hover (draw-hover (find-object hover))))
-  (when (xelfp (cursor))
+  (when (xelfp (geoffrey))
     (draw (status-line))))
 
 (define-method reset-game scene ()
   (let ((buffer (current-buffer)))
     (at-next-update 
-      (switch-to-buffer (make-quest))
+      (switch-to-scene (make-quest))
       (destroy buffer))))
 
 (defun find-camp ()
@@ -219,12 +230,12 @@
      (stacked-up-randomly (wood-pile) (dense-trees) (lone-wolf) (meadow-debris))
      (stacked-up-randomly (some-trees) (spray '(ruin-wall ruin-wall berry-bush thornweed) :count (+ 7 (random 5)))
 			  (singleton (new 'stone-stairwell)))
-     (stacked-up-randomly (dead-trees) (spray '(ancient-road) :trim t :count 8) (spray '(wraith wolf) :count 2 (flowers))))))
+     (stacked-up-randomly (dead-trees) (spray '(ancient-road) :trim t :count 8) (spray '(wraith wolf) :count 2) (flowers)))))
 
 ;;; Cemetery
 
 (defthing (cemetery scene)
-  :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png" "ancient-road.png")))
+  :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png" "stone-road.png")))
 
 (defun row-of-graves ()
   (with-border (units (+ 2 (random 3)))

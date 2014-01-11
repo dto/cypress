@@ -64,9 +64,9 @@
 
 (defthing (grave-hag enemy)
   :seen-player nil
-  :image-scale 2000
-  :sprite-height 180
-  :sprite-width 180
+  :image-scale 1800
+  :sprite-height 150
+  :sprite-width 150
   :tags '(:enemy)
   :health 15
   :image (random-choose *grave-hag-stalk-images*))

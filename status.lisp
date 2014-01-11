@@ -83,10 +83,16 @@
   (dolist (input (field-value :inputs self))
     (setf (field-value :text-color input) *status-line-foreground-color*)))
 
+(defun status-window-x () 
+  (field-value :window-x (or (current-scene) (current-buffer))))
+
+(defun status-window-y () 
+  (field-value :window-y (or (current-scene) (current-buffer))))
+
 (define-method layout status-line ()
   (with-fields (x y width height) self
-    (setf x (window-x))
-    (setf y (+ (window-y)
+    (setf x (status-window-x))
+    (setf y (+ (status-window-y)
 	       *gl-screen-height*
 	       (- *status-line-height*)))
     (call-next-method)
