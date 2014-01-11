@@ -26,10 +26,26 @@
 	(find-object (new 'status-line)))
   (let ((terrain (make-terrain buffer)))
     (when terrain
-      (paste-from buffer terrain))
-    (when player
-      (multiple-value-bind (x y) (starting-location buffer)
-	(drop-object buffer player x y)))))
+      (paste-from buffer terrain)))
+  ;; adjust scrolling parameters 
+  (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
+	(%horizontal-scrolling-margin buffer) 3/5
+	(%vertical-scrolling-margin buffer) 4/7)
+  ;;
+  (set-cursor buffer (geoffrey))
+  (snap-window-to-cursor buffer)
+  (glide-window-to-cursor buffer)
+  (follow-with-camera buffer (geoffrey))
+  ;; allocate
+  (install-quadtree buffer)
+  (trim buffer)
+  ;; drop player at start point
+  (when player
+    (multiple-value-bind (x y) (starting-location buffer)
+      (drop-object buffer player x y)))
+  ;; return buffer
+  buffer)
+
 
 (defmethod alternate-tap ((buffer scene) x y)
   (when (xelfp (cursor))
@@ -74,7 +90,7 @@
 (define-method reset-game scene ()
   (let ((buffer (current-buffer)))
     (at-next-update 
-      (switch-to-buffer (make-meadow))
+      (switch-to-buffer (make-quest))
       (destroy buffer))))
 
 (defun find-camp ()
@@ -90,10 +106,25 @@
 
 (defthing (meadow scene)
   :background-image (random-choose '("stone-road.png" "meadow.png")))
-;; flowers
-;; twigs, a branch
-;; dead tree
-;; a few leafy trees
+
+(defun meadow-debris () (spray '(stone twig branch branch ginseng silverwood)
+			       :trim t :count (+ 2 (random 4))))
+
+(defun flowers () (spray *flowers* :trim t :count (+ 2 (random 5))))
+(defun dead-tree () (singleton (new 'dead-tree)))
+(defun leafy-tree () (singleton (new 'leafy-tree)))
+(defun wood-pile ()
+  (spray '(twig twig branch leafy-tree)
+	 :trim t :count (+ 3 (random 4))))
+
+(defun some-trees ()
+  (randomly 
+   (randomly (meadow-debris) (leafy-tree))
+   (randomly (leafy-tree) (leafy-tree))))
+
+(defmethod make-terrain ((meadow meadow))
+  (with-border (units 10)
+    (lined-up (some-trees) (some-trees))))
 
 (defthing (grassy-meadow scene)
   :background-image (random-choose *grassy-meadow-images*))

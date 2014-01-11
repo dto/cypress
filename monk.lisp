@@ -564,6 +564,16 @@
       (drop camp fire 25 125)
       (bring-to-front fire))))
 
+(defmethod recover ((monk monk))
+  (modify-health monk +50)
+  (modify-magic monk +50)
+  (modify-cold monk +80)
+  (modify-fatigue monk -50)
+  (narrate-now "You rest at the campfire, and feel much better."))
+  
+(defmethod ignite :after ((camp camp))
+  (recover (geoffrey)))
+
 (defmethod douse ((camp camp))
   (with-fields (fire timer) camp
     (when fire

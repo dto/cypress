@@ -192,54 +192,11 @@ you left.
 '("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg"
   "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
 
-(defresource "nice-map.png")
-
-(defparameter *map-scroll-speed* 0.3)
-(defparameter *map-zoom-speed* 0.9)
-
-(defthing old-map :image "fine-map.png" :width (* 3200 0.9) :height (* 2502 0.9))
-
-(define-method run old-map ()
-  (move-toward self :left *map-scroll-speed*)
-  (resize self 
-	  (- %width *map-zoom-speed*)
-	  (- %height *map-zoom-speed*)))
-
-(defresource "dusk.ogg" :volume 40)
-
-(defun show-old-map ()
-  (switch-to-buffer (new 'buffer))
-  (resize (current-buffer) 3000 3000)
-  (let ((map (new 'old-map)))
-    (insert map -400 0))
-  (play-music "dusk.ogg" :loop t))
-
-(defun make-meadow ()
+(defun make-quest (&optional (terrain-class 'meadow))
   (let ((geoffrey (new 'geoffrey))
-;;	(lucius (new 'lucius))
-	(buffer (new 'scene))
-	(forest (trim (make-forest))))
+	(buffer (new terrain-class)))
     (with-buffer buffer
-      (let ((height (field-value :height forest))
-	    (width (field-value :width forest)))
-	(paste-from buffer (with-border 250 forest))
-	(resize buffer (+ width 600) (+ height 400)))
-      (drop-object buffer geoffrey 120 120)
-;;      (drop-object buffer lucius 180 80)
-      (drop-object buffer (new 'scroll) 270 100 0)
-      ;; adjust scrolling parameters 
-      (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
-	    (%horizontal-scrolling-margin buffer) 3/5
-	    (%vertical-scrolling-margin buffer) 4/7)
-      ;;
-      (set-cursor buffer geoffrey)
-      (snap-window-to-cursor buffer)
-      (glide-window-to-cursor buffer)
-      (follow-with-camera buffer geoffrey)
-      
-      ;; allocate
-      (install-quadtree buffer)
-;;      (play-music (random-choose *soundtrack*) :loop t)
-      (current-buffer))))
+      (play-music (random-choose *soundtrack*) :loop t)
+     (current-buffer))))
 
 

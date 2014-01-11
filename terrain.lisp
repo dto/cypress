@@ -129,7 +129,6 @@
 
 ;;; Forest pieces
 
-(defparameter *forest-debris-items* '(stone stone twig branch branch ginseng silverwood))
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 (defparameter *reagents* '(ginseng ginseng silverwood stone branch))
 
