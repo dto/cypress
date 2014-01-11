@@ -1,6 +1,8 @@
 * Tasks
 
 ** TODO Finish 0.6 release
+*** TODO geoffrey enters at left
+*** TODO cannot flee/exit when enemies near
 *** TODO start monk off with some ginseng
 *** TODO camping
 *** TODO world map grid
