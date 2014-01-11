@@ -53,7 +53,7 @@
     (decf clock)
     (if (minusp clock)
 	(destroy self)
-	(forward self 15))))
+	(forward self 18))))
 
 (defmethod collide ((self arrow) (thing thing))
   (when (solidp thing) 
@@ -169,9 +169,9 @@
   (sprite-width :initform (units 5))
   (image :initform (random-choose *monk-stand-images*))
   ;; weapon
-  (load-time :initform (seconds->frames 1.2))
+  (load-time :initform (seconds->frames 0.85))
   (load-clock :initform 0)
-  (reload-time :initform (seconds->frames 0.5))
+  (reload-time :initform (seconds->frames 0.4))
   (reload-clock :initform 0)
   (aiming-bow :initform nil)
   (bow-ready :initform nil)
@@ -201,6 +201,7 @@
 
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'spellbook))
+  (add-inventory-item monk (new 'camp))
   (add-inventory-item monk (new 'ginseng))
   (add-inventory-item monk (new 'stone))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
@@ -286,7 +287,7 @@
 
 ;;; Control logic driven by the above (possibly overridden) methods.
 
-(defparameter *monk-speed* 12)
+(defparameter *monk-speed* 13)
 
 (defmethod standing-animation ((self monk)) *monk-2-stand*)
 (defmethod walking-animation ((self monk)) *monk-2-walk*)
@@ -523,7 +524,52 @@
   (modify-health monk +60)
   (modify-magic monk +100))
 
+;;; Tent and camping
 
+(defparameter *fire-images* (image-set "fire" 4))
+
+(defthing fire :image (random-choose *fire-images*) :scale 1.1)
+
+(defmethod run ((fire fire))
+  (percent-of-time 14 (setf (field-value :image fire) (random-choose *fire-images*))))
+
+(defthing camp
+  :description "Geoffrey's magic tent"
+  :fire nil
+  :timer nil
+  :contained-image "tent-2.png"
+  :image "tent-3.png"
+  :tags '(:solid))
+  
+(defmethod activate ((camp camp))
+  (replace-gump camp (new 'browser :container camp)))
+
+(defmethod can-accept ((camp camp)) t)
+
+(defmethod ignite ((camp camp))
+  (with-fields (fire timer) camp
+    (when (not fire)
+      (setf fire (new 'fire))
+      (setf timer (seconds->frames 15))
+      (drop camp fire 25 125)
+      (bring-to-front fire))))
+
+(defmethod douse ((camp camp))
+  (with-fields (fire timer) camp
+    (when fire
+      (destroy fire)
+      (setf fire nil)
+      (setf timer nil))))
+
+(defmethod can-pick :after ((camp camp))
+  (douse camp))
+
+(defmethod run ((camp camp))
+  (with-fields (fire timer) camp
+    (when (and fire timer)
+      (decf timer)
+      (unless (plusp timer)
+	(douse camp)))))
 
 ;; (defmethod activate ((self lucius))
 ;;   (discuss self :hello))

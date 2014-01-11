@@ -229,7 +229,7 @@ you left.
       (drop-object buffer (new 'scroll) 270 100 0)
       ;; adjust scrolling parameters 
       (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
-	    (%horizontal-scrolling-margin buffer) 2/5
+	    (%horizontal-scrolling-margin buffer) 3/5
 	    (%vertical-scrolling-margin buffer) 4/7)
       ;;
       (set-cursor buffer geoffrey)

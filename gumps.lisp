@@ -23,7 +23,7 @@
 	     (+ target-x (window-x))
 	     (+ target-y (window-y)))))
 
-(defmethod drop-object :after ((buffer scene) (gump gump) &optional x y z)
+(defmethod drop-object :after ((buffer buffer) (gump gump) &optional x y z)
   (set-target-position gump (field-value :x gump) (field-value :y gump))
   (bring-to-front gump))
 
@@ -124,25 +124,27 @@
 
 (defmethod draw ((icon icon))
   (with-fields (x y height width target) icon
-    (with-fields (image quantity) target
-      (let ((image-width (image-width image))
-	    (image-height (image-height image)))
-	;; fit to square without distorting
-	(if (> image-width image-height)
-	    (draw-image image x y 
-			:width width
-			:height (- height 
-				   (* height (/ width image-width))))
-	    (draw-image image x y
-			:height height
-			:width (- width (* width (/ height image-height)))))
-	;; now possibly draw quantity
-	(when (> quantity 1)
-	  (draw-string (format nil "~S" quantity)
-		       (+ x *icon-width* (- (units 1)))
-		       (+ y *icon-width* (- (units 0.3)))
-		       :color "saddle brown"
-		       :font "oldania-bold"))))))
+    (with-fields (quantity) target
+      (let ((image (or (field-value :contained-image target)
+		       (field-value :image target))))
+	(let ((image-width (image-width image))
+	      (image-height (image-height image)))
+	  ;; fit to square without distorting
+	  (if (> image-width image-height)
+	      (draw-image image x y 
+			  :width width
+			  :height (- height 
+				     (* height (/ width image-width))))
+	      (draw-image image x y
+			  :height height
+			  :width (- width (* width (/ height image-height)))))
+	  ;; now possibly draw quantity
+	  (when (> quantity 1)
+	    (draw-string (format nil "~S" quantity)
+			 (+ x *icon-width* (- (units 1)))
+			 (+ y *icon-width* (- (units 0.3)))
+			 :color "saddle brown"
+			 :font "oldania-bold")))))))
 
 (defparameter *icon-spacing* (units 1))
 

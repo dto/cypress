@@ -22,15 +22,18 @@
 
 (defmethod can-pick ((spell spell)) nil)
 
-;;; Spark
+;;; Spark spell to light fire 
 
 (defthing (spark spell)
-  :description "Spark (5 mp)"
+  :description "Ignite (5 mp)"
   :reagents '(:magic 5)
   :image "spark.png")
 
 (defmethod cast ((caster thing) (spell spark))
-  (message "Nothing happens."))
+  (let ((camp (find-camp)))
+    (if (not camp)
+	(narrate-now "You haven't made camp yet.")
+	(ignite camp))))
 
 ;;; Cure light wounds
 
@@ -56,15 +59,29 @@
   (equip caster (find-arrow caster))
   (narrate-now "You crafted 12 wooden arrows."))
 
+;;; Travel
+
+(defthing (travel spell)
+  :description "Travel (15 fatigue, 10 hunger)"
+  :image "mountain-5.png")
+
+(defmethod cast ((caster thing) (spell travel))
+  (modify-fatigue caster 15)
+  (modify-hunger caster 10)
+  (let ((old-buffer (current-buffer)))
+    (switch-to-buffer *map-screen*)
+    (destroy-buffer old-buffer)))
+
 ;;; Spellbook 
 
-(defthing spellbook :image "spellbook.png")
+(defthing spellbook :ima'ge "spellbook.png")
 
 (defmethod find-description ((book spellbook))
   "Geoffrey's spellbook")
 
 (defmethod initialize ((book spellbook) &key)
   (dolist (spell (list (new 'spark)
+		       (new 'travel)
 		       (new 'cure)
 		       (new 'craft-wooden-arrows)))
     (add-inventory-item book spell)))

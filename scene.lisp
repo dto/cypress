@@ -18,12 +18,18 @@
 
 (defmethod make-terrain ((buffer scene)))
 
-(defmethod initialize :after ((buffer scene) &key)
+(defmethod starting-location ((buffer scene))
+  (values (units 5) (/ (field-value :height buffer) 2)))
+
+(defmethod initialize :after ((buffer scene) &key (player (geoffrey)))
   (setf (field-value :status-line buffer) 
 	(find-object (new 'status-line)))
   (let ((terrain (make-terrain buffer)))
     (when terrain
-      (paste-from buffer terrain))))
+      (paste-from buffer terrain))
+    (when player
+      (multiple-value-bind (x y) (starting-location buffer)
+	(drop-object buffer player x y)))))
 
 (defmethod alternate-tap ((buffer scene) x y)
   (when (xelfp (cursor))
@@ -68,11 +74,15 @@
 (define-method reset-game scene ()
   (let ((buffer (current-buffer)))
     (at-next-update 
-      (switch-to-buffer (random-terrain))
+      (switch-to-buffer (make-meadow))
       (destroy buffer))))
 
-;;; Various scenes
+(defun find-camp ()
+  (dolist (object (get-objects (current-buffer)))
+    (when (typep object (find-class 'camp))
+      (return object))))
 
+;;; Various scenes
 
 (defparameter *grassy-meadow-images* '("golden-meadow.png" "stone-road.png" "meadow.png"))
 (defparameter *snowy-meadow-images* '("cloudy-meadow.png" "paynes-meadow.png" "purple-meadow.png" "sky-meadow.png" "forgotten-meadow.png"))

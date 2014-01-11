@@ -1,5 +1,7 @@
 (in-package :cypress)
 
+(defvar *map-screen* nil)
+
 (defparameter *castle-icons* (image-set "castle" 2))
 (defparameter *cold-meadow-icons* (image-set "cold-meadow" 2))
 (defparameter *frozen-meadow-icons* (image-set "frozen" 2))
@@ -23,6 +25,8 @@
   :tags '(:fixed)
   :terrain nil
   :scale 1.1
+  :row 0
+  :column 0
   :height *sector-size*
   :width *sector-size*)
 
@@ -55,21 +59,36 @@
   (setf (field-value :image sector) (terrain-icon terrain))
   (setf (field-value :terrain sector) terrain))
 
+(defmethod set-coordinates ((sector sector) row column)
+  (setf (field-value :row sector) row)
+  (setf (field-value :column sector) column))
+
 (defmethod find-description ((sector sector))
   (pretty-string (symbol-name (field-value :terrain sector))))
 
+(defun find-map-row ()
+  (field-value :row *map-screen*))
+
+(defun find-map-column ()
+  (field-value :column *map-screen*))
+
 (defmethod draw ((sector sector))
-  (with-fields (x y width height image) sector
-    (let ((image-width (image-width image))
-	  (image-height (image-height image)))
-	(if (>= image-width image-height)
-	    (draw-image image x y 
-			:width width
-			:height (- height 
-				   (* height (/ height image-height))))
-	    (draw-image image x y
-			:height height
-			:width (- width (* width (/ width image-width))))))))
+  (with-fields (x y width height image row column) sector
+    (let ((draw-p (if (and (= row (find-map-row))
+			   (= column (find-map-column)))
+		      (plusp (- (mod *updates* 100) 50))
+		      t)))
+      (when draw-p
+	(let ((image-width (image-width image))
+	      (image-height (image-height image)))
+	  (if (>= image-width image-height)
+	      (draw-image image x y 
+			  :width width
+			  :height (- height 
+				     (* height (/ height image-height))))
+	      (draw-image image x y
+			  :height height
+			  :width (- width (* width (/ width image-width))))))))))
 
 (defmethod activate ((sector sector))
   (with-fields (terrain) sector 
@@ -90,15 +109,22 @@
    (mapcar #'make-sector '(meadow grassy-meadow forest forest 
 			   cold-meadow ruins highway frozen-meadow frozen-forest river river))))
 			   
-	  
-
 (defthing (map-screen buffer)
   :sectors nil
+  :row 0
+  :column 0
   :background-image "parchment.png")
 
 (defparameter *map-screen-left-margin* 100)
 (defparameter *map-screen-top-margin* 230)
 
+(defmethod find-sector ((map map-screen) row column)
+  (with-fields (sectors) map
+    (when (<= row (length sectors))
+      (let ((ss (nth row sectors)))
+	(when (<= column (length ss))
+	  (nth column ss))))))
+  
 (defmethod arrange ((map-screen map-screen))
   ;; lay out the items
   (let ((x0 *map-screen-left-margin*)
@@ -109,17 +135,20 @@
 	(dotimes (column (length sectors))
 	  (let ((sector (pop sectors)))
 	    (resize sector *sector-size* *sector-size*)
+	    (set-coordinates sector row column)
 	    (move-to sector 
 		     (+ x0 (* column *sector-size*))
 		     (+ y0 (* row *sector-size*)))))))))
 
 (defmethod initialize :after ((map map-screen) &key)
-  (with-fields (sectors) map 
-    (setf sectors (test-map-sectors))
-    (dolist (row sectors)
-      (dolist (sector row)
-	(drop-object map sector)))
-    (resize map 1280 781)))
+  (with-buffer map
+    (setf *map-screen* map)
+    (with-fields (sectors) map 
+      (setf sectors (test-map-sectors))
+      (dolist (row sectors)
+	(dolist (sector row)
+	  (drop-object map sector)))
+      (resize map 1280 781))))
 
 (defmethod update :after ((map map-screen)) 
   (arrange map))

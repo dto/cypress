@@ -28,6 +28,7 @@
   (container :initform nil)
   ;; animation fields
   (image-scale :initform +dots-per-inch+)
+  (contained-image :initform nil)
   (scale :initform 1)
   (frames :initform nil)
   (delay :initform 0)

@@ -36,13 +36,6 @@
 
 (defthing campfire :tags '(:fixed) :image *campfire-image*)
 
-(defparameter *fire-images* (image-set "fire" 4))
-
-(defthing fire :image (random-choose *fire-images*))
-
-(defmethod run ((fire fire))
-  (percent-of-time 14 (change-image fire (random-choose *fire-images*))))
-
 (defparameter *crack-images* (image-set "crack" 6))
 
 (defthing crack :tags '(:fixed) :image (random-choose *crack-images*))
@@ -149,15 +142,6 @@
 (defthing copper-plate :tags '(:fixed) :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
 
 (defmethod can-pick ((campfire campfire)) nil)
-
-(defthing tent 
-  :image (random-choose '("tent-1.png" "tent-2.png"))
-  :tags '(:solid :fixed))
-  
-(defmethod activate ((tent tent))
-  (replace-gump tent (new 'browser :container tent)))
-
-(defmethod can-accept ((tent tent)) t)
 
 (defthing dead-tree 
   :tags '(:solid :fixed) 
