@@ -16,6 +16,7 @@
   (stacking :initform t)
   (weight :initform nil)
   (inventory :initform nil)
+  (spells :initform nil)
   (health :initform 0)
   (magic :initform 0)
   (spells :initform nil)
@@ -169,7 +170,7 @@
 	    (not (find-inventory-item container 
 				      (class-name (class-of item)))))
 	(progn 
-	  (pushnew item inventory :test 'eq)
+	  (setf inventory (append inventory (list item)))
 	  (setf (field-value :container item) container))
 	(merge-inventory-item container item))))
 

@@ -55,10 +55,6 @@
 
 (defthing gravestone :tags '(:solid :fixed) :image (random-choose *gravestone-images*))
 
-(defparameter *spellbook-image* "spellbook.png")
-
-(defthing spellbook :image *spellbook-image*)
-
 (defparameter *puddle-images* (image-set "puddle" 10))
 
 (defthing puddle :tags '(:fixed) :image (random-choose *puddle-images*))
@@ -233,4 +229,6 @@
 (defun make-box ()
   (make-container 'item-box (grab *boxed-items*)))
 
+(defun reagent-bag ()
+  (make-container 'bag (grab *reagents*)))
 

@@ -78,9 +78,6 @@
 (defparameter *snowy-meadow-images* '("cloudy-meadow.png" "paynes-meadow.png" "purple-meadow.png" "sky-meadow.png" "forgotten-meadow.png"))
 (defparameter *frozen-meadow-images* (image-set "frozen-meadow" 3))
 
-(defparameter *forest-debris-items* '(stone stone twig branch branch ginseng silverwood))
-(defparameter *flowers* '(violet forget-me-not snowdrop))
-
 (defthing (meadow scene)
   :background-image (random-choose '("stone-road.png" "meadow.png")))
 ;; flowers
