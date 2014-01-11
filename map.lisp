@@ -62,14 +62,14 @@
   (with-fields (x y width height image) sector
     (let ((image-width (image-width image))
 	  (image-height (image-height image)))
-	(if (> image-width image-height)
+	(if (>= image-width image-height)
 	    (draw-image image x y 
 			:width width
 			:height (- height 
-				   (* height (/ width image-width))))
+				   (* height (/ height image-height))))
 	    (draw-image image x y
 			:height height
-			:width (- width (* width (/ height image-height))))))))
+			:width (- width (* width (/ width image-width))))))))
 
 (defmethod activate ((sector sector))
   (with-fields (terrain) sector 
