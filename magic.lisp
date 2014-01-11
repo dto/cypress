@@ -79,8 +79,10 @@
   (modify-fatigue caster 15)
   (modify-hunger caster 10)
   (let ((old-buffer (current-buffer)))
-    (switch-to-buffer *map-screen*)
-    (destroy-buffer old-buffer)))
+    (new 'map-screen)
+    (switch-to-buffer *map-screen*)))
+
+;;    (destroy old-buffer)))
 
 ;;; Spellbook 
 

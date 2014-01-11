@@ -66,17 +66,21 @@
 (defmethod find-description ((sector sector))
   (pretty-string (symbol-name (field-value :terrain sector))))
 
+(defvar *map-row* 0)
+
+(defvar *map-column* 0)
+
 (defun find-map-row ()
-  (field-value :row *map-screen*))
+  *map-row*)
 
 (defun find-map-column ()
-  (field-value :column *map-screen*))
+  *map-column*)
 
 (defmethod draw ((sector sector))
   (with-fields (x y width height image row column) sector
     (let ((draw-p (if (and (= row (find-map-row))
 			   (= column (find-map-column)))
-		      (plusp (- (mod *updates* 100) 50))
+		      (plusp (- (mod *updates* 30) 15))
 		      t)))
       (when draw-p
 	(let ((image-width (image-width image))
@@ -90,9 +94,17 @@
 			  :height height
 			  :width (- width (* width (/ width image-width))))))))))
 
+(defmethod can-travel-to ((sector sector))
+  (with-fields (row column) sector
+    (and (<= 1 (abs (- row *map-row*)))
+	 (<= 1 (abs (- column *map-column*))))))
+
 (defmethod activate ((sector sector))
-  (with-fields (terrain) sector 
-    (switch-to-buffer (new terrain))))
+  (if (can-travel-to sector)
+      (with-fields (terrain row column) sector 
+	(setf *map-row* row *map-column* column)
+	(switch-to-buffer (new terrain)))
+      (show-error sector)))
 
 (defun make-sector (key)
   (new 'sector :terrain key))
@@ -148,7 +160,11 @@
       (dolist (row sectors)
 	(dolist (sector row)
 	  (drop-object map sector)))
-      (resize map 1280 781))))
+      (resize map 1280 781)))
+  map)
 
 (defmethod update :after ((map map-screen)) 
   (arrange map))
+
+(defmethod alternate-tap ((map map-screen) x y) nil)
+

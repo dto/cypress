@@ -35,11 +35,6 @@
   :images *wooden-arrow-images*
   :image (random-choose *wooden-arrow-images*))
 
-(defmethod use ((monk monk) (arrow arrow))
-  (let ((arrow (class-name (class-of arrow))))
-    (equip monk (find-inventory-item monk arrow))
-    (narrate-now "Equipped ~A." (fancy-description arrow))))
-
 (defmethod drop-object :after ((buffer buffer) (arrow arrow) &optional x y z )
   (layout arrow))
 
@@ -192,6 +187,11 @@
   (direction :initform :up)
   ;; timers
   (walk-clock :initform 0))
+
+(defmethod use ((monk monk) (arrow arrow))
+  (let ((arrow (class-name (class-of arrow))))
+    (equip monk (find-inventory-item monk arrow))
+    (narrate-now "Equipped ~A." (fancy-description arrow))))
 
 (defmethod walk-to :before ((monk monk) x y)
   (bring-to-front monk)

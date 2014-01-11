@@ -195,8 +195,10 @@ you left.
 (defun make-quest (&optional (terrain-class 'meadow))
   (let ((geoffrey (new 'geoffrey))
 	(buffer (new terrain-class)))
+    (setf *map-row* 0)
+    (setf *map-column* 0)
     (with-buffer buffer
-      (play-music (random-choose *soundtrack*) :loop t)
+;;      (play-music (random-choose *soundtrack*) :loop t)
      (current-buffer))))
 
 
