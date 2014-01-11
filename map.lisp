@@ -15,9 +15,8 @@
 (defparameter *map-image* "map.png")
 (defparameter *home-image* "home.png")
 
-(defparameter *grassy-meadow-images*
-'("golden-meadow.png" "stone-road.png" "bright-meadow.png"))
-(defparameter *snowy-meadow-images* '("cloudy-meadow.png" "paynes-meadow.png" "purple-meadow.png" "forgotten-meadow.png"))
+(defparameter *grassy-meadow-images* '("golden-meadow.png" "stone-road.png" "meadow.png"))
+(defparameter *snowy-meadow-images* '("cloudy-meadow.png" "paynes-meadow.png" "purple-meadow.png" "sky-meadow.png" "forgotten-meadow.png"))
 (defparameter *frozen-meadow-images* (image-set "frozen-meadow" 3))
 
 (defthing sector
@@ -53,19 +52,18 @@
 (defun row-of-sectors (&rest keys)
   (apply #'lined-up (apply #'make-sectors keys)))
 
-(defun make-journey ()
+(defthing (map-screen scene)
+  :background-image "parchment.png")
+
+(defmethod make-terrain ((map map-screen))
   (stacked-up
    (row-of-sectors :grassy-meadow :meadow :forest :cold-meadow :forest :mountain :forest :large-mountain :frozen-meadow :river :large-mountain :mountain)
    (row-of-sectors :meadow :grassy-meadow :meadow :forest :forest :cold-meadow :ruins :frozen-meadow :cemetery :mountain :river :castle :mountain)
    (row-of-sectors :home :meadow :forest :forest :mountain :forest :cold-meadow :cemetery :ruins :river :frozen-meadow :river :mountain)))
 
-(defthing (map-screen scene)
-  :background-image "parchment.png")
-
 (defmethod initialize :after ((map map-screen) &key)
-  (paste-from map (make-journey) 100 270)
   (resize map 1280 781))
   
-  
+
 
   

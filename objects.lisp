@@ -1,21 +1,67 @@
 (in-package :cypress)
 
 (defparameter *iron-fence-images* (image-set "iron-fence" 7))
+
+(defthing iron-fence 
+  :tags '(:solid :fixed)
+  :image (random-choose *iron-fence-images*)
+  :scale 1.2)
+
 (defparameter *berry-bush-images* (image-set "berry-bush" 5))
+
+(defthing berry-bush 
+  :tags '(:solid :fixed)
+  :image (random-choose *berry-bush-images*)
+  :scale 1.2)
+
 (defparameter *bone-dust-images* (image-set "bone-dust" 4))
+
+(defthing bone-dust :image (random-choose *bone-dust-images*))
+
 (defparameter *ancient-road-images* (image-set "ancient-road" 10))
+
+(defthing ancient-road
+  :tags '(:fixed)
+  :image (random-choose *ancient-road-images*))
+
 (defparameter *ancient-road-debris-images* (image-set "ancient-road-debris" 5))
 
+(defthing ancient-road-debris
+  :tags '(:fixed)
+  :image (random-choose *ancient-road-debris-images*))
+
 (defparameter *black-wolf-images* (image-set "black-wolf" 2))
+
 (defparameter *campfire-image* "campfire.png")
+
+(defthing campfire :tags '(:fixed) :image *campfire-image*)
+
 (defparameter *fire-images* (image-set "fire" 4))
+
+(defthing fire :image (random-choose *fire-images*))
+
+(defmethod run ((fire fire))
+  (percent-of-time 14 (change-image fire (random-choose *fire-images*))))
+
 (defparameter *crack-images* (image-set "crack" 6))
+
+(defthing crack :tags '(:fixed) :image (random-choose *crack-images*))
+
 (defparameter *large-crack-images* (image-set "large-crack" 3))
+
+(defthing large-crack :tags '(:fixed) :image (random-choose *large-crack-images*))
 
 (defparameter *gravestone-images* (image-set "gravestone" 12))
 
+(defthing gravestone :tags '(:solid :fixed) :image (random-choose *gravestone-images*))
+
 (defparameter *spellbook-image* "spellbook.png")
+
+(defthing spellbook :image *spellbook-image*)
+
 (defparameter *puddle-images* (image-set "puddle" 10))
+
+(defthing puddle :tags '(:fixed) :image (random-choose *puddle-images*))
 
 (defparameter *ruin-wall-images* (image-set "ruin-wall" 4))
 (defparameter *skull-images* (image-set "skull" 3))
@@ -106,8 +152,6 @@
 (defthing copper-stairwell  :tags '(:fixed) :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
 (defthing copper-plate :tags '(:fixed) :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
 
-(defthing campfire :image "fire-pit-3.png")
-
 (defmethod can-pick ((campfire campfire)) nil)
 
 (defthing tent 
@@ -169,4 +213,24 @@
   :tags '(:fixed :solid))
 
 (defthing coverstone :image "coverstone.png" :z 10)
+
+;;; Various prizes
+
+(defparameter *grab-bag-items* '(elixir elixir skull wolf-skull ruined-book silver-elixir
+ stone stone thornweed nightshade white-bread wheat-bread))
+
+(defparameter *boxed-items* '(silver-elixir xalcium-armor atlas))
+
+(defun grab (bag &optional (count (+ 2 (random 5))))
+  (let (items)
+    (dotimes (n count)
+      (push (new (random-choose bag)) items))
+    items))
+
+(defun grab-bag ()
+  (make-container 'bag (grab *grab-bag-items*)))
+
+(defun make-box ()
+  (make-container 'item-box (grab *boxed-items*)))
+
 

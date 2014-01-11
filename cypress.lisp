@@ -45,7 +45,8 @@
     (index-pending-resources)
     ;; (preload-resources)
     ;; (switch-to-buffer (make-meadow))
-    (switch-to-buffer (new 'map-screen))
+    ;; (switch-to-buffer (new 'map-screen))
+    (switch-to-buffer (random-terrain))
     (setf *font* "oldania")
     (start-session)))
 

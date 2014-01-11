@@ -2,11 +2,6 @@
 
 ** TODO Object oriented level generation with generic functions
 
-** TODO Paint white snow backgrounds / decals 
-** TODO Paint one or two more nice green/brown meadows
-** TODO Paint "nightshade's nanny" bushes
-** TODO Find or paint "bone dust"
-
 ** TODO New build 0.6 with three or four scenarios
 *** TODO Sunny meadow 
 **** TODO Sprinkle wildflowers
@@ -25,28 +20,10 @@
 **** TODO Very white background
 **** TODO Crack and puddle decals
 
-** TODO Write overworld map system
-*** TODO Import map symbols
-*** TODO Import blank overworld map
-*** TODO MOUNTAIN SQUARES IMPASSABLE
-
-** TODO Make inventory of existing terrain backgrounds and import 
-
 ** TODO Press ESCAPE to close all gumps and unpause
 ** TODO Move spells into spellbook
 ** TODO Spellcast animation
 ** TODO Implement low HP warning, i.e. Dying condition
-
-** TODO Identify all scene parameters 
-*** TODO time (day, night)
-*** TODO background-image
-*** TODO height
-*** TODO width
-*** TODO terrain
-*** TODO decals
-*** TODO items
-*** TODO enemies
-*** TODO Rewrite forest generator based on this parameterization
 
 ** TODO [#A] Implement cold
 *** TODO + 20 you are getting cold
@@ -83,33 +60,10 @@
 *** TODO Paint skeleton archers
 **** TODO Charcoal
 **** TODO Pinecones
-*** DONE Paint grave hag
-    CLOSED: [2014-01-10 Fri 15:37]
 *** TODO Paint dead traveler bodies
-
-** TODO Paint more terrain
-*** TODO Paint meadow grass and meadow decals
-*** DONE Paint watery snow pool decals
-    CLOSED: [2014-01-10 Fri 15:37]
-*** TODO Paint rushes, weeds, branches
-*** DONE Import gravestones
-    CLOSED: [2014-01-10 Fri 15:37]
-
-*** TODO Paint ruins pieces
-**** TODO Basic blocks
-**** TODO Broken basic blocks
-**** TODO Stone chips
-**** TODO Horizontal wall sections
-**** TODO Vertical wall sections
-**** TODO Wall junctions
-**** TODO Clogged stairwells
 
 ** TODO Paint other objects
 *** TODO Paint ruined wood
-*** TODO Paint bone dust
-*** DONE Paint glowing campfire and halo for night scenes (crafting, rest)
-    CLOSED: [2014-01-10 Fri 15:37]
-
 ** TODO Paint mouse cursors
 *** TODO Normal 
 *** TODO Target
@@ -908,3 +862,143 @@ FORGET-ME-NOTS and Temporal Seance
    :END:
    CLnOSED: [2014-01-08 Wed 15:51]
 
+** DONE Paint white snow backgrounds / decals
+   CLOSED: [2014-01-11 Sat 02:43]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 02:43
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Paint one or two more nice green/brown meadows
+   CLOSED: [2014-01-11 Sat 02:43]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 02:43
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Paint "nightshade's nanny" bushes
+   CLOSED: [2014-01-11 Sat 02:43]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 02:43
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Find or paint "bone dust"
+   CLOSED: [2014-01-11 Sat 02:43]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 02:43
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Draft overworld map system
+   CLOSED: [2014-01-11 Sat 02:43]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 02:43
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE Import map symbols
+    CLOSED: [2014-01-11 Sat 02:43]
+*** DONE Import blank overworld map
+    CLOSED: [2014-01-11 Sat 02:43]
+*** DONE MOUNTAIN SQUARES IMPASSABLE
+    CLOSED: [2014-01-11 Sat 02:43]
+
+** DONE Make inventory of existing terrain backgrounds and import
+   CLOSED: [2014-01-11 Sat 02:43]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 02:43
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Identify all scene parameters
+   CLOSED: [2014-01-11 Sat 03:32]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 03:33
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** TODO time (day, night)
+*** TODO background-image
+*** TODO height
+*** TODO width
+*** TODO terrain
+*** TODO decals
+*** TODO items
+*** TODO enemies
+*** TODO Rewrite forest generator based on this parameterization
+
+** DONE Paint grave hag
+   CLOSED: [2014-01-10 Fri 15:37]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 03:33
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint more characters
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Paint more terrain
+   CLOSED: [2014-01-11 Sat 03:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 03:33
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE Paint meadow grass and meadow decals
+    CLOSED: [2014-01-11 Sat 03:33]
+*** DONE Paint watery snow pool decals
+    CLOSED: [2014-01-10 Fri 15:37]
+*** DONE Paint rushes, weeds, branches
+    CLOSED: [2014-01-11 Sat 03:33]
+*** DONE Import gravestones
+    CLOSED: [2014-01-10 Fri 15:37]
+
+*** TODO Paint ruins pieces
+**** TODO Basic blocks
+**** TODO Broken basic blocks
+**** TODO Stone chips
+**** TODO Horizontal wall sections
+**** TODO Vertical wall sections
+**** TODO Wall junctions
+**** TODO Clogged stairwells
+
+** DONE Paint glowing campfire and halo for night scenes (crafting, rest)
+   CLOSED: [2014-01-10 Fri 15:37]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 03:33
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint other objects
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO Paint bone dust
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-11 Sat 03:33
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint other objects
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
