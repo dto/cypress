@@ -1,6 +1,6 @@
 (in-package :cypress)
 
-;;; Actions
+;;; Basic spell definitions
 
 (defthing spell reagents)
 
@@ -22,6 +22,8 @@
 
 (defmethod can-pick ((spell spell)) nil)
 
+;;; Spark
+
 (defthing (spark spell)
   :description "Spark (5 mp)"
   :reagents '(:magic 5)
@@ -29,6 +31,8 @@
 
 (defmethod cast ((caster thing) (spell spark))
   (message "Nothing happens."))
+
+;;; Cure light wounds
 
 (defthing (cure spell)
   :description "Cure light wounds (25 mp, 1 ginseng)"
@@ -39,6 +43,8 @@
   (modify-fatigue caster -1)
   (modify-health caster (random-choose '(15 20 20 25)))
   (narrate-now "Some of your wounds have been healed. You feel better."))
+
+;;; Craft wooden arrows
       
 (defthing (craft-wooden-arrows spell)
   :description "Craft arrows (5 mp, 2 wood, 1 stone)"
@@ -50,5 +56,27 @@
   (equip caster (find-arrow caster))
   (narrate-now "You crafted 12 wooden arrows."))
 
+;;; Spellbook 
+
+(defthing spellbook :image "spellbook.png")
+
+(defmethod find-description ((book spellbook))
+  "Geoffrey's spellbook")
+
+(defmethod initialize ((book spellbook) &key)
+  (dolist (spell (list (new 'spark)
+		       (new 'cure)
+		       (new 'craft-wooden-arrows)))
+    (add-inventory-item book spell)))
+
+(defmethod can-pick ((book spellbook))
+  (not (field-value :container book)))
+
+(defmethod can-accept ((book spellbook)) t)
+(defmethod will-accept ((book spellbook) (thing thing)) nil)
+(defmethod will-accept ((book spellbook) (spell spell)) t)
+
+(defmethod activate ((spellbook spellbook))
+  (replace-gump spellbook (new 'browser :container spellbook)))
 
 
