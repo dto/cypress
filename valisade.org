@@ -1,6 +1,10 @@
 * Tasks
 
-** TODO start monk off with some ginseng
+** TODO Finish 0.6 release
+*** TODO start monk off with some ginseng
+*** TODO camping
+*** TODO world map grid
+*** TODO lucius camp intro
 
 ** TODO Object oriented level generation with generic functions
 

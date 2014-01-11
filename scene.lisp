@@ -73,6 +73,11 @@
 
 ;;; Various scenes
 
+
+(defparameter *grassy-meadow-images* '("golden-meadow.png" "stone-road.png" "meadow.png"))
+(defparameter *snowy-meadow-images* '("cloudy-meadow.png" "paynes-meadow.png" "purple-meadow.png" "sky-meadow.png" "forgotten-meadow.png"))
+(defparameter *frozen-meadow-images* (image-set "frozen-meadow" 3))
+
 (defparameter *forest-debris-items* '(stone stone twig branch branch ginseng silverwood))
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 
@@ -89,7 +94,7 @@
 ;; twigs and stones
 ;; some leafy trees
 ;; wolf
-;; ginseng near dead tree and ruin wall
+;; ginseng and/or thornweed near dead tree and ruin wall
 
 (defthing (forest scene)
   :background-image (random-choose '("stone-road.png" "meadow.png")))
@@ -98,6 +103,12 @@
 ;; wood piles and twigs
 ;; wraiths, wolves
 ;; stones
+
+(defthing (cold-meadow scene)
+  :background-image (random-choose *snowy-meadow-images*))
+;; twigs and stones
+;; dead trees
+;; thornweed
 
 (defthing (ruins scene)
   :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png" "purple-meadow.png")))
@@ -156,6 +167,6 @@
 ;; wolves
 
 (defun random-terrain ()
-  (new 'cemetery))
+  (new 'map-screen))
   ;; (new (random-choose '(forest frozen-forest meadow grassy-meadow
   ;; 			cold-meadow frozen-meadow river ruins cemetery highway))))
