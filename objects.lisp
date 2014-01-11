@@ -1,8 +1,8 @@
 (in-package :cypress)
 
-(defparameter *iron-fence-images* (image-set "iron-fence" 7)
-(defparameter *berry-bush-images* (image-set "berry-bush" 5)
-(defparameter *bone-dust-images* (image-set "bone-dust" 4)
+(defparameter *iron-fence-images* (image-set "iron-fence" 7))
+(defparameter *berry-bush-images* (image-set "berry-bush" 5))
+(defparameter *bone-dust-images* (image-set "bone-dust" 4))
 (defparameter *frozen-meadow-images* (image-set "frozen-meadow" 3))
 
 (defparameter *castle-images* (image-set "castle" 2))
