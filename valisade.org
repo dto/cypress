@@ -1,5 +1,7 @@
 * Tasks
 
+** TODO Object oriented level generation with generic functions
+
 ** TODO Paint white snow backgrounds / decals 
 ** TODO Paint one or two more nice green/brown meadows
 ** TODO Paint "nightshade's nanny" bushes
