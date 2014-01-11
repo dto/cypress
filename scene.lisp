@@ -76,35 +76,84 @@
 (defparameter *forest-debris-items* '(stone stone twig branch branch ginseng silverwood))
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 
-(defthing (forest scene)
-  :background-image (random-choose '("stone-road.png" "meadow.png")))
-
-(defthing (frozen-forest scene)
-  :background-image (random-choose *snowy-meadow-images*))
-
 (defthing (meadow scene)
   :background-image (random-choose '("stone-road.png" "meadow.png")))
+;; flowers
+;; twigs, a branch
+;; dead tree
+;; a few leafy trees
 
 (defthing (grassy-meadow scene)
   :background-image (random-choose *grassy-meadow-images*))
+;; flowers
+;; twigs and stones
+;; some leafy trees
+;; wolf
+;; ginseng near dead tree and ruin wall
 
-(defthing (cold-meadow scene)
-  :background-image (random-choose *snowy-meadow-images*))
-
-(defthing (frozen-meadow scene)
-  :background-image (random-choose *frozen-meadow-images*))
-
-(defthing (river scene)
-  :background-image (random-choose *frozen-meadow-images*))
+(defthing (forest scene)
+  :background-image (random-choose '("stone-road.png" "meadow.png")))
+;; flowers, silverwood
+;; dense leafy trees
+;; wood piles and twigs
+;; wraiths, wolves
+;; stones
 
 (defthing (ruins scene)
   :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png" "purple-meadow.png")))
+;; ruin walls
+;; item boxes
+;; item corpses (ginseng)
+;; silverwood
+;; ginseng trees
+;; stones
+;; wraiths 
+;; blocked stairwells (for now)
 
 (defthing (cemetery scene)
   :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png")))
+;; fences
+;; stones and twigs
+;; a few pine trees
+;; bone dust
+;; nightshade and bushes
+;; one or two dead trees
+;; rows of gravestones
+;; grave hags
+
+(defthing (frozen-forest scene)
+  :background-image (random-choose *snowy-meadow-images*))
+;; dense pine trees and some dead trees
+;; wood piles and twigs and branches
+;; nightshade and bushes
+;; wraiths, skeleton archers
+;; ginseng
+
+(defthing (frozen-meadow scene)
+  :background-image (random-choose *frozen-meadow-images*))
+;; a few pine trees
+;; wet pools and icy areas
+;; ginseng
+;; twigs, branches
+;; black wolves
+;; wood piles
+;; dead trees
+
+(defthing (river scene)
+  :background-image (random-choose *frozen-meadow-images*))
+;; pools of water
+;; various ice cracks
+;; twigs and branches
+;; skeleton archers
 
 (defthing (highway scene)
   :background-image (random-choose '("stone-road.png" "golden-meadow.png")))
+;; generated roadway
+;; stone chips
+;; twigs
+;; a few leafy trees
+;; item boxes/ruins
+;; wolves
 
 (defun random-terrain ()
   (new 'cemetery))
