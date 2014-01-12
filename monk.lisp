@@ -204,6 +204,9 @@
       (show-error monk x y)
       (narrate "That destination is obstructed."))))
 
+(defmethod drop-object :after ((buffer buffer) (monk monk) &optional x y z)
+  (setf (field-value :path monk) nil))
+
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'spellbook))
   (add-inventory-item monk (new 'camp))
