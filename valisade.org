@@ -30,7 +30,8 @@
 **** TODO Crack and puddle decals
 
 ** TODO Press ESCAPE to close all gumps and unpause
-** TODO Move spells into spellbook
+** DONE Move spells into spellbook
+   CLOSED: [2014-01-13 Mon 23:03]
 ** TODO Spellcast animation
 ** TODO Implement low HP warning, i.e. Dying condition
 
