@@ -247,6 +247,9 @@
      (stacked-up-randomly (meadow-debris) (lone-wraith) (some-trees))
      (stacked-up-randomly (dead-trees) (lone-wolf) (flowers)))))
 
+(defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
+  (modify-cold monk +10))
+
 ;;; Ruins
 
 (defthing (ruins scene)
@@ -259,6 +262,9 @@
      (stacked-up-randomly (some-trees) (spray '(ruin-wall ruin-wall berry-bush thornweed) :count (+ 7 (random 5)))
 			  (singleton (new 'stone-stairwell)))
      (stacked-up-randomly (dead-trees) (spray '(ancient-road) :trim t :count 8) (spray '(wraith wolf) :count 2) (flowers)))))
+
+(defmethod drop-object :after ((ruins ruins) (monk geoffrey) &optional x y z)
+  (modify-cold monk +10))
 
 ;;; Cemetery
 
@@ -285,6 +291,9 @@
 			  (some-trees))
      (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (spray 'iron-fence :count (+ 2 (random 3))) (singleton (new 'grave-hag)) (spray 'bone-dust) (singleton (new 'iron-fence)) (flowers)))))
 
+(defmethod drop-object :after ((cemetery cemetery) (monk geoffrey) &optional x y z)
+  (modify-cold monk +15))
+
 ;;; Frozen forest
 
 (defthing (frozen-forest scene)
@@ -306,6 +315,9 @@
      (stacked-up-randomly (rock-outcropping) (pine-trees) (pine-trees))
      (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
      (stacked-up-randomly (dead-trees-and-puddles) (lone-wolf) (wood-pile)))))
+
+(defmethod drop-object :after ((forest frozen-forest) (monk geoffrey) &optional x y z)
+  (modify-cold monk +22))
 
 ;; dense pine trees and some dead trees
 ;; wood piles and twigs and branches
@@ -338,6 +350,9 @@
      (stacked-up-randomly (wood-pile) (treacherous-trees))
      (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
      (stacked-up-randomly (dead-trees-and-puddles) (lone-wraith) (wood-pile)))))
+
+(defmethod drop-object :after ((river river) (monk geoffrey) &optional x y z)
+  (modify-cold monk +10))
 
 ;; pools of water
 ;; various ice cracks
