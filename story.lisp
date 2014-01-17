@@ -99,14 +99,30 @@ Double-click an object to activate it.
 Double-click a monster to attack it.
 Double click Geoffrey for his inventory.
 Drag items into/out of inventory scrolls.
-Click spells in spellbook for description.
-Double click spells in spellbook to cast.
-Use the Travel spell to explore the land.
-Double-click food to eat it.
-Use the \"Cure meat\" spell to make jerky
-from freshly killed wolves.
-If you die, press Control-R for a new 
-quest.
+
+Click spells in spellbook for
+description.  Double click spells in
+spellbook to cast.
+
+Use the Travel spell to explore the
+land.  Double-click land symbols to
+explore regions.  If you die, press
+Control-R for a new quest.
+
+You must eat. Traveling and combat cause
+hunger. Double-click food to eat it.
+Use the \"Cure meat\" spell to make
+jerky from freshly killed wolves.
+
+Geoffrey must stay warm. He will get
+colder by progressing through the
+terrain (or by touching certain
+objects). You have a magic tent and
+campfire which you can use to heal and
+warm yourself up. To use the tent, drag
+it out of your inventory onto an open
+space on the ground, and then cast
+Spark.
 
 There are several new keyboard shortcuts:
 
