@@ -200,6 +200,7 @@ you left.
     (setf *map-row* 0)
     (setf *map-column* 0)
     (with-buffer buffer
+      ;; (drop-object buffer (new 'lucius) (units 12) (units 8))
       (drop-object buffer (new 'scroll) (units 10) (units 4))
      (current-buffer))))
 
