@@ -78,6 +78,10 @@
   (modify-health enemy (random-choose '(-10 -12 -15)))
   (destroy self))
 
+(defmethod collide ((arrow silver-arrow) (wolf wolf))
+  (modify-health wolf (random-choose '(-20 -30)))
+  (destroy arrow))
+
 (defthing (crystal-arrow arrow)
   :images *crystal-arrow-images*
   :image (random-choose *crystal-arrow-images*))
@@ -299,7 +303,7 @@
   (when (field-value :alive self)
     (percent-of-time 6
       (narrate-now "You step into the water. You are wet!")
-      (modify-health self (- (random-chose '(5 7))))
+      (modify-health self (- (random-choose '(5 7))))
       (modify-cold self +20)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
