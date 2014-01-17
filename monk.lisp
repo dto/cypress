@@ -435,7 +435,7 @@
 
 (defmethod humanp ((monk geoffrey)) t)
 
-(defmethod activate ((monk monk))
+(defmethod activate ((monk geoffrey))
   (resume)
   (replace-gump monk (new 'browser :container monk)))
 
@@ -473,22 +473,6 @@
 	      *monk-walk*))))
 
 (defmethod casting-animation ((self monk)) *monk-cast*)
-
-;;; Lucius 
-
-(defthing (lucius monk) :clock 10 :description "Lucius")
-
-(defmethod run ((self lucius))
-  (call-next-method)
-  (with-fields (clock) self
-    (decf clock)
-    (when (cursor)
-      (cond  ((> (distance-to-cursor self) 150)
-	      (unless (or (field-value :waypoints self) (plusp clock))
-		(multiple-value-bind (x y) (at (cursor))
-		  (walk-to self x y))))
-	     ((> (distance-to-cursor self) 110)
-	      (prog1 nil (stop-walking self) (setf clock 10)))))))
 
 ;;; Monk food
 
