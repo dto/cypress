@@ -303,7 +303,7 @@
 (defmethod make-terrain ((forest frozen-forest))
   (with-border (units 10)
     (lined-up-randomly 
-     (stacked-up-randomly (wood-pile) (pine-trees) (pine-trees))
+     (stacked-up-randomly (rock-outcropping) (pine-trees) (pine-trees))
      (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
      (stacked-up-randomly (dead-trees-and-puddles) (lone-wolf) (wood-pile)))))
 

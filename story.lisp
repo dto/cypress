@@ -93,9 +93,11 @@ Geoffrey there.
 Click an object to show its name.
 Drag objects to move them.
 Drag objects onto Geoffrey to take them.
-Double-click object to activate it.
-Double-click monster to attack it.
-Double click Geoffrey for inventory.
+ (Take and keep this scroll 
+  for easy reference.)
+Double-click an object to activate it.
+Double-click a monster to attack it.
+Double click Geoffrey for his inventory.
 Drag items into/out of inventory scrolls.
 Click spells in spellbook for description.
 Double click spells in spellbook to cast.
@@ -103,6 +105,8 @@ Use the Travel spell to explore the land.
 Double-click food to eat it.
 Use the \"Cure meat\" spell to make jerky
 from freshly killed wolves.
+If you die, press Control-R for a new 
+quest.
 
 There are several new keyboard shortcuts:
 
