@@ -592,38 +592,54 @@
       (unless (plusp timer)
 	(douse camp)))))
 
-;; (defmethod activate ((self lucius))
-;;   (discuss self :hello))
+;;; Lucius 
 
-;; (define-topic hello lucius 
-;;    "Good morning Geoffrey! A Raven just
-;; delivered this letter for you."
-;;    :letter :weather :name :job :bye)
+(defthing (lucius monk) :clock 10 :description "Lucius")
+
+(defmethod run ((self lucius))
+  (call-next-method)
+  (with-fields (clock) self
+    (decf clock)
+    (when (cursor)
+      (cond  ((> (distance-to-cursor self) 150)
+	      (unless (or (field-value :waypoints self) (plusp clock))
+		(multiple-value-bind (x y) (at (cursor))
+		  (walk-to self x y))))
+	     ((> (distance-to-cursor self) 110)
+	      (prog1 nil (stop-walking self) (setf clock 10)))))))
+
+(defmethod activate ((self lucius))
+  (discuss self :hello))
+
+(define-topic hello lucius 
+   "Good morning Geoffrey! A Raven just
+delivered this letter for you."
+   :letter :weather :name :job :bye)
 	   
-;; (define-topic name lucius 
-;;   "I am your friend Lucius, of course.")
+(define-topic name lucius 
+  "I am your friend Lucius, of course.")
 
-;; (define-topic job lucius 
-;;   "You know perfectly well that I work
-;; at the Nothbess Library. My duties
-;; include dusting and organizing books.
-;; And what else have you forgotten today?
-;; Something must be wrong with you.")
+(define-topic job lucius 
+  "You know perfectly well that I work
+at the Nothbess Library. My duties
+include dusting and organizing books.
+And what else have you forgotten today?
+Something must be wrong with you.")
 
-;; (define-topic weather lucius 
-;; "It's nice out today, but I feel as if
-;; it's been a bit colder than usual."
-;;   :colder :letter :name :job :bye)
+(define-topic weather lucius 
+"It's nice out today, but I feel as if
+it's been a bit colder than usual."
+  :colder :letter :name :job :bye)
 
-;; (define-topic bye lucius () nil)
+(define-topic bye lucius () nil)
 
-;; (define-topic colder lucius 
-;; "Yes. The leaves seem to be turning early.")
+(define-topic colder lucius 
+"Yes. The leaves seem to be turning early.")
 
-;; (define-topic letter lucius 
-;;   (drop self (new 'scroll) 0 (field-value :height self))
-;;   (make-talk-gump self "I wonder what it says? It comes
-;; straight from Dr. Quine at the
-;; monastery. Here you go. I'm so curious
-;; to know what it says. Open it, open it!" :bye))
+(define-topic letter lucius 
+  (drop self (new 'scroll) 0 (field-value :height self))
+  (make-talk-gump self "I wonder what it says? It comes
+straight from Dr. Quine at the
+monastery. Here you go. I'm so curious
+to know what it says. Open it, open it!" :bye))
 
