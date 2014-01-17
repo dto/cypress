@@ -11,7 +11,7 @@
 (defun current-scene () *current-scene*)
 
 (defun switch-to-scene (buffer)
-  (play-music (random-choose *soundtrack*) :loop t)
+;;  (play-music (random-choose *soundtrack*) :loop t)
   (setf *current-scene* buffer)
   (switch-to-buffer buffer))
 
