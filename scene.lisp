@@ -41,7 +41,7 @@
 	(paste-from buffer terrain)
 	(resize buffer (field-value :width terrain) (field-value :height terrain))))
     ;; adjust scrolling parameters 
-    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 2.5))
+    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	  (%horizontal-scrolling-margin buffer) 3/5
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
@@ -68,6 +68,9 @@
 	(walk-to (geoffrey)
 		 (- x (/ width 2))
 		 (- y (/ height 2)))))))
+
+(defmethod scroll-tap ((buffer scene) x y)
+  nil)
 
 (defmethod draw-object-layer ((buffer scene))
   (multiple-value-bind (top left right bottom) 

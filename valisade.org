@@ -1,17 +1,20 @@
 * Tasks
 
-** TODO title screen
-** TODO don't pop up bubbles for bubbles
-** TODO each bubble replaces the last, not adding up bubbles
+** DONE title screen
+   CLOSED: [2014-01-16 Thu 22:03]
+** DONE don't pop up bubbles for bubbles
+   CLOSED: [2014-01-16 Thu 22:03]
+** DONE each bubble replaces the last, not adding up bubbles
+   CLOSED: [2014-01-16 Thu 22:45]
+** TODO fix diagonal scrolling jitter
 ** TODO S for spellbook, I for inventory, P or space for pause
+*** TODO fix keyboard event tasks to not use CLON-style selectors
 ** TODO fix stale pathfinding-data bug relating to tent
-** TODO fix keyboard event tasks to not use CLON-style selectors
 ** TODO fix giant arrow for 1 frame
-** TODO fix arrow not showing sometimes
+*** TODO fix arrow not showing sometimes
 ** TODO fix z-sorting of tent
 ** TODO fix z-sorting of player remains
 ** TODO fix berry bush emptying crash
-** TODO fix diagonal scrolling jitter
 ** TODO cascade scroll instances based on count of open scrolls
 ** TODO fix wolf not chasing
 
