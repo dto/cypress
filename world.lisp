@@ -571,7 +571,7 @@
 
 (defmethod draw-hover ((self thing))
   (with-fields (x y) self
-    (with-fields (drag) (current-buffer)
+    (with-fields (drag) (current-scene)
       (when drag
 	(when (will-accept self drag)
 	  (draw-image "check-button.png" x y 
