@@ -39,13 +39,14 @@
 	  when (typep (find-object thing) (find-class 'gump))
 	    collect (find-object thing))))
 
-(defparameter *gump-cascade-size* (units 4))
+(defparameter *gump-cascade-offset* (units -26))
+(defparameter *gump-cascade-size* (units -4))
 
 (defun gump-cascade-position ()
   (let ((delta (* *gump-cascade-size* (length (find-gumps)))))
     (values
-     (+ (window-x) delta)
-     (+ (window-y) delta))))
+     (+ (window-x) *gl-screen-width* *gump-cascade-offset* delta)
+     (- (window-y) (units -1) delta))))
 
 (defmethod drop-object :after ((buffer buffer) (gump gump) &optional x y z)
   (set-target-position gump (field-value :x gump) (field-value :y gump))
