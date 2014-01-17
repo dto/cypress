@@ -546,19 +546,20 @@
 
 (defparameter *fire-images* (image-set "fire" 4))
 
-(defthing fire :image (random-choose *fire-images*) :scale 1.1)
+(defthing fire :image (random-choose *fire-images*) :scale 1.1 :tags '(:ethereal))
 
 (defmethod run ((fire fire))
   (percent-of-time 14 (setf (field-value :image fire) (random-choose *fire-images*))))
 
 (defthing camp
   :description "Geoffrey's magic tent"
+  :stacking nil
   :fire nil
   :timer nil
   :contained-image "tent-2.png"
   :image "tent-3.png"
   :tags '(:solid))
-  
+
 (defmethod activate ((camp camp))
   (replace-gump camp (new 'browser :container camp)))
 
@@ -589,8 +590,12 @@
       (setf fire nil)
       (setf timer nil))))
 
-(defmethod can-pick :after ((camp camp))
-  (douse camp))
+(defmethod can-pick ((camp camp)) 
+  (not (null (field-value :container camp))))
+
+(defmethod return-to-geoffrey ((camp camp))
+  (remove-object (current-scene) camp)
+  (add-inventory-item (geoffrey) camp))
 
 (defmethod run ((camp camp))
   (with-fields (fire timer) camp

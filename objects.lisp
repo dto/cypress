@@ -64,7 +64,7 @@
 
 (defparameter *item-box-images* (image-set "item-box" 2))
 
-(defthing item-box :image (random-choose *item-box-images*))
+(defthing item-box :image (random-choose *item-box-images*) :stacking nil)
 
 (defmethod can-accept ((box item-box)) t)
 

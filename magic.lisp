@@ -80,6 +80,7 @@
 (defmethod cast ((caster thing) (spell travel))
   (modify-fatigue caster 15)
   (modify-hunger caster 10)
+  (return-to-geoffrey (find-camp))
   (at-next-update
     (let ((old-buffer (current-buffer)))
       (remove-object (current-buffer) (geoffrey))
