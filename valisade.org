@@ -183,7 +183,7 @@ or fatigue.
 *** Very slight flicker of circle
 *** Required in dark areas
 *** Certain enemies can negate magic spell effects, dousing your light
-** Cure meat (5 mana)  
+** Cure meat (5 mana, 1 thornweed)
 *** Create healing-jerky from animal carcasses
 *** TODO Paint meat
 ** Cure light wounds (25 mana) (2 ginseng) 

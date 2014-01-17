@@ -30,7 +30,7 @@
     (when (percent-of-time 70 t)
       (when (percent-of-time 60 t)
 	(add-inventory-item remains (new 'scroll-fragment)))
-      (add-inventory-item remains (new (random-choose '(skull wolf-skull stone item-box))))
+      (add-inventory-item remains (new (random-choose '(skull wolf-corpse stone item-box))))
       (if (percent-of-time 70 t)
 	  (if (percent-of-time 50 t)
 	      (add-inventory-item remains (reagent-bag))
@@ -55,7 +55,6 @@
 	(percent-of-time 10 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
 	(move self heading0 6))))))
 
-
 ;;; Grave hags
 
 (defparameter *grave-hag-corpse-image* "grave-hag-corpse.png")
@@ -76,7 +75,7 @@
     (when (percent-of-time 70 t)
       (when (percent-of-time 60 t)
 	(add-inventory-item remains (new 'scroll-fragment)))
-      (add-inventory-item remains (new (random-choose '(skull wolf-skull stone item-box))))
+      (add-inventory-item remains (new (random-choose '(skull wolf-corpse stone item-box))))
       (if (percent-of-time 70 t)
 	  (if (percent-of-time 50 t)
 	      (add-inventory-item remains (reagent-bag))
@@ -122,8 +121,7 @@
 
 (defmethod die ((self wolf))
   (let ((remains (new 'remains)))
-    (add-inventory-item remains (new 'wolf-skull))
-    (percent-of-time 60 (add-inventory-item remains (new 'jerky)))
+    (add-inventory-item remains (new 'wolf-corpse))
     (drop self remains))
   (destroy self))
 

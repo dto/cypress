@@ -54,7 +54,7 @@
 
 (defparameter *ruin-wall-images* (image-set "ruin-wall" 4))
 (defparameter *skull-images* (image-set "skull" 3))
-(defparameter *wolf-skull-images* (image-set "wolf-skull" 3))
+(defparameter *wolf-corpse-images* (image-set "wolf-skull" 3))
 
 (defparameter *item-box-images* (image-set "item-box" 2))
 
@@ -168,7 +168,7 @@
   :scale 1.7)
 
 (defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
-(defthing wolf-skull :image (random-choose '("wolf-skull-1.png" "wolf-skull-2.png")))
+(defthing wolf-corpse :image (random-choose '("wolf-skull-1.png" "wolf-skull-2.png")))
 
 (defthing remains :tags '(:fixed) :image (random-choose '("remains-1.png" "remains-2.png")))
 
@@ -196,7 +196,7 @@
 
 ;;; Various prizes
 
-(defparameter *grab-bag-items* '(elixir elixir skull wolf-skull ruined-book silver-elixir
+(defparameter *grab-bag-items* '(elixir elixir skull wolf-corpse ruined-book silver-elixir
  stone stone thornweed nightshade white-bread wheat-bread))
 
 (defparameter *boxed-items* '(silver-elixir xalcium-armor atlas))

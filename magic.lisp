@@ -92,7 +92,24 @@
       (remove-object (current-buffer) (geoffrey))
       (switch-to-scene (new 'map-screen)))))
 
-;;    (destroy old-buffer)))
+;;; Cure meat
+
+(defthing (cure-meat spell)
+  :description "Cure meat (8 mp, 1 thornweed)"
+  :image "cure.png"
+  :reagents '(:magic 8 thornweed 2))
+
+(defmethod cast ((caster thing) (spell cure-meat))
+  (add-inventory-item (geoffrey) (quantity-of 'jerky 2))
+  (narrate-now "You cured enough meat for two meals."))
+
+(defmethod use :around ((caster thing) (spell cure-meat))
+  (let ((corpse (find-inventory-item (geoffrey) 'wolf-corpse)))
+    (if corpse
+	(progn
+	  (destroy corpse)
+	  (call-next-method))
+	(narrate-now "You don't have any meat to cure."))))
 
 ;;; Spellbook 
 
@@ -105,6 +122,7 @@
   (dolist (spell (list (new 'spark)
 		       (new 'travel)
 		       (new 'cure)
+		       (new 'cure-meat)
 		       (new 'craft-wooden-arrows)
 		       (new 'craft-silver-arrows)))
     (add-inventory-item book spell)))
