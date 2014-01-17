@@ -1,15 +1,7 @@
 * Tasks
 
-** DONE title screen
-   CLOSED: [2014-01-16 Thu 22:03]
-** DONE don't pop up bubbles for bubbles
-   CLOSED: [2014-01-16 Thu 22:03]
-** DONE each bubble replaces the last, not adding up bubbles
-   CLOSED: [2014-01-16 Thu 22:45]
-** TODO fix diagonal scrolling jitter
 ** TODO S for spellbook, I for inventory, P or space for pause
 *** TODO fix keyboard event tasks to not use CLON-style selectors
-** TODO fix stale pathfinding-data bug relating to tent
 ** TODO fix giant arrow for 1 frame
 *** TODO fix arrow not showing sometimes
 ** TODO fix z-sorting of tent
@@ -1032,4 +1024,54 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_OLPATH: Tasks/Paint other objects
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE title screen
+   CLOSED: [2014-01-16 Thu 22:03]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 00:02
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE don't pop up bubbles for bubbles
+   CLOSED: [2014-01-16 Thu 22:03]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 00:02
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE each bubble replaces the last, not adding up bubbles
+   CLOSED: [2014-01-16 Thu 22:45]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 00:02
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE fix diagonal scrolling jitter
+   CLOSED: [2014-01-16 Thu 23:03]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 00:02
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE fix stale quadtree bug relating to tent
+   CLOSED: [2014-01-17 Fri 00:02]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 00:02
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
    :END:
