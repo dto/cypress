@@ -40,6 +40,9 @@
 (defmethod tap ((title title) x y)
   (switch-to-scene (make-quest)))
 
+(defmethod scroll-tap ((title title) x y) nil)
+(defmethod alternate-tap ((title title) x y) nil)
+
 ;;; Main game
 
 (defun cypress (&optional (level 1))
