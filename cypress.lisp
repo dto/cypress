@@ -20,6 +20,32 @@
 
 (in-package :cypress)
 
+;;; Title screen
+
+(defresource "title-sbcl.png")
+(defresource "title-ccl.png")
+(defresource "title-jp.png")
+
+(defun title-screen-image () 
+  #+sbcl "title-sbcl.png"
+  #+ccl "title-ccl.png")
+
+(define-buffer title 
+  (quadtree-depth :initform 4)
+  (background-image :initform (title-screen-image)))
+
+(defmethod initialize :after ((title title) &key)
+  (resize title 1280 720))
+
+(defmethod start-playing ((title title))
+  (sleep 0.2) ;; allow time for human to remove finger from spacebar
+  (switch-to-scene (make-quest)))
+
+(defmethod tap ((title title) x y)
+  (start-playing title))
+
+;;; Main game
+
 (defun cypress (&optional (level 1))
   (setf *window-title* "cypress v0.6") 
   (setf *screen-width* 1280)
@@ -44,7 +70,7 @@
     (index-all-samples)
     (index-pending-resources)
     ;; (preload-resources)
-    (switch-to-scene (make-quest))
+    (switch-to-buffer (new 'title))
     (setf *font* "oldania")
     (start-session)))
 
