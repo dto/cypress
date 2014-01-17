@@ -535,6 +535,8 @@
   (font :initform *bubble-font*)
   (collision-type :initform nil))
 
+(defmethod look ((bubble bubble)))
+
 (defmethod initialize ((self bubble) &key text (font *bubble-font*))
   (with-local-fields 
     (setf (field-value :text self) text)
