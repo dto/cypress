@@ -26,6 +26,7 @@
     ((:r :control) reset-game)
     ((:space) transport-toggle-play)
     ((:p) transport-toggle-play)
+    ((:m) open-map)
     ((:s) open-spellbook)
     ((:i) open-inventory)))
 
@@ -42,6 +43,13 @@
 (defmethod starting-location ((buffer scene))
   (values (units 5) (units 5)))
   ;; (values (units 5) (/ (field-value :height buffer) 2)))
+
+(defun find-spell (class)
+  (find-inventory-item (find-spellbook) class))
+
+(defmethod open-map ((buffer scene))
+  (let ((travel (find-spell 'travel)))
+    (when travel (cast (geoffrey) travel))))
 
 (defmethod open-spellbook ((buffer scene))
   (activate (find-spellbook)))
@@ -162,7 +170,7 @@
 (defun dead-tree () (singleton (new 'dead-tree)))
 (defun leafy-tree () (singleton (new 'leafy-tree)))
 (defun wood-pile ()
-  (spray '(twig twig branch leafy-tree)
+  (spray '(twig twig branch dead-tree)
 	 :trim t :count (+ 2 (random 2))))
 
 (defun clearing ()
@@ -277,8 +285,28 @@
 			  (some-trees))
      (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (spray 'iron-fence :count (+ 2 (random 3))) (singleton (new 'grave-hag)) (spray 'bone-dust) (singleton (new 'iron-fence)) (flowers)))))
 
+;;; Frozen forest
+
 (defthing (frozen-forest scene)
-  :background-image (random-choose *snowy-meadow-images*))
+  :background-image (random-choose *frozen-meadow-images*))
+
+(defun pine-trees ()
+  (randomly 
+   (spray '(silverwood snowdrop thornweed) :trim t :count (+ 2 (random 2)))
+   (spray 'pine-tree
+	  :trim nil
+	  :count (random-choose '(3 4 4 5)))))
+
+(defun dead-trees-and-puddles ()
+  (spray '(dead-tree dead-tree puddle puddle silverwood) :trim nil :count (random-choose '(3 5 6))))
+
+(defmethod make-terrain ((forest frozen-forest))
+  (with-border (units 10)
+    (lined-up-randomly 
+     (stacked-up-randomly (wood-pile) (pine-trees) (pine-trees))
+     (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
+     (stacked-up-randomly (dead-trees-and-puddles) (lone-wolf) (wood-pile)))))
+
 ;; dense pine trees and some dead trees
 ;; wood piles and twigs and branches
 ;; nightshade and bushes
@@ -287,6 +315,7 @@
 
 (defthing (frozen-meadow scene)
   :background-image (random-choose *frozen-meadow-images*))
+
 ;; a few pine trees
 ;; wet pools and icy areas
 ;; ginseng
@@ -297,6 +326,19 @@
 
 (defthing (river scene)
   :background-image (random-choose *frozen-meadow-images*))
+
+(defun treacherous-trees ()
+  (spray '(dead-tree dead-tree nightshade crack crack large-crack puddle)
+	 :trim nil
+	 :count 14))
+
+(defmethod make-terrain ((river river))
+  (with-border (units 10)
+    (lined-up-randomly 
+     (stacked-up-randomly (wood-pile) (treacherous-trees))
+     (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
+     (stacked-up-randomly (dead-trees-and-puddles) (lone-wraith) (wood-pile)))))
+
 ;; pools of water
 ;; various ice cracks
 ;; twigs and branches

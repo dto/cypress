@@ -96,7 +96,7 @@
 
 (defmethod can-travel-to ((sector sector))
   (member (field-value :terrain sector)
-	  '(meadow cold-meadow grassy-meadow forest cemetery ruins)))
+	  '(frozen-forest river meadow cold-meadow grassy-meadow forest cemetery ruins)))
   ;; (with-fields (row column) sector
   ;;   (and (<= 1 (abs (- row *map-row*)))
   ;; 	 (<= 1 (abs (- column *map-column*))))))
