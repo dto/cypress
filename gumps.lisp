@@ -158,7 +158,7 @@
 	  (when (> quantity 1)
 	    (draw-string (format nil "~S" quantity)
 			 (+ x *icon-width* (- (units 1)))
-			 (+ y *icon-width* (- (units 0.3)))
+			 (+ y *icon-width* (- (units 0.5)))
 			 :color "saddle brown"
 			 :font "oldania-bold")))))))
 
@@ -177,7 +177,7 @@
 
 ;;; Container browser gump
 
-(defparameter *browser-top-margin* (units 5.5))
+(defparameter *browser-top-margin* (units 5.2))
 
 (defparameter *browser-left-margin* (units 2.3))
 
