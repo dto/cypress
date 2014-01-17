@@ -2,49 +2,17 @@
 
 ** TODO fix giant arrow for 1 frame
 *** TODO fix arrow not showing sometimes
-** DONE fix z-sorting of tent
-   CLOSED: [2014-01-17 Fri 00:11]
-** TODO fix z-sorting of player remains
-** TODO fix berry bush emptying crash
-** TODO cascade scroll instances based on count of open scrolls
+** TODO [#A] fix berry bush emptying crash
+** TODO [#C] fix z-sorting of player remains
+** DONE cascade scroll instances based on count of open scrolls
+   CLOSED: [2014-01-17 Fri 00:22]
 ** TODO fix wolf not chasing
-
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 
-** TODO Finish 0.6 release
-*** TODO geoffrey enters at left
 *** TODO cannot flee/exit when enemies near
-*** TODO start monk off with some ginseng
-*** TODO camping
-*** DONE world map grid
-    CLOSED: [2014-01-11 Sat 13:35]
-*** TODO lucius camp intro
-
-** TODO Object oriented level generation with generic functions
-
-** TODO New build 0.6 with three or four scenarios
-*** TODO Sunny meadow 
-**** TODO Sprinkle wildflowers
-*** TODO Forgotten cemetery
-**** TODO gravestones, crumbled walls, grave hags, bone dust, silverwood
-*** TODO Dry meadow
-**** TODO Ginseng, twigs, dead trees
-*** TODO Ancient road
-**** TODO Sometimes ruins by side of road with item box
-**** TODO dynamic ancient road decal tiling
-**** TODO wildflowers, sometimes
-***** TODO sometimes snow instead of meadow
-*** TODO Green forest
-**** TODO Green trees
-*** TODO Frozen crossing
-**** TODO Very white background
-**** TODO Crack and puddle decals
-
-** DONE Move spells into spellbook
-   CLOSED: [2014-01-13 Mon 23:03]
 
 ** TODO Press ESCAPE to close all gumps and unpause
 ** TODO Spellcast animation
@@ -70,7 +38,8 @@
 ** TODO [#C] Implement exhaustion
 ** TODO [#C] Floating eyes that glide and dart
 ** TODO [#B] Abstractify the sounds and/or find new ones in archive
-** TODO [#B] Fix player can run over gumps
+** DONE [#B] Fix player can run over gumps
+   CLOSED: [2014-01-17 Fri 00:26]
 ** TODO [#C] Fix giant arrow when dragging arrow/sprite out
 ** TODO [#C] Fix non-impelled arrows moving on their own 
 
@@ -1086,3 +1055,24 @@ FORGET-ME-NOTS and Temporal Seance
    :END:
 *** DONE fix keyboard event tasks to not use CLON-style selectors
     CLOSED: [2014-01-17 Fri 00:11]
+
+** DONE fix z-sorting of tent
+   CLOSED: [2014-01-17 Fri 00:11]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 00:22
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Move spells into spellbook
+   CLOSED: [2014-01-13 Mon 23:03]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 00:23
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
