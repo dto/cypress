@@ -32,6 +32,8 @@
   :image-scale 700
   :height *arrow-size*
   :width *arrow-size*
+  :sprite-height *arrow-size*
+  :sprite-width *arrow-size*
   :clock 400
   :heading (/ pi 2)
   :images *wooden-arrow-images*
@@ -45,13 +47,11 @@
     (setf (field-value :heading self) heading)))
 
 (defmethod initialize :after ((self arrow) &key heading)
-  (resize self *arrow-size* *arrow-size*)
-  (layout self))
+  (resize self *arrow-size* *arrow-size*))
 
 (defmethod run ((self arrow))
   (with-fields (clock image images) self
     (percent-of-time 13 (setf image (random-choose images)))
-    (resize self *arrow-size* *arrow-size*)
     (decf clock)
     (if (minusp clock)
 	(destroy self)
