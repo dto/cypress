@@ -391,11 +391,23 @@
   (or (field-value :description self)
       (fancy-description self)))
 
+(defun find-bubble ()
+  (block finding
+    (with-fields (objects) (current-buffer)
+      (loop for thing being the hash-values in objects
+	    do (when (typep (find-object thing) (find-class 'bubble))
+		 (return-from finding (find-object thing)))))))
+
+(defmethod replace-bubble ((self thing) text)
+  (let ((old-bubble (find-bubble)))
+    (when old-bubble 
+      (destroy old-bubble))
+    (drop self (new 'bubble :text text)
+	  ;; just to the right of object
+	  (field-value :width self) 0)))
+
 (defmethod look ((self thing))
-  (drop self 
-	(new 'bubble :text (find-description self))
-	;; just to the right of object
-	(field-value :width self) 0))
+  (replace-bubble self (find-description self)))
 
 ;;; Detecting click and double-click
 
