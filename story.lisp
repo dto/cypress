@@ -104,7 +104,6 @@ Double-click food to eat it.
 Use the \"Cure meat\" spell to make jerky
 from freshly killed wolves.
 
-
 There are several new keyboard shortcuts:
 
 Press \"I\" to see Geoffrey's inventory.
@@ -112,7 +111,8 @@ Press \"S\" to open the spellbook.
 Press \"P\" to pause (or spacebar).
 Press \"M\" to open the travel map.
 
-I hope you enjoy Cypress.  Please submit
+I hope you enjoy this work-in-progress
+demonstration of Cypress.  Please submit
 bug reports and feedback to me at
 dto@blocky.io
 

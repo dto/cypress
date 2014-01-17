@@ -349,6 +349,11 @@
 	  (modify-health self (- (random-choose '(2 3 3 5 7))))
 	  (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))
 	  (narrate-now "You are freezing to death! Make a campfire.")))
+      (when (> %hunger 80)
+	(percent-of-time 1
+	  (modify-health self (- (random-choose '(2 3 3 5 7))))
+	  (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))
+	  (narrate-now "You are starving to death! You must eat something.")))
       (when (field-value :bow-ready self)
 	(fire self (find-arrow self)))
       ;; find out what direction the AI or human wants to go
@@ -480,9 +485,15 @@
 	  ((> cold 30)
 	   (narrate "You are getting cold.")))))
 
-  ;; (if (minusp points)
-  ;;     (narrate "You suffered ~A health points of damage." points)
-  ;;     (narrate "You recovered ~A health points." points)))
+(defmethod modify-hunger :after ((monk geoffrey) points)
+  (with-fields (hunger) monk
+    (narrate "You feel a bit hungrier. Currently at ~S percent." hunger)
+    (cond ((> hunger 85)
+	   (narrate "You are starving to death!"))
+	  ((> hunger 70)
+	   (narrate "You are beginning to starve. You feel weak from hunger."))
+	  ((> hunger 40)
+	   (narrate "You are getting hungry.")))))
 
 (defparameter *monk-hide-weapon-time* (seconds->frames 10))
 
@@ -524,14 +535,14 @@
 
 (defmethod eat ((monk monk) (bread white-bread))
   (modify-health monk +5)
-  (modify-hunger monk -10))
+  (modify-hunger monk -20))
 
 (defthing (wheat-bread food)
   :image "wheat-bread.png")
 
 (defmethod eat ((monk monk) (bread wheat-bread))
   (modify-health monk +10)
-  (modify-hunger monk -15))
+  (modify-hunger monk -30))
 
 (defmethod eat :after ((monk geoffrey) (food food))
   (narrate "Very good! You feel better."))
@@ -541,7 +552,7 @@
 
 (defmethod eat ((monk monk) (jerky jerky))
   (modify-health monk +15)
-  (modify-hunger monk -30))
+  (modify-hunger monk -45))
 
 (defparameter *elixir-images* (image-set "elixir" 2))
 
@@ -596,7 +607,7 @@
 (defmethod recover ((monk monk))
   (modify-health monk +50)
   (modify-magic monk +50)
-  (modify-cold monk +100)
+  (modify-cold monk -100)
   (modify-fatigue monk -50)
   (narrate-now "You rest at the campfire, and feel much better."))
   

@@ -1,8 +1,10 @@
 * Tasks
 
+** TODO seance spell gives you a piece of lore from a skull
 ** TODO restrict visitable map squares
 ** TODO disallow re-visiting same square
-** TODO disallow camping more than once in a square
+** DONE disallow camping more than once in a square
+   CLOSED: [2014-01-17 Fri 08:00]
 ** TODO [#C] fix z-sorting of player remains
 ** TODO [#B] fix wolf not chasing
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
@@ -14,18 +16,6 @@
 *** TODO cannot flee/exit when enemies near
 ** TODO [#B] Spellcast animation
 ** TODO [#B] Implement low HP warning, i.e. Dying condition
-** TODO [#B] Implement cold
-*** TODO + 20 you are getting cold
-*** TODO + 40 you are very cold, and shivering (arrow accuracy)
-*** TODO + 70 you are extremely cold, shivering a lot
-*** TODO + 80 you are freezing to death
-** TODO [#B] Implement hunger
-*** TODO + 35 you are getting hungry
-*** TODO + 50 you are getting hungry
-*** TODO + 70 you are beginning to feel weak from hunger
-*** TODO + 80 you are beginning to starve
-*** TODO + 90 you are starving to death
-** TODO [#B] Implement camping
 ** TODO [#B] Write method CAN-REACH to allow checking player distance from manipulated objets
 *** TODO Check CAN-REACH in CAN-PICK etc
 
@@ -1100,4 +1090,42 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] Implement cold
+   CLOSED: [2014-01-17 Fri 08:10]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 08:10
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** TODO + 20 you are getting cold
+*** TODO + 40 you are very cold, and shivering (arrow accuracy)
+*** TODO + 70 you are extremely cold, shivering a lot
+*** TODO + 80 you are freezing to death
+
+** DONE [#B] Implement hunger
+   CLOSED: [2014-01-17 Fri 08:10]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 08:10
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** TODO + 35 you are getting hungry
+*** TODO + 50 you are getting hungry
+*** TODO + 70 you are beginning to feel weak from hunger
+*** TODO + 80 you are beginning to starve
+*** TODO + 90 you are starving to death
+
+** TODO [#B] Implement camping
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 08:10
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
    :END:
