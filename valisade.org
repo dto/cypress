@@ -1,5 +1,25 @@
 * Tasks
 
+** TODO title screen
+** TODO don't pop up bubbles for bubbles
+** TODO each bubble replaces the last, not adding up bubbles
+** TODO S for spellbook, I for inventory, P or space for pause
+** TODO fix stale pathfinding-data bug relating to tent
+** TODO fix keyboard event tasks to not use CLON-style selectors
+** TODO fix giant arrow for 1 frame
+** TODO fix arrow not showing sometimes
+** TODO fix z-sorting of tent
+** TODO fix z-sorting of player remains
+** TODO fix berry bush emptying crash
+** TODO fix diagonal scrolling jitter
+** TODO cascade scroll instances based on count of open scrolls
+** TODO fix wolf not chasing
+
+** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
+*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
+
+** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
+
 ** TODO Finish 0.6 release
 *** TODO geoffrey enters at left
 *** TODO cannot flee/exit when enemies near
@@ -29,12 +49,12 @@
 **** TODO Very white background
 **** TODO Crack and puddle decals
 
-** TODO Press ESCAPE to close all gumps and unpause
 ** DONE Move spells into spellbook
    CLOSED: [2014-01-13 Mon 23:03]
+
+** TODO Press ESCAPE to close all gumps and unpause
 ** TODO Spellcast animation
 ** TODO Implement low HP warning, i.e. Dying condition
-
 ** TODO [#A] Implement cold
 *** TODO + 20 you are getting cold
 *** TODO + 40 you are very cold, and shivering (arrow accuracy)
@@ -56,8 +76,6 @@
 ** TODO [#C] Implement exhaustion
 ** TODO [#C] Floating eyes that glide and dart
 ** TODO [#B] Abstractify the sounds and/or find new ones in archive
-** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
-*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 ** TODO [#B] Fix player can run over gumps
 ** TODO [#C] Fix giant arrow when dragging arrow/sprite out
 ** TODO [#C] Fix non-impelled arrows moving on their own 
