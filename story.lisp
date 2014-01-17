@@ -79,20 +79,45 @@ I've got to get moving! See you soon.
 ")
 
 (defparameter *help-text* 
-"Welcome to Cypress v0.6. 
+"Welcome to Cypress v0.7 (alpha) 
 
-Press Control-R to get a new quest.
-Press Spacebar to pause the action.
-Single-click an object to show its name.
-Right-click a destination to move there.
+This is the Scroll of Helping. If you
+click the scroll, you will advance to
+the next page. Use the right mouse
+button (or the Control key with the left
+button) to close scrolls.
+
+Right-click a destination to move
+Geoffrey there.
+
+Click an object to show its name.
 Drag objects to move them.
+Drag objects onto Geoffrey to take them.
+Double-click object to activate it.
 Double-click monster to attack it.
-Drag object onto monks to take item.
-Double click container for inventory.
-Right click scrolls to close.
-Drag items into/out of inventory.
-Double click spells in spellbook.
-Use Travel spell to explore land.")
+Double click Geoffrey for inventory.
+Drag items into/out of inventory scrolls.
+Click spells in spellbook for description.
+Double click spells in spellbook to cast.
+Use the Travel spell to explore the land.
+Double-click food to eat it.
+Use the \"Cure meat\" spell to make jerky
+from freshly killed wolves.
+
+
+There are several new keyboard shortcuts:
+
+Press \"I\" to see Geoffrey's inventory.
+Press \"S\" to open the spellbook.
+Press \"P\" to pause (or spacebar).
+Press \"M\" to open the travel map.
+
+I hope you enjoy Cypress.  Please submit
+bug reports and feedback to me at
+dto@blocky.io
+
+-- David O'Toole
+")
 
 (defparameter *poem-1*
 "My name is Amalia.
