@@ -322,7 +322,31 @@
 		drop)
 	      browser))))))
 
-;;; The talk gump 
+;;; Conversation gump 
+
+(defun discussion-method (topic)
+  (make-keyword (format nil "discuss/~A" (symbol-name topic))))
+
+(defmacro define-topic (name super &body forms)
+  `(define-method ,(make-non-keyword (discussion-method name)) ,super ()
+     ,@(if (stringp (first forms))
+	   (list (append 
+		  (list 'make-talk-gump 'self (first forms))
+		  (rest forms)))
+	   forms)))
+	  
+(defmethod discuss ((self thing) topic)
+  (let ((method (discussion-method topic)))
+    (let ((gump (send method self)))
+      (if (xelfp gump)
+	  (if (or (null gump)
+		  (%inputs (buttons gump)))
+	      ;; replace whole gump 
+	      (replace-gump self gump)
+	      ;; just replace text in existing gump
+	      (replace-gump-text gump gump))
+	  ;; no gump. quit conversation
+	  (destroy-gump self)))))
 
 (defparameter *button-margin* 2)
 
