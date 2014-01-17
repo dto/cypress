@@ -25,9 +25,11 @@
   '(((:pause) transport-toggle-play)
     ((:r :control) reset-game)
     ((:space) transport-toggle-play)
+    ((:p) transport-toggle-play)
     ((:s) open-spellbook)
-    ((:i) open-inventory)
-    ((:p :control) :transport-toggle-play)))
+    ((:i) open-inventory)))
+
+(defmethod begin-region ((buffer scene)))
 
 (defmethod mark-camped ((buffer scene))
   (setf (field-value :camped buffer) t))
