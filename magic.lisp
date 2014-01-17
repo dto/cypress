@@ -84,7 +84,7 @@
 
 (defmethod cast ((caster thing) (spell travel))
   (modify-fatigue caster 15)
-  (modify-hunger caster 10)
+  (modify-hunger caster 12)
   (when (find-camp)
     (return-to-geoffrey (find-camp)))
   (at-next-update

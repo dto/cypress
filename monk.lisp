@@ -207,6 +207,7 @@
       (narrate "That destination is obstructed."))))
 
 (defmethod drop-object :after ((buffer buffer) (monk monk) &optional x y z)
+  (modify-hunger monk 1)
   (setf (field-value :path monk) nil))
 
 (defmethod initialize :after ((monk monk) &key)
@@ -295,10 +296,10 @@
 
 (defmethod collide ((self monk) (puddle puddle))
   (when (field-value :alive self)
-    (percent-of-time 8
+    (percent-of-time 6
       (narrate-now "You step into the water. You are wet!")
-      (modify-health self (- (random-choose '(5 7))))
-      (modify-cold self +40)
+      (modify-health self (- (random-chose '(5 7))))
+      (modify-cold self +20)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod die ((self monk))
@@ -442,6 +443,7 @@
 	    (progn 
 	      (aim monk (heading-between monk enemy))
 	      (begin-firing monk)
+	      (modify-hunger monk 1)
 	      (modify-fatigue monk 1))))))
 
 (defmethod can-accept ((self monk))
@@ -487,13 +489,15 @@
 
 (defmethod modify-hunger :after ((monk geoffrey) points)
   (with-fields (hunger) monk
-    (narrate "You feel a bit hungrier. Currently at ~S percent." hunger)
     (cond ((> hunger 85)
 	   (narrate "You are starving to death!"))
 	  ((> hunger 70)
-	   (narrate "You are beginning to starve. You feel weak from hunger."))
+	   (narrate "You feel weak from hunger."))
 	  ((> hunger 40)
-	   (narrate "You are getting hungry.")))))
+	   (narrate "You are getting hungry."))
+	  ((> hunger 20)
+	   (narrate "You feel a bit hungrier. Currently at ~S percent." hunger)))))
+
 
 (defparameter *monk-hide-weapon-time* (seconds->frames 10))
 
