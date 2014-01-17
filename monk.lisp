@@ -214,7 +214,8 @@
   (add-inventory-item monk (new 'spellbook))
   (add-inventory-item monk (new 'camp))
   (add-inventory-item monk (quantity-of 'ginseng 2))
-  (add-inventory-item monk (new 'stone))
+  (add-inventory-item monk (quantity-of 'stone 2))
+  (add-inventory-item monk (new 'white-bread))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
   (equip monk (find-arrow monk)))
   
