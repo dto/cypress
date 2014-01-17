@@ -314,7 +314,7 @@
     (lined-up-randomly 
      (stacked-up-randomly (rock-outcropping) (pine-trees) (pine-trees))
      (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
-     (stacked-up-randomly (dead-trees-and-puddles) (lone-wolf) (wood-pile)))))
+     (stacked-up-randomly (dead-trees-and-puddles) (pack-of-wolves) (wood-pile)))))
 
 (defmethod drop-object :after ((forest frozen-forest) (monk geoffrey) &optional x y z)
   (modify-cold monk +22))
