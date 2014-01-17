@@ -246,7 +246,7 @@
 ;;; Cemetery
 
 (defthing (cemetery scene)
-  :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png" "stone-road.png")))
+  :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png")))
 
 (defun row-of-graves ()
   (with-border (units (+ 2 (random 3)))
