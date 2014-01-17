@@ -113,3 +113,5 @@
 (defmethod activate ((spellbook spellbook))
   (replace-gump spellbook (new 'browser :container spellbook)))
 
+(defun find-spellbook ()
+  (find-inventory-item (geoffrey) 'spellbook))

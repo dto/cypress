@@ -21,9 +21,11 @@
   :time :day
   :cold 0
   :default-events
-  '(((:pause) :transport-toggle-play)
-    ((:r :control) :reset-game)
-    ((:space) :transport-toggle-play)
+  '(((:pause) transport-toggle-play)
+    ((:r :control) reset-game)
+    ((:space) transport-toggle-play)
+    ((:s) open-spellbook)
+    ((:i) open-inventory)
     ((:p :control) :transport-toggle-play)))
 
 (defmethod make-terrain ((buffer scene)))
@@ -31,6 +33,12 @@
 (defmethod starting-location ((buffer scene))
   (values (units 5) (units 5)))
   ;; (values (units 5) (/ (field-value :height buffer) 2)))
+
+(defmethod open-spellbook ((buffer scene))
+  (activate (find-spellbook)))
+
+(defmethod open-inventory ((buffer scene))
+  (activate (geoffrey)))
 
 (defmethod initialize :after ((buffer scene) &key (player (geoffrey)))
   (with-buffer buffer
