@@ -437,7 +437,8 @@
   (replace-gump monk (new 'browser :container monk)))
 
 (defmethod collide :after ((monk geoffrey) (gump gump))
-  (bring-to-front gump))
+  (when (field-value :waypoints monk)
+    (bring-to-front gump)))
 
 (defmethod modify-health :after ((monk geoffrey) points)
   (with-fields (alive health) monk
