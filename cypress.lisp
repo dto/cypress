@@ -37,12 +37,8 @@
 (defmethod initialize :after ((title title) &key)
   (resize title 1280 720))
 
-(defmethod start-playing ((title title))
-  (sleep 0.2) ;; allow time for human to remove finger from spacebar
-  (switch-to-scene (make-quest)))
-
 (defmethod tap ((title title) x y)
-  (start-playing title))
+  (switch-to-scene (make-quest)))
 
 ;;; Main game
 
