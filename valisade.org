@@ -1,10 +1,9 @@
 * Tasks
 
-** TODO S for spellbook, I for inventory, P or space for pause
-*** TODO fix keyboard event tasks to not use CLON-style selectors
 ** TODO fix giant arrow for 1 frame
 *** TODO fix arrow not showing sometimes
-** TODO fix z-sorting of tent
+** DONE fix z-sorting of tent
+   CLOSED: [2014-01-17 Fri 00:11]
 ** TODO fix z-sorting of player remains
 ** TODO fix berry bush emptying crash
 ** TODO cascade scroll instances based on count of open scrolls
@@ -1075,3 +1074,15 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE S for spellbook, I for inventory, P or space for pause
+   CLOSED: [2014-01-17 Fri 00:11]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-17 Fri 00:11
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE fix keyboard event tasks to not use CLON-style selectors
+    CLOSED: [2014-01-17 Fri 00:11]

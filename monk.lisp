@@ -291,6 +291,7 @@
       (drop self (new 'remains))
       (drop self (new 'skull))
       (play-sample "death.wav")
+      (send-to-back self)
       (setf (field-value :alive self) nil))))
 
 ;;; Control logic driven by the above (possibly overridden) methods.
