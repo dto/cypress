@@ -31,6 +31,11 @@
   :reagents '(:magic 3 wood 3)
   :image "spark.png")
 
+(defmethod use :around ((caster thing) (spell spark))
+  (if (camped (current-scene))
+      (narrate-now "You can't camp here again.")
+      (call-next-method caster spell)))
+
 (defmethod cast ((caster thing) (spell spark))
   (let ((camp (find-camp)))
     (if (not camp)

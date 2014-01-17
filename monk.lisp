@@ -555,6 +555,7 @@
 (defmethod ignite ((camp camp))
   (with-fields (fire timer) camp
     (when (not fire)
+      (mark-camped (current-scene))
       (setf fire (new 'fire))
       (setf timer (seconds->frames 15))
       (drop camp fire 25 125)

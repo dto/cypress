@@ -18,6 +18,7 @@
 (define-buffer scene 
   :background-image "stone-road.png"
   :quadtree-depth 8
+  :camped nil
   :time :day
   :cold 0
   :default-events
@@ -27,6 +28,12 @@
     ((:s) open-spellbook)
     ((:i) open-inventory)
     ((:p :control) :transport-toggle-play)))
+
+(defmethod mark-camped ((buffer scene))
+  (setf (field-value :camped buffer) t))
+
+(defmethod camped ((buffer scene)) 
+  (field-value :camped buffer))
 
 (defmethod make-terrain ((buffer scene)))
 
