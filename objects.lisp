@@ -102,7 +102,8 @@
   :description "Scroll of Helping")
 
 (defmethod activate ((self scroll))
-  (replace-gump self (new 'scroll-gump :text *help-text*)))
+  (let ((gump (new 'scroll-gump :text *help-text*)))
+    (replace-gump self gump)))
 
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *wraith-images* (image-set "wraith" 3))
