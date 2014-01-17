@@ -27,8 +27,8 @@
 ;;; Spark spell to light fire 
 
 (defthing (spark spell)
-  :description "Ignite (3 mp)"
-  :reagents '(:magic 3)
+  :description "Ignite (3 mp, 3 wood)"
+  :reagents '(:magic 3 wood 3)
   :image "spark.png")
 
 (defmethod cast ((caster thing) (spell spark))
