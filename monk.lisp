@@ -30,6 +30,8 @@
 
 (defthing (arrow sprite)
   :image-scale 700
+  :height *arrow-size*
+  :width *arrow-size*
   :clock 400
   :heading (/ pi 2)
   :images *wooden-arrow-images*
