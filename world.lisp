@@ -402,9 +402,10 @@
   (let ((old-bubble (find-bubble)))
     (when old-bubble 
       (destroy old-bubble))
-    (drop self (new 'bubble :text text)
-	  ;; just to the right of object
-	  (field-value :width self) 0)))
+    (multiple-value-bind (x y) (right-of self)
+      (drop-object (current-buffer)
+		   (new 'bubble :text text)
+		   x y))))
 
 (defmethod look ((self thing))
   (replace-bubble self (find-description self)))
