@@ -79,7 +79,7 @@
 ;;; Travel
 
 (defthing (travel spell)
-  :description "Travel (15 fatigue, 10 hunger)"
+  :description "Travel (15 fatigue, 12 hunger)"
   :image "mountain-5.png")
 
 (defmethod cast ((caster thing) (spell travel))
