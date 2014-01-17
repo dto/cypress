@@ -230,7 +230,9 @@ you left.
     (setf *map-column* 0)
     (with-buffer buffer
       ;; (drop-object buffer (new 'lucius) (units 12) (units 8))
-      (drop-object buffer (new 'scroll) (units 10) (units 4))
-     (current-buffer))))
+      (let ((scroll (new 'scroll)))
+	(drop-object buffer scroll (units 10) (units 4))
+	(activate scroll))
+      (current-buffer))))
 
 
