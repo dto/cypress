@@ -267,12 +267,15 @@
 (defmethod tap :after ((browser browser) x y)
   (let ((icon (hit-icons browser x y)))
     (when icon 
-      (drop-object (current-buffer)
-		   (new 'bubble 
-			:text (find-description 
-			       (field-value :target icon)))
-		   (+ (units 2) x)
-		   y))))
+      (let ((old-bubble (find-bubble)))
+	(when old-bubble 
+	  (destroy old-bubble))
+	(drop-object (current-buffer)
+		     (new 'bubble 
+			  :text (find-description 
+				 (field-value :target icon)))
+		     (+ (units 2) x)
+		     y)))))
 
 (defmethod look ((browser browser)))
 
