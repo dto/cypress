@@ -90,7 +90,7 @@
   (at-next-update
     (let ((old-buffer (current-buffer)))
       (remove-object (current-buffer) (geoffrey))
-      (switch-to-scene (new 'map-screen)))))
+      (switch-to-buffer (new 'map-screen)))))
 
 ;;; Cure meat
 
