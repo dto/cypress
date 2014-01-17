@@ -116,7 +116,7 @@
   :sprite-height 130
   :sprite-width 130
   :tags '(:enemy)
-  :health 20
+  :health 25
   :image (random-choose *wolf-images*))
 
 (defmethod die ((self wolf))
@@ -134,7 +134,7 @@
     (setf (field-value :seen-player self) nil))
   (with-fields (image heading seen-player) self
     (percent-of-time 17 (setf image (random-choose *wolf-images*)))
-    (when (< (distance-to-cursor self) 700)
+    (when (<= (distance-to-cursor self) 700)
       (unless seen-player
 	(with-fields (x y) (cursor)
 	  (walk-to self x y)
@@ -147,15 +147,15 @@
 	      (let ((heading0 (heading-to-cursor self)))
 		(percent-of-time 25 
 		  (setf heading heading0))
-		(percent-of-time 70
-		  (move self heading0 2.2))))
+		(percent-of-time 80
+		  (move self heading0 3))))
 	    (progn
 	      (percent-of-time 1
 		(with-fields (x y) (cursor)
 		  (walk-to self x y)))
 	      (when (movement-heading self)
 		(setf (field-value :heading self) (movement-heading self))
-		(move self (movement-heading self) 3.2))))))))
+		(move self (movement-heading self) 4))))))))
 
 
 	    
