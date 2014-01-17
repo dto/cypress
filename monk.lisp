@@ -285,6 +285,22 @@
       (modify-health self (- (random-choose '(2 3 3 5 7))))
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
+(defmethod collide ((self monk) (crack large-crack))
+  (when (field-value :alive self)
+    (percent-of-time 8
+      (narrate-now "The ice cracks beneath your feet. You are splashed with frigid water.")
+      (modify-health self (- (random-choose '(1 2))))
+      (modify-cold self +10)
+      (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
+
+(defmethod collide ((self monk) (puddle puddle))
+  (when (field-value :alive self)
+    (percent-of-time 8
+      (narrate-now "You step into the water. You are wet!")
+      (modify-health self (- (random-choose '(5 7))))
+      (modify-cold self +40)
+      (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
+
 (defmethod die ((self monk))
   (when (field-value :alive self)
     (when (humanp self) 
@@ -328,6 +344,11 @@
     (when %alive
       (update-animation self)
       (update-bow self)
+      (when (> %cold 80)
+	(percent-of-time 1
+	  (modify-health self (- (random-choose '(2 3 3 5 7))))
+	  (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))
+	  (narrate-now "You are freezing to death! Make a campfire.")))
       (when (field-value :bow-ready self)
 	(fire self (find-arrow self)))
       ;; find out what direction the AI or human wants to go
@@ -448,6 +469,17 @@
     (when (and alive
 	       (not (plusp health)))
       (die monk))))
+
+(defmethod modify-cold :after ((monk geoffrey) points)
+  (with-fields (cold) monk
+    (narrate "You feel colder. Currently at ~S percent." cold)
+    (cond ((> cold 80)
+	   (narrate "You are freezing!"))
+	  ((> cold 50)
+	   (narrate "You are beginning to freeze!"))
+	  ((> cold 30)
+	   (narrate "You are getting cold.")))))
+
   ;; (if (minusp points)
   ;;     (narrate "You suffered ~A health points of damage." points)
   ;;     (narrate "You recovered ~A health points." points)))
@@ -564,7 +596,7 @@
 (defmethod recover ((monk monk))
   (modify-health monk +50)
   (modify-magic monk +50)
-  (modify-cold monk +80)
+  (modify-cold monk +100)
   (modify-fatigue monk -50)
   (narrate-now "You rest at the campfire, and feel much better."))
   
