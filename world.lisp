@@ -325,7 +325,10 @@
 (defmethod set-gump ((self thing) gump)
   (setf (field-value :gump self) 
 	(find-object gump))
-  (drop self gump (field-value :width self)))
+  ;; cascade
+  (multiple-value-bind (x y)
+      (gump-cascade-position)
+    (drop-object (current-buffer) gump x y)))
 
 (defmethod destroy-gump ((self thing))
   (with-fields (gump) self

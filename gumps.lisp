@@ -23,13 +23,6 @@
 	     (+ target-x (window-x))
 	     (+ target-y (window-y)))))
 
-(defmethod drop-object :after ((buffer buffer) (gump gump) &optional x y z)
-  (set-target-position gump (field-value :x gump) (field-value :y gump))
-  (bring-to-front gump))
-
-(defmethod add-object :after ((buffer buffer) (self gump) &optional x y z)
-  (bring-to-front self))
-
 (defmethod drag ((self gump) x y)
   (set-target-position self x y)
   (move-to self x y)
@@ -37,6 +30,29 @@
 
 (defmethod run ((self gump))
   (arrange self))
+
+;;; Cascading the gumps 
+
+(defun find-gumps ()
+  (with-fields (objects) (current-buffer)
+    (loop for thing being the hash-values in objects
+	  when (typep (find-object thing) (find-class 'gump))
+	    collect (find-object thing))))
+
+(defparameter *gump-cascade-size* (units 4))
+
+(defun gump-cascade-position ()
+  (let ((delta (* *gump-cascade-size* (length (find-gumps)))))
+    (values
+     (+ (window-x) delta)
+     (+ (window-y) delta))))
+
+(defmethod drop-object :after ((buffer buffer) (gump gump) &optional x y z)
+  (set-target-position gump (field-value :x gump) (field-value :y gump))
+  (bring-to-front gump))
+
+(defmethod add-object :after ((buffer buffer) (self gump) &optional x y z)
+  (bring-to-front self))
 
 ;;; Right click to close gumps
 
