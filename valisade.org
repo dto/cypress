@@ -1,33 +1,28 @@
 * Tasks
 
-** TODO seance spell gives you a piece of lore from a skull
-** TODO restrict visitable map squares
-** TODO disallow re-visiting same square
-** DONE disallow camping more than once in a square
-   CLOSED: [2014-01-17 Fri 08:00]
-** TODO [#C] fix z-sorting of player remains
+** TODO [#A] move gump cascade back to left
+** TODO [#B] Night/camp dream sequences
+** TODO [#A] fix UUID drag errors
+** TODO [#A] restrict visitable map squares
+** TODO [#A] disallow re-visiting same square
 ** TODO [#B] fix wolf not chasing
+** TODO [#A] Disallow flee/exit when enemies near
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-
-** TODO Press ESCAPE to close all gumps and unpause
+** TODO [#C] seance spell gives you a piece of lore from a skull
+** TODO [#C] fix z-sorting of player remains
+** TODO [#B] Press ESCAPE to close all gumps and unpause
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
-
-*** TODO cannot flee/exit when enemies near
 ** TODO [#B] Spellcast animation
 ** TODO [#B] Implement low HP warning, i.e. Dying condition
 ** TODO [#B] Write method CAN-REACH to allow checking player distance from manipulated objets
 *** TODO Check CAN-REACH in CAN-PICK etc
-
 ** TODO [#B] Add jitter to aim when cold/exhausted
-
 ** TODO [#C] Implement bleeding
 ** TODO [#C] Implement exhaustion
-** TODO [#C] Floating eyes that glide and dart
-** TODO [#B] Abstractify the sounds and/or find new ones in archive
-** DONE [#B] Fix player can run over gumps
-   CLOSED: [2014-01-17 Fri 00:26]
-** TODO [#C] Fix giant arrow when dragging arrow/sprite out
+** TODO [#A] Skeleton archers
+** TODO [#B] Floating eyes that glide and dart
+** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] Fix non-impelled arrows moving on their own 
 
 ** TODO Paint and Animate an Imperial Raven.
@@ -177,7 +172,7 @@ or fatigue.
 *** Create healing-jerky from animal carcasses
 *** TODO Paint meat
 ** Cure light wounds (25 mana) (2 ginseng) 
-*** Heals between 10-15 mana
+*** Heals between 10-15 hp
 ** Hold creature (8 mana) (2 thornweed)
 *** 80% chance of briefly paralyzing target so they cannot move or attack
 ** Craft arrows (1 mana) (3 fatigue) (stone chips, wood) 
@@ -1128,4 +1123,34 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE disallow camping more than once in a square
+   CLOSED: [2014-01-17 Fri 08:00]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-18 Sat 18:07
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] Fix player can run over gumps
+   CLOSED: [2014-01-17 Fri 00:26]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-18 Sat 18:08
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#C] Fix giant arrow when dragging arrow/sprite out
+   CLOSED: [2014-01-18 Sat 18:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-18 Sat 18:08
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
    :END:
