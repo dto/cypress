@@ -103,8 +103,9 @@
 
 (defmethod activate ((self scroll))
   (let ((gump (new 'scroll-gump :text *help-text*)))
-    (replace-gump self gump)))
-
+    (replace-gump self gump)
+    (set-target-position gump (units 50) (units 1))))
+	     
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *wraith-images* (image-set "wraith" 3))
 (defparameter *fire-pit-images* (image-set "fire-pit" 3))
