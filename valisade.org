@@ -1,27 +1,27 @@
 * Tasks
 
-** TODO [#A] move gump cascade back to left
-** TODO [#B] Night/camp dream sequences
+** TODO [#A] fix geoffrey-in-wrong-world bug
 ** TODO [#A] fix UUID drag errors
 ** TODO [#A] restrict visitable map squares
 ** TODO [#A] disallow re-visiting same square
-** TODO [#B] fix wolf not chasing
 ** TODO [#A] Disallow flee/exit when enemies near
+** TODO [#A] Skeleton archers
+** TODO [#B] Night/camp dream sequences
+** TODO [#B] fix wolf not chasing
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#C] seance spell gives you a piece of lore from a skull
-** TODO [#C] fix z-sorting of player remains
 ** TODO [#B] Press ESCAPE to close all gumps and unpause
-** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 ** TODO [#B] Spellcast animation
 ** TODO [#B] Implement low HP warning, i.e. Dying condition
 ** TODO [#B] Write method CAN-REACH to allow checking player distance from manipulated objets
 *** TODO Check CAN-REACH in CAN-PICK etc
 ** TODO [#B] Add jitter to aim when cold/exhausted
+** TODO [#B] Floating eyes that glide and dart
+** TODO [#C] seance spell gives you a piece of lore from a skull
+** TODO [#C] fix z-sorting of player remains
+** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 ** TODO [#C] Implement bleeding
 ** TODO [#C] Implement exhaustion
-** TODO [#A] Skeleton archers
-** TODO [#B] Floating eyes that glide and dart
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] Fix non-impelled arrows moving on their own 
 
@@ -1149,6 +1149,16 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2014-01-18 Sat 18:08]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-18 Sat 18:08
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] move gump cascade back to left
+   CLOSED: [2014-01-18 Sat 19:34]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-18 Sat 19:34
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade
