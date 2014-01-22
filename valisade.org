@@ -4,11 +4,14 @@
 
 * Tasks
 
-** TODO find reagents recursively, start geoffrey with reagent bag
+** TODO Fix lack of paused message
 ** TODO survive each day; end it by camping 
-** TODO integrate more sound effects and music; grak.wav groar.wav
-** TODO geoffreys footsteps? lichdeath, chimes, thunder
-** TODO musical rewards for magic
+** DONE integrate more sound effects and music; grak.wav groar.wav
+   CLOSED: [2014-01-21 Tue 22:56]
+** DONE geoffreys footsteps? lichdeath, chimes, thunder
+   CLOSED: [2014-01-21 Tue 22:56]
+** DONE musical rewards for magic
+   CLOSED: [2014-01-21 Tue 22:56]
 ** TODO copper keys, stairwells, plates
 ** TODO grave hag corpses
 
@@ -26,7 +29,6 @@
 ** TODO [#A] Goal is to reach bottom right corner in most levels? Clear condition before travel...
 
 ** TODO [#A] Disallow travel when enemies near
-
 
 ** TODO [#A] fix geoffrey-in-wrong-world bug
 ** TODO [#A] fix checkbox issues where not showing in middle
