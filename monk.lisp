@@ -629,10 +629,10 @@
       (bring-to-front fire))))
 
 (defmethod recover ((monk monk))
-  (modify-health monk +50)
+  (modify-health monk +12)
   (modify-magic monk +50)
   (modify-cold monk -100)
-  (modify-fatigue monk -50)
+  (modify-fatigue monk -40)
   (narrate-now "You rest at the campfire, and feel much better."))
   
 (defmethod ignite :after ((camp camp))
