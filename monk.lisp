@@ -646,8 +646,11 @@
   (not (null (field-value :container camp))))
 
 (defmethod return-to-geoffrey ((camp camp))
-  (remove-object (current-scene) camp)
-  (add-inventory-item (geoffrey) camp))
+  (with-fields (fire) camp
+    (remove-object (current-scene) camp)
+    (when fire
+      (remove-object (current-scene) fire))
+    (add-inventory-item (geoffrey) camp)))
 
 (defmethod run ((camp camp))
   (with-fields (fire timer) camp
