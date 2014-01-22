@@ -1,5 +1,9 @@
 (in-package :cypress)
 
+(defresource "chimes-1.wav" :volume 20)
+(defresource "chimes-2.wav" :volume 20)
+(defresource "chimes-3.wav" :volume 20)
+
 ;;; Basic spell definitions
 
 (defthing spell reagents)

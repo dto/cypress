@@ -124,7 +124,7 @@
 
 (defparameter *monk-walk* 
   '(:repeat t
-    :scale 850
+    :scale 820
     :frames (("monk-walk-1.png" 4)
 	     ("monk-walk-3.png" 4)
 	     ("monk-walk-2.png" 4)
@@ -132,7 +132,7 @@
 
 (defparameter *monk-walk-bow* 
   '(:repeat t
-    :scale 850
+    :scale 800
     :frames (("monk-walk-bow-3.png" 4)
 	     ("monk-walk-bow-1.png" 4)
 	     ("monk-walk-bow-2.png" 4)
@@ -217,6 +217,7 @@
 (defmethod initialize :after ((monk monk) &key)
   (add-inventory-item monk (new 'spellbook))
   (add-inventory-item monk (new 'camp))
+  (add-inventory-item monk (new 'bag))
   (add-inventory-item monk (quantity-of 'ginseng 2))
   (add-inventory-item monk (quantity-of 'stone 2))
   (add-inventory-item monk (new 'white-bread))
