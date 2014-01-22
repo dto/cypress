@@ -1,38 +1,41 @@
 * Tasks
 
-** DONE persistent maps
-   CLOSED: [2014-01-21 Tue 20:07]
-** DONE [#A] camera glide should use step-toward-#heading
-   CLOSED: [2014-01-21 Tue 19:58]
+** TODO [#A] restrict visitable map squares in order to begin testing Act I
+** TODO [#A] increase map grid density and procgen it
+** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
+** TODO [#A] Goal is to reach bottom right corner in most levels? Clear condition before travel...
+** TODO [#A] Must clear enemies to camp
 ** TODO [#A] make hungry/cold messages into Geoffrey-aligned bark bubbles
-** TODO [#A] dialogue bark bubbles
-** TODO [#A] Fix mac window resizing bugs
-** TODO [#A] possibly swap right-click and left-click i.e. movement/look
-** TODO [#A] fix checkbox issues where not showing in middle
-** TODO [#A] increase pond size
-** TODO [#A] implement snow/rain/darkness
-** TODO [#A] fix geoffrey-in-wrong-world bug
-** TODO [#A] Consider fully turn-based combat
+
+** TODO [#A] Disallow travel when enemies near
+
+
 ** TODO [#A] fix UUID drag errors
-** TODO [#A] restrict visitable map squares
-** TODO [#A] disallow re-visiting same square
-** TODO [#A] Disallow flee/exit when enemies near
-** TODO [#A] Skeleton archers
+** TODO [#A] fix geoffrey-in-wrong-world bug
+** TODO [#A] fix checkbox issues where not showing in middle
+** TODO [#A] Lucius help AI?
+
+** TODO [#A] Spellcast animation
+
+** TODO [#A] Implement low HP warning, i.e. Dying condition
+** TODO [#A] Write method CAN-REACH to allow checking player distance from manipulated objets
+*** TODO Check CAN-REACH in CAN-PICK etc
+** TODO [#B] Add jitter to aim when cold/exhausted
+
+** TODO [#B] implement snow/rain/darkness
+** TODO [#B] Consider fully turn-based combat
+** TODO [#B] Skeleton archers
+** TODO [#B] possibly swap right-click and left-click i.e. movement/look
+** TODO [#B] increase pond size
 ** TODO [#B] allow canceling travel
-** TODO [#B] increase map grid density and procgen it
-** TODO [#B] Control Q and Command q should quit game
-** TODO [#B] Lucius help AI?
 ** TODO [#B] Night/camp dream sequences
 ** TODO [#B] fix wolf not chasing
 ** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 ** TODO [#B] Press ESCAPE to close all gumps and unpause
-** TODO [#B] Spellcast animation
-** TODO [#B] Implement low HP warning, i.e. Dying condition
-** TODO [#B] Write method CAN-REACH to allow checking player distance from manipulated objets
-*** TODO Check CAN-REACH in CAN-PICK etc
-** TODO [#B] Add jitter to aim when cold/exhausted
 ** TODO [#B] Floating eyes that glide and dart
+** TODO [#C] Fix mac window resizing bugs
+** TODO [#C] Control Q and Command q should quit game
 ** TODO [#C] seance spell gives you a piece of lore from a skull
 ** TODO [#C] fix z-sorting of player remains
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
@@ -1200,6 +1203,26 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2014-01-18 Sat 19:34]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-18 Sat 19:34
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE persistent maps
+   CLOSED: [2014-01-21 Tue 20:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-21 Tue 20:12
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] camera glide should use step-toward-#heading
+   CLOSED: [2014-01-21 Tue 19:58]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-21 Tue 20:12
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade
