@@ -32,6 +32,9 @@
     ((:s) open-spellbook)
     ((:i) open-inventory)))
 
+(defmethod drag-fail ((scene scene) x y)
+  (show-error (geoffrey) x y))
+
 (defmethod begin-region ((buffer scene)))
 
 (defmethod mark-camped ((buffer scene))
@@ -151,7 +154,7 @@
 	  (multiple-value-bind (tx ty) 
 	      (step-toward-heading object 
 				   (field-value :heading object) 
-				   (/ *monk-speed* 1.8))
+				   (/ *monk-speed* 2))
 		;; yes. recenter.
 		(glide-window-to self
 				 (truncate (max 0
@@ -273,7 +276,6 @@
 					(pack-of-wolves)
 					(lone-wraith))
 			  (dense-trees)))))
-
 
 ;;; Cold meadow
 

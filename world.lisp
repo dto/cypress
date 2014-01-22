@@ -340,12 +340,22 @@
   (destroy-gump self)
   (set-gump self gump))
 
+;;; Reaching objects
+
+(defparameter *reach-distance* 400)
+
+(defmethod can-reach ((target thing) (reacher thing))
+  (< (distance-between reacher target)
+     *reach-distance*))
+
 ;;; Dragging objects to move them
     
 (defmethod can-pick ((self thing))
   (or (shell-open-p)
-      (and (not (fixedp self))
-	   (not (etherealp self)))))
+      (and
+       (can-reach self (geoffrey))
+       (not (fixedp self))
+       (not (etherealp self)))))
 
 (defmethod pick ((self thing)) self)
 
