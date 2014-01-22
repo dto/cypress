@@ -123,8 +123,8 @@
 
 (defmethod draw :after ((self scene))
   (with-fields (drag hover) self
-    (when drag (draw drag))
-    (when hover (draw-hover (find-object hover))))
+    (when (xelfp drag) (draw drag))
+    (when (xelfp hover) (draw-hover (find-object hover))))
   (when (xelfp (geoffrey))
     (draw (status-line))))
 
