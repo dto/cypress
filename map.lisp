@@ -27,6 +27,7 @@
   :scale 1.1
   :row 0
   :column 0
+  :scene nil 
   :height *sector-size*
   :width *sector-size*)
 
@@ -70,16 +71,16 @@
 
 (defvar *map-column* 0)
 
-(defun find-map-row ()
+(defun map-row ()
   *map-row*)
 
-(defun find-map-column ()
+(defun map-column ()
   *map-column*)
 
 (defmethod draw ((sector sector))
   (with-fields (x y width height image row column) sector
-    (let ((draw-p (if (and (= row (find-map-row))
-			   (= column (find-map-column)))
+    (let ((draw-p (if (and (= row (map-row))
+			   (= column (map-column)))
 		      (plusp (- (mod *updates* 30) 15))
 		      t)))
       (when draw-p
@@ -96,16 +97,22 @@
 
 (defmethod can-travel-to ((sector sector))
   (member (field-value :terrain sector)
-	  '(frozen-forest river meadow cold-meadow grassy-meadow forest cemetery ruins)))
-  ;; (with-fields (row column) sector
-  ;;   (and (<= 1 (abs (- row *map-row*)))
-  ;; 	 (<= 1 (abs (- column *map-column*))))))
+  	  '(frozen-forest river meadow cold-meadow grassy-meadow forest cemetery ruins)))
+
+   ;; (with-fields (row column) sector
+   ;;  (and (<= 1 (abs (- row *map-row*)))
+   ;; 	 (<= 1 (abs (- column *map-column*))))))
+
+(defmethod travel-to ((sector sector))
+  (with-fields (terrain row column scene) sector 
+    (setf *map-row* row *map-column* column)
+    (unless scene 
+      (setf scene (new terrain)))
+    (switch-to-scene scene)))
 
 (defmethod activate ((sector sector))
   (if (can-travel-to sector)
-      (with-fields (terrain row column) sector 
-	(setf *map-row* row *map-column* column)
-	(switch-to-scene (new terrain)))
+      (travel-to sector)
       (show-error sector)))
 
 (defun make-sector (key)
@@ -169,4 +176,9 @@
   (arrange map))
 
 (defmethod alternate-tap ((map map-screen) x y) nil)
+
+(defun ildran ()
+  (or *map-screen*
+      (setf *map-screen* (new 'map-screen))))
+
 

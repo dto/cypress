@@ -301,8 +301,8 @@
 			  (singleton (new 'stone-stairwell)))
      (stacked-up-randomly (dead-trees) (spray '(ancient-road) :trim t :count 8) (spray '(wraith wolf) :count 2) (flowers)))))
 
-(defmethod drop-object :after ((ruins ruins) (monk geoffrey) &optional x y z)
-  (modify-cold monk +10))
+;; (defmethod drop-object :after ((ruins ruins) (monk geoffrey) &optional x y z)
+;;   (modify-cold monk +10))
 
 ;;; Cemetery
 

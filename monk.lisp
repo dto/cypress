@@ -108,13 +108,13 @@
 	     ("monk-stand-4.png" 20))))
 
 (defparameter *monk-stand-bow*
-  '(:scale 1400
+  '(:scale 1500
     :frames (("monk-stand-bow-1.png" 19)
 	     ("monk-stand-bow-2.png" 24)
 	     ("monk-stand-bow-3.png" 32))))
 
 (defparameter *monk-stand-bow-ready*
-  '(:scale 1400
+  '(:scale 1500
     :frames (("monk-stand-bow-ready-1.png" 19)
 	     ("monk-stand-bow-ready-2.png" 24)
 	     ("monk-stand-bow-ready-3.png" 32))))
@@ -661,7 +661,10 @@
 	      (prog1 nil (stop-walking self) (setf clock 10)))))))
 
 (defmethod activate ((self lucius))
-  (discuss self :hello))
+    (resume)
+  (replace-gump self (new 'browser :container self)))
+
+(defmethod initialize ((self lucius) &key))
 
 (define-topic hello lucius 
    "Good morning Geoffrey! A Raven just
