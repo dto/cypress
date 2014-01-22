@@ -12,8 +12,10 @@
 
 (defun switch-to-scene (buffer)
   ;; (play-music (random-choose *soundtrack*) :loop nil)
-  (setf *current-scene* buffer)
-  (switch-to-buffer buffer))
+  (switch-to-buffer buffer)
+  (snap-window-to-cursor buffer)
+  (follow-with-camera buffer (geoffrey))
+  (setf *current-scene* buffer))
 
 (define-buffer scene 
   :background-image "stone-road.png"
@@ -71,9 +73,9 @@
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
     (set-cursor buffer (geoffrey))
+    (snap-window-to-cursor buffer)
     ;;  (glide-window-to-cursor buffer)
     (follow-with-camera buffer (geoffrey))
-    ;;  (snap-window-to-cursor buffer)
     ;; allocate
     (install-quadtree buffer)
     ;; drop player at start point
