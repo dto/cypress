@@ -1,11 +1,23 @@
 * Tasks
 
+** TODO integrate more sound effects and music; grak.wav groar.wav
+** TODO geoffreys footsteps? lichdeath, chimes, thunder
+** TODO musical rewards for magic
+** TODO copper keys, stairwells, plates
+** TODO grave hag corpses
+
 ** TODO [#A] restrict visitable map squares in order to begin testing Act I
+
 ** TODO [#A] increase map grid density and procgen it
+
 ** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
-** TODO [#A] Goal is to reach bottom right corner in most levels? Clear condition before travel...
+
+** TODO [#A] playtest food/hunger
+
 ** TODO [#A] Must clear enemies to camp
 ** TODO [#A] make hungry/cold messages into Geoffrey-aligned bark bubbles
+
+** TODO [#A] Goal is to reach bottom right corner in most levels? Clear condition before travel...
 
 ** TODO [#A] Disallow travel when enemies near
 

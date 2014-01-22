@@ -234,9 +234,11 @@ you left.
 (defresource "ruins.ogg" :volume 10)
 (defresource "standing-by-the-river.ogg" :volume 10)
 (defresource "spiritus.ogg" :volume 20)
+(defresource "path.ogg" :volume 20)
+(defresource "flutism.ogg" :volume 20)
 
 (defparameter *soundtrack*
-'("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg"
+'("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg" "path.ogg"
   "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
 
 (defun make-quest (&optional (terrain-class 'meadow))

@@ -256,13 +256,13 @@
     ;; on first step
     (0 "left-foot.wav")
     ;; on 8th steps while looping 
-    (1 "left-foot.wav")
+    (7 "right-foot.wav")
 ;    (3 "right-foot.wav")
-    (5 "left-foot.wav")
+    (15 "left-foot.wav")
 ;    (7 "right-foot.wav")
-    (9 "left-foot.wav")
+    (23 "right-foot.wav")))
 ;    (11 "right-foot.wav")
-    (13 "left-foot.wav")))
+
 ;    (15 "right-foot.wav")))
     
 (defparameter *footstep-sound-range* 300)
@@ -272,6 +272,15 @@
     (when sound 
       (when (< (distance-to-cursor self) 400)
 	(play-sound self sound)))))
+
+(defmethod update-footsteps ((monk monk))
+  (with-fields (walk-clock) monk
+    (if (movement-heading monk)
+	(progn 
+	  (incf walk-clock)
+	  (when (> walk-clock 32)
+	    (setf walk-clock 0)))
+	(setf walk-clock 0))))
 
 ;;; Default collision methods
 
@@ -348,6 +357,9 @@
 (defmethod run ((self monk))
   (with-local-fields 
     (when %alive
+      (update-footsteps self)
+      (when (movement-heading self)
+	(make-footstep-sounds self))
       (update-animation self)
       (update-bow self)
       (when (> %cold 80)
