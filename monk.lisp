@@ -101,7 +101,7 @@
 	     ("monk-cast-5.png" 6))))
 
 (defparameter *monk-stand*
-  '(:scale 850
+  '(:scale 800
     :frames (("monk-stand-1.png" 19)
 	     ("monk-stand-2.png" 24)
 	     ("monk-stand-3.png" 18)
@@ -109,12 +109,12 @@
 
 (defparameter *monk-stand-bow*
   '(:scale 1500
-    :frames (("monk-stand-bow-1.png" 19)
+    :frames (("monk-stand-bow-3.png" 19)
 	     ("monk-stand-bow-2.png" 24)
 	     ("monk-stand-bow-3.png" 32))))
 
 (defparameter *monk-stand-bow-ready*
-  '(:scale 1500
+  '(:scale 1600
     :frames (("monk-stand-bow-ready-1.png" 19)
 	     ("monk-stand-bow-ready-2.png" 24)
 	     ("monk-stand-bow-ready-3.png" 32))))
@@ -124,7 +124,7 @@
 
 (defparameter *monk-walk* 
   '(:repeat t
-    :scale 900
+    :scale 850
     :frames (("monk-walk-1.png" 4)
 	     ("monk-walk-3.png" 4)
 	     ("monk-walk-2.png" 4)
@@ -132,7 +132,7 @@
 
 (defparameter *monk-walk-bow* 
   '(:repeat t
-    :scale 800
+    :scale 850
     :frames (("monk-walk-bow-3.png" 4)
 	     ("monk-walk-bow-1.png" 4)
 	     ("monk-walk-bow-2.png" 4)
