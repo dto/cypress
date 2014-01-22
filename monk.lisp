@@ -212,6 +212,7 @@
 
 (defmethod drop-object :after ((buffer buffer) (monk monk) &optional x y z)
   (modify-hunger monk 1)
+  (begin-animation monk (standing-animation monk))
   (setf (field-value :path monk) nil))
 
 (defmethod initialize :after ((monk monk) &key)
@@ -220,7 +221,7 @@
   (add-inventory-item monk (new 'bag))
   (add-inventory-item monk (quantity-of 'ginseng 2))
   (add-inventory-item monk (quantity-of 'stone 2))
-  (add-inventory-item monk (new 'white-bread))
+  (add-inventory-item monk (quantity-of 'white-bread 2))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
   (equip monk (find-arrow monk)))
   
