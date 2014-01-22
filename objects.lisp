@@ -50,7 +50,7 @@
 
 (defparameter *puddle-images* (image-set "puddle" 10))
 
-(defthing puddle :tags '(:fixed) :image (random-choose *puddle-images*))
+(defthing puddle :tags '(:fixed) :scale 3 :image (random-choose *puddle-images*))
 
 (defparameter *ruin-wall-images* (image-set "ruin-wall" 4))
 (defparameter *skull-images* (image-set "skull" 3))
