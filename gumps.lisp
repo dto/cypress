@@ -98,6 +98,7 @@
   (flip self 0))
 
 (defmethod tap ((self scroll-gump) x y)
+  (play-sample "ok.wav")
   (flip self))
 
 (defmethod can-pick ((self scroll-gump)) 
