@@ -345,8 +345,9 @@
 (defparameter *reach-distance* 400)
 
 (defmethod can-reach ((target thing) (reacher thing))
-  (< (distance-between reacher target)
-     *reach-distance*))
+  (or (field-value :container target)
+      (< (distance-between reacher target)
+	 *reach-distance*)))
 
 ;;; Dragging objects to move them
     
@@ -446,8 +447,12 @@
 (defmethod use ((self thing) (object thing))
   (narrate-now "Nothing happens."))
 
+(defmethod activate-maybe ((self thing))
+  (when (can-reach (geoffrey) self)
+    (activate self)))
+
 (defmethod activate ((self thing))
-  (use (cursor) self))
+  (use (geoffrey) self))
 
 (defmethod activate :before ((thing thing))
   (play-sample "activate.wav"))
