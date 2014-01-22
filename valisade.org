@@ -4,6 +4,7 @@
 
 * Tasks
 
+** TODO find reagents recursively, start geoffrey with reagent bag
 ** TODO survive each day; end it by camping 
 ** TODO integrate more sound effects and music; grak.wav groar.wav
 ** TODO geoffreys footsteps? lichdeath, chimes, thunder
