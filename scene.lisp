@@ -11,7 +11,7 @@
 (defun current-scene () *current-scene*)
 
 (defun switch-to-scene (buffer)
-  ;; (play-music (random-choose *soundtrack*) :loop nil)
+  (play-music (random-choose *soundtrack*) :loop nil)
   (switch-to-buffer buffer)
   (snap-window-to-cursor buffer)
   (follow-with-camera buffer (geoffrey))
@@ -24,16 +24,20 @@
   :time :day
   :cold 0
   :default-events
-  '(((:pause) transport-toggle-play)
+  '(
+    ;; ((:pause) transport-toggle-play)
     ((:r :control) reset-game)
-    ((:space) transport-toggle-play)
-    ((:p) transport-toggle-play)
+    ;; ((:space) transport-toggle-play)
+    ;; ((:p) transport-toggle-play)
     ((:m) open-map)
     ((:s) open-spellbook)
     ((:i) open-inventory)))
 
-(defmethod drag-fail ((scene scene) x y)
-  (show-error (geoffrey) x y))
+(defmethod drag-fail ((scene scene) (object thing) x y)
+  (when (and (not (typep object 'enemy))
+	     (not (can-reach object (geoffrey))))
+    (show-error (geoffrey) x y)
+    (narrate-now "You can't reach that from where you're standing.")))
 
 (defmethod begin-region ((buffer scene)))
 
@@ -71,7 +75,7 @@
 	(paste-from buffer terrain)
 	(resize buffer (field-value :width terrain) (field-value :height terrain))))
     ;; adjust scrolling parameters 
-    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 4))
+    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	  (%horizontal-scrolling-margin buffer) 3/5
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
