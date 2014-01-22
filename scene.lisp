@@ -151,17 +151,17 @@
 	  (multiple-value-bind (tx ty) 
 	      (step-toward-heading object 
 				   (field-value :heading object) 
-				   (/ *monk-speed* 2))
+				   (/ *monk-speed* 1.8))
 		;; yes. recenter.
 		(glide-window-to self
-				 (max 0
-				      (min (- width *gl-screen-width*)
-					   (- tx
-					      (truncate (/ *gl-screen-width* 2)))))
-				 (max 0 
+				 (truncate (max 0
+						(min (- width *gl-screen-width*)
+						     (- tx
+							(truncate (/ *gl-screen-width* 2))))))
+				 (truncate (max 0 
 				      (min (- height *gl-screen-height*)
 					   (- ty 
-					      (truncate (/ *gl-screen-height* 2))))))))))))
+					      (truncate (/ *gl-screen-height* 2)))))))))))))
 
 (defmethod update-window-glide ((self scene))
   (with-fields (window-x window-x0 window-y window-y0 window-scrolling-speed) self
