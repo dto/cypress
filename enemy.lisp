@@ -2,9 +2,6 @@
 
 (defresource "groar.wav" :volume 20)
 (defresource "grak.wav" :volume 20)
-(defresource "chimes-1.wav" :volume 20)
-(defresource "chimes-2.wav" :volume 20)
-(defresource "chimes-3.wav" :volume 20)
 (defresource "grunt-1.wav" :volume 20)
 (defresource "grunt-2.wav" :volume 20)
 (defresource "grunt-3.wav" :volume 20)
