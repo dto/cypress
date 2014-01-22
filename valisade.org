@@ -1,5 +1,10 @@
+* New changes 
+ - 2 new music tracks
+ - new sound effects
+
 * Tasks
 
+** TODO survive each day; end it by camping 
 ** TODO integrate more sound effects and music; grak.wav groar.wav
 ** TODO geoffreys footsteps? lichdeath, chimes, thunder
 ** TODO musical rewards for magic
@@ -22,7 +27,6 @@
 ** TODO [#A] Disallow travel when enemies near
 
 
-** TODO [#A] fix UUID drag errors
 ** TODO [#A] fix geoffrey-in-wrong-world bug
 ** TODO [#A] fix checkbox issues where not showing in middle
 ** TODO [#A] Lucius help AI?
@@ -1235,6 +1239,16 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2014-01-21 Tue 19:58]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-21 Tue 20:12
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] fix UUID drag errors
+   CLOSED: [2014-01-21 Tue 21:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-01-21 Tue 21:35
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade

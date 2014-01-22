@@ -79,7 +79,7 @@ I've got to get moving! See you soon.
 ")
 
 (defparameter *help-text* 
-"Welcome to Cypress v0.7 (alpha) 
+"Welcome to Cypress v0.8 (alpha) 
 
 This is the Scroll of Helping. If you
 click the scroll, you will advance to
