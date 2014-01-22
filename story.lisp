@@ -128,7 +128,6 @@ There are several new keyboard shortcuts:
 
 Press \"I\" to see Geoffrey's inventory.
 Press \"S\" to open the spellbook.
-Press \"P\" to pause (or spacebar).
 Press \"M\" to open the travel map.
 
 I hope you enjoy this work-in-progress
