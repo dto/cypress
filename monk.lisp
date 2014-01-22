@@ -513,10 +513,10 @@
 	   (narrate "You are starving to death!"))
 	  ((> hunger 70)
 	   (narrate "You feel weak from hunger."))
-	  ((> hunger 40)
-	   (narrate "You are getting hungry."))
-	  ((> hunger 20)
-	   (narrate "You feel a bit hungrier. Currently at ~S percent." hunger)))))
+	  ((> hunger 45)
+	   (narrate "You are getting hungrier."))
+	  ((> hunger 25)
+	   (narrate "You feel a bit hungry. Currently at ~S percent." hunger)))))
 
 
 (defparameter *monk-hide-weapon-time* (seconds->frames 10))
