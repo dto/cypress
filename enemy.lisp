@@ -1,5 +1,14 @@
 (in-package :cypress)
 
+(defresource "groar.wav" :volume 20)
+(defresource "grak.wav" :volume 20)
+(defresource "chimes-1.wav" :volume 20)
+(defresource "chimes-2.wav" :volume 20)
+(defresource "chimes-3.wav" :volume 20)
+(defresource "grunt-1.wav" :volume 20)
+(defresource "grunt-2.wav" :volume 20)
+(defresource "grunt-3.wav" :volume 20)
+(defresource "grunt-4.wav" :volume 20)
 (defresource "knock.wav" :volume 20)
 (defresource "death.wav" :volume 20)
 (defresource "lichscream.wav" :volume 20)
@@ -52,7 +61,7 @@
       (percent-of-time 30 
 	(setf heading heading0))
       (percent-of-time 30
-	(percent-of-time 10 (play-sample (random-choose '("growl-1.wav" "growl-2.wav"))))
+	(percent-of-time 8 (play-sample (random-choose '("grak.wav" "groar.wav"))))
 	(move self heading0 6))))))
 
 ;;; Grave hags
@@ -83,13 +92,14 @@
 	  (add-inventory-item remains (new 'stone))))
     (drop self remains))
   (drop self (new 'skull))
-  (play-sound self "death.wav")
+  (play-sound self "death-alien.wav")
   (destroy self))
 
 (defmethod run ((self grave-hag))
   (with-fields (image heading seen-player) self
     (when (< (distance-to-cursor self) 700)
       (unless seen-player
+	(play-sample "lichdeath.wav")
 	(setf seen-player t))
       (let ((heading0 (heading-to-cursor self)))
 	(percent-of-time 30 
@@ -97,9 +107,11 @@
 	(percent-of-time 30
 	  (move self heading0 8)))
       (if (< (distance-to-cursor self) 250)
-	  (percent-of-time 15 (setf image (random-choose *grave-hag-attack-images*)))
+	  (progn
+	    (percent-of-time 8 
+	      (play-sample (random-choose '("grunt-1.wav" "grunt-2.wav" "grunt-3.wav" "grunt-4.wav"))))
+	    (percent-of-time 15 (setf image (random-choose *grave-hag-attack-images*))))
 	  (percent-of-time 12 (setf image (random-choose *grave-hag-stalk-images*)))))))
-
 
 ;;; Wolf
 
@@ -108,7 +120,6 @@
 (defresource "yelp.wav" :volume 20)
 (defresource "howl.wav" :volume 20)
 (defresource "bark.wav" :volume 20)
-(defresource "yelp.wav" :volume 20)
 
 (defthing (wolf enemy)
   :seen-player nil
