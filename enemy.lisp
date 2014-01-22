@@ -89,7 +89,7 @@
 	  (add-inventory-item remains (new 'stone))))
     (drop self remains))
   (drop self (new 'skull))
-  (play-sound self "death-alien.wav")
+  (play-sound self "death.wav")
   (destroy self))
 
 (defmethod run ((self grave-hag))
@@ -137,15 +137,16 @@
   (play-sound wolf (random-choose '("bark.wav" "yelp.wav"))))
 
 (defmethod run ((self wolf))
-  (when (> (distance-to-cursor self) 700) 
+  (when (> (distance-to-cursor self) 800) 
     (setf (field-value :waypoints self) nil)
     (setf (field-value :seen-player self) nil))
   (with-fields (image heading seen-player) self
     (percent-of-time 17 (setf image (random-choose *wolf-images*)))
-    (when (<= (distance-to-cursor self) 700)
+    (when (<= (distance-to-cursor self) 800)
       (unless seen-player
 	(with-fields (x y) (cursor)
 	  (walk-to self x y)
+	  (play-sample "bark.wav")
 	  (play-sample "howl.wav")
 	  (setf seen-player t)))
       (when seen-player
@@ -156,11 +157,12 @@
 		(percent-of-time 25 
 		  (setf heading heading0))
 		(percent-of-time 80
-		  (move self heading0 3))))
+		  (move self heading0 3.5))))
 	    (progn
-	      (percent-of-time 1
-		(with-fields (x y) (cursor)
-		  (walk-to self x y)))
+	      (when (null (field-value :waypoints self))
+		(percent-of-time 5
+		  (with-fields (x y) (cursor)
+		    (walk-to self x y))))
 	      (when (movement-heading self)
 		(setf (field-value :heading self) (movement-heading self))
 		(move self (movement-heading self) 4))))))))
