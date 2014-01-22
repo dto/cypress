@@ -250,8 +250,8 @@
 
 ;;; Footstep sounds
 
-(defresource "left-foot.wav" :volume 20)
-(defresource "right-foot.wav" :volume 20)
+(defresource "left-foot.wav" :volume 15)
+(defresource "right-foot.wav" :volume 15)
 
 (defmethod footstep-sound ((self monk))
   (case (field-value :walk-clock self)
