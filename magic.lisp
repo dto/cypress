@@ -24,6 +24,7 @@
 (defmethod cast :after ((monk monk) (spell spell))
   (let ((browser (get-gump monk)))
     (when browser (refresh browser)))
+  (play-sample (random-choose '("chimes-1.wav" "chimes-2.wav" "chimes-3.wav")))
   (begin-animation monk (casting-animation monk)))
 
 (defmethod can-pick ((spell spell)) nil)
