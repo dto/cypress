@@ -93,7 +93,7 @@
 ;;; A monk, either AI or human controlled
 
 (defparameter *monk-cast*
-  '(:scale 950
+  '(:scale 1400
     :frames (("monk-cast-1.png" 3)
 	     ("monk-cast-2.png" 4)
 	     ("monk-cast-3.png" 4)
@@ -379,9 +379,10 @@
 	      ;; don't allow movement when aiming
 	      (when (not (aiming-bow self))
 		(movement-heading self))))
-	(when (or (null heading)
-		  (null %animation))
-	  (begin-animation self (standing-animation self)))
+	(when (null heading)
+	  (when (or (null %animation)
+		    (not (eq %animation (casting-animation self))))
+	    (begin-animation self (standing-animation self))))
 	(when heading 
 	  (unless (eq %animation (walking-animation self))
 	    (begin-animation self (walking-animation self)))
