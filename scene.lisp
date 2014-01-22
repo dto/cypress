@@ -66,7 +66,7 @@
 	(paste-from buffer terrain)
 	(resize buffer (field-value :width terrain) (field-value :height terrain))))
     ;; adjust scrolling parameters 
-    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
+    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 4))
 	  (%horizontal-scrolling-margin buffer) 3/5
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
@@ -136,6 +136,44 @@
   (dolist (object (get-objects (current-buffer)))
     (when (typep object (find-class 'camp))
       (return object))))
+
+;;; Camera control
+
+(defmethod glide-follow ((self scene) object)
+  (with-local-fields 
+    (with-fields (window-x window-y width height) self
+      (let ((margin-x (* %horizontal-scrolling-margin *gl-screen-width*))
+	    (margin-y (* %vertical-scrolling-margin *gl-screen-height*)))
+	(multiple-value-bind (object-x object-y)
+	    (center-point object)
+	  (multiple-value-bind (tx ty) 
+	      (step-toward-heading object 
+				   (field-value :heading object) 
+				   (/ *monk-speed* 2))
+		;; yes. recenter.
+		(glide-window-to self
+				 (max 0
+				      (min (- width *gl-screen-width*)
+					   (- tx
+					      (truncate (/ *gl-screen-width* 2)))))
+				 (max 0 
+				      (min (- height *gl-screen-height*)
+					   (- ty 
+					      (truncate (/ *gl-screen-height* 2))))))))))))
+
+(defmethod update-window-glide ((self scene))
+  (with-fields (window-x window-x0 window-y window-y0 window-scrolling-speed) self
+    (labels ((nearby (a b)
+	       (> window-scrolling-speed (abs (- a b))))
+	     (jump (a b)
+	       (if (< a b) window-scrolling-speed (- window-scrolling-speed))))
+      (when (and window-x0 window-y0)
+	(if (nearby window-x window-x0)
+	    (setf window-x0 nil)
+	    (incf window-x (jump window-x window-x0)))
+	(if (nearby window-y window-y0)
+	    (setf window-y0 nil)
+	    (incf window-y (jump window-y window-y0)))))))
 
 ;;; Various scenes
 
