@@ -37,13 +37,15 @@
   :image "spark.png")
 
 (defmethod use :around ((caster thing) (spell spark))
-  (let ((camp (find-camp)))
-    (if (not camp)
-	(narrate-now "You haven't made camp yet.")
-	(if (camped (current-scene))
-	    (narrate-now "You can't camp here again.")
-	    (call-next-method caster spell)))))
-
+  (if (nearby-enemies-p)
+      (narrate-now "You cannot safely make camp when enemies are near!") 
+      (let ((camp (find-camp)))
+	(if (not camp)
+	    (narrate-now "You haven't made camp yet.")
+	    (if (camped (current-scene))
+		(narrate-now "You can't camp here again.")
+		(call-next-method caster spell))))))
+  
 (defmethod cast ((caster thing) (spell spark))
   (ignite (find-camp)))
 
@@ -86,6 +88,11 @@
 (defthing (travel spell)
   :description "Travel (15 fatigue, 12 hunger)"
   :image "mountain-5.png")
+
+(defmethod use :around ((caster thing) (spell travel))
+  (if (nearby-enemies-p)
+      (narrate-now "You cannot travel when enemies are near!")
+      (call-next-method caster spell)))
 
 (defmethod cast ((caster thing) (spell travel))
   (modify-fatigue caster 15)

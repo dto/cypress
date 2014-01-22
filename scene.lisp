@@ -58,7 +58,7 @@
 
 (defmethod open-map ((buffer scene))
   (let ((travel (find-spell 'travel)))
-    (when travel (cast (geoffrey) travel))))
+    (when travel (use (geoffrey) travel))))
 
 (defmethod open-spellbook ((buffer scene))
   (activate (find-spellbook)))
