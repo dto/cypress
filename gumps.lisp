@@ -100,6 +100,9 @@
 (defmethod tap ((self scroll-gump) x y)
   (flip self))
 
+(defmethod can-pick ((self scroll-gump)) 
+  t)
+
 (defmethod draw ((self scroll-gump))
   (call-next-method)
   (with-fields (x y z height width page-number pages) self
