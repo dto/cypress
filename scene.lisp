@@ -146,6 +146,22 @@
     (when (typep object (find-class 'camp))
       (return object))))
 
+(defun find-enemies ()
+  (let (enemies)
+    (dolist (object (get-objects (current-buffer)))
+      (when (typep object (find-class 'enemy))
+	(push object enemies)))
+    enemies))
+
+(defparameter *enemy-near-distance* 800)
+
+(defmethod near-geoffrey ((self thing))
+  (< (distance-between self (geoffrey))
+     *enemy-near-distance*))
+
+(defun nearby-enemies-p ()
+  (some #'near-geoffrey (find-enemies)))
+
 ;;; Camera control
 
 (defmethod glide-follow ((self scene) object)
@@ -158,7 +174,7 @@
 	  (multiple-value-bind (tx ty) 
 	      (step-toward-heading object 
 				   (field-value :heading object) 
-				   (/ *monk-speed* 2))
+				   (/ *monk-speed* 1))
 		;; yes. recenter.
 		(glide-window-to self
 				 (truncate (max 0
@@ -309,8 +325,8 @@
 			  (singleton (new 'stone-stairwell)))
      (stacked-up-randomly (dead-trees) (spray '(ancient-road) :trim t :count 8) (spray '(wraith wolf) :count 2) (flowers)))))
 
-;; (defmethod drop-object :after ((ruins ruins) (monk geoffrey) &optional x y z)
-;;   (modify-cold monk +10))
+(defmethod drop-object :after ((ruins ruins) (monk geoffrey) &optional x y z)
+  (modify-cold monk +10))
 
 ;;; Cemetery
 
@@ -363,7 +379,7 @@
      (stacked-up-randomly (dead-trees-and-puddles) (pack-of-wolves) (wood-pile)))))
 
 (defmethod drop-object :after ((forest frozen-forest) (monk geoffrey) &optional x y z)
-  (modify-cold monk +22))
+  (modify-cold monk +15))
 
 ;; dense pine trees and some dead trees
 ;; wood piles and twigs and branches
