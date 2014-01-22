@@ -113,7 +113,7 @@
 
 ;;; Spellbook 
 
-(defthing spellbook :image "spellbook.png")
+(defthing spellbook :image "notebook-2.png")
 
 (defmethod find-description ((book spellbook))
   "Geoffrey's spellbook")
