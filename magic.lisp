@@ -37,15 +37,15 @@
   :image "spark.png")
 
 (defmethod use :around ((caster thing) (spell spark))
-  (if (camped (current-scene))
-      (narrate-now "You can't camp here again.")
-      (call-next-method caster spell)))
-
-(defmethod cast ((caster thing) (spell spark))
   (let ((camp (find-camp)))
     (if (not camp)
 	(narrate-now "You haven't made camp yet.")
-	(ignite camp))))
+	(if (camped (current-scene))
+	    (narrate-now "You can't camp here again.")
+	    (call-next-method caster spell)))))
+
+(defmethod cast ((caster thing) (spell spark))
+  (ignite (find-camp)))
 
 ;;; Cure light wounds
 
