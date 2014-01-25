@@ -4,6 +4,8 @@
 
 * Tasks
 
+** TODO don't allow tent to be put in containers other than Geoffrey
+** TODO Fix spellcasting/activating objects after dead
 ** TODO Fix lack of paused message
 ** TODO survive each day; end it by camping 
 ** DONE integrate more sound effects and music; grak.wav groar.wav
