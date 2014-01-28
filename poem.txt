@@ -6,7 +6,7 @@ I guide the souls of Ildran
 as they pass between worlds.
 
 I will tell thee now 
-of an Age whose very stones have turned to dust,
+of an Age whose very stones have vanished,
 so long ago began 
 this history of Sorrows.
 
@@ -24,7 +24,7 @@ When a man of humility,
 with little more than robe and longbow, passed
 into the history of Heroes.
 
---- small pause ---
+----- pause as brief title/credits sequence is shown -----
 
 Not for Heroes
 nor for wicked men,
@@ -43,6 +43,7 @@ a little more.
 
 For though he vanished long before the birth of Sol,
 His crimes will echo into Eternity.
+
 
 
 
