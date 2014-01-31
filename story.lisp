@@ -428,7 +428,7 @@ you left.
 (defmethod update :after ((self prologue))
   (cond ((momentp self *guiding*)
 	 (clear-objects self)
-	 (drop-object self (new 'guiding) -50 -100))
+	 (drop-object self (new 'guiding) 0 -100))
 	((momentp self *famine*)
 	 (clear-objects self)
 	 (drop-object self (new 'smoke-map) -50 -150))
