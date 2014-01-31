@@ -2,6 +2,10 @@
  - 2 new music tracks
  - new sound effects
 
+* TODO Music edit
+** TODO add verb / compression to ruins
+** TODO eq standing-by-the-river to remove hum
+
 * Tasks
 
 ** TODO don't allow tent to be put in containers other than Geoffrey
@@ -1005,12 +1009,6 @@ FORGET-ME-NOTS and Temporal Seance
    :END:
 *** DONE Paint meadow grass and meadow decals
     CLOSED: [2014-01-11 Sat 03:33]
-*** DONE Paint watery snow pool decals
-    CLOSED: [2014-01-10 Fri 15:37]
-*** DONE Paint rushes, weeds, branches
-    CLOSED: [2014-01-11 Sat 03:33]
-*** DONE Import gravestones
-    CLOSED: [2014-01-10 Fri 15:37]
 
 *** TODO Paint ruins pieces
 **** TODO Basic blocks
@@ -1020,6 +1018,12 @@ FORGET-ME-NOTS and Temporal Seance
 **** TODO Vertical wall sections
 **** TODO Wall junctions
 **** TODO Clogged stairwells
+*** DONE Paint watery snow pool decals
+    CLOSED: [2014-01-10 Fri 15:37]
+*** DONE Paint rushes, weeds, branches
+    CLOSED: [2014-01-11 Sat 03:33]
+*** DONE Import gravestones
+    CLOSED: [2014-01-10 Fri 15:37]
 
 ** DONE Paint glowing campfire and halo for night scenes (crafting, rest)
    CLOSED: [2014-01-10 Fri 15:37]

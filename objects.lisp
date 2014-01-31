@@ -105,6 +105,15 @@
   (let ((gump (new 'scroll-gump :text *help-text*)))
     (replace-gump self gump)
     (set-target-position gump (units 50) (units 1))))
+
+(defthing wax-cylinder-letter
+  :stacking nil
+  :image (random-choose *scroll-images*) 
+  :description "In re: wax cylinder recordings")
+
+(defmethod activate ((self wax-cylinder-letter))
+  (let ((gump (new 'scroll-gump :text *wax-cylinder-letter*)))
+    (replace-gump self gump)))
 	     
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *wraith-images* (image-set "wraith" 3))

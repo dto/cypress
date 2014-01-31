@@ -23,8 +23,8 @@
 ;;; Title screen
 
 (defresource "title-sbcl.png")
-(defresource "title-ccl.png")
-(defresource "title-jp.png")
+;; (defresource "title-ccl.png")
+;; (defresource "title-jp.png")
 
 (defun title-screen-image () 
   #+sbcl "title-sbcl.png"
@@ -68,8 +68,9 @@
     (index-all-images)
     (index-all-samples)
     (index-pending-resources)
-    ;; (preload-resources)
-    (switch-to-buffer (new 'title))
+    ;;(preload-resources)
+    ;; (switch-to-buffer (new 'title))
+    (switch-to-buffer (new 'prologue))
     (setf *font* "oldania")
     (start-session)))
 
