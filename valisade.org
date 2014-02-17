@@ -1,16 +1,11 @@
-* New changes 
- - 2 new music tracks
- - new sound effects
-
-* TODO Music edit
-** TODO add verb / compression to ruins
-** TODO eq standing-by-the-river to remove hum
 
 * Tasks
 
-** TODO don't allow tent to be put in containers other than Geoffrey
-** TODO Fix spellcasting/activating objects after dead
-** TODO Fix lack of paused message
+** TODO Review todo list
+
+** TODO [#A] Don't allow tent to be put in containers other than Geoffrey
+** TODO [#B] Fix spellcasting/activating objects after dead
+** TODO [#B] Fix lack of paused message
 ** TODO survive each day; end it by camping 
 ** DONE integrate more sound effects and music; grak.wav groar.wav
    CLOSED: [2014-01-21 Tue 22:56]
@@ -20,7 +15,6 @@
    CLOSED: [2014-01-21 Tue 22:56]
 ** TODO copper keys, stairwells, plates
 ** TODO grave hag corpses
-
 ** TODO [#A] restrict visitable map squares in order to begin testing Act I
 
 ** TODO [#A] increase map grid density and procgen it
@@ -46,6 +40,11 @@
 ** TODO [#A] Write method CAN-REACH to allow checking player distance from manipulated objets
 *** TODO Check CAN-REACH in CAN-PICK etc
 ** TODO [#B] Add jitter to aim when cold/exhausted
+
+** TODO Music edit
+*** TODO add verb / compression to ruins
+*** TODO eq standing-by-the-river to remove hum
+
 
 ** TODO [#B] implement snow/rain/darkness
 ** TODO [#B] Consider fully turn-based combat
