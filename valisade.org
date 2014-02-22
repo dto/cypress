@@ -1,82 +1,53 @@
 
 * Tasks
 
-** TODO Review todo list
+** TODO Create list of quest components 
 
-** TODO [#A] Don't allow tent to be put in containers other than Geoffrey
-** TODO [#B] Fix spellcasting/activating objects after dead
-** TODO [#B] Fix lack of paused message
-** TODO survive each day; end it by camping 
-** DONE integrate more sound effects and music; grak.wav groar.wav
-   CLOSED: [2014-01-21 Tue 22:56]
-** DONE geoffreys footsteps? lichdeath, chimes, thunder
-   CLOSED: [2014-01-21 Tue 22:56]
-** DONE musical rewards for magic
-   CLOSED: [2014-01-21 Tue 22:56]
-** TODO copper keys, stairwells, plates
-** TODO grave hag corpses
-** TODO [#A] restrict visitable map squares in order to begin testing Act I
-
+** TODO [#A] make hungry/cold messages into Geoffrey-aligned bark bubbles
 ** TODO [#A] increase map grid density and procgen it
-
+** TODO [#A] restrict visitable map squares in order to begin testing Act I
 ** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
 
-** TODO [#A] playtest food/hunger
-
-** TODO [#A] Must clear enemies to camp
-** TODO [#A] make hungry/cold messages into Geoffrey-aligned bark bubbles
-
-** TODO [#A] Goal is to reach bottom right corner in most levels? Clear condition before travel...
-
-** TODO [#A] Disallow travel when enemies near
-
-** TODO [#A] fix geoffrey-in-wrong-world bug
-** TODO [#A] fix checkbox issues where not showing in middle
-** TODO [#A] Lucius help AI?
-
-** TODO [#A] Spellcast animation
-
-** TODO [#A] Implement low HP warning, i.e. Dying condition
-** TODO [#A] Write method CAN-REACH to allow checking player distance from manipulated objets
-*** TODO Check CAN-REACH in CAN-PICK etc
-** TODO [#B] Add jitter to aim when cold/exhausted
-
-** TODO Music edit
-*** TODO add verb / compression to ruins
-*** TODO eq standing-by-the-river to remove hum
-
-
+** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
 ** TODO [#B] implement snow/rain/darkness
-** TODO [#B] Consider fully turn-based combat
+** TODO [#B] Implement low HP warning, i.e. Dying condition
 ** TODO [#B] Skeleton archers
-** TODO [#B] possibly swap right-click and left-click i.e. movement/look
-** TODO [#B] increase pond size
-** TODO [#B] allow canceling travel
-** TODO [#B] Night/camp dream sequences
+** TODO [#B] day/night cycle; survive each day; end it by camping 
 ** TODO [#B] fix wolf not chasing
-** TODO [#B] Add heuristic to try to choose a decent spot, when target space isn't occupiable
+** TODO [#B] Rewrite conversation gump
+** TODO [#B] Consider fully turn-based combat, or returning to Pause
+*** TODO Press ESCAPE to close all gumps and unpause
+*** TODO possibly swap right-click and left-click i.e. movement/look
+
+
+** TODO [#C] Fix spellcasting/activating objects after dead
+** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#B] Press ESCAPE to close all gumps and unpause
+** TODO [#C] grave hag corpses
+** TODO [#C] allow canceling travel
+** TODO [#C] Night/camp dream sequences
 ** TODO [#B] Floating eyes that glide and dart
 ** TODO [#C] Fix mac window resizing bugs
 ** TODO [#C] Control Q and Command q should quit game
 ** TODO [#C] seance spell gives you a piece of lore from a skull
 ** TODO [#C] fix z-sorting of player remains
-** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
-** TODO [#C] Implement bleeding
+** TODO [#C] Implement bleeding and blood tracks in the snow
 ** TODO [#C] Implement exhaustion
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] Fix non-impelled arrows moving on their own 
+** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 
-** TODO Paint and Animate an Imperial Raven.
-** TODO Fix conversation gump; design real convo system (inform manual)
+** TODO [#C] Fix jittery rotation of monk at corners of paths
 
-** TODO Paint more characters
+** TODO [#B] Paint more characters
 *** TODO Paint skeleton soldiers
+*** TODO Paint dead traveler bodies
 *** TODO Paint skeleton archers
 **** TODO Charcoal
 **** TODO Pinecones
-*** TODO Paint dead traveler bodies
+*** TODO Paint and Animate an Imperial Raven.
+
+** TODO Bring stone monk into game
 
 ** TODO Paint other objects
 *** TODO Paint ruined wood
@@ -85,16 +56,14 @@
 *** TODO Target
 *** TODO Error
 
-** TODO Fix jittery rotation of monk at corners of paths
-
 ** Journey to valisade has a three-act structure
 *** Prologue (brief, good variation)
 **** At home with Lucius; learn how to play
 **** Meadows and forest 
 **** Encounter wolves and wraiths
 *** Middle game (long, most variation)
-**** Explosion event, cold night
 **** Puzzles
+**** Towns
 **** Magic quest items
 **** Stone Golem and conversation
 **** Learn new spells
@@ -110,7 +79,6 @@
 ** In that town find special stuff and unlock it with the key
 ** Find a particular gravestone
 ** Special items like xalcium armor and xalcium leggings
-
 
 * Overview
 
@@ -1257,6 +1225,36 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2014-01-21 Tue 21:33]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-01-21 Tue 21:35
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE integrate more sound effects and music; grak.wav groar.wav
+   CLOSED: [2014-01-21 Tue 22:56]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-20 Thu 05:27
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE geoffreys footsteps? lichdeath, chimes, thunder
+   CLOSED: [2014-01-21 Tue 22:56]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-20 Thu 05:27
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE musical rewards for magic
+   CLOSED: [2014-01-21 Tue 22:56]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-20 Thu 05:27
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_OLPATH: Tasks
    :ARCHIVE_CATEGORY: valisade
