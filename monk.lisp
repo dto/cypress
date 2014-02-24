@@ -705,10 +705,14 @@ it's been a bit colder than usual."
 "Yes. The leaves seem to be turning early.")
 
 (define-topic letter lucius 
-  (drop self (new 'scroll) 0 (field-value :height self))
-  (say self "I wonder what it says? It comes
+  "I wonder what it says? It comes
 straight from Dr. Quine at the
 monastery. Here you go. I'm so curious
-to know what it says. Open it, open it!" :bye))
+to know what it says. Open it, open it!"
+:bye)
+
+(defmethod discuss :after ((self lucius) (topic (eql :letter)))
+  (drop self (new 'scroll) 0 (field-value :height self)))
+
 
 

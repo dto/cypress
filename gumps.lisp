@@ -348,11 +348,12 @@
 
 (defmethod arrange ((self button))
   (with-fields (label) self
-    (let ((font *gump-button-font*))
-      (resize self 
-	      (+ (* 2 *button-margin*)
-		 (font-text-width label font))
-	      (font-height font)))))
+    (when label
+      (let ((font *gump-button-font*))
+	(resize self 
+		(+ (* 2 *button-margin*)
+		   (font-text-width label font))
+		(font-height font))))))
 
 (defmethod layout ((self button))
   (arrange self))
@@ -391,16 +392,16 @@
       (set-background-color text nil)
       (set-read-only text t))))
 
-(defparameter *lines-per-talk-gump* 10)
+(defparameter *lines-per-talk-gump* 4)
 
 (defthing (talk-gump gump)
-  (image :initform "scroll-gump.png")
+  (image :initform "talk-scroll.png")
   (target :initform nil)
   (topic :initform nil)
   (pages :initform nil)
   (page-number :initform 0))
 
-(defparameter *talk-gump-scale* (/ 1 2.8))
+(defparameter *talk-gump-scale* (/ 1 2))
 
 (defmethod initialize ((self talk-gump) &key)
   (with-local-fields
@@ -460,22 +461,17 @@
 (defmethod draw ((self talk-gump))
   (with-fields (x y target image width height inputs) self
     (draw-image image x y :width width :height height)
-    (mapc #'draw inputs)
-    (draw-string (find-description target)
-		 (+ x (units 7))
-		 (+ y (units 1.5))
-		 :color "saddle brown" 
-		 :font "oldania-title")))
+    (mapc #'draw inputs)))
 
 (defmethod arrange ((self talk-gump))
   (with-local-fields
     (move-to-target-position self)
     (when (xelfp (text self))
-      (let ((x0 (+ %x (* 0.11 %width)))
-	    (y0 (+ %y (* 0.17 %height))))
+      (let ((x0 (+ %x (* 0.14 %width)))
+	    (y0 (+ %y (* 0.18 %height))))
 	(resize-to-fit (text self))
 	(move-to (text self) x0 y0)
-	(move-to (buttons self) x0 (+ y0 (%height (text self))))
+	(move-to (buttons self) x0 (+ y0 (units 7.5)))
 	(layout (buttons self))))
     (resize self 
 	    (* (image-width %image) *talk-gump-scale*)
@@ -505,12 +501,17 @@
 
 (defmethod get-topic-gump ((self thing) topic)
   (let ((content (topic-content self topic)))
-    (when content
+    (when (first content)
       (destructuring-bind (text &rest keys) content
 	(apply #'make-talk-gump self text keys)))))
 
 (defmethod discuss ((self thing) topic)
-  (replace-gump self (get-topic-gump self topic)))
+  (with-fields (gump width x y) self
+    (let ((new-gump (get-topic-gump self topic)))
+      (if new-gump 
+	  (progn (replace-gump self new-gump)
+		 (set-target-position gump (+ x width 2) y))
+	  (destroy-gump self)))))
 		
 	
       
