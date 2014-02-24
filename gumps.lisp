@@ -416,7 +416,6 @@
     (setf page-number 
 	  (mod (or p (1+ page-number))
 	       (length pages)))
-    (message "page number ~S" page-number)
     (setf (first inputs)
 	  (make-talk-gump-text (nth page-number pages)))
     (update-parent-links self)))
