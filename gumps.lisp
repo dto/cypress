@@ -367,7 +367,7 @@
 (defmethod tap ((self button) x y)
   (with-fields (target arguments method) self
     (when (xelfp target)
-      (discuss target arguments))))
+      (discuss target (first arguments)))))
 
 (defun make-topic-button (target topic)
   (new 'button :label (pretty-string (make-keyword topic))
