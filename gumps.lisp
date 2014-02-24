@@ -37,8 +37,8 @@
 
 ;;; Cascading the gumps 
 
-(defun find-gumps ()
-  (with-fields (objects) (current-buffer)
+(defun find-gumps (&optional (buffer (current-buffer)))
+  (with-fields (objects) buffer
     (loop for thing being the hash-values in objects
 	  when (typep (find-object thing) (find-class 'gump))
 	    collect (find-object thing))))
@@ -386,7 +386,7 @@
     (destroy (find-object parent))))
 
 (defun make-talk-gump-text (data)
-  (let ((text (new 'scroll-text :text data)))
+  (let ((text (new 'scroll-text :text (list data))))
     (prog1 text
       (set-font text *gump-font*)
       (set-background-color text nil)
@@ -416,6 +416,7 @@
     (setf page-number 
 	  (mod (or p (1+ page-number))
 	       (length pages)))
+    (message "page number ~S" page-number)
     (setf (first inputs)
 	  (make-talk-gump-text (nth page-number pages)))
     (update-parent-links self)))
@@ -469,7 +470,7 @@
     (when (xelfp (text self))
       (let ((x0 (+ %x (* 0.14 %width)))
 	    (y0 (+ %y (* 0.18 %height))))
-	(resize-to-fit (text self))
+	(resize (text self) %width (units 6))
 	(move-to (text self) x0 y0)
 	(move-to (buttons self) x0 (+ y0 (units 7.5)))
 	(layout (buttons self))))
