@@ -1,7 +1,57 @@
+* Quest ideas
+
+** DONE make conversation gump use the standard scroll graphic, maybe slightly smaller
+   CLOSED: [2014-02-24 Mon 14:52]
+** TODO rework conversatin topic system
+** TODO only display buttons on last page of response
+** TODO use :after methods with EQ :topic specializers to do non-text actions
+
+** TODO Lucius NPC
+
+Bark "Ho, stranger."
+
+Greetings, brother. Well met.
+
+My name is Lucius Pentaquin. I don't recall ever seeing robes like
+yours! You must be a traveler?
+
+
+** TODO level aura.  
+** TODO draw an example quest map with notes
+** TODO map coordinate system with 27N, 7E or  ... 12S, 142E
+** TODO valisade is in the northeast
+** TODO [#A] Spell scrolls and Transcription spell
+** TODO [#A] Find a scroll for understanding the secret language of Shayol
+** raven sends message from town to east "help us"
+** sextant
+** discover dried nightshade. nightshade should be more rare
+** help me and i'll give you X gold
+** help me and i'll give you items
+** old storytellers
+** TODO [#C] seance spell gives you a piece of lore from a skull
+** bands of brigands
+** find forest treasure map, highlights a map square with a yellow icon
+** defeat-all-enemies in farm-to-the-south
+** investigate cave-to-west
+** discover ruined house 
+** cave/crypt
+** lore ,pieces of text conditions that sometimes attach. 
+** amulets
+** wax cylinders
+** discover ruined basement
+** Find an item-box with a scroll inside and key relating to a specific ruin town basement
+** Find poem fragments
+** Randomly choose town names
+** Find letter describing a key buried with some random dude, in a specific cemetery
+** Must learn to time-travel forward to meet Lucius, who left the day after you
+** In that town find special stuff and unlock it with the key
+** Find a particular gravestone
+** Special items like xalcium armor and xalcium leggings
 
 * Tasks
 
 ** TODO Create list of quest components 
+** TODO possibly swap right-click and left-click i.e. movement/look
 
 ** TODO [#A] make hungry/cold messages into Geoffrey-aligned bark bubbles
 ** TODO [#A] increase map grid density and procgen it
@@ -17,7 +67,6 @@
 ** TODO [#B] Rewrite conversation gump
 ** TODO [#B] Consider fully turn-based combat, or returning to Pause
 *** TODO Press ESCAPE to close all gumps and unpause
-*** TODO possibly swap right-click and left-click i.e. movement/look
 
 
 ** TODO [#C] Fix spellcasting/activating objects after dead
@@ -29,14 +78,12 @@
 ** TODO [#B] Floating eyes that glide and dart
 ** TODO [#C] Fix mac window resizing bugs
 ** TODO [#C] Control Q and Command q should quit game
-** TODO [#C] seance spell gives you a piece of lore from a skull
 ** TODO [#C] fix z-sorting of player remains
 ** TODO [#C] Implement bleeding and blood tracks in the snow
 ** TODO [#C] Implement exhaustion
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] Fix non-impelled arrows moving on their own 
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
-
 ** TODO [#C] Fix jittery rotation of monk at corners of paths
 
 ** TODO [#B] Paint more characters
@@ -70,15 +117,6 @@
 **** Dreams
 **** Subquests
 *** End game (short, less variation)
-
-** Find an item-box with a scroll inside and key relating to a specific ruin town basement
-** Find poem fragments
-** Randomly choose town names
-** Find letter describing a key buried with some random dude, in a specific cemetery
-** Must learn to time-travel forward to meet Lucius, who left the day after you
-** In that town find special stuff and unlock it with the key
-** Find a particular gravestone
-** Special items like xalcium armor and xalcium leggings
 
 * Overview
 

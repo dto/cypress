@@ -14,4 +14,5 @@
 	       (:file "scene" :depends-on ("terrain"))
 	       (:file "map" :depends-on ("scene"))
 	       (:file "story" :depends-on ("map"))
-	       (:file "cypress" :depends-on ("story"))))
+	       (:file "quest" :depends-on ("story"))
+	       (:file "cypress" :depends-on ("quest"))))

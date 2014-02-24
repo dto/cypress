@@ -107,7 +107,7 @@
 ;;; Cure meat
 
 (defthing (cure-meat spell)
-  :description "Cure meat (8 mp, 1 thornweed)"
+  :description "Cure meat (8 mp, 2 thornweed)"
   :image "cure.png"
   :reagents '(:magic 8 thornweed 2))
 

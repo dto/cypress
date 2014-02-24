@@ -123,66 +123,6 @@ I've got to get moving! See you soon.
  -- Dr. Quine
 ")
 
-(defparameter *help-text* 
-"Welcome to Cypress v0.8 (alpha) 
-
-This is the Scroll of Helping. If you
-click the scroll, you will advance to
-the next page. Use the right mouse
-button (or the Control key with the left
-button) to close scrolls.
-
-Right-click a destination to move
-Geoffrey there.
-
-Click an object to show its name.
-Drag objects to move them.
-Drag objects onto Geoffrey to take them.
- (Take and keep this scroll 
-  for easy reference.)
-Double-click an object to activate it.
-Double-click a monster to attack it.
-Double click Geoffrey for his inventory.
-Drag items into/out of inventory scrolls.
-
-Click spells in spellbook for
-description.  Double click spells in
-spellbook to cast.
-
-Use the Travel spell to explore the
-land.  Double-click land symbols to
-explore regions.  If you die, press
-Control-R for a new quest.
-
-You must eat. Traveling and combat cause
-hunger. Double-click food to eat it.
-Use the \"Cure meat\" spell to make
-jerky from freshly killed wolves.
-
-Geoffrey must stay warm. He will get
-colder by progressing through the
-terrain (or by touching certain
-objects). You have a magic tent and
-campfire which you can use to heal and
-warm yourself up. To use the tent, drag
-it out of your inventory onto an open
-space on the ground, and then cast
-Spark.
-
-There are several new keyboard shortcuts:
-
-Press \"I\" to see Geoffrey's inventory.
-Press \"S\" to open the spellbook.
-Press \"M\" to open the travel map.
-
-I hope you enjoy this work-in-progress
-demonstration of Cypress.  Please submit
-bug reports and feedback to me at
-dto@blocky.io
-
--- David O'Toole
-")
-
 (defparameter *poem-1*
 "My name is Amalia.
 
@@ -284,20 +224,6 @@ you left.
 (defparameter *soundtrack*
 '("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg" "path.ogg"
   "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
-
-(defun make-quest (&optional (terrain-class 'meadow))
-  (let ((geoffrey (new 'geoffrey))
-	(buffer (new terrain-class)))
-    (setf *map-row* 0)
-    (setf *map-column* 0)
-    (setf *map-screen* nil)
-    (with-buffer buffer
-      ;; (drop-object buffer (new 'lucius) (units 12) (units 8))
-      (let ((scroll (new 'scroll)))
-	(drop-object buffer scroll (units 10) (units 4))
-	(drop-object buffer (new 'wax-cylinder-letter) (units 20) (units 4))
-	(activate scroll))
-      (current-buffer))))
 
 (defresource "prologue.ogg" :volume 70)
 

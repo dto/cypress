@@ -150,14 +150,14 @@
 
 (defparameter *monk-2-walk* 
   '(:repeat t
-    :scale 900
+    :scale 820
     :frames (("monk-2-walk-1.png" 4)
 	     ("monk-2-walk-2.png" 4)
 	     ("monk-2-walk-3.png" 4)
 	     ("monk-2-walk-4.png" 4))))
 
 (defparameter *monk-2-stand*
-  '(:scale 900
+  '(:scale 820
     :frames (("monk-2-stand-1.png" 19)
 	     ("monk-2-stand-2.png" 24))))
 
@@ -215,16 +215,6 @@
   (begin-animation monk (standing-animation monk))
   (setf (field-value :path monk) nil))
 
-(defmethod initialize :after ((monk monk) &key)
-  (add-inventory-item monk (new 'spellbook))
-  (add-inventory-item monk (new 'camp))
-  (add-inventory-item monk (new 'bag))
-  (add-inventory-item monk (quantity-of 'ginseng 2))
-  (add-inventory-item monk (quantity-of 'stone 2))
-  (add-inventory-item monk (quantity-of 'white-bread 2))
-  (add-inventory-item monk (quantity-of 'wooden-arrow 16))
-  (equip monk (find-arrow monk)))
-  
 (defmethod humanp ((self monk)) nil)
 
 (defmethod equipped-item ((self monk))
@@ -479,7 +469,15 @@
 (defthing (geoffrey monk) :description "Geoffrey")
 
 (defmethod initialize :after ((monk geoffrey) &key)
-  (setf *geoffrey* monk))
+  (setf *geoffrey* monk)
+  (add-inventory-item monk (new 'spellbook))
+  (add-inventory-item monk (new 'camp))
+  (add-inventory-item monk (new 'bag))
+  (add-inventory-item monk (quantity-of 'ginseng 2))
+  (add-inventory-item monk (quantity-of 'stone 2))
+  (add-inventory-item monk (quantity-of 'white-bread 2))
+  (add-inventory-item monk (quantity-of 'wooden-arrow 16))
+  (equip monk (find-arrow monk)))
 
 (defmethod humanp ((monk geoffrey)) t)
 
@@ -679,10 +677,7 @@
 	      (prog1 nil (stop-walking self) (setf clock 10)))))))
 
 (defmethod activate ((self lucius))
-    (resume)
-  (replace-gump self (new 'browser :container self)))
-
-(defmethod initialize ((self lucius) &key))
+  (discuss self :hello))
 
 (define-topic hello lucius 
    "Good morning Geoffrey! A Raven just
@@ -711,8 +706,9 @@ it's been a bit colder than usual."
 
 (define-topic letter lucius 
   (drop self (new 'scroll) 0 (field-value :height self))
-  (make-talk-gump self "I wonder what it says? It comes
+  (say self "I wonder what it says? It comes
 straight from Dr. Quine at the
 monastery. Here you go. I'm so curious
 to know what it says. Open it, open it!" :bye))
+
 

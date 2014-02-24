@@ -337,8 +337,16 @@
       (setf gump nil))))
 
 (defmethod replace-gump ((self thing) gump)
-  (destroy-gump self)
-  (set-gump self gump))
+  (with-local-fields
+    (if %gump
+	(multiple-value-bind (x y) (get-target-position %gump)
+	  (destroy-gump self)
+	  (set-gump self gump)
+	  (set-target-position gump x y))
+	(set-gump self gump))))
+
+(defmethod talk ((self thing) &rest args)
+  (replace-gump self (apply #'make-talk-gump self args)))
 
 ;;; Reaching objects
 

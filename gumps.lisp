@@ -5,12 +5,16 @@
 (defresource (:name "oldania-title" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 20)))
 
 (defparameter *gump-font* "oldania")
+(defparameter *gump-button-font* "oldania")
 (defparameter *gump-title-font* "oldania-title")
 (defparameter *gump-color* '(#x52 #x2e #x00)) 
 
 (defthing gump
   (target-x :initform 0)
   (target-y :initform 0))
+
+(defmethod get-target-position ((self gump))
+  (with-local-fields (values %target-x %target-y)))
 
 (defmethod set-target-position ((self gump) x y)
   (with-fields (target-x target-y) self
@@ -329,68 +333,44 @@
 
 ;;; Conversation gump 
 
-(defun discussion-method (topic)
-  (make-keyword (format nil "discuss/~A" (symbol-name topic))))
-
-(defmacro define-topic (name super &body forms)
-  `(define-method ,(make-non-keyword (discussion-method name)) ,super ()
-     ,@(if (stringp (first forms))
-	   (list (append 
-		  (list 'make-talk-gump 'self (first forms))
-		  (rest forms)))
-	   forms)))
-	  
-(defmethod discuss ((self thing) topic)
-  (let ((method (discussion-method topic)))
-    (let ((gump (send method self)))
-      (if (xelfp gump)
-	  (if (or (null gump)
-		  (%inputs (buttons gump)))
-	      ;; replace whole gump 
-	      (replace-gump self gump)
-	      ;; just replace text in existing gump
-	      (replace-gump-text gump gump))
-	  ;; no gump. quit conversation
-	  (destroy-gump self)))))
-
 (defparameter *button-margin* 2)
 
 (defthing button
-  (method :initform nil)
   (target :initform nil)
   (label :initform "foo")
   (arguments :initform nil))
 
 (defmethod initialize ((self button) &key label method target arguments font)
   (with-local-fields 
-    (setf %label (format nil "* ~A " label)
-	  %method method 
+    (setf %label (format nil "* ~A  " label)
 	  %target target 
 	  %arguments arguments)))
 
 (defmethod arrange ((self button))
   (with-fields (label) self
-    (let ((font *gump-font*))
+    (let ((font *gump-button-font*))
       (resize self 
 	      (+ (* 2 *button-margin*)
 		 (font-text-width label font))
 	      (font-height font)))))
+
+(defmethod layout ((self button))
+  (arrange self))
 
 (defmethod can-pick ((self button)))
 (defmethod pick ((self button)))
 
 (defmethod draw ((self button))
   (with-fields (x y label) self
-    (draw-string label (+ x *button-margin*) y :color *gump-color* :font *gump-font*)))
+    (draw-string label (+ x *button-margin*) y :color *gump-color* :font *gump-button-font*)))
 
 (defmethod tap ((self button) x y)
   (with-fields (target arguments method) self
     (when (xelfp target)
-      (apply #'xelf:send method target arguments))))
+      (discuss target arguments))))
 
 (defun make-topic-button (target topic)
   (new 'button :label (pretty-string (make-keyword topic))
-	       :method :discuss
 	       :target target
 	       :arguments (list topic)))
 
@@ -398,11 +378,11 @@
 
 (defmethod tap ((self scroll-text) x y)
   (with-fields (parent) self
-    (flip parent)))
+    (flip (find-object parent))))
 
 (defmethod alternate-tap ((self scroll-text) x y)
   (with-fields (parent) self
-    (destroy parent)))
+    (destroy (find-object parent))))
 
 (defun make-talk-gump-text (data)
   (let ((text (new 'scroll-text :text data)))
@@ -411,17 +391,20 @@
       (set-background-color text nil)
       (set-read-only text t))))
 
-(defparameter *lines-per-talk-gump* 3)
+(defparameter *lines-per-talk-gump* 10)
 
 (defthing (talk-gump gump)
+  (image :initform "scroll-gump.png")
+  (target :initform nil)
   (topic :initform nil)
-   (pages :initform nil)
-   (page-number :initform 0))
+  (pages :initform nil)
+  (page-number :initform 0))
 
-(defparameter *talk-gump-scale* (/ 1 2.3))
+(defparameter *talk-gump-scale* (/ 1 2.8))
 
 (defmethod initialize ((self talk-gump) &key)
   (with-local-fields
+    ;; dummy contents
     (setf %inputs (list 
 		   (make-talk-gump-text "hello")
 		   (make-sentence nil)))
@@ -475,34 +458,60 @@
   (length (%inputs (buttons self))))
 
 (defmethod draw ((self talk-gump))
-  (with-fields (x y width height inputs) self
-    (draw-image "talk-scroll.png" x y :width width :height height)
-    (mapc #'draw inputs)))
+  (with-fields (x y target image width height inputs) self
+    (draw-image image x y :width width :height height)
+    (mapc #'draw inputs)
+    (draw-string (find-description target)
+		 (+ x (units 7))
+		 (+ y (units 1.5))
+		 :color "saddle brown" 
+		 :font "oldania-title")))
 
 (defmethod arrange ((self talk-gump))
   (with-local-fields
     (move-to-target-position self)
     (when (xelfp (text self))
-      (let ((x0 (+ %x (* 0.13 %width)))
-	    (y0 (+ %y (* 0.14 %height))))
+      (let ((x0 (+ %x (* 0.11 %width)))
+	    (y0 (+ %y (* 0.17 %height))))
 	(resize-to-fit (text self))
 	(move-to (text self) x0 y0)
 	(move-to (buttons self) x0 (+ y0 (%height (text self))))
 	(layout (buttons self))))
     (resize self 
-	    (* (image-width "talk-scroll.png") *talk-gump-scale*)
-	    (* (image-height "talk-scroll.png") *talk-gump-scale*))))
+	    (* (image-width %image) *talk-gump-scale*)
+	    (* (image-height %image) *talk-gump-scale*))))
 
-(defmethod configure ((self talk-gump) text buttons)
+(defmethod configure ((self talk-gump) text buttons target)
   (with-local-fields
+    (setf %target target)
     (setf %pages (split-into-pages text *lines-per-talk-gump*))
     (when buttons (replace-buttons self buttons))
     (flip self 0)))
+
+;;; Conversation
 
 (defun make-talk-gump (thing text &rest button-keys)
   (let ((buttons (mapcar #'(lambda (k)
 			     (make-topic-button thing k))
 			 button-keys))
 	(gump (new 'talk-gump)))
-      (prog1 gump (configure gump text buttons))))
+      (prog1 gump (configure gump text buttons thing))))
+
+(defmethod topic-content ((self thing) topic))
+
+(defmacro define-topic (name super &body forms)
+  `(defmethod topic-content ((self ,super) (topic (eql ,(make-keyword name))))
+     (list ,@forms)))
+
+(defmethod get-topic-gump ((self thing) topic)
+  (let ((content (topic-content self topic)))
+    (when content
+      (destructuring-bind (text &rest keys) content
+	(apply #'make-talk-gump self text keys)))))
+
+(defmethod discuss ((self thing) topic)
+  (replace-gump self (get-topic-gump self topic)))
+		
+	
+      
 
