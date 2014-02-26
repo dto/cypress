@@ -135,7 +135,8 @@
 		    (- x (/ width 2))
 		    (- y (/ height 2))
 		    :height height
-		    :width width))))))
+		    :width width
+		    :blend :multiply))))))
 
 (defmethod drag-candidate ((scene scene) (drag thing) x y)
   (let ((objects (z-sorted-objects scene)))
