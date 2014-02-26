@@ -10,9 +10,12 @@
 
 (defun current-scene () *current-scene*)
 
-(defun switch-to-scene (buffer)
+(defun switch-to-scene (buffer &optional previous-x previous-y)
   (play-music (random-choose *soundtrack*) :loop nil)
   (switch-to-buffer buffer)
+  (set-cursor buffer (geoffrey))
+  (when (and (numberp previous-x) (numberp previous-y))
+    (move-to (geoffrey) previous-x previous-y))
   (snap-window-to-cursor buffer)
   (follow-with-camera buffer (geoffrey))
   (setf *current-scene* buffer))
@@ -148,13 +151,15 @@
     (update (status-line))))
 
 (defmethod draw :after ((self scene))
-  (with-fields (drag hover) self
-    (when (xelfp drag) (draw drag))
-    (when (xelfp hover) (draw-hover (find-object hover))))
   ;; draw gumps and bubbles
   (mapc #'draw (z-sort 
 		(append (find-gumps self)
 			(find-instances self 'bubble))))
+  ;; draw any drags
+  (with-fields (drag hover) self
+    (when (xelfp drag) (draw drag))
+    (when (xelfp hover) (draw-hover (find-object hover))))
+  ;; draw status line
   (when (xelfp (geoffrey))
     (draw (status-line))))
 
@@ -335,7 +340,50 @@
 (defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
   (modify-cold monk +10))
 
-;;; Ruins
+;;; Ruins and basements
+
+(defparameter *basement-images* (image-set "basement" 2))
+
+(defthing (basement scene)
+  :darkness-image "darkness.png"
+  :background-image (random-choose *basement-images*))
+
+(defmethod initialize :after ((scene basement) &key)
+  (resize-to-background-image scene))
+
+(defmethod make-terrain ((scene basement))
+  (with-border (units 3)
+    (singleton (new 'crumbling-stairwell))))
+
+(defvar *previous-scene* nil)
+(defvar *previous-x* nil)
+(defvar *previous-y* nil)
+
+(defthing stone-stairwell 
+  :tags '(:fixed) 
+  :image (random-choose *gray-stairwell-images*) 
+  :basement nil)
+
+(defmethod activate ((self stone-stairwell))
+  (narrate "You descend the stairs and enter a moldering basement.")
+  (with-fields (basement) self
+    (when (null basement)
+      (setf basement (new 'basement)))
+    (setf *previous-scene* (current-scene))
+    (multiple-value-bind (x y) (at (cursor))
+      (setf *previous-x* x *previous-y* y)
+      (switch-to-scene basement))))
+
+(defparameter *crumbling-stair-images* (image-set "crumbling-stair" 2))
+
+(defthing crumbling-stairwell 
+  :tags '(:fixed) 
+  :image-scale 200
+  :image (random-choose *crumbling-stair-images*))
+
+(defmethod activate ((self crumbling-stairwell))
+  (switch-to-scene *previous-scene* *previous-x* *previous-y*)
+  (setf *previous-scene* nil))
 
 (defthing (ruins scene)
   :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png")))

@@ -147,11 +147,6 @@
 
 (defthing copper-lock :image (random-choose *copper-lock-images*))
 
-(defthing stone-stairwell :tags '(:fixed) :image (random-choose *gray-stairwell-images*))
-
-(defmethod activate ((self stone-stairwell))
-  (narrate "There is an underground door at the bottom, but it remains sealed."))
-
 (defthing copper-stairwell  :tags '(:fixed) :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
 (defthing copper-plate :tags '(:fixed) :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
 

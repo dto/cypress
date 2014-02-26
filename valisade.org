@@ -3,6 +3,7 @@
 ** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
 ** TODO [#A] implement darkness
 ** TODO [#A] implement ruin basements
+** TODO [#A] disallow travel in the dark.
 ** TODO [#A] implement crypts
 ** TODO [#A] implement open caves with filled regions as objects and flat dirt or stone background, dark halo
 ** TODO [#A] home icon becomes cave icon
