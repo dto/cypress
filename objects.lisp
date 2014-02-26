@@ -137,9 +137,12 @@
 (defparameter *forget-me-not-images* (image-set "forget-me-not" 3))
 (defparameter *stone-images* (image-set "stone" 5))
 
-(defthing snowdrop :image (random-choose *snowdrop-images*))
-(defthing violet :image (random-choose *violet-images*))
-(defthing forget-me-not :image (random-choose *forget-me-not-images*))
+(defthing flower)
+
+(defthing (snowdrop flower) :image (random-choose *snowdrop-images*))
+(defthing (violet flower) :image (random-choose *violet-images*))
+(defthing (forget-me-not flower) :image (random-choose *forget-me-not-images*))
+
 (defthing stone :scale 0.8 :image (random-choose *stone-images*))
 
 (defthing copper-lock :image (random-choose *copper-lock-images*))

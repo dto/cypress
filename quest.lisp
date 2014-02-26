@@ -7,7 +7,11 @@
     (setf *map-column* 0)
     (setf *map-screen* nil)
     (with-buffer buffer
-      (drop-object buffer (new 'lucius) (units 12) (units 8))
+      (drop-object buffer (new 'lucius) 
+		   (- (field-value :width buffer)
+		      (units 8))
+		   (- (field-value :height buffer)
+		      (units 8)))
       (let ((scroll (new 'scroll)))
 	(drop-object buffer scroll (units 10) (units 4)))
 	;; (activate scroll))

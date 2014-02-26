@@ -251,9 +251,9 @@
 (defmethod make-terrain ((meadow meadow))
   (with-border (units 10)
     (lined-up-randomly 
-     (stacked-up-randomly (meadow-debris) (some-trees))
-     (stacked-up-randomly (wood-pile) (clearing) (meadow-debris))
-     (stacked-up-randomly (some-trees) (flowers)))))
+     (stacked-up-randomly (meadow-debris) (flowers) (some-trees))
+     (stacked-up-randomly (wood-pile) (flowers) (clearing) (meadow-debris))
+     (stacked-up-randomly (some-trees) (flowers) (flowers)))))
 
 ;;; Grassy meadow
 

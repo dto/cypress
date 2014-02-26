@@ -8,6 +8,14 @@
 (defparameter *unit* 14) 
 (defun units (n) (* n *unit*))
 
+;;; Finding all objects of a given class in a buffer
+
+(defun find-instances (buffer class-name)
+  (with-fields (objects) buffer
+    (loop for thing being the hash-values in objects
+	  when (typep (find-object thing) (find-class class-name))
+	    collect (find-object thing))))
+
 ;;; Fundamental object attributes in the world of Cypress
 
 (defblock thing 
@@ -134,6 +142,10 @@
     (setf waypoints (rest (rest (find-path-waypoints path x y x1 y1))))
     (when (null waypoints) 
       (stop-walking self))))
+
+(defmethod walk-to-thing ((self thing) (destination thing))
+  (multiple-value-bind (x y) (center-point destination)
+    (walk-to self x y)))
 
 (defmethod stop-walking ((self thing))
   (with-fields (waypoints goal-x goal-y) self
@@ -394,6 +406,10 @@
 (defmethod accept :before ((container thing) (item thing))
   (play-sample "ok.wav"))
 
+(defmethod take ((container thing) (item thing))
+  ;; simple for now
+  (accept container item))
+
 (defmethod bring-to-front ((self thing))
   (when (xelfp (current-buffer))
     (with-fields (z) self
@@ -427,20 +443,23 @@
 	    do (when (typep (find-object thing) (find-class 'bubble))
 		 (return-from finding (find-object thing)))))))
 
-(defmethod replace-bubble ((self thing) text)
+(defmethod replace-bubble ((self thing) text &optional anchor)
   (let ((old-bubble (find-bubble)))
     (when old-bubble 
       (destroy old-bubble))
     (multiple-value-bind (x y) (right-of self)
       (drop-object (current-buffer)
-		   (new 'bubble :text text)
+		   (new 'bubble :text text :anchor anchor)
 		   x y))))
 
 (defmethod look ((self thing))
   (replace-bubble self (find-description self)))
 
+(defresource "talk.wav" :volume 30)
+
 (defmethod bark ((self thing) string)
-  (replace-bubble self string))
+  (play-sample "talk.wav")
+  (replace-bubble self string self))
 
 ;;; Detecting click and double-click
 
@@ -556,20 +575,28 @@
 
 (defthing bubble
   (tags :initform '(:bubble :ethereal))
+  (anchor :initform nil)
   (text :initform nil) 
   (font :initform *bubble-font*)
   (collision-type :initform nil))
 
 (defmethod look ((bubble bubble)))
 
-(defmethod initialize ((self bubble) &key text (font *bubble-font*))
+(defmethod initialize ((self bubble) &key text (font *bubble-font*) anchor)
   (with-local-fields 
+    (setf (field-value :anchor self) anchor)
     (setf (field-value :text self) text)
     (setf (field-value :font self) font)
     (later 4.0 (destroy self))))
 
 (defmethod drop-object :after ((buffer buffer) (self bubble) &optional x y z)
   (bring-to-front self))
+
+(defmethod arrange ((self bubble))
+  (with-fields (anchor) self
+    (when anchor
+      (multiple-value-bind (x y) (right-of anchor)
+	(move-to self x y)))))
 
 (defmethod draw ((self bubble))
   (with-field-values (x y text font) self

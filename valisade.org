@@ -1,11 +1,6 @@
 * Quest ideas
 
-** TODO indicate when there is more text via ellipsis
-
 ** TODO level aura.  
-** TODO draw an example quest map with notes
-** TODO map coordinate system with 27N, 7E or  ... 12S, 142E
-** TODO valisade is in the northeast
 ** TODO [#A] Spell scrolls and Transcription spell
 ** TODO [#A] Find a scroll for understanding the secret language of Shayol
 ** raven sends message from town to east "help us"
@@ -36,14 +31,22 @@
 
 * Tasks
 
-** TODO Create list of quest components 
-** TODO possibly swap right-click and left-click i.e. movement/look
+** TODO when geoffrey not near/talking, Lucius should wander around and collect flowers
+*** TODO randomly choose a flower on the map
+*** TODO walk to it 
+*** TODO take 1 or 2 flowers from any cluster
+*** TODO repeat
 
-** TODO [#A] make hungry/cold messages into Geoffrey-aligned bark bubbles
+** TODO [#A] draw an example quest map with notes
 ** TODO [#A] increase map grid density and procgen it
+** TODO [#A] Create list of quest components 
+** TODO [#A] map coordinate system with 27N, 7E or  ... 12S, 142E
+** TODO [#A] valisade is in the northeast
 ** TODO [#A] restrict visitable map squares in order to begin testing Act I
 ** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
 
+** TODO [#B] indicate when there is more text via ellipsis
+** TODO [#B] make hungry/cold messages into Geoffrey-aligned bark bubbles
 ** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
 ** TODO [#B] implement snow/rain/darkness
 ** TODO [#B] Implement low HP warning, i.e. Dying condition
@@ -54,8 +57,8 @@
 ** TODO [#B] Consider fully turn-based combat, or returning to Pause
 *** TODO Press ESCAPE to close all gumps and unpause
 
-
 ** TODO [#C] Fix spellcasting/activating objects after dead
+** TODO [#C] possibly swap right-click and left-click i.e. movement/look
 ** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 ** TODO [#C] grave hag corpses

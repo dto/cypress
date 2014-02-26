@@ -236,7 +236,7 @@
   (setf (field-value :talking self) t))
 
 (defmethod stop-talking ((self monk))
-  (setf (field-value :ttalking self) nil))
+  (setf (field-value :talking self) nil))
 
 ;;; Footstep sounds
 
@@ -662,19 +662,49 @@
 
 ;;; Lucius 
 
-(defthing (lucius monk) :clock 10 :description "Lucius")
+(defthing (lucius monk) 
+  :next-flower nil 
+  :clock 10 
+  :seen-player nil
+  :description "Lucius")
+
+(defmethod choose-flower ((self lucius))
+  (setf (field-value :next-flower self)
+	(let ((flowers (find-instances (current-buffer) 'flower)))
+	  (when flowers (random-choose flowers)))))
 
 (defmethod run ((self lucius))
-  (call-next-method)
-  (with-fields (clock) self
+  (with-fields (next-flower seen-player gump waypoints clock) self
+    (call-next-method)
     (decf clock)
-    (when (cursor)
-      (cond  ((> (distance-to-cursor self) 150)
-	      (unless (or (field-value :waypoints self) (plusp clock))
-		(multiple-value-bind (x y) (at (cursor))
-		  (walk-to self x y))))
-	     ((> (distance-to-cursor self) 110)
-	      (prog1 nil (stop-walking self) (setf clock 10)))))))
+    (let ((distance (distance-to-cursor self)))
+      (when (cursor)
+	(when (and (not seen-player)
+		   (< distance 300))
+	  (setf seen-player t)
+	  (bark self "Ho, stranger!")
+	  (walk-to-thing self (cursor)))
+	(cond 
+	  ((and (null gump) 
+		(> distance 240))
+	   ;; pick flowers
+	   (unless (plusp clock)
+	     (if (null next-flower)
+		 (choose-flower self)
+		 (if (null waypoints)
+		     (walk-to-thing self next-flower)
+		     ;; are we near flower?
+		     (when (< (distance-between self next-flower) 80)
+		       (stop-walking self)
+		       (setf clock 30)
+		       (take self next-flower)
+		       (setf next-flower nil))))))
+	  ((> distance 150)
+	   (unless (or waypoints (null gump) (plusp clock))
+	     (multiple-value-bind (x y) (at (cursor))
+	       (walk-to self x y))))
+	  ((> distance 110)
+	   (prog1 nil (stop-walking self) (setf clock 10))))))))
 
 (defmethod activate ((self lucius))
   (discuss self :hello))
@@ -694,22 +724,23 @@ Order?"
 (define-topic i-am-geoffrey-of-valisade lucius 
 "It's nice to meet you, Brother
 Geoffrey of Valisade! Welcome to our
-little town." :town)
+little town." :town :robes)
 
 (define-topic job lucius 
 "I'm a librarian at the Nothbess
 monastery. I'm also a maker and mender
-of shirts, pants, robes, and leather
-armor.")
+of shirts, shoes, pants, robes, and
+leather armor." :town)
 
 (define-topic robes lucius 
 "Yes. I haven't seen a style quite like
-it. Although, the stitching around the
-leather portions, as well as the
-general fit, do remind me a bit of my
-grandfather's old war gear.  Tell me,
-are you a soldier? Did you come across
-the mountains from the West?" :west :grandfather)
+it. Although, the general fit, and the
+stitching around the leather portions,
+do remind me a bit of my grandfather's
+old war gear. Tell me, are you a
+soldier? Did you come across the
+mountains from the West?" 
+:west :grandfather :town)
 
 (define-topic west lucius "I thought so!")
 

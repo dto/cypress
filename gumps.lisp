@@ -38,10 +38,7 @@
 ;;; Cascading the gumps 
 
 (defun find-gumps (&optional (buffer (current-buffer)))
-  (with-fields (objects) buffer
-    (loop for thing being the hash-values in objects
-	  when (typep (find-object thing) (find-class 'gump))
-	    collect (find-object thing))))
+  (find-instances buffer 'gump))
 
 (defparameter *gump-cascade-offset* (units 1))
 (defparameter *gump-cascade-size* (units 4))
