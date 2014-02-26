@@ -19,6 +19,7 @@
 
 (define-buffer scene 
   :background-image "stone-road.png"
+  :darkness-image nil ;; "darkness.png"
   :quadtree-depth 8
   :camped nil
   :time :day
@@ -109,11 +110,29 @@
 (defmethod draw-object-layer ((buffer scene))
   (multiple-value-bind (top left right bottom) 
       (window-bounding-box buffer)
-    (dolist (object (mapcar #'find-object (z-sort (get-objects buffer))))
+    (dolist (object 
+	     ;; don't draw gumps yet
+	     (remove-if #'(lambda (x)
+			    (typep x 'gump))
+			(mapcar #'find-object (z-sort (get-objects buffer)))))
       ;; only draw onscreen objects
       (when (colliding-with-bounding-box object top left right bottom)
 	(draw object)
 	(after-draw-object buffer object)))))
+
+(defparameter *darkness-scale* 1.0)
+
+(defmethod draw-object-layer :after ((buffer scene))
+  (with-fields (darkness-image) buffer
+    (when darkness-image
+      (let ((height (* *darkness-scale* (image-height darkness-image)))
+	    (width (* *darkness-scale* (image-width darkness-image))))
+	(multiple-value-bind (x y) (center-point (cursor))
+	  (draw-image darkness-image
+		    (- x (/ width 2))
+		    (- y (/ height 2))
+		    :height height
+		    :width width))))))
 
 (defmethod drag-candidate ((scene scene) (drag thing) x y)
   (let ((objects (z-sorted-objects scene)))
@@ -132,6 +151,10 @@
   (with-fields (drag hover) self
     (when (xelfp drag) (draw drag))
     (when (xelfp hover) (draw-hover (find-object hover))))
+  ;; draw gumps and bubbles
+  (mapc #'draw (z-sort 
+		(append (find-gumps self)
+			(find-instances self 'bubble))))
   (when (xelfp (geoffrey))
     (draw (status-line))))
 
