@@ -679,40 +679,44 @@
 (defmethod activate ((self lucius))
   (discuss self :hello))
 
-(define-topic hello lucius 
-   "Good morning Geoffrey! A Raven just
-delivered this letter for you."
-   :letter :weather :name :job :bye)
-	   
+(define-topic hello lucius
+"Greetings, brother. Well met. I don't
+recall ever seeing robes like yours!
+You must be a traveler?"
+  :robes :where-are-we?)
+
 (define-topic name lucius 
-  "I am your friend Lucius, of course.")
+"My name is Lucius Pentaquin. And who
+are you?  A monk, it seems, but of what
+Order?"
+:i-am-geoffrey-of-valisade)
+
+(define-topic i-am-geoffrey-of-valisade lucius 
+"It's nice to meet you, Brother
+Geoffrey of Valisade! Welcome to our
+little town." :town)
 
 (define-topic job lucius 
-  "You know perfectly well that I work
-at the Nothbess Library. My duties
-include dusting and organizing books.
-And what else have you forgotten today?
-Something must be wrong with you.")
+"I'm a librarian at the Nothbess
+monastery. I'm also a maker and mender
+of shirts, pants, robes, and leather
+armor.")
 
-(define-topic weather lucius 
-"It's nice out today, but I feel as if
-it's been a bit colder than usual."
-  :colder :letter :name :job :bye)
+(define-topic robes lucius 
+"Yes. I haven't seen a style quite like
+it. Although, the stitching around the
+leather portions, as well as the
+general fit, do remind me a bit of my
+grandfather's old war gear.  Tell me,
+are you a soldier? Did you come across
+the mountains from the West?" :west :grandfather)
 
-(define-topic bye lucius () nil)
+(define-topic west lucius "I thought so!")
 
-(define-topic colder lucius 
-"Yes. The leaves seem to be turning early.")
 
-(define-topic letter lucius 
-  "I wonder what it says? It comes
-straight from Dr. Quine at the
-monastery. Here you go. I'm so curious
-to know what it says. Open it, open it!"
-:bye)
 
-(defmethod discuss :after ((self lucius) (topic (eql :letter)))
-  (drop self (new 'scroll) 0 (field-value :height self)))
+;; (defmethod discuss :after ((self lucius) (topic (eql :letter)))
+;;   (drop self (new 'scroll) 0 (field-value :height self)))
 
 
 

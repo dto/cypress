@@ -489,9 +489,18 @@
 (defun make-talk-gump (thing text &rest button-keys)
   (let ((buttons (mapcar #'(lambda (k)
 			     (make-topic-button thing k))
-			 button-keys))
+			 (append (field-value :topics thing)
+				 button-keys)))
 	(gump (new 'talk-gump)))
       (prog1 gump (configure gump text buttons thing))))
+
+(defun configure-talk-gump (gump thing content)
+  (destructuring-bind (text &rest button-keys) content
+    (let ((buttons (mapcar #'(lambda (k)
+			     (make-topic-button thing k))
+			 (append (field-value :topics thing)
+				 button-keys))))
+      (prog1 gump (configure gump text buttons thing)))))
 
 (defmethod topic-content ((self thing) topic))
 
@@ -506,13 +515,16 @@
 	(apply #'make-talk-gump self text keys)))))
 
 (defmethod discuss ((self thing) topic)
-  (with-fields (gump width x y) self
-    (let ((new-gump (get-topic-gump self topic)))
-      (if new-gump 
-	  (progn (replace-gump self new-gump)
-		 (set-target-position gump (+ x width 2) y))
-	  (destroy-gump self)))))
-		
-	
-      
-
+  (with-fields (width x y) self
+    (let ((gump (get-gump self))
+	  (content (topic-content self topic)))
+      (if (typep gump 'talk-gump)	  
+	  ;; configure in place
+	  (configure-talk-gump gump self content)
+	  ;; possibly replace other gump
+	  (let ((new-gump (get-topic-gump self topic)))
+	    ;; we got a new gump for this topic.
+	    (if new-gump 
+		(replace-gump self new-gump)
+		;; no gump remaining. quit
+		(destroy-gump self)))))))

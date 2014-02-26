@@ -1,20 +1,16 @@
 * Quest ideas
 
-** DONE make conversation gump use the standard scroll graphic, maybe slightly smaller
-   CLOSED: [2014-02-24 Mon 14:52]
-** TODO rework conversatin topic system
-** TODO only display buttons on last page of response
-** TODO use :after methods with EQ :topic specializers to do non-text actions
+** TODO append %topics to topic list
+** TODO set convo gump as object's main %gump
+** TODO re-use gump when things change
+** TODO indicate when there is more text via ellipsis
 
+** DONE rework conversatin topic system
+   CLOSED: [2014-02-25 Tue 21:35]
+
+** DONE use :after methods with EQ :topic specializers to do non-text actions
+   CLOSED: [2014-02-25 Tue 21:43]
 ** TODO Lucius NPC
-
-Bark "Ho, stranger."
-
-Greetings, brother. Well met.
-
-My name is Lucius Pentaquin. I don't recall ever seeing robes like
-yours! You must be a traveler?
-
 
 ** TODO level aura.  
 ** TODO draw an example quest map with notes

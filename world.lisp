@@ -34,6 +34,8 @@
   (delay :initform 0)
   (repeat :initform nil)
   (animation :initform nil)
+  ;; conversation fields
+  (topics :initform '(:name :job :bye))
   ;; system fields
   (last-tap-time :initform nil)
   (gump :initform nil)
@@ -435,6 +437,9 @@
 
 (defmethod look ((self thing))
   (replace-bubble self (find-description self)))
+
+(defmethod bark ((self thing) string)
+  (replace-bubble self string))
 
 ;;; Detecting click and double-click
 
