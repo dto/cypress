@@ -11,7 +11,7 @@
 (defun current-scene () *current-scene*)
 
 (defun switch-to-scene (buffer)
-  ;; (play-music (random-choose *soundtrack*) :loop nil)
+  (play-music (random-choose *soundtrack*) :loop nil)
   (switch-to-buffer buffer)
   (snap-window-to-cursor buffer)
   (follow-with-camera buffer (geoffrey))
