@@ -334,8 +334,9 @@
 
 (defmethod destroy-gump ((self thing))
   (with-fields (gump) self
-    (when (xelfp gump)
-      (destroy gump)
+    (when gump
+      (when (xelfp gump)
+	(destroy gump))
       (setf gump nil))))
 
 (defmethod replace-gump ((self thing) gump)

@@ -383,7 +383,8 @@
 
 (defmethod alternate-tap ((self scroll-text) x y)
   (with-fields (parent) self
-    (destroy (find-object parent))))
+    (with-fields (target) parent
+      (destroy-gump target))))
 
 (defun make-talk-gump-text (data)
   (let ((text (new 'scroll-text :text (list data))))
@@ -401,7 +402,7 @@
   (pages :initform nil)
   (page-number :initform 0))
 
-(defparameter *talk-gump-scale* (/ 1 2))
+(defparameter *talk-gump-scale* (/ 1 1.8))
 
 (defmethod initialize ((self talk-gump) &key)
   (with-local-fields
@@ -446,9 +447,8 @@
   (freeze (buttons self)))
 
 (defmethod destroy-buttons ((self talk-gump))
-  (with-local-fields 
-    (mapc #'destroy (%inputs (buttons self)))
-    (setf (%inputs (buttons self)) nil)))
+  (mapc #'destroy (field-value :inputs (buttons self)))
+  (setf (field-value :inputs (buttons self)) nil))
 
 (defmethod replace-buttons ((self talk-gump) items)
   (destroy-buttons self)
@@ -471,7 +471,7 @@
 	    (y0 (+ %y (* 0.18 %height))))
 	(resize (text self) %width (units 6))
 	(move-to (text self) x0 y0)
-	(move-to (buttons self) x0 (+ y0 (units 7.5)))
+	(move-to (buttons self) x0 (+ y0 (units 8)))
 	(layout (buttons self))))
     (resize self 
 	    (* (image-width %image) *talk-gump-scale*)
@@ -518,13 +518,13 @@
   (with-fields (width x y) self
     (let ((gump (get-gump self))
 	  (content (topic-content self topic)))
-      (if (typep gump 'talk-gump)	  
+      (if (and (first content)
+	       (typep gump 'talk-gump))
 	  ;; configure in place
 	  (configure-talk-gump gump self content)
 	  ;; possibly replace other gump
 	  (let ((new-gump (get-topic-gump self topic)))
-	    ;; we got a new gump for this topic.
-	    (if new-gump 
-		(replace-gump self new-gump)
-		;; no gump remaining. quit
-		(destroy-gump self)))))))
+	    (destroy-gump self)
+	    (when new-gump 
+	      ;; we got a new gump for this topic.
+		(replace-gump self new-gump)))))))

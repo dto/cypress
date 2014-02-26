@@ -1,16 +1,6 @@
 * Quest ideas
 
-** TODO append %topics to topic list
-** TODO set convo gump as object's main %gump
-** TODO re-use gump when things change
 ** TODO indicate when there is more text via ellipsis
-
-** DONE rework conversatin topic system
-   CLOSED: [2014-02-25 Tue 21:35]
-
-** DONE use :after methods with EQ :topic specializers to do non-text actions
-   CLOSED: [2014-02-25 Tue 21:43]
-** TODO Lucius NPC
 
 ** TODO level aura.  
 ** TODO draw an example quest map with notes
@@ -1294,3 +1284,63 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE append %topics to topic list
+   CLOSED: [2014-02-26 Wed 04:09]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-26 Wed 04:52
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Quest ideas
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE set convo gump as object's main %gump
+   CLOSED: [2014-02-26 Wed 04:09]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-26 Wed 04:52
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Quest ideas
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE re-use gump when things change
+   CLOSED: [2014-02-26 Wed 04:52]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-26 Wed 04:52
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Quest ideas
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE rework conversatin topic system
+   CLOSED: [2014-02-25 Tue 21:35]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-26 Wed 04:52
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Quest ideas
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE use :after methods with EQ :topic specializers to do non-text actions
+   CLOSED: [2014-02-25 Tue 21:43]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-26 Wed 04:52
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Quest ideas
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO Lucius NPC
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-02-26 Wed 04:52
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Quest ideas
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
