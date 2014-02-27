@@ -12,6 +12,7 @@
 
 (defun switch-to-scene (buffer &optional previous-x previous-y)
   (play-music (random-choose *soundtrack*) :loop nil)
+  (stop-walking (geoffrey))
   (switch-to-buffer buffer)
   (set-cursor buffer (geoffrey))
   (when (and (numberp previous-x) (numberp previous-y))
@@ -23,6 +24,7 @@
 (define-buffer scene 
   :background-image "stone-road.png"
   :darkness-image nil ;; "darkness.png"
+  :darkness-boil 1.0
   :quadtree-depth 8
   :camped nil
   :time :day
@@ -125,11 +127,14 @@
 
 (defparameter *darkness-scale* 1.0)
 
+(defun random-boil-factor () (random-choose '(1.0 1.005 1.01 1.015 1.02)))
+
 (defmethod draw-object-layer :after ((buffer scene))
-  (with-fields (darkness-image) buffer
+  (with-fields (darkness-image darkness-boil) buffer
     (when darkness-image
-      (let ((height (* *darkness-scale* (image-height darkness-image)))
-	    (width (* *darkness-scale* (image-width darkness-image))))
+      (percent-of-time 16 (setf darkness-boil (random-boil-factor)))
+      (let ((height (* darkness-boil *darkness-scale* (image-height darkness-image)))
+	    (width (* darkness-boil *darkness-scale* (image-width darkness-image))))
 	(multiple-value-bind (x y) (center-point (cursor))
 	  (draw-image darkness-image
 		    (- x (/ width 2))
@@ -203,7 +208,7 @@
 	  (multiple-value-bind (tx ty) 
 	      (step-toward-heading object 
 				   (field-value :heading object) 
-				   (/ *monk-speed* 1))
+				   (/ *monk-speed* 1.2))
 		;; yes. recenter.
 		(glide-window-to self
 				 (truncate (max 0
