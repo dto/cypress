@@ -141,7 +141,8 @@
       (setf path (create-path self :buffer (current-buffer))))
     (setf waypoints (rest (rest (find-path-waypoints path x y x1 y1))))
     (when (null waypoints) 
-      (stop-walking self))))
+      (stop-walking self))
+    waypoints))
 
 (defmethod walk-to-thing ((self thing) (destination thing))
   (multiple-value-bind (x y) (center-point destination)
@@ -356,8 +357,7 @@
     (if %gump
 	(multiple-value-bind (x y) (get-target-position %gump)
 	  (destroy-gump self)
-	  (set-gump self gump)
-	  (set-target-position gump x y))
+	  (set-gump self gump))
 	(set-gump self gump))))
 
 (defmethod talk ((self thing) &rest args)

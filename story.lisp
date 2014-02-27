@@ -1,6 +1,5 @@
 (in-package :cypress)
 
-
 (defparameter *wax-cylinder-letter*
 "The alliance between the Black Wizards
 and the Industrialists sparked the
@@ -123,38 +122,6 @@ I've got to get moving! See you soon.
  -- Dr. Quine
 ")
 
-(defparameter *poem-1*
-"My name is Amalia.
-
-I am the spirit who lives 
- in the White Cypress.
-Like those who dwelt therein before, 
-I guide the souls of Ildran 
- as they pass between worlds.
-
-I will tell you now 
-of an ancient time,
-
-When ash and smoke concealed 
-the fury of Sol.")
-
-(defparameter *poem-2*
-"When ash and smoke concealed 
-the fury of Sol.
-
-When famine and despair
-swept over Ildran.
-
-When the Cypress died, 
-leaving souls to wander
-without rest.
-
-When a man of humility,
-with little more than
-robe and longbow, 
-passed into the history
-of Heroes.")
-
 (defparameter *letter-text-3* 
   "Dear Geoffrey,
 
@@ -200,8 +167,7 @@ you left.
   :image (random-choose *scroll-images*) 
   :text  (random-choose
 	  (list *letter-text*
-		*poem-1*
-		*poem-2*
+		*amalia-poem*
 		*letter-text-3*)))
 
 (defmethod activate ((self scroll-fragment))

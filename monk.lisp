@@ -668,6 +668,12 @@
   :seen-player nil
   :description "Lucius")
 
+(defmethod walk-to :after ((monk lucius) x y)
+  (with-fields (waypoints clock) monk
+    (when (null waypoints)
+      (choose-flower monk)
+      (setf clock 20))))
+
 (defmethod choose-flower ((self lucius))
   (setf (field-value :next-flower self)
 	(let ((flowers (find-instances (current-buffer) 'flower)))
@@ -707,6 +713,7 @@
 	   (prog1 nil (stop-walking self) (setf clock 10))))))))
 
 (defmethod activate ((self lucius))
+  (destroy-gump self)
   (discuss self :hello))
 
 (define-topic hello lucius
