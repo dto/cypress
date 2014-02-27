@@ -210,10 +210,31 @@
       (show-error monk x y)
       (narrate "That destination is obstructed."))))
 
+(defmethod bark-hunger ((monk monk))
+  (with-fields (hunger) monk
+    (cond ((> hunger 85)
+	   (bark monk "I am starving to death!"))
+	  ((> hunger 70)
+	   (bark monk "I feel weak from hunger!"))
+	  ((> hunger 45)
+	   (bark monk "I am very hungry."))
+	  ((> hunger 25)
+	   (bark monk "I feel a bit hungry.")))))
+
+(defmethod bark-cold ((monk monk))
+  (with-fields (cold) monk
+    (cond ((> cold 80)
+	   (bark monk "I am freezing to death!"))
+	  ((> cold 50)
+	   (bark monk "I am beginning to freeze!"))
+	  ((> cold 30)
+	   (bark monk "I feel cold.")))))
+
 (defmethod drop-object :after ((buffer buffer) (monk monk) &optional x y z)
-  (modify-hunger monk 1)
   (begin-animation monk (standing-animation monk))
-  (setf (field-value :path monk) nil))
+  (setf (field-value :path monk) nil)
+  (bark-hunger monk)
+  (bark-cold monk))
 
 (defmethod humanp ((self monk)) nil)
 
@@ -491,31 +512,17 @@
 
 (defmethod modify-health :after ((monk geoffrey) points)
   (with-fields (alive health) monk
+    (when alive
+      (when (< health 20) 
+	(bark monk "I'm dying!")))
     (when (and alive
 	       (not (plusp health)))
       (die monk))))
 
 (defmethod modify-cold :after ((monk geoffrey) points)
   (with-fields (cold) monk
-    (narrate "You feel colder. Currently at ~S percent." cold)
-    (cond ((> cold 80)
-	   (narrate "You are freezing!"))
-	  ((> cold 50)
-	   (narrate "You are beginning to freeze!"))
-	  ((> cold 30)
-	   (narrate "You are getting cold.")))))
-
-(defmethod modify-hunger :after ((monk geoffrey) points)
-  (with-fields (hunger) monk
-    (cond ((> hunger 85)
-	   (narrate "You are starving to death!"))
-	  ((> hunger 70)
-	   (narrate "You feel weak from hunger."))
-	  ((> hunger 45)
-	   (narrate "You are getting hungrier."))
-	  ((> hunger 25)
-	   (narrate "You feel a bit hungry. Currently at ~S percent." hunger)))))
-
+    (bark-cold monk)
+    (narrate "You feel colder. Currently at ~S percent." cold)))
 
 (defparameter *monk-hide-weapon-time* (seconds->frames 10))
 
