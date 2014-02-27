@@ -387,6 +387,7 @@
   (let ((text (new 'scroll-text :text (list data))))
     (prog1 text
       (set-font text *gump-font*)
+      (set-foreground-color text "saddle brown")
       (set-background-color text nil)
       (set-read-only text t))))
 

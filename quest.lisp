@@ -13,8 +13,8 @@
 		   (- (field-value :height buffer)
 		      (units 8)))
       (let ((scroll (new 'scroll)))
-	(drop-object buffer scroll (units 10) (units 4)))
-	;; (activate scroll))
+	(drop-object buffer scroll (units 10) (units 4))
+	(activate scroll))
       (current-buffer))))
 
 

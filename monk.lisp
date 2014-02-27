@@ -125,10 +125,10 @@
 (defparameter *monk-walk* 
   '(:repeat t
     :scale 820
-    :frames (("monk-walk-1.png" 4)
-	     ("monk-walk-3.png" 4)
-	     ("monk-walk-2.png" 4)
-	     ("monk-walk-4.png" 4))))
+    :frames (("monk-walk-2.png" 4)
+	     ("monk-walk-4.png" 4)
+	     ("monk-walk-1.png" 4)
+	     ("monk-walk-3.png" 1))))
 
 (defparameter *monk-walk-bow* 
   '(:repeat t
@@ -722,7 +722,12 @@ recall ever seeing robes like yours!
 You must be a traveler?"
   :robes :where-are-we?)
 
-(define-topic name lucius 
+(define-topic where-are-we? lucius
+"We're just outside the little town of
+Nothbess. You really have no idea where
+you are, do you?" :robes :quine)
+
+(define-topic name lucius
 "My name is Lucius Pentaquin. And who
 are you?  A monk, it seems, but of what
 Order?"
@@ -731,13 +736,20 @@ Order?"
 (define-topic i-am-geoffrey-of-valisade lucius 
 "It's nice to meet you, Brother
 Geoffrey of Valisade! Welcome to our
-little town." :town :robes)
+little town." :town :robes :quine)
 
 (define-topic job lucius 
 "I'm a librarian at the Nothbess
 monastery. I'm also a maker and mender
 of shirts, shoes, pants, robes, and
-leather armor." :town)
+leather armor." :town :robes :quine)
+
+(define-topic quine lucius 
+"I don't think I've met anyone named
+Quine myself, but we do see travelers
+pass through town from time to
+time. Maybe my grandfather would know?"
+:grandfather)
 
 (define-topic robes lucius 
 "Yes. I haven't seen a style quite like
@@ -747,11 +759,30 @@ do remind me a bit of my grandfather's
 old war gear. Tell me, are you a
 soldier? Did you come across the
 mountains from the West?" 
-:west :grandfather :town)
+:west :grandfather)
 
-(define-topic west lucius "I thought so!")
+(define-topic grandfather lucius 
+  "Yes, the great Arturo Pentaquin the
+Fourth! A decorated officer of the Wars
+of the West. We should visit him in
+Nothbess; it's a short distance to the
+north of here. He knows all about
+Westerners." :west)
 
+(define-topic west lucius 
+  "I've never been out West myself, but
+of course I've heard all the old
+stories and read all the old books." :quine :robes :books)
 
+(define-topic books lucius 
+  "There are plenty of books, maps, and
+scrolls at the Library where I work. 
+You should visit the Monastery in town." :town)
+
+(define-topic town lucius 
+  "Nothbess is my family's home, a
+quiet town to the north of here.
+There's also a monastery.")
 
 ;; (defmethod discuss :after ((self lucius) (topic (eql :letter)))
 ;;   (drop self (new 'scroll) 0 (field-value :height self)))
