@@ -11,7 +11,7 @@
 (defun current-scene () *current-scene*)
 
 (defun switch-to-scene (buffer &optional previous-x previous-y)
-  (play-music (random-choose *soundtrack*) :loop nil)
+  ;; (play-music (random-choose *soundtrack*) :loop nil)
   (stop-walking (geoffrey))
   (switch-to-buffer buffer)
   (set-cursor buffer (geoffrey))
