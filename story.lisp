@@ -144,7 +144,7 @@ studied the ancients' commentaries on
 Rama's maps of the Cosmos, we drew
 charts of our own and found that ages
 had passed since our departure from
-Nothbess.
+Nothbehem.
 
 If we read these charts aright, then by
 the time you read these words your

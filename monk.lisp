@@ -731,7 +731,7 @@ You must be a traveler?"
 
 (define-topic where-are-we? lucius
 "We're just outside the little town of
-Nothbess. You really have no idea where
+Nothbehem. You really have no idea where
 you are, do you?" :robes :quine)
 
 (define-topic name lucius
@@ -746,7 +746,7 @@ Geoffrey of Valisade! Welcome to our
 little town." :town :robes :quine)
 
 (define-topic job lucius 
-"I'm a librarian at the Nothbess
+"I'm a librarian at the Nothbehem
 monastery. I'm also a maker and mender
 of shirts, shoes, pants, robes, and
 leather armor." :town :robes :quine)
@@ -772,7 +772,7 @@ mountains from the West?"
   "Yes, the great Arturo Pentaquin the
 Fourth! A decorated officer of the Wars
 of the West. We should visit him in
-Nothbess; it's a short distance to the
+Nothbehem; it's a short distance to the
 north of here. He knows all about
 Westerners." :west)
 
@@ -787,7 +787,7 @@ scrolls at the Library where I work.
 You should visit the Monastery in town." :town)
 
 (define-topic town lucius 
-  "Nothbess is my family's home, a
+  "Nothbehem is my family's home, a
 quiet town to the north of here.
 There's also a monastery.")
 
