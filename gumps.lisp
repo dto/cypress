@@ -419,6 +419,10 @@
 	  (make-talk-gump-text (nth page-number pages)))
     (update-parent-links self)))
 
+(defmethod more-p ((self talk-gump))
+  (with-fields (pages page-number) self
+    (< page-number (1- (length pages)))))
+
 (defmethod can-pick ((self talk-gump)) 
   t)
 
@@ -459,6 +463,12 @@
 (defmethod draw ((self talk-gump))
   (with-fields (x y target image width height inputs) self
     (draw-image image x y :width width :height height)
+    (when (more-p self)
+      (draw-string "(continued...)" 
+		   (+ x (units 15))
+		   (+ y (units 9))
+		   :color *gump-color*
+		   :font *gump-font*))
     (mapc #'draw inputs)))
 
 (defmethod arrange ((self talk-gump))
