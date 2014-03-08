@@ -1,20 +1,20 @@
 * Fixes and tweaks
 
+** TODO [#C] Fix non-impelled arrows moving on their own 
 ** TODO Reagent search will look in bags
 ** TODO Disallow browsing/picking from faraway containers
 ** TODO Better flower clusters and wood around dead trees
 ** TODO Modeline lighter(s) for Freezing/Hungry/Dying
-
+** TODO 
 ** TODO make pretty magic potions more common
-** TODO better distribution of herbs and things
 ** TODO Fix scrolling jerkiness
-** TODO [#B] Don't allow giving things to lucius in Chapter 1
-** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
-** TODO [#C] Fix spellcasting/activating objects after dead
-** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
+** TODO Don't allow giving things to lucius in Chapter 1
+** TODO Don't allow tent to be put in containers other than Geoffrey
+** TODO Fix spellcasting/activating objects after dead
+** TODO Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#C] grave hag corpses
-** TODO [#C] allow canceling travel
+** TODO grave hag corpses
+** TODO allow canceling travel
 
 * Improve terrain and expand Ildran
 ** TODO Fix pathfinding / placement bugs when exiting basements
@@ -22,7 +22,6 @@
 ** TODO make geoffrey appear in an appropriate entry location on each visit
 ** TODO restrict visitable map squares in order to begin testing Act I (exception: holding shift)
 ** TODO [#B] implement snow/rain/darkness
-
 
 * Ruin Basement improvements
 ** TODO Small basements in ruins
@@ -91,7 +90,6 @@
 ** TODO [#C] fix z-sorting of player remains
 ** TODO [#C] Implement exhaustion
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
-** TODO [#C] Fix non-impelled arrows moving on their own 
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 ** TODO [#C] Fix jittery rotation of monk at corners of paths
 

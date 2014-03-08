@@ -274,7 +274,7 @@
   (>= (compute-quantity container item-class)
       quantity))
 
-;;; Derived attack/defense/resistance scores 
+;;; Equipping things
 
 (defmethod equip ((equipper thing) (self thing))
   (when (field-value :container self)
@@ -298,6 +298,8 @@
 		
 (defmethod equipment-description ((self thing)) nil)
    
+;;; Derived attack/defense/resistance scores 
+
 (defmethod compute-rating ((self thing) stat)
   (apply #'+ 
 	 (field-value stat self) 
