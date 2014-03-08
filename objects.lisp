@@ -190,9 +190,9 @@
 (defthing triangle-key :image "triangle-key.png")
 (defthing circle-key :image "circle-key.png")
 
-(defthing xalcium-leggings :image "xalcium-leggings.png")
-(defthing xalcium-armor :image "xalcium-armor.png")
-(defthing xalcium-mail :image "xalcium-mail.png")
+(defthing silver-leggings :image "silver-leggings.png")
+(defthing silver-armor :image "silver-armor.png")
+(defthing silver-mail :image "silver-mail.png")
 
 ;;; ruin walls
 
@@ -208,7 +208,7 @@
 (defparameter *grab-bag-items* '(elixir elixir skull wolf-corpse ruined-book silver-elixir
  stone stone thornweed nightshade white-bread wheat-bread))
 
-(defparameter *boxed-items* '(silver-elixir xalcium-armor atlas))
+(defparameter *boxed-items* '(silver-elixir silver-armor))
 
 (defun grab (bag &optional (count (+ 2 (random 5))))
   (let (items)
