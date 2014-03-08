@@ -41,7 +41,7 @@
 
 (defun-memo status-line-equipment-string (n)
     (:key #'identity :test 'equal :validator #'identity)
-  (format nil "Equipment: ~A       " n))
+  (format nil "Quiver: ~A       " n))
 
 (defresource (:name "oldania-medium-bold" :type :ttf :file "OldaniaADFStd-Bold.otf" :properties (:size 18)))
 
@@ -112,4 +112,90 @@
     (draw-box x y width height :color *status-line-background-color*)
     (mapc #'draw %inputs)))
 
+(defun health-description (points)
+  (format nil "Geoffrey is ~A."
+	  (cond ((< points 10)
+		 "close to death")
+		((< points 25)
+		 "badly wounded")
+		((< points 50)
+		 "seriously wounded")
+		((< points 80)
+		 "wounded")
+		((< points 95)
+		 "lightly wounded")
+		((<= points 100)
+		 "alive and well"))))
 
+(defun hunger-description (points0)
+  (let ((points (- 100 points0)))
+    (format nil "Geoffrey is ~A."
+	    (cond ((< points 10)
+		   "on the verge of starvation")
+		  ((< points 25)
+		   "becoming weak from hunger")
+		  ((< points 50)
+		   "extremely hungry")
+		  ((< points 80)
+		   "hungry")
+		  ((< points 87)
+		   "slightly hungry")
+		  ((<= points 100)
+		   "not hungry")))))
+
+(defun cold-description (points0)
+  (let ((points (- 100 points0)))
+    (format nil "Geoffrey is ~A."
+	    (cond ((< points 10)
+		   "freezing to death")
+		  ((< points 25)
+		   "shivering from extreme cold")
+		  ((< points 50)
+		   "very cold")
+		  ((< points 75)
+		   "cold")
+		  ((< points 90)
+		   "slightly cold")
+		  ((< points 95)
+		   "comfortable")
+		  ((<= points 100)
+		   "comfortable and warm")))))
+
+(defun magic-description (points)
+  (when (< points 15)
+    "Geoffrey's magical energy is running low."))
+	  
+(defun attack-description (points)
+  (when (plusp points)
+    (format nil "Attack power is raised ~A points." points)))
+
+(defun defense-description (points)
+  (when (plusp points)
+    (format nil "Defensive power is up ~A points." points)))
+
+(defun resistance-description (points)
+  (when (plusp points)
+    (format nil "Resistance is up ~A points." points)))
+
+(defun make-page (lines)
+  (apply #'concatenate 'string
+	 (mapcar #'(lambda (x)
+		     (concatenate 'string x (string #\Newline)))
+		 lines)))
+
+(defun status-text ()
+  (with-fields (health magic cold hunger) (geoffrey)
+    (make-page
+     (delete nil
+	     (append 
+	      (list 
+	       (health-description health)
+	       (magic-description magic)
+	       (hunger-description hunger)
+	       (cold-description cold))
+	      (mapcar #'equipment-description
+		      (equipment (geoffrey)))
+	      (list
+	       (attack-description (attack-rating (geoffrey)))
+	       (defense-description (defense-rating (geoffrey)))
+	       (resistance-description (resistance-rating (geoffrey)))))))))

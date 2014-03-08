@@ -146,7 +146,7 @@
 
 (defmethod draw ((icon icon))
   (with-fields (x y height width target) icon
-    (with-fields (quantity) target
+    (with-fields (quantity equipper) target
       (let ((image (or (field-value :contained-image target)
 		       (field-value :image target))))
 	(let ((image-width (image-width image))
@@ -160,13 +160,18 @@
 	      (draw-image image x y
 			  :height height
 			  :width (- width (* width (/ height image-height)))))
-	  ;; now possibly draw quantity
-	  (when (> quantity 1)
-	    (draw-string (format nil "~S" quantity)
-			 (+ x *icon-width* (- (units 1)))
-			 (+ y *icon-width* (- (units 0.5)))
-			 :color "saddle brown"
-			 :font "oldania-bold")))))))
+	  ;; now possibly draw quantity or Equipped indicator
+	  (let (label-string)
+	    (when (> quantity 1)
+	      (setf label-string (format nil "~S" quantity)))
+	    (when equipper 
+	      (setf label-string "Eq"))
+	    (when label-string
+	      (draw-string label-string
+			   (+ x *icon-width* (- (units 1)))
+			   (+ y *icon-width* (- (units 0.5)))
+			   :color "saddle brown"
+			   :font "oldania-bold"))))))))
 
 (defparameter *icon-spacing* (units 1))
 

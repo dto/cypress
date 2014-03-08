@@ -276,6 +276,28 @@
 
 ;;; Derived attack/defense/resistance scores 
 
+(defmethod equip ((equipper thing) (self thing))
+  (when (field-value :container self)
+    (setf (field-value :equipper self) equipper)))
+
+(defmethod equipped ((equipment thing))
+  (field-value :equipper equipment))
+
+(defmethod unequip ((equipper thing) (self thing))
+  (setf (field-value :equipper self) nil))
+
+(defmethod equipment ((self thing))
+  (remove-if-not #'(lambda (x)
+		     (field-value :equipper x))
+		 (inventory-items self)))
+
+(defmethod toggle-equipped ((equipper thing) (self thing))
+  (if (equipped self)
+      (unequip equipper self)
+      (equip equipper self)))
+		
+(defmethod equipment-description ((self thing)) nil)
+   
 (defmethod compute-rating ((self thing) stat)
   (apply #'+ 
 	 (field-value stat self) 
@@ -419,6 +441,7 @@
 (defmethod can-pick ((self thing))
   (or (shell-open-p)
       (and
+       (not (equipped self))
        (can-reach self (geoffrey))
        (not (fixedp self))
        (not (etherealp self)))))

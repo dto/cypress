@@ -57,7 +57,6 @@
   :image "fancy-heart.png")
 
 (defmethod cast ((caster thing) (spell cure))
-  (modify-fatigue caster -1)
   (modify-health caster (random-choose '(15 20 20 25)))
   (narrate-now "Some of your wounds have been healed. You feel better."))
 
@@ -95,7 +94,6 @@
       (call-next-method caster spell)))
 
 (defmethod cast ((caster thing) (spell travel))
-  (modify-fatigue caster 15)
   (modify-hunger caster 12)
   (when (find-camp)
     (return-to-geoffrey (find-camp)))

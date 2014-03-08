@@ -1,39 +1,54 @@
-* Tasks
+* Fixes and tweaks
 
-** TODO organize, prioritize, and Verbify todo list
-** TODO review unused art and objects.lisp
-
-** TODO Require light spell in dark areas
-** TODO Magic outdoor item boxes with coverstone.png coverstone2.png item-box.png
+** TODO Reagent search will look in bags
+** TODO Disallow browsing/picking from faraway containers
 ** TODO Better flower clusters and wood around dead trees
-** TODO also, in ancient caves: lock/key system--- plate with lock, you must use corresponding key
-*** TODO circle/triangle/warrior
-
-** TODO define criteria for 0.9 release
-
-** TODO allow push/pop of topic set
-** TODO books with lore
-** TODO silver books with spells/Special lore
-** TODO implement Hold Creature
-** TODO Small basements in ruins
-** TODO Reduce size of gray stairwells
-** TODO Seance spell requires 1 skull, 1 forget-me-not, 1 bonedust
-** TODO Add dead traveler bodies to basements
-** TODO Add caves with item box / stone monk
 ** TODO Modeline lighter(s) for Freezing/Hungry/Dying
-** TODO Slight health drain when freezing
-** TODO Slight aim jitter when freezing
+
 ** TODO make pretty magic potions more common
+** TODO better distribution of herbs and things
+** TODO Fix scrolling jerkiness
+** TODO [#B] Don't allow giving things to lucius in Chapter 1
+** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
+** TODO [#C] Fix spellcasting/activating objects after dead
+** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
+*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
+** TODO [#C] grave hag corpses
+** TODO [#C] allow canceling travel
+
+* Improve terrain and expand Ildran
 ** TODO Fix pathfinding / placement bugs when exiting basements
 ** TODO increase map grid density and procgen it as a list of lists of symbols, with Valisade in Northeast
 ** TODO make geoffrey appear in an appropriate entry location on each visit
 ** TODO restrict visitable map squares in order to begin testing Act I (exception: holding shift)
-** TODO better distribution of herbs and things
+** TODO [#B] implement snow/rain/darkness
+
+
+* Ruin Basement improvements
+** TODO Small basements in ruins
+** TODO Reduce size of gray stairwells
+** TODO Seance spell requires 1 skull, 1 forget-me-not, 1 bonedust
+** TODO Add dead traveler bodies to basements
+
+* Add more spells
+** TODO Require light spell in dark areas
+** TODO Add Hold Creature spell
+   
+* Small ancient caves
+** TODO Add stone monk with Lore
+** TODO Add item boxes with goodies
+
+* Expanded ancient caves
+** TODO Add magic outdoor item boxes with coverstone.png coverstone2.png item-box.png
+** TODO Ancient caves with: lock/key system--- plate with lock, you must use corresponding key
+*** TODO circle/triangle/warrior
+*** TODO lock beomes seal when correct key is used, and doors open
+** TODO books with lore
+** TODO silver books with spells/Special lore
+
+* Improving conversations and Lore
+** TODO allow push/pop of topic set
 ** TODO add Lore/help fields to objects
-
-
-** TODO make story cubes out of the image gallery and create UserStories 
-** TODO xiotank tones/symbols for copper doorway puzzles
 
 ** TODO Write lore for various sources
 *** TODO Stone monk
@@ -41,18 +56,23 @@
 **** TODO Also spell scrolls and food in metal boxes
 *** TODO Skull seance
 *** TODO Books
-** TODO add lore and grab-boxes to basements
 
-** TODO [#A] Paint the village of Nothbess. 
+* Improve combat and control
+** TODO [#C] possibly swap right-click and left-click i.e. movement/look
+** TODO [#B] Consider fully turn-based combat, or returning to Pause
+*** TODO Press ESCAPE to close all gumps and unpause
 
-** TODO [#A] Paint more characters 
+** TODO Slight health drain when freezing
+** TODO Slight aim jitter when freezing
+** TODO [#C] Implement bleeding and blood tracks in the snow
+
+* Paint more characters 
 *** TODO Paint skeleton soldiers
 *** TODO Paint skeleton archers
 **** TODO Charcoal
 **** TODO Pinecones
 *** TODO Paint and Animate an Imperial Raven.
 
-** TODO Fix scrolling jerkiness
 ** TODO [#B] day/night cycle; survive each day; end it by camping 
 ** TODO [#B] implement crypts
 ** TODO [#B] implement open caves with filled regions as perspex walls and flat dirt or stone background, dark halo
@@ -60,28 +80,15 @@
 
 ** DONE [#B] indicate when there is more text via ellipsis
    CLOSED: [2014-03-05 Wed 21:44]
-** TODO [#B] Don't allow giving things to lucius in Chapter 1
-** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
-** TODO [#B] implement snow/rain/darkness
 
 ** TODO [#B] Skeleton archers
 ** TODO [#B] fix wolf not chasing
 
-** TODO [#B] Consider fully turn-based combat, or returning to Pause
-*** TODO Press ESCAPE to close all gumps and unpause
-
-** TODO [#C] Fix spellcasting/activating objects after dead
-** TODO [#C] possibly swap right-click and left-click i.e. movement/look
-** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
-*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#C] grave hag corpses
-** TODO [#C] allow canceling travel
 ** TODO [#C] Night/camp dream sequences
 ** TODO [#B] Floating eyes that glide and dart
 ** TODO [#C] Fix mac window resizing bugs
 ** TODO [#C] Control Q and Command q should quit game
 ** TODO [#C] fix z-sorting of player remains
-** TODO [#C] Implement bleeding and blood tracks in the snow
 ** TODO [#C] Implement exhaustion
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] Fix non-impelled arrows moving on their own 
@@ -534,3 +541,53 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE Double click armor/bow to equip/dequip
+   CLOSED: [2014-03-08 Sat 08:51]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 08:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Fixes and tweaks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Silver armor increases defense power
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 08:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Fixes and tweaks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Silver bow increases attack power
+   CLOSED: [2014-03-08 Sat 08:51]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 08:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Fixes and tweaks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE organize, prioritize, and Verbify todo list
+   CLOSED: [2014-03-08 Sat 08:48]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 08:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Improve terrain and expand Ildran
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE review unused art and objects.lisp
+   CLOSED: [2014-03-08 Sat 08:48]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 08:53
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Improve terrain and expand Ildran
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+

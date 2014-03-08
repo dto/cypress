@@ -1,5 +1,27 @@
 (in-package :cypress)
 
+(defthing wood)
+
+(defparameter *twig-images* (image-set "twig" 9))
+
+(defthing (twig wood) 
+  :scale 1.4
+  :image (random-choose *twig-images*))
+
+(defparameter *branch-images* (image-set "branch" 9))
+
+(defthing (branch wood) 
+  :quantity 3 
+  :image (random-choose *branch-images*) 
+  :scale 1.2)
+
+(defparameter *silverwood-images* (image-set "silverwood" 9))
+
+(defthing silverwood
+  :scale 1.2 
+  :image (random-choose *silverwood-images*))
+
+
 (defparameter *iron-fence-images* (image-set "iron-fence" 7))
 
 (defthing iron-fence 
@@ -189,10 +211,6 @@
 (defthing warrior-key :image "warrior-key.png")
 (defthing triangle-key :image "triangle-key.png")
 (defthing circle-key :image "circle-key.png")
-
-(defthing silver-leggings :image "silver-leggings.png")
-(defthing silver-armor :image "silver-armor.png")
-(defthing silver-mail :image "silver-mail.png")
 
 ;;; ruin walls
 

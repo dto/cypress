@@ -1,25 +1,25 @@
 (in-package :cypress)
 
-(defthing wood)
+;;; The silver things
 
-(defparameter *twig-images* (image-set "twig" 9))
+(defthing silver-bow :stacking nil :attack 2 :image "silver-bow.png")
 
-(defthing (twig wood) 
-  :scale 1.4
-  :image (random-choose *twig-images*))
+(defmethod equipment-description ((self silver-bow))
+  "Geoffrey wields a silver-plated longbow.")
 
-(defparameter *branch-images* (image-set "branch" 9))
+(defmethod activate ((self silver-bow))
+  (toggle-equipped (geoffrey) self))
 
-(defthing (branch wood) 
-  :quantity 3 
-  :image (random-choose *branch-images*) 
-  :scale 1.2)
+(defthing silver-armor :stacking nil :defense 2 :resistance 1 :image "silver-armor.png")
 
-(defparameter *silverwood-images* (image-set "silverwood" 9))
+(defmethod activate ((self silver-armor))
+  (toggle-equipped (geoffrey) self))
 
-(defthing silverwood
-  :scale 1.2 
-  :image (random-choose *silverwood-images*))
+(defmethod equipment-description ((self silver-armor))
+  "Geoffrey is wearing silver armor.")
+
+(defthing silver-leggings :image "silver-leggings.png")
+(defthing silver-mail :image "silver-mail.png")
 
 ;;; Arrows, the monk's main weapon
 
@@ -241,7 +241,8 @@
 (defmethod equipped-item ((self monk))
   (field-value :equipped-item self))
 
-(defmethod equip ((self monk) (item thing))
+(defmethod equip ((self monk) (item arrow))
+  ;; equipping arrows works a little differently
   (setf (field-value :equipped-item self) item))
 
 ;;; Animating the monk as he walks
@@ -474,8 +475,7 @@
 	    (progn 
 	      (aim monk (heading-between monk enemy))
 	      (begin-firing monk)
-	      (modify-hunger monk 1)
-	      (modify-fatigue monk 1))))))
+	      (modify-hunger monk 1))))))
 
 (defmethod can-accept ((self monk))
   (with-fields (inventory) self
@@ -488,6 +488,9 @@
 (defun geoffrey () *geoffrey*)
   
 (defthing (geoffrey monk) :description "Geoffrey")
+
+(defmethod alternate-tap ((self geoffrey) x y)
+  (replace-gump self (new 'scroll-gump :text (status-text))))
 
 (defmethod initialize :after ((monk geoffrey) &key)
   (setf *geoffrey* monk)
@@ -637,7 +640,6 @@
   (modify-health monk +12)
   (modify-magic monk +50)
   (modify-cold monk -100)
-  (modify-fatigue monk -40)
   (narrate-now "You rest at the campfire, and feel much better."))
   
 (defmethod ignite :after ((camp camp))

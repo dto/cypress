@@ -100,6 +100,9 @@ Click spells in spellbook for
 description.  Double click spells in
 spellbook to cast.
 
+Double-click armor/arrows while in
+inventory to equip/unequip them.
+
 Use the Travel spell to explore the
 land.  Double-click land symbols to
 explore regions.  If you die, press
@@ -118,7 +121,7 @@ campfire which you can use to heal and
 warm yourself up. To use the tent, drag
 it out of your inventory onto an open
 space on the ground, and then cast
-Spark.
+Spark. 
 
 There are several new keyboard shortcuts:
 
