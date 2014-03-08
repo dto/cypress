@@ -104,7 +104,7 @@
 
 (defparameter *bag-images* (image-set "bag" 3))
 
-(defthing bag :scale 1.2 :image (random-choose *bag-images*))
+(defthing bag :stacking nil :scale 1.2 :image (random-choose *bag-images*))
 
 (defmethod activate ((bag bag))
   (replace-gump bag (new 'browser :container bag)))

@@ -37,7 +37,7 @@ of Heroes.")
 I can't find my way home...
  ...
 Do you know which way lies 
-the town of Nothbess?"
+the town of Nothbehem?"
 
 "One, two, three.
 That's violets here, 

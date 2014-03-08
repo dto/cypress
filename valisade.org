@@ -1,3 +1,7 @@
+** TODO [#B] Don't allow giving things to lucius in Chapter 1
+** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
+
+
 ** TODO Fix elixir drinking bug
 ** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
 ** TODO [#A] Add dead traveler bodies to basements
@@ -15,8 +19,6 @@
 
 ** TODO [#B] Reagent search will look in bags
 ** TODO [#B] Modeline lighter(s) for Freezing/Hungry/Dying
-** TODO [#B] Don't allow giving things to lucius in Chapter 1
-** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
 ** TODO [#B] Fix spellcasting/activating objects after dead
 ** TODO Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle

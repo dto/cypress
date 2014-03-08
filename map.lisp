@@ -95,7 +95,7 @@
 			  :height height
 			  :width (- width (* width (/ width image-width))))))))))
 
-(defparameter *unlimited-travel* t)
+(defparameter *unlimited-travel* nil)
 
 (defmethod can-travel-to ((sector sector))
   (and (member (field-value :terrain sector)

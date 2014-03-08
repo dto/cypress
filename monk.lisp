@@ -18,7 +18,7 @@
 (defmethod equipment-description ((self silver-armor))
   "Geoffrey is wearing silver armor.")
 
-(defthing silver-leggings :image "silver-leggings.png" :defense 1 :resistance 2)
+(defthing silver-leggings :stacking nil :image "silver-leggings.png" :defense 1 :resistance 2)
 
 (defmethod activate ((self silver-leggings))
   (toggle-equipped (geoffrey) self))
@@ -558,7 +558,7 @@
 
 (defmethod casting-animation ((self monk)) *monk-cast*)
 
-;;; Monk food
+;;; Monk food and potions
 
 (defthing food)
 
@@ -576,14 +576,14 @@
 
 (defmethod eat ((monk monk) (bread white-bread))
   (modify-health monk +5)
-  (modify-hunger monk -20))
+  (modify-hunger monk -25))
 
 (defthing (wheat-bread food)
   :image "wheat-bread.png")
 
 (defmethod eat ((monk monk) (bread wheat-bread))
   (modify-health monk +10)
-  (modify-hunger monk -30))
+  (modify-hunger monk -35))
 
 (defmethod eat :after ((monk geoffrey) (food food))
   (narrate "Very good! You feel better."))
@@ -593,7 +593,7 @@
 
 (defmethod eat ((monk monk) (jerky jerky))
   (modify-health monk +15)
-  (modify-hunger monk -45))
+  (modify-hunger monk -50))
 
 (defparameter *elixir-images* (image-set "elixir" 2))
 
@@ -635,6 +635,8 @@
   (replace-gump camp (new 'browser :container camp)))
 
 (defmethod can-accept ((camp camp)) t)
+
+(defmethod will-accept ((thing thing) (camp camp)) nil)
 
 (defmethod ignite ((camp camp))
   (with-fields (fire timer) camp

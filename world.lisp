@@ -172,6 +172,10 @@
   (dolist (item (inventory-items container))
     (when (typep item (find-class item-class))
       (return item))))
+	;; ;; search in containers
+	;; (when (inventory-items item)
+	;;   (let ((i2 (find-inventory-item item item-class)))
+	;;     (when i2 (return i2)))))))
 
 (defmethod merge-inventory-item ((container thing) (item thing))
   (let* ((item-class (class-name (class-of item)))
@@ -191,9 +195,9 @@
 	    (not (find-inventory-item container 
 				      (class-name (class-of item)))))
 	(progn 
-	  (setf inventory (append inventory (list item)))
+	  (setf inventory (append inventory (list (find-object item))))
 	  (setf (field-value :container item) container))
-	(merge-inventory-item container item))))
+	(merge-inventory-item container (find-object item)))))
 
 (defmethod add-inventory-item :after ((container thing) (item thing) &optional (merge t))
   (let ((gump (get-gump container)))
@@ -201,8 +205,10 @@
   
 (defmethod remove-inventory-item ((container thing) (item thing))
   (with-fields (inventory) container
-    (setf inventory (remove (find-object item) inventory :test 'eq))
-    (setf (field-value :container (find-object item)) nil)))
+    (let ((count (length inventory)))
+      (setf inventory (remove (find-object item) inventory :test 'eq))
+      (assert (< (length inventory) count))
+      (setf (field-value :container (find-object item)) nil))))
 
 (defmethod destroy :before ((self thing))
   (with-fields (container) self

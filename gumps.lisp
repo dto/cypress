@@ -178,6 +178,7 @@
 (defmethod icon-drop ((icon icon))
   (with-fields (target) icon
     (with-fields (container inventory stacking) target
+      (assert container)
       (if (or inventory (not stacking))
 	  ;; don't split up containers or non-stackable items.
 	  (prog1 target 
@@ -274,6 +275,7 @@
   (clear browser)
   (with-fields (target icons rows columns) browser
     (with-fields (inventory) target
+      (message "~A with ~A items ~A" target (length inventory) inventory)
       ;; only take max items
       (let ((items (subseq inventory
 			   0 (min *maximum-inventory-size* (length inventory)))))

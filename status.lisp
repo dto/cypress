@@ -162,9 +162,11 @@
 		   "comfortable and warm")))))
 
 (defun magic-description (points)
-  (when (< points 15)
-    "Geoffrey's magical energy is running low."))
-	  
+  (or (when (<= points 20)
+	(format nil "Geoffrey's magic is very low."))
+      (when (<= points 35)
+	(format nil "Geoffrey's magic is low."))))
+      	  
 (defun attack-description (points)
   (when (plusp points)
     (format nil "Attack power is raised ~A points." points)))

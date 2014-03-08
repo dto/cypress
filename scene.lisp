@@ -454,7 +454,7 @@
     (lined-up-randomly 
      (stacked-up-randomly (wood-pile) (spray 'bone-dust) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (dense-trees) (singleton (new 'grave-hag)) (spray '(nightshade ginseng)))
      (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3)))
-			  (singleton (new 'stone-stairwell)) 
+			  ;; (singleton (new 'stone-stairwell)) 
 			  (some-trees))
      (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (spray 'iron-fence :count (+ 2 (random 3))) (singleton (new 'grave-hag)) (spray 'bone-dust) (singleton (new 'iron-fence)) (flowers)))))
 
