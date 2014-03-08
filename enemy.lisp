@@ -80,19 +80,25 @@
   :health 15
   :image (random-choose *grave-hag-stalk-images*))
 
+(defthing grave-hag-corpse :tags '(:fixed) :image *grave-hag-corpse-image*)
+
+(defmethod can-accept ((grave-hag-corpse grave-hag-corpse)) t)
+
+(defmethod activate ((grave-hag-corpse grave-hag-corpse))
+  (replace-gump grave-hag-corpse (new 'browser :container grave-hag-corpse)))
+
 (defmethod die ((self grave-hag))
-  (let ((remains (new 'remains)))
+  (let ((corpse (new 'grave-hag-corpse)))
     (when (percent-of-time 70 t)
       (when (percent-of-time 60 t)
-	(add-inventory-item remains (new 'scroll-fragment)))
-      (add-inventory-item remains (new (random-choose '(skull wolf-corpse stone item-box))))
+	(add-inventory-item corpse (new 'scroll-fragment)))
+      (add-inventory-item corpse (new (random-choose '(skull wolf-corpse stone item-box))))
       (if (percent-of-time 70 t)
 	  (if (percent-of-time 50 t)
-	      (add-inventory-item remains (reagent-bag))
-	      (add-inventory-item remains (grab-bag)))
-	  (add-inventory-item remains (new 'stone))))
-    (drop self remains))
-  (drop self (new 'skull))
+	      (add-inventory-item corpse (reagent-bag))
+	      (add-inventory-item corpse (grab-bag)))
+	  (add-inventory-item corpse (new 'stone))))
+    (drop self corpse))
   (play-sound self "death.wav")
   (destroy self))
 
