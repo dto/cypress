@@ -1,6 +1,6 @@
 (in-package :cypress)
 
-(defun make-quest (&optional (terrain-class 'basement))
+(defun make-quest (&optional (terrain-class 'meadow))
   (let ((geoffrey (new 'geoffrey))
 	(buffer (new terrain-class)))
     (setf *map-row* 0)

@@ -1,19 +1,7 @@
-
-** DONE [#A] Mountain icons become cave worlds
-   CLOSED: [2014-03-08 Sat 13:28]
+** TODO Fix elixir drinking bug
 ** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
-** DONE [#A] restrict visitable map squares in order to begin testing Act I (exception: holding shift)
-   CLOSED: [2014-03-08 Sat 13:28]
-** DONE [#A] Fix pathfinding / placement bugs when exiting basements
-   CLOSED: [2014-03-08 Sat 13:28]
-** DONE [#A] Reduce size of gray stairwells
-   CLOSED: [2014-03-08 Sat 13:28]
 ** TODO [#A] Add dead traveler bodies to basements
 ** TODO [#A] Require light spell in dark areas
-** DONE [#A] Add caves with item boxes and other mystery objects
-   CLOSED: [2014-03-08 Sat 13:28]
-** DONE [#A] Add grave hag corpses with bone dust
-   CLOSED: [2014-03-08 Sat 12:11]
 ** TODO [#B] Better flower clusters and wood around dead trees
 ** TODO [#B] make pretty magic potions more common
 ** TODO [#B] Slight health drain when freezing
@@ -589,3 +577,56 @@ FORGET-ME-NOTS and Temporal Seance
 *** TODO Target
 *** TODO Error
 
+** DONE [#A] Mountain icons become cave worlds
+   CLOSED: [2014-03-08 Sat 13:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 13:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] restrict visitable map squares in order to begin testing Act I (exception: holding shift)
+   CLOSED: [2014-03-08 Sat 13:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 13:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix pathfinding / placement bugs when exiting basements
+   CLOSED: [2014-03-08 Sat 13:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 14:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Reduce size of gray stairwells
+   CLOSED: [2014-03-08 Sat 13:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 14:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Add caves with item boxes and other mystery objects
+   CLOSED: [2014-03-08 Sat 13:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 14:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Add grave hag corpses with bone dust
+   CLOSED: [2014-03-08 Sat 12:11]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 14:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
