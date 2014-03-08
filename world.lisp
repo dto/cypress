@@ -22,18 +22,24 @@
   ;; world fields
   (quantity :initform 1)
   (stacking :initform t)
-  (weight :initform nil)
-  (inventory :initform nil)
-  (spells :initform nil)
-  (health :initform 0)
-  (magic :initform 0)
-  (spells :initform nil)
-  (hunger :initform 0)
-  (fatigue :initform 0)
-  (cold :initform 0)
   (description :initform nil)
   (inscription :initform nil)
   (container :initform nil)
+  (equipper :initform nil)
+  (weight :initform nil)
+  (inventory :initform nil)
+  (spells :initform nil)
+  ;; player attributes
+  (health :initform 0)
+  (magic :initform 0)
+  (hunger :initform 0)
+  (cold :initform 0)
+  ;; modifiers
+  (attack :initform 0)
+  (defense :initform 0)
+  (resistance :initform 0)
+  ;; conversation fields
+  (topics :initform '(:name :job :bye))
   ;; animation fields
   (image-scale :initform +dots-per-inch+)
   (contained-image :initform nil)
@@ -42,8 +48,6 @@
   (delay :initform 0)
   (repeat :initform nil)
   (animation :initform nil)
-  ;; conversation fields
-  (topics :initform '(:name :job :bye))
   ;; system fields
   (last-tap-time :initform nil)
   (gump :initform nil)
@@ -270,31 +274,69 @@
   (>= (compute-quantity container item-class)
       quantity))
 
+;;; Derived attack/defense/resistance scores 
+
+(defmethod compute-rating ((self thing) stat)
+  (apply #'+ 
+	 (field-value stat self) 
+	 (mapcar #'(lambda (item)
+		     (field-value stat item))
+		 (equipment self))))
+
+(defconstant *rating-unit-percentage-points* 5)
+
+(defmethod compute-modifier ((self thing) stat)
+ (cfloat
+   (/ (+ 100 (* (compute-rating self stat)
+		*rating-unit-percentage-points*))
+      100)))
+
+(defmethod attack-rating ((self thing))
+  (compute-rating self :attack))
+
+(defmethod defense-rating ((self thing))
+  (compute-rating self :defense))
+
+(defmethod resistance-rating ((self thing))
+  (compute-rating self :resistance))
+
+;;; Vital attributes
+
 (defparameter *maximum-points* 100)
 
 (defmethod modify-points ((self thing) field points)
   (setf (field-value field self)
-	(max 0
-	     (min *maximum-points* 
-		  (+ points
-		     (field-value field self))))))
+	(truncate 
+	 (max 0
+	      (min *maximum-points*
+		   (+ points 
+		      (field-value field self)))))))
 
 (defmethod modify-health ((self thing) points)
-  (modify-points self :health points)
+  (modify-points self :health 
+		 (- points
+		    (* points 
+		       ;; higher DEF means lower damage
+		       (- 1 
+			  (compute-modifier self :defense))))))
+
+(defmethod modify-health :after ((self thing) points)
   (when (not (plusp (field-value :health self)))
     (die self)))
 
-(defmethod modify-magic ((self thing) points)
-  (modify-points self :magic points))
+(defmethod modify-cold ((self thing) points)
+  (modify-points self :cold 
+		 (- points
+		    (* points 
+		       ;; higher RES means lower cold
+		       (- 1
+			  (compute-modifier self :resistance))))))
 
-(defmethod modify-fatigue ((self thing) points)
-  (modify-points self :fatigue points))
+(defmethod modify-magic ((self thing) points)
+  (modify-points self :magic points ))
 
 (defmethod modify-hunger ((self thing) points)
   (modify-points self :hunger points))
-
-(defmethod modify-cold ((self thing) points)
-  (modify-points self :cold points))
 
 (defmethod has-condition ((self thing) field points)
   (assert (keywordp field))
@@ -306,7 +348,7 @@
   (assert (keywordp field))
   (incf (field-value field self) points))
 
-;;; General status checks
+;;; Reagent management
 
 (defmethod have-reagents ((self thing) reagents)
   (block checking
