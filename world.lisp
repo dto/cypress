@@ -305,7 +305,7 @@
 		     (field-value stat item))
 		 (equipment self))))
 
-(defconstant *rating-unit-percentage-points* 5)
+(defconstant *rating-unit-percentage-points* 10)
 
 (defmethod compute-modifier ((self thing) stat)
  (cfloat
@@ -322,6 +322,15 @@
 (defmethod resistance-rating ((self thing))
   (compute-rating self :resistance))
 
+(defmethod attack-modifier ((self thing))
+  (compute-modifier self :attack))
+
+(defmethod defense-modifier ((self thing))
+  (- 1 (- (compute-modifier self :defense) 1)))
+
+(defmethod resistance-modifier ((self thing))
+  (- 1 (- (compute-modifier self :resistance) 1)))
+
 ;;; Vital attributes
 
 (defparameter *maximum-points* 100)
@@ -335,30 +344,28 @@
 		      (field-value field self)))))))
 
 (defmethod modify-health ((self thing) points)
-  (modify-points self :health 
-		 (- points
-		    (* points 
-		       ;; higher DEF means lower damage
-		       (- 1 
-			  (compute-modifier self :defense))))))
+  (modify-points self :health points))
 
+(defmethod damage ((self thing) points)
+  (modify-health self (* points (defense-modifier self))))
+		 
 (defmethod modify-health :after ((self thing) points)
   (when (not (plusp (field-value :health self)))
     (die self)))
 
 (defmethod modify-cold ((self thing) points)
-  (modify-points self :cold 
-		 (- points
-		    (* points 
-		       ;; higher RES means lower cold
-		       (- 1
-			  (compute-modifier self :resistance))))))
+  (modify-points self :cold points))
+
+(defmethod chill ((self thing) points)
+  (modify-cold self (* points (resistance-modifier self))))
 
 (defmethod modify-magic ((self thing) points)
   (modify-points self :magic points ))
 
 (defmethod modify-hunger ((self thing) points)
   (modify-points self :hunger points))
+
+;;; Reagent management
 
 (defmethod has-condition ((self thing) field points)
   (assert (keywordp field))
@@ -369,8 +376,6 @@
 (defmethod modify-condition ((self thing) field points)
   (assert (keywordp field))
   (incf (field-value field self) points))
-
-;;; Reagent management
 
 (defmethod have-reagents ((self thing) reagents)
   (block checking

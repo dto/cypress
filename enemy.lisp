@@ -20,6 +20,10 @@
   (resume)
   (attack (cursor) enemy))
 
+(defmethod modify-health :around ((enemy enemy) points)
+  (call-next-method enemy (* points (compute-modifier (geoffrey) :attack))))
+		    
+
 ;;; Wraiths
 
 (defthing (wraith enemy)

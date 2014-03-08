@@ -2,7 +2,7 @@
 
 ;;; The silver things
 
-(defthing silver-bow :stacking nil :attack 2 :image "silver-bow.png")
+(defthing silver-bow :stacking nil :attack 3 :image "silver-bow.png")
 
 (defmethod equipment-description ((self silver-bow))
   "Geoffrey wields a silver-plated longbow.")
@@ -10,7 +10,7 @@
 (defmethod activate ((self silver-bow))
   (toggle-equipped (geoffrey) self))
 
-(defthing silver-armor :stacking nil :defense 2 :resistance 1 :image "silver-armor.png")
+(defthing silver-armor :stacking nil :defense 2 :resistance 2 :image "silver-armor.png")
 
 (defmethod activate ((self silver-armor))
   (toggle-equipped (geoffrey) self))
@@ -18,7 +18,14 @@
 (defmethod equipment-description ((self silver-armor))
   "Geoffrey is wearing silver armor.")
 
-(defthing silver-leggings :image "silver-leggings.png")
+(defthing silver-leggings :image "silver-leggings.png" :defense 1 :resistance 2)
+
+(defmethod activate ((self silver-leggings))
+  (toggle-equipped (geoffrey) self))
+
+(defmethod equipment-description ((self silver-leggings))
+  "Geoffrey is wearing warm silver leggings.")
+
 (defthing silver-mail :image "silver-mail.png")
 
 ;;; Arrows, the monk's main weapon
@@ -42,9 +49,11 @@
 (defmethod drop-object :after ((buffer buffer) (arrow arrow) &optional x y z )
   (layout arrow))
 
-(defmethod initialize ((self arrow) &key heading)
+(defmethod initialize ((self arrow) &key heading rating)
   (when heading
-    (setf (field-value :heading self) heading)))
+    (setf (field-value :heading self) heading))
+  (when rating
+    (setf (field-value :rating self) rating)))
 
 (defmethod initialize :after ((self arrow) &key heading)
   (resize self *arrow-size* *arrow-size*))
@@ -67,7 +76,7 @@
 (defthing (wooden-arrow arrow))
 
 (defmethod collide ((self wooden-arrow) (enemy enemy))
-  (modify-health enemy (random-choose '(-3 -5 -7)))
+  (damage enemy (random-choose '(-3 -5 -7)))
   (destroy self))
 
 (defthing (silver-arrow arrow)
@@ -75,11 +84,11 @@
   :image (random-choose *silver-arrow-images*))
 
 (defmethod collide ((self silver-arrow) (enemy enemy))
-  (modify-health enemy (random-choose '(-10 -12 -15)))
+  (damage enemy (random-choose '(-10 -12 -15)))
   (destroy self))
 
 (defmethod collide ((arrow silver-arrow) (wolf wolf))
-  (modify-health wolf (random-choose '(-20 -30)))
+  (damage wolf (random-choose '(-20 -30)))
   (destroy arrow))
 
 (defthing (crystal-arrow arrow)
@@ -87,7 +96,7 @@
   :image (random-choose *crystal-arrow-images*))
 
 (defmethod collide ((self crystal-arrow) (enemy enemy))
-  (modify-health enemy -20)
+  (damage enemy -20)
   (destroy self))
 
 ;;; A monk, either AI or human controlled
@@ -311,23 +320,23 @@
 (defmethod collide ((self monk) (enemy enemy))
   (when (field-value :alive self)
     (percent-of-time 10
-      (modify-health self (- (random-choose '(2 3 3 5 7))))
+      (damage self (- (random-choose '(2 3 3 5 7))))
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod collide ((self monk) (crack large-crack))
   (when (field-value :alive self)
     (percent-of-time 8
       (narrate-now "The ice cracks beneath your feet. You are splashed with frigid water.")
-      (modify-health self (- (random-choose '(1 2))))
-      (modify-cold self +10)
+      (damage self (- (random-choose '(1 2))))
+      (chill self +10)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod collide ((self monk) (puddle puddle))
   (when (field-value :alive self)
     (percent-of-time 6
       (narrate-now "You step into the water. You are wet!")
-      (modify-health self (- (random-choose '(5 7))))
-      (modify-cold self +20)
+      (damage self (- (random-choose '(5 7))))
+      (chill self +20)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod die ((self monk))
@@ -378,12 +387,12 @@
       (update-bow self)
       (when (> %cold 80)
 	(percent-of-time 1
-	  (modify-health self (- (random-choose '(2 3 3 5 7))))
+	  (damage self (- (random-choose '(2 3 3 5 7))))
 	  (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))
 	  (narrate-now "You are freezing to death! Make a campfire.")))
       (when (> %hunger 80)
 	(percent-of-time 1
-	  (modify-health self (- (random-choose '(2 3 3 5 7))))
+	  (damage self (- (random-choose '(2 3 3 5 7))))
 	  (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))
 	  (narrate-now "You are starving to death! You must eat something.")))
       (when (field-value :bow-ready self)
