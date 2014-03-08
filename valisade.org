@@ -1,22 +1,27 @@
 * Tasks
 
+** TODO allow push/pop of topic set
+
 ** TODO organize todo list
+** TODO review unused art and objects.lisp
 ** TODO define criteria for 0.9 release
 
+** TODO Add dead traveler bodies to basements
+** TODO Add caves with item box / stone monk
 ** TODO Modeline lighter(s) for Freezing/Hungry/Dying
 ** TODO Slight health drain when freezing
 ** TODO Slight aim jitter when freezing
-** TODO make magic potions more common
+** TODO make pretty magic potions more common
 ** TODO Fix pathfinding / placement bugs when exiting basements
 ** TODO increase map grid density and procgen it as a list of lists of symbols, with Valisade in Northeast
 ** TODO make geoffrey appear in an appropriate entry location on each visit
 ** TODO restrict visitable map squares in order to begin testing Act I (exception: holding shift)
 ** TODO better distribution of herbs and things
+** TODO add Lore/help fields to objects
 
+
+** TODO make story cubes out of the image gallery and create UserStories 
 ** TODO xiotank tones/symbols for copper doorway puzzles
-** TODO 
-
-** TODO review unused art and objects.lisp
 
 ** TODO Write lore for various sources
 *** TODO Stone monk
@@ -29,12 +34,7 @@
 ** TODO [#A] Paint the village of Nothbess. 
 
 ** TODO [#A] Paint more characters 
-*** DONE Paint new prettier potions
-    CLOSED: [2014-03-05 Wed 21:45]
-*** TODO Paint basements/caves
 *** TODO Paint skeleton soldiers
-*** DONE Paint dead traveler bodies
-    CLOSED: [2014-02-28 Fri 20:59]
 *** TODO Paint skeleton archers
 **** TODO Charcoal
 **** TODO Pinecones
@@ -493,3 +493,32 @@ FORGET-ME-NOTS and Temporal Seance
    :ARCHIVE_TODO: DONE
    :END:
 
+** DONE Paint dead traveler bodies
+   CLOSED: [2014-02-28 Fri 20:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-07 Fri 20:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint more characters
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Paint basements/caves
+   CLOSED: [2014-03-07 Fri 19:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-07 Fri 20:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint more characters
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Paint new prettier potions
+   CLOSED: [2014-03-05 Wed 21:45]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-07 Fri 20:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Tasks/Paint more characters
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:

@@ -46,7 +46,7 @@
 ;;; Main game
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "cypress v0.8") 
+  (setf *window-title* "cypress v0.9") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)
@@ -75,7 +75,7 @@
     (start-session)))
 
 (defparameter *help-text* 
-"Welcome to Cypress v0.8 (alpha) 
+"Welcome to Cypress v0.9 (alpha) 
 
 This is the Scroll of Helping. If you
 click the scroll, you will advance to
