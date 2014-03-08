@@ -201,7 +201,7 @@
   :image (random-choose *ruin-wall-images*)
   :tags '(:fixed :solid))
 
-(defthing coverstone :image "coverstone.png" :z 10)
+;; (defthing coverstone :image "coverstone.png" :z 10)
 
 ;;; Various prizes
 

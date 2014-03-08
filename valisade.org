@@ -1,11 +1,23 @@
 * Tasks
 
-** TODO allow push/pop of topic set
-
-** TODO organize todo list
+** TODO organize, prioritize, and Verbify todo list
 ** TODO review unused art and objects.lisp
+
+** TODO Require light spell in dark areas
+** TODO Magic outdoor item boxes with coverstone.png coverstone2.png item-box.png
+** TODO Better flower clusters and wood around dead trees
+** TODO also, in ancient caves: lock/key system--- plate with lock, you must use corresponding key
+*** TODO circle/triangle/warrior
+
 ** TODO define criteria for 0.9 release
 
+** TODO allow push/pop of topic set
+** TODO books with lore
+** TODO silver books with spells/Special lore
+** TODO implement Hold Creature
+** TODO Small basements in ruins
+** TODO Reduce size of gray stairwells
+** TODO Seance spell requires 1 skull, 1 forget-me-not, 1 bonedust
 ** TODO Add dead traveler bodies to basements
 ** TODO Add caves with item box / stone monk
 ** TODO Modeline lighter(s) for Freezing/Hungry/Dying
