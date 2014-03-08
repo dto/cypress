@@ -29,6 +29,17 @@
 
 (defmethod can-pick ((spell spell)) nil)
 
+;;; Seance spell to get lore from skulls
+
+(defthing (seance spell)
+  :description "Seance (8 mp, 1 forget-me-not, 1 skull)"
+  :reagents '(:magic 8 skull 1 forget-me-not 1)
+  :image "danger-1.png")
+
+(defmethod cast ((caster thing) (spell seance))
+  (narrate-now "A spirit begins to speak.")
+  (replace-gump caster (new 'scroll-gump :text (random-choose *skull-lore*))))
+
 ;;; Spark spell to light fire 
 
 (defthing (spark spell)
@@ -134,7 +145,8 @@
 		       (new 'cure)
 		       (new 'cure-meat)
 		       (new 'craft-wooden-arrows)
-		       (new 'craft-silver-arrows)))
+		       (new 'craft-silver-arrows)
+		       (new 'seance)))
     (add-inventory-item book spell)))
 
 (defmethod can-pick ((book spellbook))

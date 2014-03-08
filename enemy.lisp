@@ -22,7 +22,6 @@
 
 (defmethod modify-health :around ((enemy enemy) points)
   (call-next-method enemy (* points (compute-modifier (geoffrey) :attack))))
-		    
 
 ;;; Wraiths
 
@@ -46,8 +45,8 @@
 	      (add-inventory-item remains (reagent-bag))
 	      (add-inventory-item remains (grab-bag)))
 	  (add-inventory-item remains (new 'stone))))
+    (add-inventory-item remains (new 'skull))
     (drop self remains))
-  (drop self (new 'skull))
   (play-sound self "death.wav")
   (destroy self))
 
@@ -97,7 +96,7 @@
 	  (if (percent-of-time 50 t)
 	      (add-inventory-item corpse (reagent-bag))
 	      (add-inventory-item corpse (grab-bag)))
-	  (add-inventory-item corpse (new 'stone))))
+	  (add-inventory-item corpse (quantity-of 'bone-dust (random-choose '(2 3 4))))))
     (drop self corpse))
   (play-sound self "death.wav")
   (destroy self))

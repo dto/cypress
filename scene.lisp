@@ -85,6 +85,8 @@
 	  (%horizontal-scrolling-margin buffer) 3/5
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
+    (multiple-value-bind (x y) (starting-location buffer)
+      (drop-object buffer player x y))
     (set-cursor buffer (geoffrey))
     (snap-window-to-cursor buffer)
     ;;  (glide-window-to-cursor buffer)
@@ -92,9 +94,6 @@
     ;; allocate
     (install-quadtree buffer)
     ;; drop player at start point
-    (when player
-      (multiple-value-bind (x y) (starting-location buffer)
-	(drop-object buffer player x y)))
     ;; return buffer
     buffer))
 
@@ -346,6 +345,33 @@
 (defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
   (chill monk +10))
 
+;;; Caves
+
+(defparameter *ancient-cave-images* (image-set "ancient-cave" 3))
+
+(defthing (cave scene)
+  :darkness-image "darkness.png"
+  :background-image (random-choose *ancient-cave-images*))
+
+(defmethod initialize :after ((scene cave) &key)
+  (resize-to-background-image scene)
+  (with-fields (height width) scene
+    (percent-of-time 80
+      (dotimes (n (1+ (random 5)))
+	(drop-object scene (new 'bone-dust) (random width) (random height))))
+    (percent-of-time 70
+      (drop-object scene (make-box)
+		   (- width (units (+ 10 (random 15))))
+		   (- height (units (+ 10 (random 15))))))
+    (percent-of-time 50 
+      (drop-object scene (new 'wraith)
+		   (random width)
+		   (random height))
+      (percent-of-time 50 
+	(drop-object scene (new 'wraith)
+		     (random width)
+		     (random height))))))
+
 ;;; Ruins and basements
 
 (defparameter *basement-images* (image-set "basement" 2))
@@ -358,15 +384,17 @@
   (resize-to-background-image scene))
 
 (defmethod make-terrain ((scene basement))
-  (with-border (units 3)
-    (singleton (new 'crumbling-stairwell))))
-
+  (with-border (units 15)
+    (or (percent-of-time 50 (spray '(corpse bone-dust bone-dust) :count (+ 2 (random 4))))
+	(singleton (grab-bag)))))
+	
 (defvar *previous-scene* nil)
 (defvar *previous-x* nil)
 (defvar *previous-y* nil)
 
 (defthing stone-stairwell 
   :tags '(:fixed) 
+  :scale 0.8
   :image (random-choose *gray-stairwell-images*) 
   :basement nil)
 

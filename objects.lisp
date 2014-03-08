@@ -21,7 +21,6 @@
   :scale 1.2 
   :image (random-choose *silverwood-images*))
 
-
 (defparameter *iron-fence-images* (image-set "iron-fence" 7))
 
 (defthing iron-fence 
@@ -44,6 +43,7 @@
 
 (defthing ancient-road
   :tags '(:fixed)
+  :scale 2
   :image (random-choose *ancient-road-images*))
 
 (defparameter *ancient-road-debris-images* (image-set "ancient-road-debris" 5))
@@ -77,6 +77,15 @@
 (defparameter *ruin-wall-images* (image-set "ruin-wall" 4))
 (defparameter *skull-images* (image-set "skull" 3))
 (defparameter *wolf-corpse-images* (image-set "wolf-skull" 3))
+
+(defparameter *corpse-images* (image-set "corpse" 4))
+
+(defthing corpse :image (random-choose *corpse-images*) :stacking nil)
+
+(defmethod can-accept ((corpse corpse)) t)
+
+(defmethod activate ((corpse corpse))
+  (replace-gump corpse (new 'browser :container corpse)))
 
 (defparameter *item-box-images* (image-set "item-box" 2))
 
@@ -198,7 +207,9 @@
   :image (random-choose *gray-rock-images*)
   :scale 1.7)
 
-(defthing skull :image (random-choose '("skull-1.png" "skull-2.png")))
+(defthing skull 
+  :image (random-choose '("skull-1.png" "skull-2.png" "skull-3.png")))
+
 (defthing wolf-corpse :image (random-choose '("wolf-skull-1.png" "wolf-skull-2.png")))
 
 (defthing remains :tags '(:fixed) :image (random-choose '("remains-1.png" "remains-2.png")))
@@ -223,12 +234,16 @@
 
 ;;; Various prizes
 
-(defparameter *grab-bag-items* '(elixir elixir skull wolf-corpse ruined-book silver-elixir
- stone stone thornweed nightshade white-bread wheat-bread))
+(defparameter *grab-bag-items* '(elixir skull wolf-corpse ruined-book silver-elixir
+ stone stone silver-leggings thornweed nightshade white-bread wheat-bread))
 
-(defparameter *boxed-items* '(silver-elixir silver-armor))
+(defparameter *silver-book-images* (image-set "silver-book" 3))
 
-(defun grab (bag &optional (count (+ 2 (random 5))))
+(defthing silver-book :image (random-choose *silver-book-images*))
+
+(defparameter *boxed-items* '(silver-elixir silver-armor silver-leggings silver-bow silver-book))
+
+(defun grab (bag &optional (count (+ 1 (random 3))))
   (let (items)
     (dotimes (n count)
       (push (new (random-choose bag)) items))

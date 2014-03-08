@@ -94,6 +94,7 @@ Drag objects onto Geoffrey to take them.
 Double-click an object to activate it.
 Double-click a monster to attack it.
 Double click Geoffrey for his inventory.
+Right-click Geoffrey to see status.
 Drag items into/out of inventory scrolls.
 
 Click spells in spellbook for

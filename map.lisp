@@ -31,7 +31,7 @@
   :height *sector-size*
   :width *sector-size*)
 
-(defparameter *terrain-classes* '(forest frozen-forest meadow
+(defparameter *terrain-classes* '(forest frozen-forest meadow cave
   grassy-meadow cold-meadow frozen-meadow ruins river valisade highway
   cemetery))
 
@@ -47,9 +47,9 @@
 	'valisade *castle-icons*
 	'highway (list *road-image*)
 	'cemetery *danger-icons*
+	'cave *mountain-icons*
 	;; can't visit these.
 	'home (list *home-image*)
-	'mountain *mountain-icons*
 	'large-mountain *large-mountain-icons*))
   
 (defun terrain-icon (terrain)
@@ -95,13 +95,14 @@
 			  :height height
 			  :width (- width (* width (/ width image-width))))))))))
 
-(defmethod can-travel-to ((sector sector))
-  (member (field-value :terrain sector)
-  	  '(frozen-forest river meadow cold-meadow grassy-meadow forest cemetery ruins)))
+(defparameter *unlimited-travel* t)
 
-   ;; (with-fields (row column) sector
-   ;;  (and (<= 1 (abs (- row *map-row*)))
-   ;; 	 (<= 1 (abs (- column *map-column*))))))
+(defmethod can-travel-to ((sector sector))
+  (and (member (field-value :terrain sector)
+	       '(frozen-forest cave river meadow cold-meadow grassy-meadow forest cemetery ruins))
+       (with-fields (row column) sector
+	 (and (>= 1 (abs (- row *map-row*)))
+	      (>= 1 (abs (- column *map-column*)))))))
 
 (defmethod travel-to ((sector sector))
   (with-fields (terrain row column scene) sector 
@@ -111,7 +112,8 @@
     (switch-to-scene scene)))
 
 (defmethod activate ((sector sector))
-  (if (can-travel-to sector)
+  (if (or *unlimited-travel*
+	  (can-travel-to sector))
       (travel-to sector)
       (show-error sector)))
 
@@ -120,14 +122,14 @@
 
 (defun test-map-sectors ()
   (list
-   (mapcar #'make-sector '(home meadow forest cold-meadow forest mountain
-			   forest large-mountain frozen-meadow river large-mountain mountain))
+   (mapcar #'make-sector '(home meadow forest cold-meadow forest cave
+			   forest large-mountain frozen-meadow river large-mountain cave))
    (mapcar #'make-sector '(meadow grassy-meadow meadow forest forest cold-meadow ruins
-			   frozen-meadow cemetery mountain river frozen-forest mountain))
-   (mapcar #'make-sector '(grassy-meadow meadow forest forest mountain
+			   frozen-meadow cemetery cave river frozen-forest cave))
+   (mapcar #'make-sector '(grassy-meadow meadow forest forest cave
 			   forest highway cemetery ruins river frozen-meadow river
 			   valisade))
-   (mapcar #'make-sector '(meadow grassy-meadow forest forest 
+   (mapcar #'make-sector '(meadow cave forest cold-meadow 
 			   cold-meadow ruins highway frozen-meadow frozen-forest river river))))
 			   
 (defthing (map-screen buffer)

@@ -38,8 +38,9 @@
   (attack :initform 0)
   (defense :initform 0)
   (resistance :initform 0)
-  ;; conversation fields
+  ;; conversation and lore fields
   (topics :initform '(:name :job :bye))
+  (lore :initform nil)
   ;; animation fields
   (image-scale :initform +dots-per-inch+)
   (contained-image :initform nil)
