@@ -55,8 +55,33 @@
 
 (defmethod make-terrain ((buffer scene)))
 
-(defmethod starting-location ((buffer scene))
-  (values (units 5) (units 5)))
+(defmethod starting-x ((buffer scene) direction)
+  (with-fields (width) buffer 
+     (ecase direction
+       (:downright (units 5))
+       (:downleft (- width (units 8)))
+       (:down (/ width 2))
+       (:right (units 8))
+       (:upright (units 8))
+       (:up (/ width 2))
+       (:upleft (- width (units 5)))
+       (:left (- width (units 5))))))
+
+(defmethod starting-y ((buffer scene) direction)
+  (with-fields (height) buffer 
+     (ecase direction
+       (:downright (units 5))
+       (:downleft (units 5))
+       (:down (units 5))
+       (:right (/ height 2))
+       (:upright (- height (units 8)))
+       (:up (- height (units 8)))
+       (:upleft (- height (units 8)))
+       (:left (/ height 2)))))
+
+(defmethod starting-location ((buffer scene) &optional (direction :downright))
+  (values (starting-x buffer direction)
+	  (starting-y buffer direction)))
   ;; (values (units 5) (/ (field-value :height buffer) 2)))
 
 (defun find-spell (class)
@@ -72,6 +97,8 @@
 (defmethod open-inventory ((buffer scene))
   (activate (geoffrey)))
 
+(defvar *travel-direction* :downright)
+
 (defmethod initialize :after ((buffer scene) &key (player (geoffrey)))
   (with-buffer buffer
     (setf *status-line*
@@ -85,7 +112,7 @@
 	  (%horizontal-scrolling-margin buffer) 3/5
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
-    (multiple-value-bind (x y) (starting-location buffer)
+    (multiple-value-bind (x y) (starting-location buffer *travel-direction*)
       (drop-object buffer player x y))
     (set-cursor buffer (geoffrey))
     (snap-window-to-cursor buffer)

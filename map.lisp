@@ -106,6 +106,10 @@
 
 (defmethod travel-to ((sector sector))
   (with-fields (terrain row column scene) sector 
+    ;; determine travel dir
+    (setf *travel-direction* 
+	  (direction-to *map-column* *map-row* column row)) 
+    ;; go
     (setf *map-row* row *map-column* column)
     (unless scene 
       (setf scene (new terrain)))

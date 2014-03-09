@@ -2,7 +2,8 @@
 ** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
 
 
-** TODO Fix elixir drinking bug
+** TODO Fix inventory bookeeping not getting properly duplicated?
+
 ** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
 ** TODO [#A] Add dead traveler bodies to basements
 ** TODO [#A] Require light spell in dark areas
@@ -628,6 +629,15 @@ FORGET-ME-NOTS and Temporal Seance
    CLOSED: [2014-03-08 Sat 12:11]
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-03-08 Sat 14:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Fix elixir drinking bug
+   CLOSED: [2014-03-08 Sat 20:10]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-03-08 Sat 20:10
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE

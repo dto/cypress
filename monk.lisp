@@ -611,7 +611,7 @@
   :scale 0.8
   :image (random-choose *silver-elixir-images*))
 
-(defmethod eat ((monk monk) (silver-elixir elixir))
+(defmethod eat ((monk monk) (elixir silver-elixir))
   (modify-health monk +60)
   (modify-magic monk +100))
 
