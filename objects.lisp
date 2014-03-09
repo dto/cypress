@@ -243,7 +243,7 @@
   :image (random-choose *ruin-wall-images*)
   :tags '(:fixed :solid))
 
-(defthing coverstone :image (random-choose '("triangle-coverstone.png" "warrior-coverstone.png")))
+(defthing coverstone :tags '(:solid :fixed) :image (random-choose '("triangle-coverstone.png" "warrior-coverstone.png")))
 
 ;;; Various prizes
 
@@ -253,6 +253,9 @@
 (defparameter *silver-book-images* (image-set "silver-book" 3))
 
 (defthing silver-book :image (random-choose *silver-book-images*))
+
+(defmethod activate ((book silver-book))
+  (bark (geoffrey) "I can't read this language."))
 
 (defparameter *boxed-items* '(silver-elixir elixir silver-armor silver-leggings silver-bow silver-book))
 

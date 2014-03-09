@@ -380,6 +380,11 @@
   :darkness-image "darkness.png"
   :background-image (random-choose *ancient-cave-images*))
 
+(defmethod make-terrain ((scene cave))
+  (percent-of-time 40
+  (with-border (units 15)
+    (spray '(ruin-wall copper-plate copper-lock) :trim nil :count (random-choose '(2 3 4))))))
+
 (defmethod initialize :after ((scene cave) &key)
   (resize-to-background-image scene)
   (with-fields (height width) scene
