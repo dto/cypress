@@ -385,8 +385,9 @@
 
 (defmethod make-terrain ((scene basement))
   (with-border (units 15)
-    (or (percent-of-time 50 (spray '(corpse bone-dust bone-dust) :count (+ 2 (random 4))))
-	(singleton (grab-bag)))))
+    (or (percent-of-time 50 (spray '(corpse bone-dust bone-dust ) :count (+ 2 (random 4))))
+	(percent-of-time 40 (singleton (new 'coverstone)))
+	(spray 'ruin-wall :trim nil :count (1+ (random 3))))))
 	
 (defvar *previous-scene* nil)
 (defvar *previous-x* nil)

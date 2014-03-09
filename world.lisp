@@ -181,8 +181,8 @@
   (let* ((item-class (class-name (class-of item)))
 	 (existing-item (find-inventory-item container item-class)))
     (assert existing-item)
-    (add-quantity container item-class (quantity item))))
-;;    (destroy item)))
+    (add-quantity container item-class (quantity item))
+    (destroy item)))
 
 (defmethod add-inventory-item ((container thing) (item thing) &optional (merge t))
   (with-fields (inventory) container
@@ -208,7 +208,8 @@
     (let ((count (length inventory)))
       (setf inventory (remove (find-object item) inventory :test 'eq))
       (assert (< (length inventory) count))
-      (setf (field-value :container (find-object item)) nil))))
+      (setf (field-value :container (find-object item)) nil)
+      inventory)))
 
 (defmethod destroy :before ((self thing))
   (with-fields (container) self
@@ -219,6 +220,9 @@
   (let ((bag (new class)))
     (dolist (item contents)
       (add-inventory-item bag item))
+    (message "Container ~A with ~A items: ~A" 
+	     bag (length (inventory-items bag))
+	     (inventory-items bag))
     bag))
 
 (defmethod consume ((consumer thing) (consumed thing))) ;;; possibly nothing

@@ -178,14 +178,15 @@
 (defmethod icon-drop ((icon icon))
   (with-fields (target) icon
     (with-fields (container inventory stacking) target
-      (assert container)
-      (if (or inventory (not stacking))
-	  ;; don't split up containers or non-stackable items.
-	  (prog1 target 
-	    (remove-inventory-item container target))
-	  ;; consume single quantity, splitting if needed
-	  (let ((class (class-name (class-of target))))
-	    (consume-single container class))))))
+      (if (null container)
+	  (prog1 nil (message "Warning; attempt to get icon drop for non-contained object ~A" target))
+	  (if (or inventory (not stacking))
+	      ;; don't split up containers or non-stackable items.
+	      (prog1 target 
+		(remove-inventory-item container target))
+	      ;; consume single quantity, splitting if needed
+	      (let ((class (class-name (class-of target))))
+		(consume-single container class)))))))
 
 ;;; Container browser gump
 

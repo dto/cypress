@@ -84,6 +84,14 @@
 
 (defmethod can-accept ((corpse corpse)) t)
 
+(defmethod initialize ((corpse corpse) &key)
+  (percent-of-time 80
+    (add-inventory-item corpse (quantity-of 'bone-dust (1+ (random 5))))
+    (percent-of-time 50 
+      (add-inventory-item corpse (new (grab-bag)))
+      (percent-of-time 20
+	(add-inventory-item corpse (new (make-box)))))))
+
 (defmethod activate ((corpse corpse))
   (replace-gump corpse (new 'browser :container corpse)))
 
@@ -230,7 +238,7 @@
   :image (random-choose *ruin-wall-images*)
   :tags '(:fixed :solid))
 
-;; (defthing coverstone :image "coverstone.png" :z 10)
+(defthing coverstone :image (random-choose '("triangle-coverstone.png" "warrior-coverstone.png")))
 
 ;;; Various prizes
 
