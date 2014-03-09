@@ -370,7 +370,7 @@
      (stacked-up-randomly (dead-trees) (lone-wolf) (flowers)))))
 
 (defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
-  (chill monk +10))
+  (chill monk +12))
 
 ;;; Caves
 
