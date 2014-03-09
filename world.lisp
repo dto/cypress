@@ -165,10 +165,17 @@
 (defmethod inventory-items ((container thing))
   (field-value :inventory container))
 
+(defmethod valid-container ((container thing))
+  (every #'(lambda (item)
+	     (and (plusp (quantity item))
+		  (eq container (find-container item))))
+	 (inventory-items container)))
+
 (defmethod find-container ((item thing))
   (field-value :container item))
 
 (defmethod find-inventory-item ((container thing) item-class)
+  (assert (valid-container container))
   (dolist (item (inventory-items container))
     (when (typep item (find-class item-class))
       (return item))))
@@ -178,6 +185,7 @@
 	;;     (when i2 (return i2)))))))
 
 (defmethod merge-inventory-item ((container thing) (item thing))
+  (assert (valid-container container))
   (let* ((item-class (class-name (class-of item)))
 	 (existing-item (find-inventory-item container item-class)))
     (assert existing-item)
@@ -185,6 +193,7 @@
     (destroy item)))
 
 (defmethod add-inventory-item ((container thing) (item thing) &optional (merge t))
+  (assert (valid-container container))
   (with-fields (inventory) container
     (if (or (not merge)
 	    ;; don't allow container items themselves to stack, ever
@@ -200,6 +209,7 @@
 	(merge-inventory-item container (find-object item)))))
 
 (defmethod add-inventory-item :after ((container thing) (item thing) &optional (merge t))
+  (assert (valid-container container))
   (let ((gump (get-gump container)))
     (when gump (refresh gump))))
   
@@ -209,7 +219,8 @@
       (setf inventory (remove (find-object item) inventory :test 'eq))
       (assert (< (length inventory) count))
       (setf (field-value :container (find-object item)) nil)
-      inventory)))
+      inventory))
+  (assert (valid-container container)))
 
 (defmethod destroy :before ((self thing))
   (with-fields (container) self
@@ -223,6 +234,7 @@
     (message "Container ~A with ~A items: ~A" 
 	     bag (length (inventory-items bag))
 	     (inventory-items bag))
+    (assert (valid-container bag))
     bag))
 
 (defmethod consume ((consumer thing) (consumed thing))) ;;; possibly nothing
@@ -237,11 +249,13 @@
 
 (defmethod add-quantity ((container thing) item-class &optional (quantity 1))
   (let ((item (find-inventory-item container item-class)))
-    (when item (modify-quantity item quantity))))
+    (when item (modify-quantity item quantity)))
+  (assert (valid-container container)))
 
 (defmethod remove-quantity ((container thing) item-class &optional (quantity 1))
   (let ((item (find-inventory-item container item-class)))
-    (when item (modify-quantity item (- quantity)))))
+    (when item (modify-quantity item (- quantity))))
+  (assert (valid-container container)))
 
 (defmethod consume-single ((container thing) item-class)
   (let ((item (find-inventory-item container item-class)))
@@ -256,7 +270,9 @@
 	      ;; remove the ghosts of departed quantities
 	      (when (not (plusp (quantity item)))
 		(remove-inventory-item container item)
-		(destroy item))))))))
+		(destroy item))
+	      ;; check
+	      (assert (valid-container container))))))))
 
 (defmethod consume-quantity ((container thing) item-class &optional (quantity 1))
   (dotimes (n quantity)
@@ -483,8 +499,7 @@
     (with-fields (gump) container
       (destroy-gump item)
       (remove-object (current-buffer) item)
-      (add-inventory-item container item)
-      (when gump (refresh gump)))))
+      (add-inventory-item container item))))
 
 (defmethod accept :before ((container thing) (item thing))
   (play-sample "ok.wav"))

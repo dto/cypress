@@ -80,20 +80,25 @@
 
 (defparameter *corpse-images* (image-set "corpse" 4))
 
-(defthing corpse :image (random-choose *corpse-images*) :stacking nil)
+(defthing corpse 
+  :activated nil
+  :image (random-choose *corpse-images*) 
+  :tags '(:fixed)
+  :stacking nil)
 
 (defmethod can-accept ((corpse corpse)) t)
 
-(defmethod initialize ((corpse corpse) &key)
-  (percent-of-time 80
-    (add-inventory-item corpse (quantity-of 'bone-dust (1+ (random 5))))
-    (percent-of-time 50 
-      (add-inventory-item corpse (new (grab-bag)))
-      (percent-of-time 20
-	(add-inventory-item corpse (new (make-box)))))))
-
 (defmethod activate ((corpse corpse))
-  (replace-gump corpse (new 'browser :container corpse)))
+  (with-fields (activated) corpse
+    (unless activated
+      (setf activated t)
+      (percent-of-time 80
+	(add-inventory-item corpse (quantity-of 'bone-dust (1+ (random 5))))
+	 (percent-of-time 50 
+	   (add-inventory-item corpse (new (grab-bag)))
+	   (percent-of-time 30
+	     (add-inventory-item corpse (new (make-box)))))))
+    (replace-gump corpse (new 'browser :container corpse))))
 
 (defparameter *item-box-images* (image-set "item-box" 2))
 
@@ -249,7 +254,7 @@
 
 (defthing silver-book :image (random-choose *silver-book-images*))
 
-(defparameter *boxed-items* '(silver-elixir silver-armor silver-leggings silver-bow silver-book))
+(defparameter *boxed-items* '(silver-elixir elixir silver-armor silver-leggings silver-bow silver-book))
 
 (defun grab (bag &optional (count (+ 1 (random 3))))
   (let (items)

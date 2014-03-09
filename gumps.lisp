@@ -229,8 +229,9 @@
 	(will-accept target thing))))
 
 (defmethod accept ((browser browser) thing)
-  (accept (field-value :target browser) thing)
-  (refresh browser))
+  (with-fields (target) browser
+    (accept target thing)
+    (refresh browser)))
 
 (defmethod arrange ((browser browser))
   ;; stay in same spot onscreen
@@ -276,7 +277,7 @@
   (clear browser)
   (with-fields (target icons rows columns) browser
     (with-fields (inventory) target
-      (message "~A with ~A items ~A" target (length inventory) inventory)
+      (message "REFRESHING ~A with ~A items ~A" target (length inventory) inventory)
       ;; only take max items
       (let ((items (subseq inventory
 			   0 (min *maximum-inventory-size* (length inventory)))))

@@ -598,6 +598,7 @@
 (defparameter *elixir-images* (image-set "elixir" 2))
 
 (defthing (elixir food)
+  :scale 0.8
   :image (random-choose *elixir-images*))
 
 (defmethod eat ((monk monk) (elixir elixir))
@@ -607,6 +608,7 @@
 (defparameter *silver-elixir-images* (image-set "silver-elixir" 2))
 
 (defthing (silver-elixir food)
+  :scale 0.8
   :image (random-choose *silver-elixir-images*))
 
 (defmethod eat ((monk monk) (silver-elixir elixir))
