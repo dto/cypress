@@ -231,9 +231,6 @@
   (let ((bag (new class)))
     (dolist (item contents)
       (add-inventory-item bag item))
-    (message "Container ~A with ~A items: ~A" 
-	     bag (length (inventory-items bag))
-	     (inventory-items bag))
     (assert (valid-container bag))
     bag))
 

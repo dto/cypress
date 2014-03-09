@@ -277,7 +277,6 @@
   (clear browser)
   (with-fields (target icons rows columns) browser
     (with-fields (inventory) target
-      (message "REFRESHING ~A with ~A items ~A" target (length inventory) inventory)
       ;; only take max items
       (let ((items (subseq inventory
 			   0 (min *maximum-inventory-size* (length inventory)))))

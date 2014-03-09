@@ -11,7 +11,7 @@
 (defun current-scene () *current-scene*)
 
 (defun switch-to-scene (buffer &optional previous-x previous-y)
-  ;; (play-music (random-choose *soundtrack*) :loop nil)
+  (play-music (random-choose *soundtrack*) :loop nil)
   (stop-walking (geoffrey))
   (switch-to-buffer buffer)
   (set-cursor buffer (geoffrey))
@@ -464,7 +464,7 @@
      (stacked-up-randomly (dead-trees) (spray '(ancient-road) :trim t :count 8) (spray '(wraith wolf) :count 2) (flowers)))))
 
 (defmethod drop-object :after ((ruins ruins) (monk geoffrey) &optional x y z)
-  (chill monk +10))
+  (chill monk +16))
 
 ;;; Cemetery
 
@@ -517,7 +517,7 @@
      (stacked-up-randomly (dead-trees-and-puddles) (pack-of-wolves) (wood-pile)))))
 
 (defmethod drop-object :after ((forest frozen-forest) (monk geoffrey) &optional x y z)
-  (chill monk +15))
+  (chill monk +20))
 
 ;; dense pine trees and some dead trees
 ;; wood piles and twigs and branches
