@@ -1,6 +1,17 @@
+** TODO disallow dropping tent onto geoffrey.
+** TODO disallow equipping non-held items
+** TODO auto-close inventory windows on faraway objets if you move
+** TODO hitting I while inventory open should close it, same with (S)pellbook
+** TODO destroy bubbles when closing gumps
+** TODO don't consume wolf corpse unless cast is successful, 
+** TODO don't allow spawning geoffrey in obstacle
+
+** TODO Disable text event handling on SCROLL-TEXT etc http://paste.lisp.org/display/141642
+** TODO Proper parameterized LRU texture cache expiring at travel time
+** TODO allow eating violets and snowdrops for restoring 1mp
+** TODO better, turn-based combat with pause button in corner
 ** TODO [#B] Don't allow giving things to lucius in Chapter 1
 ** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
-
 
 ** TODO Fix inventory bookeeping not getting properly duplicated?
 
@@ -24,7 +35,8 @@
 ** TODO Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 ** TODO [#B] allow canceling travel
-** TODO [#B] increase map grid density and procgen it as a list of lists of symbols, with Valisade in Northeast
+** TODO [#B] increase map grid size/density and procgen it as a list of lists of symbols, with Valisade in Northeast
+*** TODO Add sextant
 ** TODO [#B] Seance spell requires 1 skull, 1 forget-me-not, 1 bonedust
 ** TODO [#B] Add Hold Creature spell
 ** TODO [#B] Protection (2 thornweed 10 mp)
