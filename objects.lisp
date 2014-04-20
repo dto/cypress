@@ -43,7 +43,7 @@
 
 (defthing ancient-road
   :tags '(:fixed)
-  :scale 2
+  :scale 5
   :image (random-choose *ancient-road-images*))
 
 (defparameter *ancient-road-debris-images* (image-set "ancient-road-debris" 5))
