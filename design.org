@@ -1,0 +1,308 @@
+* Overview
+
+The player controls a storybook-like animated monk named Geoffrey as
+he travels through the wilderness fighting monsters and collecting
+items. A point-and-click interface allows the player to travel to
+different areas of the wilderness, move Geoffrey around the
+environment, attack enemies, and cast spells.
+
+Combat will consist of ranged attacks by the player, using a bow and
+several different kinds of arrows. 
+
+** Manage health, hunger, cold, and scarce food/resources 
+** Magic spells
+*** All spells require Mind points
+*** Some spells require "reagents" i.e. a supply
+** Story is exposed through the notebook, written letters/scrolls
+*** I found two wraiths, but vanquished them. 
+*** I collected skulls for making bone dust.
+
+* Player attributes
+
+** Equipped item
+*** Supplies the verb for double clicking objects in the world ?
+*** Usually the bow is equipped, so the verb is "attack"
+*** When a spell is selected, the spell is cast on the clicked target, etc
+
+** Inventory. 16 stacking item slots
+
+** Statistics. Higher is better.
+*** Body (0-100) (death at 0)
+*** Mind (0-100) (used for casting spells. cannot cast anything when less than 15%)
+**** Slowly recharges
+
+** Conditions. Lower is better.
+*** Hunger (0-100) 
+**** You must eat periodically. When hunger > 80 your health drains
+*** Cold (0-100)
+**** When cold reaches 65% your health will drain small amounts (2-5 hp)
+**** When cold reaches 80% your health will drain faster 
+**** Reduce cold with camp or dry with Warmth
+*** Fatigue (0-100)
+**** You must eventually sleep. Cannot cast spells when Fatigue > 90
+
+* Modeline status display
+
+** " Equip [ITEMNAME]       Body 100   Mind 100        Hunger 0   Cold 20   Fatigue 30 "
+** Can also show single-line message briefly
+** Allow light-up color alarm when stat is low or condition is high or new message
+*** Queue messages when there are multiples
+  
+* Gameplay screens
+
+The game's world is shown from an overhead 2-D perspective. The world
+view is full-frame, except for a thin black bar across the bottom
+called the "modeline". This line is used for status display and
+triggering the menu. It is mostly unobtrusive, displaying the meter
+bars for Body (Red) and Mind (Blue), and an icon for the currently
+equipped item/weapon. Status icons and some other messages will also
+be displayed here. The various meters and items can briefly blink when
+something requires the player's attention, such as wounding , hunger,
+or fatigue.
+
+** Overworld map grid with terrain sectors
+*** Each quest is composed of your movements on the symbols of a randomly generated grid map
+**** Some mountain (impassable) squares
+*** Can only travel 1 square at a time.
+**** Expends 10 hunger
+**** Expends 20 fatigue
+*** Player should have a choice of sectors to move to
+**** If he/she wants more herbs, move to glen etc
+*** When you move into a sector you get a randomly generated (and/or procedural) level in the sector's style
+*** Four entry/exit points to a sector: north, south, east, and west
+**** Depends on direction of previous map square occupied
+*** Choose when to leave with "Leave Area" unless held by conditions (presence of enemies)
+
+** Exploration/combat as monk in a sector
+*** Look around
+**** Left click to see name of object
+*** Move around
+**** Right click open space to move there
+*** Double click (or control-click) Geoffrey to open action menu (inventory, spells, etc)
+**** Can also click modeline
+*** Collect items 
+**** Mouse-drag onto character or into inventory gump
+*** Fight enemies
+**** Double-click (or control-click) enemy to fire arrow
+*** Cast spells
+**** Click background of inventory gump to flip page to Spells/Stats
+*** Modal gumps for close-ups of scrolls, books, maps
+**** Gumps halt action, but updates still happen (RUNs do not)
+**** Right click to close gump
+
+** Menu with traditional RPG checkpoint save/load system.
+*** Should only be able to save at campfire when no enemies present.
+
+* Actions
+
+** Fire bow (1 fatigue, 1 arrow)
+*** choose target while action paused
+*** can also double-click enemy 
+** Open inventory
+*** Shows the inventory gump
+*** Can eat food, use other items
+** Cast spell
+*** Shows spell list
+** Make camp (1 fatigue) (3 firewood)
+*** puts out the small tent and firepit
+*** camp provides good healing and mana restoration.
+*** can only craft items at camp
+
+* Geoffrey's initial Spells
+
+** Spark (2 mana)
+*** Light torches, campfires, and dry out even soaked wood
+** Hearth stone (2 mana) (1 stone chips)
+*** Heat up stone held in the hand
+*** Reduces cold by 5pts
+*** Does not consume the stone
+** Light (2 mana)
+*** Casts light with medium radius
+*** Lasts for 4 minutes 
+*** Very slight flicker of circle
+*** Required in dark areas
+*** Certain enemies can negate magic spell effects, dousing your light
+** Cure meat (5 mana, 1 thornweed)
+*** Create healing-jerky from animal carcasses
+*** TODO Paint meat
+** Cure light wounds (25 mana) (2 ginseng) 
+*** Heals between 10-15 hp
+** Hold creature (8 mana) (2 thornweed)
+*** 80% chance of briefly paralyzing target so they cannot move or attack
+** Craft arrows (1 mana) (3 fatigue) (stone chips, wood) 
+*** Create bundle of 20 arrows
+** Boil grasses (2 fatigue) (3 grasses)
+**** Make small amounts of thin gruel. requires wild grasses and water)
+
+* Spell scrolls found in ruins or on dead travelers
+
+** Vault on roadway, raven delivers story note or magic spell
+** Craft silver arrows (1 mana) (8 fatigue) (stone chips, silverwood)
+*** Create 10 3x-powerful arrows
+** Craft crystal arrow (20 mana) (snow)
+** Phantom Scythe (10 mana)
+*** Creates white or wheat bread
+** Protection (15 mana) (1 ginseng, 1 thornweed)
+*** Temporary 35% reduction in combat damage received
+** Cause Fear (15 mana) (1 nightshade)
+*** 80% chance of enemy fleeing
+** Dispel magic (20 mana) (1 ginseng)
+*** 60% chance of removing ordinary spell effects. 
+** Cure heavy wounds (50 mana) (2 ginseng)
+*** Heals between 40-60 HP
+** Explosion (20 mana) (1 nightshade, 2 stone chips)
+*** 90% chance of scorching several enemies in target area
+
+* Items
+
+** Arrows
+*** Wood: 5 damage
+**** TODO "Use" method fires arrow at current target
+**** TODO "Collide" method applies damage to target, if it hits
+*** Silver: 15 damage
+*** Crystal: 50 damage
+** White bread
+*** Hunger -10
+*** HP +5
+** Wheat bread
+*** Hunger -15
+*** HP +8
+** Dried Jerky
+*** Hunger -30
+*** HP +14
+** Elixir
+*** Mana +40
+** Silver Elixir
+*** Mana +100
+** Stones, stone chips
+** Charcoal (from other campsites too)
+** Branches, wood planks, ruined wood
+** Temple Incense
+** Nightshade
+** Ginseng
+** Silverwood 
+
+* Characters
+
+** Geoffrey (the player)
+** Lucius
+** Francis
+** Dr. Quine
+** good Rangers
+** evil Brigands
+** Imperial Raven
+** Skeleton wanderer
+** Skeleton soldier
+** Soulless wolves
+** Hag of the Mist
+** Cryptghast
+** Thief
+** Skullscraper
+** Eldritch acid pool
+** Maggot hound
+** Watcher-in-the-weeds
+** Goddess 
+
+
+** Dead travelers (raid for items)
+** Wolf
+*** 20 HP
+** Watcher-in-the-weeds
+** Wraith
+*** 10 or 15 HP
+** Skeleton soldier
+*** 15 or 20 HP
+** Skeleton archer
+*** 20-30 HP
+** Grave hag
+*** 10 HP
+
+* Locations
+** Nothbess
+*** Campsite, Lucius
+** Meadow
+*** Grass, bushes, weeds
+*** Trees
+*** Flowers
+*** Some herbs
+** Field
+*** Grass, weeds
+*** Wolves
+*** Flowers
+** Ancient roadway
+*** Grass, ochre-toned rock road
+*** Stone chips
+*** Watcher in the weeds
+*** Xalcium bead
+** Forgotten cemetery
+*** Snow with gravestones
+*** Old metal fences
+*** Grave hags
+*** Silverwood
+*** Stone chips
+*** Bone dust
+** Glen
+*** Dirt, grass, bushes, weeds
+*** Herbs
+*** Firewood
+*** Silverwood
+*** Flowers
+*** Wood chips
+** Forest
+*** Evergreen trees
+*** Wraiths
+*** Firewood
+*** Herbs
+*** Wood chips
+*** Pinecones
+*** Dead travellers
+** Frozen Meadow
+*** Snow, dead grass, dead bushes
+*** Precipitation/wetness
+*** Wolves
+*** Silverwood
+*** Wraiths
+** Snowy glen
+*** Snowy evergreens (turning brown)
+*** Firewood 
+*** Wood chips
+*** Pinecones
+*** Wolves
+*** Skeleton soldiers
+** Ruins 
+*** Snow, dirt, dead grass
+*** Waterlogged areas
+*** Item boxes with scrolls w/ dried herbs/flowers
+*** Stone chips
+*** Story scroll pieces
+*** Skeleton soldiers
+*** Wraiths
+** ----------NIGHTFALL------------
+** Frozen crossing
+*** Skeleton archers
+*** Icy crossing with broken ice/water areas
+** Dead forest hills
+*** Dead trees
+*** Firewood
+*** Skeleton soldiers
+*** Skeleton archers
+** Mountain pass
+*** Wolves
+** Road to Valisade
+
+<dto> my concept for this is that on some playthroughs you might find magic
+      potions and spells in the item boxes and on dead travelers, and that'd
+      be a somewhat more magical playthrough, whereas on other playthroughs
+      you'd randomly get silver and crystal arrows.  [11:29]
+<dto> and similarly, you'd find different story fragments, so that by the time
+      you've had enough and got through to the ending, you've seen a pretty
+      good share of the content.   [11:30]
+<dto> this also means that the early and mid game can vary more than the
+      endgame areas, since they'll be played less often
+
+SHOULD be able to solve endgame both ways, most magic supplements combat
+
+ALSO have a stealth spell, a way to avoid confrontation
+
+FORGET-ME-NOTS and Temporal Seance
+

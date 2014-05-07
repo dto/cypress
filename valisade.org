@@ -1,61 +1,98 @@
-** Journey to valisade has a three-act structure
-*** Prologue (brief, good variation)
-**** At home with Lucius; learn how to play
-**** Meadows and forest 
-**** Encounter wolves and wraiths
-*** Middle game (long, most variation)
-**** Puzzles
-**** Towns
-**** Magic quest items
-**** Stone Golem and conversation
-**** Learn new spells
-**** Dreams
-**** Subquests
-*** End game (short, less variation)
+* Graphics tasks
 
-** TODO disallow dropping tent onto geoffrey.
+** TODO paint wax cylinder
+** TODO paint cylindrophone
+** TODO paint Valisade entrance
+** TODO paint bone flute
+** TODO paint snow as black/darkgray dot flakes which are then color-inverted 
+** TODO paint blue/red blood
+** TODO paint sextant
+** TODO paint Silver Timecubes and Time Keys
+** TODO paint spell icons
+*** light, protection, crystal arrow, heavy wounds, Explosion, Dispel Magic
+
+** TODO import final story objects
+** TODO import Arturo pentaquin
+** TODO import screech owl
+** TODO import stone monk
+** TODO import cryptghast
+** TODO import skeleton archers
+** TODO import Black Wizards
+** TODO import the cypress
+** TODO import ruined houses
+** TODO import Nothbehem houses
+** TODO import inkwell/quillpen
+
+* Bugfixes
+
+** TODO should show-error when pathfinding fails ONLY for geoffrey
+** TODO disallow deploying tent on top of geoffrey
+** TODO don't allow tent to be put in containers other than Geoffrey
 ** TODO disallow equipping non-held items
-** TODO auto-close inventory windows on faraway objets if you move
-** TODO hitting I while inventory open should close it, same with (S)pellbook
+** TODO auto-close inventory windows on faraway objects if you move
 ** TODO destroy bubbles when closing gumps
 ** TODO don't consume wolf corpse unless cast is successful, 
 ** TODO don't allow spawning geoffrey in obstacle
-
 ** TODO Disable text event handling on SCROLL-TEXT etc http://paste.lisp.org/display/141642
-** TODO Proper parameterized texture cache expiring at travel time
-** TODO Pre-loading resources when possible---allow method for preloading and default field of resource names
-** TODO allow eating violets and snowdrops for restoring 1mp
-** TODO better, turn-based combat with pause button in corner
-** TODO [#B] Don't allow giving things to lucius in Chapter 1
-** TODO [#B] Don't allow tent to be put in containers other than Geoffrey
-
+** TODO Don't allow giving things to lucius
 ** TODO Fix inventory bookeeping not getting properly duplicated?
-
-** TODO [#A] make geoffrey appear in an appropriate entry location on each visit
-** TODO [#A] Add dead traveler bodies to basements
-** TODO [#A] Require light spell in dark areas
-** TODO [#B] Better flower clusters and wood around dead trees
-** TODO [#B] make pretty magic potions more common
-** TODO [#B] Slight health drain when freezing
-** TODO [#B] Slight aim jitter when freezing
-
-** TODO [#A] Small ancient caves
-*** TODO Add stone monk with Lore
-*** TODO Add item boxes with goodies
-*** TODO books with lore
-*** TODO silver books with spells/Special lore
-
-** TODO [#B] Reagent search will look in bags
-** TODO [#B] Modeline lighter(s) for Freezing/Hungry/Dying
-** TODO [#B] Fix spellcasting/activating objects after dead
 ** TODO Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#B] allow canceling travel
-** TODO [#B] increase map grid size/density and procgen it as a list of lists of symbols, with Valisade in Northeast
+
+* Tasks
+
+** TODO Spell scrolls have 1 use, Spell Book teaches you the spell
+** TODO [#A] Reagent search should look in bags
+** TODO [#A] Review code
+** TODO [#A] Define quest/worldmap structure 
+*** TODO create fixed-symbols dense overworld map on graph paper
+*** TODO [#B] attempt to map grid size/density and procgen it as a list of lists of symbols, with Valisade in Northeast
+*** TODO [#B] or, something to permute the map?
+*** TODO incrementally reveal map
+*** TODO allow saving progress like a traditional rpg
+*** TODO return to using simple pause/resume-on-command
+
+** TODO [#A] change to right-click on geoffrey for Pause
+*** TODO [#A] change to clicking modeline status to open Status scroll
+
+** TODO [#A] assign songs to scenes/moments
+** TODO [#A] Seek ye the Screech Owl when storm thunders; when her cry is heard, blow the flute and she will appear and disclose to find stuff at "3 hectares north and two hectares west."
+*** TODO custom lisp for rain/thunder with fadein/fadeout
+*** TODO code owl
+*** TODO alter flutism.wav for downward owl cry imitation
+** TODO [#A] ice cracks should be hidden until nearby
+** TODO [#A] use only one NARRATE function
+** TODO [#A] Require light spell in dark areas
+** TODO [#A] Slight health drain when freezing
+** TODO [#A] Slight aim jitter when freezing
+** TODO [#A] Lore system
+** TODO [#A] add stone monk with Lore and story messages
+** TODO [#A] books with lore
+** TODO [#A] silver books with spells/Special lore
+** TODO [#A] Light spell (2 mana)
+*** Casts light with medium radius
+*** Lasts for 4 minutes 
+*** Very slight flicker of circle
+*** Required in dark areas
+*** Certain enemies can negate magic spell effects, dousing your light
+** TODO [#A] Protection (15 mana) (1 nightshade)
+*** Temporary 35% reduction in combat damage received
+** TODO [#A] Craft crystal arrow (20 mana) (snow)
+** TODO [#A] Cure heavy wounds (50 mana) (2 ginseng)
+*** Heals between 40-60 HP
+** TODO [#A] Find rational consistent way to exit from basements
 *** TODO Add sextant
-** TODO [#B] Seance spell requires 1 skull, 1 forget-me-not, 1 bonedust
-** TODO [#B] Add Hold Creature spell
-** TODO [#B] Protection (2 thornweed 10 mp)
+** TODO [#B] allow eating violets and snowdrops for restoring 1mp
+** TODO [#B] reasons to return to town: arturo can heal
+** TODO [#B] hitting I while inventory open should close it, same with (S)pellbook
+** TODO [#B] preload textures when possible---allow method for preloading and default field of resource names
+*** TODO Proper parameterized texture cache expiring at travel time
+** TODO [#B] Improve shape of flower clusters and branches wood around trees
+** TODO [#B] Modeline lighter(s) for Freezing/Hungry/Dying
+** TODO [#B] Fix spellcasting/activating objects after dead
+** TODO [#B] allow canceling travel
+** TODO [#B] Explosion (20 mana) (1 nightshade, 1 stone)
+*** 90% chance of scorching several enemies in target area
 ** TODO [#B] Add magic outdoor item boxes with coverstone.png coverstone2.png item-box.png
 ** TODO [#B] Ancient caves with: lock/key system--- plate with lock, you must use corresponding key
 *** TODO circle/triangle/warrior
@@ -71,6 +108,11 @@
 ** TODO [#B] Consider fully turn-based combat, or returning to Pause
 *** TODO Press ESCAPE to close all gumps and unpause
 
+** TODO [#C] Make magic potions more common
+** TODO [#C] Cause Fear (15 mana) (1 nightshade)
+*** 80% chance of enemy fleeing
+** TODO [#C] Dispel magic (20 mana) (1 ginseng)
+*** 60% chance of removing ordinary spell effects. 
 ** TODO [#C] Fix non-impelled arrows moving on their own 
 ** TODO [#C] Disallow browsing/picking from faraway containers
 ** TODO [#C] Fix scrolling jerkiness
@@ -92,124 +134,13 @@
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 ** TODO [#C] Fix jittery rotation of monk at corners of paths
 
-* Overview
-
-The player controls a storybook-like animated monk named Geoffrey as
-he travels through the wilderness fighting monsters and collecting
-items. A point-and-click interface allows the player to travel to
-different areas of the wilderness, move Geoffrey around the
-environment, attack enemies, and cast spells.
-
-Combat will consist of ranged attacks by the player, using a bow and
-several different kinds of arrows. 
-
-** Manage health, hunger, cold, and scarce food/resources 
-** Magic spells
-*** All spells require Mind points
-*** Some spells require "reagents" i.e. a supply
-** Story is exposed through the notebook, written letters/scrolls
-*** I found two wraiths, but vanquished them. 
-*** I collected skulls for making bone dust.
-
-* Player attributes
-
-** Equipped item
-*** Supplies the verb for double clicking objects in the world ?
-*** Usually the bow is equipped, so the verb is "attack"
-*** When a spell is selected, the spell is cast on the clicked target, etc
-
-** Inventory. 16 stacking item slots
-
-** Statistics. Higher is better.
-*** Body (0-100) (death at 0)
-*** Mind (0-100) (used for casting spells. cannot cast anything when less than 15%)
-**** Slowly recharges
-
-** Conditions. Lower is better.
-*** Hunger (0-100) 
-**** You must eat periodically. When hunger > 80 your health drains
-*** Cold (0-100)
-**** When cold reaches 65% your health will drain small amounts (2-5 hp)
-**** When cold reaches 80% your health will drain faster 
-**** Reduce cold with camp or dry with Warmth
-*** Fatigue (0-100)
-**** You must eventually sleep. Cannot cast spells when Fatigue > 90
-
-* Modeline status display
-
-** " Equip [ITEMNAME]       Body 100   Mind 100        Hunger 0   Cold 20   Fatigue 30 "
-** Can also show single-line message briefly
-** Allow light-up color alarm when stat is low or condition is high or new message
-*** Queue messages when there are multiples
-  
-* Gameplay screens
-
-The game's world is shown from an overhead 2-D perspective. The world
-view is full-frame, except for a thin black bar across the bottom
-called the "modeline". This line is used for status display and
-triggering the menu. It is mostly unobtrusive, displaying the meter
-bars for Body (Red) and Mind (Blue), and an icon for the currently
-equipped item/weapon. Status icons and some other messages will also
-be displayed here. The various meters and items can briefly blink when
-something requires the player's attention, such as wounding , hunger,
-or fatigue.
-
-** Overworld map grid with terrain sectors
-*** Each quest is composed of your movements on the symbols of a randomly generated grid map
-**** Some mountain (impassable) squares
-*** Can only travel 1 square at a time.
-**** Expends 10 hunger
-**** Expends 20 fatigue
-*** Player should have a choice of sectors to move to
-**** If he/she wants more herbs, move to glen etc
-*** When you move into a sector you get a randomly generated (and/or procedural) level in the sector's style
-*** Four entry/exit points to a sector: north, south, east, and west
-**** Depends on direction of previous map square occupied
-*** Choose when to leave with "Leave Area" unless held by conditions (presence of enemies)
-
-** Exploration/combat as monk in a sector
-*** Look around
-**** Left click to see name of object
-*** Move around
-**** Right click open space to move there
-*** Double click (or control-click) Geoffrey to open action menu (inventory, spells, etc)
-**** Can also click modeline
-*** Collect items 
-**** Mouse-drag onto character or into inventory gump
-*** Fight enemies
-**** Double-click (or control-click) enemy to fire arrow
-*** Cast spells
-**** Click background of inventory gump to flip page to Spells/Stats
-*** Modal gumps for close-ups of scrolls, books, maps
-**** Gumps halt action, but updates still happen (RUNs do not)
-**** Right click to close gump
-
-** Menu with traditional RPG checkpoint save/load system.
-*** Should only be able to save at campfire when no enemies present.
-
-* Actions
-
-** Fire bow (1 fatigue, 1 arrow)
-*** choose target while action paused
-*** can also double-click enemy 
-** Open inventory
-*** Shows the inventory gump
-*** Can eat food, use other items
-** Cast spell
-*** Shows spell list
-** Make camp (1 fatigue) (3 firewood)
-*** puts out the small tent and firepit
-*** camp provides good healing and mana restoration.
-*** can only craft items at camp
-
 * Geoffrey's initial Spells
 
 ** Spark (2 mana)
 *** Light torches, campfires, and dry out even soaked wood
-** Hearth stone (2 mana) (1 stone chips)
+** Vibrate stone (4 mana) (1 stone)
 *** Heat up stone held in the hand
-*** Reduces cold by 5pts
-*** Does not consume the stone
+*** Reduces cold by 10pts
 ** Light (2 mana)
 *** Casts light with medium radius
 *** Lasts for 4 minutes 
@@ -221,8 +152,6 @@ or fatigue.
 *** TODO Paint meat
 ** Cure light wounds (25 mana) (2 ginseng) 
 *** Heals between 10-15 hp
-** Hold creature (8 mana) (2 thornweed)
-*** 80% chance of briefly paralyzing target so they cannot move or attack
 ** Craft arrows (1 mana) (3 fatigue) (stone chips, wood) 
 *** Create bundle of 20 arrows
 ** Boil grasses (2 fatigue) (3 grasses)
@@ -230,6 +159,8 @@ or fatigue.
 
 * Spell scrolls found in ruins or on dead travelers
 
+** Hold creature (8 mana) (2 thornweed)
+*** 80% chance of briefly paralyzing target so they cannot move or attack
 ** Vault on roadway, raven delivers story note or magic spell
 ** Craft silver arrows (1 mana) (8 fatigue) (stone chips, silverwood)
 *** Create 10 3x-powerful arrows
@@ -238,6 +169,8 @@ or fatigue.
 *** Creates white or wheat bread
 ** Protection (15 mana) (1 ginseng, 1 thornweed)
 *** Temporary 35% reduction in combat damage received
+** Craft crystal arrow (20 mana) (snow)
+
 ** Cause Fear (15 mana) (1 nightshade)
 *** 80% chance of enemy fleeing
 ** Dispel magic (20 mana) (1 ginseng)
@@ -247,141 +180,8 @@ or fatigue.
 ** Explosion (20 mana) (1 nightshade, 2 stone chips)
 *** 90% chance of scorching several enemies in target area
 
-* Items
-
-** Arrows
-*** Wood: 5 damage
-**** TODO "Use" method fires arrow at current target
-**** TODO "Collide" method applies damage to target, if it hits
-*** Silver: 15 damage
-*** Crystal: 50 damage
-** White bread
-*** Hunger -10
-*** HP +5
-** Wheat bread
-*** Hunger -15
-*** HP +8
-** Dried Jerky
-*** Hunger -30
-*** HP +14
-** Elixir
-*** Mana +40
-** Silver Elixir
-*** Mana +100
-** Stones, stone chips
-** Charcoal (from other campsites too)
-** Branches, wood planks, ruined wood
-** Temple Incense
-** Nightshade
-** Ginseng
-** Silverwood 
-
-* Enemies
-
-** Dead travelers (raid for items)
-** Wolf
-*** 20 HP
-** Watcher-in-the-weeds
-** Wraith
-*** 10 or 15 HP
-** Skeleton soldier
-*** 15 or 20 HP
-** Skeleton archer
-*** 20-30 HP
-** Grave hag
-*** 10 HP
-
-* Locations
-** Nothbess
-*** Campsite, Lucius
-** Meadow
-*** Grass, bushes, weeds
-*** Trees
-*** Flowers
-*** Some herbs
-** Field
-*** Grass, weeds
-*** Wolves
-*** Flowers
-** Ancient roadway
-*** Grass, ochre-toned rock road
-*** Stone chips
-*** Watcher in the weeds
-*** Xalcium bead
-** Forgotten cemetery
-*** Snow with gravestones
-*** Old metal fences
-*** Grave hags
-*** Silverwood
-*** Stone chips
-*** Bone dust
-** Glen
-*** Dirt, grass, bushes, weeds
-*** Herbs
-*** Firewood
-*** Silverwood
-*** Flowers
-*** Wood chips
-** Forest
-*** Evergreen trees
-*** Wraiths
-*** Firewood
-*** Herbs
-*** Wood chips
-*** Pinecones
-*** Dead travellers
-** Frozen Meadow
-*** Snow, dead grass, dead bushes
-*** Precipitation/wetness
-*** Wolves
-*** Silverwood
-*** Wraiths
-** Snowy glen
-*** Snowy evergreens (turning brown)
-*** Firewood 
-*** Wood chips
-*** Pinecones
-*** Wolves
-*** Skeleton soldiers
-** Ruins 
-*** Snow, dirt, dead grass
-*** Waterlogged areas
-*** Item boxes with scrolls w/ dried herbs/flowers
-*** Stone chips
-*** Story scroll pieces
-*** Skeleton soldiers
-*** Wraiths
-** ----------NIGHTFALL------------
-** Frozen crossing
-*** Skeleton archers
-*** Icy crossing with broken ice/water areas
-** Dead forest hills
-*** Dead trees
-*** Firewood
-*** Skeleton soldiers
-*** Skeleton archers
-** Mountain pass
-*** Wolves
-** Road to Valisade
-
-<dto> my concept for this is that on some playthroughs you might find magic
-      potions and spells in the item boxes and on dead travelers, and that'd
-      be a somewhat more magical playthrough, whereas on other playthroughs
-      you'd randomly get silver and crystal arrows.  [11:29]
-<dto> and similarly, you'd find different story fragments, so that by the time
-      you've had enough and got through to the ending, you've seen a pretty
-      good share of the content.   [11:30]
-<dto> this also means that the early and mid game can vary more than the
-      endgame areas, since they'll be played less often
-
-SHOULD be able to solve endgame both ways, most magic supplements combat
-
-ALSO have a stealth spell, a way to avoid confrontation
-
-FORGET-ME-NOTS and Temporal Seance
 
 * Quest ideas
-
 
 ** TODO level aura.  
 ** TODO [#A] Spell scrolls and Transcription spell
