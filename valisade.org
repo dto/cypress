@@ -1,17 +1,35 @@
+* TODO NEED FURS to continue past chapter 1
+
 * Graphics tasks
 
-** TODO paint wax cylinder
-** TODO paint cylindrophone
-** TODO paint Valisade entrance
-** TODO paint bone flute
-** TODO paint snow as black/darkgray dot flakes which are then color-inverted 
-** TODO paint blue/red blood
-** TODO paint sextant
-** TODO paint Silver Timecubes and Time Keys
-** TODO paint spell icons
+** DONE paint wax cylinder
+   CLOSED: [2014-05-07 Wed 18:33]
+** DONE paint cylindrophone
+   CLOSED: [2014-05-07 Wed 18:33]
+** DONE paint Valisade entrance
+   CLOSED: [2014-05-07 Wed 18:33]
+** DONE paint bone flute
+   CLOSED: [2014-05-07 Wed 18:33]
+** DONE paint snow as black/darkgray dot flakes which are then color-inverted 
+   CLOSED: [2014-05-07 Wed 18:33]
+** DONE paint blue/red blood
+   CLOSED: [2014-05-07 Wed 18:33]
+** DONE paint sextant
+   CLOSED: [2014-05-07 Wed 18:33]
+** DONE paint Silver Timecubes and Time Keys
+   CLOSED: [2014-05-07 Wed 18:33]
+** DONE paint spell icons
+   CLOSED: [2014-05-07 Wed 18:33]
 *** light, protection, crystal arrow, heavy wounds, Explosion, Dispel Magic
 
-** TODO import final story objects
+** TODO import wax cylinder 
+** TODO import cylindrophone
+** TODO import Valisade exterior stones
+** TODO import bone flute
+** TODO import snow/blood
+** TODO import sextant
+** TODO import timecubes/timekeys
+** TODO import new spell icons
 ** TODO import Arturo pentaquin
 ** TODO import screech owl
 ** TODO import stone monk
