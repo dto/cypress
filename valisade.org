@@ -23,6 +23,7 @@
 ** DONE Write story/activity timeline based on icon board map
    CLOSED: [2014-05-08 Thu 01:17]
 
+** TODO Don't specify Amalia's birthplace/time
 ** TODO [#A] Light spell (2 mana)
 *** Casts light with medium radius
 *** Lasts for 4 minutes 
@@ -30,7 +31,6 @@
 *** Required in dark areas
 *** Certain enemies can negate magic spell effects, dousing your light
 ** TODO lucius helper AI for healing and simple help until first town?
-
 ** TODO [#A] Ancient caves with: lock/key system--- plate with lock, you must use corresponding key
 ** TODO [#A] Protection (15 mana) (1 nightshade)
 *** Temporary 35% reduction in combat damage received
@@ -71,7 +71,7 @@
 ** TODO [#A] Slight health drain when freezing
 ** TODO [#A] Slight aim jitter when freezing
 ** TODO [#A] Find rational consistent way to exit from basements
-*** TODO Add sextant
+*** TODO Add sextant which guides you to your next location
 ** TODO [#B] Add Clockwork Valisade Knight
 ** TODO [#B] allow eating violets and snowdrops for restoring 1mp
 ** TODO [#B] reasons to return to town: arturo can heal

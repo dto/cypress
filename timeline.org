@@ -1,13 +1,13 @@
-You begin in a meadow with Lucius collecting flowers. (Why is Geoffrey
-in the meadow looking for Dr. Quine? explain it with a letter already
-in Geoffrey's possession.) Lucius strikes up a conversation, and tells
-you about the land. He gives you the Travel spell, and a map of the
-local area to Nothbehem. He joins the party and follows you around
-until you arrive in town.
+You begin in a meadow with Lucius collecting flowers. Lucius strikes
+up a conversation, and tells you about the land. He gives you the
+Travel spell, and a map of the local area to Nothbehem. He joins the
+party and follows you around until you arrive in town.
 
-(Dr. Quine had been summoned to Valisade by the high priestess, for
-she had become concerned that one of the Black Wizards was tampering
-with Time itself.)
+(Why is Geoffrey in the meadow looking for Dr. Quine? explain it with
+a letter already in Geoffrey's possession. Dr. Quine had been
+summoned to Valisade by the high priestess, for she had become
+concerned that one of the Black Wizards was tampering with Time
+itself.)
 
 While in the party, Lucius can cast a simple healing spell when your
 health is low, and make suggestions about what to do next. He can also
@@ -84,11 +84,12 @@ spell. These new spells are useful when you encounter Cryptghasts.
 
 To the south of the Road you will find the Cypress, surrounded by
 ruins and three Black Wizards, whom you must defeat. They are trying
-to stop you from communicating with the Cypress.
+to stop you from communicating with the owl who keeps watch over the
+Cypress.
 
 When you have won, the screech owl returns and tells you a story about
-the cypress that begins to sketch out the larger issues at play in the
-story.
+the cypress. This begins to sketch out the larger issues at play in
+the world of Ildron.
 
 From the black wizards corpses you get the Magic Missile spell,
 another copper gear, a conspiracy letter about killing the Traveler,
