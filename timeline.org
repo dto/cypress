@@ -1,0 +1,112 @@
+You begin in a meadow with Lucius collecting flowers. (Why is Geoffrey
+in the meadow?) Lucius strikes up a conversation, and tells you about
+the land. He gives you the Travel spell, and a map of the local area
+to Nothbehem. He joins the party and follows you around until you
+arrive in town.
+
+While in the party, Lucius can cast a simple healing spell when your
+health is low, and make suggestions about what to do next. He can also
+comment on things in the immediate environment, such as ruined walls
+and/or megalithic structures.
+
+You travel through meadows/hills/forest with Lucius, fighting wraiths
+and a wolf or two along the way, until reaching Nothbehem. You may
+encounter an ancient cave during this sequence, but since you don't
+have the keys, you can't enter yet.
+
+Lucius hangs around town, telling you to visit his grandfather Arturo
+in the house with three skylights. Arturo is out front tending to the
+stone well and some silverwood growing in a patch around a dead tree.
+
+Arturo recognizes your clothing and tells you that you've traveled far
+forward in time; exactly how far, he is unable to tell---only that the
+rune-writings on your map seem more archaic to him than any he's seen,
+yet are partially readable. He gives you a pair of silver leggings to
+keep you warm in the snow. (Increase resistance of these.)
+
+He hasn't traveled as far north as your map claims Valisade will be
+found, but he relates a story to you about his expedition to the
+frigid North on a failed quest to find the seer Amalia and her home.
+
+He gives a warning about the cemeteries and crypts to the northeast
+and gives you a sextant to help you find your way.
+
+Arturo gives you a book with background information on Amalia, and a
+partial account of the journey. He also gives you the Craft Silver
+Arrows, two loaves of bread, and all the silverwood in the garden. 
+
+Finally, Arturo tells you he's been saving a strange object found on
+the expedition; a kind of copper gear or locking mechanism, associated
+with the Ancients. He suspects that having two of them will unlock the
+two copper doors in the ancient cave near town, but that he has only
+ever found one of the gears. He gives it to you in the hope that you
+can find your destination. He also gives you Amalia's quill pen.
+
+He says also that he believes Alonso Pentaquin kept one of the gears,
+but feared sharing it with Arturo due to wanting all the treasure to
+himself.
+
+Arturo is not sure where Alonso lives now, as the brothers are
+bitterly estranged. He says he thinks Alonso lived in a cabin in the
+Northwesterly Woods, but may have died or moved on.
+
+During chapter 1 you can return to Arturo in town for healing and
+additional supplies.
+
+In Alonso's basement you find a 2nd gear.
+
+The ancient cave near Nothbehem contains a bone flute and a note about
+the screech owl. The note is addressed to a stone monk and talks about
+his task of helping the Traveler. You also find the triangle time key.
+
+You hear the first screech owl when you are in the right cemetery; she
+tells you how to find the third gear to open the 3-gear gateway to
+Part 2. She will land on and activate the correct tombstone, then
+you find the gear.
+
+Part 2 opens with you meeting the Stone Monk named in the letter from
+the first cave. He tells you about the distortions in Time, that
+Dr. Quine has long since died, and that Quine set up a system of
+enchanted mechanical men to carry his knowledge into the distant
+future you arrive in, to help prepare you for your task of saving
+Ildron. 
+
+You learn the Hold Creature spell and gain a Silver Bow. In another
+silver cave you find Silver Armor, a copper gear, and a Triangle
+timecube with a wax cylinder inside. Along the ancient road you can
+also find caves holding timecubes with food, and a Protection
+spell. These new spells are useful when you encounter Cryptghasts.
+
+To the south of the Road you will find the Cypress, surrounded by
+ruins and three Black Wizards, whom you must defeat. They are trying
+to stop you from communicating with the Cypress.
+
+When you have won, the screech owl returns and tells you a story about
+the cypress that begins to sketch out the larger issues at play in the
+story.
+
+From the black wizards corpses you get the Magic Missile spell,
+another copper gear, a conspiracy letter about killing the Traveler.
+You also find their Cylindrophone, and can now play the first
+cylinder.  The cylinder contains the voices of the demons trapped
+within Mount Einhall, trying to work their influence on the Wizards.
+
+When you find the 2nd stone monk in the cave with four doors, he tells
+you he has more information from Dr. Quine. You get the Crystal Arrow
+spell, the Warrior Time Key, Great Heal.
+
+Part 3. A 3rd screech owl guides you to Amalia's burnt-out cabin where
+you find the inkwell she used to write her final Prophecies.
+
+After exiting the forest you cross the frozen river to the northeast,
+encountering wraiths and skeleton archers.
+
+You break through to a valley where the ruins of Valisade are
+crumbling.  In the basement you find a warrior time cube with a 2nd
+wax cylinder inside, and another gear. 
+
+Playing the 2nd wax cylinder reveals that you must combine the inkwell
+with the quill pen. Doing so after playing the cylinder will trigger
+the endgame animation.
+
+
