@@ -1,46 +1,3 @@
-* TODO NEED FURS to continue past chapter 1
-
-* Graphics tasks
-
-** DONE paint wax cylinder
-   CLOSED: [2014-05-07 Wed 18:33]
-** DONE paint cylindrophone
-   CLOSED: [2014-05-07 Wed 18:33]
-** DONE paint Valisade entrance
-   CLOSED: [2014-05-07 Wed 18:33]
-** DONE paint bone flute
-   CLOSED: [2014-05-07 Wed 18:33]
-** DONE paint snow as black/darkgray dot flakes which are then color-inverted 
-   CLOSED: [2014-05-07 Wed 18:33]
-** DONE paint blue/red blood
-   CLOSED: [2014-05-07 Wed 18:33]
-** DONE paint sextant
-   CLOSED: [2014-05-07 Wed 18:33]
-** DONE paint Silver Timecubes and Time Keys
-   CLOSED: [2014-05-07 Wed 18:33]
-** DONE paint spell icons
-   CLOSED: [2014-05-07 Wed 18:33]
-*** light, protection, crystal arrow, heavy wounds, Explosion, Dispel Magic
-
-** TODO import wax cylinder 
-** TODO import cylindrophone
-** TODO import Valisade exterior stones
-** TODO import bone flute
-** TODO import snow/blood
-** TODO import sextant
-** TODO import timecubes/timekeys
-** TODO import new spell icons
-** TODO import Arturo pentaquin
-** TODO import screech owl
-** TODO import stone monk
-** TODO import cryptghast
-** TODO import skeleton archers
-** TODO import Black Wizards
-** TODO import the cypress
-** TODO import ruined houses
-** TODO import Nothbehem houses
-** TODO import inkwell/quillpen
-
 * Bugfixes
 
 ** TODO should show-error when pathfinding fails ONLY for geoffrey
@@ -474,3 +431,249 @@
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE paint wax cylinder
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE paint cylindrophone
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE paint Valisade entrance
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE paint bone flute
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE paint snow as black/darkgray dot flakes which are then color-inverted
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE paint blue/red blood
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE paint sextant
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE paint Silver Timecubes and Time Keys
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE paint spell icons
+   CLOSED: [2014-05-07 Wed 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** light, protection, crystal arrow, heavy wounds, Explosion, Dispel Magic
+
+** DONE import wax cylinder
+   CLOSED: [2014-05-07 Wed 22:09]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO import cylindrophone
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import bone flute
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import snow/blood
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import sextant
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import timecubes/timekeys
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import new spell icons
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import Arturo pentaquin
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import screech owl
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import stone monk
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import cryptghast
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import skeleton archers
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import Black Wizards
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import the cypress
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import ruined houses
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import Nothbehem houses
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO import inkwell/quillpen
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-07 Wed 22:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Graphics tasks
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
