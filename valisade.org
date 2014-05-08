@@ -100,6 +100,7 @@
 *** Heals between 40-60 HP
 ** TODO [#A] Find rational consistent way to exit from basements
 *** TODO Add sextant
+** TODO [#A] Add Clockwork Valisade Knight
 ** TODO [#B] allow eating violets and snowdrops for restoring 1mp
 ** TODO [#B] reasons to return to town: arturo can heal
 ** TODO [#B] hitting I while inventory open should close it, same with (S)pellbook
