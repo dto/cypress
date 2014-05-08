@@ -19,7 +19,8 @@
 
 * Tasks
 
-** TODO Write story/activity timeline based on icon board map
+** DONE Write story/activity timeline based on icon board map
+   CLOSED: [2014-05-08 Thu 01:17]
 
 ** TODO [#A] Light spell (2 mana)
 *** Casts light with medium radius
@@ -47,6 +48,7 @@
 *** TODO [#B] or, something to permute the map?
 *** TODO incrementally reveal map
 *** TODO allow saving progress like a traditional rpg
+**** TODO can only save at map screen
 *** TODO return to using simple pause/resume-on-command
 *** TODO [#A] change to right-click on geoffrey for Pause
 **** TODO [#A] change to clicking modeline status to open Status scroll

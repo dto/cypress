@@ -1,8 +1,13 @@
 You begin in a meadow with Lucius collecting flowers. (Why is Geoffrey
-in the meadow?) Lucius strikes up a conversation, and tells you about
-the land. He gives you the Travel spell, and a map of the local area
-to Nothbehem. He joins the party and follows you around until you
-arrive in town.
+in the meadow looking for Dr. Quine? explain it with a letter already
+in Geoffrey's possession.) Lucius strikes up a conversation, and tells
+you about the land. He gives you the Travel spell, and a map of the
+local area to Nothbehem. He joins the party and follows you around
+until you arrive in town.
+
+(Dr. Quine had been summoned to Valisade by the high priestess, for
+she had become concerned that one of the Black Wizards was tampering
+with Time itself.)
 
 While in the party, Lucius can cast a simple healing spell when your
 health is low, and make suggestions about what to do next. He can also
@@ -87,9 +92,10 @@ story.
 
 From the black wizards corpses you get the Magic Missile spell,
 another copper gear, a conspiracy letter about killing the Traveler.
-You also find their Cylindrophone, and can now play the first
-cylinder.  The cylinder contains the voices of the demons trapped
-within Mount Einhall, trying to work their influence on the Wizards.
+You also find their Cylindrophone in their encampment to the south of
+the Cypress, and can now play the first cylinder.  The cylinder
+contains the voices of the demons trapped within Mount Einhall, trying
+to work their influence on the Wizards.
 
 When you find the 2nd stone monk in the cave with four doors, he tells
 you he has more information from Dr. Quine. You get the Crystal Arrow
