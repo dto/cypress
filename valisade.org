@@ -16,6 +16,7 @@
 ** TODO Fix non-impelled arrows moving on their own 
 ** TODO Disallow browsing/picking from faraway containers
 ** TODO Fix scrolling jerkiness
+** TODO Conversation system should union the remaining keywords?
 
 * Tasks
 
@@ -28,9 +29,9 @@
 *** Very slight flicker of circle
 *** Required in dark areas
 *** Certain enemies can negate magic spell effects, dousing your light
+** TODO lucius helper AI for healing and simple help until first town?
+
 ** TODO [#A] Ancient caves with: lock/key system--- plate with lock, you must use corresponding key
-*** TODO circle/triangle/warrior
-*** TODO lock beomes seal when correct key is used, and doors open
 ** TODO [#A] Protection (15 mana) (1 nightshade)
 *** Temporary 35% reduction in combat damage received
 ** TODO [#A] Craft crystal arrow (20 mana) (snow)
@@ -55,8 +56,6 @@
 **** TODO [#A] don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
 *** TODO Allow special verb/action where game stops for a target of USEing
-
-** TODO lucius helper AI for healing and simple help until first town?
 ** TODO [#A] Add fur cloak for chapter 2
 ** TODO [#A] Reagent search should look in bags
 ** TODO [#A] Spell scrolls have 1 use, Spell Book teaches you the spell

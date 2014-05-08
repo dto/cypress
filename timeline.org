@@ -91,7 +91,9 @@ the cypress that begins to sketch out the larger issues at play in the
 story.
 
 From the black wizards corpses you get the Magic Missile spell,
-another copper gear, a conspiracy letter about killing the Traveler.
+another copper gear, a conspiracy letter about killing the Traveler,
+and a woolen undersuit (needed to visit Amalia's cabin.) 
+
 You also find their Cylindrophone in their encampment to the south of
 the Cypress, and can now play the first cylinder.  The cylinder
 contains the voices of the demons trapped within Mount Einhall, trying
