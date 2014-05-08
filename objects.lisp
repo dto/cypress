@@ -274,3 +274,31 @@
 (defun reagent-bag ()
   (make-container 'bag (grab *reagents*)))
 
+;;; The silver things
+
+(defthing silver-bow :stacking nil :attack 3 :image "silver-bow.png")
+
+(defmethod equipment-description ((self silver-bow))
+  "Geoffrey wields a silver-plated longbow.")
+
+(defmethod activate ((self silver-bow))
+  (toggle-equipped (geoffrey) self))
+
+(defthing silver-armor :stacking nil :defense 2 :resistance 2 :image "silver-armor.png")
+
+(defmethod activate ((self silver-armor))
+  (toggle-equipped (geoffrey) self))
+
+(defmethod equipment-description ((self silver-armor))
+  "Geoffrey is wearing silver armor.")
+
+(defthing silver-leggings :stacking nil :image "silver-leggings.png" :defense 1 :resistance 2)
+
+(defmethod activate ((self silver-leggings))
+  (toggle-equipped (geoffrey) self))
+
+(defmethod equipment-description ((self silver-leggings))
+  "Geoffrey is wearing warm silver leggings.")
+
+(defthing silver-mail :image "silver-mail.png")
+

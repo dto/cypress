@@ -79,6 +79,7 @@
 ** TODO [#B] Improve shape of flower clusters and branches wood around trees
 ** TODO [#B] Modeline lighter(s) for Freezing/Hungry/Dying
 ** TODO [#B] Fix spellcasting/activating objects after dead
+** TODO [#B] Paint some nicer trees
 ** TODO [#B] allow canceling travel
 ** TODO [#B] sometimes a random carved stone with lore in the middle of the woods
 ** TODO [#B] Explosion (20 mana) (1 nightshade, 1 stone)
@@ -95,7 +96,7 @@
 *** 80% chance of enemy fleeing
 ** TODO [#C] Dispel magic (20 mana) (1 ginseng)
 *** 60% chance of removing ordinary spell effects. 
-** TODO [#C] implement snow/rain/darkness
+** TODO [#C] implement snow/rain with additive blending
 ** TODO [#B] Implement bleeding and blood tracks in the snow
 ** TODO [#C] day/night cycle; survive each day; end it by camping 
 ** TODO [#C] Night/camp dream sequences

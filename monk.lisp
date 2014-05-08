@@ -1,33 +1,5 @@
 (in-package :cypress)
 
-;;; The silver things
-
-(defthing silver-bow :stacking nil :attack 3 :image "silver-bow.png")
-
-(defmethod equipment-description ((self silver-bow))
-  "Geoffrey wields a silver-plated longbow.")
-
-(defmethod activate ((self silver-bow))
-  (toggle-equipped (geoffrey) self))
-
-(defthing silver-armor :stacking nil :defense 2 :resistance 2 :image "silver-armor.png")
-
-(defmethod activate ((self silver-armor))
-  (toggle-equipped (geoffrey) self))
-
-(defmethod equipment-description ((self silver-armor))
-  "Geoffrey is wearing silver armor.")
-
-(defthing silver-leggings :stacking nil :image "silver-leggings.png" :defense 1 :resistance 2)
-
-(defmethod activate ((self silver-leggings))
-  (toggle-equipped (geoffrey) self))
-
-(defmethod equipment-description ((self silver-leggings))
-  "Geoffrey is wearing warm silver leggings.")
-
-(defthing silver-mail :image "silver-mail.png")
-
 ;;; Arrows, the monk's main weapon
 
 (defparameter *arrow-size* 25)
@@ -154,21 +126,6 @@
 	     ("monk-walk-bow-ready-2.png" 4)
 	     ("monk-walk-bow-ready-3.png" 4)
 	     ("monk-walk-bow-ready-4.png" 4))))
-
-;;; Animations for monk 2
-
-(defparameter *monk-2-walk* 
-  '(:repeat t
-    :scale 820
-    :frames (("monk-2-walk-1.png" 4)
-	     ("monk-2-walk-2.png" 4)
-	     ("monk-2-walk-3.png" 4)
-	     ("monk-2-walk-4.png" 4))))
-
-(defparameter *monk-2-stand*
-  '(:scale 820
-    :frames (("monk-2-stand-1.png" 19)
-	     ("monk-2-stand-2.png" 24))))
 
 (defparameter *maximum-points* 100)
 
@@ -354,10 +311,10 @@
 
 (defparameter *monk-speed* 13)
 
-(defmethod standing-animation ((self monk)) *monk-2-stand*)
-(defmethod walking-animation ((self monk)) *monk-2-walk*)
+(defmethod standing-animation ((self monk)) *monk-stand*)
+(defmethod walking-animation ((self monk)) *monk-walk*)
 
-(defmethod casting-animation ((self monk)) *monk-2-stand*)
+(defmethod casting-animation ((self monk)) *monk-stand*)
 
 (defmethod update-bow ((monk monk))
   (with-fields (aiming-bow load-clock load-time bow-ready reload-time reload-clock) monk
@@ -490,74 +447,6 @@
   (with-fields (inventory) self
     (not (fullp inventory))))
 
-;;; As the monk Geoffrey, the player drives the action
-
-(defvar *geoffrey* nil)
-
-(defun geoffrey () *geoffrey*)
-  
-(defthing (geoffrey monk) :description "Geoffrey")
-
-(defmethod alternate-tap ((self geoffrey) x y)
-  (replace-gump self (new 'scroll-gump :text (status-text))))
-
-(defmethod initialize :after ((monk geoffrey) &key)
-  (setf *geoffrey* monk)
-  (add-inventory-item monk (new 'spellbook))
-  (add-inventory-item monk (new 'camp))
-  (add-inventory-item monk (new 'bag))
-  (add-inventory-item monk (quantity-of 'ginseng 2))
-  (add-inventory-item monk (quantity-of 'stone 2))
-  (add-inventory-item monk (quantity-of 'white-bread 2))
-  (add-inventory-item monk (quantity-of 'wooden-arrow 16))
-  (equip monk (find-arrow monk)))
-
-(defmethod humanp ((monk geoffrey)) t)
-
-(defmethod activate ((monk geoffrey))
-  (resume)
-  (replace-gump monk (new 'browser :container monk)))
-
-(defmethod collide :after ((monk geoffrey) (gump gump))
-  (when (field-value :waypoints monk)
-    (bring-to-front gump)))
-
-(defmethod modify-health :after ((monk geoffrey) points)
-  (with-fields (alive health) monk
-    (when alive
-      (when (< health 20) 
-	(bark monk "I'm dying!")))
-    (when (and alive
-	       (not (plusp health)))
-      (die monk))))
-
-(defmethod modify-cold :after ((monk geoffrey) points)
-  (with-fields (cold) monk
-    (bark-cold monk)
-    (narrate "You feel colder. Currently at ~S percent." cold)))
-
-(defparameter *monk-hide-weapon-time* (seconds->frames 10))
-
-(defmethod standing-animation ((self geoffrey))
-  (with-fields (aiming-bow last-fire-time) self
-      (if aiming-bow
-	  *monk-stand-bow-ready*
-	  (if (> *monk-hide-weapon-time* 
-		 (- *updates* last-fire-time))
-	      *monk-stand-bow*
-	      *monk-stand*))))
-
-(defmethod walking-animation ((self geoffrey))
-  (with-fields (aiming-bow last-fire-time) self
-      (if aiming-bow
-	  *monk-walk-bow-ready*
-	  (if (> *monk-hide-weapon-time* 
-		 (- *updates* last-fire-time))
-	      *monk-walk-bow*
-	      *monk-walk*))))
-
-(defmethod casting-animation ((self monk)) *monk-cast*)
-
 ;;; Monk food and potions
 
 (defthing food)
@@ -585,9 +474,6 @@
   (modify-health monk +10)
   (modify-hunger monk -35))
 
-(defmethod eat :after ((monk geoffrey) (food food))
-  (narrate "Very good! You feel better."))
-
 (defthing (jerky food)
   :image "beef-jerky.png")
 
@@ -614,200 +500,4 @@
 (defmethod eat ((monk monk) (elixir silver-elixir))
   (modify-health monk +60)
   (modify-magic monk +100))
-
-;;; Tent and camping
-
-(defparameter *fire-images* (image-set "fire" 4))
-
-(defthing fire :image (random-choose *fire-images*) :scale 1.1 :tags '(:ethereal))
-
-(defmethod run ((fire fire))
-  (percent-of-time 14 (setf (field-value :image fire) (random-choose *fire-images*))))
-
-(defthing camp
-  :description "Geoffrey's magic tent"
-  :stacking nil
-  :fire nil
-  :timer nil
-  :contained-image "tent-2.png"
-  :image "tent-3.png"
-  :tags '(:solid))
-
-(defmethod activate ((camp camp))
-  (replace-gump camp (new 'browser :container camp)))
-
-(defmethod can-accept ((camp camp)) t)
-
-(defmethod will-accept ((thing thing) (camp camp)) nil)
-
-(defmethod ignite ((camp camp))
-  (with-fields (fire timer) camp
-    (when (not fire)
-      (mark-camped (current-scene))
-      (setf fire (new 'fire))
-      (setf timer (seconds->frames 15))
-      (drop camp fire 25 125)
-      (bring-to-front fire))))
-
-(defmethod recover ((monk monk))
-  (modify-health monk +12)
-  (modify-magic monk +50)
-  (modify-cold monk -100)
-  (narrate-now "You rest at the campfire, and feel much better."))
-  
-(defmethod ignite :after ((camp camp))
-  (recover (geoffrey)))
-
-(defmethod douse ((camp camp))
-  (with-fields (fire timer) camp
-    (when fire
-      (destroy fire)
-      (setf fire nil)
-      (setf timer nil))))
-
-(defmethod can-pick ((camp camp)) 
-  (not (null (field-value :container camp))))
-
-(defmethod return-to-geoffrey ((camp camp))
-  (with-fields (fire) camp
-    (remove-object (current-scene) camp)
-    (when fire
-      (remove-object (current-scene) fire))
-    (add-inventory-item (geoffrey) camp)))
-
-(defmethod run ((camp camp))
-  (with-fields (fire timer) camp
-    (when (and fire timer)
-      (decf timer)
-      (unless (plusp timer)
-	(douse camp)))))
-
-;;; Lucius 
-
-(defthing (lucius monk) 
-  :next-flower nil 
-  :clock 10 
-  :seen-player nil
-  :description "Lucius")
-
-(defmethod walk-to :after ((monk lucius) x y)
-  (with-fields (waypoints clock) monk
-    (when (null waypoints)
-      (choose-flower monk)
-      (setf clock 20))))
-
-(defmethod choose-flower ((self lucius))
-  (setf (field-value :next-flower self)
-	(let ((flowers (find-instances (current-buffer) 'flower)))
-	  (when flowers (random-choose flowers)))))
-
-(defmethod run ((self lucius))
-  (with-fields (next-flower seen-player gump waypoints clock) self
-    (call-next-method)
-    (decf clock)
-    (let ((distance (distance-to-cursor self)))
-      (when (cursor)
-	(when (and (not seen-player)
-		   (< distance 300))
-	  (setf seen-player t)
-	  (bark self "Ho, stranger!")
-	  (walk-to-thing self (cursor)))
-	(cond 
-	  ((and (null gump) 
-		(> distance 240))
-	   ;; pick flowers
-	   (unless (plusp clock)
-	     (if (null next-flower)
-		 (choose-flower self)
-		 (if (null waypoints)
-		     (walk-to-thing self next-flower)
-		     ;; are we near flower?
-		     (when (< (distance-between self next-flower) 80)
-		       (stop-walking self)
-		       (setf clock 30)
-		       (take self next-flower)
-		       (setf next-flower nil))))))
-	  ((> distance 150)
-	   (unless (or waypoints (null gump) (plusp clock))
-	     (multiple-value-bind (x y) (at (cursor))
-	       (walk-to self x y))))
-	  ((> distance 110)
-	   (prog1 nil (stop-walking self) (setf clock 10))))))))
-
-(defmethod activate ((self lucius))
-  (destroy-gump self)
-  (discuss self :hello))
-
-(define-topic hello lucius
-"Greetings, brother. Well met. I don't
-recall ever seeing robes like yours!
-You must be a traveler?"
-  :robes :where-are-we?)
-
-(define-topic where-are-we? lucius
-"We're just outside the little town of
-Nothbehem. You really have no idea where
-you are, do you?" :robes :quine)
-
-(define-topic name lucius
-"My name is Lucius Pentaquin. And who
-are you?  A monk, it seems, but of what
-Order?"
-:i-am-geoffrey-of-valisade)
-
-(define-topic i-am-geoffrey-of-valisade lucius 
-"It's nice to meet you, Brother
-Geoffrey of Valisade! Welcome to our
-little town." :town :robes :quine)
-
-(define-topic job lucius 
-"I'm a librarian at the Nothbehem
-monastery. I'm also a maker and mender
-of shirts, shoes, pants, robes, and
-leather armor." :town :robes :quine)
-
-(define-topic quine lucius 
-"I don't think I've met anyone named
-Quine myself, but we do see travelers
-pass through town from time to
-time. Maybe my grandfather would know?"
-:grandfather)
-
-(define-topic robes lucius 
-"Yes. I haven't seen a style quite like
-it. Although, the general fit, and the
-stitching around the leather portions,
-do remind me a bit of my grandfather's
-old war gear. Tell me, are you a
-soldier? Did you come across the
-mountains from the West?" 
-:west :grandfather)
-
-(define-topic grandfather lucius 
-  "Yes, the great Arturo Pentaquin the
-Fourth! A decorated officer of the Wars
-of the West. We should visit him in
-Nothbehem; it's a short distance to the
-north of here. He knows all about
-Westerners." :west)
-
-(define-topic west lucius 
-  "I've never been out West myself, but
-of course I've heard all the old
-stories and read all the old books." :quine :robes :books)
-
-(define-topic books lucius 
-  "There are plenty of books, maps, and
-scrolls at the Library where I work. 
-You should visit the Monastery in town." :town)
-
-(define-topic town lucius 
-  "Nothbehem is my family's home, a
-quiet town to the north of here.
-There's also a monastery.")
-
-;; (defmethod discuss :after ((self lucius) (topic (eql :letter)))
-;;   (drop self (new 'scroll) 0 (field-value :height self)))
-
-
 
