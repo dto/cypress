@@ -19,12 +19,12 @@
 (defparameter *home-image* "home.png")
 (defparameter *road-image* "road.png")
 
-(defparameter *sector-size* (units 6))
+(defparameter *sector-size* (units 4))
 
 (defthing sector
   :tags '(:fixed)
   :terrain nil
-  :scale 1.1
+  :scale 0.6
   :row 0
   :column 0
   :scene nil 
@@ -33,11 +33,17 @@
 
 (defparameter *terrain-classes* '(forest frozen-forest meadow cave
   grassy-meadow cold-meadow frozen-meadow ruins river valisade highway
-  cemetery))
+  alonso-ruins nothbehem southern-cave eastern-cave
+  cemetery eavesbury-cemetery))
 
 (defparameter *terrain-icons* 
   (list 'forest *forest-icons*
 	'frozen-forest *frozen-forest-icons*
+	'nothbehem (list *home-image*)
+	'alonso-ruins *ruins-icons*
+	'southern-cave (list *road-image*)
+	'eastern-cave (list *road-image*)
+	'eavesbury-cemetery *danger-icons*
 	'meadow *meadow-icons*
 	'grassy-meadow *grassy-meadow-icons*
 	'cold-meadow *cold-meadow-icons*
@@ -45,12 +51,12 @@
 	'ruins *ruins-icons*
 	'river *river-icons*
 	'valisade *castle-icons*
-	'highway (list *road-image*)
+	'cave (list *road-image*)
 	'cemetery *danger-icons*
-	'cave *mountain-icons*
+	'highway *forest-icons*
 	;; can't visit these.
-	'home (list *home-image*)
-	'large-mountain *large-mountain-icons*))
+	'mountain-pass *meadow-icons*
+	'large-mountain *mountain-icons*))
   
 (defun terrain-icon (terrain)
   (random-choose (getf *terrain-icons* terrain)))
@@ -67,9 +73,9 @@
 (defmethod find-description ((sector sector))
   (pretty-string (symbol-name (field-value :terrain sector))))
 
-(defvar *map-row* 0)
+(defparameter *map-row* 10)
 
-(defvar *map-column* 0)
+(defparameter *map-column* 2)
 
 (defun map-row ()
   *map-row*)
@@ -98,8 +104,8 @@
 (defparameter *unlimited-travel* nil)
 
 (defmethod can-travel-to ((sector sector))
-  (and (member (field-value :terrain sector)
-	       '(frozen-forest cave river meadow cold-meadow grassy-meadow forest cemetery ruins))
+  (and (not (member (field-value :terrain sector)
+		    '(mountain-pass large-mountain)))
        (with-fields (row column) sector
 	 (and (>= 1 (abs (- row *map-row*)))
 	      (>= 1 (abs (- column *map-column*)))))))
@@ -115,6 +121,9 @@
       (setf scene (new terrain)))
     (switch-to-scene scene)))
 
+(defmethod activate-maybe ((sector sector))
+  (activate sector))
+
 (defmethod activate ((sector sector))
   (if (or *unlimited-travel*
 	  (can-travel-to sector))
@@ -124,26 +133,84 @@
 (defun make-sector (key)
   (new 'sector :terrain key))
 
+(defparameter *ildron*
+  '((large-mountain large-mountain large-mountain
+     large-mountain large-mountain large-mountain 
+     large-mountain large-mountain large-mountain)
+
+    (large-mountain frozen-meadow cold-meadow 
+     cold-meadow cave frozen-meadow 
+     frozen-forest large-mountain cave)
+
+    (cold-meadow cold-meadow highway
+     frozen-meadow forest ruins 
+     cemetery frozen-forest frozen-forest
+     large-mountain)
+
+    (ruins cold-meadow highway
+     cold-meadow cemetery forest
+     ruins frozen-meadow frozen-forest
+     large-mountain)
+
+    (forest cold-meadow forest 
+     forest forest forest
+     cold-meadow frozen-forest river
+     large-mountain)
+
+     (cave cold-meadow forest
+      grassy-meadow grassy-meadow forest
+      meadow forest highway
+      large-mountain)
+
+     (forest forest nothbehem 
+      grassy-meadow meadow forest 
+      forest cold-meadow ruins
+      large-mountain)
+    
+    (forest grassy-meadow grassy-meadow
+     forest forest large-mountain 
+     large-mountain cave large-mountain
+     large-mountain)
+
+    (cave forest forest 
+     meadow cave large-mountain 
+     large-mountain large-mountain large-mountain
+     large-mountain)
+
+    (large-mountain grassy-meadow grassy-meadow 
+     forest large-mountain large-mountain
+     large-mountain large-mountain large-mountain
+     large-mountain)
+
+    (large-mountain large-mountain mountain-pass
+     forest large-mountain large-mountain 
+     large-mountain large-mountain large-mountain
+     large-mountain)))
+         
 (defun test-map-sectors ()
-  (list
-   (mapcar #'make-sector '(home meadow forest cold-meadow forest cave
-			   forest large-mountain frozen-meadow river large-mountain cave))
-   (mapcar #'make-sector '(meadow grassy-meadow meadow forest forest cold-meadow ruins
-			   frozen-meadow cemetery cave river frozen-forest cave))
-   (mapcar #'make-sector '(grassy-meadow meadow forest forest cave
-			   forest highway cemetery ruins river frozen-meadow river
-			   valisade))
-   (mapcar #'make-sector '(meadow cave forest cold-meadow 
-			   cold-meadow ruins highway frozen-meadow frozen-forest river river))))
+  (let (valley)
+    (dolist (line *ildron*)
+      (push (mapcar #'make-sector line)
+	    valley))
+    (nreverse valley)))
+
+   ;; (mapcar #'make-sector '(home meadow forest cold-meadow forest cave forest large-mountain frozen-meadow river large-mountain cave))
+   ;; (mapcar #'make-sector '(meadow grassy-meadow meadow forest forest cold-meadow ruins
+   ;; 			   frozen-meadow cemetery cave river frozen-forest cave))
+   ;; (mapcar #'make-sector '(grassy-meadow meadow forest forest cave
+   ;; 			   forest highway cemetery ruins river frozen-meadow river
+   ;; 			   valisade))
+   ;; (mapcar #'make-sector '(meadow cave forest cold-meadow 
+   ;; 			   cold-meadow ruins highway frozen-meadow frozen-forest river river))))
 			   
 (defthing (map-screen buffer)
   :sectors nil
-  :row 0
-  :column 0
+  :row 10
+  :column 2
   :background-image "parchment.png")
 
-(defparameter *map-screen-left-margin* 100)
-(defparameter *map-screen-top-margin* 230)
+(defparameter *map-screen-left-margin* 330)
+(defparameter *map-screen-top-margin* 50)
 
 (defmethod find-sector ((map map-screen) row column)
   (with-fields (sectors) map
@@ -170,6 +237,7 @@
 (defmethod initialize :after ((map map-screen) &key)
   (with-buffer map
     (setf *map-screen* map)
+    (setf *map-row* 10 *map-column* 2)
     (with-fields (sectors) map 
       (setf sectors (test-map-sectors))
       (dolist (row sectors)

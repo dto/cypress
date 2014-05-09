@@ -1,8 +1,9 @@
 * TODO Version 0.95 contains a rough draft of chapter 1
 
-** TODO Geoffrey should start the game with Quine's summons
+** DONE Geoffrey should start the game with Quine's summons
+   CLOSED: [2014-05-08 Thu 21:02]
 
-* TODO Implement Lucius helper AI for healing and simple help until first town
+* TODO Implement Lucius helper AI 
 *** TODO revise introductory conversation
 *** TODO should just find geoffrey when no flowers
 *** TODO following flag
@@ -12,10 +13,10 @@
 *** TODO new conversation tree for help, including help scroll
 *** TODO write function to auto-position Lucius when Geoffrey enters a level
 *** TODO [#C] can remark upon nearby objects as a way of exposing some Lore. 
+*** TODO goes home on arrival at nothbess
 
 * TODO [#A] enter partial New Ildron map data into Lisp via roguelike chars
 *** TODO [#B] incrementally reveal map
-
 
 * TODO return to using simple pause/resume-on-command
 *** TODO [#A] change to right-click on geoffrey for Pause
