@@ -21,19 +21,21 @@
 **** TODO [#A] don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
 
-* Nothbehem arrival
-
 ** DONE Make houses
    CLOSED: [2014-05-09 Fri 05:53]
-** TODO Make arturo's house and arturo
-** TODO Image gumps with Amalia and Traveler
+** DONE Make arturo's house and arturo
+   CLOSED: [2014-05-09 Fri 06:35]
+** TODO [#A] Image gumps with Amalia and Traveler
+** TODO add townspeople
+
+** TODO add arturo conversations and items
+** TODO [#A] Exit basements with double click on stairwell
 
 ** TODO allow canceling travel
 
 ** TODO update helpfile
 
 ** TODO Ruins: Add newly painted ruined houses, possibly with smaller basements
-** TODO [#A] Exit basements with double click on stairwell
 ** TODO add cryptghasts to ruin basements
 
 ** TODO [#A] Expire texture cache at travel time
