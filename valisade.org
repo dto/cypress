@@ -1,8 +1,17 @@
 * General
 ** TODO [#A] Expire texture cache at travel time
+** TODO [#A] fix object dup error when peeling one from stack into sub container 
+
+* Music
+** TODO specify per-scene what musics are available
+** TODO most generic squares have no music, but sometimes
+** TODO fade in/out most pieces of music
+** TODO story caves: kosmium, spiritus, dusk
+** TODO add more tense militaristic battle cues
 
 * Terrain
 ** TODO Incrementally reveal map
+** TODO add secrets in less-used parts of map
 ** TODO Reagent search should look in bags
 ** TODO Make thornweed less common in warm areas, since it's not needed then
 ** TODO Add some different tree/shrub types
@@ -17,6 +26,7 @@
 ** TODO sometimes a random carved stone with lore in the middle of the woods
 ** TODO [#C] implement snow/rain with additive blending
 ** TODO [#C] ice cracks should be hidden until nearby
+** TODO [#C] add tweeting birds
 
 * Improve Lucius helper AI
 *** TODO can remark upon nearby objects as a way of exposing some Lore. 
@@ -26,6 +36,7 @@
 ***** TODO use miniscroll graphic
 
 * Combat
+** TODO add blackwolves
 ** TODO Implement bleeding and blood tracks in the snow
 ** TODO allow eating violets and snowdrops for restoring 1mp
 ** TODO return to using simple pause/resume-on-command
@@ -33,13 +44,14 @@
 **** TODO change to clicking modeline status to open Status scroll
 **** TODO don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
-** TODO [#B] Hold Creature spell
+** TODO [#B] Hold Creature spell, uses Nightshade and is important
 ** TODO [#C] Modeline lighter(s) for Freezing/Hungry/Dying
 ** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
 ** TODO [#C] Slight health drain when freezing
 ** TODO [#C] Slight aim jitter when freezing
 ** TODO [#C] Protection (15 mana) (1 nightshade)
 *** Temporary 35% reduction in combat damage received
+** TODO Switch to new red/blue/green potion graphics
 
 * Nothbehem
 ** TODO add arturo conversations and items
@@ -52,6 +64,8 @@
 
 * Alonso 
 ** TODO Implement alonso quest
+
+* Resupply at nothbehem, talk to arturo
 
 * Southern Cave
 ** TODO Implement "Southern Cave" with: lock/key system--- plate with lock, you must use corresponding key
@@ -79,13 +93,14 @@
 ** TODO [#C] Fix scrolling jerkiness
 ** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#C] Conversation system should union the remaining keywords?
+** TODO [#C] Conversation system should be more flexible
    
 * TODO RELEASE 0.95
 ** TODO update helpfile
 
+* TODO CHAPTER 2
+** TODO Allow special verb/action where game stops for a target of USEing
 
-** TODO [#B] reasons to return to town: arturo can heal
 ** TODO [#A] Craft crystal arrow (20 mana) (snow)
 ** TODO [#A] Cure heavy wounds (50 mana) (2 ginseng)
 *** Heals between 40-60 HP
@@ -98,9 +113,8 @@
 ** TODO [#A] Define quest/worldmap structure 
 *** DONE Create draft Lore timeline
     CLOSED: [2014-05-08 Thu 19:15]
-*** TODO allow saving progress like a traditional rpg
-**** TODO can only save at map screen
-*** TODO Allow special verb/action where game stops for a target of USEing
+** TODO allow saving progress like a traditional rpg
+*** TODO can only save at map screen
 ** TODO [#A] Add fur cloak for chapter 2
 ** TODO [#B] preload textures when possible---allow method for preloading and default field of resource names
 ** TODO [#A] assign songs to scenes/moments
