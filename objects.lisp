@@ -5,7 +5,7 @@
 (defparameter *twig-images* (image-set "twig" 9))
 
 (defthing (twig wood) 
-  :scale 1.4
+  :scale 1.1
   :image (random-choose *twig-images*))
 
 (defparameter *branch-images* (image-set "branch" 9))
@@ -13,7 +13,7 @@
 (defthing (branch wood) 
   :quantity 3 
   :image (random-choose *branch-images*) 
-  :scale 1.2)
+  :scale 1.0)
 
 (defparameter *silverwood-images* (image-set "silverwood" 9))
 

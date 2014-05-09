@@ -1,5 +1,8 @@
 * TODO Version 0.95 contains a rough draft of chapter 1
 
+** TODO Make thornweed less common in warm areas, since it's not needed then
+** TODO [#C] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
+
 * TODO Implement Lucius helper AI 
 *** TODO should just find geoffrey when no flowers
 *** TODO throw stones at enemy and cheer geoffrey on during combat
@@ -17,9 +20,8 @@
 **** TODO [#A] don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
 
-** TODO [#C] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
 
-* Nothbess arrival
+* Nothbehem arrival
 
 ** TODO Make houses
 ** TODO Make arturo's house and arturo

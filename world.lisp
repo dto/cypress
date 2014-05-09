@@ -13,8 +13,8 @@
 (defun find-instances (buffer class-name)
   (with-fields (objects) buffer
     (loop for thing being the hash-values in objects
-	  when (typep (find-object thing) (find-class class-name))
-	    collect (find-object thing))))
+	  when (typep (find-object thing t) (find-class class-name))
+	    collect (find-object thing t))))
 
 ;;; Fundamental object attributes in the world of Cypress
 

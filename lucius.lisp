@@ -1,5 +1,37 @@
 (in-package :cypress)
 
+;;; Thrown pebbles
+
+(defthing (pebble sprite) 
+  :image-scale 200
+  :height 20
+  :width 20
+  :sprite-height 20
+  :sprite-width 20
+  :clock 400
+  :heading (/ pi 2)
+  :image (random-choose *stone-images*))
+
+(defmethod initialize ((self pebble) &key heading)
+  (when heading
+    (setf (field-value :heading self) heading)))
+
+(defmethod collide ((self pebble) (thing thing))
+  (when (solidp thing) 
+    (destroy self)))
+
+(defmethod run ((self pebble))
+  (with-fields (clock heading) self
+    (decf clock)
+    (incf heading 0.01)
+    (if (minusp clock)
+	(destroy self)
+	(forward self 14))))
+
+(defmethod collide ((self pebble) (enemy enemy))
+  (damage enemy (random-choose '(-2 -4)))
+  (destroy self))
+
 ;;; Lucius Pentaquin
 
 (defvar *lucius* nil)
@@ -12,6 +44,15 @@
   :clock 10 
   :met-player nil
   :description "Lucius")
+
+(defmethod throw-pebble ((self lucius) heading)
+  (multiple-value-bind (x y) (center-point self)
+    (drop-object *current-scene* (new 'pebble :heading heading) x y)))
+
+(defmethod attack :after ((monk geoffrey) (enemy enemy))
+  (when (lucius)
+    (percent-of-time 50
+      (throw-pebble (lucius) (heading-to-thing (lucius) enemy)))))
 
 (defparameter *monk-2-walk* 
   '(:repeat t
@@ -40,7 +81,7 @@
 
 (defmethod choose-flower ((self lucius))
   (setf (field-value :next-flower self)
-	(let ((flowers (find-instances (current-buffer) 'flower)))
+	(let ((flowers (find-instances (current-scene) 'flower)))
 	  (when flowers (random-choose flowers)))))
 
 (defmethod follow ((self lucius) (leader monk))
@@ -56,6 +97,9 @@
     (decf clock)
     (let ((distance (distance-to-cursor self)))
       (when (cursor)
+	;; handle no-flowers
+	(when (null (choose-flower self))
+	  (walk-to-thing self (cursor)))
 	;; handle first meeting
 	(when (and (not met-player)
 		   (< distance 300))
