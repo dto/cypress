@@ -1,11 +1,12 @@
 * TODO Version 0.95 contains a rough draft of chapter 1
 
 ** TODO Make thornweed less common in warm areas, since it's not needed then
-** TODO [#C] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
+** TODO Add some different tree/shrub types
+** TODO Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
+** TODO [#A] Reagent search should look in bags
 
-* TODO Implement Lucius helper AI 
-*** TODO should just find geoffrey when no flowers
-*** TODO throw stones at enemy and cheer geoffrey on during combat
+
+* TODO Improve Lucius helper AI 
 *** TODO drop up to 3 healing scroll if player gets below 50%
 **** TODO [#A] Implement single-use spell scrolls
 ***** TODO use miniscroll graphic
@@ -20,34 +21,34 @@
 **** TODO [#A] don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
 
-
 * Nothbehem arrival
 
-** TODO Make houses
+** DONE Make houses
+   CLOSED: [2014-05-09 Fri 05:53]
 ** TODO Make arturo's house and arturo
 ** TODO Image gumps with Amalia and Traveler
 
-* Ruins makeover
+** TODO allow canceling travel
 
 ** TODO update helpfile
-** Add newly painted ruined houses, possibly with smaller basements
+
+** TODO Ruins: Add newly painted ruined houses, possibly with smaller basements
+** TODO [#A] Exit basements with double click on stairwell
+** TODO add cryptghasts to ruin basements
 
 ** TODO [#A] Expire texture cache at travel time
-** TODO [#A] Exit basements with double click on stairwell
 ** TODO [#C] Hold Creature spell
 ** TODO [#C] Protection (15 mana) (1 nightshade)
 *** Temporary 35% reduction in combat damage received
 
 ** TODO [#B] Ancient caves with: lock/key system--- plate with lock, you must use corresponding key
 *** TODO the keys weld permanently into seals. Must alter gear points in story.
-** TODO [#B] Seek ye the Screech Owl when storm thunders; when her cry is heard, blow the flute and she will appear and disclose to find stuff at "3 hectares north and two hectares west."
+
+** TODO [#B] Seek ye the Screech Owl when storm thunders; when her cry is heard, blow the flute and she will appear
 *** TODO custom lisp for rain/thunder with fadein/fadeout
 *** TODO code owl
 *** TODO alter flutism.wav for downward owl cry imitation
-
-** TODO allow canceling travel
 ** TODO sometimes a random carved stone with lore in the middle of the woods
-
    
 ** TODO [#C] implement snow/rain with additive blending
 ** TODO [#B] Implement bleeding and blood tracks in the snow
@@ -127,7 +128,7 @@
 ** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 ** TODO [#C] Conversation system should union the remaining keywords?
-** TODO [#A] Reagent search should look in bags
+
 * Archived Entries
 
 ** DONE [#A] Don't specify Amalia's birthplace/time
@@ -341,4 +342,23 @@
    :ARCHIVE_OLPATH: Implement Lucius helper AI
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE should just find geoffrey when no flowers
+   CLOSED: [2014-05-09 Fri 05:50]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-09 Fri 05:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Implement Lucius helper AI
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO throw stones at enemy and cheer geoffrey on during combat
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-09 Fri 05:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Implement Lucius helper AI
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
    :END:

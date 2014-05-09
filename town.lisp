@@ -21,6 +21,9 @@
 (defun pentaquin-house ()
   (with-border (units 5) (singleton (new 'pentaquin-house))))
 
+(defun find-pentaquin-house ()
+  (find-instances (current-scene) 'pentaquin-house))
+
 (defun nothbehem-p ()
   (typep (current-scene) (find-class 'nothbehem)))
 
@@ -30,7 +33,9 @@
      (stacked-up-randomly (flowers) (some-trees) (random-house) (wood-pile))
      (stacked-up-randomly (random-house) (some-trees) (flowers) (wood-pile))
      (stacked-up-randomly (random-house) (dead-trees) 
-			  (stacked-up 
+			  (stacked-up-randomly
 			   (pentaquin-house)
-			   (spray '(ruin-wall dead-tree silverwood silverwood silverwood) :trim t :count 10)
+			   (singleton (new 'arturo))
+			   (singleton (new 'silverwood))
+			   (spray '(ruin-wall silverwood silverwood) :trim t :count 10)
 			   (flowers))))))
