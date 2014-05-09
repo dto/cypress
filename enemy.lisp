@@ -16,6 +16,9 @@
 
 (defmethod can-pick ((enemy enemy)) nil)
 
+(defmethod activate-maybe ((enemy enemy))
+  (activate enemy))
+
 (defmethod activate ((enemy enemy))
   (resume)
   (attack (cursor) enemy))

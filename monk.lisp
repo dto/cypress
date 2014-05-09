@@ -68,7 +68,7 @@
   :image (random-choose *crystal-arrow-images*))
 
 (defmethod collide ((self crystal-arrow) (enemy enemy))
-  (damage enemy -20)
+  (damage enemy (random-choose '(-30 -40)))
   (destroy self))
 
 ;;; A monk, either AI or human controlled
@@ -168,13 +168,6 @@
 (defmethod walk-to :before ((monk monk) x y)
   (bring-to-front monk)
   (resume))
-
-(defmethod walk-to :after ((monk monk) x y)
-  (with-fields (waypoints) monk
-    (when (null waypoints)
-      ;; pathfinding failed
-      (show-error monk x y)
-      (narrate "That destination is obstructed."))))
 
 (defmethod bark-hunger ((monk monk))
   (with-fields (hunger) monk

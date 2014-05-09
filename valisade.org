@@ -1,16 +1,13 @@
 * TODO Version 0.95 contains a rough draft of chapter 1
 
 * TODO Implement Lucius helper AI 
-*** TODO revise introductory conversation
 *** TODO should just find geoffrey when no flowers
-*** TODO following flag
+*** TODO throw stones at enemy and cheer geoffrey on during combat
 *** TODO drop up to 3 healing scroll if player gets below 50%
 **** TODO [#A] Implement single-use spell scrolls
 ***** TODO use miniscroll graphic
-*** TODO new conversation tree for help, including help scroll
-*** TODO write function to auto-position Lucius when Geoffrey enters a level
 *** TODO [#C] can remark upon nearby objects as a way of exposing some Lore. 
-*** TODO goes home on arrival at nothbess
+*** TODO goes home on arrival at nothbehem
 
 * TODO [#B] incrementally reveal map
 
@@ -302,4 +299,44 @@
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE write function to auto-position Lucius when Geoffrey enters a level
+   CLOSED: [2014-05-09 Fri 00:05]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-09 Fri 00:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Implement Lucius helper AI
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE new conversation tree for help, including help scroll
+   CLOSED: [2014-05-09 Fri 00:05]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-09 Fri 00:06
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Implement Lucius helper AI
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE following flag
+   CLOSED: [2014-05-09 Fri 00:05]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-09 Fri 00:06
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Implement Lucius helper AI
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE revise introductory conversation
+   CLOSED: [2014-05-09 Fri 00:05]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-09 Fri 00:06
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Implement Lucius helper AI
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
    :END:

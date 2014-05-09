@@ -4,6 +4,9 @@
 (defresource "chimes-2.wav" :volume 10)
 (defresource "chimes-3.wav" :volume 10)
 
+(defun magical-flourish ()
+  (play-sample (random-choose '("chimes-1.wav" "chimes-2.wav" "chimes-3.wav"))))
+
 ;;; Basic spell definitions
 
 (defthing spell reagents)
@@ -24,7 +27,7 @@
 (defmethod cast :after ((monk monk) (spell spell))
   (let ((browser (get-gump monk)))
     (when browser (refresh browser)))
-  (play-sample (random-choose '("chimes-1.wav" "chimes-2.wav" "chimes-3.wav")))
+  (magical-flourish)
   (begin-animation monk (casting-animation monk)))
 
 (defmethod can-pick ((spell spell)) nil)
@@ -133,12 +136,8 @@
 
 (defmethod initialize ((book spellbook) &key)
   (dolist (spell (list (new 'spark)
-		       (new 'travel)
 		       (new 'cure)
-		       (new 'cure-meat)
-		       (new 'craft-wooden-arrows)
-		       (new 'craft-silver-arrows)
-		       (new 'seance)))
+		       (new 'craft-wooden-arrows)))
     (add-inventory-item book spell)))
 
 (defmethod can-pick ((book spellbook))
@@ -147,6 +146,10 @@
 (defmethod can-accept ((book spellbook)) t)
 (defmethod will-accept ((book spellbook) (thing thing)) nil)
 (defmethod will-accept ((book spellbook) (spell spell)) t)
+
+(defmethod add-spell ((spellbook spellbook) (spell spell))
+  (unless (find-inventory-item spellbook (class-name (class-of spell)))
+    (add-inventory-item spellbook spell)))
 
 (defmethod activate ((spellbook spellbook))
   (replace-gump spellbook (new 'browser :container spellbook)))

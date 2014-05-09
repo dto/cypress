@@ -70,7 +70,23 @@
 	      *monk-walk-bow*
 	      *monk-walk*))))
 
+(defmethod walk-to :after ((monk geoffrey) x y)
+  (with-fields (waypoints) monk
+    (when (null waypoints)
+      ;; pathfinding failed
+      (show-error monk x y)
+      (narrate "That destination is obstructed."))))
+
 (defmethod casting-animation ((self monk)) *monk-cast*)
+
+;;; Learning new spells
+
+(defmethod learn-spell ((self geoffrey) (spell spell))
+  (add-spell (find-spellbook) spell))
+
+(defmethod learn-spell :after ((self geoffrey) (spell spell))
+  (narrate "You learned a new magic spell: ~A" (find-description spell))
+  (magical-flourish))
 
 ;;; Geoffrey's magic tent
 

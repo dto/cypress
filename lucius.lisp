@@ -2,6 +2,10 @@
 
 ;;; Lucius Pentaquin
 
+(defvar *lucius* nil)
+
+(defun lucius () *lucius*)
+
 (defthing (lucius monk) 
   :next-flower nil 
   :leader nil
@@ -40,6 +44,7 @@
 	  (when flowers (random-choose flowers)))))
 
 (defmethod follow ((self lucius) (leader monk))
+  (setf *lucius* self)
   (setf (field-value :leader self) leader))
 
 (defmethod unfollow ((self lucius))
@@ -145,7 +150,7 @@ do remind me a bit of my grandfather's
 old war gear. Tell me, are you a
 soldier? Did you come across the
 mountains from the West?" 
-:west :grandfather :where-are-we?)
+:west :grandfather)
 
 (define-topic grandfather lucius 
   "Yes, the great Arturo Pentaquin the
@@ -171,19 +176,28 @@ You should visit the Monastery in town."
 
 (define-topic town lucius 
   "Nothbehem is my family's home, a
-quiet town to the north of here.  I'm
-headed home now, why don't you follow
-me? I can show you the lay of the land,
-and tell you a bit about our home."
+quiet farming town. I'm headed there
+now, why don't you follow me? I'll teach
+you a magic incantation I use to aid in
+traveling through the valley. This spell
+projects a parchment map into the mind
+of the caster, with knowlege of nearby
+terrain gathered from the eyes of birds
+above. If you open your spellbook and
+speak the incantation, you'll gain the
+presence of mind required to travel in
+this inhospitable clime.
+Shall we get moving?"
  :go-with-lucius :talk-more)
 
 (define-topic go-with-lucius lucius 
   "Very well! Let's head North." :bye)
 
 (defmethod discuss :after ((self lucius) (topic (eql :go-with-lucius)))
-  (follow self (geoffrey))
   (destroy-gump self)
-  (bark self "Let's head North!"))
+  (follow self (geoffrey))
+  (learn-spell (geoffrey) (new 'travel))
+  (bark self "Very well. Let's head North!"))
 
 (define-topic talk-more lucius 
   "Sure. What else do you want to talk
@@ -194,5 +208,4 @@ about?" :quine :robes :grandfather :west :town)
 to sit around and talk, with the sun
 setting." :bye)
 
-;; (defmethod discuss :after ((self lucius) (topic (eql :letter)))
-;;   (drop self (new 'scroll) 0 (field-value :height self)))
+;;; Lucius can comment on things Geoffrey picks up. 

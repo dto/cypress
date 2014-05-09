@@ -19,7 +19,11 @@
     (move-to (geoffrey) previous-x previous-y))
   (snap-window-to-cursor buffer)
   (follow-with-camera buffer (geoffrey))
-  (setf *current-scene* buffer))
+  (setf *current-scene* buffer)
+  ;; possibly place lucius 
+  (when (lucius)
+    (multiple-value-bind (x y) (left-of (geoffrey))
+      (drop-object buffer (lucius) x y))))
 
 (define-buffer scene 
   :background-image "stone-road.png"
