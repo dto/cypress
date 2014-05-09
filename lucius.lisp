@@ -4,8 +4,9 @@
 
 (defthing (lucius monk) 
   :next-flower nil 
+  :leader nil
   :clock 10 
-  :seen-player nil
+  :met-player nil
   :description "Lucius")
 
 (defparameter *monk-2-walk* 
@@ -38,55 +39,66 @@
 	(let ((flowers (find-instances (current-buffer) 'flower)))
 	  (when flowers (random-choose flowers)))))
 
+(defmethod follow ((self lucius) (leader monk))
+  (setf (field-value :leader self) leader))
+
+(defmethod unfollow ((self lucius))
+  (setf (field-value :leader self) nil))
+
 (defmethod run ((self lucius))
-  (with-fields (next-flower seen-player gump waypoints clock) self
+  (with-fields (next-flower leader met-player gump waypoints clock) self
     (call-next-method)
     (decf clock)
     (let ((distance (distance-to-cursor self)))
       (when (cursor)
-	(when (and (not seen-player)
+	;; handle first meeting
+	(when (and (not met-player)
 		   (< distance 300))
-	  (setf seen-player t)
+	  (setf met-player t)
 	  (bark self "Ho, stranger!")
 	  (walk-to-thing self (cursor)))
-	(cond 
-	  ((and (null gump) 
-		(> distance 240))
-	   ;; pick flowers
-	   (unless (plusp clock)
-	     (if (null next-flower)
-		 (choose-flower self)
-		 (if (null waypoints)
-		     (walk-to-thing self next-flower)
-		     ;; are we near flower?
-		     (when (< (distance-between self next-flower) 80)
-		       (stop-walking self)
-		       (setf clock 30)
-		       (take self next-flower)
-		       (setf next-flower nil))))))
-	  ((> distance 150)
-	   (unless (or waypoints (null gump) (plusp clock))
-	     (multiple-value-bind (x y) (at (cursor))
-	       (walk-to self x y))))
-	  ((> distance 110)
-	   (prog1 nil (stop-walking self) (setf clock 10))))))))
+	(if (or leader gump)
+	    ;; follow geoffrey
+	    (when (> distance 150)
+	      (unless (or waypoints (plusp clock))
+		(multiple-value-bind (x y) (at (cursor))
+		  (walk-to self x y))))
+	    ;; pick flowers
+	    (when (and (null gump) 
+		  (> distance 240))
+	     (unless (plusp clock)
+	       (if (null next-flower)
+		   (choose-flower self)
+		   (if (null waypoints)
+		       (walk-to-thing self next-flower)
+		       ;; are we near flower?
+		       (when (< (distance-between self next-flower) 80)
+			 (stop-walking self)
+			 (setf clock 30)
+			 (take self next-flower)
+			 (setf next-flower nil)))))))
+	;; stop near geoffrey
+	(when (< distance 110)
+	  (prog1 nil (stop-walking self) (setf clock 10)))))))
 
 (defmethod will-accept ((self lucius) (thing thing)) nil)
 
 (defmethod activate ((self lucius))
   (destroy-gump self)
-  (discuss self :hello))
+  (if (null (field-value :leader self))
+      (discuss self :hello)
+      (discuss self :chat)))
 
 (define-topic hello lucius
 "Greetings, brother. Well met. I don't
 recall ever seeing robes like yours!
 You must be a traveler?"
-  :robes :where-are-we?)
+:name :job :robes :where-are-we?)
 
 (define-topic where-are-we? lucius
 "We're just outside the little town of
 Nothbehem. You really have no idea where
-you are, do you?" :robes :quine)
+you are, do you?" :name :job :robes :quine :valley)
 
 (define-topic name lucius
 "My name is Lucius Pentaquin. And who
@@ -95,9 +107,22 @@ Order?"
 :i-am-geoffrey-of-valisade)
 
 (define-topic i-am-geoffrey-of-valisade lucius 
-"It's nice to meet you, Brother
-Geoffrey of Valisade! Welcome to our
-little town." :town :robes :quine)
+"It's nice to meet you, Brother Geoffrey
+of Valisade! Welcome to the Eavesbury
+Valley."
+:name :town :robes :quine :valley)
+
+(define-topic valley lucius
+"Look around you! Mountains to the
+south, and east, and west. This is the
+vale of Eavesbury. In olden times, when
+the Sun was hotter than it is now,
+Eavesbury was a busy town. Now it's in
+ruins, but Nothbehem and a few other
+towns remain. I've not been far to the
+northeast, but I bet my grandfather will
+know more."
+:name :town :grandfather)
 
 (define-topic job lucius 
 "I'm a librarian at the Nothbehem
@@ -120,7 +145,7 @@ do remind me a bit of my grandfather's
 old war gear. Tell me, are you a
 soldier? Did you come across the
 mountains from the West?" 
-:west :grandfather)
+:west :grandfather :where-are-we?)
 
 (define-topic grandfather lucius 
   "Yes, the great Arturo Pentaquin the
@@ -128,22 +153,46 @@ Fourth! A decorated officer of the Wars
 of the West. We should visit him in
 Nothbehem; it's a short distance to the
 north of here. He knows all about
-Westerners." :west)
+Westerners, and stories about old
+times." 
+:west :town)
 
 (define-topic west lucius 
   "I've never been out West myself, but
 of course I've heard all the old
-stories and read all the old books." :quine :robes :books)
+stories and read all the old books." 
+:quine :robes :books :town)
 
 (define-topic books lucius 
   "There are plenty of books, maps, and
 scrolls at the Library where I work. 
-You should visit the Monastery in town." :town)
+You should visit the Monastery in town." 
+:town)
 
 (define-topic town lucius 
   "Nothbehem is my family's home, a
-quiet town to the north of here.
-There's also a monastery.")
+quiet town to the north of here.  I'm
+headed home now, why don't you follow
+me? I can show you the lay of the land,
+and tell you a bit about our home."
+ :go-with-lucius :talk-more)
+
+(define-topic go-with-lucius lucius 
+  "Very well! Let's head North." :bye)
+
+(defmethod discuss :after ((self lucius) (topic (eql :go-with-lucius)))
+  (follow self (geoffrey))
+  (destroy-gump self)
+  (bark self "Let's head North!"))
+
+(define-topic talk-more lucius 
+  "Sure. What else do you want to talk
+about?" :quine :robes :grandfather :west :town)
+
+(define-topic chat lucius
+  "Let's keep moving. We don't have time
+to sit around and talk, with the sun
+setting." :bye)
 
 ;; (defmethod discuss :after ((self lucius) (topic (eql :letter)))
 ;;   (drop self (new 'scroll) 0 (field-value :height self)))

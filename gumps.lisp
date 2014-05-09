@@ -517,8 +517,8 @@
 (defun make-talk-gump (thing text &rest button-keys)
   (let ((buttons (mapcar #'(lambda (k)
 			     (make-topic-button thing k))
-			 (append (field-value :topics thing)
-				 button-keys)))
+			 ;;(append (field-value :topics thing)
+				 button-keys))
 	(gump (new 'talk-gump)))
       (prog1 gump (configure gump text buttons thing))))
 
@@ -526,8 +526,8 @@
   (destructuring-bind (text &rest button-keys) content
     (let ((buttons (mapcar #'(lambda (k)
 			     (make-topic-button thing k))
-			 (append (field-value :topics thing)
-				 button-keys))))
+			   ;; (append (field-value :topics thing)
+				 button-keys)))
       (prog1 gump (configure gump text buttons thing)))))
 
 (defmethod topic-content ((self thing) topic))

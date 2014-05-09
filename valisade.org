@@ -1,8 +1,5 @@
 * TODO Version 0.95 contains a rough draft of chapter 1
 
-** DONE Geoffrey should start the game with Quine's summons
-   CLOSED: [2014-05-08 Thu 21:02]
-
 * TODO Implement Lucius helper AI 
 *** TODO revise introductory conversation
 *** TODO should just find geoffrey when no flowers
@@ -15,8 +12,7 @@
 *** TODO [#C] can remark upon nearby objects as a way of exposing some Lore. 
 *** TODO goes home on arrival at nothbess
 
-* TODO [#A] enter partial New Ildron map data into Lisp via roguelike chars
-*** TODO [#B] incrementally reveal map
+* TODO [#B] incrementally reveal map
 
 * TODO return to using simple pause/resume-on-command
 *** TODO [#A] change to right-click on geoffrey for Pause
@@ -288,4 +284,22 @@
    :ARCHIVE_OLPATH: Version 0.95 contains a rough draft of chapter 1
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Geoffrey should start the game with Quine's summons
+   CLOSED: [2014-05-08 Thu 21:02]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 22:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Version 0.95 contains a rough draft of chapter 1
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] enter partial New Ildron map data into Lisp via roguelike chars
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 22:54
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
    :END:
