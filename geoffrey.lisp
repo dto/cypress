@@ -23,6 +23,7 @@
   (add-inventory-item monk (quantity-of 'stone 2))
   (add-inventory-item monk (quantity-of 'white-bread 2))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
+  (add-inventory-item monk (make-scroll "Summons from Dr. Quine" *quine-summons*))
   (equip monk (find-arrow monk)))
 
 (defmethod humanp ((monk geoffrey)) t)

@@ -140,25 +140,123 @@
 
 (defparameter *scroll-images* (image-set "scroll" 5))
 
-(defthing scroll 
+(defparameter *lorem-ipsum*
+"Lorem ipsum dolor sit amet,
+consectetuer adipiscing elit. Aenean
+commodo ligula eget dolor. Aenean
+massa. Cum sociis natoque penatibus et
+magnis dis parturient montes, nascetur
+ridiculus mus. Donec quam felis,
+ultricies nec, pellentesque eu, pretium
+quis, sem. Nulla consequat massa quis
+enim. Donec pede justo, fringilla vel,
+aliquet nec, vulputate eget, arcu. In
+enim justo, rhoncus ut, imperdiet a,
+venenatis vitae, justo. Nullam dictum
+felis eu pede mollis pretium. Integer
+tincidunt. Cras dapibus. Vivamus
+elementum semper nisi. Aenean vulputate
+eleifend tellus. Aenean leo ligula,
+porttitor eu, consequat vitae, eleifend
+ac, enim. Aliquam lorem ante, dapibus
+in, viverra quis, feugiat a,
+tellus. Phasellus viverra nulla ut metus
+varius laoreet. Quisque rutrum. Aenean
+imperdiet. Etiam ultricies nisi vel
+augue. Curabitur ullamcorper ultricies
+nisi. Nam eget dui.")
+
+(defthing scroll
   :stacking nil
-  :image (random-choose *scroll-images*) 
-  :description "Scroll of Helping")
+  :text *lorem-ipsum*
+  :image (random-choose *scroll-images*)
+  :description "Blank scroll")
 
 (defmethod activate ((self scroll))
-  (let ((gump (new 'scroll-gump :text *help-text*)))
-    (replace-gump self gump)
-    (set-target-position gump (units 50) (units 1))))
-
-(defthing wax-cylinder-letter
-  :stacking nil
-  :image (random-choose *scroll-images*) 
-  :description "In re: wax cylinder recordings")
-
-(defmethod activate ((self wax-cylinder-letter))
-  (let ((gump (new 'scroll-gump :text *wax-cylinder-letter*)))
+  (let ((gump (new 'scroll-gump :text (field-value :text self))))
     (replace-gump self gump)))
-	     
+
+(defun make-scroll (description text)
+  (let ((scroll (new 'scroll)))
+    (setf (field-value :description scroll) description)
+    (setf (field-value :text scroll) text)
+    scroll))
+
+(defparameter *help-text* 
+"Welcome to Cypress v0.95 (alpha) 
+
+This is the Scroll of Helping. If you
+click the scroll, you will advance to
+the next page. Use the right mouse
+button (or the Control key with the left
+button) to close scrolls.
+
+Right-click a destination to move
+Geoffrey there.
+
+Click an object to show its name.
+Drag objects to move them.
+Drag objects onto Geoffrey to take them.
+ (Take and keep this scroll 
+  for easy reference.)
+Double-click an object to activate it.
+Double-click a monster to attack it.
+Double click Geoffrey for his inventory.
+Right-click Geoffrey to see status.
+Drag items into/out of inventory scrolls.
+
+Click spells in spellbook for
+description.  Double click spells in
+spellbook to cast.
+
+Double-click armor/arrows while in
+inventory to equip/unequip them.
+
+Use the Travel spell to explore the
+land.  Double-click land symbols to
+explore regions.  If you die, press
+Control-R for a new quest.
+
+You must eat. Traveling and combat cause
+hunger. Double-click food to eat it.
+Use the \"Cure meat\" spell to make
+jerky from freshly killed wolves.
+
+Geoffrey must stay warm. He will get
+colder by progressing through the
+terrain (or by touching certain
+objects). You have a magic tent and
+campfire which you can use to heal and
+warm yourself up. To use the tent, drag
+it out of your inventory onto an open
+space on the ground, and then cast
+Spark. 
+
+There are several new keyboard shortcuts:
+
+Press \"I\" to see Geoffrey's inventory.
+Press \"S\" to open the spellbook.
+Press \"M\" to open the travel map.
+
+I hope you enjoy this work-in-progress
+demonstration of Cypress.  Please submit
+bug reports and feedback to me at
+dto@blocky.io
+
+-- David O'Toole
+")
+
+(defthing (help-scroll scroll)
+  :text *help-text*
+  :stacking nil
+  :image (random-choose *scroll-images*)
+  :description "Scroll of Helping")
+
+(defmethod activate :after ((self help-scroll))
+  (let ((gump (get-gump self)))
+    (when gump
+      (set-target-position gump (units 50) (units 1)))))
+
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *wraith-images* (image-set "wraith" 3))
 (defparameter *fire-pit-images* (image-set "fire-pit" 3))

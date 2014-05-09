@@ -1,39 +1,23 @@
 * TODO Version 0.95 contains a rough draft of chapter 1
 
-** TODO Add Chapter 1 todo items from Storyline
-
-* Bugfixes
-
-** DONE Indicate error when trying to open faraway
-   CLOSED: [2014-05-08 Thu 20:18]
-** TODO [#B] auto-close inventory windows on faraway objects if you move
-** TODO [#B] destroy bubbles when closing gumps
-** TODO [#B] don't allow spawning geoffrey in obstacle
-** TODO [#C] should show-error when pathfinding fails ONLY for geoffrey
-** TODO [#C] Fix non-impelled arrows moving on their own 
-** TODO [#C] Fix scrolling jerkiness
-** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
-*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#C] Conversation system should union the remaining keywords?
-** TODO [#A] Reagent search should look in bags
-
-* Features
-
-** TODO allow canceling travel
-** TODO sometimes a random carved stone with lore in the middle of the woods
-
-** TODO Implement single-use spell scrolls
-*** TODO use miniscroll graphic
-
 ** TODO Geoffrey should start the game with Quine's summons
-** TODO Implement Lucius helper AI for healing and simple help until first town
+
+* TODO Implement Lucius helper AI for healing and simple help until first town
+*** TODO revise introductory conversation
+*** TODO should just find geoffrey when no flowers
 *** TODO following flag
 *** TODO drop up to 3 healing scroll if player gets below 50%
+**** TODO [#A] Implement single-use spell scrolls
+***** TODO use miniscroll graphic
 *** TODO new conversation tree for help, including help scroll
 *** TODO write function to auto-position Lucius when Geoffrey enters a level
 *** TODO [#C] can remark upon nearby objects as a way of exposing some Lore. 
 
-** TODO return to using simple pause/resume-on-command
+* TODO [#A] enter partial New Ildron map data into Lisp via roguelike chars
+*** TODO [#B] incrementally reveal map
+
+
+* TODO return to using simple pause/resume-on-command
 *** TODO [#A] change to right-click on geoffrey for Pause
 **** TODO [#A] change to clicking modeline status to open Status scroll
 **** TODO [#A] don't run enemies when paused
@@ -41,11 +25,19 @@
 
 ** TODO [#C] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
 
+* Nothbess arrival
+
+** TODO Make houses
+** TODO Make arturo's house and arturo
+** TODO Image gumps with Amalia and Traveler
+
+* Ruins makeover
+
+** TODO update helpfile
+** Add newly painted ruined houses, possibly with smaller basements
+
 ** TODO [#A] Expire texture cache at travel time
 ** TODO [#A] Exit basements with double click on stairwell
-
-** TODO [#A] enter map data into Lisp via roguelike chars
-*** TODO [#B] incrementally reveal map
 ** TODO [#C] Hold Creature spell
 ** TODO [#C] Protection (15 mana) (1 nightshade)
 *** Temporary 35% reduction in combat damage received
@@ -57,13 +49,16 @@
 *** TODO code owl
 *** TODO alter flutism.wav for downward owl cry imitation
 
+** TODO allow canceling travel
+** TODO sometimes a random carved stone with lore in the middle of the woods
+
+   
 ** TODO [#C] implement snow/rain with additive blending
 ** TODO [#B] Implement bleeding and blood tracks in the snow
 ** TODO [#B] allow eating violets and snowdrops for restoring 1mp
 
 ** TODO [#B] Modeline lighter(s) for Freezing/Hungry/Dying
 ** TODO [#B] Add sextant which guides you to your next location
-
 
 ** TODO [#B] Implement spell tomes that teach you the spell
 *** TODO use doublepage graphic
@@ -122,6 +117,21 @@
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 ** TODO [#C] Fix jittery rotation of monk at corners of paths
+
+* Bugfixes
+
+** DONE Indicate error when trying to open faraway
+   CLOSED: [2014-05-08 Thu 20:18]
+** TODO [#B] auto-close inventory windows on faraway objects if you move
+** TODO [#B] destroy bubbles when closing gumps
+** TODO [#B] don't allow spawning geoffrey in obstacle
+** TODO [#C] should show-error when pathfinding fails ONLY for geoffrey
+** TODO [#C] Fix non-impelled arrows moving on their own 
+** TODO [#C] Fix scrolling jerkiness
+** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
+*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
+** TODO [#C] Conversation system should union the remaining keywords?
+** TODO [#A] Reagent search should look in bags
 * Archived Entries
 
 ** DONE [#A] Don't specify Amalia's birthplace/time
@@ -265,6 +275,16 @@
    :ARCHIVE_TIME: 2014-05-08 Thu 20:14
    :ARCHIVE_FILE: ~/cypress/valisade.org
    :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Add Chapter 1 todo items from Storyline
+   CLOSED: [2014-05-08 Thu 20:41]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 20:41
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Version 0.95 contains a rough draft of chapter 1
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
