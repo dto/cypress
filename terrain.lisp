@@ -132,12 +132,17 @@
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 (defparameter *reagents* '(ginseng ginseng silverwood stone branch))
 
+;;; Enemies in scenes
+
 (defun lone-wolf ()
   (singleton (new 'wolf)))
 
 (defun pack-of-wolves ()
   (with-border (units 5) 
     (randomly (lone-wolf) (lone-wolf))))
+
+(defun lone-wraith () ()
+  (singleton (new 'wraith)))
 
 (defun debris () 
   (spray *forest-debris-items*

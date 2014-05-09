@@ -43,7 +43,7 @@
   (when (and (not (typep object 'enemy))
 	     (not (can-reach object (geoffrey))))
     (show-error (geoffrey) x y)
-    (narrate-now "You can't reach that from where you're standing.")))
+    (narrate "You can't reach that from where you're standing.")))
 
 (defmethod begin-region ((buffer scene)))
 
@@ -265,18 +265,6 @@
 (defparameter *grassy-meadow-images* '("golden-meadow.png" "stone-road.png" "meadow.png"))
 (defparameter *snowy-meadow-images* '("cloudy-meadow.png" "paynes-meadow.png" "purple-meadow.png" "sky-meadow.png" "forgotten-meadow.png"))
 (defparameter *frozen-meadow-images* (image-set "frozen-meadow" 3))
-
-;;; Enemies in scenes
-
-(defun lone-wolf ()
-  (singleton (new 'wolf)))
-
-(defun pack-of-wolves ()
-  (with-border (units 5) 
-    (randomly (lone-wolf) (lone-wolf))))
-
-(defun lone-wraith () ()
-  (singleton (new 'wraith)))
 
 ;;; Meadow
 

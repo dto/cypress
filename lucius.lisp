@@ -71,6 +71,8 @@
 	  ((> distance 110)
 	   (prog1 nil (stop-walking self) (setf clock 10))))))))
 
+(defmethod will-accept ((self lucius) (thing thing)) nil)
+
 (defmethod activate ((self lucius))
   (destroy-gump self)
   (discuss self :hello))

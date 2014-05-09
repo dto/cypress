@@ -163,7 +163,7 @@
 (defmethod use ((monk monk) (arrow arrow))
   (let ((arrow (class-name (class-of arrow))))
     (equip monk (find-inventory-item monk arrow))
-    (narrate-now "Equipped ~A." (fancy-description arrow))))
+    (narrate "Equipped ~A." (fancy-description arrow))))
 
 (defmethod walk-to :before ((monk monk) x y)
   (bring-to-front monk)
@@ -283,7 +283,7 @@
 (defmethod collide ((self monk) (crack large-crack))
   (when (field-value :alive self)
     (percent-of-time 8
-      (narrate-now "The ice cracks beneath your feet. You are splashed with frigid water.")
+      (narrate "The ice cracks beneath your feet. You are splashed with frigid water.")
       (damage self (- (random-choose '(1 2))))
       (chill self +10)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
@@ -291,7 +291,7 @@
 (defmethod collide ((self monk) (puddle puddle))
   (when (field-value :alive self)
     (percent-of-time 6
-      (narrate-now "You step into the water. You are wet!")
+      (narrate "You step into the water. You are wet!")
       (damage self (- (random-choose '(5 7))))
       (chill self +20)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
@@ -299,7 +299,7 @@
 (defmethod die ((self monk))
   (when (field-value :alive self)
     (when (humanp self) 
-      (narrate-now "You died. Press Control-R to restart the game.")
+      (narrate "You died. Press Control-R to restart the game.")
       (change-image self (random-choose *remains-images*))
       (drop self (new 'remains))
       (drop self (new 'skull))
@@ -346,12 +346,12 @@
 	(percent-of-time 1
 	  (damage self (- (random-choose '(2 3 3 5 7))))
 	  (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))
-	  (narrate-now "You are freezing to death! Make a campfire.")))
+	  (narrate "You are freezing to death! Make a campfire.")))
       (when (> %hunger 80)
 	(percent-of-time 1
 	  (damage self (- (random-choose '(2 3 3 5 7))))
 	  (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))
-	  (narrate-now "You are starving to death! You must eat something.")))
+	  (narrate "You are starving to death! You must eat something.")))
       (when (field-value :bow-ready self)
 	(fire self (find-arrow self)))
       ;; find out what direction the AI or human wants to go
@@ -400,7 +400,7 @@
     (setf reload-clock reload-time)
     (setf aiming-bow nil bow-ready nil)
     (play-sound monk "bow.wav")
-    (narrate-now "Fire!")
+    (narrate "Fire!")
     (multiple-value-bind (x y) 
 	(fire-location monk)
       (drop-object (current-buffer) 
@@ -411,7 +411,7 @@
 
 (defmethod begin-firing ((monk monk))
   (stop-walking monk)
-  (narrate-now "You take aim... Ready.... Set...")
+  (narrate "You take aim... Ready.... Set...")
   (with-fields (load-time aiming-bow load-clock bow-ready) monk
     (setf bow-ready nil)
     (setf aiming-bow t)
@@ -432,12 +432,12 @@
 (defmethod attack ((monk monk) (enemy enemy))
   (if (not (find-arrow monk))
       (progn (show-error enemy)
-	     (narrate-now "You don't have any arrows!"))
+	     (narrate "You don't have any arrows!"))
       (with-fields (bow-ready) monk
 	(if (reloading-bow monk) 
 	    (progn
 	      (show-error enemy)
-	      (narrate-now "Cannot fire while reloading."))
+	      (narrate "Cannot fire while reloading."))
 	    (progn 
 	      (aim monk (heading-between monk enemy))
 	      (begin-firing monk)

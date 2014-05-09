@@ -20,6 +20,23 @@
 
 (in-package :cypress)
 
+(defresource "passageway.ogg" :volume 20)
+(defresource "home.ogg" :volume 10)
+(defresource "kosmium.ogg" :volume 20)
+(defresource "believe-me2.ogg" :volume 20)
+(defresource "3-against-2.ogg" :volume 20)
+(defresource "xolaros3.ogg" :volume 20)
+(defresource "dusk.ogg" :volume 20)
+(defresource "ruins.ogg" :volume 10)
+(defresource "standing-by-the-river.ogg" :volume 10)
+(defresource "spiritus.ogg" :volume 20)
+(defresource "path.ogg" :volume 20)
+(defresource "flutism.ogg" :volume 20)
+
+(defparameter *soundtrack*
+'("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg" "path.ogg"
+  "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
+
 (defun make-quest (&optional (terrain-class 'meadow))
   (let ((geoffrey (new 'geoffrey))
 	(buffer (new terrain-class)))
@@ -73,7 +90,7 @@
 ;;; Main game
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "cypress v0.9") 
+  (setf *window-title* "cypress v0.95") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)
@@ -102,7 +119,7 @@
     (start-session)))
 
 (defparameter *help-text* 
-"Welcome to Cypress v0.9 (alpha) 
+"Welcome to Cypress v0.95 (alpha) 
 
 This is the Scroll of Helping. If you
 click the scroll, you will advance to

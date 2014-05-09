@@ -224,9 +224,10 @@
 
 (defmethod will-accept ((browser browser) (thing thing))
   (with-fields (target) browser
-    (if (eq thing target)
-	nil
-	(will-accept target thing))))
+    (when (can-reach target (geoffrey))
+      (if (eq thing target)
+	  nil
+	  (will-accept target thing)))))
 
 (defmethod accept ((browser browser) thing)
   (with-fields (target) browser
@@ -321,7 +322,13 @@
   (let ((x (window-pointer-x))
 	(y (window-pointer-y)))
     (let ((icon (hit-icons browser x y)))
-      (if icon (can-pick icon) browser))))
+      (if icon 
+	  (if (can-reach (field-value :target browser) 
+			   (geoffrey))
+	      (can-pick icon)
+	      (prog1 nil (show-error browser)))
+	  ;; you should always be able to move the gump
+	  browser))))
 
 (defmethod pick ((browser browser))
   (block checking
@@ -381,6 +388,8 @@
 	       :arguments (list topic)))
 
 (defblock (scroll-text text))
+
+(defmethod handle-text-event ((self scroll-text) event) nil)
 
 (defmethod tap ((self scroll-text) x y)
   (with-fields (parent) self

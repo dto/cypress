@@ -183,7 +183,7 @@
 
 (defmethod alternate-tap ((map map-screen) x y) nil)
 
-(defun ildran ()
+(defun ildron ()
   (or *map-screen*
       (setf *map-screen* (new 'map-screen))))
 

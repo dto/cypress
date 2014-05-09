@@ -16,7 +16,7 @@
 	  (cast caster spell))
 	(progn
 	  (show-error caster (window-pointer-x) (window-pointer-y))
-	  (narrate-now "You don't have enough ingredients to cast ~A"
+	  (narrate "You don't have enough ingredients to cast ~A"
 		   (find-description spell))))))
 
 (defmethod cast ((caster thing) (spell spell)))
@@ -37,7 +37,7 @@
   :image "danger-1.png")
 
 (defmethod cast ((caster thing) (spell seance))
-  (narrate-now "A spirit begins to speak.")
+  (narrate "A spirit begins to speak.")
   (replace-gump caster (new 'scroll-gump :text (random-choose *skull-lore*))))
 
 ;;; Spark spell to light fire 
@@ -49,12 +49,12 @@
 
 (defmethod use :around ((caster thing) (spell spark))
   (if (nearby-enemies-p)
-      (narrate-now "You cannot safely make camp when enemies are near!") 
+      (narrate "You cannot safely make camp when enemies are near!") 
       (let ((camp (find-camp)))
 	(if (not camp)
-	    (narrate-now "You haven't made camp yet.")
+	    (narrate "You haven't made camp yet.")
 	    (if (camped (current-scene))
-		(narrate-now "You can't camp here again.")
+		(narrate "You can't camp here again.")
 		(call-next-method caster spell))))))
   
 (defmethod cast ((caster thing) (spell spark))
@@ -69,7 +69,7 @@
 
 (defmethod cast ((caster thing) (spell cure))
   (modify-health caster (random-choose '(15 20 20 25)))
-  (narrate-now "Some of your wounds have been healed. You feel better."))
+  (narrate "Some of your wounds have been healed. You feel better."))
 
 ;;; Craft wooden arrows
       
@@ -80,7 +80,7 @@
   
 (defmethod cast ((caster thing) (spell craft-wooden-arrows))
   (add-inventory-item caster (quantity-of 'wooden-arrow 12))
-  (narrate-now "You crafted 12 wooden arrows."))
+  (narrate "You crafted 12 wooden arrows."))
 
 ;;; Craft silver arrows
       
@@ -91,7 +91,7 @@
   
 (defmethod cast ((caster thing) (spell craft-silver-arrows))
   (add-inventory-item caster (quantity-of 'silver-arrow 6))
-  (narrate-now "You crafted 6 silver arrows."))
+  (narrate "You crafted 6 silver arrows."))
 
 ;;; Travel
 
@@ -101,7 +101,7 @@
 
 (defmethod use :around ((caster thing) (spell travel))
   (if (nearby-enemies-p)
-      (narrate-now "You cannot travel when enemies are near!")
+      (narrate "You cannot travel when enemies are near!")
       (call-next-method caster spell)))
 
 (defmethod cast ((caster thing) (spell travel))
@@ -111,26 +111,18 @@
   (at-next-update
     (let ((old-buffer (current-buffer)))
       (remove-object (current-buffer) (geoffrey))
-      (switch-to-buffer (ildran)))))
+      (switch-to-buffer (ildron)))))
 
 ;;; Cure meat
 
 (defthing (cure-meat spell)
-  :description "Cure meat (8 mp, 2 thornweed)"
+  :description "Cure meat (8 mp, 2 thornweed, 1 corpse)"
   :image "cure.png"
-  :reagents '(:magic 8 thornweed 2))
+  :reagents '(:magic 8 thornweed 2 wolf-corpse 1))
 
 (defmethod cast ((caster thing) (spell cure-meat))
   (add-inventory-item (geoffrey) (quantity-of 'jerky 2))
-  (narrate-now "You cured enough meat for two meals."))
-
-(defmethod use :around ((caster thing) (spell cure-meat))
-  (let ((corpse (find-inventory-item (geoffrey) 'wolf-corpse)))
-    (if corpse
-	(progn
-	  (destroy corpse)
-	  (call-next-method))
-	(narrate-now "You don't have any meat to cure."))))
+  (narrate "You cured enough meat for two meals."))
 
 ;;; Spellbook 
 

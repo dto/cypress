@@ -1,87 +1,103 @@
+* TODO Version 0.95 contains a rough draft of chapter 1
+
+** TODO Add Chapter 1 todo items from Storyline
+
 * Bugfixes
 
-** TODO should show-error when pathfinding fails ONLY for geoffrey
-** TODO disallow deploying tent on top of geoffrey
-** TODO don't allow tent to be put in containers other than Geoffrey
-** TODO disallow equipping non-held items
-** TODO auto-close inventory windows on faraway objects if you move
-** TODO destroy bubbles when closing gumps
-** TODO don't consume wolf corpse unless cast is successful, 
-** TODO don't allow spawning geoffrey in obstacle
-** TODO Disable text event handling on SCROLL-TEXT etc http://paste.lisp.org/display/141642
-** TODO Don't allow giving things to lucius
-** TODO Fix inventory bookeeping not getting properly duplicated?
-** TODO Add heuristic to try to choose a decent spot, when target space isn't occupiable
+** DONE Indicate error when trying to open faraway
+   CLOSED: [2014-05-08 Thu 20:18]
+** TODO [#B] auto-close inventory windows on faraway objects if you move
+** TODO [#B] destroy bubbles when closing gumps
+** TODO [#B] don't allow spawning geoffrey in obstacle
+** TODO [#C] should show-error when pathfinding fails ONLY for geoffrey
+** TODO [#C] Fix non-impelled arrows moving on their own 
+** TODO [#C] Fix scrolling jerkiness
+** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO Fix non-impelled arrows moving on their own 
-** TODO Disallow browsing/picking from faraway containers
-** TODO Fix scrolling jerkiness
-** TODO Conversation system should union the remaining keywords?
+** TODO [#C] Conversation system should union the remaining keywords?
+** TODO [#A] Reagent search should look in bags
 
-* Tasks
+* Features
 
-** DONE Write story/activity timeline based on icon board map
-   CLOSED: [2014-05-08 Thu 01:17]
+** TODO allow canceling travel
+** TODO sometimes a random carved stone with lore in the middle of the woods
 
-** TODO Don't specify Amalia's birthplace/time
-** TODO [#A] Light spell (2 mana)
-*** Casts light with medium radius
-*** Lasts for 4 minutes 
-*** Very slight flicker of circle
-*** Required in dark areas
-*** Certain enemies can negate magic spell effects, dousing your light
-** TODO lucius helper AI for healing and simple help until first town?
-** TODO [#A] Ancient caves with: lock/key system--- plate with lock, you must use corresponding key
-** TODO [#A] Protection (15 mana) (1 nightshade)
-*** Temporary 35% reduction in combat damage received
-** TODO [#A] Craft crystal arrow (20 mana) (snow)
-** TODO [#A] Cure heavy wounds (50 mana) (2 ginseng)
-*** Heals between 40-60 HP
-** TODO [#A] watch for wolves duplication in terrain.lisp/scene.lisp
-** TODO [#A] add stone monk with Lore and story messages
-*** TODO [#A] silver books with spells/Special lore
-** TODO [#A] Change Ildran to Ildron
-** TODO [#A] Revise enemy-damages-geoffrey situation
-** TODO [#A] Define quest/worldmap structure 
-*** TODO Create draft Lore timeline
-*** TODO create fixed-symbols dense overworld map on graph paper
-*** TODO [#B] attempt to map grid size/density and procgen it as a list of lists of symbols, with Valisade in Northeast
-*** TODO [#B] or, something to permute the map?
-*** TODO incrementally reveal map
-*** TODO allow saving progress like a traditional rpg
-**** TODO can only save at map screen
-*** TODO return to using simple pause/resume-on-command
+** TODO Implement single-use spell scrolls
+*** TODO use miniscroll graphic
+
+** TODO Geoffrey should start the game with Quine's summons
+** TODO Implement Lucius helper AI for healing and simple help until first town
+*** TODO following flag
+*** TODO drop up to 3 healing scroll if player gets below 50%
+*** TODO new conversation tree for help, including help scroll
+*** TODO write function to auto-position Lucius when Geoffrey enters a level
+*** TODO [#C] can remark upon nearby objects as a way of exposing some Lore. 
+
+** TODO return to using simple pause/resume-on-command
 *** TODO [#A] change to right-click on geoffrey for Pause
 **** TODO [#A] change to clicking modeline status to open Status scroll
 **** TODO [#A] don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
-*** TODO Allow special verb/action where game stops for a target of USEing
-** TODO [#A] Add fur cloak for chapter 2
-** TODO [#A] Reagent search should look in bags
-** TODO [#A] Spell scrolls have 1 use, Spell Book teaches you the spell
-** TODO [#A] assign songs to scenes/moments
-** TODO [#A] Seek ye the Screech Owl when storm thunders; when her cry is heard, blow the flute and she will appear and disclose to find stuff at "3 hectares north and two hectares west."
+
+** TODO [#C] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
+
+** TODO [#A] Expire texture cache at travel time
+** TODO [#A] Exit basements with double click on stairwell
+
+** TODO [#A] enter map data into Lisp via roguelike chars
+*** TODO [#B] incrementally reveal map
+** TODO [#C] Hold Creature spell
+** TODO [#C] Protection (15 mana) (1 nightshade)
+*** Temporary 35% reduction in combat damage received
+
+** TODO [#B] Ancient caves with: lock/key system--- plate with lock, you must use corresponding key
+*** TODO the keys weld permanently into seals. Must alter gear points in story.
+** TODO [#B] Seek ye the Screech Owl when storm thunders; when her cry is heard, blow the flute and she will appear and disclose to find stuff at "3 hectares north and two hectares west."
 *** TODO custom lisp for rain/thunder with fadein/fadeout
 *** TODO code owl
 *** TODO alter flutism.wav for downward owl cry imitation
-** TODO [#A] Expire texture cache at travel time
-*** TODO [#B] preload textures when possible---allow method for preloading and default field of resource names
-** TODO [#A] ice cracks should be hidden until nearby
-** TODO [#A] use only one NARRATE function
-** TODO [#A] Slight health drain when freezing
-** TODO [#A] Slight aim jitter when freezing
-** TODO [#A] Find rational consistent way to exit from basements
-*** TODO Add sextant which guides you to your next location
-** TODO [#B] Add Clockwork Valisade Knight
+
+** TODO [#C] implement snow/rain with additive blending
+** TODO [#B] Implement bleeding and blood tracks in the snow
 ** TODO [#B] allow eating violets and snowdrops for restoring 1mp
+
+** TODO [#B] Modeline lighter(s) for Freezing/Hungry/Dying
+** TODO [#B] Add sextant which guides you to your next location
+
+
+** TODO [#B] Implement spell tomes that teach you the spell
+*** TODO use doublepage graphic
+
 ** TODO [#B] reasons to return to town: arturo can heal
 ** TODO [#B] hitting I while inventory open should close it, same with (S)pellbook
-** TODO [#B] Improve shape of flower clusters and branches wood around trees
-** TODO [#B] Modeline lighter(s) for Freezing/Hungry/Dying
+** TODO [#A] Craft crystal arrow (20 mana) (snow)
+** TODO [#A] Cure heavy wounds (50 mana) (2 ginseng)
+*** Heals between 40-60 HP
+** TODO [#A] add stone monk with Lore and story messages
+*** TODO [#A] silver books with spells/Special lore
+
+** TODO [#B] Light spell (2 mana)
+*** Casts light with medium radius
+*** Lasts for 4 minutes 
+*** Required in dark areas
+*** Certain enemies can negate magic spell effects, dousing your light
+** TODO [#B] Slight health drain when freezing
+** TODO [#B] Slight aim jitter when freezing
+** TODO [#C] ice cracks should be hidden until nearby
+** TODO [#A] Revise enemy-damages-geoffrey situation
+** TODO [#A] Define quest/worldmap structure 
+*** DONE Create draft Lore timeline
+    CLOSED: [2014-05-08 Thu 19:15]
+*** TODO allow saving progress like a traditional rpg
+**** TODO can only save at map screen
+*** TODO Allow special verb/action where game stops for a target of USEing
+** TODO [#A] Add fur cloak for chapter 2
+** TODO [#B] preload textures when possible---allow method for preloading and default field of resource names
+** TODO [#A] assign songs to scenes/moments
+** TODO [#B] Add Clockwork Valisade Knight
+
 ** TODO [#B] Fix spellcasting/activating objects after dead
 ** TODO [#B] Paint some nicer trees
-** TODO [#B] allow canceling travel
-** TODO [#B] sometimes a random carved stone with lore in the middle of the woods
 ** TODO [#B] Explosion (20 mana) (1 nightshade, 1 stone)
 *** 90% chance of scorching several enemies in target area
 ** TODO [#B] Write lore for various sources
@@ -96,8 +112,7 @@
 *** 80% chance of enemy fleeing
 ** TODO [#C] Dispel magic (20 mana) (1 ginseng)
 *** 60% chance of removing ordinary spell effects. 
-** TODO [#C] implement snow/rain with additive blending
-** TODO [#B] Implement bleeding and blood tracks in the snow
+
 ** TODO [#C] day/night cycle; survive each day; end it by camping 
 ** TODO [#C] Night/camp dream sequences
 ** TODO [#C] Cryptghasts that glide and dart
@@ -107,5 +122,149 @@
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 ** TODO [#C] Fix jittery rotation of monk at corners of paths
+* Archived Entries
 
+** DONE [#A] Don't specify Amalia's birthplace/time
+   CLOSED: [2014-05-08 Thu 19:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:33
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Features
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
 
+** DONE [#A] create fixed-symbols dense overworld map on graph paper
+   CLOSED: [2014-05-08 Thu 19:16]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:34
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Features
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Write story/activity timeline based on icon board map
+   CLOSED: [2014-05-08 Thu 01:17]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:34
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Features
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Change Ildran to Ildron
+   CLOSED: [2014-05-08 Thu 19:38]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:38
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] don't allow tent to be put in containers other than Geoffrey
+   CLOSED: [2014-05-08 Thu 19:44]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:44
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] disallow deploying tent on top of geoffrey
+   CLOSED: [2014-05-08 Thu 19:42]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:44
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] disallow equipping non-held items
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#A] watch for wolves duplication in terrain.lisp/scene.lisp
+   CLOSED: [2014-05-08 Thu 19:51]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Don't allow giving things to lucius
+   CLOSED: [2014-05-08 Thu 19:58]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 19:58
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] don't consume wolf corpse unless cast is successful,
+   CLOSED: [2014-05-08 Thu 20:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 20:08
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] Disallow dropping items on faraway containers
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 20:08
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] Disallow activating faraway objects
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 20:08
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] Disallow browsing/picking from faraway containers
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 20:08
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] Disable text event handling on SCROLL-TEXT etc http://paste.lisp.org/display/141642
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 20:14
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#A] use only one NARRATE function
+   CLOSED: [2014-05-08 Thu 20:10]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-08 Thu 20:14
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:

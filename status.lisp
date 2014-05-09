@@ -9,14 +9,14 @@
 
 (defparameter *last-status-message-time* 0)
 
-(defun narrate (format-string &rest args)
-  (let ((message (apply #'format nil format-string args)))
-    (unless (find message *status-messages* :test 'equal)
-      (setf *status-messages*
-	    (append *status-messages* (list message)))
-      (setf *last-status-message-time* *updates*))))
+;; (defun narrate (format-string &rest args)
+;;   (let ((message (apply #'format nil format-string args)))
+;;     (unless (find message *status-messages* :test 'equal)
+;;       (setf *status-messages*
+;; 	    (append *status-messages* (list message)))
+;;       (setf *last-status-message-time* *updates*))))
 
-(defun narrate-now (format-string &rest args)
+(defun narrate (format-string &rest args)
   (let ((message (apply #'format nil format-string args)))
       (setf *status-messages* (list message))
       (setf *last-status-message-time* *updates*)))

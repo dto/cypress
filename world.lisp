@@ -301,7 +301,9 @@
 ;;; Equipping things
 
 (defmethod equip ((equipper thing) (self thing))
-  (when (field-value :container self)
+  (when (and (field-value :container self)
+	     ;; can only equip from top level of own inventory
+	     (eq equipper (field-value :container self)))
     (setf (field-value :equipper self) equipper)))
 
 (defmethod equipped ((equipment thing))
@@ -489,7 +491,8 @@
 
 (defmethod will-accept ((container thing) (item thing))
   (unless (eq container item)
-    (can-accept container)))
+    (when (can-reach container (geoffrey))
+      (can-accept container))))
 
 (defmethod accept ((container thing) (item thing))
   (prog1 t
@@ -568,16 +571,19 @@
 	     (setf last-tap-time time))
 	    ((<= elapsed-time *double-tap-time*)
 	     (setf last-tap-time nil)
-	     (activate self))))))
+	     (activate-maybe self))))))
 
 ;;; Double-clicking an object causes it to activate.
 
 (defmethod use ((self thing) (object thing))
-  (narrate-now "Nothing happens."))
+  (narrate "Nothing happens."))
 
 (defmethod activate-maybe ((self thing))
-  (when (can-reach (geoffrey) self)
-    (activate self)))
+  (if (can-reach (geoffrey) self)
+      (activate self)
+      (prog1 nil 
+	(show-error self)
+	(narrate "You can't reach that from where you're standing."))))
 
 (defmethod activate ((self thing))
   (use (geoffrey) self))

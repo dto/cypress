@@ -96,6 +96,8 @@
 
 (defmethod will-accept ((thing thing) (camp camp)) nil)
 
+(defmethod will-accept ((geoffrey geoffrey) (camp camp)) t)
+
 (defmethod ignite ((camp camp))
   (with-fields (fire timer) camp
     (when (not fire)
@@ -109,7 +111,7 @@
   (modify-health monk +12)
   (modify-magic monk +50)
   (modify-cold monk -100)
-  (narrate-now "You rest at the campfire, and feel much better."))
+  (narrate "You rest at the campfire, and feel much better."))
   
 (defmethod ignite :after ((camp camp))
   (recover (geoffrey)))
