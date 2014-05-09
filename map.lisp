@@ -140,15 +140,15 @@
 
     (large-mountain frozen-meadow cold-meadow 
      cold-meadow cave frozen-meadow 
-     frozen-forest large-mountain cave)
+     frozen-forest large-mountain eastern-cave)
 
     (cold-meadow cold-meadow highway
      frozen-meadow forest ruins 
      cemetery frozen-forest frozen-forest
      large-mountain)
 
-    (ruins cold-meadow highway
-     cold-meadow cemetery forest
+    (alonso-ruins cold-meadow highway
+     cold-meadow eavesbury-cemetery forest
      ruins frozen-meadow frozen-forest
      large-mountain)
 
@@ -169,7 +169,7 @@
     
     (forest grassy-meadow grassy-meadow
      forest forest large-mountain 
-     large-mountain cave large-mountain
+     large-mountain southern-cave large-mountain
      large-mountain)
 
     (cave forest forest 

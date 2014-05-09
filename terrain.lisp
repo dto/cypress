@@ -127,6 +127,7 @@
 		(randomly patch (singleton (new class))))))
       patch)))
 
+
 ;;; Forest pieces
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))

@@ -64,8 +64,8 @@
        (:right (units 8))
        (:upright (units 8))
        (:up (/ width 2))
-       (:upleft (- width (units 5)))
-       (:left (- width (units 5))))))
+       (:upleft (- width (units 8)))
+       (:left (- width (units 8))))))
 
 (defmethod starting-y ((buffer scene) direction)
   (with-fields (height) buffer 

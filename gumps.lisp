@@ -310,6 +310,9 @@
 
 (defmethod look ((browser browser)))
 
+(defmethod activate-maybe ((browser browser))
+  (activate browser))
+
 (defmethod activate ((browser browser))
   (let ((x (window-pointer-x))
 	(y (window-pointer-y)))

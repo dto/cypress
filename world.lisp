@@ -579,7 +579,9 @@
   (narrate "Nothing happens."))
 
 (defmethod activate-maybe ((self thing))
-  (if (can-reach (geoffrey) self)
+  (if (or 
+       (field-value :container self)
+       (can-reach self (geoffrey)))
       (activate self)
       (prog1 nil 
 	(show-error self)
