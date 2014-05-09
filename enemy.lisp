@@ -126,9 +126,9 @@
 
 (defparameter *wolf-images* (image-set "wolf" 3))
 
-(defresource "yelp.wav" :volume 20)
-(defresource "howl.wav" :volume 20)
-(defresource "bark.wav" :volume 20)
+(defresource "yelp.wav" :volume 25)
+(defresource "howl.wav" :volume 25)
+(defresource "bark.wav" :volume 10)
 
 (defthing (wolf enemy)
   :seen-player nil

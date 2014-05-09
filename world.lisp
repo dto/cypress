@@ -538,8 +538,8 @@
   (block finding
     (with-fields (objects) (current-buffer)
       (loop for thing being the hash-values in objects
-	    do (when (typep (find-object thing) (find-class 'bubble))
-		 (return-from finding (find-object thing)))))))
+	    do (when (typep (find-object thing t) (find-class 'bubble))
+		 (return-from finding (find-object thing t)))))))
 
 (defmethod replace-bubble ((self thing) text &optional anchor)
   (let ((old-bubble (find-bubble)))
@@ -750,9 +750,11 @@
 
 (defmethod show-error ((thing thing) &optional x0 y0)
   (with-field-values (x y) thing
-    (play-sample "error.wav")
-    (drop-object (current-buffer) (new 'error-bubble)
-		 (or x0 x) (or y0 y))))
+    (let ((bubble (new 'error-bubble)))
+      (play-sample "error.wav")
+      (drop-object (current-buffer) bubble
+		   (or x0 x) (or y0 y))
+      (bring-to-front bubble))))
 
 ;;; Object predicates
 

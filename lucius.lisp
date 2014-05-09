@@ -23,10 +23,10 @@
 (defmethod run ((self pebble))
   (with-fields (clock heading) self
     (decf clock)
-    (incf heading 0.01)
+    (incf heading 0.002)
     (if (minusp clock)
 	(destroy self)
-	(forward self 14))))
+	(forward self 17))))
 
 (defmethod collide ((self pebble) (enemy enemy))
   (damage enemy (random-choose '(-2 -4)))
@@ -47,12 +47,16 @@
 
 (defmethod throw-pebble ((self lucius) heading)
   (multiple-value-bind (x y) (center-point self)
+    (play-sample "bow.wav")
+    (percent-of-time 80 (bark self (random-choose '("Aha!" "Oh-ho!" "Ha-ha!" "Take that!" "Eat this!"))))
     (drop-object *current-scene* (new 'pebble :heading heading) x y)))
 
 (defmethod attack :after ((monk geoffrey) (enemy enemy))
   (when (lucius)
     (percent-of-time 50
       (throw-pebble (lucius) (heading-to-thing (lucius) enemy)))))
+
+(defmethod collide ((monk lucius) (enemy enemy)) nil)
 
 (defparameter *monk-2-walk* 
   '(:repeat t

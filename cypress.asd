@@ -13,6 +13,7 @@
 	       (:file "arturo" :depends-on ("lucius"))
 	       (:file "terrain" :depends-on ("arturo"))
 	       (:file "scene" :depends-on ("terrain"))
-	       (:file "map" :depends-on ("scene"))
+	       (:file "town" :depends-on ("scene"))
+	       (:file "map" :depends-on ("town"))
 	       (:file "lore" :depends-on ("map"))
 	       (:file "cypress" :depends-on ("lore"))))
