@@ -53,7 +53,7 @@
 
 (defmethod attack :after ((monk geoffrey) (enemy enemy))
   (when (lucius)
-    (percent-of-time 50
+    (percent-of-time 70
       (throw-pebble (lucius) (heading-to-thing (lucius) enemy)))))
 
 (defmethod collide ((monk lucius) (enemy enemy)) nil)

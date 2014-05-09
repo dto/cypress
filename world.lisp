@@ -177,12 +177,13 @@
 (defmethod find-inventory-item ((container thing) item-class)
   (assert (valid-container container))
   (dolist (item (inventory-items container))
-    (when (typep item (find-class item-class))
-      (return item))))
-	;; ;; search in containers
-	;; (when (inventory-items item)
-	;;   (let ((i2 (find-inventory-item item item-class)))
-	;;     (when i2 (return i2)))))))
+    (prog1 nil
+      (when (typep item (find-class item-class))
+	(return item))
+      ;; search in containers
+      (when (inventory-items item)
+	(let ((i2 (find-inventory-item item item-class)))
+	  (when i2 (return i2)))))))
 
 (defmethod merge-inventory-item ((container thing) (item thing))
   (assert (valid-container container))
@@ -206,7 +207,8 @@
 	(progn 
 	  (setf inventory (append inventory (list (find-object item))))
 	  (setf (field-value :container item) container))
-	(merge-inventory-item container (find-object item)))))
+	(merge-inventory-item container (find-object item))))
+  (assert (valid-container container)))
 
 (defmethod add-inventory-item :after ((container thing) (item thing) &optional (merge t))
   (assert (valid-container container))
@@ -254,9 +256,10 @@
     (when item (modify-quantity item (- quantity))))
   (assert (valid-container container)))
 
-(defmethod consume-single ((container thing) item-class)
-  (let ((item (find-inventory-item container item-class)))
+(defmethod consume-single ((character thing) item-class)
+  (let ((item (find-inventory-item character item-class)))
     (when item 
+      (let ((container (field-value :container item)))
 	(when (plusp (quantity item))
 	  (modify-quantity item -1)
 	  (let ((new-item (new item-class)))
@@ -269,7 +272,7 @@
 		(remove-inventory-item container item)
 		(destroy item))
 	      ;; check
-	      (assert (valid-container container))))))))
+	      (assert (valid-container container)))))))))
 
 (defmethod consume-quantity ((container thing) item-class &optional (quantity 1))
   (dotimes (n quantity)
@@ -284,8 +287,9 @@
 
 (defmethod search-inventory ((container thing) &optional (class 'thing))
   (labels ((match (item)
-	       (when (typep item class)
-		 (list item))))
+	     (if (typep item class)
+		 (list item)
+		 (search-inventory item class)))) 
     (mapcan #'match (inventory-items container))))
 
 (defmethod compute-quantity ((container thing) item-class)
