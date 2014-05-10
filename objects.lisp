@@ -392,7 +392,7 @@ dto@blocky.io
 (defmethod equipment-description ((self woolen-leggings))
   "Geoffrey is wearing warm woolen leggings.")
 
-(defthing woolen-longsleeve :stacking nil :image "woolen-longsleeve.png")
+(defthing woolen-shirt :stacking nil :image "woolen-shirt.png")
 
-(defmethod equipment-description ((self woolen-longsleeve))
-  "Geoffrey is wearing longsleeve wool undershirt.")
+(defmethod equipment-description ((self woolen-shirt))
+  "Geoffrey is wearing a warm woolen undershirt.")
