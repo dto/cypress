@@ -55,7 +55,7 @@
 
 (defmethod activate ((self arturo))
   (with-fields (met-player) self
-    (if met-player
+    (if (not met-player)
 	(progn (setf met-player t)
 	       (discuss self :hello))
 	(discuss self :chat))))
@@ -198,7 +198,7 @@ the key." :woods)
 (define-topic woods arturo
 "Come to my house before you leave town,
 and I'll give you enough supplies to get
-started on your journey.")
+started on your journey." :bye)
 
 
 
