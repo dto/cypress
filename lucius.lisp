@@ -178,7 +178,7 @@ Order?"
 (define-topic i-am-geoffrey-of-valisade lucius 
 "It's nice to meet you, Brother Geoffrey
 of Valisade! Welcome to our humble home."
-:town :robes :quine :vale)
+:town :wraith :robes :quine :vale)
 
 (define-topic vale lucius
 "Yes, and a beautiful place it is!
@@ -264,11 +264,12 @@ Shall we get moving?"
   (destroy-gump self)
   (follow self (geoffrey))
   (learn-spell (geoffrey) (new 'travel))
+  (cue-music (current-scene) (random-choose '("path.ogg" "lutey.ogg" "tumbling.ogg")))
   (bark self "Very well. Let's head North!"))
 
 (define-topic talk-more lucius 
   "Sure. What else do you want to talk
-about?" :quine :robes :grandfather :west :town)
+about?" :quine :wraiths :grandfather :west :town)
 
 (define-topic chat lucius
   "Let's keep moving. We don't have time

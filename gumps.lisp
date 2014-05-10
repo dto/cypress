@@ -1,6 +1,6 @@
 (in-package :cypress)
 
-(defresource (:name "oldania" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 9)))
+(defresource (:name "oldania" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 16)))
 (defresource (:name "oldania-bold" :type :ttf :file "OldaniaADFStd-Bold.otf" :properties (:size 16)))
 (defresource (:name "oldania-title" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 20)))
 

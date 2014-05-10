@@ -306,6 +306,14 @@
 (defun enemy ()
   (singleton (new (random-choose '(wraith wraith wolf)))))
 
+(defun lone-wolf ()
+  (singleton (new 'wolf)))
+
+(defun lone-wraith ()
+  (singleton (new 'wraith)))
+
+(defun pack-of-wolves ()
+  (spray 'wolf :trim t :count 2))
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 (defparameter *reagents* '(ginseng ginseng silverwood stone branch))
