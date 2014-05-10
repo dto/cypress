@@ -1,6 +1,8 @@
+* Make cool video.
+
 * General
 ** TODO [#A] Expire texture cache at travel time
-** TODO [#A] fix object dup error when peeling one from stack into sub container 
+** TODO [#A] fix object dup error when peeling one from stack into opened sub container gump
 
 * Music
 ** TODO specify per-scene what musics are available
@@ -10,7 +12,7 @@
 ** TODO add more tense militaristic battle cues
 
 * Terrain
-** TODO Incrementally reveal map
+** TODO [#A] Incrementally reveal map
 ** TODO add secrets in less-used parts of map
 ** TODO Reagent search should look in bags
 ** TODO Make thornweed less common in warm areas, since it's not needed then
@@ -36,14 +38,14 @@
 ***** TODO use miniscroll graphic
 
 * Combat
-** TODO add blackwolves
-** TODO Implement bleeding and blood tracks in the snow
-** TODO allow eating violets and snowdrops for restoring 1mp
 ** TODO return to using simple pause/resume-on-command
 *** TODO change to right-click on geoffrey for Pause
 **** TODO change to clicking modeline status to open Status scroll
 **** TODO don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
+** TODO [#A] Implement bleeding and blood tracks in the snow
+** TODO [#B] add blackwolves
+** TODO [#A] allow eating violets and snowdrops for restoring 1mp
 ** TODO [#B] Hold Creature spell, uses Nightshade and is important
 ** TODO [#C] Modeline lighter(s) for Freezing/Hungry/Dying
 ** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
@@ -81,6 +83,10 @@
 *** TODO alter flutism.wav for downward owl cry imitation
 
 * Eastern Cave
+
+** Stone Monk
+
+
 
 * Bugfixes
 

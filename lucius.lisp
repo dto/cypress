@@ -143,15 +143,29 @@
       (discuss self :chat)))
 
 (define-topic hello lucius
-"Greetings, brother. Well met. I don't
-recall ever seeing robes like yours!
-You must be a traveler?"
+"Greetings, brother! Well met. I don't
+recall ever seeing robes like yours! I
+must admit you startled me; when I heard
+your footsteps, I thought at first you
+were a Wraith! But you seem human enough
+to me. Salutations!"
+:name :job :robes :wraith :where-are-we?)
+
+(define-topic wraith lucius 
+"You really aren't from around here, are
+you? Wraiths are hideous conglomerations
+of rags and bones, brought to living
+Undeath by foul wandering Spirits who
+crave the possession of a body. Wraiths
+must be killed, lest they take your body
+as their own."
 :name :job :robes :where-are-we?)
 
 (define-topic where-are-we? lucius
-"We're just outside the little town of
-Nothbehem. You really have no idea where
-you are, do you?" :name :job :robes :quine :valley)
+"You've reached the vale of Eavesbury,
+traveler. It must have been a difficult
+journey through the mountains!"
+:name :job :robes :quine :vale)
 
 (define-topic name lucius
 "My name is Lucius Pentaquin. And who
@@ -161,20 +175,24 @@ Order?"
 
 (define-topic i-am-geoffrey-of-valisade lucius 
 "It's nice to meet you, Brother Geoffrey
-of Valisade! Welcome to the Eavesbury
-Valley."
-:name :town :robes :quine :valley)
+of Valisade! Welcome to the vale of
+Eavesbury."
+:name :town :robes :quine :vale)
 
-(define-topic valley lucius
-"Look around you! Mountains to the
-south, and east, and west. This is the
-vale of Eavesbury. In olden times, when
-the Sun was hotter than it is now,
-Eavesbury was a busy town. Now it's in
-ruins, but Nothbehem and a few other
-towns remain. I've not been far to the
-northeast, but I bet my grandfather will
-know more."
+(define-topic vale lucius
+"Yes, and a beautiful place it is!
+Mountains to the south, and east, and
+west. This is the vale of Eavesbury,
+named for its discoverer, who found it
+way, way back in whorememebers-time. In
+those ages, the Sun was hotter than it
+is now, and Eavesbury was a busy town
+because of the mountain trade
+routes. Now it's a frigid ruin, but
+Nothbehem and a few other towns remain
+in the warmer South. I've not been far
+to the northeast, but I bet my
+grandfather will know more."
 :name :town :grandfather)
 
 (define-topic job lucius 
@@ -198,7 +216,7 @@ do remind me a bit of my grandfather's
 old war gear. Tell me, are you a
 soldier? Did you come across the
 mountains from the West?" 
-:west :grandfather)
+:west :grandfather :town)
 
 (define-topic grandfather lucius 
   "Yes, the great Arturo Pentaquin the

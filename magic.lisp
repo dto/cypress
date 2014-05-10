@@ -108,7 +108,7 @@
       (call-next-method caster spell)))
 
 (defmethod cast ((caster thing) (spell travel))
-  (modify-hunger caster 12)
+  (modify-hunger caster 8)
   (when (find-camp)
     (return-to-geoffrey (find-camp)))
   (at-next-update

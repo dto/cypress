@@ -133,7 +133,7 @@
 (defun make-sector (key)
   (new 'sector :terrain key))
 
-(defparameter *ildron*
+(defparameter *ildron-map-data*
   '((large-mountain large-mountain large-mountain
      large-mountain large-mountain large-mountain 
      large-mountain large-mountain large-mountain)
@@ -189,7 +189,7 @@
          
 (defun test-map-sectors ()
   (let (valley)
-    (dolist (line *ildron*)
+    (dolist (line *ildron-map-data*)
       (push (mapcar #'make-sector line)
 	    valley))
     (nreverse valley)))
