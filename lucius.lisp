@@ -45,6 +45,9 @@
   :met-player nil
   :description "Lucius")
 
+(defmethod initialize :after ((lucius lucius) &key)
+  (setf *lucius* lucius))
+
 (defmethod throw-pebble ((self lucius) heading)
   (multiple-value-bind (x y) (center-point self)
     (play-sample "bow.wav")
@@ -89,7 +92,6 @@
 	  (when flowers (random-choose flowers)))))
 
 (defmethod follow ((self lucius) (leader monk))
-  (setf *lucius* self)
   (setf (field-value :leader self) leader))
 
 (defmethod unfollow ((self lucius))
@@ -162,8 +164,8 @@ as their own."
 :name :job :robes :where-are-we?)
 
 (define-topic where-are-we? lucius
-"You've reached the vale of Eavesbury,
-traveler. It must have been a difficult
+"You've reached the Vale of
+Eavesbury. It must have been a difficult
 journey through the mountains!"
 :name :job :robes :quine :vale)
 
@@ -175,9 +177,8 @@ Order?"
 
 (define-topic i-am-geoffrey-of-valisade lucius 
 "It's nice to meet you, Brother Geoffrey
-of Valisade! Welcome to the vale of
-Eavesbury."
-:name :town :robes :quine :vale)
+of Valisade! Welcome to our humble home."
+:town :robes :quine :vale)
 
 (define-topic vale lucius
 "Yes, and a beautiful place it is!

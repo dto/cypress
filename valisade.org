@@ -1,14 +1,35 @@
+* RELEASE 0.95
+
+** TODO Change scene class so that it only generates terrain on first visit
+** TODO Change map class so that it instantiates all the scenes
+** TODO Make the icon and description into methods that refer to existing data
+
+
+
+
+
+* TODO hidden forest cemetery with screech owl
+
+** TODO [#A] Expire texture cache at travel time
+
+* TODO screech owl
+
+
 * Make cool video.
 
 * General
 ** TODO [#A] Expire texture cache at travel time
 ** TODO [#A] fix object dup error when peeling one from stack into opened sub container gump
 ** TODO move character-following AI into base class
+
 * Music
 ** TODO specify per-scene what musics are available
+*** TODO "home" is too buzzy. remix up pitch?
+*** TODO cypress scene: "believe-me2"
 ** TODO most generic squares have no music, but sometimes
 ** TODO fade in/out most pieces of music
 ** TODO story caves: kosmium, spiritus, dusk
+** TODO black wizards fight.
 ** TODO add more tense militaristic battle cues
 
 * Terrain

@@ -88,6 +88,17 @@
   (narrate "You learned a new magic spell: ~A" (find-description spell))
   (magical-flourish))
 
+;;; Party members
+
+(defmethod place-party-members ((self geoffrey)) 
+  (when (and (lucius)
+  	     (field-value :leader (lucius)))
+    (multiple-value-bind (x y) (left-of self)
+      (drop-object (current-scene) (lucius) x y))))
+
+(defmethod enter-scene ((self geoffrey))
+  (place-party-members self))
+
 ;;; Geoffrey's magic tent
 
 (defparameter *fire-images* (image-set "fire" 4))

@@ -119,6 +119,10 @@
 	      ;; no more frames
 	      (begin-animation self (if repeat animation nil) t)))))))
 
+;;; Action to run upon entering a scene
+
+(defmethod enter-scene ((self thing)) nil)
+
 ;;; Pathfinding 
 
 (defmethod next-waypoint ((self thing))

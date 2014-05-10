@@ -33,6 +33,8 @@
 (defresource "path.ogg" :volume 20)
 (defresource "flutism.ogg" :volume 20)
 
+(defparameter *skip-meadow* nil)
+
 (defparameter *soundtrack*
 '("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg" "path.ogg"
   "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
@@ -45,11 +47,11 @@
     (setf *map-screen* nil)
     (setf *travel-direction* :downright)
     (with-buffer buffer
-      (drop-object buffer (new 'lucius) 
-		   (- (field-value :width buffer)
-		      (units 8))
-		   (- (field-value :height buffer)
-		      (units 8)))
+      ;; (drop-object buffer (new 'lucius) 
+      ;; 		   (- (field-value :width buffer)
+      ;; 		      (units 8))
+      ;; 		   (- (field-value :height buffer)
+      ;; 		      (units 8)))
       ;; (drop-object buffer (new 'silver-bow)
       ;; 		   (units 20)
       ;; 		   (units 5))
@@ -62,7 +64,10 @@
       (let ((scroll (new 'help-scroll)))
 	(drop-object buffer scroll (units 10) (units 4))
 	(activate scroll))
-      (current-buffer))))
+      (if *skip-meadow* 
+	  (ildron)
+	  (current-buffer)))))
+
 
 ;;; Title screen
 
@@ -106,7 +111,7 @@
   (setf *default-texture-filter* :mipmap)
   (setf *frame-rate* 30)
   
-  ;;  (setf *font* "sans-mono-bold-11") 
+  ;;  (setf *font* "sans-mono-bold-9") 
   (with-session 
     (load-project "cypress" '(:with-database nil))
     (index-all-images)

@@ -58,9 +58,43 @@
 	    (progn (setf open nil)
 		   (add-tag door :solid)))))))
       
-	    
-      
+;;; Ancient caves
 
+(defparameter *ancient-cave-images* (image-set "ancient-cave" 3))
 
+(defthing (cave scene)
+  :darkness-image "darkness.png"
+  :background-image (random-choose *ancient-cave-images*))
+
+(defmethod make-terrain ((scene cave))
+  (percent-of-time 40
+  (with-border (units 10)
+    (spray '(ruin-wall) :trim nil :count (random-choose '(2 3 4))))))
+
+(defmethod initialize :after ((scene cave) &key)
+  (resize-to-background-image scene)
+  (with-fields (height width) scene
+    (percent-of-time 80
+      (dotimes (n (1+ (random 5)))
+	(drop-object scene (new 'bone-dust) (random width) (random height))))))
+
+(defthing (eastern-cave cave))
+(defthing (southern-cave cave))
+(defthing (alonso-ruins scene))
+
+    ;; (percent-of-time 70
+    ;;   (drop-object scene (make-box)
+    ;; 		   (- width (units (+ 10 (random 15))))
+    ;; 		   (- height (units (+ 10 (random 15))))))
+    ;; (percent-of-time 50 
+    ;;   (drop-object scene (new 'wraith)
+    ;; 		   (random width)
+    ;; 		   (random height))
+    ;;   (percent-of-time 50 
+    ;; 	(drop-object scene (new 'wraith)
+    ;; 		     (random width)
+    ;; 		     (random height))))))
+
+;;; 
 
 

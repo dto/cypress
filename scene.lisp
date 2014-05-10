@@ -11,7 +11,7 @@
 (defun current-scene () *current-scene*)
 
 (defun switch-to-scene (buffer &optional previous-x previous-y)
-  (play-music (random-choose *soundtrack*) :loop nil)
+  ;; (play-music (random-choose *soundtrack*) :loop nil)
   (stop-walking (geoffrey))
   (switch-to-buffer buffer)
   (set-cursor buffer (geoffrey))
@@ -20,19 +20,21 @@
   (snap-window-to-cursor buffer)
   (follow-with-camera buffer (geoffrey))
   (setf *current-scene* buffer)
-  ;; possibly place lucius 
-  (when (lucius)
-    (multiple-value-bind (x y) (left-of (geoffrey))
-      (drop-object buffer (lucius) x y))))
+  (begin-scene buffer)
+  (enter-scene (geoffrey)))
+
+(defparameter *use-music* t)
 
 (define-buffer scene 
   :background-image "stone-road.png"
   :darkness-image nil ;; "darkness.png"
   :darkness-boil 1.0
   :quadtree-depth 8
+  :music nil
   :camped nil
   :time :day
   :cold 0
+  :generated nil
   :default-events
   '(
     ;; ((:pause) transport-toggle-play)
@@ -42,6 +44,27 @@
     ((:m) open-map)
     ((:s) open-spellbook)
     ((:i) open-inventory)))
+
+(defmethod map-icon ((scene scene))
+  (terrain-icon (class-name (class-of scene))))
+
+(defmethod find-description ((scene scene))
+  (pretty-string (class-name (class-of scene))))
+
+(defmethod can-be-visited ((scene scene)) t)
+
+(defthing (mountain-pass scene))
+(defmethod can-be-visited ((scene mountain-pass)) nil)
+
+(defthing (large-mountain scene))
+(defmethod can-be-visited ((scene large-mountain)) nil)
+
+(defthing (valisade scene))
+(defmethod can-be-visited ((scene valisade)) nil)
+
+(defmethod cue-music ((scene scene) music)
+  (when *use-music*
+    (play-music music)))
 
 (defmethod drag-fail ((scene scene) (object thing) x y)
   (when (and (not (typep object 'enemy))
@@ -103,27 +126,30 @@
 
 (defvar *travel-direction* :downright)
 
-(defmethod initialize :after ((buffer scene) &key (player (geoffrey)))
+(defmethod begin-scene ((buffer scene))
   (with-buffer buffer
     (setf *status-line*
 	  (find-object (new 'status-line)))
-    (let ((terrain (make-terrain buffer)))
-      (when terrain
-	(paste-from buffer terrain)
-	(resize buffer (field-value :width terrain) (field-value :height terrain))))
+    (with-fields (generated) buffer
+      (when (not generated)
+	(setf generated t)
+	(let ((terrain (make-terrain buffer)))
+	  (when terrain
+	    (paste-from buffer terrain)
+	    (destroy terrain)
+	    (resize buffer (field-value :width terrain) (field-value :height terrain))
+	    (unless (field-value :quadtree buffer)
+	      (install-quadtree buffer))))))
     ;; adjust scrolling parameters 
     (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
 	  (%horizontal-scrolling-margin buffer) 3/5
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
     (multiple-value-bind (x y) (starting-location buffer *travel-direction*)
-      (drop-object buffer player x y))
+      (drop-object buffer (geoffrey) x y))
     (set-cursor buffer (geoffrey))
     (snap-window-to-cursor buffer)
-    ;;  (glide-window-to-cursor buffer)
     (follow-with-camera buffer (geoffrey))
-    ;; allocate
-    (install-quadtree buffer)
     ;; drop player at start point
     ;; return buffer
     buffer))
@@ -264,13 +290,22 @@
 	    (setf window-y0 nil)
 	    (incf window-y (jump window-y window-y0)))))))
 
-;;; Various scenes
+;;; Large background textures
 
 (defparameter *grassy-meadow-images* '("golden-meadow.png" "stone-road.png" "meadow.png"))
 (defparameter *snowy-meadow-images* '("cloudy-meadow.png" "paynes-meadow.png" "purple-meadow.png" "sky-meadow.png" "forgotten-meadow.png"))
 (defparameter *frozen-meadow-images* (image-set "frozen-meadow" 3))
 
 ;;; Meadow
+
+(defun reagents ()
+  (spray (random-choose *reagents*)
+	 :count (+ 1 (random 5))
+	 :trim t))
+
+(defun enemy ()
+  (singleton (new (random-choose '(wraith wraith wolf)))))
+
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 (defparameter *reagents* '(ginseng ginseng silverwood stone branch))
@@ -301,11 +336,18 @@
    (spray 'dead-tree :trim nil :count (+ 2 (random 3))))
 
 (defmethod make-terrain ((meadow meadow))
-  (with-border (units 10)
+  (with-border (units 12)
     (lined-up-randomly 
-     (stacked-up-randomly (meadow-debris) (flowers) (some-trees))
+     (stacked-up-randomly (dead-tree) (flowers) (some-trees))
      (stacked-up-randomly (wood-pile) (flowers) (clearing) (meadow-debris))
      (stacked-up-randomly (some-trees) (flowers) (flowers)))))
+
+(defmethod begin-scene :after ((meadow meadow))
+  (drop-object meadow (new 'lucius) 
+	       (- (field-value :width meadow)
+		  (units 8))
+	       (- (field-value :height meadow)
+		  (units 8))))
 
 ;;; Grassy meadow
 
@@ -363,38 +405,6 @@
 
 (defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
   (chill monk +12))
-
-;;; Caves
-
-(defparameter *ancient-cave-images* (image-set "ancient-cave" 3))
-
-(defthing (cave scene)
-  :darkness-image "darkness.png"
-  :background-image (random-choose *ancient-cave-images*))
-
-(defmethod make-terrain ((scene cave))
-  (percent-of-time 40
-  (with-border (units 15)
-    (spray '(ruin-wall copper-plate copper-lock) :trim nil :count (random-choose '(2 3 4))))))
-
-(defmethod initialize :after ((scene cave) &key)
-  (resize-to-background-image scene)
-  (with-fields (height width) scene
-    (percent-of-time 80
-      (dotimes (n (1+ (random 5)))
-	(drop-object scene (new 'bone-dust) (random width) (random height))))
-    (percent-of-time 70
-      (drop-object scene (make-box)
-		   (- width (units (+ 10 (random 15))))
-		   (- height (units (+ 10 (random 15))))))
-    (percent-of-time 50 
-      (drop-object scene (new 'wraith)
-		   (random width)
-		   (random height))
-      (percent-of-time 50 
-	(drop-object scene (new 'wraith)
-		     (random width)
-		     (random height))))))
 
 ;;; Ruins and basements
 
@@ -486,10 +496,43 @@
 (defmethod drop-object :after ((cemetery cemetery) (monk geoffrey) &optional x y z)
   (chill monk +15))
 
+;;; Hidden cemetery
+
+(defthing (hidden-cemetery scene)
+  :background-image "stone-road.png")
+
+(defmethod map-icon ((self hidden-cemetery)) (random-choose *forest-icons*))
+
+(defmethod find-description ((self hidden-cemetery)) "hidden-cemetery")
+
+(defun small-fence ()
+  (with-border (units 3)
+    (apply #'stacked-up (mapcar #'singleton
+				(list 
+				(new 'iron-fence)
+				(new 'iron-fence)
+				(new 'iron-fence)
+				(new 'iron-fence)
+				(new 'iron-fence))))))
+(defun small-cemetery ()
+  (lined-up (small-fence)
+	    (stacked-up 
+	     (flowers)
+	     (some-graves)
+	     (flowers))
+	    (small-fence)))
+
+(defmethod make-terrain ((self hidden-cemetery))
+  (with-border (units 12)
+    (stacked-up 
+     (lined-up (some-trees) (some-trees) (some-trees))
+     (lined-up (flowers) (small-cemetery) (flowers))
+     (lined-up (some-trees) (some-trees) (some-trees)))))
+
 ;;; Frozen forest
 
 (defthing (frozen-forest scene)
-  :background-image (random-choose *frozen-meadow-images*))
+  :backgrounnd-image (random-choose *frozen-meadow-images*))
 
 (defun pine-trees ()
   (randomly 

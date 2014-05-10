@@ -128,35 +128,23 @@
       patch)))
 
 
+;; (defun some-trees ()
+;;   (randomly 
+;;    (spray *forest-debris-items* :trim t :count (+ 2 (random 4)))
+;;    (spray 'leafy-tree
+;; 	  :trim nil
+;; 	  :count (random-choose '(4 5)))))
+
+;; (defun ginseng-garden ()
+;;   (lined-up-randomly (singleton (new (random-choose '(stone-stairwell copper-plate))))
+;; 		     (spray '(dead-tree ruin-wall ginseng) :trim nil :count (+ 5 (random 5)))))
+  
 ;;; Forest pieces
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 (defparameter *reagents* '(ginseng ginseng silverwood stone branch))
 
 ;;; Enemies in scenes
-
-(defun lone-wolf ()
-  (singleton (new 'wolf)))
-
-(defun pack-of-wolves ()
-  (with-border (units 5) 
-    (randomly (lone-wolf) (lone-wolf))))
-
-(defun lone-wraith () ()
-  (singleton (new 'wraith)))
-
-(defun debris () 
-  (spray *forest-debris-items*
-	 :count (+ 1 (random 6))
-	 :trim t))
-
-(defun reagents ()
-  (spray (random-choose *reagents*)
-	 :count (+ 1 (random 5))
-	 :trim t))
-
-(defun enemy ()
-  (singleton (new (random-choose '(wraith wraith wolf)))))
 
 (defun stuff ()
   (if (percent-of-time 60 t)
@@ -165,17 +153,6 @@
 	  (reagents)
 	  (enemy))))
 
-(defun some-trees ()
-  (randomly 
-   (spray *forest-debris-items* :trim t :count (+ 2 (random 4)))
-   (spray 'leafy-tree
-	  :trim nil
-	  :count (random-choose '(4 5)))))
-
-;; (defun ginseng-garden ()
-;;   (lined-up-randomly (singleton (new (random-choose '(stone-stairwell copper-plate))))
-;; 		     (spray '(dead-tree ruin-wall ginseng) :trim nil :count (+ 5 (random 5)))))
-  
 
 (defun rock-outcropping ()
   (spray '(gray-rock stone stone)
