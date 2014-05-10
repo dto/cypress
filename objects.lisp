@@ -263,7 +263,6 @@ dto@blocky.io
 (defparameter *dead-tree-images* (image-set "dead-tree" 5))
 (defparameter *gray-rock-images* (image-set "gray-rock" 8))
 (defparameter *gray-stairwell-images* (image-set "gray-stairwell" 2))
-(defparameter *copper-lock-images* (image-set "copper-lock" 5))
 
 (defparameter *nightshade-images* (image-set "nightshade" 6))
 (defthing nightshade :scale 1.1 :image (random-choose *nightshade-images*)) 
@@ -286,11 +285,6 @@ dto@blocky.io
 (defthing (forget-me-not flower) :image (random-choose *forget-me-not-images*))
 
 (defthing stone :scale 0.8 :image (random-choose *stone-images*))
-
-(defthing copper-lock :image (random-choose *copper-lock-images*))
-
-(defthing copper-stairwell  :tags '(:fixed) :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
-(defthing copper-plate :tags '(:fixed) :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
 
 (defmethod can-pick ((campfire campfire)) nil)
 
@@ -346,7 +340,7 @@ dto@blocky.io
 ;;; Various prizes
 
 (defparameter *grab-bag-items* '(elixir skull wolf-corpse ruined-book silver-elixir
- stone stone silver-leggings thornweed nightshade white-bread wheat-bread))
+ stone stone woolen-leggings thornweed nightshade white-bread wheat-bread))
 
 (defparameter *silver-book-images* (image-set "silver-book" 3))
 
@@ -355,7 +349,7 @@ dto@blocky.io
 (defmethod activate ((book silver-book))
   (bark (geoffrey) "I can't read this language."))
 
-(defparameter *boxed-items* '(silver-elixir elixir silver-armor silver-leggings silver-bow silver-book))
+(defparameter *boxed-items* '(silver-elixir elixir silver-armor woolen-leggings silver-bow silver-book))
 
 (defun grab (bag &optional (count (+ 1 (random 3))))
   (let (items)
@@ -377,12 +371,12 @@ dto@blocky.io
 (defthing silver-bow :stacking nil :attack 3 :image "silver-bow.png")
 
 (defmethod equipment-description ((self silver-bow))
-  "Geoffrey wields a silver-plated longbow.")
+  "Geoffrey wields a silver-strung longbow.")
 
 (defmethod activate ((self silver-bow))
   (toggle-equipped (geoffrey) self))
 
-(defthing silver-armor :stacking nil :defense 2 :resistance 2 :image "silver-armor.png")
+(defthing silver-armor :stacking nil :defense 3 :resistance 1 :image "silver-armor.png")
 
 (defmethod activate ((self silver-armor))
   (toggle-equipped (geoffrey) self))
@@ -390,13 +384,15 @@ dto@blocky.io
 (defmethod equipment-description ((self silver-armor))
   "Geoffrey is wearing silver armor.")
 
-(defthing silver-leggings :stacking nil :image "silver-leggings.png" :defense 1 :resistance 2)
+(defthing woolen-leggings :stacking nil :image "woolen-leggings.png" :defense 1 :resistance 3)
 
-(defmethod activate ((self silver-leggings))
+(defmethod activate ((self woolen-leggings))
   (toggle-equipped (geoffrey) self))
 
-(defmethod equipment-description ((self silver-leggings))
-  "Geoffrey is wearing warm silver leggings.")
+(defmethod equipment-description ((self woolen-leggings))
+  "Geoffrey is wearing warm woolen leggings.")
 
-(defthing silver-mail :image "silver-mail.png")
+(defthing woolen-longsleeve :stacking nil :image "woolen-longsleeve.png")
 
+(defmethod equipment-description ((self woolen-longsleeve))
+  "Geoffrey is wearing longsleeve wool undershirt.")

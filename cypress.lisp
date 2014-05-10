@@ -56,7 +56,7 @@
       ;; (drop-object buffer (new 'silver-armor)
       ;; 		   (units 26)
       ;; 		   (units 5))
-      ;; (drop-object buffer (new 'silver-leggings)
+      ;; (drop-object buffer (new 'woolen-leggings)
       ;; 		   (units 34)
       ;; 		   (units 5))
       (let ((scroll (new 'help-scroll)))

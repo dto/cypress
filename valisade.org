@@ -3,7 +3,7 @@
 * General
 ** TODO [#A] Expire texture cache at travel time
 ** TODO [#A] fix object dup error when peeling one from stack into opened sub container gump
-
+** TODO move character-following AI into base class
 * Music
 ** TODO specify per-scene what musics are available
 ** TODO most generic squares have no music, but sometimes
@@ -12,13 +12,13 @@
 ** TODO add more tense militaristic battle cues
 
 * Terrain
+** TODO increase general cold
 ** TODO [#A] Incrementally reveal map
 ** TODO add secrets in less-used parts of map
 ** TODO Reagent search should look in bags
 ** TODO Make thornweed less common in warm areas, since it's not needed then
 ** TODO Add some different tree/shrub types
 ** TODO Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
-** TODO import improved ancient-road graphic (non-contrast-adjusted version) 
 ** TODO Exit basements with double click on stairwell
 
 ** TODO allow canceling travel
@@ -56,11 +56,14 @@
 ** TODO Switch to new red/blue/green potion graphics
 
 * Nothbehem
+** TODO move nothbehem down 1 row
 ** TODO add arturo conversations and items
 ** TODO make arturo's house into a container
+*** TODO add woolen leggings, woolen shirt, 
+*** TODO add spellbooks: craft silver arrows, cure meat
+*** TODO add copper-lock
 ** TODO [#B] Implement spell tomes that teach you the spell
 *** TODO use doublepage graphic
-
 ** TODO add more townspeople
 ** TODO [#B] Add sextant which guides you to your next location
 
@@ -72,6 +75,7 @@
 * Southern Cave
 ** TODO Implement "Southern Cave" with: lock/key system--- plate with lock, you must use corresponding key
 *** TODO the keys weld permanently into seals. Must alter gear points in story.
+*** TODO plates, gates, then copper stairwell to silver antechamber
 
 ** TODO [#A] add stone monk with Lore and story messages
 *** TODO [#A] silver books with spells/Special lore
@@ -86,6 +90,10 @@
 
 ** Stone Monk
 
+** TODO tells you about the ancient road to Valisade
+
+* Ancient road
+** TODO import improved ancient-road graphic (non-contrast-adjusted version) 
 
 
 * Bugfixes
