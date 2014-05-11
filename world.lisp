@@ -175,6 +175,12 @@
 		  (eq container (find-container item))))
 	 (inventory-items container)))
 
+;; (defmethod duplicate-safely :after ((container thing))
+;;   (with-fields (inventory) container
+;;     (setf inventory (mapcar #'duplicate-safely inventory))
+;;     (dolist (item inventory)
+;;       (setf (field-value :container item) container))))
+
 (defmethod find-container ((item thing))
   (field-value :container item))
 
@@ -561,10 +567,17 @@
 (defmethod look ((self thing))
   (replace-bubble self (find-description self)))
 
-(defresource "talk.wav" :volume 30)
+(defresource "talk.wav" :volume 20)
+(defresource "talk-1.wav" :volume 20)
+(defresource "talk-2.wav" :volume 20)
+(defresource "talk-3.wav" :volume 20)
+(defresource "npc-talk.wav" :volume 20)
+
+(defmethod play-talk-sound ((self thing))
+  (play-sample (random-choose '("talk-1.wav" "talk-2.wav" "talk-3.wav"))))
 
 (defmethod bark ((self thing) string)
-  (play-sample "talk.wav")
+  (play-talk-sound self)
   (replace-bubble self string self))
 
 ;;; Detecting click and double-click
@@ -600,6 +613,11 @@
 
 (defmethod activate :before ((thing thing))
   (play-sample "activate.wav"))
+
+;;; movement-click through, for decals etc
+
+(defmethod alternate-tap ((thing thing) x y)
+  (alternate-tap (current-scene) x y))
 
 ;;; The system update function does its own work, then invokes the
 ;;; gameworld's RUN method.

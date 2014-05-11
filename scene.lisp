@@ -14,14 +14,14 @@
   ;; (play-music (random-choose *soundtrack*) :loop nil)
   (stop-walking (geoffrey))
   (switch-to-buffer buffer)
+  (xelf::delete-all-textures)
   (set-cursor buffer (geoffrey))
   (when (and (numberp previous-x) (numberp previous-y))
     (move-to (geoffrey) previous-x previous-y))
   (snap-window-to-cursor buffer)
   (follow-with-camera buffer (geoffrey))
   (setf *current-scene* buffer)
-  (begin-scene buffer)
-  (enter-scene (geoffrey)))
+  (begin-scene buffer))
 
 (defparameter *use-music* t)
 
@@ -44,6 +44,9 @@
     ((:m) open-map)
     ((:s) open-spellbook)
     ((:i) open-inventory)))
+
+(defmethod drop-object :after ((scene scene) (thing thing) &optional x y z)
+  (enter-scene thing))
 
 (defmethod map-icon ((scene scene))
   (terrain-icon (class-name (class-of scene))))
@@ -393,9 +396,9 @@
   (with-border (units 10)
     (lined-up-randomly 
      (stacked-up-randomly (meadow-debris) (dense-trees) (lone-wraith) (some-trees))
-     (stacked-up-randomly (clearing) (tree-clearing) (clearing))
+     (stacked-up-randomly (some-trees) (some-trees) (flowers) (dead-trees))
      (stacked-up-randomly (flowers) (if (percent-of-time 50 t)
-					(pack-of-wolves)
+					(lone-wolf)
 					(lone-wraith))
 			  (dense-trees)))))
 
@@ -410,6 +413,9 @@
      (stacked-up-randomly (wood-pile) (ginseng-garden) (meadow-debris))
      (stacked-up-randomly (meadow-debris) (lone-wraith) (some-trees))
      (stacked-up-randomly (dead-trees) (lone-wolf) (flowers)))))
+
+(defmethod begin-scene :after ((meadow cold-meadow))
+  (cue-music meadow (random-choose '("kosmium.ogg" "passageway.ogg"))))
 
 (defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
   (chill monk +12))
@@ -511,7 +517,7 @@
 
 (defmethod map-icon ((self hidden-cemetery)) (random-choose *forest-icons*))
 
-(defmethod find-description ((self hidden-cemetery)) "hidden-cemetery")
+(defmethod find-description ((self hidden-cemetery)) "forest")
 
 (defun small-fence ()
   (with-border (units 3)

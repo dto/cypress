@@ -5,6 +5,7 @@
 (defthing (arturo monk) 
   :met-player nil
   :next-target nil
+  :discussed-woods nil
   :description "Arturo")
 
 (defparameter *arturo-walk* 
@@ -42,23 +43,28 @@
     (choose-target self)
     (let ((distance (distance-to-cursor self)))
       (cond 
-	((< distance 330)
+	((> distance 500)
+	 (when (and next-target (null waypoints))
+	   (percent-of-time 4 (walk-to-thing self next-target))))
+	((and (< distance 220) (> distance 200))
 	 (walk-to-thing self (geoffrey)))
-	((< distance 200)
-	 (setf waypoints nil))
-	((and next-target (null waypoints))
-	     (percent-of-time 4 (walk-to-thing self next-target)))
-	((and (null next-target)
-	      (null waypoints))
-	 (percent-of-time 4
-			  (walk-to-thing self (find-pentaquin-house))))))))
+	((or gump (<= distance 200))
+	 (setf waypoints nil))))))
 
 (defmethod activate ((self arturo))
+  (play-talk-sound self)
   (with-fields (met-player) self
     (if (not met-player)
 	(progn (setf met-player t)
 	       (discuss self :hello))
-	(discuss self :chat))))
+	(cond 
+	  ((and (field-value :discussed-woods self)
+		(field-value :locked (find-pentaquin-house)))
+	   (discuss self :house))
+	  ((and (not (field-value :discussed-woods self))
+		 (field-value :locked (find-pentaquin-house)))
+	   (discuss self :hello))
+	  (t (discuss self :farewell))))))
 	
 (define-topic hello arturo 
 "Well, you do look rather unusual!
@@ -66,9 +72,10 @@ Those are most extraordinary robes. Oh,
 but I'm being so rude! Greetings and
 salutations, traveler. I am Arturo
 Pentaquin, retired Lieutenant Commander
-of the Paladins. And I can see you've
-already met my grandson! So, Lucius, why
-don't you introduce me to your friend?"
+of the Green Paladins. And I can see
+you've already met my grandson! So,
+Lucius, why don't you introduce me to
+your friend?"
 :traveler)
 
 (define-topic traveler arturo 
@@ -104,7 +111,13 @@ string up my silverwood garden.
 Silverwood arrows are the best way to
 take down a wolf. Even Dire Wolves can be
 felled by a single arrow, if your aim is
-true." :wolves :town)
+true." :wolves :town :walls)
+
+(define-topic walls arturo
+"You'll find archaic stone walls and
+other stone objects throughout the Vale.
+They are the remains of a vanished 
+civilization." :wolves :town :walls)
 
 (define-topic wolves arturo
 "Wolves can kill with ease, but are an
@@ -148,8 +161,8 @@ to wear, before you leave town." :caves)
 
 (define-topic caves arturo
 "The cave entrances are decorated with
-stone carvings of a rounded, yet
-irregular motif involving semi-circles.
+stone carvings, an irregular motif with
+rays and intersecting semi-circles.
 Beyond these markings lay massive copper
 doors, and strange copper plates whose
 workings have never been deciphered.
@@ -160,19 +173,19 @@ none have ever found."
 (define-topic plates arturo
 "Some caves have two plates, and some
 have three or more. I believe that these
-can be unlocked by a set of matching
-copper keys. My brother Alonso found one
-key on an archaeological dig, and I
-found another while on an expedition to
-the Northeast; but Alonso would not
-share his key with me, for he greedily
-desired whatever treasure may lay behind
-the doors, all to himself. To this day,
-we each hold one key, and are bitterly
-estranged. If you want to find
+mechanisms can be activated by a set of
+matching copper gears. My brother Alonso
+found one gear on an archaeological dig,
+and I found another while on an
+expedition to the Northeast; but Alonso
+would not share his gear with me, for he
+greedily desired whatever treasure may
+lay behind the doors, all to himself. To
+this day, we each hold one gear, and are
+bitterly estranged. If you want to find
 Dr. Quine, you'd better find my
-brother's key first. I'll give you the
-other key when you return."
+brother's gear first. I'll give you my
+own gear before you leave town."
 :alonso :expedition)
 
 (define-topic expedition arturo
@@ -198,8 +211,36 @@ the key." :woods)
 (define-topic woods arturo
 "Come to my house before you leave town,
 and I'll give you enough supplies to get
-started on your journey." :bye)
+started on your journey." :bye :house)
 
+(defmethod discuss :after ((self arturo) (topic (eql :woods)))
+  (setf (field-value :discussed-woods self) t))
+
+(define-topic house arturo 
+"Here, I'll let you in. Grab the things
+I told you about! And, you are welcome
+to take all the silverwood in the
+garden; I have plenty of my own. You
+have a long journey ahead of you; I hope
+my gifts will help you on your way. And
+please, tell me what you find of my
+brother. It is too bad that we've been
+apart for so long.  Farewell,
+Geoffrey. And a safe return."
+:bye)
+
+(defmethod discuss :after ((self arturo) (topic (eql :house)))
+  (when (lucius) 
+    (unfollow (lucius))
+    (bark (lucius) "Good luck, Geoffrey!"))
+  (unlock (find-pentaquin-house)))
+  
+(define-topic farewell arturo 
+"Farewell, Geoffrey.  Please come back
+soon, and tell me what you've
+learned. And don't forget to stop by my
+house before you leave!"
+:bye)
 
 
 

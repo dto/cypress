@@ -43,7 +43,7 @@
 
 (defthing ancient-road
   :tags '(:fixed)
-  :scale 5
+  :scale 3
   :image (random-choose *ancient-road-images*))
 
 (defparameter *ancient-road-debris-images* (image-set "ancient-road-debris" 5))
@@ -384,7 +384,7 @@ dto@blocky.io
 (defmethod equipment-description ((self silver-armor))
   "Geoffrey is wearing silver armor.")
 
-(defthing woolen-leggings :stacking nil :image "woolen-leggings.png" :defense 1 :resistance 3)
+(defthing woolen-leggings :stacking nil :image "woolen-leggings.png" :defense 1 :resistance 2)
 
 (defmethod activate ((self woolen-leggings))
   (toggle-equipped (geoffrey) self))
@@ -392,7 +392,10 @@ dto@blocky.io
 (defmethod equipment-description ((self woolen-leggings))
   "Geoffrey is wearing warm woolen leggings.")
 
-(defthing woolen-shirt :stacking nil :image "woolen-shirt.png")
+(defthing woolen-shirt :stacking nil :image "woolen-shirt.png" :defense 1 :resistance 2)
 
 (defmethod equipment-description ((self woolen-shirt))
   "Geoffrey is wearing a warm woolen undershirt.")
+
+(defmethod activate ((self woolen-shirt))
+  (toggle-equipped (geoffrey) self))

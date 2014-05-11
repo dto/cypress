@@ -1,26 +1,8 @@
 * RELEASE 0.95
 
-** TODO Change scene class so that it only generates terrain on first visit
-** TODO Change map class so that it instantiates all the scenes
-** TODO Make the icon and description into methods that refer to existing data
-
-
-
-
-
 * TODO hidden forest cemetery with screech owl
 
-** TODO [#A] Expire texture cache at travel time
-
 * TODO screech owl
-
-
-* Make cool video.
-
-* General
-** TODO [#A] Expire texture cache at travel time
-** TODO [#A] fix object dup error when peeling one from stack into opened sub container gump
-** TODO move character-following AI into base class
 
 * Music
 ** TODO specify per-scene what musics are available
@@ -77,14 +59,26 @@
 ** TODO Switch to new red/blue/green potion graphics
 
 * Nothbehem
-** TODO move nothbehem down 1 row
-** TODO add arturo conversations and items
-** TODO make arturo's house into a container
-*** TODO add woolen leggings, woolen shirt, 
-*** TODO add spellbooks: craft silver arrows, cure meat
-*** TODO add copper-lock
-** TODO [#B] Implement spell tomes that teach you the spell
-*** TODO use doublepage graphic
+** DONE move nothbehem down 1 row
+   CLOSED: [2014-05-10 Sat 20:30]
+** DONE add arturo conversations 
+   CLOSED: [2014-05-10 Sat 20:30]
+** DONE make arturo's house into a container
+   CLOSED: [2014-05-10 Sat 20:50]
+*** DONE add woolen leggings, woolen shirt, 
+    CLOSED: [2014-05-10 Sat 20:50]
+*** DONE add spellbooks: craft silver arrows, cure meat
+    CLOSED: [2014-05-10 Sat 20:50]
+*** DONE add copper-lock
+    CLOSED: [2014-05-10 Sat 20:50]
+** DONE [#B] Implement spell tomes that teach you the spell
+   CLOSED: [2014-05-10 Sat 20:50]
+*** DONE use doublepage graphic
+    CLOSED: [2014-05-10 Sat 20:50]
+
+* Arturo
+
+** TODO arturo should return to his garden when not talking to you.
 ** TODO add more townspeople
 ** TODO [#B] Add sextant which guides you to your next location
 
@@ -443,4 +437,60 @@
    :ARCHIVE_OLPATH: Bugfixes
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Change scene class so that it only generates terrain on
+ first visit
+   CLOSED: [2014-05-10 Sat 20:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: RELEASE 0.95
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO Change map class so that it instantiates all the scenes
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: RELEASE 0.95
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO Make the icon and description into methods that refer to existing data
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: RELEASE 0.95
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] Expire texture cache at travel time
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: hidden forest cemetery with screech owl
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] Expire texture cache at travel time
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: General
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] fix object dup error when peeling one from stack into opened sub container gump
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: General
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
    :END:

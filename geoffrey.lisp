@@ -39,8 +39,10 @@
 (defmethod modify-health :after ((monk geoffrey) points)
   (with-fields (alive health) monk
     (when alive
-      (when (< health 20) 
-	(bark monk "I'm dying!")))
+      (or (when (< health 40) 
+	    (bark monk "I'm badly hurt!"))
+	  (when (< health 20) 
+	    (bark monk "I'm dying!"))))
     (when (and alive
 	       (not (plusp health)))
       (die monk))))
@@ -87,6 +89,26 @@
 (defmethod learn-spell :after ((self geoffrey) (spell spell))
   (narrate "You learned a new magic spell: ~A" (find-description spell))
   (magical-flourish))
+
+(defthing tome
+  :stacking nil
+  :image (random-choose *book-images*)
+  :spell nil)
+
+(defmethod initialize :after ((tome tome) &key spell)
+  (assert spell)
+  (setf (field-value :spell tome) spell))
+
+(defmethod activate ((tome tome))
+  (learn-spell (geoffrey) (field-value :spell tome))
+  (destroy tome))
+
+(defmethod find-description ((tome tome))
+  (format nil "Magic tome of ~A" 
+	  (find-description (field-value :spell tome))))
+
+(defun tome-of (spell-class)
+  (new 'tome :spell (new spell-class)))
 
 ;;; Party members
 

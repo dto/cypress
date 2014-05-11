@@ -99,7 +99,8 @@
 ;;; Travel
 
 (defthing (travel spell)
-  :description "Travel (15 fatigue, 12 hunger)"
+  :description "Travel (3 magic, some hunger)"
+  :reagents '(:magic 3)
   :image "mountain-5.png")
 
 (defmethod use :around ((caster thing) (spell travel))
@@ -108,7 +109,7 @@
       (call-next-method caster spell)))
 
 (defmethod cast ((caster thing) (spell travel))
-  (modify-hunger caster 8)
+  (modify-hunger caster (random-choose '(10 12 14)))
   (when (find-camp)
     (return-to-geoffrey (find-camp)))
   (at-next-update

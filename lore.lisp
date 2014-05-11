@@ -238,7 +238,7 @@ Sages.
   :stacking nil
   :image (random-choose *scroll-images*) 
   :text  (random-choose
-	  (list *amalia-report*
+	  (list 
 		*amalia-poem*)))
 
 (defmethod activate ((self scroll-fragment))

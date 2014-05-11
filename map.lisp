@@ -125,7 +125,7 @@
 
 (defmethod activate ((sector sector))
   (if (or *unlimited-travel*
-	  (can-travel-to sector))
+	   (can-travel-to sector))
       (travel-to sector)
       (show-error sector)))
 

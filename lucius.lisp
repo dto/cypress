@@ -55,7 +55,7 @@
     (drop-object *current-scene* (new 'pebble :heading heading) x y)))
 
 (defmethod attack :after ((monk geoffrey) (enemy enemy))
-  (when (lucius)
+  (when (and (lucius) (field-value :leader (lucius)))
     (percent-of-time 70
       (throw-pebble (lucius) (heading-to-thing (lucius) enemy)))))
 
@@ -130,7 +130,8 @@
 		       (when (< (distance-between self next-flower) 80)
 			 (stop-walking self)
 			 (setf clock 30)
-			 (take self next-flower)
+			 (unless (nothbehem-p)
+			   (take self next-flower))
 			 (setf next-flower nil)))))))
 	;; stop near geoffrey
 	(when (< distance 110)
@@ -140,9 +141,14 @@
 
 (defmethod activate ((self lucius))
   (destroy-gump self)
-  (if (null (field-value :leader self))
-      (discuss self :hello)
-      (discuss self :chat)))
+  (play-talk-sound self)
+  (if (nothbehem-p)
+      (if (field-value :locked (find-pentaquin-house))
+	  (discuss self :house)
+	  (discuss self :farewell))
+      (if (null (field-value :leader self))
+	  (discuss self :hello)
+	  (discuss self :chat))))
 
 (define-topic hello lucius
 "Greetings, brother! Well met. I don't
@@ -269,11 +275,25 @@ Shall we get moving?"
 
 (define-topic talk-more lucius 
   "Sure. What else do you want to talk
-about?" :quine :wraiths :grandfather :west :town)
+about?" :quine :wraith :grandfather :west :town)
 
 (define-topic chat lucius
   "Let's keep moving. We don't have time
 to sit around and talk, with the sun
 setting." :bye)
 
-;;; Lucius can comment on things Geoffrey picks up. 
+(define-topic house lucius 
+  "Here's my hometown! I'm so excited to
+find out what my grandfather thinks of
+you! Let's get to his house; it's the
+fancy one with the three skylights." :bye)
+
+(define-topic farewell lucius 
+  "Best of luck on your journey, Geoffrey.
+I'd come with you but, as you can see,
+I'm something of a homebody. Besides, as
+you've seen, I'm not very useful in a
+fight! Take care, Traveler, and come
+back soon.")
+
+;;; Lucius can comment on things Geoffrey picks up.
