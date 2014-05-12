@@ -132,7 +132,7 @@
     (let ((objects (get-objects spray)))
       (dolist (object objects)
 	(with-fields (x y) object
-	  (move-to object (+ x (random 20)) (+ y (random 20)))))
+	  (move-to object (+ x (random (units 4))) (+ y (random (units 4))))))
       spray)))
 
 ;; (defun some-trees ()

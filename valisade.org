@@ -3,13 +3,14 @@
 ** TODO [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
 
 
+** TODO [#A] add hidden ice-cracks and some pine trees to area in between Alonso's and hidden cemetery
+
 ** TODO [#B] allow eating violets and snowdrops for restoring 1mp
 
 
 ** TODO [#A] review video and take notes
 
 ** TODO special gravestone
-** TODO [#A] add hidden ice-cracks and some pine trees to area in between Alonso's and hidden cemetery
 ** TODO hidden cemetery with music and items
 
 ** TODO [#A] screech owl who drops amalia poem fragment 1

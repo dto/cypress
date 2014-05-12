@@ -494,3 +494,6 @@
   (modify-health monk +60)
   (modify-magic monk +100))
 
+(defmethod eat ((monk monk) (snowdrop snowdrop))
+  (modify-magic monk +1))
+

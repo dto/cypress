@@ -75,7 +75,7 @@
 (defmethod find-description ((scene garden)) "forest000")
 (defmethod map-icon ((scene garden)) (random-choose *forest-icons*))
 
-(defun some-ginseng () (spatter '(ginseng twig) :trim t :count (+ 2 (random 4))))
+(defun some-ginseng () (spatter '(ginseng twig) :trim t :count (+ 2 (random 5))))
 
 (defun some-snowdrops () (spatter 'snowdrop :trim t :count (+ 1 (random 3))))
 

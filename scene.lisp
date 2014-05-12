@@ -419,6 +419,14 @@
 
 ;;; Ruins and basements
 
+(defparameter *ruined-house-images* (image-set "ruin" 7))
+
+(defthing ruined-house 
+  :description "ruined house"
+  :scale 2.0
+  :tags '(:fixed)
+  :image (random-choose *ruined-house-images*))
+
 (defparameter *basement-images* (image-set "basement" 2))
 
 (defthing (basement scene)
@@ -472,9 +480,9 @@
   (with-border (units 10)
     (lined-up-randomly 
      (stacked-up-randomly (wood-pile) (dense-trees) (lone-wolf) (meadow-debris))
-     (stacked-up-randomly (some-trees) (spray '(ruin-wall ruin-wall berry-bush thornweed) :count (+ 7 (random 5)))
+     (stacked-up-randomly (some-trees) (spray '(ruin-wall ruined-house dead-tree ruin-wall berry-bush thornweed) :count (+ 7 (random 5)))
 			  (singleton (new 'stone-stairwell)))
-     (stacked-up-randomly (dead-trees) (spray '(ancient-road) :trim t :count 8) (spray '(wraith wolf) :count 2) (flowers)))))
+     (stacked-up-randomly (dead-trees) (with-border (units 10) (singleton (new 'ruined-house))) (spray '(wraith wolf) :count 2) (flowers)))))
 
 (defmethod drop-object :after ((ruins ruins) (monk geoffrey) &optional x y z)
   (chill monk +16))
