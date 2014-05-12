@@ -1,6 +1,51 @@
-* RELEASE 0.95
+** TODO [#A] add secrets in less-used parts of map
+** TODO [#B] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
+** TODO [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
 
-* TODO hidden forest cemetery with screech owl
+
+** TODO [#B] allow eating violets and snowdrops for restoring 1mp
+
+
+** TODO [#A] review video and take notes
+
+** TODO special gravestone
+** TODO [#A] add hidden ice-cracks and some pine trees to area in between Alonso's and hidden cemetery
+** TODO hidden cemetery with music and items
+
+** TODO [#A] screech owl who drops amalia poem fragment 1
+** TODO Restrict ginseng slightly, use more ginseng gardens w occasional weird stone
+
+** TODO [#C] Implement bleeding and blood tracks in the snow
+** TODO do screech owl AI
+** TODO [#B] display floating neumes when owl sings 
+** TODO [#A] add blackwolves
+** TODO [#B] add cryptghasts that bite and then run away
+** TODO [#A] increase general cold
+** TODO [#A] Add strange stones (use recent valisade stones)
+*** TODO Import valisade stones
+** TODO [#B] add cryptghasts to basements
+** TODO [#B] Hold Creature spell, uses Nightshade and freezes nearest creature
+** DONE [#B] Don't incrementally reveal map. just hide hidden stuff using icons 
+   CLOSED: [2014-05-11 Sun 22:04]
+** TODO [#C] Exit basements with double click on stairwell
+** TODO [#C] allow canceling travel
+** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
+** TODO Switch to new red/blue/green potion graphics
+** TODO [#B] Don't drop scrolls in any enemy booty packs
+** TODO [#C] snow footprints?
+** TODO story caves: kosmium, spiritus, dusk
+
+
+
+* RELEASE 0.95
+* TODO telekinesis spell
+* [#A] 
+*** TODO custom lisp for rain/thunder with fadein/fadeout
+*** TODO code owl
+*** TODO alter flutism.wav for downward owl cry imitation
+
+
+
 
 * TODO screech owl
 
@@ -15,22 +60,11 @@
 ** TODO add more tense militaristic battle cues
 
 * Terrain
-** TODO increase general cold
-** TODO [#A] Incrementally reveal map
-** TODO add secrets in less-used parts of map
-** TODO Reagent search should look in bags
+** DONE Reagent search should look in bags
+   CLOSED: [2014-05-11 Sun 22:06]
 ** TODO Make thornweed less common in warm areas, since it's not needed then
 ** TODO Add some different tree/shrub types
-** TODO Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
-** TODO Exit basements with double click on stairwell
-
-** TODO allow canceling travel
-** TODO Ruins: Add newly painted ruined houses, possibly with smaller basements
-** TODO add cryptghasts to basements
-
-** TODO sometimes a random carved stone with lore in the middle of the woods
 ** TODO [#C] implement snow/rain with additive blending
-** TODO [#C] ice cracks should be hidden until nearby
 ** TODO [#C] add tweeting birds
 
 * Improve Lucius helper AI
@@ -46,17 +80,13 @@
 **** TODO change to clicking modeline status to open Status scroll
 **** TODO don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
-** TODO [#A] Implement bleeding and blood tracks in the snow
-** TODO [#B] add blackwolves
-** TODO [#A] allow eating violets and snowdrops for restoring 1mp
-** TODO [#B] Hold Creature spell, uses Nightshade and is important
 ** TODO [#C] Modeline lighter(s) for Freezing/Hungry/Dying
 ** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
 ** TODO [#C] Slight health drain when freezing
 ** TODO [#C] Slight aim jitter when freezing
 ** TODO [#C] Protection (15 mana) (1 nightshade)
 *** Temporary 35% reduction in combat damage received
-** TODO Switch to new red/blue/green potion graphics
+
 
 * Nothbehem
 ** DONE move nothbehem down 1 row

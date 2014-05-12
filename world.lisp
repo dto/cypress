@@ -1,6 +1,7 @@
 (in-package :cypress)
 
 (defun resume () (play))
+;; (defun pause () 
 
 ;;; Spatial parameters
 

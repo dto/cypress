@@ -365,14 +365,11 @@
 (defthing (grassy-meadow scene)
   :background-image (random-choose *grassy-meadow-images*))
 
-(defun ginseng-garden ()
-  (spray '(dead-tree ruin-wall ginseng) :trim nil :count (+ 2 (random 3))))
-
 (defmethod make-terrain ((meadow grassy-meadow))
   (with-border (units 10)
     (lined-up-randomly 
      (stacked-up-randomly (meadow-debris) (flowers) (some-trees))
-     (stacked-up-randomly (clearing) (ginseng-garden) (clearing))
+     (stacked-up-randomly (clearing) (pine-trees) (clearing))
      (stacked-up-randomly (flowers)
 			  (lone-wolf)
 			  (spray '(silverwood stone) :count (+ 2 (random 3)))))))
@@ -381,7 +378,7 @@
 
 (defun dense-trees ()
   (randomly
-   (spray '(leafy-tree leafy-tree leafy-tree leafy-tree dead-tree)
+   (spray '(leafy-tree leafy-tree pine-tree leafy-tree dead-tree)
 	  :trim t :count (+ 4 (random 7)))
    (spray '(silverwood thornweed) :count (+ 2 (random 3)))))
 
@@ -410,12 +407,12 @@
 (defmethod make-terrain ((meadow cold-meadow))
   (with-border (units 10)
     (lined-up-randomly 
-     (stacked-up-randomly (wood-pile) (ginseng-garden) (meadow-debris))
-     (stacked-up-randomly (meadow-debris) (lone-wraith) (some-trees))
+     (stacked-up-randomly (wood-pile) (pine-trees) (meadow-debris))
+     (stacked-up-randomly (meadow-debris) (lone-wraith) (pine-trees))
      (stacked-up-randomly (dead-trees) (lone-wolf) (flowers)))))
 
 (defmethod begin-scene :after ((meadow cold-meadow))
-  (cue-music meadow (random-choose '("kosmium.ogg" "passageway.ogg"))))
+  (percent-of-time 50 (cue-music meadow (random-choose '("rain.ogg" "passageway.ogg")))))
 
 (defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
   (chill monk +12))

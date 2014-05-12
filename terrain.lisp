@@ -127,6 +127,13 @@
 		(randomly patch (singleton (new class))))))
       patch)))
 
+(defun spatter (&rest args)
+  (let ((spray (apply #'spray args)))
+    (let ((objects (get-objects spray)))
+      (dolist (object objects)
+	(with-fields (x y) object
+	  (move-to object (+ x (random 20)) (+ y (random 20)))))
+      spray)))
 
 ;; (defun some-trees ()
 ;;   (randomly 
@@ -142,7 +149,7 @@
 ;;; Forest pieces
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))
-(defparameter *reagents* '(ginseng ginseng silverwood stone branch))
+(defparameter *reagents* '(ginseng silverwood silverwood stone stone stone branch branch snowdrop violet))
 
 ;;; Enemies in scenes
 

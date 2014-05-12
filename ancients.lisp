@@ -1,5 +1,13 @@
 (in-package :cypress)
 
+(defparameter *megalith-images* (image-set "megalith" 2))
+
+(defthing megalith 
+  :scale 2.0
+  :image (random-choose *megalith-images*)
+  :tags '(:fixed)
+  :description "giant stone block")
+
 (defparameter *copper-gear-images* (image-set "copper-lock" 5))
 
 (defthing copper-gear 
@@ -58,6 +66,33 @@
 		   (remove-tag door :solid))
 	    (progn (setf open nil)
 		   (add-tag door :solid)))))))
+
+;;; Ancient garden
+
+(defthing (garden scene)
+  :background-image (random-choose *grassy-meadow-images*))
+
+(defmethod find-description ((scene garden)) "forest000")
+(defmethod map-icon ((scene garden)) (random-choose *forest-icons*))
+
+(defun some-ginseng () (spatter '(ginseng twig) :trim t :count (+ 2 (random 4))))
+
+(defun some-snowdrops () (spatter 'snowdrop :trim t :count (+ 1 (random 3))))
+
+(defun ginseng-garden ()
+  (stacked-up
+   (spray '(ruin-wall) :trim nil :count (+ 2 (random 3)))
+   (randomly (some-ginseng) (with-border (units 10) (singleton (new 'megalith))) (some-ginseng))
+   (spray '(ruin-wall copper-plate ginseng ruin-wall) :trim nil :count (+ 1 (random 4)))))
+
+(defmethod make-terrain ((scene garden))
+  (with-border (units 15)
+    (stacked-up-randomly 
+     (lined-up-randomly (some-snowdrops) (some-trees))
+     (lined-up-randomly (some-snowdrops) (ginseng-garden)))))
+
+(defmethod begin-scene :after ((scene garden))
+  (percent-of-time 70 (cue-music scene (random-choose '("ancient-fanfare.ogg" "kosmium.ogg")))))
       
 ;;; Ancient caves
 
