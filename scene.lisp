@@ -302,7 +302,7 @@
 ;;; Meadow
 
 (defun reagents ()
-  (spray (random-choose *reagents*)
+  (spatter (random-choose *reagents*)
 	 :count (+ 1 (random 5))
 	 :trim t))
 
@@ -324,14 +324,14 @@
 (defthing (meadow scene)
   :background-image (random-choose '("stone-road.png" "meadow.png")))
 
-(defun meadow-debris () (spray '(stone twig branch branch ginseng silverwood)
+(defun meadow-debris () (spatter '(stone twig branch branch ginseng silverwood)
 			       :trim t :count (+ 2 (random 4))))
 
-(defun flowers () (spray *flowers* :trim t :count (+ 1 (random 4))))
+(defun flowers () (spatter *flowers* :trim t :count (+ 1 (random 4))))
 (defun dead-tree () (singleton (new 'dead-tree)))
 (defun leafy-tree () (singleton (new 'leafy-tree)))
 (defun wood-pile ()
-  (spray '(twig twig branch dead-tree)
+  (spatter '(twig twig branch dead-tree)
 	 :trim t :count (+ 2 (random 2))))
 
 (defun clearing ()
@@ -372,7 +372,7 @@
      (stacked-up-randomly (clearing) (pine-trees) (clearing))
      (stacked-up-randomly (flowers)
 			  (lone-wolf)
-			  (spray '(silverwood stone) :count (+ 2 (random 3)))))))
+			  (spatter '(silverwood stone) :count (+ 2 (random 3)))))))
 
 ;;; Forest
 
@@ -380,7 +380,7 @@
   (randomly
    (spray '(leafy-tree leafy-tree pine-tree leafy-tree dead-tree)
 	  :trim t :count (+ 4 (random 7)))
-   (spray '(silverwood thornweed) :count (+ 2 (random 3)))))
+   (spatter '(silverwood thornweed) :count (+ 2 (random 3)))))
 
 (defun tree-clearing ()
   (with-border (units (random-choose '(5 10 12)))
@@ -506,7 +506,7 @@
 (defmethod make-terrain ((cemetery cemetery))
   (with-border (units 10)
     (lined-up-randomly 
-     (stacked-up-randomly (wood-pile) (spray 'bone-dust) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (dense-trees) (singleton (new 'grave-hag)) (spray '(nightshade ginseng)))
+     (stacked-up-randomly (wood-pile) (spatter 'bone-dust) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (dense-trees) (singleton (new 'grave-hag)) (spatter '(nightshade ginseng)))
      (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3)))
 			  ;; (singleton (new 'stone-stairwell)) 
 			  (some-trees))
@@ -555,7 +555,7 @@
 
 (defun pine-trees ()
   (randomly 
-   (spray '(silverwood snowdrop thornweed) :trim t :count (+ 2 (random 2)))
+   (spatter '(silverwood snowdrop thornweed) :trim t :count (+ 2 (random 2)))
    (spray 'pine-tree
 	  :trim nil
 	  :count (random-choose '(3 4 4 5)))))
@@ -579,17 +579,6 @@
 ;; wraiths, skeleton archers
 ;; ginseng
 
-(defthing (frozen-meadow scene)
-  :background-image (random-choose *frozen-meadow-images*))
-
-;; a few pine trees
-;; wet pools and icy areas
-;; ginseng
-;; twigs, branches
-;; black wolves
-;; wood piles
-;; dead trees
-
 (defthing (river scene)
   :background-image (random-choose *frozen-meadow-images*))
 
@@ -607,6 +596,10 @@
 
 (defmethod drop-object :after ((river river) (monk geoffrey) &optional x y z)
   (chill monk +10))
+
+(defthing (frozen-meadow river)
+  :background-image (random-choose *frozen-meadow-images*))
+
 
 ;; pools of water
 ;; various ice cracks

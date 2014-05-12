@@ -72,10 +72,10 @@
 (defthing (garden scene)
   :background-image (random-choose *grassy-meadow-images*))
 
-(defmethod find-description ((scene garden)) "forest000")
+(defmethod find-description ((scene garden)) "forest")
 (defmethod map-icon ((scene garden)) (random-choose *forest-icons*))
 
-(defun some-ginseng () (spatter '(ginseng twig) :trim t :count (+ 2 (random 5))))
+(defun some-ginseng () (spatter '(ginseng stone twig twig) :trim t :count (+ 2 (random 5))))
 
 (defun some-snowdrops () (spatter 'snowdrop :trim t :count (+ 1 (random 3))))
 
@@ -92,7 +92,8 @@
      (lined-up-randomly (some-snowdrops) (ginseng-garden)))))
 
 (defmethod begin-scene :after ((scene garden))
-  (percent-of-time 70 (cue-music scene (random-choose '("ancient-fanfare.ogg" "kosmium.ogg")))))
+  (or (percent-of-time 50 (cue-music scene (random-choose '("believe-me2.ogg" "kosmium.ogg"))) t)
+      (percent-of-time 20 (cue-music scene (random-choose '("mountain.ogg" "xolaros3.ogg"))))))
       
 ;;; Ancient caves
 

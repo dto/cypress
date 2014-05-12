@@ -395,7 +395,7 @@ dto@blocky.io
 (defthing woolen-shirt :stacking nil :image "woolen-shirt.png" :defense 1 :resistance 2)
 
 (defmethod equipment-description ((self woolen-shirt))
-  "Geoffrey is wearing a warm woolen undershirt.")
+  "Geoffrey is wearing a woolen shirt.")
 
 (defmethod activate ((self woolen-shirt))
   (toggle-equipped (geoffrey) self))

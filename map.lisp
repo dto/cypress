@@ -148,12 +148,12 @@
      cemetery frozen-forest frozen-forest
      large-mountain)
 
-    (alonso-ruins cold-meadow highway
+    (alonso-ruins frozen-meadow highway
      cold-meadow hidden-cemetery cold-meadow
      ruins frozen-meadow frozen-forest
      large-mountain)
 
-    (garden cold-meadow forest 
+    (garden frozen-meadow forest
      forest cold-meadow cold-meadow
      cold-meadow frozen-forest frozen-meadow
      large-mountain)

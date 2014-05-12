@@ -28,9 +28,11 @@
 (defresource "3-against-2.ogg" :volume 20)
 (defresource "xolaros3.ogg" :volume 20)
 (defresource "dusk.ogg" :volume 20)
+(defresource "traveler2.ogg" :volume 20)
 (defresource "lutey.ogg" :volume 20)
 (defresource "tumbling.ogg" :volume 18)
 (defresource "ruins.ogg" :volume 17)
+(defresource "mountain.ogg" :volume 12)
 (defresource "standing-by-the-river.ogg" :volume 10)
 (defresource "spiritus.ogg" :volume 20)
 (defresource "path.ogg" :volume 20)
@@ -90,9 +92,11 @@
   (background-image :initform (title-screen-image)))
 
 (defmethod initialize :after ((title title) &key)
+  (play-music "ancient-fanfare.ogg" :loop nil)
   (resize title 1280 720))
 
 (defmethod tap ((title title) x y)
+  (magical-flourish)
   (switch-to-scene (make-quest)))
 
 (defmethod scroll-tap ((title title) x y) nil)

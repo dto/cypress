@@ -497,3 +497,11 @@
 (defmethod eat ((monk monk) (snowdrop snowdrop))
   (modify-magic monk +1))
 
+(defmethod use ((monk monk) (snowdrop snowdrop))
+  (eat monk snowdrop)
+  (let ((container (find-container snowdrop)))
+    (if container
+	;; we're in a container. update the container's quantity
+	(consume-single container (class-name (class-of snowdrop)))
+	;; not in container.
+	(destroy snowdrop))))
