@@ -1,4 +1,22 @@
+** TODO fix new bag-to-bag item move crash
+** TODO fix slow scrolling
+** TODO fix jittery scrolling
+** TODO fix slots-filled error when items would stack ok
+** TODO fix broken areas
+** TODO implement conversation log / journal
+** TODO allow inventory/spellbook pinning to remember locaiton on next open?
+** TODO fix stuck items when laid on top of tree/obstacle
+** TODO fix tree corner annoyances.
+** TODO add close-game buttons
+** TODO fix being able to drop items unreachably faraway
+** TODO game doesn't close console window after X'ing out game window
+** TODO make actions into single-click?
+** TODO allow char follows mouse cursor while RMB held
+** TODO toggle spellbook / inventory with S I not just open
+** TODO don't crash when clicking current location on map
+** TODO optimize w pngcrush?lemee
 ** TODO [#A] add secrets in less-used parts of map
+** TODO Go North should say go to map
 ** TODO [#B] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
 ** TODO [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
 
