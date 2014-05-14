@@ -119,17 +119,17 @@
 
 ;;; Party members
 
-(defmethod place-party-members ((self geoffrey)) 
-  (when (and (lucius)
-  	     (field-value :leader (lucius)))
-    (multiple-value-bind (x y) (left-of self)
-      (drop-object (current-scene) (lucius) x y))))
-
 (defmethod enter-scene ((self geoffrey))
-  (place-party-members self))
+  (when (lucius-in-party-p)
+    (multiple-value-bind (x y) (left-of self)
+      (add-object (current-scene) (lucius) (- x 10) (- y 10)))))
+
+;; (defmethod add-object :after ((scene scene) (geoffrey geoffrey) &optional x y z) nil)
 
 (defmethod exit-scene ((self geoffrey))
   (stop-walking self)
+  (when (lucius-in-party-p)
+    (exit-scene (lucius)))
   (when (current-scene) 
     (remove-object (current-scene) self)))
 

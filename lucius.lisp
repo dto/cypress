@@ -48,6 +48,9 @@
 (defmethod initialize :after ((lucius lucius) &key)
   (setf *lucius* lucius))
 
+(defmethod move-to :after ((lucius lucius) x y &optional z)
+  (message "MOVE TO ~S ~S" x y))
+
 (defmethod throw-pebble ((self lucius) heading)
   (multiple-value-bind (x y) (center-point self)
     (play-sample "bow.wav")
@@ -101,28 +104,28 @@
   (with-fields (next-flower leader met-player gump waypoints clock) self
     (call-next-method)
     (decf clock)
-    (let ((distance (distance-to-cursor self)))
+    (let ((distance (distance-between self (geoffrey))))
       (when (cursor)
 	;; handle no-flowers
 	(when (null (choose-flower self))
-	  (walk-to-thing self (cursor)))
+	  (walk-to-thing self (geoffrey)))
 	;; handle first meeting
 	(when (and (not met-player)
 		   (< distance 300))
 	  (setf met-player t)
 	  (bark self "Ho, stranger!")
-	  (walk-to-thing self (cursor)))
+	  (walk-to-thing self (geoffrey)))
 	(if (or leader gump)
 	    ;; follow geoffrey
 	    (progn (when (> distance 150)
 		     (unless (or waypoints (plusp clock))
-		       (multiple-value-bind (x y) (at (cursor))
-			 (walk-to self x y))))
-		   ;; warp to geoffrey when can't pathfind
-		   (multiple-value-bind (top left right bottom) 
-		       (bounding-box (geoffrey))
-		     (when (not (can-walk-to self left top))
-		       (move-to self left top))))
+		       (multiple-value-bind (x y) (at (geoffrey))
+			 (walk-to self x y)))))
+		   ;; ;; warp to geoffrey when can't pathfind
+		   ;; (multiple-value-bind (top left right bottom) 
+		   ;;     (bounding-box (geoffrey))
+		   ;;   (when (not (can-walk-to self left top))
+		   ;;     (move-to self (- left 2) (- top 2)))))
 	    ;; pick flowers
 	    (when (and (null gump) 
 		  (> distance 240))

@@ -3,8 +3,10 @@
 ** TODO mute stone monk in near cave. walks around to bone dust
 ** TODO 
 
-** TODO [#A] Cryptghast
-** TODO [#A] Cemetery
+** DONE [#A] Cryptghast
+   CLOSED: [2014-05-14 Wed 01:08]
+** DONE [#A] Cemetery
+   CLOSED: [2014-05-14 Wed 01:08]
 
 ** TODO [#A] review video and take notes
 
@@ -54,27 +56,35 @@
 ** TODO optimize w pngcrush?lemee
 ** DONE [#B] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
    CLOSED: [2014-05-13 Tue 20:24]
-** TODO [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
+** DONE [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
+   CLOSED: [2014-05-14 Wed 01:07]
 ** DONE [#B] allow eating violets and snowdrops for restoring 1mp
    CLOSED: [2014-05-13 Tue 18:53]
-** TODO Restrict ginseng slightly, use more ginseng gardens w occasional weird stone
+** DONE Restrict ginseng slightly, use more ginseng gardens w occasional weird stone
+   CLOSED: [2014-05-14 Wed 01:07]
 ** TODO [#C] Implement bleeding and blood tracks in the snow
 ** TODO do screech owl AI
 ** TODO [#B] display floating neumes when owl sings 
 ** TODO [#A] add blackwolves
-** TODO [#B] add cryptghasts that bite and then run away
+** DONE [#B] add cryptghasts that bite and then run away
+   CLOSED: [2014-05-14 Wed 01:07]
 ** TODO [#A] increase general cold
-** TODO [#A] Add strange stones (use recent valisade stones)
+** DONE [#A] Add strange stones (use recent valisade stones)
+   CLOSED: [2014-05-14 Wed 01:07]
 *** TODO Import valisade stones
-** TODO [#B] add cryptghasts to basements
+** DONE [#B] add cryptghasts to basements
+   CLOSED: [2014-05-14 Wed 01:07]
 ** TODO [#B] Hold Creature spell, uses Nightshade and freezes nearest creature
 ** DONE [#B] Don't incrementally reveal map. just hide hidden stuff using icons 
    CLOSED: [2014-05-11 Sun 22:04]
-** TODO [#C] Exit basements with double click on stairwell
-** TODO [#C] allow canceling travel
+** DONE [#C] Exit basements with double click on stairwell
+   CLOSED: [2014-05-14 Wed 01:07]
+** DONE [#C] allow canceling travel
+   CLOSED: [2014-05-14 Wed 01:07]
 ** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
 ** TODO Switch to new red/blue/green potion graphics
-** TODO [#B] Don't drop scrolls in any enemy booty packs
+** DONE [#B] Don't drop scrolls in any enemy booty packs
+   CLOSED: [2014-05-14 Wed 01:07]
 ** TODO [#C] snow footprints?
 ** TODO story caves: kosmium, spiritus, dusk
 

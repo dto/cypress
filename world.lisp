@@ -120,9 +120,15 @@
 	      ;; no more frames
 	      (begin-animation self (if repeat animation nil) t)))))))
 
-;;; Action to run upon entering a scene
+;;; Action to run upon entering/exiting a scene
 
 (defmethod enter-scene ((self thing)) nil)
+
+(defmethod exit-scene ((self thing))
+  (when (current-scene) 
+    (remove-object (current-scene) self))
+  (setf (field-value :path self) nil)
+  (setf (field-value :waypoints self) nil))
 
 ;;; Pathfinding 
 

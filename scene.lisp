@@ -6,6 +6,10 @@
 (defvar *current-scene* nil)
 (defun current-scene () *current-scene*)
 
+(defun lucius-in-party-p ()
+  (and (lucius)
+       (field-value :leader (lucius))))
+
 (defun switch-to-scene (buffer)
   (exit-scene (geoffrey))
   (xelf::delete-all-textures)
@@ -13,10 +17,10 @@
   (switch-to-buffer buffer)
   (add-object (current-scene) (geoffrey))
   (set-cursor (current-scene) (geoffrey))
-  (snap-window-to-cursor(current-scene))
+  (snap-window-to-cursor (current-scene))
   (follow-with-camera (current-scene) (geoffrey))
-  (enter-scene (geoffrey))
-  (begin-scene buffer))
+  (begin-scene buffer)
+  (enter-scene (geoffrey)))
 
 (defvar *previous-scene* nil)
 (defvar *previous-x* nil)
