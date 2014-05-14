@@ -12,7 +12,7 @@
   :cold 0)
 
 (defmethod begin-scene :after ((scene nothbehem)) 
-  (cue-music scene (random-choose '("drum.ogg" "xmrio.ogg"))))
+  (cue-music scene (random-choose '("drum.ogg" "dusk.ogg"))))
 
 (define (pentaquin-house house)
   :scale 1.4
@@ -33,7 +33,8 @@
       (add-inventory-item house (tome-of 'craft-silver-arrows))
       (add-inventory-item house (tome-of 'cure-meat))
       (add-inventory-item house (make-scroll "Expedition report" *amalia-report*))
-      (add-inventory-item house (new 'copper-gear)))))
+      (add-inventory-item house (new 'copper-gear))
+      (add-inventory-item house (tome-of 'seance)))))
 
 (defmethod activate ((house pentaquin-house))
   (if (field-value :locked house)

@@ -68,9 +68,17 @@
 
 (defthing crack :tags '(:fixed) :image (random-choose *crack-images*))
 
+(defmethod draw ((crack crack))
+  (when (< (distance-between crack (geoffrey)) 200)
+    (call-next-method)))
+
 (defparameter *large-crack-images* (image-set "large-crack" 3))
 
 (defthing large-crack :tags '(:fixed) :image (random-choose *large-crack-images*))
+
+(defmethod draw ((crack large-crack))
+  (when (< (distance-between crack (geoffrey)) 250)
+    (call-next-method)))
 
 (defparameter *gravestone-images* (image-set "gravestone" 11))
 
@@ -390,7 +398,7 @@ dto@blocky.io
 (defmethod equipment-description ((self silver-armor))
   "Geoffrey is wearing silver armor.")
 
-(defthing woolen-leggings :stacking nil :image "woolen-leggings.png" :defense 1 :resistance 2)
+(defthing woolen-leggings :stacking nil :image "woolen-leggings.png" :defense 2 :resistance 1)
 
 (defmethod activate ((self woolen-leggings))
   (toggle-equipped (geoffrey) self))

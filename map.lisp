@@ -120,9 +120,10 @@
     ;; determine travel dir
     (setf *travel-direction* 
 	  (direction-to *map-column* *map-row* column row)) 
+    (unless (eq :here *travel-direction*)
+      (modify-hunger (geoffrey) (random-choose '(10 12 14))))
     ;; go
     (setf *map-row* row *map-column* column)
-    (modify-hunger (geoffrey) (random-choose '(10 12 14)))
     (switch-to-scene scene)))
 
 (defmethod activate-maybe ((sector sector))

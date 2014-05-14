@@ -48,9 +48,6 @@
 (defmethod initialize :after ((lucius lucius) &key)
   (setf *lucius* lucius))
 
-(defmethod move-to :after ((lucius lucius) x y &optional z)
-  (message "MOVE TO ~S ~S" x y))
-
 (defmethod throw-pebble ((self lucius) heading)
   (multiple-value-bind (x y) (center-point self)
     (play-sample "bow.wav")

@@ -106,7 +106,7 @@
 (defmethod make-terrain ((scene cave))
   (with-border (units 10)
     (stacked-up (singleton (new 'crumbling-stairwell))
-		(spray '(ruin-wall stone) :trim nil :count (random-choose '(2 3 4))))))
+		(spray '(ruin-wall copper-seal stone) :trim nil :count (random-choose '(2 3 4 5))))))
 
 (defmethod initialize :after ((scene cave) &key)
   (with-fields (height width) scene
