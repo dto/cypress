@@ -1,39 +1,53 @@
-** TODO fix new bag-to-bag item move crash
-** TODO fix slow scrolling
+
+** TODO [#A] review video and take notes
+
+** TODO [#A] fix new bag-to-bag item move crash
+** TODO [#A] fix slots-filled error when items would stack ok
+** TODO [#A] Cryptghast
+** TODO [#A] Cemetery
+
+** DONE [#A] don't crash when clicking current location on map
+   CLOSED: [2014-05-13 Tue 22:23]
+** DONE [#A] Go North should say go to map
+   CLOSED: [2014-05-13 Tue 22:23]
+** DONE [#A] fix broken areas
+   CLOSED: [2014-05-13 Tue 21:54]
+** TODO Make travel not use reagents if returning to same square
+** TODO [#A] add secrets in less-used parts of map
+
+
+** TODO print message when eat snowdrop
+** TODO [#B] add coherent error msg when can't equip
+
+** TODO [#A] hidden cemetery with music and items
+*** TODO [#B] special gravestone
+
+** TODO [#A] add hidden ice-cracks and some pine trees to area in between Alonso's and hidden cemetery
+
+** TODO [#A] screech owl who drops amalia poem fragment 1
+
+** TODO [#C] fix stuck items when laid on top of tree/obstacle
+** TODO [#C] fix tree corner annoyances.
+
+** DONE fix slow scrolling
+   CLOSED: [2014-05-13 Tue 21:55]
 ** TODO fix jittery scrolling
-** TODO fix slots-filled error when items would stack ok
-** TODO fix broken areas
+
 ** TODO implement conversation log / journal
 ** TODO allow inventory/spellbook pinning to remember locaiton on next open?
-** TODO fix stuck items when laid on top of tree/obstacle
-** TODO fix tree corner annoyances.
 ** TODO add close-game buttons
 ** TODO fix being able to drop items unreachably faraway
 ** TODO game doesn't close console window after X'ing out game window
 ** TODO make actions into single-click?
 ** TODO allow char follows mouse cursor while RMB held
 ** TODO toggle spellbook / inventory with S I not just open
-** TODO don't crash when clicking current location on map
 ** TODO optimize w pngcrush?lemee
-** TODO [#A] add secrets in less-used parts of map
-** TODO Go North should say go to map
-** TODO [#B] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
+** DONE [#B] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
+   CLOSED: [2014-05-13 Tue 20:24]
 ** TODO [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
-
-
-** TODO [#A] add hidden ice-cracks and some pine trees to area in between Alonso's and hidden cemetery
-
-** TODO [#B] allow eating violets and snowdrops for restoring 1mp
-
-
-** TODO [#A] review video and take notes
-
-** TODO special gravestone
-** TODO hidden cemetery with music and items
-
-** TODO [#A] screech owl who drops amalia poem fragment 1
+** DONE [#B] allow eating violets and snowdrops for restoring 1mp
+   CLOSED: [2014-05-13 Tue 18:53]
 ** TODO Restrict ginseng slightly, use more ginseng gardens w occasional weird stone
-
 ** TODO [#C] Implement bleeding and blood tracks in the snow
 ** TODO do screech owl AI
 ** TODO [#B] display floating neumes when owl sings 
@@ -53,8 +67,6 @@
 ** TODO [#B] Don't drop scrolls in any enemy booty packs
 ** TODO [#C] snow footprints?
 ** TODO story caves: kosmium, spiritus, dusk
-
-
 
 * RELEASE 0.95
 * TODO telekinesis spell
