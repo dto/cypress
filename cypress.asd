@@ -15,6 +15,7 @@
 	       (:file "scene" :depends-on ("terrain"))
 	       (:file "town" :depends-on ("scene"))
 	       (:file "ancients" :depends-on ("town"))
-	       (:file "map" :depends-on ("ancients"))
+	       (:file "alonso" :depends-on ("ancients"))
+	       (:file "map" :depends-on ("alonso"))
 	       (:file "lore" :depends-on ("map"))
 	       (:file "cypress" :depends-on ("lore"))))

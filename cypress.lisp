@@ -36,6 +36,7 @@
 (defresource "standing-by-the-river.ogg" :volume 10)
 (defresource "spiritus.ogg" :volume 20)
 (defresource "path.ogg" :volume 20)
+(defresource "rain.ogg" :volume 20)
 (defresource "xmrio.ogg" :volume 20)
 (defresource "drum.ogg" :volume 20)
 (defresource "flutism.ogg" :volume 20)
@@ -105,7 +106,7 @@
 ;;; Main game
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "cypress v0.95") 
+  (setf *window-title* "cypress v0.96") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)
