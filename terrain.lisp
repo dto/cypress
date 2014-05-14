@@ -163,7 +163,7 @@
 
 (defun rock-outcropping ()
   (spray '(gray-rock stone stone)
-	 :trim t :count (+ 5 (random 4))))
+	 :trim nil :count (+ 5 (random 4))))
 
 
 ;; (defun dense-trees ()
