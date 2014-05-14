@@ -254,4 +254,8 @@
   (or *map-screen*
       (setf *map-screen* (new 'map-screen))))
 
+(defun switch-to-map ()
+  (at-next-update
+    (remove-object (current-buffer) (geoffrey))
+    (switch-to-buffer (ildron))))
 

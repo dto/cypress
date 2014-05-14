@@ -35,6 +35,12 @@
   :image (random-choose *berry-bush-images*)
   :scale 1.4)
 
+(defmethod enter-scene ((bush berry-bush))
+  (add-inventory-item bush (quantity-of 'nightshade (1+ (random 3)))))
+
+(defmethod activate ((bush berry-bush))
+  (replace-gump bush (new 'browser :container bush)))
+
 (defparameter *bone-dust-images* (image-set "bone-dust" 4))
 
 (defthing bone-dust :image (random-choose *bone-dust-images*))
@@ -349,7 +355,7 @@ dto@blocky.io
 (defmethod activate ((book silver-book))
   (bark (geoffrey) "I can't read this language."))
 
-(defparameter *boxed-items* '(silver-elixir elixir silver-armor woolen-leggings silver-bow silver-book))
+(defparameter *boxed-items* '(silver-elixir wheat-bread jerky elixir silver-armor silver-book))
 
 (defun grab (bag &optional (count (+ 1 (random 3))))
   (let (items)
@@ -376,7 +382,7 @@ dto@blocky.io
 (defmethod activate ((self silver-bow))
   (toggle-equipped (geoffrey) self))
 
-(defthing silver-armor :stacking nil :defense 3 :resistance 1 :image "silver-armor.png")
+(defthing silver-armor :stacking nil :defense 3 :resistance 2 :image "silver-armor.png")
 
 (defmethod activate ((self silver-armor))
   (toggle-equipped (geoffrey) self))

@@ -29,6 +29,7 @@
 (defresource "3-against-2.ogg" :volume 20)
 (defresource "xolaros3.ogg" :volume 20)
 (defresource "dusk.ogg" :volume 20)
+(defresource "monks.ogg" :volume 20)
 (defresource "traveler2.ogg" :volume 20)
 (defresource "lutey.ogg" :volume 20)
 (defresource "tumbling.ogg" :volume 18)

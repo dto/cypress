@@ -299,7 +299,17 @@ fancy one with the three skylights." :bye)
 I'd come with you but, as you can see,
 I'm something of a homebody. Besides, as
 you've seen, I'm not very useful in a
-fight! Take care, Traveler, and come
+fight! 
+
+Oh! I almost forgot to tell you. I've
+been hearing a weird sound in the forest
+up to the northeast. It sounds like a
+very strange bird, and plays a sad
+song. I've never heard such a sound in
+my life! I wonder if it's connected to
+your appearance?
+
+Take care, Traveler, and come
 back soon.")
 
 ;;; Lucius can comment on things Geoffrey picks up.

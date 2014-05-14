@@ -39,7 +39,7 @@
 (defun restore-excursion-maybe ()
   (when (and *previous-scene* *previous-x* *previous-y*)
     (restore-excursion)))
-
+    
 (defparameter *use-music* t)
 
 (define-buffer scene 
@@ -62,7 +62,7 @@
     ((:s) open-spellbook)
     ((:i) open-inventory)))
 
-(defmethod drop-object :after ((scene scene) (thing thing) &optional x y z)
+(defmethod add-object :after ((scene scene) (thing thing) &optional x y z)
   (enter-scene thing))
 
 (defmethod map-icon ((scene scene))
@@ -449,18 +449,21 @@
   :tags '(:fixed)
   :image (random-choose *ruined-house-images*))
 
+(defmethod begin-scene :after ((house ruined-house))
+  (send-to-back house))
+
 (defparameter *basement-images* (image-set "basement" 2))
 
 (defthing (basement scene)
   :darkness-image "darkness.png"
   :background-image (random-choose *basement-images*))
 
-(defmethod initialize :after ((scene basement) &key)
+(defmethod begin-scene :after ((scene basement))
   (resize-to-background-image scene))
 
 (defmethod make-terrain ((scene basement))
   (with-border (units 15)
-    (or (percent-of-time 50 (spray '(corpse bone-dust bone-dust ) :count (+ 2 (random 4))))
+    (or (percent-of-time 50 (spray '(corpse bone-dust bone-dust cryptghast) :count (+ 2 (random 4))))
 	(percent-of-time 40 (singleton (new 'coverstone)))
 	(spray 'ruin-wall :trim nil :count (1+ (random 3))))))
 	
@@ -486,7 +489,9 @@
   :image (random-choose *crumbling-stair-images*))
 
 (defmethod activate ((self crumbling-stairwell))
-  (restore-excursion-maybe))
+  (if *previous-scene*
+      (restore-excursion-maybe)
+      (switch-to-map)))
 
 (defthing (ruins scene)
   :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png")))
@@ -494,7 +499,7 @@
 (defmethod make-terrain ((ruins ruins))
   (with-border (units 10)
     (lined-up-randomly 
-     (stacked-up-randomly (wood-pile) (dense-trees) (lone-wolf) (meadow-debris))
+     (stacked-up-randomly (wood-pile) (some-trees) (singleton (new 'ruined-house)) (lone-wolf) (meadow-debris))
      (stacked-up-randomly (some-trees) (spray '(ruin-wall ruined-house dead-tree ruin-wall berry-bush thornweed) :count (+ 7 (random 5)))
 			  (singleton (new 'stone-stairwell)))
      (stacked-up-randomly (dead-trees) (with-border (units 10) (singleton (new 'ruined-house))) (spray '(wraith wolf) :count 2) (flowers)))))
@@ -530,39 +535,6 @@
 (defmethod drop-object :after ((cemetery cemetery) (monk geoffrey) &optional x y z)
   (chill monk +15))
 
-;;; Hidden cemetery
-
-(defthing (hidden-cemetery scene)
-  :background-image "stone-road.png")
-
-(defmethod map-icon ((self hidden-cemetery)) (random-choose *forest-icons*))
-
-(defmethod find-description ((self hidden-cemetery)) "forest")
-
-(defun small-fence ()
-  (with-border (units 3)
-    (apply #'stacked-up (mapcar #'singleton
-				(list 
-				(new 'iron-fence)
-				(new 'iron-fence)
-				(new 'iron-fence)
-				(new 'iron-fence)
-				(new 'iron-fence))))))
-(defun small-cemetery ()
-  (lined-up (small-fence)
-	    (stacked-up 
-	     (flowers)
-	     (some-graves)
-	     (flowers))
-	    (small-fence)))
-
-(defmethod make-terrain ((self hidden-cemetery))
-  (with-border (units 12)
-    (stacked-up 
-     (lined-up (some-trees) (some-trees) (some-trees))
-     (lined-up (flowers) (small-cemetery) (flowers))
-     (lined-up (some-trees) (some-trees) (some-trees)))))
-
 ;;; Frozen forest
 
 (defthing (frozen-forest scene)
@@ -580,13 +552,13 @@
 
 (defmethod make-terrain ((forest frozen-forest))
   (with-border (units 10)
-    (lined-up-randomly 
-     (stacked-up-randomly (rock-outcropping) (pine-trees) (pine-trees))
-     (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
-     (stacked-up-randomly (dead-trees-and-puddles) (pack-of-wolves) (wood-pile)))))
+    (stacked-up-randomly 
+     (lined-up-randomly (rock-outcropping) (dead-trees-and-puddles) (pine-trees) (pine-trees))
+     (lined-up-randomly (pine-trees) (lone-wraith) (pine-trees))
+     (lined-up-randomly (dead-trees-and-puddles) (pack-of-wolves) (wood-pile)))))
 
 (defmethod drop-object :after ((forest frozen-forest) (monk geoffrey) &optional x y z)
-  (chill monk +20))
+  (chill monk +30))
 
 ;; dense pine trees and some dead trees
 ;; wood piles and twigs and branches

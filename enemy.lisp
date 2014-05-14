@@ -1,5 +1,8 @@
 (in-package :cypress)
 
+(defresource "creep-1.wav" :volume 10)
+(defresource "creep-2.wav" :volume 10)
+(defresource "creep-3.wav" :volume 10)
 (defresource "groar.wav" :volume 20)
 (defresource "grak.wav" :volume 20)
 (defresource "grunt-1.wav" :volume 20)
@@ -26,6 +29,33 @@
 (defmethod modify-health :around ((enemy enemy) points)
   (call-next-method enemy (* points (compute-modifier (geoffrey) :attack))))
 
+;;; Cryptghasts! 
+
+(defparameter *cryptghast-skull-images* (image-set "cryptghast-skull" 2))
+(defparameter *cryptghast-walk-images* (image-set "cryptghast-walk" 3))
+
+(defthing (cryptghast enemy)
+  :image-scale 1000
+  :sprite-height 130
+  :sprite-width 130
+  :tags '(:enemy)
+  :health 15
+  :image (random-choose *cryptghast-walk-images*))
+
+(defmethod die ((self cryptghast))
+  (play-sound self "death.wav")
+  (destroy self))
+
+(defmethod run ((self cryptghast))
+  (let ((distance (distance-to-cursor self)))
+    (if (> distance 600)
+	(setf (field-value :image self) "cryptghast-skull-1.png")
+	(percent-of-time 40
+	  (setf (field-value :heading self) (heading-to-cursor self))
+	  (forward self 7)
+	  (percent-of-time 30 (play-sound self (random-choose '("creep-1.wav" "creep-2.wav" "creep-3.wav"))))
+	  (setf (field-value :image self) (random-choose *cryptghast-walk-images*))))))
+
 ;;; Wraiths
 
 (defthing (wraith enemy)
@@ -40,7 +70,7 @@
 (defmethod die ((self wraith))
   (let ((remains (new 'remains)))
     (when (percent-of-time 70 t)
-      (add-inventory-item remains (new (random-choose '(skull wolf-corpse stone item-box))))
+      (add-inventory-item remains (new (random-choose '(skull wolf-corpse stone))))
       (if (percent-of-time 70 t)
 	  (if (percent-of-time 50 t)
 	      (add-inventory-item remains (reagent-bag))

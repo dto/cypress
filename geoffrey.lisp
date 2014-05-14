@@ -26,6 +26,13 @@
   (add-inventory-item monk (make-scroll "Summons from Dr. Quine" *quine-summons*))
   (equip monk (find-arrow monk)))
 
+(defmethod equip :after ((monk geoffrey) (self thing))
+  (when (not (field-value :equipper self))
+    (narrate "You cannot equip this item in its current location.")))
+
+(defmethod eat :after ((monk geoffrey) (snowdrop snowdrop))
+  (bark monk (random-choose '("I gained one Magic Point."))))
+
 (defmethod humanp ((monk geoffrey)) t)
 
 (defmethod activate ((monk geoffrey))

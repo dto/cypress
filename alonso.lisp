@@ -30,7 +30,10 @@
     (stacked-up (with-border (units 4) (singleton (new 'crumbling-stairwell)))
 		(lined-up (spray '(bone-dust bone-dust nightshade) :trim nil :count 4)
 			  (singleton (new 'ruin-wall))
-			  (singleton (new 'alonso-corpse))))))
+			  (singleton (new 'alonso-corpse)))
+		(lined-up (singleton (new 'ruin-wall))
+			  (singleton (new 'cryptghast)) 
+			  (singleton (new 'cryptghast))))))
   
 (defthing alonso-stairwell 
   :tags '(:fixed) 
@@ -90,5 +93,5 @@ from this letter, that you are forgiven.
 (defmethod make-terrain ((scene alonso-ruins))
   (with-border (units 10)
     (lined-up-randomly
-     (stacked-up-randomly (singleton (new 'ruin-wall)) (lone-wraith) (alonso-pentaquin-house) (dead-trees))
+     (stacked-up-randomly (singleton (new 'ruin-wall)) (alonso-pentaquin-house) (dead-trees))
      (stacked-up-randomly (lone-wraith) (lone-wraith) (singleton (new 'ruin-wall)) (lone-wraith) (dead-trees)))))

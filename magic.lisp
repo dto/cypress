@@ -111,10 +111,7 @@
 (defmethod cast ((caster thing) (spell travel))
   (when (find-camp)
     (return-to-geoffrey (find-camp)))
-  (at-next-update
-    (let ((old-buffer (current-buffer)))
-      (remove-object (current-buffer) (geoffrey))
-      (switch-to-buffer (ildron)))))
+  (switch-to-map))
 
 ;;; Cure meat
 

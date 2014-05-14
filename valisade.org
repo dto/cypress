@@ -1,10 +1,17 @@
+** The secret cemetery quest from alonso 
+
+** TODO mute stone monk in near cave. walks around to bone dust
+** TODO 
+
+** TODO [#A] Cryptghast
+** TODO [#A] Cemetery
 
 ** TODO [#A] review video and take notes
 
-** TODO [#A] fix new bag-to-bag item move crash
-** TODO [#A] fix slots-filled error when items would stack ok
-** TODO [#A] Cryptghast
-** TODO [#A] Cemetery
+** DONE [#A] fix new bag-to-bag item move crash
+   CLOSED: [2014-05-13 Tue 22:59]
+** DONE [#A] fix slots-filled error when items would stack ok
+   CLOSED: [2014-05-13 Tue 22:59]
 
 ** DONE [#A] don't crash when clicking current location on map
    CLOSED: [2014-05-13 Tue 22:23]
@@ -12,11 +19,14 @@
    CLOSED: [2014-05-13 Tue 22:23]
 ** DONE [#A] fix broken areas
    CLOSED: [2014-05-13 Tue 21:54]
-** TODO Make travel not use reagents if returning to same square
+** DONE Make travel not use reagents if returning to same square
+   CLOSED: [2014-05-13 Tue 22:59]
 ** TODO [#A] add secrets in less-used parts of map
 
 
-** TODO print message when eat snowdrop
+** DONE print message when eat snowdrop
+   CLOSED: [2014-05-13 Tue 23:17]
+
 ** TODO [#B] add coherent error msg when can't equip
 
 ** TODO [#A] hidden cemetery with music and items

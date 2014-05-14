@@ -104,16 +104,23 @@
   :background-image (random-choose *ancient-cave-images*))
 
 (defmethod make-terrain ((scene cave))
-  (percent-of-time 40
   (with-border (units 10)
-    (spray '(ruin-wall) :trim nil :count (random-choose '(2 3 4))))))
+    (stacked-up (singleton (new 'crumbling-stairwell))
+		(spray '(ruin-wall stone) :trim nil :count (random-choose '(2 3 4))))))
 
 (defmethod initialize :after ((scene cave) &key)
-  (resize-to-background-image scene)
   (with-fields (height width) scene
     (percent-of-time 80
       (dotimes (n (1+ (random 5)))
 	(drop-object scene (new 'bone-dust) (random width) (random height))))))
+
+(defmethod begin-scene :after ((scene cave))
+  (with-fields (height width) scene
+    (resize-to-background-image scene)
+    (percent-of-time 40 (cue-music scene (random-choose '("monks.ogg" "dusk.ogg" "spiritus.ogg"))))
+    (percent-of-time 20 (drop-object scene (new 'cryptghast) (random width) (random height)))	
+    (percent-of-time 20 (drop-object scene (new 'cryptghast) (random width) (random height)))
+    (percent-of-time 40 (drop-object scene (make-box) (- width 200) (- height 200)))))
 
 (defthing (eastern-cave cave))
 (defthing (southern-cave cave))

@@ -509,5 +509,3 @@
 	;; not in container.
 	(destroy snowdrop))))
 
-(defmethod eat :after ((monk geoffrey) (snowdrop snowdrop))
-  (bark monk (random-choose '("I gained one Magic Point."))))
