@@ -436,9 +436,12 @@
 	      (begin-firing monk)
 	      (modify-hunger monk 1))))))
 
-(defmethod can-accept ((self monk))
+(defmethod will-accept ((self monk) (item thing))
   (with-fields (inventory) self
-    (not (fullp inventory))))
+    (if (field-value :stacking item)
+	(or (search-inventory self (class-name (class-of item)))
+	    (not (fullp inventory)))
+	(not (fullp inventory)))))
 
 ;;; Monk food and potions
 
