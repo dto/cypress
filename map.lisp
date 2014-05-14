@@ -148,7 +148,7 @@
      cemetery frozen-forest frozen-forest
      large-mountain)
 
-    (alonso-ruins frozen-meadow highway
+    (alonso-ruins frozen-meadow frozen-forest
      cold-meadow hidden-cemetery cold-meadow
      ruins frozen-meadow frozen-forest
      large-mountain)
