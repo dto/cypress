@@ -79,6 +79,9 @@ from this letter, that you are forgiven.
 (defthing (alonso-ruins scene)
   :background-image "paynes-meadow.png")
 
+(defmethod begin-scene :after ((scene alonso-ruins))
+  (percent-of-time 50 (cue-music scene (random-choose '("battle-1.ogg" "rain.ogg")))))
+
 (defmethod find-description ((scene alonso-ruins)) "forest")
 
 (defmethod map-icon ((scene alonso-ruins))

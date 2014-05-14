@@ -24,6 +24,7 @@
 (defresource "passageway.ogg" :volume 20)
 (defresource "home.ogg" :volume 08)
 (defresource "kosmium.ogg" :volume 10)
+(defresource "battle-1.ogg" :volume 20) 
 (defresource "believe-me2.ogg" :volume 20)
 (defresource "3-against-2.ogg" :volume 20)
 (defresource "xolaros3.ogg" :volume 20)
