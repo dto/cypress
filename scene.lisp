@@ -418,6 +418,9 @@
 					(lone-wraith))
 			  (dense-trees)))))
 
+(defmethod begin-scene :after ((forest forest))
+  (percent-of-time 8 (prog1 t (cue-music (random-choose '("rain.ogg" "believe-me2.ogg" "xolaros3.ogg" "thunder-med.ogg" "thunder-big.ogg" "crickets.ogg"))))))
+
 ;;; Cold meadow
 
 (defthing (cold-meadow scene)
@@ -431,7 +434,7 @@
      (stacked-up-randomly (dead-trees) (lone-wolf) (flowers)))))
 
 (defmethod begin-scene :after ((meadow cold-meadow))
-  (percent-of-time 50 (cue-music meadow (random-choose '("rain.ogg" "passageway.ogg")))))
+  (percent-of-time 50 (cue-music meadow (random-choose '("crickets.ogg" "passageway.ogg")))))
 
 (defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
   (chill monk +12))
