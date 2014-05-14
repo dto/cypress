@@ -144,7 +144,7 @@
 	    (unless (field-value :quadtree buffer)
 	      (install-quadtree buffer))))))
     ;; adjust scrolling parameters 
-    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 3))
+    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 2.8))
 	  (%horizontal-scrolling-margin buffer) 3/5
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
