@@ -108,8 +108,12 @@
 (defmethod can-travel-to ((sector sector))
   (and (can-be-visited (field-value :scene sector))
        (with-fields (row column) sector
-	 (and (>= 1 (abs (- row *map-row*)))
-	      (>= 1 (abs (- column *map-column*)))))))
+	 (and
+	  ;; ;; don't allow return to same square
+	  ;; (not (and (= row *map-row*)
+	  ;; 	    (= column *map-column*)))
+	  (>= 1 (abs (- row *map-row*)))
+	  (>= 1 (abs (- column *map-column*)))))))
 
 (defmethod travel-to ((sector sector))
   (with-fields (terrain row column scene) sector 
@@ -118,6 +122,7 @@
 	  (direction-to *map-column* *map-row* column row)) 
     ;; go
     (setf *map-row* row *map-column* column)
+    (modify-hunger (geoffrey) (random-choose '(10 12 14)))
     (switch-to-scene scene)))
 
 (defmethod activate-maybe ((sector sector))

@@ -109,7 +109,6 @@
       (call-next-method caster spell)))
 
 (defmethod cast ((caster thing) (spell travel))
-  (modify-hunger caster (random-choose '(10 12 14)))
   (when (find-camp)
     (return-to-geoffrey (find-camp)))
   (at-next-update
