@@ -1,27 +1,44 @@
 (in-package :cypress)
 
-;;; Scene
-
 (defvar *status-line* nil)
-
 (defun status-line () *status-line*)
 
 (defvar *current-scene* nil)
-
 (defun current-scene () *current-scene*)
 
-(defun switch-to-scene (buffer &optional previous-x previous-y)
-  ;; (play-music (random-choose *soundtrack*) :loop nil)
-  (stop-walking (geoffrey))
-  (switch-to-buffer buffer)
+(defun switch-to-scene (buffer)
+  (exit-scene (geoffrey))
   (xelf::delete-all-textures)
-  (set-cursor buffer (geoffrey))
-  (when (and (numberp previous-x) (numberp previous-y))
-    (move-to (geoffrey) previous-x previous-y))
-  (snap-window-to-cursor buffer)
-  (follow-with-camera buffer (geoffrey))
   (setf *current-scene* buffer)
+  (switch-to-buffer buffer)
+  (add-object (current-scene) (geoffrey))
+  (set-cursor (current-scene) (geoffrey))
+  (snap-window-to-cursor(current-scene))
+  (follow-with-camera (current-scene) (geoffrey))
+  (enter-scene (geoffrey))
   (begin-scene buffer))
+
+(defvar *previous-scene* nil)
+(defvar *previous-x* nil)
+(defvar *previous-y* nil)
+
+(defun save-excursion ()
+  (setf *previous-scene* (current-scene))
+  (multiple-value-bind (x y) (at (geoffrey))
+    (setf *previous-x* x *previous-y* y)))
+
+(defun restore-excursion ()
+  (assert (and *previous-scene* *previous-x* *previous-y*))
+  (switch-to-scene *previous-scene*)
+  (move-to (geoffrey) *previous-x* *previous-y*)
+  (snap-window-to-cursor (current-scene))
+  (setf *previous-scene* nil
+	*previous-x* nil
+	*previous-y* nil))
+
+(defun restore-excursion-maybe ()
+  (when (and *previous-scene* *previous-x* *previous-y*)
+    (restore-excursion)))
 
 (defparameter *use-music* t)
 
@@ -88,6 +105,7 @@
 (defmethod starting-x ((buffer scene) direction)
   (with-fields (width) buffer 
      (ecase direction
+       (:here *previous-x*)
        (:downright (units 5))
        (:downleft (- width (units 8)))
        (:down (/ width 2))
@@ -100,6 +118,7 @@
 (defmethod starting-y ((buffer scene) direction)
   (with-fields (height) buffer 
      (ecase direction
+       (:here *previous-y*)
        (:downright (units 5))
        (:downleft (units 5))
        (:down (units 5))
@@ -442,10 +461,6 @@
 	(percent-of-time 40 (singleton (new 'coverstone)))
 	(spray 'ruin-wall :trim nil :count (1+ (random 3))))))
 	
-(defvar *previous-scene* nil)
-(defvar *previous-x* nil)
-(defvar *previous-y* nil)
-
 (defthing stone-stairwell 
   :tags '(:fixed) 
   :scale 0.8
@@ -457,21 +472,18 @@
   (with-fields (basement) self
     (when (null basement)
       (setf basement (new 'basement)))
-    (setf *previous-scene* (current-scene))
-    (multiple-value-bind (x y) (at (cursor))
-      (setf *previous-x* x *previous-y* y)
-      (switch-to-scene basement))))
+    (save-excursion)
+    (switch-to-scene basement)))
 
 (defparameter *crumbling-stair-images* (image-set "crumbling-stair" 2))
 
 (defthing crumbling-stairwell 
   :tags '(:fixed) 
-  :image-scale 200
+  :scale 2
   :image (random-choose *crumbling-stair-images*))
 
 (defmethod activate ((self crumbling-stairwell))
-  (switch-to-scene *previous-scene* *previous-x* *previous-y*)
-  (setf *previous-scene* nil))
+  (restore-excursion-maybe))
 
 (defthing (ruins scene)
   :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png")))
@@ -608,6 +620,7 @@
 
 (defthing (highway scene)
   :background-image (random-choose '("stone-road.png" "golden-meadow.png")))
+
 ;; generated roadway
 ;; stone chips
 ;; twigs

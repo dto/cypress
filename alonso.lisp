@@ -1,15 +1,5 @@
 (in-package :cypress)
 
-;;; Alonso's ruins
-
-(defthing (alonso-ruins scene)
-  :background-image "paynes-meadow.png")
-
-(defmethod find-description ((scene alonso-ruins)) "forest")
-
-(defmethod map-icon ((scene alonso-ruins))
-  (random-choose *forest-icons*))
-
 (defthing (alonso-basement scene)
   :darkness-image "darkness.png"
   :background-image (random-choose *basement-images*))
@@ -37,10 +27,11 @@
 
 (defmethod make-terrain ((scene alonso-basement))
   (with-border (units 12)
-    (lined-up (spray '(bone-dust bone-dust nightshade) :trim nil :count 4)
-	      (singleton (new 'ruin-wall))
-	      (singleton (new 'alonso-corpse)))))
-
+    (stacked-up (with-border (units 4) (singleton (new 'crumbling-stairwell)))
+		(lined-up (spray '(bone-dust bone-dust nightshade) :trim nil :count 4)
+			  (singleton (new 'ruin-wall))
+			  (singleton (new 'alonso-corpse))))))
+  
 (defthing alonso-stairwell 
   :tags '(:fixed) 
   :scale 0.8
@@ -52,12 +43,13 @@
   (with-fields (basement) self
     (when (null basement)
       (setf basement (new 'alonso-basement)))
+    (save-excursion)
     (switch-to-scene basement)))
 
-(defmethod starting-x ((self alonso-stairwell) dir)
+(defmethod starting-x ((self alonso-basement) dir)
   (units 8))
 
-(defmethod starting-y ((self alonso-stairwell) dir)
+(defmethod starting-y ((self alonso-basement) dir)
   (units 8))
 
 (defthing alonso-pentaquin-house 
@@ -83,6 +75,14 @@ from this letter, that you are forgiven.
 (defun alonso-pentaquin-house ()
   (combine (singleton (new 'alonso-pentaquin-house))
 	   (with-border (units 8) (singleton (new 'alonso-stairwell)))))
+
+(defthing (alonso-ruins scene)
+  :background-image "paynes-meadow.png")
+
+(defmethod find-description ((scene alonso-ruins)) "forest")
+
+(defmethod map-icon ((scene alonso-ruins))
+  (random-choose *forest-icons*))
   
 (defmethod make-terrain ((scene alonso-ruins))
   (with-border (units 10)

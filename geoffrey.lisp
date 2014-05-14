@@ -121,6 +121,11 @@
 (defmethod enter-scene ((self geoffrey))
   (place-party-members self))
 
+(defmethod exit-scene ((self geoffrey))
+  (stop-walking self)
+  (when (current-scene) 
+    (remove-object (current-scene) self)))
+
 ;;; Geoffrey's magic tent
 
 (defparameter *fire-images* (image-set "fire" 4))
