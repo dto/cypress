@@ -276,7 +276,8 @@ Shall we get moving?"
   (follow self (geoffrey))
   (learn-spell (geoffrey) (new 'travel))
   (cue-music (current-scene) (random-choose '("path.ogg" "lutey.ogg" "tumbling.ogg")))
-  (bark self "Very well. Let's head North!"))
+  (activate (find-spellbook))
+  (bark self "Excellent! Now, cast your travel spell!"))
 
 (define-topic talk-more lucius 
   "Sure. What else do you want to talk
