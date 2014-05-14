@@ -53,7 +53,7 @@
 
 (defmethod run ((self wraith))
   (with-fields (image heading seen-player) self
-  (when (< (distance-to-cursor self) 780)
+  (when (< (distance-to-cursor self) 920)
     (unless seen-player
       (play-sample (random-choose '("lichscream.wav" "lichdie.wav")))
       (setf seen-player t))
