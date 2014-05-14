@@ -551,7 +551,7 @@
 ;;; Frozen forest
 
 (defthing (frozen-forest scene)
-  :backgrounnd-image (random-choose *frozen-meadow-images*))
+  :background-image (random-choose *frozen-meadow-images*))
 
 (defun pine-trees ()
   (randomly 
