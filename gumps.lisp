@@ -323,13 +323,15 @@
 
 (defmethod can-pick ((browser browser))
   (let ((x (window-pointer-x))
-	(y (window-pointer-y)))
+	(y (window-pointer-y))
+	(target (field-value :target browser)))
     (let ((icon (hit-icons browser x y)))
       (if icon 
-	  (if (can-reach (field-value :target browser) 
-			   (geoffrey))
-	      (can-pick icon)
-	      (prog1 nil (show-error browser)))
+	  (if 
+	   (or (eq target (geoffrey))
+	       (can-reach target (geoffrey)))
+	   (can-pick icon)
+	   (prog1 nil (show-error browser)))
 	  ;; you should always be able to move the gump
 	  browser))))
 
