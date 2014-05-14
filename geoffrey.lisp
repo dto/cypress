@@ -9,7 +9,7 @@
 (defthing (geoffrey monk) :description "Geoffrey")
 
 (defmethod eat :after ((monk geoffrey) (food food))
-  (narrate "Very good! You feel better."))
+  (bark monk (random-choose '("Very good!" "That's much better." "Delicious!"))))
 
 (defmethod alternate-tap ((self geoffrey) x y)
   (replace-gump self (new 'scroll-gump :text (status-text))))
