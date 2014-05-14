@@ -154,6 +154,12 @@
       (stop-walking self))
     waypoints))
 
+(defmethod can-walk-to ((self thing) x1 y1)
+  (with-fields (x y waypoints path) self
+    (when (null path) 
+      (setf path (create-path self :buffer (current-buffer))))
+    (find-path-waypoints path x y x1 y1)))
+
 (defmethod walk-to-thing ((self thing) (destination thing))
   (multiple-value-bind (x y) (center-point destination)
     (walk-to self x y)))

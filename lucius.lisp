@@ -26,7 +26,7 @@
     (incf heading 0.002)
     (if (minusp clock)
 	(destroy self)
-	(forward self 17))))
+	(forward self 14))))
 
 (defmethod collide ((self pebble) (enemy enemy))
   (damage enemy (random-choose '(-2 -4)))
@@ -114,10 +114,15 @@
 	  (walk-to-thing self (cursor)))
 	(if (or leader gump)
 	    ;; follow geoffrey
-	    (when (> distance 150)
-	      (unless (or waypoints (plusp clock))
-		(multiple-value-bind (x y) (at (cursor))
-		  (walk-to self x y))))
+	    (progn (when (> distance 150)
+		     (unless (or waypoints (plusp clock))
+		       (multiple-value-bind (x y) (at (cursor))
+			 (walk-to self x y))))
+		   ;; warp to geoffrey when can't pathfind
+		   (multiple-value-bind (top left right bottom) 
+		       (bounding-box (geoffrey))
+		     (when (not (can-walk-to self left top))
+		       (move-to self left top))))
 	    ;; pick flowers
 	    (when (and (null gump) 
 		  (> distance 240))
