@@ -1,239 +1,106 @@
-** The secret cemetery quest from alonso 
+* Part I
 
-** TODO mute stone monk in near cave. walks around to bone dust
-** TODO 
-
-** DONE [#A] Cryptghast
-   CLOSED: [2014-05-14 Wed 01:08]
-** DONE [#A] Cemetery
-   CLOSED: [2014-05-14 Wed 01:08]
-
-** TODO [#A] review video and take notes
-
-** DONE [#A] fix new bag-to-bag item move crash
-   CLOSED: [2014-05-13 Tue 22:59]
-** DONE [#A] fix slots-filled error when items would stack ok
-   CLOSED: [2014-05-13 Tue 22:59]
-
-** DONE [#A] don't crash when clicking current location on map
-   CLOSED: [2014-05-13 Tue 22:23]
-** DONE [#A] Go North should say go to map
-   CLOSED: [2014-05-13 Tue 22:23]
-** DONE [#A] fix broken areas
-   CLOSED: [2014-05-13 Tue 21:54]
-** DONE Make travel not use reagents if returning to same square
-   CLOSED: [2014-05-13 Tue 22:59]
-** TODO [#A] add secrets in less-used parts of map
-
-
-** DONE print message when eat snowdrop
-   CLOSED: [2014-05-13 Tue 23:17]
-
-** TODO [#B] add coherent error msg when can't equip
-
-** TODO [#A] hidden cemetery with music and items
-*** TODO [#B] special gravestone
-
-** TODO [#A] add hidden ice-cracks and some pine trees to area in between Alonso's and hidden cemetery
-
-** TODO [#A] screech owl who drops amalia poem fragment 1
-
-** TODO [#C] fix stuck items when laid on top of tree/obstacle
-** TODO [#C] fix tree corner annoyances.
-
-** DONE fix slow scrolling
-   CLOSED: [2014-05-13 Tue 21:55]
-** TODO fix jittery scrolling
-
-** TODO implement conversation log / journal
-** TODO allow inventory/spellbook pinning to remember locaiton on next open?
-** TODO add close-game buttons
-** TODO fix being able to drop items unreachably faraway
-** TODO game doesn't close console window after X'ing out game window
-** TODO make actions into single-click?
-** TODO allow char follows mouse cursor while RMB held
-** TODO toggle spellbook / inventory with S I not just open
-** TODO optimize w pngcrush?lemee
-** DONE [#B] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
-   CLOSED: [2014-05-13 Tue 20:24]
-** DONE [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
-   CLOSED: [2014-05-14 Wed 01:07]
-** DONE [#B] allow eating violets and snowdrops for restoring 1mp
-   CLOSED: [2014-05-13 Tue 18:53]
-** DONE Restrict ginseng slightly, use more ginseng gardens w occasional weird stone
-   CLOSED: [2014-05-14 Wed 01:07]
-** TODO [#C] Implement bleeding and blood tracks in the snow
-** TODO do screech owl AI
-** TODO [#B] display floating neumes when owl sings 
+** TODO [#A] screech owl flute quest 
+*** TODO scrolls with neumes
+*** TODO collect 2 neumes
+*** TODO combine flute with neumes to unlock quest for cave to north
+** TODO [#A] add a consistent tooltip mechanism for breaking the 4th wall
+*** TODO have it tell player to double-click lucius, right-click to move, etc
+*** TODO it should help you more with the camping aspect
+** TODO [#A] make world colder and hungrier
+*** TODO make hunger depend on terrain, not on spell
+** TODO [#A] implement saving progress at ancient Waystones. shown on map when you discover them.
+*** TODO [#A] sextant tells direction to nearest Waystone, discovered or not
+** TODO [#A] Hold Creature spell, uses Nightshade and freezes nearest creature
+** TODO [#A] Talk to stone monk in near cave. walks around to bone dust
 ** TODO [#A] add blackwolves
-** DONE [#B] add cryptghasts that bite and then run away
-   CLOSED: [2014-05-14 Wed 01:07]
-** TODO [#A] increase general cold
-** DONE [#A] Add strange stones (use recent valisade stones)
-   CLOSED: [2014-05-14 Wed 01:07]
-*** TODO Import valisade stones
-** DONE [#B] add cryptghasts to basements
-   CLOSED: [2014-05-14 Wed 01:07]
-** TODO [#B] Hold Creature spell, uses Nightshade and freezes nearest creature
-** DONE [#B] Don't incrementally reveal map. just hide hidden stuff using icons 
-   CLOSED: [2014-05-11 Sun 22:04]
-** DONE [#C] Exit basements with double click on stairwell
-   CLOSED: [2014-05-14 Wed 01:07]
-** DONE [#C] allow canceling travel
-   CLOSED: [2014-05-14 Wed 01:07]
-** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
-** TODO Switch to new red/blue/green potion graphics
-** DONE [#B] Don't drop scrolls in any enemy booty packs
-   CLOSED: [2014-05-14 Wed 01:07]
-** TODO [#C] snow footprints?
-** TODO story caves: kosmium, spiritus, dusk
-
-* RELEASE 0.95
-* TODO telekinesis spell
-* [#A] 
-*** TODO custom lisp for rain/thunder with fadein/fadeout
-*** TODO code owl
-*** TODO alter flutism.wav for downward owl cry imitation
-
-
-
-
-* TODO screech owl
-
-* Music
-** TODO specify per-scene what musics are available
-*** TODO "home" is too buzzy. remix up pitch?
-*** TODO cypress scene: "believe-me2"
-** TODO most generic squares have no music, but sometimes
-** TODO fade in/out most pieces of music
-** TODO story caves: kosmium, spiritus, dusk
-** TODO black wizards fight.
-** TODO add more tense militaristic battle cues
-
-* Terrain
-** DONE Reagent search should look in bags
-   CLOSED: [2014-05-11 Sun 22:06]
-** TODO Make thornweed less common in warm areas, since it's not needed then
-** TODO Add some different tree/shrub types
-** TODO [#C] implement snow/rain with additive blending
-** TODO [#C] add tweeting birds
-
-* Improve Lucius helper AI
-*** TODO can remark upon nearby objects as a way of exposing some Lore. 
-*** TODO goes home on arrival at nothbehem
-*** TODO [#C] drop up to 3 healing scroll if player gets below 50%
-**** TODO Implement single-use spell scrolls
-***** TODO use miniscroll graphic
-
-* Combat
-** TODO return to using simple pause/resume-on-command
+** TODO [#A] arturo should return to his garden when not talking to you.
+** TODO [#A] Resupply at nothbehem, talk to arturo
+** TODO [#A] Southern Cave
+*** TODO Implement "Southern Cave" with: lock/key system--- plate with lock, you must use corresponding key
+**** TODO the keys weld permanently into seals. Must alter gear points in story.
+**** TODO plates, gates, then copper stairwell to silver antechamber
+*** TODO [#A] add stone monk with Lore and story messages
+**** TODO [#A] silver books with spells/Special lore
+** TODO [#B] allow dropping items into gump icon of subcontainer 
+** TODO [#B] display cold/hunger level lighters ("Warm Cold Shivering Freezing Dead")
+*** TODO Slight health drain when shivering
+*** TODO heavy health drain when freezing
+*** TODO Geoffrey should comment when full of food
+*** TODO reduce attack/defense when very hungry
+*** TODO Slight aim jitter when shivering/freezing
+** TODO [#B] Protection (15 mana) (1 nightshade)
+*** Temporary 35% reduction in combat damage received
+** TODO [#B] add save/close-game dialogs
+** TODO [#B] Implement bleeding and blood tracks in the snow
+** TODO [#B] Revise enemy-damages-geoffrey situation
+** TODO [#B] display floating neumes when owl sings 
+** TODO [#B] Magic arrow, (nightshade) single strong attack with crystal arrow graphics
+** TODO [#B] Add some different tree/shrub types
+** TODO [#B] add more townspeople
+** TODO [#B] return to using simple pause/resume-on-command
 *** TODO change to right-click on geoffrey for Pause
 **** TODO change to clicking modeline status to open Status scroll
 **** TODO don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
-** TODO [#C] Modeline lighter(s) for Freezing/Hungry/Dying
-** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
-** TODO [#C] Slight health drain when freezing
-** TODO [#C] Slight aim jitter when freezing
-** TODO [#C] Protection (15 mana) (1 nightshade)
-*** Temporary 35% reduction in combat damage received
+** TODO [#B] Eastern Cave
+*** TODO tells you about the ancient road to Valisade
 
+* Tweaks and bugfixes
 
-* Nothbehem
-** DONE move nothbehem down 1 row
-   CLOSED: [2014-05-10 Sat 20:30]
-** DONE add arturo conversations 
-   CLOSED: [2014-05-10 Sat 20:30]
-** DONE make arturo's house into a container
-   CLOSED: [2014-05-10 Sat 20:50]
-*** DONE add woolen leggings, woolen shirt, 
-    CLOSED: [2014-05-10 Sat 20:50]
-*** DONE add spellbooks: craft silver arrows, cure meat
-    CLOSED: [2014-05-10 Sat 20:50]
-*** DONE add copper-lock
-    CLOSED: [2014-05-10 Sat 20:50]
-** DONE [#B] Implement spell tomes that teach you the spell
-   CLOSED: [2014-05-10 Sat 20:50]
-*** DONE use doublepage graphic
-    CLOSED: [2014-05-10 Sat 20:50]
-
-* Arturo
-
-** TODO arturo should return to his garden when not talking to you.
-** TODO add more townspeople
-** TODO [#B] Add sextant which guides you to your next location
-
-* Alonso 
-** TODO Implement alonso quest
-
-* Resupply at nothbehem, talk to arturo
-
-* Southern Cave
-** TODO Implement "Southern Cave" with: lock/key system--- plate with lock, you must use corresponding key
-*** TODO the keys weld permanently into seals. Must alter gear points in story.
-*** TODO plates, gates, then copper stairwell to silver antechamber
-
-** TODO [#A] add stone monk with Lore and story messages
-*** TODO [#A] silver books with spells/Special lore
-
-* Eavesbury Cemetery 
-** TODO [#B] Seek ye the Screech Owl when storm thunders; when her cry is heard, blow the flute and she will appear
-*** TODO custom lisp for rain/thunder with fadein/fadeout
-*** TODO code owl
-*** TODO alter flutism.wav for downward owl cry imitation
-
-* Eastern Cave
-
-** Stone Monk
-
-** TODO tells you about the ancient road to Valisade
-
-* Ancient road
-** TODO import improved ancient-road graphic (non-contrast-adjusted version) 
-
-
-* Bugfixes
-
+** TODO [#A] toggle spellbook / inventory with S I not just open
+** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag 
+** TODO [#B] should show bubble with "container is full" when can't accept
+** TODO [#C] fix being able to drop items unreachably faraway
 ** TODO [#B] Fix spellcasting/activating objects after dead
 ** TODO [#B] auto-close inventory windows on faraway objects if you move
 ** TODO [#B] destroy bubbles when closing gumps
 ** TODO [#B] don't allow spawning geoffrey in obstacle
+** TODO [#C] fix game doesn't close console window after X'ing out game window on MS Windows
+** TODO [#C] place description bubble near cursor, not near corner of object
+** TODO [#C] fix image stretching in inventory icons
+** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
+** TODO [#C] fix tree corner annoyances (shrink tree bounding box a little?)
+** TODO [#C] fix jittery diagonal scrolling
+** TODO [#C] implement conversation log / journal
+** TODO [#C] allow inventory/spellbook pinning to remember locaiton on next open?
 ** TODO [#C] should show-error when pathfinding fails ONLY for geoffrey
 ** TODO [#C] Fix non-impelled arrows moving on their own 
 ** TODO [#C] Fix scrolling jerkiness
+** TODO [#C] fix z-sorting of player remains
+** TODO [#C] Fix jittery rotation of monk at corners of paths
+
+* Part II
+
+** TODO [#B] Ancient road
+** TODO [#C] Beginnings of Ancient road = end scene
+*** TODO [#C] import improved ancient-road graphic (non-contrast-adjusted version) 
+** TODO [#C] townspeople side quests
+** TODO [#C] add secrets in less-used parts of map
+** TODO [#C] 2nd hidden cemetery with music and items
+*** TODO special gravestone
+** TODO [#C] allow char follows mouse cursor while RMB held?
+** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
+** TODO [#C] Switch to new red/blue/green potion graphics
+** TODO [#C] snow footprints?
+** TODO [#C] telekinesis spell
+** TODO [#C] Make thornweed less common in warm areas, since it's not needed then
+** TODO [#C] implement snow/rain with additive blending
+** TODO [#C] add synth bird tweets and tweeting birds that fly out of trees when disturbed
+** TODO [#C] Lucius can remark upon nearby objects as a way of exposing some Lore. 
 ** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 ** TODO [#C] Conversation system should be more flexible
-   
-* TODO RELEASE 0.95
-** TODO update helpfile
-
-* TODO CHAPTER 2
-** TODO Allow special verb/action where game stops for a target of USEing
-
-** TODO [#A] Craft crystal arrow (20 mana) (snow)
-** TODO [#A] Cure heavy wounds (50 mana) (2 ginseng)
+** TODO [#C] Allow special verb/action where game stops for a target of USEing
+** TODO [#C] Cure heavy wounds (50 mana) (2 ginseng)
 *** Heals between 40-60 HP
-** TODO [#B] Light spell (2 mana)
-*** Casts light with medium radius
-*** Lasts for 4 minutes 
-*** Required in dark areas
-*** Certain enemies can negate magic spell effects, dousing your light
-** TODO [#A] Revise enemy-damages-geoffrey situation
-** TODO [#A] Define quest/worldmap structure 
-*** DONE Create draft Lore timeline
-    CLOSED: [2014-05-08 Thu 19:15]
-** TODO allow saving progress like a traditional rpg
-*** TODO can only save at map screen
-** TODO [#A] Add fur cloak for chapter 2
-** TODO [#B] preload textures when possible---allow method for preloading and default field of resource names
-** TODO [#A] assign songs to scenes/moments
-** TODO [#B] Add Clockwork Valisade Knight
-
-** TODO [#B] Paint some nicer trees
-** TODO [#B] Explosion (20 mana) (1 nightshade, 1 stone)
+** TODO [#C] Add fur cloak for chapter 2
+** TODO [#C] preload textures when possible---allow method for preloading and default field of resource names
+** TODO [#C] Add Clockwork Valisade Knight
+** TODO [#C] Paint some nicer pine trees
+** TODO [#C] Explosion (20 mana) (1 nightshade, 1 stone)
 *** 90% chance of scorching several enemies in target area
-** TODO [#B] Write lore for various sources
+** TODO [#C] Write lore for various sources
 *** TODO Default object lore
 *** TODO Stone monk
 *** TODO Letters from Quine in caves etc
@@ -245,16 +112,14 @@
 *** 80% chance of enemy fleeing
 ** TODO [#C] Dispel magic (20 mana) (1 ginseng)
 *** 60% chance of removing ordinary spell effects. 
-
 ** TODO [#C] day/night cycle; survive each day; end it by camping 
 ** TODO [#C] Night/camp dream sequences
 ** TODO [#C] Cryptghasts that glide and dart
 ** TODO [#C] Fix mac window resizing bugs
 ** TODO [#C] Control Q and Command q should quit game
-** TODO [#C] fix z-sorting of player remains
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
-** TODO [#C] Fix jittery rotation of monk at corners of paths
+
 
 * Archived Entries
 
@@ -574,4 +439,244 @@
    :ARCHIVE_OLPATH: General
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#A] Cryptghast
+   CLOSED: [2014-05-14 Wed 01:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Cemetery
+   CLOSED: [2014-05-14 Wed 01:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] review video and take notes
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#A] fix new bag-to-bag item move crash
+   CLOSED: [2014-05-13 Tue 22:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] fix slots-filled error when items would stack ok
+   CLOSED: [2014-05-13 Tue 22:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] don't crash when clicking current location on map
+   CLOSED: [2014-05-13 Tue 22:23]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Go North should say go to map
+   CLOSED: [2014-05-13 Tue 22:23]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] fix broken areas
+   CLOSED: [2014-05-13 Tue 21:54]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Make travel not use reagents if returning to same square
+   CLOSED: [2014-05-13 Tue 22:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE print message when eat snowdrop
+   CLOSED: [2014-05-13 Tue 23:17]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE fix slow scrolling
+   CLOSED: [2014-05-13 Tue 21:55]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
+   CLOSED: [2014-05-13 Tue 20:24]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
+   CLOSED: [2014-05-14 Wed 01:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] allow eating violets and snowdrops for restoring 1mp
+   CLOSED: [2014-05-13 Tue 18:53]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Restrict ginseng slightly, use more ginseng gardens w occasional weird stone
+   CLOSED: [2014-05-14 Wed 01:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] add cryptghasts that bite and then run away
+   CLOSED: [2014-05-14 Wed 01:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Add strange stones (use recent valisade stones)
+   CLOSED: [2014-05-14 Wed 01:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** TODO Import valisade stones
+
+** DONE [#B] add cryptghasts to basements
+   CLOSED: [2014-05-14 Wed 01:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] Don't incrementally reveal map. just hide hidden stuff using icons
+   CLOSED: [2014-05-11 Sun 22:04]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#C] Exit basements with double click on stairwell
+   CLOSED: [2014-05-14 Wed 01:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#C] allow canceling travel
+   CLOSED: [2014-05-14 Wed 01:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] Don't drop scrolls in any enemy booty packs
+   CLOSED: [2014-05-14 Wed 01:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO add coherent error msg when can't equip
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-16 Fri 00:09
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: screech owl flute quest
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** Nothbehem
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-16 Fri 00:13
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :END:
+*** DONE move nothbehem down 1 row
+    CLOSED: [2014-05-10 Sat 20:30]
+*** DONE add arturo conversations 
+    CLOSED: [2014-05-10 Sat 20:30]
+*** DONE make arturo's house into a container
+    CLOSED: [2014-05-10 Sat 20:50]
+**** DONE add woolen leggings, woolen shirt, 
+     CLOSED: [2014-05-10 Sat 20:50]
+**** DONE add spellbooks: craft silver arrows, cure meat
+     CLOSED: [2014-05-10 Sat 20:50]
+**** DONE add copper-lock
+     CLOSED: [2014-05-10 Sat 20:50]
+*** DONE [#B] Implement spell tomes that teach you the spell
+    CLOSED: [2014-05-10 Sat 20:50]
+**** DONE use doublepage graphic
+     CLOSED: [2014-05-10 Sat 20:50]
+
+** DONE Create draft Lore timeline
+   CLOSED: [2014-05-08 Thu 19:15]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-16 Fri 00:17
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Bugfixes/Define quest/worldmap structure
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
    :END:
