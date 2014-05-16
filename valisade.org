@@ -116,6 +116,24 @@
    :Effort:   2:00
    :END:
 *** TODO tells you about the ancient road to Valisade
+** TODO [#C] Beginnings of Ancient road = end scene of Part I
+*** TODO [#C] import improved ancient-road graphic (non-contrast-adjusted version)
+    :PROPERTIES:
+    :Effort: 
+    :END: 
+** TODO [#C] townspeople side quests
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] 2nd hidden cemetery with music and items
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#C] add secrets in less-used parts of map
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+
 
 * Tweaks and bugfixes
 
@@ -196,26 +214,11 @@
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#C] Beginnings of Ancient road = end scene of Part I
-*** TODO [#C] import improved ancient-road graphic (non-contrast-adjusted version)
-    :PROPERTIES:
-    :Effort: 
-    :END: 
-** TODO [#C] townspeople side quests
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] 2nd hidden cemetery with music and items
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#C] add secrets in less-used parts of map
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
+
 
 * Part II
 
+** TODO Review quest board and timeline and plan 
 *** TODO special gravestone
 ** TODO [#C] allow char follows mouse cursor while RMB held?
 ** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
@@ -293,4 +296,3 @@
 ** TODO [#C] Control Q and Command q should quit game
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
-
