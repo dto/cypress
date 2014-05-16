@@ -1,83 +1,221 @@
-* Part I
+#+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
+#+COLUMNS: %60ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM
 
-** TODO [#A] screech owl flute quest 
+* Part I
+** TODO [#A] screech owl flute quest
+   :PROPERTIES:
+   :Effort:   2:00
+   :END: 
 *** TODO scrolls with neumes
+    :PROPERTIES:
+    :Effort: 
+    :END:
 *** TODO collect 2 neumes
 *** TODO combine flute with neumes to unlock quest for cave to north
-** TODO [#A] add a consistent tooltip mechanism for breaking the 4th wall
-*** TODO have it tell player to double-click lucius, right-click to move, etc
-*** TODO it should help you more with the camping aspect
 ** TODO [#A] make world colder and hungrier
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
 *** TODO make hunger depend on terrain, not on spell
 ** TODO [#A] implement saving progress at ancient Waystones. shown on map when you discover them.
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
 *** TODO [#A] sextant tells direction to nearest Waystone, discovered or not
+*** TODO [#A] only one save slot. "memory stone" on level 1 is used to resume a quest. otherwise, you overwrite when saving.
 ** TODO [#A] Hold Creature spell, uses Nightshade and freezes nearest creature
-** TODO [#A] Talk to stone monk in near cave. walks around to bone dust
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
 ** TODO [#A] add blackwolves
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#A] arturo should return to his garden when not talking to you.
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#A] Resupply at nothbehem, talk to arturo
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
 ** TODO [#A] Southern Cave
 *** TODO Implement "Southern Cave" with: lock/key system--- plate with lock, you must use corresponding key
+    :PROPERTIES:
+    :Effort:   3:00
+    :END:
 **** TODO the keys weld permanently into seals. Must alter gear points in story.
+     :PROPERTIES:
+     :Effort: 
+     :END:
 **** TODO plates, gates, then copper stairwell to silver antechamber
 *** TODO [#A] add stone monk with Lore and story messages
+    :PROPERTIES:
+    :Effort:   1:00
+    :END:
 **** TODO [#A] silver books with spells/Special lore
-** TODO [#B] allow dropping items into gump icon of subcontainer 
+** TODO [#B] allow dropping items into gump icon of subcontainer
+   :PROPERTIES:
+   :Effort:   0:30
+   :END: 
+** TODO [#B] add a consistent tooltip mechanism for breaking the 4th wall
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+*** TODO have it tell player to double-click lucius, right-click to move, etc
+*** TODO it should help you more with the camping aspect
 ** TODO [#B] display cold/hunger level lighters ("Warm Cold Shivering Freezing Dead")
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 *** TODO Slight health drain when shivering
 *** TODO heavy health drain when freezing
 *** TODO Geoffrey should comment when full of food
 *** TODO reduce attack/defense when very hungry
 *** TODO Slight aim jitter when shivering/freezing
 ** TODO [#B] Protection (15 mana) (1 nightshade)
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 *** Temporary 35% reduction in combat damage received
 ** TODO [#B] add save/close-game dialogs
 ** TODO [#B] Implement bleeding and blood tracks in the snow
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#B] Revise enemy-damages-geoffrey situation
-** TODO [#B] display floating neumes when owl sings 
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#B] display floating neumes when owl sings
+   :PROPERTIES:
+   :Effort:   0:30
+   :END: 
 ** TODO [#B] Magic arrow, (nightshade) single strong attack with crystal arrow graphics
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#B] Add some different tree/shrub types
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
 ** TODO [#B] add more townspeople
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
 ** TODO [#B] return to using simple pause/resume-on-command
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 *** TODO change to right-click on geoffrey for Pause
 **** TODO change to clicking modeline status to open Status scroll
 **** TODO don't run enemies when paused
 **** TODO Press ESCAPE to close all gumps and unpause
 ** TODO [#B] Eastern Cave
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
 *** TODO tells you about the ancient road to Valisade
 
 * Tweaks and bugfixes
 
-** TODO [#A] toggle spellbook / inventory with S I not just open
-** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag 
+** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+** TODO [#B] toggle spellbook / inventory with S I not just open
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#B] should show bubble with "container is full" when can't accept
-** TODO [#C] fix being able to drop items unreachably faraway
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#B] Fix spellcasting/activating objects after dead
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#B] auto-close inventory windows on faraway objects if you move
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#B] destroy bubbles when closing gumps
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#B] don't allow spawning geoffrey in obstacle
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#B] Ancient road
+** TODO [#C] fix being able to drop items unreachably faraway
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#C] fix game doesn't close console window after X'ing out game window on MS Windows
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
 ** TODO [#C] place description bubble near cursor, not near corner of object
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#C] fix image stretching in inventory icons
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#C] fix tree corner annoyances (shrink tree bounding box a little?)
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#C] fix jittery diagonal scrolling
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#C] implement conversation log / journal
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#C] allow inventory/spellbook pinning to remember locaiton on next open?
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#C] should show-error when pathfinding fails ONLY for geoffrey
-** TODO [#C] Fix non-impelled arrows moving on their own 
-** TODO [#C] Fix scrolling jerkiness
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#C] Fix non-impelled arrows moving on their own
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
 ** TODO [#C] fix z-sorting of player remains
-** TODO [#C] Fix jittery rotation of monk at corners of paths
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#C] Beginnings of Ancient road = end scene of Part I
+*** TODO [#C] import improved ancient-road graphic (non-contrast-adjusted version)
+    :PROPERTIES:
+    :Effort: 
+    :END: 
+** TODO [#C] townspeople side quests
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] 2nd hidden cemetery with music and items
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#C] add secrets in less-used parts of map
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 
 * Part II
 
-** TODO [#B] Ancient road
-** TODO [#C] Beginnings of Ancient road = end scene
-*** TODO [#C] import improved ancient-road graphic (non-contrast-adjusted version) 
-** TODO [#C] townspeople side quests
-** TODO [#C] add secrets in less-used parts of map
-** TODO [#C] 2nd hidden cemetery with music and items
 *** TODO special gravestone
 ** TODO [#C] allow char follows mouse cursor while RMB held?
 ** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
@@ -86,26 +224,62 @@
 ** TODO [#C] telekinesis spell
 ** TODO [#C] Make thornweed less common in warm areas, since it's not needed then
 ** TODO [#C] implement snow/rain with additive blending
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#C] add synth bird tweets and tweeting birds that fly out of trees when disturbed
-** TODO [#C] Lucius can remark upon nearby objects as a way of exposing some Lore. 
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] Lucius can remark upon nearby objects as a way of exposing some Lore.
+   :PROPERTIES:
+   :Effort:   1:00
+   :END: 
 ** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 *** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
 ** TODO [#C] Conversation system should be more flexible
 ** TODO [#C] Allow special verb/action where game stops for a target of USEing
 ** TODO [#C] Cure heavy wounds (50 mana) (2 ginseng)
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 *** Heals between 40-60 HP
 ** TODO [#C] Add fur cloak for chapter 2
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#C] preload textures when possible---allow method for preloading and default field of resource names
 ** TODO [#C] Add Clockwork Valisade Knight
+   :PROPERTIES:
+   :Effort:   3:00
+   :END:
 ** TODO [#C] Paint some nicer pine trees
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#C] Explosion (20 mana) (1 nightshade, 1 stone)
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
 *** 90% chance of scorching several enemies in target area
 ** TODO [#C] Write lore for various sources
 *** TODO Default object lore
 *** TODO Stone monk
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
 *** TODO Letters from Quine in caves etc
+    :PROPERTIES:
+    :Effort:   1:00
+    :END:
 **** TODO Also spell scrolls and food in metal boxes
 *** TODO Skull seance
+    :PROPERTIES:
+    :Effort:   1:00
+    :END:
 *** TODO Books
 ** TODO [#C] Make magic potions more common
 ** TODO [#C] Cause Fear (15 mana) (1 nightshade)
@@ -120,563 +294,3 @@
 ** TODO [#C] Abstractify the sounds and/or find new ones in archive
 ** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 
-
-* Archived Entries
-
-** DONE [#A] Don't specify Amalia's birthplace/time
-   CLOSED: [2014-05-08 Thu 19:33]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:33
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Features
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] create fixed-symbols dense overworld map on graph paper
-   CLOSED: [2014-05-08 Thu 19:16]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:34
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Features
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE Write story/activity timeline based on icon board map
-   CLOSED: [2014-05-08 Thu 01:17]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:34
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Features
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] Change Ildran to Ildron
-   CLOSED: [2014-05-08 Thu 19:38]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:38
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] don't allow tent to be put in containers other than Geoffrey
-   CLOSED: [2014-05-08 Thu 19:44]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:44
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] disallow deploying tent on top of geoffrey
-   CLOSED: [2014-05-08 Thu 19:42]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:44
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** TODO [#A] disallow equipping non-held items
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** DONE [#A] watch for wolves duplication in terrain.lisp/scene.lisp
-   CLOSED: [2014-05-08 Thu 19:51]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] Don't allow giving things to lucius
-   CLOSED: [2014-05-08 Thu 19:58]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 19:58
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] don't consume wolf corpse unless cast is successful,
-   CLOSED: [2014-05-08 Thu 20:08]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 20:08
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** TODO [#A] Disallow dropping items on faraway containers
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 20:08
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** TODO [#A] Disallow activating faraway objects
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 20:08
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** TODO [#A] Disallow browsing/picking from faraway containers
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 20:08
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** TODO [#A] Disable text event handling on SCROLL-TEXT etc http://paste.lisp.org/display/141642
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 20:14
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** DONE [#A] use only one NARRATE function
-   CLOSED: [2014-05-08 Thu 20:10]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 20:14
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE Add Chapter 1 todo items from Storyline
-   CLOSED: [2014-05-08 Thu 20:41]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 20:41
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Version 0.95 contains a rough draft of chapter 1
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE Geoffrey should start the game with Quine's summons
-   CLOSED: [2014-05-08 Thu 21:02]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 22:54
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Version 0.95 contains a rough draft of chapter 1
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** TODO [#A] enter partial New Ildron map data into Lisp via roguelike chars
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-08 Thu 22:54
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** DONE write function to auto-position Lucius when Geoffrey enters a level
-   CLOSED: [2014-05-09 Fri 00:05]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 00:05
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Implement Lucius helper AI
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE new conversation tree for help, including help scroll
-   CLOSED: [2014-05-09 Fri 00:05]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 00:06
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Implement Lucius helper AI
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE following flag
-   CLOSED: [2014-05-09 Fri 00:05]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 00:06
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Implement Lucius helper AI
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE revise introductory conversation
-   CLOSED: [2014-05-09 Fri 00:05]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 00:06
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Implement Lucius helper AI
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE should just find geoffrey when no flowers
-   CLOSED: [2014-05-09 Fri 05:50]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 05:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Implement Lucius helper AI
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** TODO throw stones at enemy and cheer geoffrey on during combat
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 05:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Implement Lucius helper AI
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** DONE Make houses
-   CLOSED: [2014-05-09 Fri 05:53]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 06:56
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Combat
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE Make arturo's house and arturo
-   CLOSED: [2014-05-09 Fri 06:35]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 06:56
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Combat
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE Indicate error when trying to open faraway
-   CLOSED: [2014-05-08 Thu 20:18]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-09 Fri 07:04
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE Change scene class so that it only generates terrain on
- first visit
-   CLOSED: [2014-05-10 Sat 20:28]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: RELEASE 0.95
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** TODO Change map class so that it instantiates all the scenes
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: RELEASE 0.95
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** TODO Make the icon and description into methods that refer to existing data
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: RELEASE 0.95
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** TODO [#A] Expire texture cache at travel time
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: hidden forest cemetery with screech owl
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** TODO [#A] Expire texture cache at travel time
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: General
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** TODO [#A] fix object dup error when peeling one from stack into opened sub container gump
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-10 Sat 20:28
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: General
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** DONE [#A] Cryptghast
-   CLOSED: [2014-05-14 Wed 01:08]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] Cemetery
-   CLOSED: [2014-05-14 Wed 01:08]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** TODO [#A] review video and take notes
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** DONE [#A] fix new bag-to-bag item move crash
-   CLOSED: [2014-05-13 Tue 22:59]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] fix slots-filled error when items would stack ok
-   CLOSED: [2014-05-13 Tue 22:59]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] don't crash when clicking current location on map
-   CLOSED: [2014-05-13 Tue 22:23]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] Go North should say go to map
-   CLOSED: [2014-05-13 Tue 22:23]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] fix broken areas
-   CLOSED: [2014-05-13 Tue 21:54]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE Make travel not use reagents if returning to same square
-   CLOSED: [2014-05-13 Tue 22:59]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE print message when eat snowdrop
-   CLOSED: [2014-05-13 Tue 23:17]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:50
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE fix slow scrolling
-   CLOSED: [2014-05-13 Tue 21:55]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#B] Improve shape of flower clusters and branches wood around trees by randomly permuting positions as "Scatter operator"
-   CLOSED: [2014-05-13 Tue 20:24]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#B] Ruins: Add newly painted ruined houses, possibly with smaller basements
-   CLOSED: [2014-05-14 Wed 01:07]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#B] allow eating violets and snowdrops for restoring 1mp
-   CLOSED: [2014-05-13 Tue 18:53]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE Restrict ginseng slightly, use more ginseng gardens w occasional weird stone
-   CLOSED: [2014-05-14 Wed 01:07]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#B] add cryptghasts that bite and then run away
-   CLOSED: [2014-05-14 Wed 01:07]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#A] Add strange stones (use recent valisade stones)
-   CLOSED: [2014-05-14 Wed 01:07]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-*** TODO Import valisade stones
-
-** DONE [#B] add cryptghasts to basements
-   CLOSED: [2014-05-14 Wed 01:07]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#B] Don't incrementally reveal map. just hide hidden stuff using icons
-   CLOSED: [2014-05-11 Sun 22:04]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#C] Exit basements with double click on stairwell
-   CLOSED: [2014-05-14 Wed 01:07]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#C] allow canceling travel
-   CLOSED: [2014-05-14 Wed 01:07]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#B] Don't drop scrolls in any enemy booty packs
-   CLOSED: [2014-05-14 Wed 01:07]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-15 Thu 23:51
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** TODO add coherent error msg when can't equip
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-16 Fri 00:09
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: screech owl flute quest
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: TODO
-   :END:
-
-** Nothbehem
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-16 Fri 00:13
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_CATEGORY: valisade
-   :END:
-*** DONE move nothbehem down 1 row
-    CLOSED: [2014-05-10 Sat 20:30]
-*** DONE add arturo conversations 
-    CLOSED: [2014-05-10 Sat 20:30]
-*** DONE make arturo's house into a container
-    CLOSED: [2014-05-10 Sat 20:50]
-**** DONE add woolen leggings, woolen shirt, 
-     CLOSED: [2014-05-10 Sat 20:50]
-**** DONE add spellbooks: craft silver arrows, cure meat
-     CLOSED: [2014-05-10 Sat 20:50]
-**** DONE add copper-lock
-     CLOSED: [2014-05-10 Sat 20:50]
-*** DONE [#B] Implement spell tomes that teach you the spell
-    CLOSED: [2014-05-10 Sat 20:50]
-**** DONE use doublepage graphic
-     CLOSED: [2014-05-10 Sat 20:50]
-
-** DONE Create draft Lore timeline
-   CLOSED: [2014-05-08 Thu 19:15]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2014-05-16 Fri 00:17
-   :ARCHIVE_FILE: ~/cypress/valisade.org
-   :ARCHIVE_OLPATH: Bugfixes/Define quest/worldmap structure
-   :ARCHIVE_CATEGORY: valisade
-   :ARCHIVE_TODO: DONE
-   :END:
