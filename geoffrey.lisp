@@ -8,8 +8,14 @@
   
 (defthing (geoffrey monk) :description "Geoffrey")
 
+(defmethod stomach-full-p ((monk monk))
+  (<= (field-value :hunger monk) 12))
+
 (defmethod eat :after ((monk geoffrey) (food food))
-  (bark monk (random-choose '("Very good!" "That's much better." "Delicious!"))))
+  (let ((messages (if (stomach-full-p monk)
+		      '("I'm full now." "My stomach is full." "I feel full.")
+		      '("Very good!" "That's much better." "Delicious!"))))
+    (bark monk (random-choose messages))))
 
 (defmethod alternate-tap ((self geoffrey) x y)
   (replace-gump self (new 'scroll-gump :text (status-text))))
