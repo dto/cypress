@@ -29,8 +29,68 @@ burned the house in order to destroy
 it. Now and then, travelers would claim
 to have seen an old woman up in the
 mountains---but only ever from a
-distance. Stories about Amalia
-circulated for centuries.")
+distance---and that she could vanish
+from sight in an instant. Some believed
+that her sudden vanishings may be the
+result of Witch-craft.
+
+Such \"ghost stories\" about Amalia
+circulated for many years. Their telling
+was not limited to just the campfires
+and pubs of this Valley, but spread
+generally through Ildron as her 
+disappearance became notorious. 
+
+True or not, these stories illustrate
+the ambivalence of the people toward
+Amalia; for just as much as they desired
+to know the future, they also feared her
+Gift, and wished to hear only good
+things from it. For what is Fear, if not
+the dread of future events?
+
+Our expedition was short, so far as
+Paladins' typical jaunts go. While it
+was understandably difficult to sort out
+myth from fact in our conversations with
+people along the route, we were told
+consistently that Amalia had gone to
+live in isolation by the black Mountains
+of the north-east. Sightings of Amalia
+tended to place her near the frozen
+River Abyss, whose source has not yet
+been discovered.
+
+With the Pentaquin brothers and the monk
+Brutus, we had an experienced crew of
+Paladins, and moved swiftly and easily
+in the temperate regions. But travel
+became arduous in the extreme as we
+searched farther North along the Abyss.
+
+We could not cross the frozen,
+treacherous Blackness; our brother
+Alfonse met his death in our attempt.
+Our determination thus broken, we
+resolved to return home and deliver this
+Report.
+
+We can say only that we saw the
+silhouette of a cabin-house, with smoke
+coming from its chimney; and nearby, an
+arrangement of large stones. But these
+could not be reached, for they lay on
+the other side of the River; and our
+best hopes of a safe crossing died with
+Alfonse.
+
+Thus our Report could be seen as no
+better than the stories that prompted
+it; for our evidence is merely our
+telling what we saw from afar.
+
+For the expedition, 
+Arturo Pentaquin")
 
 (defparameter *amalia-poem*
 "My name is Amalia.
