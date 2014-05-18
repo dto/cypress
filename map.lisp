@@ -121,7 +121,7 @@
     (setf *travel-direction* 
 	  (direction-to *map-column* *map-row* column row)) 
     (unless (eq :here *travel-direction*)
-      (modify-hunger (geoffrey) (random-choose '(10 12 14))))
+      (expend-travel-cost scene))
     ;; go
     (setf *map-row* row *map-column* column)
     (switch-to-scene scene)))
@@ -165,7 +165,7 @@
      large-mountain)
 
      (forest cold-meadow forest
-      garden grassy-meadow forest
+      forest grassy-meadow forest
       cold-meadow forest highway
       large-mountain)
 
@@ -184,7 +184,7 @@
      large-mountain large-mountain large-mountain
      large-mountain)
 
-    (large-mountain garden grassy-meadow 
+    (large-mountain grassy-meadow garden
      forest large-mountain large-mountain
      large-mountain large-mountain large-mountain
      large-mountain)

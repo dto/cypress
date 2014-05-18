@@ -71,9 +71,10 @@
 (defmethod layout ((self thing))
   (with-fields (image scale) self
     (when image 
-      (resize self 
-	      (* scale (image-width image) *default-thing-scale*)
-	      (* scale (image-height image) *default-thing-scale*)))))
+      (when (find-resource image :noerror)
+	(resize self 
+		(* scale (image-width image) *default-thing-scale*)
+		(* scale (image-height image) *default-thing-scale*))))))
 
 (defmethod die ((self thing))
   (destroy self))
@@ -415,7 +416,7 @@
   (modify-cold self (* points (resistance-modifier self))))
 
 (defmethod modify-magic ((self thing) points)
-  (modify-points self :magic points ))
+  (modify-points self :magic points))
 
 (defmethod modify-hunger ((self thing) points)
   (modify-points self :hunger points))

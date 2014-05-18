@@ -15,6 +15,10 @@
   :tags '(:fixed)
   :stacking nil)
 
+(defthing (alonso-letter scroll)
+  :text *alonso-letter*
+  :description "Letter to Arturo")
+
 (defmethod can-accept ((alonso alonso-corpse)) t)
 
 (defmethod activate ((alonso alonso-corpse))
@@ -22,7 +26,7 @@
     (when (not activated)
       (setf activated t)
       (add-inventory-item alonso (new 'copper-gear))
-      (add-inventory-item alonso (make-scroll "Letter from Alonso" *alonso-letter*)))
+      (add-inventory-item alonso (new 'alonso-letter)))
     (replace-gump alonso (new 'browser :container alonso))))
 
 (defmethod make-terrain ((scene alonso-basement))

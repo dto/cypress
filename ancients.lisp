@@ -1,5 +1,7 @@
 (in-package :cypress)
 
+(defthing sextant :image "sextant.png" :scale 0.8)
+
 (defparameter *megalith-images* (image-set "megalith" 2))
 
 (defthing megalith 
@@ -7,6 +9,16 @@
   :image (random-choose *megalith-images*)
   :tags '(:fixed)
   :description "giant stone block")
+
+(defthing waystone 
+  :scale 2.0
+  :image (random-choose *megalith-images*)
+  :tags '(:fixed)
+  :description "ancient waystone")
+
+(defmethod activate ((waystone waystone))
+  (cue-music (current-scene) "flutism.ogg")
+  (narrate "You feel the traces of an ancient memory, but nothing happens."))
 
 (defparameter *copper-gear-images* (image-set "copper-lock" 5))
 
@@ -82,7 +94,8 @@
 (defun ginseng-garden ()
   (stacked-up
    (spray '(ruin-wall) :trim nil :count (+ 2 (random 3)))
-   (randomly (some-ginseng) (with-border (units 10) (singleton (new 'megalith))) (some-ginseng))
+   (randomly (some-ginseng)
+	     (with-border (units 5) (singleton (new 'waystone))))
    (spray '(ruin-wall copper-plate ginseng ruin-wall) :trim nil :count (+ 1 (random 4)))))
 
 (defmethod make-terrain ((scene garden))

@@ -66,6 +66,10 @@
     ((:s) open-spellbook)
     ((:i) open-inventory)))
 
+(defmethod expend-travel-cost ((scene scene))
+  (chill (geoffrey) (random-choose '(3 5 7)))
+  (modify-hunger (geoffrey) (random-choose '(10 12 14))))
+
 (defmethod add-object :after ((scene scene) (thing thing) &optional x y z)
   (enter-scene thing))
 
@@ -440,8 +444,9 @@
 (defmethod begin-scene :after ((meadow cold-meadow))
   (percent-of-time 50 (cue-music meadow (random-choose '("crickets.ogg" "passageway.ogg")))))
 
-(defmethod drop-object :after ((meadow cold-meadow) (monk geoffrey) &optional x y z)
-  (chill monk +12))
+(defmethod expend-travel-cost ((meadow cold-meadow))
+  (modify-hunger (geoffrey) +6)
+  (chill (geoffrey) +14))
 
 ;;; Ruins and basements
 
@@ -508,8 +513,9 @@
 			  (singleton (new 'stone-stairwell)))
      (stacked-up-randomly (dead-trees) (with-border (units 10) (singleton (new 'ruined-house))) (spray '(wraith wolf) :count 2) (flowers)))))
 
-(defmethod drop-object :after ((ruins ruins) (monk geoffrey) &optional x y z)
-  (chill monk +16))
+(defmethod expend-travel-cost ((ruins ruins))
+  (modify-hunger (geoffrey) 14)
+  (chill (geoffrey) +18))
 
 ;;; Cemetery
 
@@ -536,8 +542,9 @@
 			  (some-trees))
      (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (spray 'iron-fence :count (+ 2 (random 3))) (singleton (new 'grave-hag)) (spray 'bone-dust) (singleton (new 'iron-fence)) (flowers)))))
 
-(defmethod drop-object :after ((cemetery cemetery) (monk geoffrey) &optional x y z)
-  (chill monk +15))
+(defmethod expend-travel-cost ((cemetery cemetery))
+  (modify-hunger (geoffrey) 8)
+  (chill (geoffrey) +18))
 
 ;;; Frozen forest
 
@@ -561,8 +568,9 @@
      (lined-up-randomly (pine-trees) (lone-wraith) (pine-trees))
      (lined-up-randomly (dead-trees-and-puddles) (pack-of-wolves) (wood-pile)))))
 
-(defmethod drop-object :after ((forest frozen-forest) (monk geoffrey) &optional x y z)
-  (chill monk +30))
+(defmethod expend-travel-cost ((forest frozen-forest))
+  (modify-hunger (geoffrey) 15)
+  (chill (geoffrey) +30))
 
 ;; dense pine trees and some dead trees
 ;; wood piles and twigs and branches
@@ -585,12 +593,12 @@
      (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
      (stacked-up-randomly (dead-trees-and-puddles) (lone-wraith) (wood-pile)))))
 
-(defmethod drop-object :after ((river river) (monk geoffrey) &optional x y z)
-  (chill monk +10))
+(defmethod expend-travel-cost ((river river))  
+  (modify-hunger (geoffrey) 14)
+  (chill (geoffrey) +20))
 
 (defthing (frozen-meadow river)
   :background-image (random-choose *frozen-meadow-images*))
-
 
 ;; pools of water
 ;; various ice cracks

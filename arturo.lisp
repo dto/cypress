@@ -5,6 +5,7 @@
 (defthing (arturo monk) 
   :met-player nil
   :next-target nil
+  :has-letter nil
   :discussed-woods nil
   :description "Arturo")
 
@@ -54,17 +55,20 @@
 
 (defmethod activate ((self arturo))
   (play-talk-sound self)
-  (with-fields (met-player) self
+  (with-fields (met-player has-letter) self
     (if (not met-player)
 	(progn (setf met-player t)
 	       (discuss self :hello))
-	(cond 
+	(cond
 	  ((and (field-value :discussed-woods self)
 		(field-value :locked (find-pentaquin-house)))
 	   (discuss self :house))
 	  ((and (not (field-value :discussed-woods self))
 		 (field-value :locked (find-pentaquin-house)))
 	   (discuss self :hello))
+	  ((search-inventory (geoffrey) 'alonso-letter)
+	   (discuss self :welcome-back))
+	  (has-letter (discuss self :southern-cave))
 	  (t (discuss self :farewell))))))
 	
 (define-topic hello arturo 
@@ -118,7 +122,7 @@ true." :wolves :town :walls)
 "You'll find archaic stone walls and
 other stone objects throughout the Vale.
 They are the remains of a vanished 
-civilization." :wolves :town :walls)
+civilization." :wolves :town :ancients)
 
 (define-topic wolves arturo
 "Wolves can kill with ease, but are an
@@ -126,14 +130,37 @@ important source of food when traveling
 in the wilderness. Sadly, the influx of
 Dire Wolves threatens the food supply,
 because the cursed flesh of the Dire
-Wolf cannot be eaten." :town :flesh)
+Wolf cannot be eaten." :town :flesh :ancients)
 
 (define-topic flesh arturo 
 "One can cure the meat of wolves and
 other un-cursed animals by means of a
 Curing spell. I'll teach it to you
-before you leave town!" :town)
+before you leave town!" :town :ancients)
  
+(define-topic ancients arturo
+  "Much like Amalia, what we know comes
+from stories. But there are also the
+Stones. Aside from the mysterious locked
+doors leading into the mountain, you
+will find throughout the countryside the
+remains of stone walls, odd arrangements
+of weathered stones, and cubic megaliths
+known as Waystones. With a magic
+sextant, you can find the nearest
+Waystone by following the direction its
+needle points. These Waystones are also
+said to be good places to stop, rest,
+and collect your thoughts and memories
+before continuing a journey." :sextant)
+
+(define-topic sextant arturo
+  "I almost forgot, I happen to have an
+extra one! It will help you find your
+way in the forest. You are welcome to
+grab it from my house before you leave
+town." :town)
+
 (define-topic town arturo
 "Nothbehem is one of the few remaining
 towns in the Vale---everything in the
@@ -142,7 +169,7 @@ grew cold. That was a hundred years
 ago---and in fact, your robes are not
 decked out with fur. I reckon you've
 been gone for more than a century."
-:cold)
+:cold :ancients)
 
 (define-topic cold arturo
 "You'll have to wear something warmer if
@@ -235,14 +262,49 @@ Geoffrey. And a safe return."
     (unfollow (lucius))
     (bark (lucius) "Good luck, Geoffrey!"))
   (unlock (find-pentaquin-house)))
-  
+
 (define-topic farewell arturo 
-"Farewell, Geoffrey.  Please come back
+"Farewell, Geoffrey. Please come back
 soon, and tell me what you've
 learned. And don't forget to stop by my
 house before you leave!"
 :bye)
 
+(define-topic welcome-back arturo 
+  "Welcome back, Traveler! Good to see
+you are still in one piece. So, what did
+you learn of my brother?" :give-letter)
+
+(define-topic give-letter arturo
+  "So, now both my brothers are
+gone. You are a most kind and honest
+Stranger, to have brought this letter
+back to me, so that I could know my
+brother's Fate, and see our feud laid
+also to rest. If only our own time had
+men so virtuous as those from your era!
+I also know that you are not merely
+seeking treasure, for it is not gold or
+jewels the Ancients kept, but rather the
+riches of Knowledge." :southern-cave)
+
+(defmethod discuss :after ((arturo arturo) (topic (eql :give-letter)))
+  (let ((letter (find-inventory-item (geoffrey) 'alonso-letter)))
+    (when letter (destroy letter))))
+
+(define-topic southern-cave arturo
+  "There is a Waystone just to the west
+of that cave, and south of
+Nothbehem. Follow the sextant's needle,
+and you'll find the stone. I hope you
+succeed in your quest to find Dr. Quine,
+and to understand your Origins and the
+meaning of your becoming a Traveler."
+  :goodbye)
+
+(define-topic goodbye arturo
+"Fare thee well, Geoffrey. You will be
+in my prayers and meditations." :bye)
 
 
 	  

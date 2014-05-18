@@ -34,11 +34,12 @@
       (add-inventory-item house (tome-of 'cure-meat))
       (add-inventory-item house (make-scroll "Expedition report" *amalia-report*))
       (add-inventory-item house (new 'copper-gear))
+      (add-inventory-item house (new 'sextant))
       (add-inventory-item house (tome-of 'seance)))))
 
 (defmethod activate ((house pentaquin-house))
   (if (field-value :locked house)
-      (narrate "Arturo's house is locked.")
+      (narrate "You don't have permission to enter Arturo's house.")
       (replace-gump house (new 'browser :container house))))
 
 (defun random-house ()

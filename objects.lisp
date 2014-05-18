@@ -349,7 +349,8 @@ dto@blocky.io
   :image (random-choose *ruin-wall-images*)
   :tags '(:fixed :solid))
 
-(defthing coverstone :tags '(:solid :fixed) :image (random-choose '("triangle-coverstone.png" "warrior-coverstone.png")))
+(defthing coverstone :tags '(:solid :fixed) :image (random-choose
+'("triangle-coverstone.png" "warrior-coverstone.png")))
 
 ;;; Various prizes
 
@@ -406,7 +407,7 @@ dto@blocky.io
 (defmethod equipment-description ((self woolen-leggings))
   "Geoffrey is wearing warm woolen leggings.")
 
-(defthing woolen-shirt :stacking nil :image "woolen-shirt.png" :defense 1 :resistance 2)
+(defthing woolen-shirt :stacking nil :image "woolen-shirt.png" :defense 1 :resistance 1)
 
 (defmethod equipment-description ((self woolen-shirt))
   "Geoffrey is wearing a woolen shirt.")
