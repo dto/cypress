@@ -275,7 +275,7 @@ Shall we get moving?"
   (destroy-gump self)
   (follow self (geoffrey))
   (learn-spell (geoffrey) (new 'travel))
-  (cue-music (current-scene) (random-choose '("path.ogg" "lutey.ogg" "tumbling.ogg")))
+  (cue-music (current-scene) (random-choose '("path.ogg" "lutey.ogg" "tumbling.ogg" "traveler2.ogg")))
   (activate (find-spellbook))
   (bark self "Excellent! Now, cast your travel spell!"))
 
