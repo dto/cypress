@@ -2,8 +2,9 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Part I
-   
-** TODO [#A] Resupply at nothbehem, talk to arturo
+
+** TODO Lucius should avoid monsters
+** TODO [#A] Return to Nothbehem and talk to arturo
    :PROPERTIES:
    :Effort:   2:00
    :END:
@@ -16,10 +17,11 @@
     :PROPERTIES:
     :Effort: 
     :END:
-*** TODO collect 2 neumes
-*** TODO combine flute with neumes to unlock quest for cave to north
+*** TODO collect 5 neumes
+*** TODO combine flute with music book to unlock quest for cave to north
 
-
+*** TODO get flute from first cave
+*** TODO get music book from townsperson
 ** TODO [#A] Southern Cave
 *** TODO Implement "Southern Cave" with: lock/key system--- plate with lock, you must use corresponding key
     :PROPERTIES:
