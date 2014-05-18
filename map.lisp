@@ -169,7 +169,7 @@
       cold-meadow forest highway
       large-mountain)
 
-     (forest grassy-meadow ruins 
+     (forest ruins garden 
       grassy-meadow cold-meadow forest 
       forest cold-meadow ruins
       large-mountain)
@@ -184,7 +184,7 @@
      large-mountain large-mountain large-mountain
      large-mountain)
 
-    (large-mountain grassy-meadow garden
+    (large-mountain forest grassy-meadow 
      forest large-mountain large-mountain
      large-mountain large-mountain large-mountain
      large-mountain)
