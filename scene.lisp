@@ -351,7 +351,7 @@
 (defthing (meadow scene)
   :background-image (random-choose '("stone-road.png" "meadow.png")))
 
-(defun meadow-debris () (spatter '(stone twig branch branch ginseng silverwood)
+(defun meadow-debris () (spatter '(silverwood stone twig ginseng stone twig branch branch silverwood)
 			       :trim t :count (+ 2 (random 4))))
 
 (defun flowers () (spatter *flowers* :trim t :count (+ 1 (random 4))))
