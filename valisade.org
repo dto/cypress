@@ -1,7 +1,17 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
-#+COLUMNS: %60ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM
+#+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
+
 
 * Part I
+** TODO [#A] Finish writing Amalia Expedition Report
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#A] Add Alonso Expedition Report
+   :PROPERTIES:
+   :Effort:   0:30
+   :END: 
+
 ** TODO [#A] screech owl flute quest
    :PROPERTIES:
    :Effort:   2:00
@@ -17,11 +27,12 @@
    :Effort:   0:30
    :END:
 *** TODO make hunger depend on terrain, not on spell
-** TODO [#A] implement saving progress at ancient Waystones. shown on map when you discover them.
+** TODO [#A] implement saving progress at ancient Waystones. shown on map when you discover them?
    :PROPERTIES:
    :Effort:   2:00
    :END:
 *** TODO [#A] sextant tells direction to nearest Waystone, discovered or not
+*** TODO 
 *** TODO [#A] only one save slot. "memory stone" on level 1 is used to resume a quest. otherwise, you overwrite when saving.
 ** TODO [#A] Hold Creature spell, uses Nightshade and freezes nearest creature
    :PROPERTIES:
@@ -134,7 +145,6 @@
    :Effort:   1:00
    :END:
 
-
 * Tweaks and bugfixes
 
 ** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
@@ -215,11 +225,80 @@
    :Effort:   0:15
    :END:
 
-
 * Part II
 
-** TODO Review quest board and timeline and plan 
+** TODO ancient gate w/silver basement / xalcyon bow
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO xalcyon armor
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO Triangle time key
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+** TODO triangle time cube
+   :PROPERTIES:
+   :Effort:   17:15
+   :END:
+*** TODO wax cylinder w creepy voice
+    :PROPERTIES:
+    :Effort:   3:00
+    :END:
+*** TODO Cypress tree garden
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
+*** TODO Black wizards
+    :PROPERTIES:
+    :Effort:   3:00
+    :END:
+*** TODO second owl with story of cypress
+    :PROPERTIES:
+    :Effort:   2:00
+    :END:
 *** TODO special gravestone
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
+*** TODO extreme cold furs for visiting amalia's cabin
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
+*** TODO amalia's cabin
+    :PROPERTIES:
+    :Effort:   1:00
+    :END:
+*** TODO cylindrophone
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
+*** TODO 2nd stone monk in cave w 4 doors
+    :PROPERTIES:
+    :Effort:   2:00
+    :END:
+*** TODO Frozen river with shade archers
+    :PROPERTIES:
+    :Effort:   2:00
+    :END:
+*** TODO valisade ruins w/monks sound
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
+*** TODO warrior time cube
+    :PROPERTIES:
+    :Effort:   0:15
+    :END: 
+*** TODO 2nd cylinder
+    :PROPERTIES:
+    :Effort:   1:00
+    :END:
+*** TODO must place inkwell and quill pen on ancient stone to trigger endgame
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
 ** TODO [#C] allow char follows mouse cursor while RMB held?
 ** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
 ** TODO [#C] Switch to new red/blue/green potion graphics
