@@ -6,8 +6,6 @@
 
 (defthing music-book :scale 0.8 :image "music-book.png" :stacking nil)
 
-(defmethod activate ((book music-book)) 
-
 (defmethod find-description ((book music-book))
   "Musical compendium")
 
