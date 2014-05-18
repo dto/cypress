@@ -100,7 +100,7 @@
 
 (defmethod make-terrain ((scene garden))
   (with-border (units 15)
-    (stacked-up-randomly 
+    (lined-up-randomly 
      (lined-up-randomly (some-snowdrops) (some-trees))
      (lined-up-randomly (some-snowdrops) (ginseng-garden)))))
 
