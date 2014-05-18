@@ -43,6 +43,10 @@
     (:key #'identity :test 'equal :validator #'identity)
   (format nil "Quiver: ~A       " n))
 
+(defun-memo status-line-lighter-string (n)
+    (:key #'identity :test 'equal :validator #'identity)
+  (format nil "Status: ~A       " n))
+
 (defresource (:name "oldania-medium-bold" :type :ttf :file "OldaniaADFStd-Bold.otf" :properties (:size 18)))
 
 (defparameter *status-line-font* "oldania-medium-bold")
@@ -71,7 +75,8 @@
 		  "None"))))
   (set-value %%message (if (field-value :paused (current-buffer))
 			   *paused-status-message*
-			   (or (current-status-message) " "))))
+			   (or (current-status-message) 
+			       (status-lighter-string)))))
 
 (defparameter *status-line-height* (units 2))
 (defparameter *status-line-background-color* "black")
@@ -127,6 +132,19 @@
 		((<= points 100)
 		 "alive and well"))))
 
+(defun health-lighter-string (points0)
+  (let ((points points0))
+    (cond ((< points 10)
+	   "Dying")
+	  ((< points 25)
+	   "Crippled")
+	  ((< points 50)
+	   "Badly hurt")
+	  ((< points 80)
+	   "Injured")
+	  ((< points 90)
+	   "Slightly injured"))))
+
 (defun hunger-description (points0)
   (let ((points (- 100 points0)))
     (format nil "Geoffrey is ~A."
@@ -142,6 +160,19 @@
 		   "slightly hungry")
 		  ((<= points 100)
 		   "not hungry")))))
+
+(defun hunger-lighter-string (points0)
+  (let ((points (- 100 points0)))
+    (cond ((< points 10)
+	   "Starving")
+	  ((< points 25)
+	   "Extremely hungry")
+	  ((< points 50)
+	   "Very hungry")
+	  ((< points 80)
+	   "Hungry")
+	  ((< points 87)
+	   "Slightly hungry"))))
 
 (defun cold-description (points0)
   (let ((points (- 100 points0)))
@@ -160,6 +191,27 @@
 		   "comfortable")
 		  ((<= points 100)
 		   "comfortable and warm")))))
+
+(defun cold-lighter-string (points0)
+  (let ((points (- 100 points0)))
+    (cond ((< points 10)
+	   "Freezing")
+	  ((< points 25)
+	   "Shivering")
+	  ((< points 50)
+	   "Very cold")
+	  ((< points 80)
+	   "Cold")
+	  ((< points 87)
+	   "Slightly cold"))))
+
+(defun status-lighter-string ()
+  (concatenate 'string 
+	       (or (health-lighter-string (field-value :health (geoffrey))) "") 
+	       "     "
+	       (or (hunger-lighter-string (field-value :hunger (geoffrey))) "")
+	       "     "
+	       (or (cold-lighter-string (field-value :cold (geoffrey))) "")))
 
 (defun magic-description (points)
   (or (when (<= points 20)

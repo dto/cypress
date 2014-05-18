@@ -291,7 +291,9 @@ riches of Knowledge." :southern-cave)
 
 (defmethod discuss :after ((arturo arturo) (topic (eql :give-letter)))
   (let ((letter (find-inventory-item (geoffrey) 'alonso-letter)))
-    (when letter (destroy letter))))
+    (when letter
+      (destroy letter)
+      (setf (field-value :has-letter arturo) t))))
 
 (define-topic southern-cave arturo
   "There is a Waystone just to the west

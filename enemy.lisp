@@ -93,7 +93,7 @@
 	(setf heading heading0))
       (percent-of-time 30
 	(percent-of-time 8 (play-sample (random-choose '("grak.wav" "groar.wav"))))
-	(move self heading0 6))))))
+	(move self heading0 8))))))
 
 ;;; Grave hags
 

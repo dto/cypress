@@ -191,8 +191,8 @@
       (setf fire nil)
       (setf timer nil))))
 
-(defmethod can-pick ((camp camp)) 
-  (not (null (field-value :container camp))))
+(defmethod can-pick ((camp camp)) t)
+;;  (not (null (field-value :container camp))))
 
 (defmethod return-to-geoffrey ((camp camp))
   (with-fields (fire) camp

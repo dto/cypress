@@ -67,7 +67,7 @@
     ((:i) open-inventory)))
 
 (defmethod expend-travel-cost ((scene scene))
-  (chill (geoffrey) (random-choose '(3 5 7)))
+  (chill (geoffrey) (random-choose '(5 8 9)))
   (modify-hunger (geoffrey) (random-choose '(10 12 14))))
 
 (defmethod add-object :after ((scene scene) (thing thing) &optional x y z)
@@ -419,7 +419,7 @@
 (defmethod make-terrain ((forest forest))
   (with-border (units 10)
     (lined-up-randomly 
-     (stacked-up-randomly (meadow-debris) (dense-trees) (lone-wraith) (some-trees))
+     (stacked-up-randomly (meadow-debris) (lone-wolf) (dense-trees) (lone-wraith) (some-trees))
      (stacked-up-randomly (some-trees) (some-trees) (flowers) (dead-trees))
      (stacked-up-randomly (flowers) (if (percent-of-time 50 t)
 					(lone-wolf)
@@ -446,7 +446,7 @@
 
 (defmethod expend-travel-cost ((meadow cold-meadow))
   (modify-hunger (geoffrey) +6)
-  (chill (geoffrey) +14))
+  (chill (geoffrey) +20))
 
 ;;; Ruins and basements
 
@@ -515,7 +515,7 @@
 
 (defmethod expend-travel-cost ((ruins ruins))
   (modify-hunger (geoffrey) 14)
-  (chill (geoffrey) +18))
+  (chill (geoffrey) +27))
 
 ;;; Cemetery
 
@@ -544,7 +544,7 @@
 
 (defmethod expend-travel-cost ((cemetery cemetery))
   (modify-hunger (geoffrey) 8)
-  (chill (geoffrey) +18))
+  (chill (geoffrey) +35))
 
 ;;; Frozen forest
 
@@ -570,7 +570,7 @@
 
 (defmethod expend-travel-cost ((forest frozen-forest))
   (modify-hunger (geoffrey) 15)
-  (chill (geoffrey) +30))
+  (chill (geoffrey) +50))
 
 ;; dense pine trees and some dead trees
 ;; wood piles and twigs and branches
@@ -595,10 +595,14 @@
 
 (defmethod expend-travel-cost ((river river))  
   (modify-hunger (geoffrey) 14)
-  (chill (geoffrey) +20))
+  (chill (geoffrey) +50))
 
 (defthing (frozen-meadow river)
   :background-image (random-choose *frozen-meadow-images*))
+
+(defmethod expend-travel-cost ((frozen-meadow frozen-meadow))  
+  (modify-hunger (geoffrey) 25)
+  (chill (geoffrey) +80))
 
 ;; pools of water
 ;; various ice cracks

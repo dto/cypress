@@ -2,7 +2,7 @@
 
 (defparameter *neume-images* (image-set "neumes" 7))
 
-(defthing neume :image (random-choose *neume-images*) :stacking t)
+(defthing neume :scale 0.7 :image (random-choose *neume-images*) :stacking t)
 
 (defthing music-book :scale 0.8 :image "music-book.png" :stacking nil)
 
@@ -102,17 +102,22 @@ give you a hint about the music."
 				(new 'iron-fence)
 				(new 'iron-fence))))))
 
-(defthing special-gravestone :tags '(:solid :fixed) :image (random-choose *gravestone-images*))
+(defthing special-gravestone 
+  :tags '(:solid :fixed) 
+  :description "gravestone with neumes"
+  :image (random-choose *gravestone-images*))
 
-(defmethod initialize ((self special-gravestone) &key neume)
-  (call-next-method)
-  (when neume (add-inventory-item self neume)))
+(defmethod initialize :after ((self special-gravestone) &key)
+  (add-inventory-item self (new 'neume)))
+
+(defmethod activate ((self special-gravestone))
+  (replace-gump self (new 'browser :container self)))
 
 (defun gravestone ()
   (singleton (new 'gravestone)))
 
 (defun gravestone-with-neume ()
-  (singleton (new 'gravestone :neume (new 'neume))))
+  (singleton (new 'special-gravestone)))
 
 (defun graves-with-neumes ()
   (let (rows)
