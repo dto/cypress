@@ -96,7 +96,7 @@
    (spray '(ruin-wall) :trim nil :count (+ 2 (random 3)))
    (randomly (some-ginseng)
 	     (with-border (units 5) (singleton (new 'waystone))))
-   (spray '(ruin-wall copper-plate ginseng ruin-wall) :trim nil :count (+ 1 (random 4)))))
+   (spray '(ruin-wall ginseng ruin-wall) :trim nil :count (+ 1 (random 4)))))
 
 (defmethod make-terrain ((scene garden))
   (with-border (units 15)
