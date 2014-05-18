@@ -556,6 +556,7 @@
 	  ;; possibly replace other gump
 	  (let ((new-gump (get-topic-gump self topic)))
 	    (destroy-gump self)
+	    (setf (field-value :gump self) nil)
 	    (when new-gump 
 	      ;; we got a new gump for this topic.
-		(replace-gump self new-gump)))))))
+	      (replace-gump self new-gump)))))))
