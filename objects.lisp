@@ -278,6 +278,11 @@ dto@blocky.io
 (defparameter *gray-rock-images* (image-set "gray-rock" 8))
 (defparameter *gray-stairwell-images* (image-set "gray-stairwell" 2))
 
+(defthing well :scale 1.1 :image "well.png" :description "old well")
+
+(defmethod activate ((well well)) 
+  (narrate "You don't have a bucket or rope to draw water."))
+
 (defparameter *nightshade-images* (image-set "nightshade" 6))
 (defthing nightshade :scale 1.1 :image (random-choose *nightshade-images*)) 
 
