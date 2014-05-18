@@ -278,7 +278,7 @@ dto@blocky.io
 (defparameter *gray-rock-images* (image-set "gray-rock" 8))
 (defparameter *gray-stairwell-images* (image-set "gray-stairwell" 2))
 
-(defthing well :scale 1.1 :image "well.png" :description "old well")
+(defthing well :scale 1.1 :image "well.png" :description "old well" :tags '(:solid :fixed))
 
 (defmethod activate ((well well)) 
   (narrate "You don't have a bucket or rope to draw water."))
