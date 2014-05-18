@@ -43,7 +43,8 @@
     (choose-target self)
     (let ((distance (distance-to-cursor self)))
       (cond 
-	((> distance 500)
+	((or (> distance 500)
+	     (not (field-value :locked (find-pentaquin-house))))
 	 (when (and next-target (null waypoints))
 	   (percent-of-time 4 (walk-to-thing self next-target))))
 	((and (< distance 220) (> distance 200))
