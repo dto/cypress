@@ -144,6 +144,15 @@
 (defmethod can-pick ((icon icon))
   (can-pick (field-value :target icon)))
 
+(defmethod can-accept ((icon icon))
+  (can-accept (field-value :target icon)))
+
+(defmethod accept ((icon icon) (thing thing))
+  (accept (field-value :target icon) thing))
+
+(defmethod will-accept ((icon icon) (thing thing))
+  (will-accept (field-value :target icon) thing))
+
 (defmethod draw ((icon icon))
   (with-fields (x y height width target) icon
     (with-fields (quantity equipper) target
@@ -218,21 +227,34 @@
     (mapc #'destroy icons)
     (setf icons nil)))
 
-(defmethod can-accept ((browser browser))
-  (with-fields (target) browser
-    (can-accept target)))
+;; (defmethod can-accept ((browser browser))
+;;   (with-fields (target) browser
+;;     (let ((icon (hit-icons browser (window-pointer-x) (window-pointer-y))))
+;;       (if icon 
+;; 	  (or (can-accept icon)
+;; 	      (can-accept target))
+;; 	  (can-accept target)))))
 
 (defmethod will-accept ((browser browser) (thing thing))
   (with-fields (target) browser
-    (when (can-reach target (geoffrey))
-      (if (eq thing target)
-	  nil
-	  (will-accept target thing)))))
+    (let ((icon (hit-icons browser (window-pointer-x) (window-pointer-y))))
+      (if icon
+	  (will-accept icon thing)
+	  (when (can-reach target (geoffrey))
+	    (if (eq thing target)
+		nil
+		(will-accept target thing)))))))
 
 (defmethod accept ((browser browser) thing)
   (with-fields (target) browser
-    (accept target thing)
-    (refresh browser)))
+    (let ((icon (hit-icons browser (window-pointer-x) (window-pointer-y))))
+      (if (and icon (will-accept icon thing))
+	  (accept icon thing)
+	  (accept target thing))
+      (refresh browser))))
+
+(defmethod accept :after ((browser browser) thing)
+  (mapc #'refresh (find-gumps)))
 
 (defmethod arrange ((browser browser))
   ;; stay in same spot onscreen
