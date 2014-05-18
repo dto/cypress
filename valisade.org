@@ -3,10 +3,16 @@
 
 
 * Part I
-** TODO [#A] Finish writing Amalia Expedition Report
+** DONE [#A] Finish writing Amalia Expedition Report
+   CLOSED: [2014-05-17 Sat 22:30]
    :PROPERTIES:
    :Effort:   0:30
    :END:
+** TODO [#A] make world colder and hungrier
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+*** TODO make hunger depend on terrain, not on spell
 ** TODO [#A] Add Alonso Expedition Report
    :PROPERTIES:
    :Effort:   0:30
@@ -22,17 +28,11 @@
     :END:
 *** TODO collect 2 neumes
 *** TODO combine flute with neumes to unlock quest for cave to north
-** TODO [#A] make world colder and hungrier
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-*** TODO make hunger depend on terrain, not on spell
 ** TODO [#A] implement saving progress at ancient Waystones. shown on map when you discover them?
    :PROPERTIES:
    :Effort:   2:00
    :END:
 *** TODO [#A] sextant tells direction to nearest Waystone, discovered or not
-*** TODO 
 *** TODO [#A] only one save slot. "memory stone" on level 1 is used to resume a quest. otherwise, you overwrite when saving.
 ** TODO [#A] Hold Creature spell, uses Nightshade and freezes nearest creature
    :PROPERTIES:
@@ -42,7 +42,8 @@
    :PROPERTIES:
    :Effort:   1:00
    :END:
-** TODO [#A] arturo should return to his garden when not talking to you.
+** DONE [#A] arturo should return to his garden when not talking to you.
+   CLOSED: [2014-05-17 Sat 22:31]
    :PROPERTIES:
    :Effort:   0:15
    :END:
@@ -151,6 +152,22 @@
    :PROPERTIES:
    :Effort:   0:15
    :END: 
+** TODO [#A] Fix spellcasting/activating objects after dead
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#A] destroy bubbles when closing gumps
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#A] don't allow spawning geoffrey in obstacle
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#B] place description bubble near cursor, not near corner of object
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#B] toggle spellbook / inventory with S I not just open
    :PROPERTIES:
    :Effort:   0:15
@@ -159,38 +176,21 @@
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#B] Fix spellcasting/activating objects after dead
+** TODO [#B] fix game doesn't close console window after X'ing out game window on MS Windows
    :PROPERTIES:
-   :Effort:   0:15
+   :Effort:   0:30
    :END:
 ** TODO [#B] auto-close inventory windows on faraway objects if you move
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#B] destroy bubbles when closing gumps
+** TODO [#B] fix image stretching in inventory icons
    :PROPERTIES:
-   :Effort:   0:15
+   :Effort:   1:00
    :END:
-** TODO [#B] don't allow spawning geoffrey in obstacle
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#B] Ancient road
 ** TODO [#C] fix being able to drop items unreachably faraway
    :PROPERTIES:
    :Effort:   0:15
-   :END:
-** TODO [#C] fix game doesn't close console window after X'ing out game window on MS Windows
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#C] place description bubble near cursor, not near corner of object
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#C] fix image stretching in inventory icons
-   :PROPERTIES:
-   :Effort:   1:00
    :END:
 ** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
    :PROPERTIES:
