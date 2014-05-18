@@ -139,20 +139,21 @@ Curing spell. I'll teach it to you
 before you leave town!" :town :ancients)
  
 (define-topic ancients arturo
-  "Much like Amalia, what we know comes
-from stories. But there are also the
-Stones. Aside from the mysterious locked
-doors leading into the mountain, you
-will find throughout the countryside the
-remains of stone walls, odd arrangements
-of weathered stones, and cubic megaliths
-known as Waystones. With a magic
-sextant, you can find the nearest
-Waystone by following the direction its
-needle points. These Waystones are also
-said to be good places to stop, rest,
-and collect your thoughts and memories
-before continuing a journey." :sextant)
+  "Much of what we know about the
+Ancients comes to us from legends. But
+there are also the Stones. Aside from
+the mysterious locked doors leading into
+the mountain, you will find throughout
+the countryside the remains of stone
+walls, odd arrangements of weathered
+stones, and cubic megaliths known as
+Waystones. With a magic sextant, you can
+find the nearest Waystone by following
+the direction its needle points. These
+Waystones are also said to be good
+places to stop, rest, and collect your
+thoughts and memories before continuing
+a journey." :sextant)
 
 (define-topic sextant arturo
   "I almost forgot, I happen to have an
