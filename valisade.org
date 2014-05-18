@@ -3,6 +3,7 @@
 
 * Part I
 
+** TODO Add return stairwells to basement ruins
 ** TODO Lucius should avoid monsters
 ** TODO [#A] Return to Nothbehem and talk to arturo
    :PROPERTIES:
