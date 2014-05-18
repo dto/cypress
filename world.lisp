@@ -280,8 +280,8 @@
     (when item (modify-quantity item (- quantity))))
   (assert (valid-container container)))
 
-(defmethod consume-single ((character thing) item-class)
-  (let ((item (find-inventory-item character item-class)))
+(defmethod consume-single ((character thing) item-class &optional source)
+  (let ((item (or source (find-inventory-item character item-class))))
     (when item 
       (let ((container (field-value :container item)))
 	(when (plusp (quantity item))

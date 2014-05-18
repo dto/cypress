@@ -150,6 +150,9 @@
 (defmethod accept ((icon icon) (thing thing))
   (accept (field-value :target icon) thing))
 
+(defmethod accept :after ((icon icon) thing)
+  (mapc #'refresh (find-gumps)))
+
 (defmethod will-accept ((icon icon) (thing thing))
   (will-accept (field-value :target icon) thing))
 
@@ -195,7 +198,7 @@
 		(remove-inventory-item container target))
 	      ;; consume single quantity, splitting if needed
 	      (let ((class (class-name (class-of target))))
-		(consume-single container class)))))))
+		(consume-single container class target)))))))
 
 ;;; Container browser gump
 
