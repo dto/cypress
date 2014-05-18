@@ -1,5 +1,28 @@
 (in-package :cypress)
 
+(defparameter *neume-images* (image-set "neumes" 7))
+
+(defthing neume :image (random-choose *neume-images*) :stacking t)
+
+(defthing music-book :scale 0.8 :image "music-book.png" :stacking nil)
+
+(defmethod activate ((book music-book)) 
+
+(defmethod find-description ((book music-book))
+  "Musical compendium")
+
+(defmethod can-accept ((book music-book)) t)
+(defmethod will-accept ((book music-book) (thing thing)) nil)
+(defmethod will-accept ((book music-book) (neume neume)) t)
+
+(defmethod activate ((music-book music-book))
+  (replace-gump music-book (new 'browser :container music-book)))
+
+(defun find-music-book ()
+  (find-inventory-item (geoffrey) 'music-book))
+
+(defthing bone-flute :scale 0.8 :image "bone-flute.png" :stacking nil)
+
 (defresource "owl.wav" :volume 08)
 
 (defparameter *owl-images* (image-set "owl" 5))
@@ -55,7 +78,12 @@ you." :music)
 want is supposed to be playing
 particular notes on a bone flute, so
 that I know it's him. Come back when
-you've got it!" :bye)
+you've got the flute, and maybe I'll
+give you a hint about the music."
+ :bye :hint)
+
+(define-topic hint owl 
+  "Hmm.")
 
 ;;; Hidden cemetery
 
@@ -75,11 +103,37 @@ you've got it!" :bye)
 				(new 'iron-fence)
 				(new 'iron-fence)
 				(new 'iron-fence))))))
+
+(defthing special-gravestone :tags '(:solid :fixed) :image (random-choose *gravestone-images*))
+
+(defmethod initialize ((self special-gravestone) &key neume)
+  (call-next-method)
+  (when neume (add-inventory-item self neume)))
+
+(defun gravestone ()
+  (singleton (new 'gravestone)))
+
+(defun gravestone-with-neume ()
+  (singleton (new 'gravestone :neume (new 'neume))))
+
+(defun graves-with-neumes ()
+  (let (rows)
+    (dotimes (n 3)
+      (push (lined-up-randomly (gravestone) 
+			       (with-border (units 2) (gravestone))
+			       (gravestone-with-neume)
+			       (gravestone) 
+			       (with-border (units 3) (gravestone))
+			       (gravestone))
+	    rows))
+    (with-border (units 4) 
+      (apply #'stacked-up-randomly rows))))
+
 (defun small-cemetery ()
   (lined-up (small-fence)
 	    (stacked-up 
 	     (flowers)
-	     (some-graves)
+	     (graves-with-neumes)
 	     (singleton (new 'owl))
 	     (flowers))
 	    (small-fence)))

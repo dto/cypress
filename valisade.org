@@ -2,16 +2,22 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Part I
-
-** TODO [#A] add black wolves
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-
+   
 ** TODO [#A] Resupply at nothbehem, talk to arturo
    :PROPERTIES:
    :Effort:   2:00
    :END:
+
+** TODO [#A] screech owl flute quest
+   :PROPERTIES:
+   :Effort:   2:00
+   :END: 
+*** TODO scrolls with neumes
+    :PROPERTIES:
+    :Effort: 
+    :END:
+*** TODO collect 2 neumes
+*** TODO combine flute with neumes to unlock quest for cave to north
 
 
 ** TODO [#A] Southern Cave
@@ -30,17 +36,10 @@
     :END:
 **** TODO [#A] silver books with spells/Special lore
 
-
-** TODO [#A] screech owl flute quest
+** TODO [#A] add black wolves
    :PROPERTIES:
-   :Effort:   2:00
-   :END: 
-*** TODO scrolls with neumes
-    :PROPERTIES:
-    :Effort: 
-    :END:
-*** TODO collect 2 neumes
-*** TODO combine flute with neumes to unlock quest for cave to north
+   :Effort:   1:00
+   :END:
 
 
 ** TODO [#A] Hold Creature spell, uses Nightshade and freezes nearest creature
@@ -56,6 +55,7 @@
 *** TODO sextant tells direction to nearest Waystone, discovered or not
 *** TODO only one save slot. "memory stone" (use triangle coverstone) on level 1 is used to resume a quest. otherwise, you overwrite when saving.
 
+
 ** TODO [#A] display cold/hunger level lighters ("Warm Cold Shivering Freezing Dead")
    :PROPERTIES:
    :Effort:   1:00
@@ -65,13 +65,16 @@
 *** TODO Geoffrey should comment when full of food
 *** TODO reduce attack/defense when very hungry
 *** TODO Slight aim jitter when shivering/freezing
+
 ** TODO [#A] add more townspeople
    :PROPERTIES:
    :Effort:   2:00
    :END:
 
+
 ** TODO import older unused ancient road ochre stuff
 ** TODO curved-stone-1.png
+
 ** TODO [#B] Add Alonso Expedition Report
    :PROPERTIES:
    :Effort:   0:30

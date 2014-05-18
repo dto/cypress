@@ -108,7 +108,7 @@
 ;;; Main game
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "cypress v0.96") 
+  (setf *window-title* "cypress v0.97") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1280)

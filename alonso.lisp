@@ -1,5 +1,19 @@
 (in-package :cypress)
 
+(defparameter *alonso-letter* 
+"Arturo,
+
+It is a cruel fate that befalls me. My
+illness traps me here. Indeed I am too
+sick to hunt for food, and will surely
+die soon. 
+
+My final hope is that you will someday
+venture to find me, and to discover,
+from this letter, that you are forgiven.
+
+ --- Alonso")
+
 (defthing (alonso-basement scene)
   :darkness-image "darkness.png"
   :background-image (random-choose *basement-images*))
@@ -64,20 +78,6 @@
   :scale 2.0
   :tags '(:fixed)
   :image "ruin-1.png")
-
-(defparameter *alonso-letter* 
-"Arturo,
-
-It is a cruel fate that befalls me. My
-illness traps me here. Indeed I am too
-sick to hunt for food, and will surely
-die soon. 
-
-My final hope is that you will someday
-venture to find me, and to discover,
-from this letter, that you are forgiven.
-
- --- Alonso")
 
 (defun alonso-pentaquin-house ()
   (combine (singleton (new 'alonso-pentaquin-house))
