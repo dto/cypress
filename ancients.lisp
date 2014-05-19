@@ -29,12 +29,13 @@
 (defparameter *copper-seal-images* (image-set "copper-seal" 4))
 
 (defthing copper-seal
+  :scale 0.8
   :image (random-choose *copper-seal-images*)
   :tags '(:fixed))
 
 (defthing copper-plate 
   :tags '(:fixed) 
-  :door nil
+  :channel 0
   :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
 
 (defthing copper-stairwell  :tags '(:fixed) :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
@@ -52,34 +53,36 @@
   :image (random-choose *copper-door-closed-images*)
   :tags '(:solid :fixed))
 
+(defmethod collide ((monk geoffrey) (wall copper-wall))
+  (stop-walking monk)
+  (restore-location monk))
+
 (defthing copper-door
   :image (random-choose *copper-door-closed-images*)
-  :plate nil
+  :channel 0
   :open nil
   :tags '(:solid :fixed)
   :timer 0)
 
-(defmethod lock ((door copper-door) (plate copper-plate))
-  (setf (field-value :plate door) plate)
-  (setf (field-value :door plate) door))
+(defmethod lock ((door copper-door) (plate copper-plate) channel)
+  (setf (field-value :channel door) channel)
+  (setf (field-value :channel plate) channel))
 
 (defmethod door-image ((door copper-door) n)
-  (cond ((> n 90) "copper-door-open-2")
-	((> n 80) "copper-door-open-1")
-	((> n 60) "copper-door-opening-1")
-	((> n 30) "copper-door-opening-2")
-	((> n 10) "copper-door-closed-1")
-	((t "copper-door-closed-2"))))
+  (cond ((> n 90) "copper-door-open-2.png")
+	((> n 80) "copper-door-open-1.png")
+	((> n 60) "copper-door-opening-1.png")
+	((> n 30) "copper-door-opening-2.png")
+	((> n 10) "copper-door-closed-1.png")
+	(t "copper-door-closed-2.png")))
 
 (defmethod release-lock ((door copper-door) (gear copper-gear))
-  (with-fields (plate open) door
+  (with-fields (channel open) door
     (setf open t)
     (destroy gear)
-    (multiple-value-bind (x y) (at plate)
+    (multiple-value-bind (x y) (at gear)
       (let ((seal (new 'copper-seal)))
-	(drop-object (current-scene) seal
-		     (+ x (units 2))
-		     (+ y (units 2)))
+	(drop-object (current-scene) seal x y)
 	(bring-to-front seal)))))
   
 (defmethod activate ((plate copper-plate))
@@ -88,7 +91,9 @@
       (when (and (colliding-with plate thing)
 		 (typep thing (find-class 'copper-gear)))
 	(return-from colliding
-	  (release-lock (field-value :door plate) thing))))))
+	  (dolist (door (find-instances (current-scene) 'copper-door))
+	    (when (= (field-value :channel plate) (field-value :channel door))
+	      (release-lock door thing))))))))
 		 
 (defmethod run ((door copper-door))
   (with-fields (timer open image plate) door
@@ -162,7 +167,7 @@
 ;;; First story cave
 
 (defthing (southern-cave scene)
-  ;; :darkness-image "darkness.png"
+  :darkness-image "darkness.png"
   :background-image "ancient-cave-3.png")
 
 (defmethod starting-x ((self southern-cave) direction) (units 5))
@@ -175,16 +180,20 @@
 	(right-door (new 'copper-door))
 	(left-plate (new 'copper-plate))
 	(right-plate (new 'copper-plate)))
-    (lock left-door left-plate)
-    (lock right-door right-plate)
-    (with-border (units 2)
-      (stacked-up
-       (with-border (units 3) (singleton (new 'copper-stairwell)))
-       (with-border (units 15) (lined-up (singleton (new 'copper-gear)) (singleton (new 'copper-gear)) (singleton (new 'coverstone))))
-       (lined-up (singleton left-plate) (singleton right-plate))
-       (lined-up (wall) (wall) (wall) (wall) (singleton left-door) (wall) (wall) (wall))
-       (lined-up (wall) (wall) (wall) (wall) (singleton right-door) (wall) (wall) (wall))
-       (with-border (units 15) (singleton (new 'bone-flute)))))))
+    (lock left-door left-plate 1)
+    (lock right-door right-plate 2)
+    (stacked-up
+     (with-border (units 3) (singleton (new 'copper-stairwell)))
+     (with-border (units 15) (lined-up (singleton (new 'copper-gear)) (singleton (new 'copper-gear)) (singleton (new 'coverstone))))
+     (lined-up (with-border (units 10) (singleton left-plate))
+	       (with-border (units 10) (singleton right-plate)))
+     (lined-up (wall) (wall) (wall)  (singleton left-door) (wall) (wall) (wall) (wall))
+     (lined-up (wall) (wall) (wall)  (singleton right-door) (wall) (wall) (wall) (wall))
+     (with-border (units 12)
+       (lined-up-randomly (spatter 'bone-dust :trim t :count 3)
+			  (spray '(bone-dust bone-dust gray-rock))
+			  (singleton (new 'alistair))))
+     (with-border (units 15) (singleton (new 'bone-flute))))))
     
 (defmethod begin-scene :after ((cave southern-cave))
   (resize-to-background-image cave)
