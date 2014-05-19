@@ -176,16 +176,16 @@
     
     (forest grassy-meadow nothbehem
      forest garden large-mountain 
-     large-mountain southern-cave large-mountain
+     large-mountain cave large-mountain
      large-mountain)
 
     (grassy-meadow forest forest 
-     grassy-meadow cave large-mountain 
+     grassy-meadow forest large-mountain 
      large-mountain large-mountain large-mountain
      large-mountain)
 
     (large-mountain forest grassy-meadow 
-     forest large-mountain large-mountain
+     garden southern-cave large-mountain
      large-mountain large-mountain large-mountain
      large-mountain)
 

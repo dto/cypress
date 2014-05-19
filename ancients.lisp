@@ -30,31 +30,38 @@
 
 (defthing copper-seal
   :image (random-choose *copper-seal-images*)
-  :touching nil
   :tags '(:fixed))
-
-(defmethod collide ((seal copper-seal) (gear copper-gear))
-  (setf (field-value :touching seal) t))
 
 (defthing copper-plate 
   :tags '(:fixed) 
+  :door nil
   :image (random-choose '("copper-plate-1.png" "copper-plate-2.png")))
 
 (defthing copper-stairwell  :tags '(:fixed) :image (random-choose '("copper-stairwell-1.png" "copper-stairwell-2.png")))
+
+(defmethod activate ((self copper-stairwell))
+  (if *previous-scene*
+      (restore-excursion-maybe)
+      (switch-to-map)))
 
 (defparameter *copper-door-closed-images* (image-set "copper-door-closed" 2))
 (defparameter *copper-door-opening-images* (image-set "copper-door-opening" 2))
 (defparameter *copper-door-open-images* (image-set "copper-door-open" 2))
 
+(defthing copper-wall
+  :image (random-choose *copper-door-closed-images*)
+  :tags '(:solid :fixed))
+
 (defthing copper-door
   :image (random-choose *copper-door-closed-images*)
-  :seal nil
+  :plate nil
   :open nil
   :tags '(:solid :fixed)
   :timer 0)
 
-(defmethod lock ((door copper-door) (seal copper-seal))
-  (setf (field-value :seal door) seal))
+(defmethod lock ((door copper-door) (plate copper-plate))
+  (setf (field-value :plate door) plate)
+  (setf (field-value :door plate) door))
 
 (defmethod door-image ((door copper-door) n)
   (cond ((> n 90) "copper-door-open-2")
@@ -64,20 +71,37 @@
 	((> n 10) "copper-door-closed-1")
 	((t "copper-door-closed-2"))))
 
+(defmethod release-lock ((door copper-door) (gear copper-gear))
+  (with-fields (plate open) door
+    (setf open t)
+    (destroy gear)
+    (multiple-value-bind (x y) (at plate)
+      (let ((seal (new 'copper-seal)))
+	(drop-object (current-scene) seal
+		     (+ x (units 2))
+		     (+ y (units 2)))
+	(bring-to-front seal)))))
+  
+(defmethod activate ((plate copper-plate))
+  (block colliding
+    (dolist (thing (get-objects (current-scene)))
+      (when (and (colliding-with plate thing)
+		 (typep thing (find-class 'copper-gear)))
+	(return-from colliding
+	  (release-lock (field-value :door plate) thing))))))
+		 
 (defmethod run ((door copper-door))
-  (with-fields (timer open image seal) door
-    (when seal
-      (with-fields (touching) seal
-	(setf timer 
-	      (max 0
-		   (min (+ timer (if touching 1 -1))
-			100)))
-	(setf image (door-image door timer))
-	(if (plusp timer)
-	    (progn (setf open t)
-		   (remove-tag door :solid))
-	    (progn (setf open nil)
-		   (add-tag door :solid)))))))
+  (with-fields (timer open image plate) door
+    (when open
+      (setf timer 
+	    (max 0 
+		 (min (+ timer 1)
+		      100)))
+      (setf image (door-image door timer)))
+    (if (plusp timer)
+	(remove-tag door :solid)
+	(progn (setf open nil)
+	       (add-tag door :solid)))))
 
 ;;; Ancient garden
 
@@ -135,8 +159,41 @@
     (percent-of-time 20 (drop-object scene (new 'cryptghast) (random width) (random height)))
     (percent-of-time 40 (drop-object scene (make-box) (- width 200) (- height 200)))))
 
+;;; First story cave
+
+(defthing (southern-cave scene)
+  ;; :darkness-image "darkness.png"
+  :background-image "ancient-cave-3.png")
+
+(defmethod starting-x ((self southern-cave) direction) (units 5))
+(defmethod starting-y ((self southern-cave) direction) (units 5))
+
+(defun wall () (singleton (new 'copper-wall)))
+
+(defmethod make-terrain ((cave southern-cave))
+  (let ((left-door (new 'copper-door))
+	(right-door (new 'copper-door))
+	(left-plate (new 'copper-plate))
+	(right-plate (new 'copper-plate)))
+    (lock left-door left-plate)
+    (lock right-door right-plate)
+    (with-border (units 2)
+      (stacked-up
+       (with-border (units 3) (singleton (new 'copper-stairwell)))
+       (with-border (units 15) (lined-up (singleton (new 'copper-gear)) (singleton (new 'copper-gear)) (singleton (new 'coverstone))))
+       (lined-up (singleton left-plate) (singleton right-plate))
+       (lined-up (wall) (wall) (wall) (wall) (singleton left-door) (wall) (wall) (wall))
+       (lined-up (wall) (wall) (wall) (wall) (singleton right-door) (wall) (wall) (wall))
+       (with-border (units 15) (singleton (new 'bone-flute)))))))
+    
+(defmethod begin-scene :after ((cave southern-cave))
+  (resize-to-background-image cave)
+  (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
+
+(defthing bone-flute :scale 0.8 :image "bone-flute.png" :stacking nil)
+
+
 (defthing (eastern-cave cave))
-(defthing (southern-cave cave))
 
     
 

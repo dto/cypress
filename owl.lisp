@@ -2,7 +2,7 @@
 
 (defparameter *neume-images* (image-set "neumes" 7))
 
-(defthing neume :scale 0.7 :image (random-choose *neume-images*) :stacking t)
+(defthing neume :scale 0.6 :image (random-choose *neume-images*) :stacking t :description "neumes")
 
 (defthing music-book :scale 0.8 :image "music-book.png" :stacking nil)
 
@@ -18,8 +18,6 @@
 
 (defun find-music-book ()
   (find-inventory-item (geoffrey) 'music-book))
-
-(defthing bone-flute :scale 0.8 :image "bone-flute.png" :stacking nil)
 
 (defresource "owl.wav" :volume 08)
 
@@ -78,10 +76,15 @@ particular notes on a bone flute, so
 that I know it's him. Come back when
 you've got the flute, and maybe I'll
 give you a hint about the music."
- :bye :hint)
+:hint)
 
 (define-topic hint owl 
-  "Hmm.")
+  "Hmm. Well, seeing as you don't have
+the flute, I'll help you just a
+little. You'll need to play a three-part
+funeral dirge. But I can't tell ye where
+to get the music, nor where to find the
+flute. Have fun!" :bye)
 
 ;;; Hidden cemetery
 
@@ -107,7 +110,7 @@ give you a hint about the music."
   :description "gravestone with neumes"
   :image (random-choose *gravestone-images*))
 
-(defmethod initialize :after ((self special-gravestone) &key)
+(defmethod enter-scene ((self special-gravestone))
   (add-inventory-item self (new 'neume)))
 
 (defmethod activate ((self special-gravestone))
