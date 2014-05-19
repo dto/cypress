@@ -427,7 +427,7 @@
 			  (dense-trees)))))
 
 (defmethod begin-scene :after ((forest forest))
-  (percent-of-time 8 (prog1 t (cue-music (random-choose '("rain.ogg" "believe-me2.ogg" "xolaros3.ogg" "thunder-med.ogg" "thunder-big.ogg" "crickets.ogg"))))))
+  (percent-of-time 8 (prog1 t (cue-music forest (random-choose '("rain.ogg" "believe-me2.ogg" "xolaros3.ogg" "thunder-med.ogg" "thunder-big.ogg" "crickets.ogg"))))))
 
 ;;; Cold meadow
 
@@ -516,35 +516,6 @@
 (defmethod expend-travel-cost ((ruins ruins))
   (modify-hunger (geoffrey) 14)
   (chill (geoffrey) +27))
-
-;;; Cemetery
-
-(defthing (cemetery scene)
-  :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png")))
-
-(defun row-of-graves ()
-  (with-border (units (+ 2 (random 3)))
-    (apply #'lined-up-randomly (mapcar #'singleton (grab '(gravestone) (+ 2 (random 4)))))))
-
-(defun some-graves ()
-  (let (rows)
-    (dotimes (n (+ 2 (random 2)))
-      (push (row-of-graves) rows))
-    (with-border (units 4) 
-      (apply #'stacked-up-randomly rows))))
-
-(defmethod make-terrain ((cemetery cemetery))
-  (with-border (units 10)
-    (lined-up-randomly 
-     (stacked-up-randomly (wood-pile) (spatter 'bone-dust) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (dense-trees) (singleton (new 'grave-hag)) (spatter '(nightshade ginseng)))
-     (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3)))
-			  ;; (singleton (new 'stone-stairwell)) 
-			  (some-trees))
-     (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (spray 'iron-fence :count (+ 2 (random 3))) (singleton (new 'grave-hag)) (spray 'bone-dust) (singleton (new 'iron-fence)) (flowers)))))
-
-(defmethod expend-travel-cost ((cemetery cemetery))
-  (modify-hunger (geoffrey) 8)
-  (chill (geoffrey) +35))
 
 ;;; Frozen forest
 

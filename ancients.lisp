@@ -83,8 +83,9 @@
     (multiple-value-bind (x y) (at gear)
       (let ((seal (new 'copper-seal)))
 	(drop-object (current-scene) seal x y)
+	(bark (geoffrey) "It's opening!")
 	(bring-to-front seal)))))
-  
+
 (defmethod activate ((plate copper-plate))
   (block colliding
     (dolist (thing (get-objects (current-scene)))
@@ -184,23 +185,19 @@
     (lock right-door right-plate 2)
     (stacked-up
      (with-border (units 3) (singleton (new 'copper-stairwell)))
-     (with-border (units 15) (lined-up (singleton (new 'copper-gear)) (singleton (new 'copper-gear)) (singleton (new 'coverstone))))
+     (with-border (units 15) (spatter 'bone-dust))
      (lined-up (with-border (units 10) (singleton left-plate))
 	       (with-border (units 10) (singleton right-plate)))
      (lined-up (wall) (wall) (wall)  (singleton left-door) (wall) (wall) (wall) (wall))
      (lined-up (wall) (wall) (wall)  (singleton right-door) (wall) (wall) (wall) (wall))
-     (with-border (units 12)
-       (lined-up-randomly (spatter 'bone-dust :trim t :count 3)
-			  (spray '(bone-dust bone-dust gray-rock))
-			  (singleton (new 'alistair))))
-     (with-border (units 15) (singleton (new 'bone-flute))))))
-    
+     (with-border (units 10)
+       (lined-up-randomly (singleton (new 'book))
+			  (spatter '(book ruined-book silver-book) :trim t :count 14)
+			  (singleton (new 'alistair)))))))
+     
 (defmethod begin-scene :after ((cave southern-cave))
   (resize-to-background-image cave)
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
-
-(defthing bone-flute :scale 0.8 :image "bone-flute.png" :stacking nil)
-
 
 (defthing (eastern-cave cave))
 

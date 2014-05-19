@@ -176,7 +176,7 @@ friend.
 --- Dr. Quine
 ")
 
-(defparameter *quine-letter-1* 
+(defparameter *first-quine-letter* 
   "Dear Geoffrey,
 
 Our fondest hope is that this letter
@@ -202,23 +202,23 @@ Nothbehem.
 
 If we read these charts aright, then by
 the time you read these words your
-brother and I will have been dead for
-more than five thousand years. For as we
-crossed the mountains into the North,
-each of us fell prey to magicks
+brother and I likely will have been dead
+for more than five thousand years. For
+as we crossed the mountains into the
+North, each of us fell prey to magicks
 involving Time, such that a delay in one
 day's departure meant the passage of
 five millennia.
 
 You stand on the soil of of a continent
 ten thousand years older than the land
-you left.
+you left. 
 
- (the rest of the scroll has crumbled)
-")
-
-(defparameter *quine-letter-2*
-  "Dear Geoffrey, 
+A continent whose very Souls are in
+peril! A land you must rescue, if
+Justice is to be brought, and if the
+Souls of Ildron are to be saved from
+wandering in Shadow.
 
 Your brother and I have begun to
 reconstruct what happened in the
@@ -245,7 +245,12 @@ clouds. The pollution of the water
 supply and failure of their crops led to
 widespread famine, disease, and death.
 
- (the rest of the scroll is unreadable.)
+We will tell you more in our next
+letter. In the meantime, you must seek
+out the Screech Owl; she will be waiting
+for you in a forest due North of here.
+
+-- Dr. Quine
 ")
 
 (defparameter *wax-cylinder-letter*

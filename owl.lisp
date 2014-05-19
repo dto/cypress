@@ -1,8 +1,21 @@
 (in-package :cypress)
 
+(defun find-owl ()
+  (first (find-instances (current-scene) 'owl)))
+
 (defparameter *neume-images* (image-set "neumes" 7))
 
 (defthing neume :scale 0.6 :image (random-choose *neume-images*) :stacking t :description "neumes")
+
+(defthing bone-flute :scale 0.7 :image "bone-flute.png" :stacking nil)
+
+(defmethod activate ((flute bone-flute))
+  (if (has-quantity (geoffrey) 'neume 3)
+      (progn (cue-music (current-scene) "flutism.ogg")
+	     (narrate "You play the flute!")
+	     (when (find-owl)
+	       (setf (field-value :heard-flute (find-owl)) t)))
+      (bark (geoffrey) "I don't have enough neumes.")))
 
 (defthing music-book :scale 0.8 :image "music-book.png" :stacking nil)
 
@@ -26,6 +39,7 @@
 
 (defthing (owl sprite)
   :image-scale 700
+  :heard-flute nil
   :sprite-height 130
   :sprite-width 130
   :health 15
@@ -34,9 +48,13 @@
 (defmethod can-pick ((owl owl)) nil)
 
 (defmethod activate ((owl owl))
+  (destroy-gump owl)
+  (setf (field-value :gump owl) nil)
   (cue-music (current-scene)
 	     (random-choose '("believe-me2.ogg" "xolaros3.ogg")))
-  (discuss owl :hello))
+  (if (not (field-value :heard-flute owl))
+      (discuss owl :hello)
+      (discuss owl :scroll)))
 
 (defmethod enter-scene ((owl owl))
   (play-sample "owl.wav")
@@ -86,6 +104,18 @@ funeral dirge. But I can't tell ye where
 to get the music, nor where to find the
 flute. Have fun!" :bye)
 
+(define-topic scroll owl
+"It's an honor to meet the real Geoffrey.
+Here is the scroll I've been instructed
+to give you." :bye)
+
+(defmethod discuss :after ((owl owl) (topic (eql :scroll)))
+  (drop owl (make-scroll "strange poem" *amalia-poem*)
+	(units 5) (units 5)))
+
+
+
+
 ;;; Hidden cemetery
 
 (defthing (hidden-cemetery scene)
@@ -97,8 +127,13 @@ flute. Have fun!" :bye)
 
 (defun small-fence ()
   (with-border (units 3)
-    (apply #'stacked-up (mapcar #'singleton
+    (apply #'lined-up (mapcar #'singleton
 				(list 
+				(new 'iron-fence)
+				(new 'iron-fence)
+				(new 'iron-fence)
+				(new 'iron-fence)
+				(new 'iron-fence)
 				(new 'iron-fence)
 				(new 'iron-fence)
 				(new 'iron-fence)
@@ -135,21 +170,53 @@ flute. Have fun!" :bye)
     (with-border (units 4) 
       (apply #'stacked-up-randomly rows))))
 
-(defun small-cemetery ()
-  (lined-up (small-fence)
-	    (stacked-up 
-	     (flowers)
-	     (graves-with-neumes)
-	     (singleton (new 'owl))
-	     (flowers))
-	    (small-fence)))
+(defun owl-garden ()
+  (stacked-up (small-fence)
+	      (stacked-up 
+	       (flowers)
+	       (with-border (units 8) (singleton (new 'waystone)))
+	       (with-border (units 4) (singleton (new 'owl)))
+	       (flowers) 
+	      (small-fence))))
+
+;; (learn-spell (geoffrey) (new 'travel))
 
 (defmethod make-terrain ((self hidden-cemetery))
   (with-border (units 12)
     (stacked-up 
      (lined-up (some-trees) (some-trees) (some-trees))
-     (lined-up (flowers) (small-cemetery) (flowers))
+     (lined-up (flowers) (owl-garden) (flowers))
      (lined-up (some-trees) (some-trees) (some-trees)))))
+
+
+;;; Cemetery
+
+(defthing (cemetery scene)
+  :background-image (random-choose '("forgotten-meadow.png" "paynes-meadow.png")))
+
+(defun row-of-graves ()
+  (with-border (units (+ 2 (random 3)))
+    (apply #'lined-up-randomly (mapcar #'singleton (grab '(gravestone) (+ 2 (random 4)))))))
+
+(defun some-graves ()
+  (let (rows)
+    (dotimes (n (+ 2 (random 2)))
+      (push (row-of-graves) rows))
+    (with-border (units 4) 
+      (apply #'stacked-up-randomly rows))))
+
+(defmethod make-terrain ((cemetery cemetery))
+  (with-border (units 10)
+    (lined-up-randomly 
+     (stacked-up-randomly (wood-pile) (spatter 'bone-dust) (spray 'iron-fence :count (+ 2 (random 3))) (some-graves) (dense-trees) (singleton (new 'grave-hag)) (spatter '(nightshade ginseng)))
+     (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3)))
+			  ;; (singleton (new 'stone-stairwell)) 
+			  (some-trees))
+     (stacked-up-randomly (dead-trees) (spray 'iron-fence :count (+ 2 (random 3))) (graves-with-neumes) (spray 'iron-fence :count (+ 2 (random 3))) (singleton (new 'grave-hag)) (spray 'bone-dust) (singleton (new 'iron-fence)) (flowers)))))
+
+(defmethod expend-travel-cost ((cemetery cemetery))
+  (modify-hunger (geoffrey) 8)
+  (chill (geoffrey) +35))
 
 
 
