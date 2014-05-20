@@ -68,6 +68,12 @@
   ;;
   :excluded-fields '(:quadtree :click-start :click-start-block :drag-origin :drag-start :drag-offset :focused-block                      :shell :drag :hover :highlight :inputs))
 
+(defmethod after-revive ((scene scene))
+  (bind-any-default-events scene))
+
+(defmethod initialize :after ((scene scene) &key)
+  (bind-any-default-events scene))
+
 (defmethod expend-travel-cost ((scene scene))
   (chill (geoffrey) (random-choose '(5 8 9)))
   (modify-hunger (geoffrey) (random-choose '(10 12 14))))

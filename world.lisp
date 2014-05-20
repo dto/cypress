@@ -978,7 +978,8 @@
       (assert (not (null instance)))
       ;; (setf (uuid instance) uuid)
       (setf (xelf::super instance) (xelf::find-prototype class)) 
-      (setf (xelf::fields instance) (unflatten-fields fields)))))
+      (setf (xelf::fields instance) (unflatten-fields fields))
+      instance)))
 	    
 (defun revive (sexp)
   (destructuring-bind (key &key class uuid fields) sexp
@@ -986,13 +987,16 @@
     (setf (gethash uuid xelf::*database*)
 	  (make-instance class :uuid uuid))))
 
+(defmethod after-revive ((thing thing)) nil)
+
 (defun expand-quest (quest)
   (destructuring-bind (&key variables database) quest
-      (mapc #'revive database)
-      (mapc #'unflatten-object database)
+    (mapc #'revive database)
+    (let ((objects (mapcar #'unflatten-object database)))
       (dolist (variable variables)
 	(expand-variable (first variable) 
-			 (unflatten (second variable))))))
+			 (unflatten (second variable))))
+      (mapc #'after-revive objects)))) 
 	
 (defun load-quest ()
   (expand-quest (first (read-sexp-from-file (cypress-save-file))))
