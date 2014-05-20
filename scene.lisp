@@ -359,20 +359,21 @@
 (defthing (meadow scene)
   :background-image (random-choose '("stone-road.png" "meadow.png")))
 
-(defun meadow-debris () (spatter '(silverwood stone twig ginseng stone twig branch branch silverwood)
+(defun meadow-debris () (spatter '(silverwood stone twig ginseng ginseng stone twig branch branch silverwood)
 			       :trim t :count (+ 2 (random 4))))
 
 (defun flowers () (spatter *flowers* :trim t :count (+ 1 (random 4))))
 (defun dead-tree () (singleton (new 'dead-tree)))
 (defun leafy-tree () (singleton (new 'leafy-tree)))
 (defun wood-pile ()
-  (spatter '(twig twig branch dead-tree)
-	 :trim t :count (+ 2 (random 2))))
+  (spatter '(twig twig branch branch dead-tree)
+	 :trim t :count (+ 2 (random 4))))
 
 (defun clearing ()
   (with-border (units (random-choose '(10 15 20)))
     (if (percent-of-time 50 t)
-	(meadow-debris)
+	(or (percent-of-time 50 (meadow-debris)) 
+	    (wood-pile))
 	(some-trees))))
 
 (defun some-trees ()
@@ -408,7 +409,7 @@
     (lined-up-randomly 
      (stacked-up-randomly (meadow-debris) (flowers) (some-trees))
      (stacked-up-randomly (clearing) (pine-trees) (clearing))
-     (stacked-up-randomly (flowers)
+     (stacked-up-randomly (flowers) (wood-pile)
 			  (lone-wolf)
 			  (spatter '(silverwood stone) :count (+ 2 (random 3)))))))
 
@@ -431,10 +432,13 @@
   (with-border (units 10)
     (lined-up-randomly 
      (stacked-up-randomly (meadow-debris) (lone-wolf) (dense-trees) (lone-wraith) (some-trees))
-     (stacked-up-randomly (some-trees) (some-trees) (flowers) (dead-trees))
+     (stacked-up-randomly (some-trees) (wood-pile) (some-trees) (flowers) (dead-trees))
      (stacked-up-randomly (flowers) (if (percent-of-time 50 t)
 					(lone-wolf)
-					(lone-wraith))
+					(reagents))
+			  (if (percent-of-time 50 t)
+			      (lone-wolf)
+			      (lone-wraith))
 			  (dense-trees)))))
 
 (defmethod begin-scene :after ((forest forest))

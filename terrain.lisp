@@ -149,7 +149,7 @@
 ;;; Forest pieces
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))
-(defparameter *reagents* '(ginseng silverwood silverwood stone stone stone branch branch snowdrop violet))
+;; (defparameter *reagents* '(ginseng silverwood silverwood stone stone stone branch branch snowdrop violet))
 
 ;;; Enemies in scenes
 
@@ -159,7 +159,6 @@
       (if (percent-of-time 20 t)
 	  (reagents)
 	  (enemy))))
-
 
 (defun rock-outcropping ()
   (spray '(gray-rock stone stone)
