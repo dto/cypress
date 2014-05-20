@@ -147,9 +147,9 @@
 (defmethod find-description ((scene garden)) "forest")
 (defmethod map-icon ((scene garden)) (random-choose *forest-icons*))
 
-(defun some-ginseng () (spatter '(ginseng stone twig twig) :trim t :count (+ 2 (random 5))))
+(defun some-ginseng () (spatter '(ginseng stone twig) :trim t :count (+ 2 (random 4))))
 
-(defun some-snowdrops () (spatter 'snowdrop :trim t :count (+ 1 (random 3))))
+(defun some-snowdrops () (spatter 'snowdrop :trim t :count (+ 1 (random 4))))
 
 (defun ginseng-garden ()
   (stacked-up
@@ -230,9 +230,6 @@
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
 
 (defthing (eastern-cave cave))
-
-    
-
 
 
 
