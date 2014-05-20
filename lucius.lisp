@@ -162,7 +162,7 @@ must admit you startled me; when I heard
 your footsteps, I thought at first you
 were a Wraith! But you seem human enough
 to me. Salutations!"
-:name :job :robes :wraith :where-are-we?)
+:name :job :robes :wraith)
 
 (define-topic wraith lucius 
 "You really aren't from around here, are
