@@ -34,7 +34,7 @@
 (defparameter *terrain-classes* '(forest frozen-forest meadow cave
   grassy-meadow cold-meadow frozen-meadow ruins river valisade highway
   alonso-ruins nothbehem southern-cave eastern-cave garden
-  cemetery hidden-cemetery))
+  cemetery owl-garden))
 
 (defparameter *terrain-icons* 
   (list 'forest *forest-icons*
@@ -43,7 +43,7 @@
 	'alonso-ruins *ruins-icons*
 	'southern-cave (list *road-image*)
 	'eastern-cave (list *road-image*)
-	'hidden-cemetery *forest-icons*
+	'owl-garden *forest-icons*
 	'meadow *meadow-icons*
 	'grassy-meadow *grassy-meadow-icons*
 	'cold-meadow *cold-meadow-icons*
@@ -155,7 +155,7 @@
      large-mountain)
 
     (alonso-ruins frozen-meadow frozen-forest
-     cold-meadow hidden-cemetery cold-meadow
+     cold-meadow owl-garden cold-meadow
      ruins frozen-meadow frozen-forest
      large-mountain)
 
@@ -169,9 +169,9 @@
       cold-meadow forest highway
       large-mountain)
 
-     (forest ruins garden 
-      grassy-meadow cold-meadow forest 
-      forest cold-meadow ruins
+     (forest ruins forest
+      grassy-meadow garden forest 
+      forest garden ruins
       large-mountain)
     
     (forest grassy-meadow nothbehem

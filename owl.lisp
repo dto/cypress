@@ -113,17 +113,14 @@ to give you." :bye)
   (drop owl (make-scroll "strange poem" *amalia-poem*)
 	(units 5) (units 5)))
 
+;;; Hidden owl garden
 
-
-
-;;; Hidden cemetery
-
-(defthing (hidden-cemetery scene)
+(defthing (owl-garden scene)
   :background-image "stone-road.png")
 
-(defmethod map-icon ((self hidden-cemetery)) (random-choose *forest-icons*))
+(defmethod map-icon ((self owl-garden)) (random-choose *forest-icons*))
 
-(defmethod find-description ((self hidden-cemetery)) "forest")
+(defmethod find-description ((self owl-garden)) "forest")
 
 (defun small-fence ()
   (with-border (units 3)
@@ -172,16 +169,18 @@ to give you." :bye)
 
 (defun owl-garden ()
   (stacked-up (small-fence)
-	      (stacked-up 
-	       (flowers)
-	       (with-border (units 8) (singleton (new 'waystone)))
-	       (with-border (units 4) (singleton (new 'owl)))
-	       (flowers) 
-	      (small-fence))))
+	      (with-border (units 10)
+		(stacked-up 
+		 (lined-up-randomly (flowers) (gravestone) (gravestone))
+		 (lined-up-randomly (with-border (units 8) (singleton (new 'waystone))) 	
+				    (with-border (units 4) (singleton (new 'owl))))
+		 
+		 (lined-up-randomly (meadow-debris) (flowers) (gravestone) (gravestone))))
+	      (small-fence)))
 
 ;; (learn-spell (geoffrey) (new 'travel))
 
-(defmethod make-terrain ((self hidden-cemetery))
+(defmethod make-terrain ((self owl-garden))
   (with-border (units 12)
     (stacked-up 
      (lined-up (some-trees) (some-trees) (some-trees))
