@@ -17,8 +17,17 @@
   :description "ancient waystone")
 
 (defmethod activate ((waystone waystone))
-  (cue-music (current-scene) "flutism.ogg")
-  (narrate "You feel the traces of an ancient memory.")
+  ;; (cue-music (current-scene) "flutism.ogg")
+  (narrate "You feel a sense of contact with ancient memories.")
+  (discuss waystone :confirm))
+
+(define-topic confirm waystone
+  "Would you like to save your quest?" :save-progress :cancel)
+
+(define-topic save-progress waystone
+  "Your progress has been saved." :ok)
+
+(defmethod discuss :before ((waystone waystone) (topic (eql :save-progress))) 
   (save-quest))
 
 (defthing stone-of-remembrance 
@@ -28,6 +37,17 @@
   :description "stone of remembrance")
 
 (defmethod activate ((stone stone-of-remembrance))
+  (narrate "You feel as if Time itself is vibrating.")
+  (discuss stone :confirm))
+
+(define-topic confirm stone-of-remembrance 
+  "Continue your saved quest?" :continue-quest :cancel)
+  
+(define-topic continue-quest stone-of-remembrance 
+  "Restoring quest...")
+
+(defmethod discuss :after 
+    ((stone stone-of-remembrance) (topic (eql :continue-quest)))
   (load-quest))
 
 (defparameter *copper-gear-images* (image-set "copper-lock" 5))
