@@ -69,5 +69,6 @@
 			    (spray 'silverwood :trim t :count 2)
 			    (singleton (new 'ruin-wall))
 			    (singleton (new 'well))
+			    (with-border (units 4) (singleton (new 'waystone)))
 			    (spray 'silverwood :trim t :count 2))
 			   (flowers))))))
