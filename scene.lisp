@@ -64,7 +64,9 @@
     ;; ((:p) transport-toggle-play)
     ((:m) open-map)
     ((:s) open-spellbook)
-    ((:i) open-inventory)))
+    ((:i) open-inventory))
+  ;;
+  :excluded-fields '(:quadtree :click-start :click-start-block :drag-origin :drag-start :drag-offset :focused-block                      :shell :drag :hover :highlight :inputs))
 
 (defmethod expend-travel-cost ((scene scene))
   (chill (geoffrey) (random-choose '(5 8 9)))
@@ -381,6 +383,9 @@
      (stacked-up-randomly (some-trees) (flowers) (flowers)))))
 
 (defmethod begin-scene :after ((meadow meadow))
+  (drop-object meadow (new 'stone-of-remembrance)
+	       (units 25)
+	       (units 4))
   (drop-object meadow (new 'lucius) 
 	       (- (field-value :width meadow)
 		  (units 8))

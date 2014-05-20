@@ -18,7 +18,17 @@
 
 (defmethod activate ((waystone waystone))
   (cue-music (current-scene) "flutism.ogg")
-  (narrate "You feel the traces of an ancient memory, but nothing happens."))
+  (narrate "You feel the traces of an ancient memory.")
+  (save-quest))
+
+(defthing stone-of-remembrance 
+  :scale 1.2
+  :image "triangle-coverstone.png"
+  :tags '(:fixed :solid)
+  :description "stone of remembrance")
+
+(defmethod activate ((stone stone-of-remembrance))
+  (load-quest))
 
 (defparameter *copper-gear-images* (image-set "copper-lock" 5))
 

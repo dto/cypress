@@ -24,6 +24,7 @@
   (setf *geoffrey* monk)
   ;; temp
   ;; (add-inventory-item monk (quantity-of 'copper-gear 2))
+  ;; (learn-spell (geoffrey) (new 'travel))
   ;; (add-inventory-item monk (new 'bone-flute))
   ;; (add-inventory-item monk (quantity-of 'neume 3))
   ;; 
@@ -32,7 +33,7 @@
   (add-inventory-item monk (new 'bag))
   (add-inventory-item monk (quantity-of 'ginseng 2))
   (add-inventory-item monk (quantity-of 'stone 2))
-  (add-inventory-item monk (quantity-of 'white-bread 2))
+  (add-inventory-item monk (quantity-of 'white-bread 3))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
   (add-inventory-item monk (make-scroll "Summons from Dr. Quine" *quine-summons*))
   (equip monk (find-arrow monk)))
@@ -213,3 +214,4 @@
       (unless (plusp timer)
 	(douse camp)))))
 
+ 

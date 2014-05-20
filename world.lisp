@@ -20,6 +20,7 @@
 ;;; Fundamental object attributes in the world of Cypress
 
 (defblock thing 
+  (excluded-fields :initform '(:quadtree-node :path))
   ;; world fields
   (quantity :initform 1)
   (stacking :initform t)
@@ -79,7 +80,7 @@
 (defmethod die ((self thing))
   (destroy self))
 
-(defmethod initialize-instance :after ((self thing) &key)
+(defmethod initialize :after ((self thing) &key)
   (layout self))
 
 ;;; Animation system
@@ -826,3 +827,173 @@
   (and (xelfp thing)
        (has-tag (find-object thing) :bubble)))
 
+;;; Serialization
+
+(defconstant +hash+ :%CYPRESS%1%HASH%)
+(defconstant +xelf+ :%CYPRESS%1%XELF%)
+(defconstant +uuid+ :%CYPRESS%1%UUID%)
+
+(defmethod flatten (object)
+  ;; use labels here so we can call #'flatten
+  (with-standard-io-syntax
+    (labels ((hash-to-list (hash)
+	       (let (plist)
+		 (labels ((collect (k v)
+			    (push (flatten v) plist)
+			    (push k plist)))
+		   (maphash #'collect hash)
+		   (cons +hash+ (cons (hash-table-test hash) plist))))))
+      (typecase object 
+	(hash-table (hash-to-list object))
+	;; handle tree structure
+	(cons 
+	 (if (consp (cdr object)) ;; it's a list
+	     (mapcar #'flatten object)
+	     (cons (flatten (car object)) ;; it's a dotted pair
+		   (flatten (cdr object)))))
+	;; handle strings
+	(string
+	 (if (xelfp object)
+	     (list +uuid+ (coerce (copy-tree object) 'simple-string))
+	     (coerce (copy-tree object) 'simple-string)))
+	;; pass other vectors
+	(vector (map 'vector #'flatten object))
+	;; UUID the xelf objects
+	(xelf-object (list +uuid+ (xelf::uuid object)))
+	;; pass through other Lisp entities
+	(otherwise object)))))
+
+(defmethod flatten-and-store (self)
+  (let ((excluded-fields (when (has-field :excluded-fields self)
+			   (field-value :excluded-fields self))))
+    (let ((class-name (class-name (class-of self)))
+	  (uuid (xelf::uuid self))
+	  (fields (xelf::fields self))
+	  (plist nil))
+      (assert (and class-name (stringp uuid)))
+      ;; just flatten
+      (labels ((collect (field value)
+		 (unless (member field excluded-fields)
+		   (push (flatten value) plist)
+		   (push field plist))))
+	;; make flattened/cleaned plist 
+	(etypecase fields
+	  (hash-table (maphash #'collect fields))
+	  (list (loop while fields
+		      ;; dissect plist
+		      do (let ((field (pop fields))
+			       (value (pop fields)))
+			   (collect field value)))))
+	;; cons up the final flattened sexp
+	(list +xelf+
+	      :class class-name
+	      :uuid uuid
+	      :fields plist)))))
+
+(defmethod flatten-database (&optional (database xelf::*database*))
+  (let (results)
+    (labels ((each (uuid object)
+	       (push (flatten-and-store object) results)))
+      (maphash #'each database))
+    results))
+
+(defparameter *quest-variables* '(*travel-direction* *geoffrey*
+				  *lucius* *updates* 
+				  *status-line*
+				  *previous-scene*
+				  *previous-x*
+				  *previous-y*
+				  *status-messages*
+				  *status-message-time*
+				  *last-status-message-time*
+				  *map-screen* *map-row* *map-column*
+				  *current-scene*))
+
+(defun flatten-variable (sym)
+  (list sym (flatten (symbol-value sym))))
+
+(defmethod flatten-quest ()
+  (list
+   :variables (mapcar #'flatten-variable *quest-variables*)
+   :database (flatten-database)))
+
+(defun cypress-save-file () (xelf::database-file))
+
+(defmethod save-quest ()
+  (let ((quest (flatten-quest)))
+    (prog1 quest
+      (write-sexp-to-file (cypress-save-file) quest))))
+
+(defun unflatten-hash (data test)
+    (let ((plist data)
+	  (hash (make-hash-table :test test)))
+      (prog1 hash
+	(loop while plist do
+	  (let* ((key (pop plist))
+		 (value (pop plist)))
+	    (setf (gethash key hash) (unflatten value)))))))
+
+(defun unflatten-fields (fields &optional (type :list) (test 'eq))
+  (ecase type
+    (:list (mapcar #'unflatten fields))
+    (:hash (unflatten-hash fields test))))
+
+(defun unflatten-uuid (sexp)
+  (destructuring-bind (key uuid) sexp
+    (assert (eq +uuid+ key))
+    (gethash uuid xelf::*database*)))
+
+(defun unflatten (data)
+  (with-standard-io-syntax 
+    (cond 
+      ;; replace uuid's with direct references
+      ((and (listp data) (eq +uuid+ (first data)))
+       (unflatten-uuid data))
+      ;; handle hashes
+      ((and (listp data) (eq +hash+ (first data)))
+       ;; pass hash table test key
+       (unflatten-fields (rest (rest data)) :hash (second data)))
+      ;; handle lists
+      ((consp data)
+       (if (consp (cdr data))
+	   ;; it's a list
+	   (mapcar #'unflatten data)
+	   ;; it's a dotted pair
+	   (cons (unflatten (car data))
+		 (unflatten (cdr data)))))
+      ;; passthru
+      (t data))))
+
+(defun expand-variable (symbol value)
+  (assert (boundp symbol))
+  (assert (not (eq '*quest-variables* symbol)))
+  (assert (member symbol *quest-variables*))
+  (setf (symbol-value symbol) 
+	(unflatten value)))
+
+(defun unflatten-object (sexp)
+  (destructuring-bind (key &key class uuid fields) sexp
+    (assert (eq +xelf+ key))
+    (let ((instance (gethash uuid xelf::*database*)))
+      (assert (not (null instance)))
+      ;; (setf (uuid instance) uuid)
+      (setf (xelf::super instance) (xelf::find-prototype class)) 
+      (setf (xelf::fields instance) (unflatten-fields fields)))))
+	    
+(defun revive (sexp)
+  (destructuring-bind (key &key class uuid fields) sexp
+    (assert (eq +xelf+ key))
+    (setf (gethash uuid xelf::*database*)
+	  (make-instance class :uuid uuid))))
+
+(defun expand-quest (quest)
+  (destructuring-bind (&key variables database) quest
+      (mapc #'revive database)
+      (mapc #'unflatten-object database)
+      (dolist (variable variables)
+	(expand-variable (first variable) 
+			 (unflatten (second variable))))))
+	
+(defun load-quest ()
+  (expand-quest (first (read-sexp-from-file (cypress-save-file))))
+  (switch-to-buffer (current-scene)))

@@ -2,6 +2,7 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Part I
+** TODO Slightly more firewood / ginseng especially in gardens
 ** TODO Use generic scroll image/layout for dialogue
 ** TODO Add Alonso owl song investigation Expedition report.
    :PROPERTIES:
