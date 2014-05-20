@@ -153,7 +153,9 @@ the direction its needle points. These
 Waystones are also said to be good
 places to stop, rest, and collect your
 thoughts and memories before continuing
-a journey." :sextant)
+a journey. There's a Waystone here in
+town, over by the stone
+well. " :sextant)
 
 (define-topic sextant arturo
   "I almost forgot, I happen to have an
