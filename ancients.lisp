@@ -181,8 +181,8 @@
   :darkness-image "darkness.png"
   :background-image "ancient-cave-3.png")
 
-(defmethod starting-x ((self southern-cave) direction) (units 5))
-(defmethod starting-y ((self southern-cave) direction) (units 5))
+(defmethod starting-x ((self southern-cave) direction) (units 14))
+(defmethod starting-y ((self southern-cave) direction) (units 8))
 
 (defun wall () (singleton (new 'copper-wall)))
 
