@@ -438,16 +438,16 @@
       (set-background-color text nil)
       (set-read-only text t))))
 
-(defparameter *lines-per-talk-gump* 4)
+(defparameter *lines-per-talk-gump* 10)
 
 (defthing (talk-gump gump)
-  (image :initform "talk-scroll.png")
+  (image :initform "scroll-gump.png")
   (target :initform nil)
   (topic :initform nil)
   (pages :initform nil)
   (page-number :initform 0))
 
-(defparameter *talk-gump-scale* (/ 1 1.8))
+(defparameter *talk-gump-scale* (/ 1 2.7))
 
 (defmethod initialize ((self talk-gump) &key)
   (with-local-fields
@@ -513,7 +513,7 @@
     (when (more-p self)
       (draw-string "(continued...)" 
 		   (+ x (units 15))
-		   (+ y (units 9))
+		   (+ y (units 20))
 		   :color *gump-color*
 		   :font *gump-font*))
     (draw (buttons self))
@@ -523,11 +523,11 @@
   (with-local-fields
     (move-to-target-position self)
     (when (xelfp (text self))
-      (let ((x0 (+ %x (* 0.14 %width)))
-	    (y0 (+ %y (* 0.18 %height))))
-	(resize (text self) %width (units 6))
+      (let ((x0 (+ %x (* 0.08 %width)))
+	    (y0 (+ %y (* 0.17 %height))))
+	(resize (text self) %width (units 10))
 	(move-to (text self) x0 y0)
-	(move-to (buttons self) x0 (+ y0 (units 8)))
+	(move-to (buttons self) x0 (+ y0 (units 18)))
 	(layout (buttons self))))
     (resize self 
 	    (* (image-width %image) *talk-gump-scale*)
