@@ -28,6 +28,8 @@
   "Your progress has been saved." :ok)
 
 (defmethod discuss :before ((waystone waystone) (topic (eql :save-progress))) 
+  ;; (destroy-gump waystone)
+  ;; (setf (field-value :gump waystone) nil)
   (save-quest))
 
 (defthing stone-of-remembrance 
@@ -37,8 +39,10 @@
   :description "stone of remembrance")
 
 (defmethod activate ((stone stone-of-remembrance))
-  (narrate "You feel as if Time itself is vibrating.")
-  (discuss stone :confirm))
+  (if (probe-file (xelf::database-file))
+      (progn (narrate "You feel as if Time itself is vibrating.")
+	     (discuss stone :confirm))
+      (narrate "There are no stored memories here.")))
 
 (define-topic confirm stone-of-remembrance 
   "Continue your saved quest?" :continue-quest :cancel)
