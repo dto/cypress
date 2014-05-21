@@ -197,7 +197,7 @@ nisi. Nam eget dui.")
     scroll))
 
 (defparameter *help-text* 
-"Welcome to Cypress v0.97 (alpha) 
+"Welcome to Cypress v0.98 (alpha) 
 
 This is the Scroll of Helping. If you
 click the scroll, you will advance to

@@ -585,3 +585,6 @@
 	    (when new-gump 
 	      ;; we got a new gump for this topic.
 	      (replace-gump self new-gump)))))))
+
+(defmethod after-revive ((gump gump))
+  (destroy gump))

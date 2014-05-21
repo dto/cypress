@@ -176,9 +176,7 @@
 	  ((> hunger 70)
 	   (bark monk "I feel weak from hunger!"))
 	  ((> hunger 45)
-	   (bark monk "I am very hungry."))
-	  ((> hunger 25)
-	   (bark monk "I feel a bit hungry.")))))
+	   (bark monk "I am very hungry.")))))
 
 (defmethod bark-cold ((monk monk))
   (with-fields (cold) monk
@@ -186,8 +184,8 @@
 	   (bark monk "I am freezing to death!"))
 	  ((> cold 50)
 	   (bark monk "I am beginning to freeze!"))
-	  ((> cold 30)
-	   (bark monk "I feel cold.")))))
+	  ((> cold 45)
+	   (bark monk "I feel very cold.")))))
 
 (defmethod drop-object :after ((buffer buffer) (monk monk) &optional x y z)
   (begin-animation monk (standing-animation monk))

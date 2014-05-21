@@ -627,6 +627,7 @@
   (use (geoffrey) self))
 
 (defmethod activate :before ((thing thing))
+  (destroy-gump thing)
   (play-sample "activate.wav"))
 
 ;;; movement-click through, for decals etc

@@ -385,7 +385,7 @@
 (defmethod make-terrain ((meadow meadow))
   (with-border (units 12)
     (lined-up-randomly 
-     (stacked-up-randomly (dead-tree) (flowers) (some-trees))
+     (stacked-up-randomly  (dead-tree) (flowers) (some-trees))
      (stacked-up-randomly (wood-pile) (flowers) (clearing) (meadow-debris))
      (stacked-up-randomly (some-trees) (flowers) (flowers)))))
 
@@ -442,7 +442,7 @@
 			  (dense-trees)))))
 
 (defmethod begin-scene :after ((forest forest))
-  (percent-of-time 8 (prog1 t (cue-music forest (random-choose '("rain.ogg" "believe-me2.ogg" "xolaros3.ogg" "thunder-med.ogg" "thunder-big.ogg" "crickets.ogg"))))))
+  (percent-of-time 8 (prog1 t (cue-music forest (random-choose '("rain.ogg" "believe-me2.ogg" "xolaros3.ogg" "thunder-med.ogg" "thunder-big.ogg"))))))
 
 ;;; Cold meadow
 
@@ -454,7 +454,8 @@
     (lined-up-randomly 
      (stacked-up-randomly (wood-pile) (pine-trees) (meadow-debris))
      (stacked-up-randomly (meadow-debris) (lone-wraith) (pine-trees))
-     (stacked-up-randomly (dead-trees) (lone-wolf) (flowers)))))
+     (stacked-up-randomly (dead-trees) (or (percent-of-time 80 (lone-wolf))
+					   (singleton (new 'black-wolf))) (flowers)))))
 
 (defmethod begin-scene :after ((meadow cold-meadow))
   (percent-of-time 50 (cue-music meadow (random-choose '("crickets.ogg" "passageway.ogg")))))
@@ -550,8 +551,9 @@
 (defmethod make-terrain ((forest frozen-forest))
   (with-border (units 10)
     (stacked-up-randomly 
-     (lined-up-randomly (rock-outcropping) (dead-trees-and-puddles) (pine-trees) (pine-trees))
-     (lined-up-randomly (pine-trees) (lone-wraith) (pine-trees))
+     (lined-up-randomly (rock-outcropping) (dead-trees-and-puddles) (pine-trees) (meadow-debris) (pine-trees))
+     (lined-up-randomly (pine-trees) (or (percent-of-time 60 (lone-wraith))
+					 (singleton (new 'black-wolf))) (pine-trees))
      (lined-up-randomly (dead-trees-and-puddles) (pack-of-wolves) (wood-pile)))))
 
 (defmethod expend-travel-cost ((forest frozen-forest))

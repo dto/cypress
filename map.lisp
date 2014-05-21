@@ -159,12 +159,12 @@
      ruins frozen-meadow frozen-forest
      large-mountain)
 
-    (garden frozen-meadow forest
+    (garden frozen-forest forest
      forest cold-meadow cold-meadow
      cold-meadow frozen-forest frozen-meadow
      large-mountain)
 
-     (forest cold-meadow forest
+     (cold-meadow cold-meadow cold-meadow
       forest grassy-meadow forest
       cold-meadow forest highway
       large-mountain)
