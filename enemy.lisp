@@ -107,7 +107,7 @@
   :sprite-height 150
   :sprite-width 150
   :tags '(:enemy)
-  :health 15
+  :health 23
   :image (random-choose *grave-hag-stalk-images*))
 
 (defthing grave-hag-corpse :tags '(:fixed) :image *grave-hag-corpse-image*)
@@ -140,7 +140,7 @@
 	(percent-of-time 30 
 	  (setf heading heading0))
 	(percent-of-time 30
-	  (move self heading0 8)))
+	  (move self heading0 11)))
       (if (< (distance-to-cursor self) 250)
 	  (progn
 	    (percent-of-time 8 
@@ -174,12 +174,15 @@
 (defmethod modify-health :after ((wolf wolf) points)
   (play-sound wolf (random-choose '("bark.wav" "yelp.wav"))))
 
+(defmethod random-frame ((wolf wolf))
+  (random-choose *wolf-images*))
+
 (defmethod run ((self wolf))
   (when (> (distance-to-cursor self) 800) 
     (setf (field-value :waypoints self) nil)
     (setf (field-value :seen-player self) nil))
   (with-fields (image heading seen-player) self
-    (percent-of-time 17 (setf image (random-choose *wolf-images*)))
+    (percent-of-time 17 (setf image (random-frame self)))
     (when (<= (distance-to-cursor self) 800)
       (unless seen-player
 	(with-fields (x y) (cursor)
@@ -205,5 +208,21 @@
 		(setf (field-value :heading self) (movement-heading self))
 		(move self (movement-heading self) 4))))))))
 
+;; Blackwolves
 
+(defthing (black-wolf wolf)
+  :image-scale 3000
+  :description "cursed Dire wolf"
+  :tags '(:enemy :cursed)
+  :image (random-choose *black-wolf-images*)
+  :sprite-height 130
+  :sprite-width 130
+  :health 25)
+
+(defmethod die ((self black-wolf))
+  (let ((remains (new 'remains)))
+    (drop self remains)
+    (destroy self)))
 	    
+(defmethod random-frame ((wolf black-wolf))
+  (random-choose *black-wolf-images*))
