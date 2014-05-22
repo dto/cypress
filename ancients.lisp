@@ -205,6 +205,9 @@
   :darkness-image "darkness.png"
   :background-image "ancient-cave-3.png")
 
+(defmethod find-description ((scene southern-cave))
+  "cave")
+
 (defmethod starting-x ((self southern-cave) direction) (units 14))
 (defmethod starting-y ((self southern-cave) direction) (units 8))
 
@@ -234,6 +237,10 @@
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
 
 (defthing (eastern-cave cave))
+
+(defmethod find-description ((scene eastern-cave))
+  "cave")
+
 
 
 
