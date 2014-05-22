@@ -23,7 +23,7 @@
 (defmethod initialize :after ((monk geoffrey) &key)
   (setf *geoffrey* monk)
   ;; temp
-  ;; (add-inventory-item monk (quantity-of 'elixir 2))
+  ;; (add-inventory-item monk (quantity-of 'copper-gear 5))
   ;; (add-inventory-item monk (quantity-of 'silver-elixir 2))
   ;; (add-inventory-item monk (quantity-of 'green-elixir 2))
   ;; (learn-spell (geoffrey) (new 'travel))
