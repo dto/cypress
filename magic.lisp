@@ -57,7 +57,7 @@
 	(if (not camp)
 	    (narrate "You haven't made camp yet.")
 	    (if (camped (current-scene))
-		(narrate "You can't camp here again.")
+		(narrate "You can't camp here again without traveling first.")
 		(call-next-method caster spell))))))
   
 (defmethod cast ((caster thing) (spell spark))
