@@ -38,6 +38,7 @@
 (defparameter *owl-flap-images* '("owl-6.png" "owl-7.png"))
 
 (defthing (owl sprite)
+  :given-gears nil
   :image-scale 700
   :heard-flute nil
   :sprite-height 130
@@ -54,7 +55,7 @@
 	     (random-choose '("believe-me2.ogg" "xolaros3.ogg")))
   (if (not (field-value :heard-flute owl))
       (discuss owl :hello)
-      (discuss owl :scroll)))
+      (discuss owl :confirmed)))
 
 (defmethod enter-scene ((owl owl))
   (play-sample "owl.wav")
@@ -79,7 +80,7 @@ Are you not he?" :i-am-geoffrey)
 to await the proper musical
 introduction, as proof that the correct
 Geoffrey has come to claim the
-scroll. These things have to be done in
+message. These things have to be done in
 a particular order, you see. We can't
 have messages being delivered out of
 order. Always creates problems!
@@ -104,14 +105,66 @@ funeral dirge. But I can't tell ye where
 to get the music, nor where to find the
 flute. Have fun!" :bye)
 
-(define-topic scroll owl
-"It's an honor to meet the real Geoffrey.
-Here is the scroll I've been instructed
-to give you." :bye)
+(define-topic confirmed owl
+"Beautifully played! It's an honor to
+meet the real Geoffrey. You must be
+awfully confused by all this talk of
+time travel! So let me summarize the
+situation. Dr. Quine is not dead!" 
+:quine)
 
-(defmethod discuss :after ((owl owl) (topic (eql :scroll)))
-  (drop owl (make-scroll "strange poem" *amalia-poem*)
-	(units 5) (units 5)))
+(define-topic quine owl
+"Actually, he is engaged in a most
+extraordinary game of Chess. But the
+chessboard is Time itself, and the
+pieces are such mortals as you and
+Lucius. Even Dr. Quine himself is one of
+the pieces. And his opponent is the
+Wizard Master, Shayol---the Lord High
+Priest of the black-robed Acolytes of
+the Abyss." :abyss)
+
+(define-topic abyss owl 
+"Their cult worships a mountain God who
+gives life to the River Abyss. In truth,
+they drink only Undeath from those
+waters---and are slowly, by degrees,
+turned into Shades by its influence." 
+  :shades)
+
+(define-topic shades owl
+  "These odious, ichor-swilling Black
+Wizards serve the will of Shayol. There
+are three who've stepped into this Time,
+into this Vale, and they are preparing
+to slay you at this very moment. For
+Lord Shayol desires very much to best
+Dr. Quine in that fateful game of Chess!
+And you are a very valuable
+piece." :where-are-they?)
+
+(define-topic where-are-they? owl 
+  "You must confront them now, while
+they gather their charms and mix their
+potions. Their camp is in the ruins far
+to the southeast. There's a cave just
+south of the Waystone near the ruins; go
+to the cave first! You'll find what you
+need to survive against the Wizards.
+Take these three ancient Gears; you can
+use them to unlock the cave. 
+Go now, Geoffrey!" :bye)
+
+(defmethod discuss :after ((owl owl) (topic (eql :where-are-they?)))
+  (with-fields (given-gears) owl
+    (when (not given-gears)
+      (setf given-gears t)
+      (drop owl (quantity-of 'copper-gear 1)
+	    (units 5) (units 5))
+      (drop owl (quantity-of 'copper-gear 1)
+	    (units 6) (units 6))
+      (drop owl (quantity-of 'copper-gear 1)
+	    (units 7) (units 7)))))
 
 ;;; Hidden owl garden
 
