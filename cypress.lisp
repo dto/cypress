@@ -137,5 +137,4 @@
     (setf *font* "oldania")
     (start-session)))
 
-
 ;;; cypress.lisp ends here

@@ -2,80 +2,262 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Part I
+** TODO Make magic potions more common
+*** TODO Switch to new red=health/blue=mana/green=hunger potion graphics. 
 ** TODO fix can't camp here again
-** TODO [#C] fix clicking through dialog choice buttons
-** DONE Slightly more firewood / ginseng especially in gardens
-   CLOSED: [2014-05-20 Tue 18:33]
-** TODO Use generic scroll image/layout for dialogue
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO fix clicking through dialog choice buttons
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO Add Alonso owl song investigation Expedition report.
    :PROPERTIES:
    :Effort:   0:30
    :END: 
-** TODO require reaching middle 1/3 of level in order to travel 
-** TODO Finish screech owl flute northern cave quest
-
-** TODO Add return stairwells to basement ruins
-** TODO Finish Southern Cave letter
-** TODO Add some black wolves in frozen forest
+** TODO require reaching middle 1/3 of level in order to travel
    :PROPERTIES:
-   :Effort:   1:00
+   :Effort:   0:30
+   :END: 
+** TODO Finish screech owl flute northern cave quest (gears)
+   :PROPERTIES:
+   :Effort:   0:30
    :END:
-
-** DONE Implement saving progress at ancient Waystones
-   CLOSED: [2014-05-20 Tue 18:06]
-** TODO Allow specified map-row and map-col "specials" and allow one special per map (default is twig or something)
-*** TODO Place more waystones
-*** TODO Sextant points way to waystones
-   
+*** TODO finish owl dialogue
+*** TODO finish quine letter 2
+*** TODO add cave with gears and potions
+** TODO Add return stairwells to basement ruins
 ** TODO Hold Creature spell, uses Nightshade and freezes nearest creature
    :PROPERTIES:
    :Effort:   0:30
    :END:
 *** TODO use shrunk darkness.png to implement additive sparkle halos
-
+** TODO Sextant points way to waystones
+** TODO Allow specified map-row and map-col "specials" and allow one special per map (default is twig or something)
+*** TODO [#A] Spirit of Warrior (marks good hunting zones)
+*** TODO [#A] Abandoned well / ruin
 ** TODO Add more townspeople
    :PROPERTIES:
    :Effort:   2:00
    :END:
 
-** TODO [#B] Revise enemy-damages-geoffrey situation
+** DONE [#B] Revise enemy-damages-geoffrey situation
+   CLOSED: [2014-05-21 Wed 19:52]
    :PROPERTIES:
    :Effort:   1:00
    :END:
-*** TODO some enemies should do more damage
+*** DONE some enemies should do more damage
+    CLOSED: [2014-05-21 Wed 19:52]
 
 ** TODO Slight health drain when shivering
-** TODO Add heavy health drain when freezing
-** TODO Reduce attack/defense when very hungry
-** TODO Add slight aim jitter when shivering/freezing
 
 ** TODO [#B] Eastern Cave
    :PROPERTIES:
    :Effort:   2:00
    :END:
 *** TODO tells you about the ancient road to Valisade
+** TODO Add heavy health drain when freezing
+** TODO Reduce attack/defense when very hungry
+** TODO Add slight aim jitter when shivering/freezing
 ** TODO [#C] Beginnings of Ancient road = end scene of Part I
-*** TODO [#C] import improved ancient-road graphic (non-contrast-adjusted version)
-    :PROPERTIES:
-    :Effort: 
-    :END: 
-** TODO [#C] townspeople side quests
+
+* Part II
+** TODO Import older unused ancient road ochre stuff
+*** TODO curved-stone-1.png
+** TODO Lucius should avoid monsters
+** TODO add a consistent tooltip mechanism for breaking the 4th wall
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+*** TODO have it tell player to double-click lucius, right-click to move, etc
+*** TODO it should help you more with the camping aspect
+** TODO Protection (15 mana) (1 nightshade)
    :PROPERTIES:
    :Effort:   1:00
    :END:
-** TODO [#C] display floating neumes when owl sings
+*** Temporary 35% reduction in combat damage received
+** TODO Implement bleeding and blood tracks in the snow
    :PROPERTIES:
-   :Effort:   0:30
+   :Effort:   1:00
+   :END:
+** TODO Magic arrow, (nightshade) single strong attack with crystal arrow graphics
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO Add some different tree/shrub types
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+** TODO return to using simple pause/resume-on-command
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+*** TODO change to right-click on geoffrey for Pause
+**** TODO change to clicking modeline status to open Status scroll
+**** TODO don't run enemies when paused
+**** TODO Press ESCAPE to close all gumps and unpause
+** TODO ancient gate w/silver basement / xalcyon bow
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO xalcyon armor
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO Triangle time key
+   :PROPERTIES:
+   :Effort:   0:15
    :END: 
-** TODO [#C] 2nd hidden cemetery with music and items
+** TODO triangle time cube
    :PROPERTIES:
    :Effort:   0:30
+   :END:
+** TODO wax cylinder w creepy voice
+   :PROPERTIES:
+   :Effort:   3:00
+   :END:
+** TODO Cypress tree garden
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO Black wizards
+   :PROPERTIES:
+   :Effort:   3:00
+   :END:
+** TODO second owl with story of cypress
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+** TODO special gravestone
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO extreme cold furs for visiting amalia's cabin
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO amalia's cabin
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO cylindrophone
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO 2nd stone monk in cave w 4 doors
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+** TODO Frozen river with skeleton archers
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+** TODO valisade ruins w/monks sound
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO warrior time cube
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+** TODO [#C] Cure heavy wounds (50 mana) (2 ginseng)
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+*** Heals between 40-60 HP
+** TODO 2nd cylinder
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+*** TODO creepy shade.png face fades in 
+*** TODO must place inkwell and quill pen on ancient stone to trigger endgame
+    :PROPERTIES:
+    :Effort: 
+    :END:
+** TODO [#C] Add fur cloak for chapter 2
+   :PROPERTIES:
+   :Effort: 
+   :END:
+
+
+
+* Optional
+** TODO [#C] allow char follows mouse cursor while RMB held?
+** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
+** TODO [#C] snow footprints?
+** TODO [#C] telekinesis spell
+** TODO [#C] Make thornweed less common in warm areas, since it's not needed then
+** TODO [#C] add stone wells
+** TODO [#C] import more valisade stones
+** TODO [#C] implement snow/rain with additive blending
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] add synth bird tweets and tweeting birds that fly out of trees when disturbed
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] Lucius can remark upon nearby objects as a way of exposing some Lore.
+   :PROPERTIES:
+   :Effort:   1:00
+   :END: 
+** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
+** TODO [#C] Conversation system should be more flexible
+** TODO [#C] Allow special verb/action where game stops for a target of USEing
+** TODO [#C] preload textures when possible---allow method for preloading and default field of resource names
+** TODO [#C] Add Clockwork Valisade Knight
+   :PROPERTIES:
+   :Effort:   3:00
+   :END:
+** TODO [#C] Paint some nicer pine trees
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] Explosion (20 mana) (1 nightshade, 1 stone)
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+*** 90% chance of scorching several enemies in target area
+** TODO [#C] Write lore for various sources
+*** TODO Default object lore
+*** TODO Stone monk
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
+*** TODO Letters from Quine in caves etc
+    :PROPERTIES:
+    :Effort:   1:00
+    :END:
+**** TODO Also spell scrolls and food in metal boxes
+*** TODO Skull seance
+    :PROPERTIES:
+    :Effort:   1:00
+    :END:
+*** TODO Books
+** TODO [#C] Cause Fear (15 mana) (1 nightshade)
+*** 80% chance of enemy fleeing
+** TODO [#C] Dispel magic (20 mana) (1 ginseng)
+*** 60% chance of removing ordinary spell effects. 
+** TODO [#C] day/night cycle; survive each day; end it by camping 
+** TODO [#C] Night/camp dream sequences
+** TODO [#C] Cryptghasts that glide and dart
+** TODO [#C] Fix mac window resizing bugs
+** TODO [#C] Control Q and Command q should quit game
+** TODO [#C] Abstractify the sounds and/or find new ones in archive
+** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
+** TODO [#C] townspeople side quests
+   :PROPERTIES:
+   :Effort:   1:00
    :END:
 ** TODO [#C] add secrets in less-used parts of map
    :PROPERTIES:
    :Effort:   1:00
    :END:
-
 * Tweaks and bugfixes
 
 ** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
@@ -154,193 +336,46 @@
    :PROPERTIES:
    :Effort:   0:15
    :END:
+* Archived Entries
 
-* Part II
+** DONE Slightly more firewood / ginseng especially in gardens
+   CLOSED: [2014-05-20 Tue 18:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-21 Wed 19:48
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Part I
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
 
-** TODO Import older unused ancient road ochre stuff
-*** TODO curved-stone-1.png
-** TODO [#B] Lucius should avoid monsters
-** TODO [#B] add a consistent tooltip mechanism for breaking the 4th wall
+** DONE Implement saving progress at ancient Waystones
+   CLOSED: [2014-05-20 Tue 18:06]
    :PROPERTIES:
-   :Effort:   2:00
+   :ARCHIVE_TIME: 2014-05-21 Wed 19:48
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Part I
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
    :END:
-*** TODO have it tell player to double-click lucius, right-click to move, etc
-*** TODO it should help you more with the camping aspect
-** TODO [#B] Protection (15 mana) (1 nightshade)
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-*** Temporary 35% reduction in combat damage received
-** TODO [#B] Implement bleeding and blood tracks in the snow
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#B] Magic arrow, (nightshade) single strong attack with crystal arrow graphics
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#B] Add some different tree/shrub types
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
-** TODO [#B] return to using simple pause/resume-on-command
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-*** TODO change to right-click on geoffrey for Pause
-**** TODO change to clicking modeline status to open Status scroll
-**** TODO don't run enemies when paused
-**** TODO Press ESCAPE to close all gumps and unpause
-** TODO ancient gate w/silver basement / xalcyon bow
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO xalcyon armor
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO Triangle time key
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-** TODO triangle time cube
-   :PROPERTIES:
-   :Effort:   17:15
-   :END:
-*** TODO wax cylinder w creepy voice
-    :PROPERTIES:
-    :Effort:   3:00
-    :END:
-*** TODO Cypress tree garden
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-*** TODO Black wizards
-    :PROPERTIES:
-    :Effort:   3:00
-    :END:
-*** TODO second owl with story of cypress
-    :PROPERTIES:
-    :Effort:   2:00
-    :END:
-*** TODO special gravestone
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-*** TODO extreme cold furs for visiting amalia's cabin
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-*** TODO amalia's cabin
-    :PROPERTIES:
-    :Effort:   1:00
-    :END:
-*** TODO cylindrophone
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-*** TODO 2nd stone monk in cave w 4 doors
-    :PROPERTIES:
-    :Effort:   2:00
-    :END:
-*** TODO Frozen river with skeleton archers
-    :PROPERTIES:
-    :Effort:   2:00
-    :END:
-*** TODO valisade ruins w/monks sound
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-*** TODO warrior time cube
-    :PROPERTIES:
-    :Effort:   0:15
-    :END: 
-*** TODO 2nd cylinder
-    :PROPERTIES:
-    :Effort:   1:00
-    :END:
-**** TODO creepy shade.png face fades in 
-*** TODO must place inkwell and quill pen on ancient stone to trigger endgame
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-** TODO [#C] allow char follows mouse cursor while RMB held?
-** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
-** TODO [#C] Switch to new red=health/blue=mana/green=hunger potion graphics. 
-** TODO [#C] snow footprints?
-** TODO [#C] telekinesis spell
-** TODO [#C] Make thornweed less common in warm areas, since it's not needed then
-** TODO [#C] add stone wells
-** TODO [#C] import more valisade stones
-** TODO [#C] implement snow/rain with additive blending
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] add synth bird tweets and tweeting birds that fly out of trees when disturbed
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] Lucius can remark upon nearby objects as a way of exposing some Lore.
-   :PROPERTIES:
-   :Effort:   1:00
-   :END: 
-** TODO [#C] Add heuristic to try to choose a decent spot, when target space isn't occupiable
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-*** TODO this is needed for wolf to chase human when human w/smaller bounding box is near an obstacle
-** TODO [#C] Conversation system should be more flexible
-** TODO [#C] Allow special verb/action where game stops for a target of USEing
-** TODO [#C] Cure heavy wounds (50 mana) (2 ginseng)
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-*** Heals between 40-60 HP
-** TODO [#C] Add fur cloak for chapter 2
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] preload textures when possible---allow method for preloading and default field of resource names
-** TODO [#C] Add Clockwork Valisade Knight
-   :PROPERTIES:
-   :Effort:   3:00
-   :END:
-** TODO [#C] Paint some nicer pine trees
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] Explosion (20 mana) (1 nightshade, 1 stone)
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
-*** 90% chance of scorching several enemies in target area
-** TODO [#C] Write lore for various sources
-*** TODO Default object lore
-*** TODO Stone monk
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-*** TODO Letters from Quine in caves etc
-    :PROPERTIES:
-    :Effort:   1:00
-    :END:
-**** TODO Also spell scrolls and food in metal boxes
-*** TODO Skull seance
-    :PROPERTIES:
-    :Effort:   1:00
-    :END:
-*** TODO Books
-** TODO [#C] Make magic potions more common
-** TODO [#C] Cause Fear (15 mana) (1 nightshade)
-*** 80% chance of enemy fleeing
-** TODO [#C] Dispel magic (20 mana) (1 ginseng)
-*** 60% chance of removing ordinary spell effects. 
-** TODO [#C] day/night cycle; survive each day; end it by camping 
-** TODO [#C] Night/camp dream sequences
-** TODO [#C] Cryptghasts that glide and dart
-** TODO [#C] Fix mac window resizing bugs
-** TODO [#C] Control Q and Command q should quit game
-** TODO [#C] Abstractify the sounds and/or find new ones in archive
-** TODO [#C] fadein/out console-style startup screens with copyright info, sbcl "made with alien lisp" etc
 
-x
+** DONE [#B] Use generic scroll image/layout for dialogue
+   CLOSED: [2014-05-21 Wed 19:48]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-05-21 Wed 19:49
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Part I
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Add some black wolves in frozen forest
+   CLOSED: [2014-05-21 Wed 19:48]
+   :PROPERTIES:
+   :Effort:   1:00
+   :ARCHIVE_TIME: 2014-05-21 Wed 19:49
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Part I
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
