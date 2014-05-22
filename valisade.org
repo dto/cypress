@@ -2,7 +2,8 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Part I
-** TODO [#A] Hold Creature spell, uses Nightshade and freezes nearest creature
+** DONE [#A] Hold Creature spell, uses Nightshade and freezes nearest creature
+   CLOSED: [2014-05-22 Thu 00:34]
    :PROPERTIES:
    :Effort:   0:30
    :END:
