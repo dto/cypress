@@ -150,6 +150,9 @@
 
 (defmethod exit-scene ((self geoffrey))
   (stop-walking self)
+  (when (typep (current-scene)
+	       (find-class 'scene))
+    (unmark-camped (current-scene)))
   (when (lucius-in-party-p)
     (exit-scene (lucius)))
   (when (current-scene) 
