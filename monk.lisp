@@ -475,25 +475,37 @@
   (modify-health monk +15)
   (modify-hunger monk -50))
 
-(defparameter *elixir-images* (image-set "elixir" 2))
+(defparameter *elixir-images* (image-set "red-potion" 2))
 
 (defthing (elixir food)
   :scale 0.8
+  :description "elixir (+50 hp)"
   :image (random-choose *elixir-images*))
 
 (defmethod eat ((monk monk) (elixir elixir))
-  (modify-health monk +30)
-  (modify-magic monk +40))
+  (modify-health monk +50))
 
-(defparameter *silver-elixir-images* (image-set "silver-elixir" 2))
+(defparameter *silver-elixir-images* (image-set "blue-potion" 2))
 
 (defthing (silver-elixir food)
   :scale 0.8
+  :description "elixir (+100 mp)"
   :image (random-choose *silver-elixir-images*))
 
 (defmethod eat ((monk monk) (elixir silver-elixir))
-  (modify-health monk +60)
+  (narrate "You recover your magic fully.")
   (modify-magic monk +100))
+
+(defparameter *green-elixir-images* (image-set "green-potion" 2))
+
+(defthing (green-elixir food)
+  :scale 0.8
+  :description "elixir (-100 hunger)"
+  :image (random-choose *green-elixir-images*))
+
+(defmethod eat ((monk monk) (elixir green-elixir))
+  (narrate "You feel full.")
+  (modify-hunger monk -100))
 
 (defmethod eat ((monk monk) (snowdrop snowdrop))
   (modify-magic monk +1))

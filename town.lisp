@@ -25,6 +25,7 @@
     (setf (field-value :locked house) nil)
     (let ((bag (new 'bag)))
       (add-inventory-item bag  (quantity-of 'ginseng 2))
+      (add-inventory-item bag (quantity-of 'silver-elixir 2))
       (add-inventory-item bag (quantity-of 'thornweed 2))
       (add-inventory-item bag (quantity-of 'wheat-bread 2))
       (add-inventory-item house bag) 

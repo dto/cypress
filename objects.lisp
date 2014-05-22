@@ -359,8 +359,9 @@ dto@blocky.io
 
 ;;; Various prizes
 
-(defparameter *grab-bag-items* '(elixir skull wolf-corpse ruined-book silver-elixir
- stone stone woolen-leggings thornweed nightshade white-bread wheat-bread))
+(defparameter *grab-bag-items* '(elixir elixir skull wolf-corpse
+ ruined-book silver-elixir silver-elixir stone stone green-elixir green-elixir
+ thornweed nightshade white-bread wheat-bread))
 
 (defparameter *silver-book-images* (image-set "silver-book" 3))
 
@@ -369,7 +370,7 @@ dto@blocky.io
 (defmethod activate ((book silver-book))
   (bark (geoffrey) "I can't read this language."))
 
-(defparameter *boxed-items* '(silver-elixir wheat-bread jerky elixir silver-armor silver-book))
+(defparameter *boxed-items* '(silver-elixir elixir green-elixir ruined-book silver-book))
 
 (defun grab (bag &optional (count (+ 1 (random 3))))
   (let (items)
