@@ -397,7 +397,7 @@ dto@blocky.io
 (defmethod activate ((self silver-bow))
   (toggle-equipped (geoffrey) self))
 
-(defthing silver-armor :stacking nil :defense 3 :resistance 2 :image "silver-armor.png")
+(defthing silver-armor :stacking nil :defense 3 :resistance 5 :image "silver-armor.png")
 
 (defmethod activate ((self silver-armor))
   (toggle-equipped (geoffrey) self))
