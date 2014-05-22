@@ -3,16 +3,56 @@
 (defparameter *alonso-letter* 
 "Arturo,
 
-It is a cruel fate that befalls me. My
-illness traps me here. Indeed I am too
-sick to hunt for food, and will surely
-die soon. 
+It is a cruel fate that befalls me. For
+my illness, and my guilt, have taught me
+the value of mercy just when they also
+robbed all hope from me. I wished to
+forget our troubles, and travel to see
+you once again. But my isolation has
+made me weak. Indeed I am too sick to
+hunt for food, and will surely die soon.
 
 My final hope is that you will someday
 venture to find me, and to discover,
 from this letter, that you are forgiven.
 
+I confess now, I feigned my injury, and
+thus forced upon you the decision
+whether to cross the Abyss. I wanted to
+find Amalia just as badly, but was too
+cowardly to volunteer. I cannot blame
+you, then, for the death of Alfonse.
+That blame lies on these bones, not
+yours.
+
  --- Alonso")
+
+(defparameter *bird-notes* 
+"June 1st: Saw several gorgeous
+blue-jays chasing one another around the
+yard.
+
+June 3rd: Today there was a fearsome row
+among the Chickadees! Some animal must
+have disturbed their nest in the big
+pine tree. One of the baby birds fell
+out and died; I gave him a tiny little
+burial out behind the house.
+
+June 5th: I awakened in the night to
+make water, and heard a strange,
+wavering bird-song. I've never heard
+such a thing before in my life! For a
+time I wondered if a traveler had come
+through the forest playing a flute, or
+whether a real beast made such a sound!
+
+June 18th: I can't find him. I know that
+he has some sort of message. Each time
+the song leads me farther East. Does
+that mean he is allied with the Sun? It
+could be an illusion.
+")
 
 (defthing (alonso-basement scene)
   :darkness-image "darkness.png"
@@ -40,6 +80,7 @@ from this letter, that you are forgiven.
     (when (not activated)
       (setf activated t)
       (add-inventory-item alonso (new 'copper-gear))
+      (add-inventory-item alonso (make-scroll "Journal entries" *bird-notes*))
       (add-inventory-item alonso (new 'alonso-letter)))
     (replace-gump alonso (new 'browser :container alonso))))
 
