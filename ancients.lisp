@@ -236,6 +236,56 @@
   (resize-to-background-image cave)
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
 
+;;; Second story cave
+
+(defthing (southeastern-cave scene)
+  :darkness-image "darkness.png"
+  :background-image "ancient-cave-2.png")
+
+(defmethod find-description ((scene southeastern-cave))
+  "cave")
+
+(defmethod starting-x ((self southeastern-cave) direction) (units 14))
+(defmethod starting-y ((self southeastern-cave) direction) (units 8))
+
+(defmethod make-terrain ((cave southeastern-cave))
+  (let ((left-door (new 'copper-door))
+	(middle-door (new 'copper-door))
+	(right-door (new 'copper-door))
+	(left-plate (new 'copper-plate))
+	(middle-plate (new 'copper-plate))
+	(right-plate (new 'copper-plate)))
+    (lock left-door left-plate 1)
+    (lock right-door right-plate 2)
+    (lock middle-door middle-plate 3)
+    (stacked-up
+     (with-border (units 3) (singleton (new 'copper-stairwell)))
+     (with-border (units 15) (spatter '(bone-dust skull)))
+     (lined-up (with-border (units 7) (singleton left-plate))
+	       (with-border (units 8) (singleton middle-plate))
+	       (with-border (units 7) (singleton right-plate)))
+     (lined-up (wall) (wall) (wall)  (singleton left-door) (wall) (wall) (wall) (wall))
+     (lined-up (wall) (wall) (wall)  (singleton middle-door) (wall) (wall) (wall) (wall))
+     (lined-up (wall) (wall) (wall)  (singleton right-door) (wall) (wall) (wall) (wall))
+     (stacked-up 
+      (with-border (units 10)
+	(spatter 'bone-dust))
+      (spatter 'cryptghast :count 3)))))
+       
+(defmethod begin-scene :after ((cave southeastern-cave))
+  (resize-to-background-image cave)
+  (let ((box (new 'item-box)))
+    (drop-object cave box (units 30) (units 140))
+    (add-inventory-item box (quantity-of 'copper-gear 2))
+    (add-inventory-item box (quantity-of 'silver-elixir 2))
+    (add-inventory-item box (quantity-of 'elixir 2))
+    (add-inventory-item box (quantity-of 'green-elixir 1))
+    (add-inventory-item box (new 'silver-armor))
+    (add-inventory-item box (new 'silver-bow)))
+  (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
+
+;;; Third story cave
+
 (defthing (eastern-cave cave))
 
 (defmethod find-description ((scene eastern-cave))
