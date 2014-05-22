@@ -2,11 +2,13 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Part I
-** TODO [#A] fix can't camp here again
+** DONE [#A] fix can't camp here again
+   CLOSED: [2014-05-21 Wed 22:11]
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#A] Add Alonso owl song investigation Expedition report.
+** DONE [#A] Add Alonso owl song investigation Expedition report.
+   CLOSED: [2014-05-21 Wed 22:28]
    :PROPERTIES:
    :Effort:   0:30
    :END: 
