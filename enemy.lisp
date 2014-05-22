@@ -24,9 +24,10 @@
 	  (bounding-box enemy)
 	(let ((boil (* (random 4) (sin (/ *updates* 3)))))
 	  (draw-image "sparkle.png"
-		      left top
-		      :height (+ boil (- bottom top))
-		      :width (+ boil (- right left))
+		      (- left (/ (- right left) 2))
+		      (- top (/ (- bottom top) 2))
+		      :height (* 2 (+ boil (- bottom top)))
+		      :width (* 2 (+ boil (- right left)))
 		      :blend :additive))))))
 
 (defmethod can-pick ((enemy enemy)) nil)

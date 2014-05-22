@@ -131,6 +131,11 @@
   :image "hold-creature.png"
   :reagents '(:magic 10 nightshade 2))
 
+(defmethod use :around ((caster thing) (spell hold-creature))
+  (if (nearby-enemies-p)
+      (call-next-method caster spell)
+      (narrate "No enemies are near enough to Hold!")))
+
 (defmethod cast ((caster thing) (spell hold-creature))
   (when (nearby-enemies-p)
     (let ((enemies (find-enemies)))
@@ -138,7 +143,8 @@
 		 (distance-between x (geoffrey))))
 	(setf enemies (sort enemies #'< :key #'distance-to-geoffrey))
 	(let ((target (first enemies)))
-	  (add-stasis target (random-choose '(12 14 17))))))))
+	  (add-stasis target (random-choose '(12 14 17))))
+	(narrate "The enemy has fallen into stasis!")))))
 
 ;;; Spellbook 
 
