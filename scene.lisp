@@ -113,6 +113,9 @@
 (defmethod mark-camped ((buffer scene))
   (setf (field-value :camped buffer) t))
 
+(defmethod unmark-camped ((buffer scene))
+  (setf (field-value :camped buffer) nil))
+
 (defmethod camped ((buffer scene)) 
   (field-value :camped buffer))
 
