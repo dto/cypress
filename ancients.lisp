@@ -280,6 +280,7 @@
     (add-inventory-item box (quantity-of 'silver-elixir 2))
     (add-inventory-item box (quantity-of 'elixir 2))
     (add-inventory-item box (quantity-of 'green-elixir 1))
+    (add-inventory-item box (tome-of 'hold-creature))
     (add-inventory-item box (new 'silver-armor))
     (add-inventory-item box (new 'silver-bow)))
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))

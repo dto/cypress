@@ -17,6 +17,18 @@
 
 (defsprite enemy)
 
+(defmethod draw :after ((enemy enemy))
+  (with-fields (stasis) enemy
+    (when stasis
+      (multiple-value-bind (top left right bottom)
+	  (bounding-box enemy)
+	(let ((boil (* (random 4) (sin (/ *updates* 3)))))
+	  (draw-image "sparkle.png"
+		      left top
+		      :height (+ boil (- bottom top))
+		      :width (+ boil (- right left))
+		      :blend :additive))))))
+
 (defmethod can-pick ((enemy enemy)) nil)
 
 (defmethod activate-maybe ((enemy enemy))

@@ -124,6 +124,22 @@
   (add-inventory-item (geoffrey) (quantity-of 'jerky 2))
   (narrate "You cured enough meat for two meals."))
 
+;;; Hold creature
+
+(defthing (hold-creature spell)
+  :description "Hold creature (10 mp, 2 nightshade)"
+  :image "hold-creature.png"
+  :reagents '(:magic 10 nightshade 2))
+
+(defmethod cast ((caster thing) (spell hold-creature))
+  (when (nearby-enemies-p)
+    (let ((enemies (find-enemies)))
+      (labels ((distance-to-geoffrey (x)
+		 (distance-between x (geoffrey))))
+	(setf enemies (sort enemies #'< :key #'distance-to-geoffrey))
+	(let ((target (first enemies)))
+	  (add-stasis target (random-choose '(12 14 17))))))))
+
 ;;; Spellbook 
 
 (defthing spellbook :image "notebook-2.png")

@@ -40,6 +40,8 @@
   (attack :initform 0)
   (defense :initform 0)
   (resistance :initform 0)
+  ;; time stop
+  (stasis :initform nil)
   ;; conversation and lore fields
   (topics :initform '(:name :job :bye))
   (lore :initform nil)
@@ -638,11 +640,17 @@
 ;;; The system update function does its own work, then invokes the
 ;;; gameworld's RUN method.
 
+(defmethod add-stasis ((thing thing) seconds)
+  (setf (field-value :stasis thing) (seconds->frames seconds)))
+
+(defmethod cancel-stasis ((thing thing))
+  (setf (field-value :stasis thing) nil))
+
 (defmethod run ((self thing)))
 (defmethod arrange ((self thing)))
 
 (defmethod update ((self thing))
-  (with-fields (last-tap-time) self
+  (with-fields (last-tap-time stasis) self
     ;; we actually catch the end of single-click here.
     (when (and last-tap-time
 	       (> (- *updates* last-tap-time)
@@ -651,7 +659,13 @@
       ;; display object's class name (by default on single click)
       (look self))
     (arrange self)
-    (run self)))
+    ;; handle stasis
+    (when stasis 
+      (decf stasis)
+      (when (minusp stasis) 
+	(setf stasis nil)))
+    (when (not stasis)
+      (run self))))
 
 ;;; Sprites 
 
