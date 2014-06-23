@@ -25,7 +25,8 @@
   ;; temp
   ;; (add-inventory-item monk (quantity-of 'copper-gear 5))
   ;; (add-inventory-item monk (quantity-of 'nightshade 5))
-  ;; (add-inventory-item monk (quantity-of 'silver-elixir 2))
+  ;; (add-inventory-item monk (new 'bone-flute))
+  ;; (add-inventory-item monk (quantity-of 'neume 3))
   ;; (add-inventory-item monk (quantity-of 'green-elixir 2))
 
   ;; (learn-spell (geoffrey) (new 'hold-creature))
