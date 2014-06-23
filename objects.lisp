@@ -269,7 +269,9 @@ dto@blocky.io
 (defmethod activate :after ((self help-scroll))
   (let ((gump (get-gump self)))
     (when gump
-      (set-target-position gump (units 50) (units 1)))))
+      (set-target-position gump 
+			   (+ (window-x) (units 50))
+			   (+ (window-y) (units 1))))))
 
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *wraith-images* (image-set "wraith" 3))
