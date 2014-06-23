@@ -445,7 +445,7 @@
 			  (dense-trees)))))
 
 (defmethod begin-scene :after ((forest forest))
-  (percent-of-time 8 (prog1 t (cue-music forest (random-choose '("rain.ogg" "believe-me2.ogg" "xolaros3.ogg" "thunder-med.ogg" "thunder-big.ogg"))))))
+  (percent-of-time 8 (prog1 t (cue-music forest (random-choose '("rain.ogg" "believe-me2.ogg" "xolaros3.ogg"))))))
 
 ;;; Cold meadow
 
