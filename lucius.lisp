@@ -196,10 +196,10 @@ of Valisade! Welcome to our humble home."
 Mountains to the south, and east, and
 west. This is the vale of Eavesbury,
 named for its discoverer, who found it
-way, way back in whorememebers-time. In
-those ages, the Sun was hotter than it
-is now, and Eavesbury was a busy town
-because of the mountain trade
+way, way back in who-rememebers-time. 
+In those ages, the Sun was hotter than 
+it is now, and Eavesbury was a busy 
+town because of the mountain trade
 routes. Now it's a frigid ruin, but
 Nothbehem and a few other towns remain
 in the warmer South. I've not been far
@@ -211,7 +211,7 @@ grandfather will know more."
 "I'm a librarian at the Nothbehem
 monastery. I'm also a maker and mender
 of shirts, shoes, pants, robes, and
-leather armor." :town :robes :quine)
+leather armor." :town :robes :quine :vale)
 
 (define-topic quine lucius 
 "I don't think I've met anyone named
@@ -228,7 +228,7 @@ do remind me a bit of my grandfather's
 old war gear. Tell me, are you a
 soldier? Did you come across the
 mountains from the West?" 
-:west :grandfather :town)
+:west :grandfather :town :vale)
 
 (define-topic grandfather lucius 
   "Yes, the great Arturo Pentaquin the
@@ -281,7 +281,7 @@ Shall we get moving?"
 
 (define-topic talk-more lucius 
   "Sure. What else do you want to talk
-about?" :quine :wraith :grandfather :west :town)
+about?" :quine :vale :grandfather :west :town) 
 
 (define-topic chat lucius
   "Let's keep moving. We don't have time
