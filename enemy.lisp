@@ -230,7 +230,7 @@
   :image (random-choose *black-wolf-images*)
   :sprite-height 130
   :sprite-width 130
-  :health 25)
+  :health 35)
 
 (defmethod die ((self black-wolf))
   (let ((remains (new 'remains)))
