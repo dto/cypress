@@ -231,15 +231,12 @@ Go now, Geoffrey!" :bye)
 		 (lined-up-randomly (meadow-debris) (flowers) (gravestone) (gravestone))))
 	      (small-fence)))
 
-;; (learn-spell (geoffrey) (new 'travel))
-
 (defmethod make-terrain ((self owl-garden))
   (with-border (units 12)
     (stacked-up 
      (lined-up (some-trees) (some-trees) (some-trees))
      (lined-up (flowers) (owl-garden) (flowers))
      (lined-up (some-trees) (some-trees) (some-trees)))))
-
 
 ;;; Cemetery
 
