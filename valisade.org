@@ -1,33 +1,102 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
+
+* Beta
+** TODO [#A] Fix pathfing bypassing copper gate and getting stuck
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
 ** TODO [#A] change to right-click on geoffrey for Pause
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
 *** TODO change to clicking modeline status to open Status scroll
 *** TODO don't run enemies when paused
 *** TODO Press ESCAPE to close all gumps and unpause
-** TODO [#A] re-enable pause, auto stop walking and pause when enemy in view.
+** TODO [#A] auto stop walking and pause when enemy in view.
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
 ** TODO [#A] enlarge enemy attack-click hitbox- use single right click to target enemies, show hover indicator when properly targeted
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
 ** TODO [#A] fix ruin basement crash/renderfuck
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
 ** TODO [#A] Enemies should be nastier overall
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
 ** TODO [#A] fix rendering bug with tooltip on map sector
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#A] should allow to click gear as well as plate to unlock puzzle
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#A] Add comprehensive tooltip help
+   :PROPERTIES:
+   :Effort: 
+   :END:
 *** TODO "right click the ground in order to move geoffrey"
+    :PROPERTIES:
+    :Effort:   0:15
+    :END:
 *** TODO "double-click Lucius to talk"
+    :PROPERTIES:
+    :Effort:   0:15
+    :END:
 *** TODO "control H for help"
-*** TODO show quine summons somehow 
+    :PROPERTIES:
+    :Effort:   0:15
+    :END:
+*** TODO show quine summons somehow
+    :PROPERTIES:
+    :Effort:   0:15
+    :END: 
 *** TODO double click enemies to attack
+    :PROPERTIES:
+    :Effort:   0:15
+    :END:
 *** TODO make a campfire!
+    :PROPERTIES:
+    :Effort:   0:15
+    :END:
+** TODO [#A] Add and repaint some different tree/shrub types
+   :PROPERTIES:
+   :Effort:   3:00
+   :END:
 ** TODO [#A] add bubble above npc when they have something to say?
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#A] show sextant on map to reveal next location?
-** TODO [#A] escape should close all gumps 
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#A] escape should close all gumps
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
 ** TODO [#A] fix tent immobilization bug
-** TODO [#A] enlarge enemy attack-click hitbox- use single right click to target enemies, show hover indicator when properly targeted
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 ** TODO [#A] Magic arrow, (nightshade) single strong attack with crystal arrow graphics
    :PROPERTIES:
    :Effort:   1:00
    :END:
 ** TODO [#A] implement southeastern ruin with Wiz0rds
-** TODO [#A] wraith archer 
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+** TODO [#A] wraith archer
+   :PROPERTIES:
+   :Effort:   1:00
+   :END: 
 ** TODO [#A] Add more townspeople
    :PROPERTIES:
    :Effort:   2:00
@@ -35,45 +104,22 @@
 
 ** TODO [#A] Eastern Cave
    :PROPERTIES:
-   :Effort:   2:00
+   :Effort:   1:00
    :END:
 *** TODO Mechamonk Claudius tells you about the ancient road to Valisade
-** TODO [#A] Sextant points way to waystones
-** TODO [#A] Add and repaint some different tree/shrub types
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
-*** TODO change to right-click on geoffrey for Pause
-**** TODO change to clicking modeline status to open Status scroll
-**** TODO don't run enemies when paused
-**** TODO Press ESCAPE to close all gumps and unpause
+    :PROPERTIES:
+    :Effort:   1:00
+    :END:
 ** TODO [#A] wax cylinder w creepy message
    :PROPERTIES:
    :Effort:   3:00
    :END:
-** TODO [#A] Cypress tree garden
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-*** TODO second owl with story of cypress
-    :PROPERTIES:
-    :Effort:   2:00
-    :END:
 ** TODO [#A] 2nd cylinder
    :PROPERTIES:
    :Effort:   1:00
    :END:
-*** TODO creepy shade.png face fades in 
-*** TODO must place inkwell and quill pen on ancient stone to trigger endgame
-    :PROPERTIES:
-    :Effort: 
-    :END:
 ** TODO [#A] ENDGAME
-*** TODO [#A] Black wizards
-    :PROPERTIES:
-    :Effort:   3:00
-    :END:
-*** TODO [#A] extreme cold furs for visiting amalia's cabin
+*** TODO [#A] Paint and program extreme cold furs for visiting amalia's cabin
     :PROPERTIES:
     :Effort:   0:30
     :END:
@@ -81,31 +127,33 @@
     :PROPERTIES:
     :Effort:   0:30
     :END:
-*** TODO [#A] 2nd stone monk in cave w 4 doors
-    :PROPERTIES:
-    :Effort:   2:00
-    :END:
 *** TODO [#A] Frozen river with skeleton archers
     :PROPERTIES:
     :Effort:   2:00
     :END:
-*** TODO [#A] amalia's cabin
+*** TODO [#A] amalia's cabin with inkwell/feather
     :PROPERTIES:
     :Effort:   1:00
     :END:
-*** TODO [#A] valisade ruins w/monks sound
+** TODO [#A] Cypress tree garden
+   :PROPERTIES:
+   :Effort:   2:45
+   :END:
+*** TODO second owl with story of cypress
     :PROPERTIES:
-    :Effort:   0:30
+    :Effort:   2:00
     :END:
-*** TODO warrior time cube
+*** TODO must place inkwell and quill pen on ancient stone to trigger endgame
     :PROPERTIES:
     :Effort:   0:15
-    :END: 
-*** TODO [#C] Cure heavy wounds (50 mana) (2 ginseng)
-    :PROPERTIES:
-    :Effort:   1:00
     :END:
-*** Heals between 40-60 HP
+*** TODO [#A] final scene with abstract voice and amalia subtitles
+    :PROPERTIES:
+    :Effort:   0:30
+    :END: 
+
+* Should
+
 ** TODO [#B] improve skull seance lore
 ** TODO [#B] special skull seance sidequest where you dig up a particular skull
 ** TODO [#B] double click should not reset bow timer
@@ -159,14 +207,11 @@
    :PROPERTIES:
    :Effort:   0:30
    :END:
-** TODO [#C] Add fur cloak for chapter 2
-   :PROPERTIES:
-   :Effort: 
-   :END:
 
 
 
 * Optional
+
 ** TODO [#C] allow char follows mouse cursor while RMB held?
 ** TODO [#C] sometimes a random carved stone with lore in the middle of the woods
 ** TODO [#C] snow footprints?
