@@ -97,7 +97,7 @@
 
 (defmethod initialize :after ((title title) &key)
   (play-music "ancient-fanfare.ogg" :loop nil)
-  (resize title 1280 720))
+  (resize title *nominal-screen-width* *nominal-screen-height*))
 
 (defmethod tap ((title title) x y)
   (magical-flourish)
@@ -112,8 +112,8 @@
   (setf *window-title* "cypress v0.99") 
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
-  (setf *nominal-screen-width* 1280)
-  (setf *nominal-screen-height* 720)
+  (setf *nominal-screen-width* 1680)
+  (setf *nominal-screen-height* 945)
 
   ;; (setf *nominal-screen-width* (* 1280 4))
   ;; (setf *nominal-screen-height* (* 720 4))

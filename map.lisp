@@ -244,7 +244,7 @@
       (dolist (row sectors)
 	(dolist (sector row)
 	  (drop-object map sector)))
-      (resize map 1280 781)))
+      (resize map *nominal-screen-width* *nominal-screen-height*)))
   map)
 
 (defmethod update :after ((map map-screen)) 
