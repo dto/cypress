@@ -74,8 +74,8 @@
       ;; 		   (units 34)
       ;; 		   (units 5))
       (let ((scroll (new 'help-scroll)))
-	(drop-object buffer scroll (units 10) (units 4))
-	(activate scroll))
+      	(drop-object buffer scroll (units 10) (units 4))
+      	(activate scroll))
       (if *skip-meadow* 
 	  (ildron)
 	  (current-buffer)))))
