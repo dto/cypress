@@ -19,7 +19,7 @@
 (defparameter *home-image* "home.png")
 (defparameter *road-image* "road.png")
 
-(defparameter *sector-size* (units 4))
+(defparameter *sector-size* (units 5.2))
 
 (defthing sector
   :tags '(:fixed)

@@ -1,8 +1,8 @@
 (in-package :cypress)
 
-(defresource (:name "oldania" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 16)))
-(defresource (:name "oldania-bold" :type :ttf :file "OldaniaADFStd-Bold.otf" :properties (:size 16)))
-(defresource (:name "oldania-title" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 20)))
+(defresource (:name "oldania" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 20)))
+(defresource (:name "oldania-bold" :type :ttf :file "OldaniaADFStd-Bold.otf" :properties (:size 20)))
+(defresource (:name "oldania-title" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 22)))
 
 (defparameter *gump-font* "oldania")
 (defparameter *gump-button-font* "oldania")
@@ -83,7 +83,7 @@
   :pages nil
   :page-number 0)
 
-(defparameter *scroll-scale* (/ 1 3))
+(defparameter *scroll-scale* (/ 1 2.2))
 
 (defparameter *lines-per-scroll* 14)
 
@@ -130,8 +130,8 @@
 
 ;;; Generic object icons representing items in inventories.
 
-(defparameter *icon-height* 60)
-(defparameter *icon-width* 60)
+(defparameter *icon-height* 85)
+(defparameter *icon-width* 85)
 
 (defthing icon target)
 
@@ -202,9 +202,9 @@
 
 ;;; Container browser gump
 
-(defparameter *browser-top-margin* (units 5.2))
+(defparameter *browser-top-margin* (units 6.4))
 
-(defparameter *browser-left-margin* (units 2.3))
+(defparameter *browser-left-margin* (units 2.6))
 
 (defthing (browser gump) 
   :image "scroll-gump.png"
@@ -220,7 +220,7 @@
 
 (defmethod will-accept ((container thing) (gump gump)) nil)
 
-(defparameter *browser-scale* (/ 1 3))
+(defparameter *browser-scale* (/ 1 2.2))
 
 (defmethod run ((browser browser))
   (arrange browser))
@@ -288,8 +288,8 @@
   (with-fields (x y icons target) self
     (mapc #'draw icons)
     (draw-string (find-description target)
-		 (+ x (units 7))
-		 (+ y (units 1.5))
+		 (+ x (units 7.7))
+		 (+ y (units 2.1))
 		 :color "saddle brown" 
 		 :font "oldania-title")))
 
@@ -447,7 +447,7 @@
   (pages :initform nil)
   (page-number :initform 0))
 
-(defparameter *talk-gump-scale* (/ 1 2.7))
+(defparameter *talk-gump-scale* (/ 1 2.2))
 
 (defmethod initialize ((self talk-gump) &key)
   (with-local-fields
