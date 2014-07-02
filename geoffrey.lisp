@@ -42,6 +42,9 @@
   (add-inventory-item monk (make-scroll "Summons from Dr. Quine" *quine-summons*))
   (equip monk (find-arrow monk)))
 
+(defmethod add-inventory-item :after ((monk geoffrey) (item thing) &optional merge)
+  (resume))
+
 (defmethod equip :after ((monk geoffrey) (self thing))
   (when (not (field-value :equipper self))
     (narrate "You cannot equip this item in its current location.")))
