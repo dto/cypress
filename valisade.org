@@ -2,10 +2,6 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Beta
-** TODO [#A] Fix pathfing bypassing copper gate and getting stuck
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
 ** TODO [#A] change to right-click on geoffrey for Pause
    :PROPERTIES:
    :Effort:   2:00
@@ -13,30 +9,16 @@
 *** TODO change to clicking modeline status to open Status scroll
 *** TODO don't run enemies when paused
 *** TODO Press ESCAPE to close all gumps and unpause
-** TODO [#A] auto stop walking and pause when enemy in view.
+*** TODO auto stop walking and pause when enemy in view.
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
+** TODO [#A] use single right click to target enemies
    :PROPERTIES:
    :Effort:   0:30
    :END:
-** TODO [#A] enlarge enemy attack-click hitbox- use single right click to target enemies, show hover indicator when properly targeted
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#A] fix ruin basement crash/renderfuck
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#A] Enemies should be nastier overall
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#A] fix rendering bug with tooltip on map sector
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#A] should allow to click gear as well as plate to unlock puzzle
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
+** TODO [#A] Show hover indicator when enemy properly targeted
+*** TODO enlarge enemy attack-click hitbox?
 ** TODO [#A] Add comprehensive tooltip help
    :PROPERTIES:
    :Effort: 
@@ -65,13 +47,9 @@
     :PROPERTIES:
     :Effort:   0:15
     :END:
-** TODO [#A] Add and repaint some different tree/shrub types
+** TODO [#A] Enemies should be nastier overall
    :PROPERTIES:
-   :Effort:   3:00
-   :END:
-** TODO [#A] add bubble above npc when they have something to say?
-   :PROPERTIES:
-   :Effort:   0:15
+   :Effort:   0:30
    :END:
 ** TODO [#A] show sextant on map to reveal next location?
    :PROPERTIES:
@@ -81,27 +59,57 @@
    :PROPERTIES:
    :Effort:   0:15
    :END: 
-** TODO [#A] fix tent immobilization bug
+
+
+** TODO [#A] Fix pathfind bypassing copper gate and getting stuck
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+** TODO [#A] Fix ruin basement crash/renderfuck
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#A] Fix rendering bug with tooltip on map sector
    :PROPERTIES:
    :Effort:   0:15
    :END:
+** TODO [#A] Fix tent immobilization bug
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+
+
+
+** TODO [#A] Paint furs
 ** TODO [#A] Magic arrow, (nightshade) single strong attack with crystal arrow graphics
    :PROPERTIES:
    :Effort:   1:00
    :END:
-** TODO [#A] implement southeastern ruin with Wiz0rds
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
-** TODO [#A] wraith archer
-   :PROPERTIES:
-   :Effort:   1:00
-   :END: 
 ** TODO [#A] Add more townspeople
    :PROPERTIES:
    :Effort:   2:00
    :END:
+** TODO [#A] should allow to click gear as well as plate to unlock puzzle
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#A] Add and repaint some different tree/shrub types
+   :PROPERTIES:
+   :Effort:   3:00
+   :END:
+** TODO [#A] add bubble above npc when they have something to say?
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 
+** TODO [#A] Black Wizard battle scene
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+*** TODO [#A] wax cylinder w creepy message
+    :PROPERTIES:
+    :Effort:   3:00
+    :END:
 ** TODO [#A] Eastern Cave
    :PROPERTIES:
    :Effort:   1:00
@@ -110,16 +118,12 @@
     :PROPERTIES:
     :Effort:   1:00
     :END:
-** TODO [#A] wax cylinder w creepy message
-   :PROPERTIES:
-   :Effort:   3:00
-   :END:
 ** TODO [#A] 2nd cylinder
    :PROPERTIES:
    :Effort:   1:00
    :END:
-** TODO [#A] ENDGAME
-*** TODO [#A] Paint and program extreme cold furs for visiting amalia's cabin
+** TODO [#A] Cabin scene
+*** TODO [#A] Extreme cold furs for visiting amalia's cabin
     :PROPERTIES:
     :Effort:   0:30
     :END:
@@ -151,6 +155,7 @@
     :PROPERTIES:
     :Effort:   0:30
     :END: 
+
 
 * Should
 
