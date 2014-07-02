@@ -18,7 +18,7 @@
     (bark monk (random-choose messages))))
 
 (defmethod alternate-tap ((self geoffrey) x y)
-  (replace-gump self (new 'scroll-gump :text (status-text))))
+  (toggle-pause (current-scene)))
 
 (defmethod initialize :after ((monk geoffrey) &key)
   (setf *geoffrey* monk)
