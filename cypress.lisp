@@ -120,7 +120,7 @@
 
   (setf *scale-output-to-window* t) 
   (setf *use-antialiased-text* t)
-  (setf *font-texture-filter* :linear)
+  (setf *font-texture-filter* :mipmap)
   (setf *font-texture-scale* 2)
   (setf *default-texture-filter* :mipmap)
   (setf *frame-rate* 30)
