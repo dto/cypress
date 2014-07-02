@@ -289,7 +289,7 @@
     (mapc #'draw icons)
     (draw-string (find-description target)
 		 (+ x (units 7.7))
-		 (+ y (units 2.1))
+		 (+ y (units 2.2))
 		 :color "saddle brown" 
 		 :font "oldania-title")))
 
@@ -513,7 +513,7 @@
     (when (more-p self)
       (draw-string "(continued...)" 
 		   (+ x (units 15))
-		   (+ y (units 20))
+		   (+ y (units 24))
 		   :color *gump-color*
 		   :font *gump-font*))
     (draw (buttons self))
@@ -527,7 +527,7 @@
 	    (y0 (+ %y (* 0.17 %height))))
 	(resize (text self) %width (units 10))
 	(move-to (text self) x0 y0)
-	(move-to (buttons self) x0 (+ y0 (units 18)))
+	(move-to (buttons self) x0 (+ y0 (units 20)))
 	(layout (buttons self))))
     (resize self 
 	    (* (image-width %image) *talk-gump-scale*)
