@@ -218,8 +218,8 @@
   :column 2
   :background-image "parchment.png")
 
-(defparameter *map-screen-left-margin* 330)
-(defparameter *map-screen-top-margin* 50)
+(defparameter *map-screen-left-margin* 470)
+(defparameter *map-screen-top-margin* 80)
 
 (defmethod begin-scene ((self map-screen)))
 
