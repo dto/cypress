@@ -104,6 +104,16 @@
 			  :height height
 			  :width (- width (* width (/ width image-width))))))))))
 
+(defmethod draw :after ((sector sector))
+  (with-fields (x y width height terrain scene) sector
+    (when (and (find-inventory-item (geoffrey) 'sextant)
+	       (find-instances scene 'waystone))
+      (draw-string "*" 
+		   (+ x width -22)
+		   (+ y height -22)
+		   :color "red"
+		   :font "oldania-title"))))
+
 (defparameter *unlimited-travel* nil)
 
 (defmethod can-travel-to ((sector sector))
