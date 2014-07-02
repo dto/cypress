@@ -1,7 +1,12 @@
 (in-package :cypress)
 
-(defun resume () (play))
-;; (defun pause () 
+(defparameter *paused* nil)
+
+(defun pause () 
+  (setf *paused* t))
+
+(defun resume () ()
+  (setf *paused* nil))
 
 ;;; Spatial parameters
 
@@ -659,12 +664,13 @@
       ;; display object's class name (by default on single click)
       (look self))
     (arrange self)
-    ;; handle stasis
+    ;; handle stasis counter
     (when stasis 
       (decf stasis)
       (when (minusp stasis) 
 	(setf stasis nil)))
-    (when (not stasis)
+    ;; possibly run world AI
+    (unless (or stasis *paused*)
       (run self))))
 
 ;;; Sprites 

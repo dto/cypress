@@ -2,6 +2,7 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Beta
+** TODO [#A] integrate Quine's letter with Tutorial document
 ** TODO [#A] change to right-click on geoffrey for Pause
    :PROPERTIES:
    :Effort:   2:00
@@ -156,10 +157,10 @@
     :Effort:   0:30
     :END: 
 
+** TODO [#A] improve skull seance lore
 
 * Should
 
-** TODO [#B] improve skull seance lore
 ** TODO [#B] special skull seance sidequest where you dig up a particular skull
 ** TODO [#B] double click should not reset bow timer
 ** TODO [#B] make nice trailer vid

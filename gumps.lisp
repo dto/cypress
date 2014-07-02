@@ -586,5 +586,8 @@
 	      ;; we got a new gump for this topic.
 	      (replace-gump self new-gump)))))))
 
+(defmethod discuss :after ((self thing) topic)
+  (resume))
+
 (defmethod after-revive ((gump gump))
   (destroy gump))

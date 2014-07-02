@@ -58,15 +58,18 @@
   :generated nil
   :default-events
   '(
-    ;; ((:pause) transport-toggle-play)
+    ((:pause) toggle-pause)
     ((:r :control) reset-game)
-    ;; ((:space) transport-toggle-play)
-    ;; ((:p) transport-toggle-play)
+    ((:space) toggle-pause)
+    ((:p) toggle-pause)
     ((:m) open-map)
     ((:s) open-spellbook)
     ((:i) open-inventory))
   ;;
   :excluded-fields '(:quadtree :click-start :click-start-block :drag-origin :drag-start :drag-offset :focused-block                      :shell :drag :hover :highlight :inputs))
+
+(define-method toggle-pause scene ()
+  (setf *paused* (if *paused* nil t)))
 
 (defmethod after-revive ((scene scene))
   (bind-any-default-events scene))
@@ -160,6 +163,7 @@
     (when travel (use (geoffrey) travel))))
 
 (defmethod open-spellbook ((buffer scene))
+  (resume)
   (activate (find-spellbook)))
 
 (defmethod open-inventory ((buffer scene))

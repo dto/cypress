@@ -28,6 +28,7 @@
   (let ((browser (get-gump monk)))
     (when browser (refresh browser)))
   (magical-flourish)
+  (resume)
   (begin-animation monk (casting-animation monk)))
 
 (defmethod can-pick ((spell spell)) nil)

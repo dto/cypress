@@ -1,7 +1,7 @@
 (in-package :cypress)
 
 (defparameter *paused-status-message* 
-  "GAME IS PAUSED. Press the spacebar (or issue a command) to continue...")
+  "GAME IS PAUSED. Issue a command to continue, or press SPACEBAR.")
 
 (defvar *status-messages* nil)
 
@@ -61,6 +61,9 @@
 	      :equipment (new 'label :read-only t :font *status-line-font*)
 	      :message (new 'label :read-only t :font *status-line-font*))))
 
+(defmethod tap ((self status-line) x y)
+  (replace-gump (geoffrey) (new 'scroll-gump :text (status-text))))
+
 (define-method update status-line ()
   (mapc #'pin %inputs)
   (set-value %%health (status-line-health-string (field-value :health (geoffrey))))
@@ -73,7 +76,7 @@
 			    (fancy-description item)
 			    (quantity item))
 		  "None"))))
-  (set-value %%message (if (field-value :paused (current-buffer))
+  (set-value %%message (if *paused*
 			   *paused-status-message*
 			   (or (current-status-message) 
 			       (status-lighter-string)))))
