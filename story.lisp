@@ -1,11 +1,10 @@
 (in-package :cypress)
 
-
 (defresource "prologue.ogg" :volume 70)
 
 (defparameter *prologue-height* 1578)
 
-(define-buffer prologue 
+(define-buffer prologue
   (start-time :initform *updates*)
   (quadtree-depth :initform 4)
   (background-color :initform "black"))

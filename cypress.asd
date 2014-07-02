@@ -20,4 +20,5 @@
 	       (:file "owl" :depends-on ("alonso"))
 	       (:file "map" :depends-on ("owl"))
 	       (:file "lore" :depends-on ("map"))
-	       (:file "cypress" :depends-on ("lore"))))
+	       (:file "story" :depends-on ("lore"))
+	       (:file "cypress" :depends-on ("story"))))
