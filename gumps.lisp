@@ -61,8 +61,8 @@
 (defmethod alternate-tap ((self gump) x y)
   (play-sample "close.wav")
   (destroy self))
-       
-;;; The scroll gump is for reading pages of text.
+
+;;; Utility function
 
 (defun split-into-pages (text lines-per-page)
   (let ((lines (split-string-on-lines text))
@@ -76,6 +76,57 @@
 	    (push (subseq lines 0 lines-per-page) pages)
 	    (setf lines (subseq lines lines-per-page)))))
     (reverse pages)))
+
+;;; Displaying tooltip hints
+
+(defthing (hint gump)
+  :image "talk-scroll.png"
+  :image-scale 600
+  :timer (seconds->frames 10)
+  :lines nil)
+
+(defmethod initialize ((self hint) &key text)
+  (setf (field-value :lines self) 
+	(split-string-on-lines text)))
+  
+(defparameter *hint-scale* (/ 1 1.8))
+
+(defmethod arrange :after ((self hint))
+  (with-fields (image width) self
+    (resize self 
+	    (* (image-width image) *hint-scale*)
+	    (* (image-height image) *hint-scale*))
+    (move-to self 
+	     (+ (window-x) (units 43))
+	     (+ (window-y) (units 1)))))
+
+(defmethod run ((self hint))
+  (with-fields (timer) self
+    (decf timer)
+    (unless (plusp timer)
+      (destroy self))))
+
+(defmethod draw ((self hint))
+  (call-next-method)
+  (with-fields (x y width height image lines) self
+    (let ((x0 (+ x (* 0.15 width)))
+	  (y0 (+ y (* 0.19 height))))
+      (let ((text-lines lines))
+	(loop while text-lines do
+	  (draw-string (let ((line (pop text-lines)))
+			 (if (plusp (length line))
+			     line
+			     " "))
+		       x0 y0 
+			   :color *gump-color*
+			   :font *gump-font*)
+	  (incf y0 (font-height *gump-font*)))))))
+
+(defun show-hint (text)
+  (drop-object (current-buffer)
+	       (new 'hint :text text)))
+
+;;; The scroll gump is for reading pages of text.
 
 (defthing (scroll-gump gump) 
   :image "scroll-gump.png"

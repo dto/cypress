@@ -108,9 +108,10 @@
 	  (walk-to-thing self (geoffrey)))
 	;; handle first meeting
 	(when (and (not met-player)
-		   (< distance 300))
+		   (< distance 400))
 	  (setf met-player t)
 	  (bark self "Ho, stranger!")
+	  (show-hint "Double-click Lucius to begin talking.")
 	  (walk-to-thing self (geoffrey)))
 	(if (or leader gump)
 	    ;; follow geoffrey
@@ -271,13 +272,20 @@ Shall we get moving?"
 (define-topic go-with-lucius lucius 
   "Very well! Let's head North." :bye)
 
+(defparameter *spellbook-hint*
+"Double-click Geoffrey to open his
+inventory, then double-click the
+Spellbook in the top left corner. You
+can also press the S key.")
+
 (defmethod discuss :after ((self lucius) (topic (eql :go-with-lucius)))
   (destroy-gump self)
   (follow self (geoffrey))
   (learn-spell (geoffrey) (new 'travel))
   (cue-music (current-scene) (random-choose '("path.ogg" "lutey.ogg" "tumbling.ogg" "traveler2.ogg")))
-  (activate (find-spellbook))
-  (bark self "Excellent! Now, cast your travel spell!"))
+  (bark self "Excellent. Let's get moving!")
+  (show-hint *spellbook-hint*))
+  ;; (activate (find-spellbook)))
 
 (define-topic talk-more lucius 
   "Sure. What else do you want to talk

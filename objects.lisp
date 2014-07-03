@@ -197,7 +197,7 @@ nisi. Nam eget dui.")
     scroll))
 
 (defparameter *help-text* 
-"Welcome to Cypress v0.99 (alpha) 
+"Adventurer's Guide
 
 This is the Scroll of Helping. If you
 click the scroll, you will advance to
@@ -206,30 +206,34 @@ button (or the Control key with the left
 button) to close scrolls.
 
 Right-click a destination to move
-Geoffrey there.
+Geoffrey there. 
+
+Right-click Geoffrey (or press Spacebar)
+to pause and unpause the game. Issuing
+any command resumes the game.
 
 Click an object to show its name.
 Drag objects to move them.
 Drag objects onto Geoffrey to take them.
- (Take and keep this scroll 
-  for easy reference.)
 Double-click an object to activate it.
 Double-click a monster to attack it.
 Double click Geoffrey for his inventory.
-Right-click Geoffrey to see status.
-Drag items into/out of inventory scrolls.
+Drag items into/out of inventory pop-ups.
 
 Click spells in spellbook for
-description.  Double click spells in
+description. Double click spells in
 spellbook to cast.
 
 Double-click armor/arrows while in
 inventory to equip/unequip them.
 
 Use the Travel spell to explore the
-land.  Double-click land symbols to
+land. Double-click land symbols to
 explore regions.  If you die, press
-Control-R for a new quest.
+Control-R for a new quest. You can
+resume your last saved quest by
+activating the Stone of Remembrance
+after resetting the game.
 
 You must eat. Traveling and combat cause
 hunger. Double-click food to eat it.
@@ -238,40 +242,32 @@ jerky from freshly killed wolves.
 
 Geoffrey must stay warm. He will get
 colder by progressing through the
-terrain (or by touching certain
-objects). You have a magic tent and
-campfire which you can use to heal and
-warm yourself up. To use the tent, drag
-it out of your inventory onto an open
-space on the ground, and then cast
-Spark. 
-
-There are several new keyboard shortcuts:
+terrain (or by stepping in water). You
+have a magic tent and campfire which you
+can use to heal and warm yourself up. To
+use the tent, drag it out of your
+inventory onto an open space on the
+ground, and then cast Spark. The tent
+will automatically return to your
+inventory when you travel away.
 
 Press \"I\" to see Geoffrey's inventory.
 Press \"S\" to open the spellbook.
 Press \"M\" to open the travel map.
-
-I hope you enjoy this work-in-progress
-demonstration of Cypress.  Please submit
-bug reports and feedback to me at
-dto@blocky.io
-
--- David O'Toole
 ")
 
 (defthing (help-scroll scroll)
   :text *help-text*
   :stacking nil
   :image (random-choose *scroll-images*)
-  :description "Scroll of Helping")
+  :description "Adventurer's guide")
 
-(defmethod activate :after ((self help-scroll))
-  (let ((gump (get-gump self)))
-    (when gump
-      (set-target-position gump 
-			   (+ (window-x) (units 50))
-			   (+ (window-y) (units 1))))))
+;; (defmethod activate :after ((self help-scroll))
+;;   (let ((gump (get-gump self)))
+;;     (when gump
+;;       (set-target-position gump 
+;; 			   (+ (window-x) (units 50))
+;; 			   (+ (window-y) (units 1))))))
 
 (defparameter *remains-images* (image-set "remains" 2))
 (defparameter *wraith-images* (image-set "wraith" 3))

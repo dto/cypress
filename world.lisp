@@ -672,6 +672,7 @@
 	(setf stasis nil)))
     ;; possibly run world AI
     (unless (or stasis *paused*)
+      ;;(run-tasks self)
       (run self))))
 
 ;;; Sprites 

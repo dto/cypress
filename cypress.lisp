@@ -50,6 +50,14 @@
 '("passageway.ogg" "home.ogg" "kosmium.ogg" "believe-me2.ogg" "xolaros3.ogg" "path.ogg"
   "3-against-2.ogg" "dusk.ogg" "ruins.ogg" "standing-by-the-river.ogg" "spiritus.ogg"))
 
+(defparameter *movement-hint*  
+"Right-click to move Geoffrey.")
+
+(defparameter *object-hint*
+"Left-click objects to identify them.
+To take objects, left-click and drag
+them onto Geoffrey.")
+
 (defun make-quest (&optional (terrain-class 'meadow))
   (let ((geoffrey (new 'geoffrey))
 	(buffer (new terrain-class)))
@@ -59,23 +67,6 @@
     (setf *map-screen* nil)
     (setf *travel-direction* :downright)
     (with-buffer buffer
-      ;; (drop-object buffer (new 'lucius) 
-      ;; 		   (- (field-value :width buffer)
-      ;; 		      (units 8))
-      ;; 		   (- (field-value :height buffer)
-      ;; 		      (units 8)))
-      ;; (drop-object buffer (new 'silver-bow)
-      ;; 		   (units 20)
-      ;; 		   (units 5))
-      ;; (drop-object buffer (new 'silver-armor)
-      ;; 		   (units 26)
-      ;; 		   (units 5))
-      ;; (drop-object buffer (new 'woolen-leggings)
-      ;; 		   (units 34)
-      ;; 		   (units 5))
-      (let ((scroll (new 'help-scroll)))
-      	(drop-object buffer scroll (units 10) (units 4))
-      	(activate scroll))
       (if *skip-meadow* 
 	  (ildron)
 	  (current-buffer)))))

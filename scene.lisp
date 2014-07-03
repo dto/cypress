@@ -397,6 +397,9 @@
      (stacked-up-randomly (some-trees) (flowers) (flowers)))))
 
 (defmethod begin-scene :after ((meadow meadow))
+  (let ((geoffrey (geoffrey)))
+    (later 5.0 (show-movement-hint geoffrey))
+    (later 25.0 (show-object-hint geoffrey)))
   (drop-object meadow (new 'stone-of-remembrance)
 	       (units 25)
 	       (units 4))
@@ -405,6 +408,7 @@
 		  (units 8))
 	       (- (field-value :height meadow)
 		  (units 8))))
+
 
 ;;; Grassy meadow
 

@@ -42,6 +42,12 @@
   (add-inventory-item monk (make-scroll "Summons from Dr. Quine" *quine-summons*))
   (equip monk (find-arrow monk)))
 
+(define-method show-movement-hint geoffrey ()
+  (show-hint *movement-hint*))
+
+(define-method show-object-hint geoffrey ()
+  (show-hint *object-hint*))
+
 (defmethod add-inventory-item :after ((monk geoffrey) (item thing) &optional merge)
   (resume))
 
