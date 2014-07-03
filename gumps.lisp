@@ -563,8 +563,8 @@
     (draw-image image x y :width width :height height)
     (when (more-p self)
       (draw-string "(continued...)" 
-		   (+ x (units 15))
-		   (+ y (units 24))
+		   (+ x (units 20))
+		   (+ y (units 25))
 		   :color *gump-color*
 		   :font *gump-font*))
     (draw (buttons self))
@@ -578,7 +578,7 @@
 	    (y0 (+ %y (* 0.17 %height))))
 	(resize (text self) %width (units 10))
 	(move-to (text self) x0 y0)
-	(move-to (buttons self) x0 (+ y0 (units 20)))
+	(move-to (buttons self) x0 (+ y0 (units 24)))
 	(layout (buttons self))))
     (resize self 
 	    (* (image-width %image) *talk-gump-scale*)
