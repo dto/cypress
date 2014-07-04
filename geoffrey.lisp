@@ -6,7 +6,7 @@
 
 (defun geoffrey () *geoffrey*)
   
-(defthing (geoffrey monk) :description "Geoffrey")
+(defthing (geoffrey monk) :description "Geoffrey" :hints nil)
 
 (defmethod stomach-full-p ((monk monk))
   (<= (field-value :hunger monk) 12))
@@ -16,6 +16,11 @@
 		      '("I'm full now." "My stomach is full." "I feel full.")
 		      '("Very good!" "That's much better." "Delicious!"))))
     (bark monk (random-choose messages))))
+
+(defparameter *hunger-hint* 
+"Double-click Geoffrey to open the
+inventory and find something to eat.
+")
 
 (defmethod alternate-tap ((self geoffrey) x y)
   (toggle-pause (current-scene)))
@@ -39,6 +44,7 @@
   (add-inventory-item monk (quantity-of 'stone 2))
   (add-inventory-item monk (quantity-of 'white-bread 3))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
+  (add-inventory-item monk (make-scroll "Adventurer's guide" *help-text*))
   (add-inventory-item monk (make-scroll "Summons from Dr. Quine" *quine-summons*))
   (equip monk (find-arrow monk)))
 

@@ -197,11 +197,9 @@ nisi. Nam eget dui.")
     scroll))
 
 (defparameter *help-text* 
-"Adventurer's Guide
-
-This is the Scroll of Helping. If you
-click the scroll, you will advance to
-the next page. Use the right mouse
+"Welcome to the Adventurer's Guide. If
+you click this scroll, you will advance
+to the next page. Use the right mouse
 button (or the Control key with the left
 button) to close scrolls.
 
@@ -247,7 +245,7 @@ have a magic tent and campfire which you
 can use to heal and warm yourself up. To
 use the tent, drag it out of your
 inventory onto an open space on the
-ground, and then cast Spark. The tent
+ground, and then cast Ignite. The tent
 will automatically return to your
 inventory when you travel away.
 

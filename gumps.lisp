@@ -123,8 +123,11 @@
 	  (incf y0 (font-height *gump-font*)))))))
 
 (defun show-hint (text)
-  (drop-object (current-buffer)
-	       (new 'hint :text text)))
+  (with-fields (hints) (geoffrey)
+    (unless (find text hints :test 'equal)
+      (push text hints)
+      (drop-object (current-buffer)
+		   (new 'hint :text text)))))
 
 ;;; The scroll gump is for reading pages of text.
 

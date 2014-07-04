@@ -172,6 +172,10 @@
     (add-inventory-item spellbook spell)))
 
 (defmethod activate ((spellbook spellbook))
+  (show-hint 
+"Click a spell to show its name.
+Double-click the mountain symbol to cast
+the Travel spell, or press M.")
   (replace-gump spellbook (new 'browser :container spellbook)))
 
 (defun find-spellbook ()

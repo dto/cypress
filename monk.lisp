@@ -325,6 +325,11 @@
 		(setf bow-ready t
 		      aiming-bow nil))))))
 
+(defparameter *camp-hint* 
+"Place your magic tent on the ground and
+cast the Ignite spell to start a fire
+now, or you will freeze to death!")
+
 (defmethod run ((self monk))
   (with-local-fields 
     (when %alive
@@ -337,7 +342,8 @@
 	(percent-of-time 1
 	  (damage self (- (random-choose '(2 3 3 5 7))))
 	  (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav")))
-	  (narrate "You are freezing to death! Make a campfire.")))
+	  (narrate "You are freezing to death!")
+	  (show-hint *camp-hint*)))
       (when (> %hunger 80)
 	(percent-of-time 1
 	  (damage self (- (random-choose '(2 3 3 5 7))))
