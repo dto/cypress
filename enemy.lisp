@@ -90,6 +90,7 @@
 	      (add-inventory-item remains (grab-bag)))
 	  (add-inventory-item remains (new 'stone))))
     (add-inventory-item remains (new 'skull))
+    (show-hint "Double-click to search remains.")
     (drop self remains))
   (play-sound self "death.wav")
   (destroy self))
@@ -99,6 +100,7 @@
   (when (< (distance-to-cursor self) 920)
     (unless seen-player
       (play-sample (random-choose '("lichscream.wav" "lichdie.wav")))
+      (show-hint "Double-click enemy to attack.")
       (setf seen-player t))
     (percent-of-time 22 (setf image (random-choose *wraith-images*)))
     (let ((heading0 (heading-to-cursor self)))
@@ -176,11 +178,13 @@
   :sprite-width 130
   :tags '(:enemy)
   :health 25
+  :speed 5.5
   :image (random-choose *wolf-images*))
 
 (defmethod die ((self wolf))
   (let ((remains (new 'remains)))
     (add-inventory-item remains (new 'wolf-corpse))
+    (show-hint "Double-click to harvest corpse.")
     (drop self remains))
   (destroy self))
 
@@ -191,17 +195,18 @@
   (random-choose *wolf-images*))
 
 (defmethod run ((self wolf))
-  (when (> (distance-to-cursor self) 800) 
+  (when (> (distance-to-cursor self) 1000) 
     (setf (field-value :waypoints self) nil)
     (setf (field-value :seen-player self) nil))
-  (with-fields (image heading seen-player) self
+  (with-fields (image heading seen-player speed) self
     (percent-of-time 17 (setf image (random-frame self)))
-    (when (<= (distance-to-cursor self) 800)
+    (when (<= (distance-to-cursor self) 1000)
       (unless seen-player
 	(with-fields (x y) (cursor)
 	  (walk-to self x y)
 	  (play-sample "bark.wav")
 	  (play-sample "howl.wav")
+	  (show-hint "Double-click enemy to attack.")
 	  (setf seen-player t)))
       (when seen-player
 	(if (< (distance-to-cursor self) 200)
@@ -211,7 +216,7 @@
 		(percent-of-time 25 
 		  (setf heading heading0))
 		(percent-of-time 80
-		  (move self heading0 3.5))))
+		  (move self heading0 speed))))
 	    (progn
 	      (when (null (field-value :waypoints self))
 		(percent-of-time 5
@@ -219,7 +224,7 @@
 		    (walk-to self x y))))
 	      (when (movement-heading self)
 		(setf (field-value :heading self) (movement-heading self))
-		(move self (movement-heading self) 4))))))))
+		(move self (movement-heading self) speed))))))))
 
 ;; Blackwolves
 
@@ -230,7 +235,8 @@
   :image (random-choose *black-wolf-images*)
   :sprite-height 130
   :sprite-width 130
-  :health 35)
+  :speed 7
+  :health 45)
 
 (defmethod die ((self black-wolf))
   (let ((remains (new 'remains)))
