@@ -181,7 +181,7 @@
       large-mountain)
 
      (forest ruins forest
-      grassy-meadow garden forest 
+      grassy-meadow forest forest 
       forest garden ruins
       large-mountain)
     
@@ -259,6 +259,12 @@
 
 (defmethod update :after ((map map-screen)) 
   (arrange map))
+
+(defmethod draw :after ((map map-screen))
+  (draw-string "Click to identify terrain; double-click to travel."
+	       630 900
+	       :color "burlywood4"
+	       :font "oldania"))
 
 (defmethod alternate-tap ((map map-screen) x y) nil)
 
