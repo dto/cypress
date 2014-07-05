@@ -131,15 +131,6 @@ I can't find my way home...
 Do you know which way lies 
 the town of Nothbehem?"
 
-"One, two, three.
-That's violets here, 
-Forget-me-nots!
-Little ones shouldn't speak
-to the Dead!
-Oh, Goodness.
-
-... Who is that?"
-
 "Go away! I've got nothing to say to
 anybody, living or dead!"
 
@@ -149,14 +140,9 @@ of the Ages, who cannot die.
 Ye may die to learn their secrets!"
 
 "So many thousands of years...
-trapped beneath Mount Einhall... 
-
-their voices came to us through the
-Wizards' magic glass..."
-
-"We built a digging machine called the
-Diamond Anvil. For nine years my family
-and I slaved at the construction."))
+trapped beneath Mount Einhall
+their voices came to us... through the
+Wizards' magic glass..."))
 
 
 (defparameter *quine-summons*
