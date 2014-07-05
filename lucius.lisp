@@ -163,7 +163,7 @@ must admit you startled me; when I heard
 your footsteps, I thought at first you
 were a Wraith! But you seem human enough
 to me. Salutations!"
-:name :job :robes :wraith)
+:name :where-are-we?)
 
 (define-topic wraith lucius 
 "You really aren't from around here, are
@@ -173,7 +173,7 @@ Undeath by foul wandering Spirits who
 crave the possession of a body. Wraiths
 must be killed, lest they take your body
 as their own."
-:name :job :robes :where-are-we?)
+:job :robes :quine :vale)
 
 (define-topic where-are-we? lucius
 "You've reached the Vale of
@@ -190,23 +190,23 @@ Order?"
 (define-topic i-am-geoffrey-of-valisade lucius 
 "It's nice to meet you, Brother Geoffrey
 of Valisade! Welcome to our humble home."
-:town :wraith :robes :quine :vale)
+:where-are-we?)
 
 (define-topic vale lucius
 "Yes, and a beautiful place it is!
 Mountains to the south, and east, and
 west. This is the vale of Eavesbury,
 named for its discoverer, who found it
-way, way back in who-rememebers-time. 
-In those ages, the Sun was hotter than 
-it is now, and Eavesbury was a busy 
-town because of the mountain trade
+way, way back in who-remembers-time.  In
+those ages, the Sun was hotter than it
+is now, and Eavesbury was a busy town
+because of the mountain trade
 routes. Now it's a frigid ruin, but
 Nothbehem and a few other towns remain
 in the warmer South. I've not been far
 to the northeast, but I bet my
 grandfather will know more."
-:name :town :grandfather)
+:name :town :grandfather :wraith)
 
 (define-topic job lucius 
 "I'm a librarian at the Nothbehem
