@@ -32,9 +32,9 @@
   :width *sector-size*)
 
 (defparameter *terrain-classes* '(forest frozen-forest meadow cave
-  grassy-meadow cold-meadow frozen-meadow ruins river valisade highway
-  alonso-ruins nothbehem southern-cave eastern-cave garden
-  southeastern-cave cemetery owl-garden))
+  grassy-meadow cold-meadow frozen-meadow ruins ruined-hamlet river
+  valisade highway alonso-ruins nothbehem southern-cave eastern-cave
+  wizard-ruins garden southeastern-cave cemetery owl-garden))
 
 (defparameter *terrain-icons* 
   (list 'forest *forest-icons*
@@ -50,6 +50,8 @@
 	'cold-meadow *cold-meadow-icons*
 	'frozen-meadow *frozen-meadow-icons*
 	'ruins *ruins-icons*
+	'wizard-ruins *ruins-icons*
+	'ruined-hamlet *ruins-icons*
 	'river *river-icons*
 	'valisade *castle-icons*
 	'cave (list *road-image*)
@@ -162,12 +164,12 @@
 
     (cold-meadow cold-meadow forest
      frozen-meadow cold-meadow ruins 
-     cemetery frozen-forest frozen-forest
+     cemetery large-mountain river
      large-mountain)
 
     (alonso-ruins frozen-meadow frozen-forest
      cold-meadow owl-garden cold-meadow
-     ruins frozen-meadow frozen-forest
+     ruins large-mountain river
      large-mountain)
 
     (garden frozen-forest forest
@@ -175,14 +177,14 @@
      cold-meadow frozen-forest frozen-meadow
      large-mountain)
 
-     (cold-meadow cold-meadow cold-meadow
+     (ruined-hamlet cold-meadow cold-meadow
       forest grassy-meadow forest
       cold-meadow forest highway
       large-mountain)
 
-     (forest ruins forest
+     (forest cold-meadow forest
       grassy-meadow forest forest 
-      forest garden ruins
+      forest garden wizard-ruins
       large-mountain)
     
     (forest grassy-meadow nothbehem
