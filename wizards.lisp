@@ -1,5 +1,12 @@
 (in-package :cypress)
 
+(defthing cylindrophone :image "cylindrophone.png")
+
+(defmethod activate ((self cylindrophone))
+  (if (not (find-inventory-item (geoffrey) 'wax-cylinder))
+      (bark (geoffrey) "I don't have anything to use with this.")
+      (switch-to-buffer (new 'prologue))))
+
 (defthing (black-wizard monk)
   :description "Black Wizard"
   :magic 100
@@ -138,7 +145,7 @@ the North to find the Prescient woman...
       (add-inventory-item tent (new 'silverwool-leggings))
       (add-inventory-item tent (new 'silverwool-shirt))
       (add-inventory-item tent (make-scroll "half-burnt letter" *half-burnt-letter*))
-      (add-inventory-item tent (new 'wax-cylinder))
+      (add-inventory-item tent (new 'cylindrophone))
       (add-inventory-item tent (make-scroll "crumbling scroll" *wax-cylinder-letter*)))
     (replace-gump tent (new 'browser :container tent))))
 

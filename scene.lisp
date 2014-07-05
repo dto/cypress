@@ -613,7 +613,7 @@
   :background-image (random-choose *frozen-meadow-images*))
 
 (defun treacherous-trees ()
-  (spray '(dead-tree dead-tree nightshade crack crack large-crack puddle)
+  (spray '(dead-tree large-crack dead-tree nightshade crack crack large-crack puddle)
 	 :trim nil
 	 :count 14))
 
@@ -622,7 +622,7 @@
     (lined-up-randomly 
      (stacked-up-randomly (wood-pile) (treacherous-trees))
      (stacked-up-randomly (pine-trees) (lone-wraith) (pine-trees))
-     (stacked-up-randomly (dead-trees-and-puddles) (lone-wraith) (wood-pile)))))
+     (stacked-up-randomly (treacherous-trees) (lone-wraith) (wood-pile)))))
 
 (defmethod expend-travel-cost ((river river))  
   (modify-hunger (geoffrey) 14)
@@ -640,8 +640,7 @@
 ;; twigs and branches
 ;; skeleton archers
 
-(defthing (highway scene)
-  :background-image (random-choose '("stone-road.png" "golden-meadow.png")))
+(defthing (highway frozen-forest))
 
 ;; generated roadway
 ;; stone chips

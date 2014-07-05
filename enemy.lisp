@@ -22,7 +22,7 @@ or right-click Geoffrey.")
 
 (defsprite enemy)
 
-(defmethod draw :after ((enemy enemy))
+(defmethod draw :after ((enemy thing))
   (with-fields (stasis) enemy
     (when stasis
       (multiple-value-bind (top left right bottom)

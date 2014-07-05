@@ -58,7 +58,7 @@
 	'valisade *castle-icons*
 	'cave (list *road-image*)
 	'cemetery *danger-icons*
-	'highway *forest-icons*
+	'highway *frozen-forest-icons*
 	;; can't visit these.
 	'mountain-pass *meadow-icons*
 	'large-mountain *mountain-icons*))
@@ -181,7 +181,7 @@
 
      (ruined-hamlet cold-meadow cold-meadow
       forest grassy-meadow forest
-      cold-meadow forest highway
+      cold-meadow forest frozen-forest
       large-mountain)
 
      (forest cold-meadow forest

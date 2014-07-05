@@ -268,10 +268,20 @@
 
 (defmethod collide ((self monk) (crack large-crack))
   (when (field-value :alive self)
+    (percent-of-time 12
+      (narrate "Your foot breaks through the ice! You are wet.")
+      (show-hint "Watch out for cracks!")
+      (damage self (- (random-choose '(3 5))))
+      (chill self +22)
+      (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
+
+(defmethod collide ((self monk) (crack crack))
+  (when (field-value :alive self)
     (percent-of-time 8
       (narrate "The ice cracks beneath your feet. You are splashed with frigid water.")
+      (show-hint "Watch out for cracks!")
       (damage self (- (random-choose '(1 2))))
-      (chill self +10)
+      (chill self +17)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod collide ((self monk) (puddle puddle))
@@ -279,7 +289,7 @@
     (percent-of-time 6
       (narrate "You step into the water. You are wet!")
       (damage self (- (random-choose '(5 7))))
-      (chill self +20)
+      (chill self +30)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defparameter *restart-hint*
