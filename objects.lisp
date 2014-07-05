@@ -391,7 +391,7 @@ Press \"M\" to open the travel map.
 (defun reagent-bag ()
   (make-container 'bag (grab *reagents*)))
 
-;;; The silver things
+;;; The silver things and leather also
 
 (defthing silver-bow :stacking nil :attack 3 :image "silver-bow.png")
 
@@ -401,7 +401,7 @@ Press \"M\" to open the travel map.
 (defmethod activate ((self silver-bow))
   (toggle-equipped (geoffrey) self))
 
-(defthing silver-armor :stacking nil :defense 3 :resistance 5 :image "silver-armor.png")
+(defthing silver-armor :stacking nil :defense 3 :resistance 1 :image "silver-armor.png")
 
 (defmethod activate ((self silver-armor))
   (toggle-equipped (geoffrey) self))
@@ -409,18 +409,34 @@ Press \"M\" to open the travel map.
 (defmethod equipment-description ((self silver-armor))
   "Geoffrey is wearing silver armor.")
 
-(defthing woolen-leggings :stacking nil :image "woolen-leggings.png" :defense 2 :resistance 1)
+(defthing silverwool-leggings :stacking nil :image "woolen-leggings.png" :defense 1 :resistance 3)
 
-(defmethod activate ((self woolen-leggings))
+(defmethod activate ((self silverwool-leggings))
   (toggle-equipped (geoffrey) self))
 
-(defmethod equipment-description ((self woolen-leggings))
-  "Geoffrey is wearing warm woolen leggings.")
+(defmethod equipment-description ((self silverwool-leggings))
+  "Geoffrey is wearing silverwool leggings.")
 
-(defthing woolen-shirt :stacking nil :image "woolen-shirt.png" :defense 1 :resistance 1)
+(defthing silverwool-shirt :stacking nil :image "woolen-shirt.png" :defense 1 :resistance 3)
 
-(defmethod equipment-description ((self woolen-shirt))
-  "Geoffrey is wearing a woolen shirt.")
+(defmethod equipment-description ((self silverwool-shirt))
+  "Geoffrey is wearing a silverwool shirt.")
 
-(defmethod activate ((self woolen-shirt))
+(defmethod activate ((self silverwool-shirt))
+  (toggle-equipped (geoffrey) self))
+
+(defthing leather-leggings :stacking nil :image "leather-leggings.png" :defense 1 :resistance 1)
+
+(defmethod activate ((self leather-leggings))
+  (toggle-equipped (geoffrey) self))
+
+(defmethod equipment-description ((self leather-leggings))
+  "Geoffrey is wearing leather leggings.")
+
+(defthing leather-shirt :stacking nil :image "leather-shirt.png" :defense 2 :resistance 1)
+
+(defmethod equipment-description ((self leather-shirt))
+  "Geoffrey is wearing a leather shirt.")
+
+(defmethod activate ((self leather-shirt))
   (toggle-equipped (geoffrey) self))

@@ -2,106 +2,59 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Beta
-** TODO [#A] integrate Quine's letter with Tutorial document
-** TODO [#A] change to right-click on geoffrey for Pause
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
-*** TODO change to clicking modeline status to open Status scroll
-*** TODO don't run enemies when paused
-*** TODO Press ESCAPE to close all gumps and unpause
-*** TODO auto stop walking and pause when enemy in view.
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-** TODO [#A] use single right click to target enemies
+
+** TODO [#A] Exchange leather and silver clothes
+** TODO [#A] add a *current-objective* string
+** TODO [#C] help scroll accessible at any time
+** TODO [#A] show quine summons hint
+** TODO [#A] show cemetery hint
+** TODO [#C] Show arrow hover indicator when enemy properly targeted
+
+** TODO [#C] auto stop walking when enemy very close
    :PROPERTIES:
    :Effort:   0:30
    :END:
-** TODO [#A] Show hover indicator when enemy properly targeted
-*** TODO enlarge enemy attack-click hitbox?
-** TODO [#A] Add comprehensive tooltip help
-   :PROPERTIES:
-   :Effort: 
-   :END:
-*** TODO "right click the ground in order to move geoffrey"
-    :PROPERTIES:
-    :Effort:   0:15
-    :END:
-*** TODO "double-click Lucius to talk"
-    :PROPERTIES:
-    :Effort:   0:15
-    :END:
-*** TODO "control H for help"
-    :PROPERTIES:
-    :Effort:   0:15
-    :END:
-*** TODO show quine summons somehow
-    :PROPERTIES:
-    :Effort:   0:15
-    :END: 
-*** TODO double click enemies to attack
-    :PROPERTIES:
-    :Effort:   0:15
-    :END:
-*** TODO make a campfire!
-    :PROPERTIES:
-    :Effort:   0:15
-    :END:
-** TODO [#A] Enemies should be nastier overall
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#A] show sextant on map to reveal next location?
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#A] escape should close all gumps
+** TODO [#C] escape should close all gumps
    :PROPERTIES:
    :Effort:   0:15
    :END: 
 
-
-** TODO [#A] Fix pathfind bypassing copper gate and getting stuck
+** TODO [#B] Fix rendering bug with tooltip on map sector
    :PROPERTIES:
-   :Effort:   2:00
+   :Effort:   0:15
    :END:
-** TODO [#A] Fix ruin basement crash/renderfuck
+** TODO [#B] text bubbles should not clip against the right edge of the screen
+
+** TODO [#B] Paint furs (and/or Protection from Cold tome found on wiz0rds)
+** TODO [#B] Magic arrow, (nightshade) single strong attack with crystal seeking arrow graphics
    :PROPERTIES:
    :Effort:   1:00
    :END:
-** TODO [#A] Fix rendering bug with tooltip on map sector
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#A] Fix tent immobilization bug
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-
-
-
-** TODO [#A] Paint furs
-** TODO [#A] Magic arrow, (nightshade) single strong attack with crystal arrow graphics
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#A] Add more townspeople
+** TODO [#B] Add more townspeople
    :PROPERTIES:
    :Effort:   2:00
    :END:
-** TODO [#A] should allow to click gear as well as plate to unlock puzzle
+** TODO [#B] should allow to click gear as well as plate to unlock puzzle
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#A] Add and repaint some different tree/shrub types
+** TODO [#C] Add and repaint some different tree/shrub types
    :PROPERTIES:
    :Effort:   3:00
    :END:
-** TODO [#A] add bubble above npc when they have something to say?
+** TODO [#A] don't allow spawning geoffrey in obstacle
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+** TODO [#A] Fix spellcasting/activating objects after dead
    :PROPERTIES:
    :Effort:   0:15
    :END:
+
 
 ** TODO [#A] Black Wizard battle scene
    :PROPERTIES:
@@ -159,9 +112,12 @@
 
 ** TODO [#A] improve skull seance lore
 
+
+
+
+
 * Should
 
-** TODO [#B] special skull seance sidequest where you dig up a particular skull
 ** TODO [#B] double click should not reset bow timer
 ** TODO [#B] make nice trailer vid
 ** TODO [#B] add more Alistair dialogue/history, make sure player reads about mecha
@@ -212,6 +168,72 @@
 ** TODO [#C] triangle time cube
    :PROPERTIES:
    :Effort:   0:30
+   :END:
+* Tweaks and bugfixes
+
+** TODO [#A] destroy bubbles when closing gumps
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#B] place description bubble near cursor, not near corner of object
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#B] toggle spellbook / inventory with S I not just open
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#B] should show bubble with "container is full" when can't accept
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#B] fix game doesn't close console window after X'ing out game window on MS Windows
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#B] auto-close inventory windows on faraway objects if you move
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#B] fix image stretching in inventory icons
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] fix being able to drop items unreachably faraway
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#C] fix tree corner annoyances (shrink tree bounding box a little?)
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] fix jittery diagonal scrolling
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] implement conversation log / journal
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#C] allow inventory/spellbook pinning to remember locaiton on next open?
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#C] should show-error when pathfinding fails ONLY for geoffrey
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#C] Fix non-impelled arrows moving on their own
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+** TODO [#C] fix z-sorting of player remains
+   :PROPERTIES:
+   :Effort:   0:15
    :END:
 
 
@@ -292,84 +314,6 @@
 ** TODO [#C] add secrets in less-used parts of map
    :PROPERTIES:
    :Effort:   1:00
-   :END:
-* Tweaks and bugfixes
-
-** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-** TODO [#A] Fix spellcasting/activating objects after dead
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#A] destroy bubbles when closing gumps
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#A] don't allow spawning geoffrey in obstacle
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#B] place description bubble near cursor, not near corner of object
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#B] toggle spellbook / inventory with S I not just open
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#B] should show bubble with "container is full" when can't accept
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#B] fix game doesn't close console window after X'ing out game window on MS Windows
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#B] auto-close inventory windows on faraway objects if you move
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#B] fix image stretching in inventory icons
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] fix being able to drop items unreachably faraway
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#C] hitting I while inventory open should close it, same with (S)pellbook
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#C] fix tree corner annoyances (shrink tree bounding box a little?)
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] fix jittery diagonal scrolling
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] implement conversation log / journal
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#C] allow inventory/spellbook pinning to remember locaiton on next open?
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#C] should show-error when pathfinding fails ONLY for geoffrey
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#C] Fix non-impelled arrows moving on their own
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-** TODO [#C] fix z-sorting of player remains
-   :PROPERTIES:
-   :Effort:   0:15
    :END:
 * Archived Entries
 
@@ -534,3 +478,161 @@
    :ARCHIVE_TODO: DONE
    :END:
 *** TODO use shrunk darkness.png to implement additive sparkle halos
+
+** DONE don't run enemies when paused
+   CLOSED: [2014-07-02 Wed 14:50]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-02 Wed 14:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta/change to clicking modeline status to open Status scroll
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] change to right-click on geoffrey for Pause
+   CLOSED: [2014-07-02 Wed 14:50]
+   :PROPERTIES:
+   :Effort:   2:00
+   :ARCHIVE_TIME: 2014-07-02 Wed 14:50
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] show discovered waystones on map as red asterisk
+   CLOSED: [2014-07-02 Wed 21:46]
+   :PROPERTIES:
+   :Effort:   0:15
+   :ARCHIVE_TIME: 2014-07-02 Wed 21:46
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE "right click the ground in order to move geoffrey"
+   CLOSED: [2014-07-02 Wed 23:16]
+   :PROPERTIES:
+   :Effort:   0:15
+   :ARCHIVE_TIME: 2014-07-02 Wed 23:17
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta/Add more tooltip help
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE "double-click Lucius to talk"
+   CLOSED: [2014-07-02 Wed 23:16]
+   :PROPERTIES:
+   :Effort:   0:15
+   :ARCHIVE_TIME: 2014-07-02 Wed 23:17
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta/Add more tooltip help
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE alistair needs a :talk-more menu
+   CLOSED: [2014-07-04 Fri 16:42]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-04 Fri 16:42
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE double click enemies to attack
+   CLOSED: [2014-07-03 Thu 18:25]
+   :PROPERTIES:
+   :Effort:   0:15
+   :ARCHIVE_TIME: 2014-07-04 Fri 16:42
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta/Add more tooltip help
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] Fix tent immobilization bug
+   :PROPERTIES:
+   :Effort:   0:15
+   :ARCHIVE_TIME: 2014-07-04 Fri 16:44
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE Fix wrong z-sorting of stairwells
+   CLOSED: [2014-07-04 Fri 21:54]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-05 Sat 04:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE require traveling a certain distance away from starting point in order to travel
+   CLOSED: [2014-07-04 Fri 19:42]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-05 Sat 04:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] special skull seance sidequest where you find a cemetery hint in the northern ruins basement
+   CLOSED: [2014-07-04 Fri 21:54]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-05 Sat 04:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Display ATK/DEF/PRT on status line
+   CLOSED: [2014-07-04 Fri 21:54]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-05 Sat 04:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Enemies should be nastier overall
+   CLOSED: [2014-07-04 Fri 21:54]
+   :PROPERTIES:
+   :Effort:   0:30
+   :ARCHIVE_TIME: 2014-07-05 Sat 04:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix pathfind bypassing copper gate and getting stuck
+   CLOSED: [2014-07-04 Fri 21:54]
+   :PROPERTIES:
+   :Effort:   2:00
+   :ARCHIVE_TIME: 2014-07-05 Sat 04:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix ruin basement crash/renderfuck
+   CLOSED: [2014-07-04 Fri 21:54]
+   :PROPERTIES:
+   :Effort:   1:00
+   :ARCHIVE_TIME: 2014-07-05 Sat 04:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:

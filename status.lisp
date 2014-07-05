@@ -61,9 +61,6 @@
 	      :equipment (new 'label :read-only t :font *status-line-font*)
 	      :message (new 'label :read-only t :font *status-line-font*))))
 
-(defmethod tap ((self status-line) x y)
-  (replace-gump (geoffrey) (new 'scroll-gump :text (status-text))))
-
 (define-method update status-line ()
   (mapc #'pin %inputs)
   (set-value %%health (status-line-health-string (field-value :health (geoffrey))))

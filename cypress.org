@@ -355,7 +355,7 @@ into the history of Heroes.
 * Scan scripts
 
 ** Scan a page
-scanimage --resolution 300 --batch=out-%d.pnm --batch-prompt
+scanimage --resolution 300 --batch=leather-%d.pnm --batch-prompt
 
 ** Bring paper background up to white 
 
