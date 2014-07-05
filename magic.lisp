@@ -11,6 +11,11 @@
 
 (defthing spell reagents)
 
+(defparameter *magic-hint* 
+"Your magic power is low.
+Try camping to restore MP.
+Or eat some Snowdrops.")
+
 (defmethod use ((caster thing) (spell spell))
   (with-fields (reagents) spell
     (if (have-reagents caster reagents)
@@ -19,6 +24,8 @@
 	  (cast caster spell))
 	(progn
 	  (show-error caster (window-pointer-x) (window-pointer-y))
+	  (when (< (field-value :magic caster) 10)
+	    (show-hint *magic-hint*))
 	  (narrate "You don't have enough ingredients to cast ~A"
 		   (find-description spell))))))
 
