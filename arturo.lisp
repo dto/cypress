@@ -49,6 +49,7 @@
 	 (when (and next-target (null waypoints))
 	   (percent-of-time 4 (walk-to-thing self next-target))))
 	((and (< distance 220) (> distance 200))
+	 (show-hint "Double-click Arturo to talk.")
 	 (walk-to-thing self (geoffrey)))
 	((or gump (<= distance 200))
 	 (setf waypoints nil))))))
@@ -215,8 +216,7 @@ lay behind the doors, all to himself. To
 this day, we each hold one gear, and are
 bitterly estranged. If you want to find
 Dr. Quine, you'd better find my
-brother's gear first. I'll give you my
-own gear before you leave town."
+brother's gear first."
 :alonso :expedition)
 
 (define-topic expedition arturo
@@ -237,7 +237,12 @@ valuable help." :alonso)
 aged. Last I heard, he built a cabin in
 the Wilmont Woods, to the northwest.
 Perhaps if you can find him, you'll find
-the key." :woods)
+the key.
+
+If you return with news of my brother,
+I'll give you the other gear. For I am
+an old man now, too weak to undertake
+the journey to the Gates." :woods)
 
 (define-topic woods arturo
 "Come to my house before you leave town,
@@ -264,6 +269,7 @@ Geoffrey. And a safe return."
   (when (lucius) 
     (unfollow (lucius))
     (bark (lucius) "Good luck, Geoffrey!"))
+  (show-hint "Visit Arturo's house.")
   (unlock (find-pentaquin-house)))
 
 (define-topic farewell arturo 
@@ -284,18 +290,30 @@ gone. You are a most kind and honest
 Stranger, to have brought this letter
 back to me, so that I could know my
 brother's Fate, and see our feud laid
-also to rest. If only our own time had
-men so virtuous as those from your era!
-I also know that you are not merely
-seeking treasure, for it is not gold or
-jewels the Ancients kept, but rather the
-riches of Knowledge." :southern-cave)
+also to rest. 
+
+If only our own time had men so virtuous
+as those from your era! Here---the other
+ancient Gear is now yours. You should be
+able to enter the southern cave by using
+both gears. 
+
+I know that you are not seeking mere
+treasure, for it is not gold or jewels
+the Ancients kept, but rather the riches
+of Knowledge.
+
+I suspect, in that regard, you shall be
+wealthier than a King one day."
+:southern-cave)
 
 (defmethod discuss :after ((arturo arturo) (topic (eql :give-letter)))
   (let ((letter (find-inventory-item (geoffrey) 'alonso-letter)))
     (when letter
       (destroy letter)
-      (setf (field-value :has-letter arturo) t))))
+      (setf (field-value :has-letter arturo) t)
+      (drop arturo (quantity-of 'copper-gear 1)
+	    (units 5) (units 5)))))
 
 (define-topic southern-cave arturo
   "There is a Waystone just to the west
