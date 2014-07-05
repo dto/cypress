@@ -120,10 +120,15 @@ inventory and find something to eat.
 
 (defmethod walk-to :after ((monk geoffrey) x y)
   (with-fields (waypoints) monk
-    (when (null waypoints)
-      ;; pathfinding failed
-      (show-error monk x y)
-      (narrate "That destination is obstructed."))))
+    (with-fields (barrier-y) (current-scene)
+      (when (or
+	     ;; pathfinding failed
+	     (null waypoints)
+	     ;; beyond invisible barrier
+	     (and barrier-y (> y barrier-y)))
+	(show-error monk x y)
+	(stop-walking monk)
+	(narrate "That destination is obstructed.")))))
 
 (defmethod casting-animation ((self monk)) *monk-cast*)
 
