@@ -309,6 +309,10 @@ I'm something of a homebody. Besides, as
 you've seen, I'm not very useful in a
 fight! 
 
+If you're traveling Northwest to the
+Wilmont Woods, watch out for the ruins!
+That place creeps me out.
+
 Oh! I almost forgot to tell you. I've
 been hearing a weird sound in the forest
 up to the northeast. It sounds like a
