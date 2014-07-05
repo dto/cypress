@@ -53,6 +53,8 @@
   :quadtree-depth 8
   :music nil
   :camped nil
+  :traversed nil
+  :barrier-y nil
   :time :day
   :cold 0
   :generated nil
@@ -126,7 +128,7 @@
 
 (defmethod starting-x ((buffer scene) direction)
   (with-fields (width) buffer 
-     (ecase direction
+     (ecase direction 
        (:here *previous-x*)
        (:downright (units 5))
        (:downleft (- width (units 8)))
@@ -155,6 +157,29 @@
 	  (starting-y buffer direction)))
   ;; (values (units 5) (/ (field-value :height buffer) 2)))
 
+(defmethod mark-traversed ((buffer scene))
+  (setf (field-value :traversed buffer) t))
+
+(defmethod unmark-traversed ((buffer scene))
+  (setf (field-value :traversed buffer) nil))
+
+(defmethod distance-from-starting-point ((thing thing))
+  (multiple-value-bind (x y) (center-point thing)
+    (multiple-value-bind (x0 y0) (starting-location (current-scene) *travel-direction*)
+      (distance x y x0 y0))))
+
+(defmethod traversed ((buffer scene))
+  (or (field-value :traversed buffer)
+      (if (null (starting-location (current-scene) *travel-direction*))
+	  (mark-traversed buffer)
+	  (with-fields (width height) (current-scene)
+	    (when (> (distance-from-starting-point (geoffrey))
+		     (/ (+ width height) 4))
+	      (narrate "You have traversed the current scene, and may now travel.")
+	      (mark-traversed buffer))))))
+	 
+;;; Utilities
+
 (defun find-spell (class)
   (find-inventory-item (find-spellbook) class))
 
@@ -173,6 +198,7 @@
 
 (defmethod begin-scene ((buffer scene))
   (with-buffer buffer
+    (unmark-traversed buffer)
     (setf *status-line*
 	  (find-object (new 'status-line)))
     (with-fields (generated) buffer
@@ -195,7 +221,6 @@
     (set-cursor buffer (geoffrey))
     (snap-window-to-cursor buffer)
     (follow-with-camera buffer (geoffrey))
-    ;; drop player at start point
     ;; return buffer
     buffer))
 
@@ -253,6 +278,7 @@
 	  (return-from searching object))))))
 
 (defmethod update :after ((self scene))
+  (traversed self)
   (when (xelfp (geoffrey))
     (layout (status-line))
     (update (status-line))))
@@ -399,7 +425,8 @@
 (defmethod begin-scene :after ((meadow meadow))
   (let ((geoffrey (geoffrey)))
     (later 5.0 (show-movement-hint geoffrey))
-    (later 25.0 (show-object-hint geoffrey)))
+    (later 19.0 (show-object-hint geoffrey)))
+  (mark-traversed meadow)
   (drop-object meadow (new 'stone-of-remembrance)
 	       (units 25)
 	       (units 4))
@@ -408,7 +435,6 @@
 		  (units 8))
 	       (- (field-value :height meadow)
 		  (units 8))))
-
 
 ;;; Grassy meadow
 
@@ -453,7 +479,7 @@
 			  (dense-trees)))))
 
 (defmethod begin-scene :after ((forest forest))
-  (percent-of-time 8 (prog1 t (cue-music forest (random-choose '("rain.ogg" "believe-me2.ogg" "xolaros3.ogg"))))))
+  (percent-of-time 8 (prog1 t (cue-music forest (random-choose '("path.ogg" "mountain.ogg" "lutey.ogg" "tumbling.ogg" "dusk.ogg" "believe-me2.ogg" "xolaros3.ogg"))))))
 
 ;;; Cold meadow
 
@@ -469,7 +495,7 @@
 					   (singleton (new 'black-wolf))) (flowers)))))
 
 (defmethod begin-scene :after ((meadow cold-meadow))
-  (percent-of-time 50 (cue-music meadow (random-choose '("crickets.ogg" "passageway.ogg")))))
+  (percent-of-time 50 (cue-music meadow (random-choose '("lutey.ogg" "passageway.ogg")))))
 
 (defmethod expend-travel-cost ((meadow cold-meadow))
   (modify-hunger (geoffrey) +6)
@@ -495,6 +521,7 @@
   :background-image (random-choose *basement-images*))
 
 (defmethod begin-scene :after ((scene basement))
+  (mark-traversed scene)
   (resize-to-background-image scene))
 
 (defmethod make-terrain ((scene basement))
