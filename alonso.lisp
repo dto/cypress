@@ -66,7 +66,8 @@ could be an illusion.
   :background-image (random-choose *basement-images*))
 
 (defmethod begin-scene :after ((scene alonso-basement))
-  (cue-music scene "ruins.ogg")
+  (mark-traversed scene)
+  (cue-music scene (random-choose '("ruins.ogg" "believe-me2.ogg")))
   (resize-to-background-image scene))
 
 (defthing alonso-corpse 
@@ -107,6 +108,9 @@ could be an illusion.
   :image (random-choose *gray-stairwell-images*) 
   :basement nil)
 
+(defmethod run :after ((self alonso-stairwell))
+  (bring-to-front self))
+
 (defmethod activate ((self alonso-stairwell))
   (narrate "You descend the stairs and enter a moldering basement.")
   (with-fields (basement) self
@@ -122,7 +126,7 @@ could be an illusion.
   (units 8))
 
 (defthing alonso-pentaquin-house 
-  :description "Alonso Pentaquin's house"
+  :description "ruined cottage"
   :scale 2.0
   :tags '(:fixed)
   :image "ruin-1.png")
@@ -134,8 +138,14 @@ could be an illusion.
 (defthing (alonso-ruins scene)
   :background-image "paynes-meadow.png")
 
+(defparameter *alonso-hint*
+"This place appears to be a ruined
+settlement. Could it be Alonso's?")
+
 (defmethod begin-scene :after ((scene alonso-ruins))
-  (percent-of-time 50 (cue-music scene (random-choose '("battle-1.ogg" "rain.ogg")))))
+  (mark-traversed scene)
+  (show-hint *alonso-hint*)
+  (percent-of-time 50 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg" "rain.ogg")))))
 
 (defmethod find-description ((scene alonso-ruins)) "forest")
 
@@ -145,5 +155,5 @@ could be an illusion.
 (defmethod make-terrain ((scene alonso-ruins))
   (with-border (units 10)
     (lined-up-randomly
-     (stacked-up-randomly (singleton (new 'ruin-wall)) (alonso-pentaquin-house) (dead-trees))
+     (stacked-up-randomly (singleton (new 'ruin-wall)) (alonso-pentaquin-house) (singleton (new 'well)) (dead-trees))
      (stacked-up-randomly (lone-wraith) (lone-wraith) (singleton (new 'ruin-wall)) (lone-wraith) (dead-trees)))))
