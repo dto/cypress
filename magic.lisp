@@ -37,12 +37,15 @@
 
 (defthing (seance spell)
   :description "Seance (8 mp, 1 forget-me-not, 1 skull)"
-  :reagents '(:magic 8 skull 1 forget-me-not 1)
+  :reagents '(:magic 8 forget-me-not 1)
   :image "danger-1.png")
 
 (defmethod cast ((caster thing) (spell seance))
-  (narrate "A spirit begins to speak.")
-  (replace-gump caster (new 'scroll-gump :text (random-choose *skull-lore*))))
+  (let ((skull (or (find-inventory-item caster 'roberto-skull)
+		   (find-inventory-item caster 'skull))))
+    (if skull
+	(replace-gump caster (new 'scroll-gump :text (find-lore skull)))
+	(show-hint "You need a skull to conduct a seance."))))
 
 ;;; Spark spell to light fire 
 
@@ -107,7 +110,9 @@
 (defmethod use :around ((caster thing) (spell travel))
   (if (nearby-enemies-p)
       (narrate "You cannot travel when enemies are near!")
-      (call-next-method caster spell)))
+      (if (not (traversed (current-scene)))
+	  (narrate "You have not yet traveled far enough.")
+	  (call-next-method caster spell))))
 
 (defmethod cast ((caster thing) (spell travel))
   (when (find-camp)
