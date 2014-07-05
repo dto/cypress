@@ -35,8 +35,7 @@
       (add-inventory-item house (tome-of 'cure-meat))
       (add-inventory-item house (make-scroll "Expedition report" *amalia-report*))
       (add-inventory-item house (new 'copper-gear))
-      (add-inventory-item house (new 'sextant))
-      (add-inventory-item house (tome-of 'seance)))))
+      (add-inventory-item house (new 'sextant)))))
 
 (defmethod activate ((house pentaquin-house))
   (if (field-value :locked house)
