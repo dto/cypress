@@ -22,6 +22,7 @@
 
 (defresource "ancient-fanfare.ogg" :volume 10)
 (defresource "passageway.ogg" :volume 20)
+(defresource "procession4.ogg" :volume 20)
 (defresource "home.ogg" :volume 08)
 (defresource "kosmium.ogg" :volume 10)
 (defresource "battle-1.ogg" :volume 20) 
@@ -87,7 +88,7 @@ them onto Geoffrey.")
   (background-image :initform (title-screen-image)))
 
 (defmethod initialize :after ((title title) &key)
-  ;; (play-music "ancient-fanfare.ogg" :loop nil)
+  (play-music "ancient-fanfare.ogg" :loop nil)
   (resize title *nominal-screen-width* *nominal-screen-height*))
 
 (defmethod tap ((title title) x y)

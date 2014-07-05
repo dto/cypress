@@ -14,6 +14,7 @@
   :sprite-height *arrow-size*
   :sprite-width *arrow-size*
   :clock 400
+  :speed 18
   :heading (/ pi 2)
   :images *wooden-arrow-images*
   :image (random-choose *wooden-arrow-images*))
@@ -31,12 +32,12 @@
   (resize self *arrow-size* *arrow-size*))
 
 (defmethod run ((self arrow))
-  (with-fields (clock image images) self
+  (with-fields (clock image images speed) self
     (percent-of-time 13 (setf image (random-choose images)))
     (decf clock)
     (if (minusp clock)
 	(destroy self)
-	(forward self 18))))
+	(forward self speed))))
 
 (defmethod collide ((self arrow) (thing thing))
   (when (solidp thing) 
@@ -51,6 +52,8 @@
   (damage enemy (random-choose '(-3 -5 -7)))
   (destroy self))
 
+;;; Silver arrows
+
 (defthing (silver-arrow arrow)
   :images *silver-arrow-images*
   :image (random-choose *silver-arrow-images*))
@@ -62,14 +65,6 @@
 (defmethod collide ((arrow silver-arrow) (wolf wolf))
   (damage wolf (random-choose '(-20 -30)))
   (destroy arrow))
-
-(defthing (crystal-arrow arrow)
-  :images *crystal-arrow-images*
-  :image (random-choose *crystal-arrow-images*))
-
-(defmethod collide ((self crystal-arrow) (enemy enemy))
-  (damage enemy (random-choose '(-30 -40)))
-  (destroy self))
 
 ;;; A monk, either AI or human controlled
 
@@ -311,7 +306,6 @@ Remembrance.")
 
 (defmethod standing-animation ((self monk)) *monk-stand*)
 (defmethod walking-animation ((self monk)) *monk-walk*)
-
 (defmethod casting-animation ((self monk)) *monk-stand*)
 
 (defmethod update-bow ((monk monk))
@@ -433,7 +427,7 @@ now, or you will freeze to death!")
    (find-inventory-item monk 'silver-arrow)
    (find-inventory-item monk 'crystal-arrow)))
 
-(defmethod attack ((monk monk) (enemy enemy))
+(defmethod attack ((monk monk) (enemy thing))
   (if (not (find-arrow monk))
       (progn (show-error enemy)
 	     (narrate "You don't have any arrows!"))
@@ -531,4 +525,5 @@ now, or you will freeze to death!")
 	(consume-single container (class-name (class-of snowdrop)))
 	;; not in container.
 	(destroy snowdrop))))
+
 

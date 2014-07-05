@@ -157,3 +157,7 @@ settlement. Could it be Alonso's?")
     (lined-up-randomly
      (stacked-up-randomly (singleton (new 'ruin-wall)) (alonso-pentaquin-house) (singleton (new 'well)) (dead-trees))
      (stacked-up-randomly (lone-wraith) (lone-wraith) (singleton (new 'ruin-wall)) (lone-wraith) (dead-trees)))))
+
+;; - 3 wiz0rds
+;; - dead trees
+;; - tents with silverwool clothing for quest

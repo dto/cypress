@@ -138,8 +138,6 @@ inventory and find something to eat.
 	(stop-walking monk)
 	(narrate "That destination is obstructed.")))))
 
-(defmethod casting-animation ((self monk)) *monk-cast*)
-
 ;;; Learning new spells
 
 (defmethod learn-spell ((self geoffrey) (spell spell))
@@ -257,4 +255,3 @@ inventory and find something to eat.
       (unless (plusp timer)
 	(douse camp)))))
 
- 

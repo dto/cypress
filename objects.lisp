@@ -306,6 +306,8 @@ Press \"M\" to open the travel map.
 
 (defthing stone :scale 0.8 :image (random-choose *stone-images*))
 
+(defthing tent :scale 0.9 :image (random-choose '("tent-1.png" "tent-2.png")) :tags '(:solid :fixed))
+
 (defmethod can-pick ((campfire campfire)) nil)
 
 (defthing dead-tree 

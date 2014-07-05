@@ -314,7 +314,8 @@
 (defun find-enemies ()
   (let (enemies)
     (dolist (object (get-objects (current-buffer)))
-      (when (typep object (find-class 'enemy))
+      (when (or (typep object (find-class 'enemy))
+		(typep object (find-class 'black-wizard)))
 	(push object enemies)))
     enemies))
 
