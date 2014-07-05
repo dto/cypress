@@ -433,7 +433,7 @@ Press \"M\" to open the travel map.
 (defmethod equipment-description ((self leather-leggings))
   "Geoffrey is wearing leather leggings.")
 
-(defthing leather-shirt :stacking nil :image "leather-shirt.png" :defense 2 :resistance 1)
+(defthing leather-shirt :stacking nil :image "leather-shirt.png" :defense 1 :resistance 1)
 
 (defmethod equipment-description ((self leather-shirt))
   "Geoffrey is wearing a leather shirt.")
