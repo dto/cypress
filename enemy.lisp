@@ -1,5 +1,10 @@
 (in-package :cypress)
 
+(defparameter *attack-hint*
+"Double-click enemy to attack.
+Press Spacebar to pause action, 
+or right-click Geoffrey.")
+
 (defresource "creep-1.wav" :volume 10)
 (defresource "creep-2.wav" :volume 10)
 (defresource "creep-3.wav" :volume 10)
@@ -100,7 +105,7 @@
   (when (< (distance-to-cursor self) 920)
     (unless seen-player
       (play-sample (random-choose '("lichscream.wav" "lichdie.wav")))
-      (show-hint "Double-click enemy to attack.")
+      (show-hint *attack-hint*)
       (setf seen-player t))
     (percent-of-time 22 (setf image (random-choose *wraith-images*)))
     (let ((heading0 (heading-to-cursor self)))
@@ -206,7 +211,7 @@
 	  (walk-to self x y)
 	  (play-sample "bark.wav")
 	  (play-sample "howl.wav")
-	  (show-hint "Double-click enemy to attack.")
+	  (show-hint *attack-hint*)
 	  (setf seen-player t)))
       (when seen-player
 	(if (< (distance-to-cursor self) 200)
