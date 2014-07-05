@@ -41,7 +41,7 @@
 (defmethod run ((self arturo))
   (with-fields (next-target met-player gump waypoints) self
     (call-next-method)
-    (choose-target self)
+    (unless gump (choose-target self))
     (let ((distance (distance-to-cursor self)))
       (cond 
 	((or (> distance 500)
