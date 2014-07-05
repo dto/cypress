@@ -49,6 +49,7 @@
 	((or given-letter gump (<= distance 200))
 	 (setf waypoints nil))
 	((and (< distance 220) (> distance 200))
+	 (show-hint "Double-click Alistair to talk.")
 	 (walk-to-thing self (geoffrey)))
 	(t (percent-of-time 4 (walk-to-thing self next-target)))))))
 
@@ -97,7 +98,7 @@ them!" :quine :wizards :creators)
 lying Black Wizards on your journey. You
 cannot trust them! While I cannot jump
 ahead of the tale for Quine's sake, I
-must warn you of at least that." :quine :creators)
+must warn you of at least that." :quine :creators :mecha)
 
 (define-topic creators alistair 
   "Oh, that's a tricky one. I'll let
@@ -119,17 +120,22 @@ going to be useful, but I'm sure you'll
 have fun with it! And that finishes my
 duties for now. I'm quite busy,
 actually, organizing all these
-books. So.. umm...." :bye)
+books. So.. umm...." :bye :talk-more)
+
+(define-topic talk-more alistair 
+"Very well, what would you like to talk
+about?" :mecha :creators :wizards :quine :bye)
 
 (defmethod discuss :after ((alistair alistair) (topic (eql :letter)))
-  (drop alistair (make-scroll "First letter from Dr. Quine" *first-quine-letter*)
-	(units 3) (units 3))
-  (drop alistair (new 'bone-flute)
-	(units 4) (units 4))
-  (setf (field-value :given-letter alistair) t))
+  (when (not (field-value :given-letter alistair))
+    (drop alistair (make-scroll "First letter from Dr. Quine" *first-quine-letter*)
+	  (units 3) (units 3))
+    (drop alistair (new 'bone-flute)
+	  (units 4) (units 4))
+    (setf (field-value :given-letter alistair) t)))
 
 (define-topic busy alistair 
-  "I'm very busy! I don't have time to talk." :bye)
+  "I'm very busy! I don't have time to talk." :bye :talk-more)
 
 
 
