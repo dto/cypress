@@ -90,7 +90,7 @@
 	      (add-inventory-item remains (grab-bag)))
 	  (add-inventory-item remains (new 'stone))))
     (add-inventory-item remains (new 'skull))
-    (show-hint "Double-click to search remains.")
+    (show-hint "Double-click remains to search.")
     (drop self remains))
   (play-sound self "death.wav")
   (destroy self))
@@ -184,7 +184,7 @@
 (defmethod die ((self wolf))
   (let ((remains (new 'remains)))
     (add-inventory-item remains (new 'wolf-corpse))
-    (show-hint "Double-click to harvest corpse.")
+    (show-hint "Double-click remains to harvest corpse.")
     (drop self remains))
   (destroy self))
 
@@ -235,7 +235,7 @@
   :image (random-choose *black-wolf-images*)
   :sprite-height 130
   :sprite-width 130
-  :speed 7
+  :speed 6.3
   :health 45)
 
 (defmethod die ((self black-wolf))
