@@ -5,7 +5,7 @@
 (defmethod activate ((self cylindrophone))
   (if (not (find-inventory-item (geoffrey) 'wax-cylinder))
       (bark (geoffrey) "I don't have anything to use with this.")
-      (switch-to-buffer (new 'prologue))))
+      (at-next-update (switch-to-buffer (new 'prologue)))))
 
 (defthing (black-wizard monk)
   :description "Black Wizard"

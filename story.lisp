@@ -175,19 +175,19 @@
 (defparameter *when-famine* (seconds->frames 51))
 (defparameter *when-cypress* (seconds->frames 58))
 
-(defparameter *famine* (seconds->frames 47))
+(defparameter *famine* (seconds->frames 45))
 (defparameter *souls* (seconds->frames 55))
 (defparameter *map-time* (seconds->frames 61))
-(defparameter *destinies* (seconds->frames 63))
+(defparameter *destinies* (seconds->frames 65))
 (defparameter *shade* (seconds->frames 79))
 
-(defparameter *elysium-1* (seconds->frames 68))
+(defparameter *elysium-1* (seconds->frames 72))
 (defparameter *elysium-2* (seconds->frames 83))
-(defparameter *elysium-3* (seconds->frames 88))
+(defparameter *elysium-3* (seconds->frames 95))
 
 (defparameter *souls-call* (seconds->frames 71))
 (defparameter *sanctuary* (seconds->frames 80))
-(defparameter *story* (seconds->frames 90))
+(defparameter *story* (seconds->frames 88))
 
 (defmethod initialize :after ((self prologue) &key)
   (resize self *nominal-screen-width* *nominal-screen-height*)
