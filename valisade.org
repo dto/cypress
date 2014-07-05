@@ -2,7 +2,9 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Beta
-
+  
+** TODO [#A] Add hint about low magic: camping/ potion / flowers
+** TODO [#A] Add hint about white flowers
 ** TODO [#A] Exchange leather and silver clothes
 ** TODO [#A] add a *current-objective* string
 ** TODO [#C] help scroll accessible at any time
