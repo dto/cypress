@@ -25,6 +25,13 @@ you, then, for the death of Alfonse.
 That blame lies on these bones, not
 yours.
 
+I leave also my Ancient key, in the hope
+that you will someday combine it with
+your own and travel through the Gates.
+May you discover the answers you seek,
+where the Ancients laid them down inside
+the mountain.
+
  --- Alonso")
 
 (defparameter *bird-notes* 
