@@ -87,9 +87,7 @@
   :image (random-choose *copper-door-closed-images*)
   :tags '(:solid :fixed))
 
-(defmethod collide ((monk geoffrey) (wall copper-wall))
-  (stop-walking monk)
-  (restore-location monk))
+(defmethod collide ((monk geoffrey) (wall copper-wall)) nil)
 
 (defthing copper-door
   :image (random-choose *copper-door-closed-images*)
@@ -131,8 +129,16 @@
 	      (release-lock door thing))))))))
 		 
 (defmethod run ((door copper-door))
-  (with-fields (timer open image plate) door
+  (with-fields (y timer open image plate) door
+    (when (not open)
+      (setf (field-value :barrier-y (current-scene)) y))
     (when open
+      (unless 
+	  (block any-locked?
+	    (dolist (door (find-instances (current-scene) 'copper-door))
+	      (when (not (field-value :open door))
+		(return-from any-locked? t))))
+	(setf (field-value :barrier-y (current-scene)) nil))
       (setf timer 
 	    (max 0 
 		 (min (+ timer 1)
@@ -192,6 +198,7 @@
 	(drop-object scene (new 'bone-dust) (random width) (random height))))))
 
 (defmethod begin-scene :after ((scene cave))
+  (mark-traversed scene)
   (with-fields (height width) scene
     (resize-to-background-image scene)
     (percent-of-time 40 (cue-music scene (random-choose '("monks.ogg" "dusk.ogg" "spiritus.ogg"))))
@@ -233,8 +240,12 @@
 			  (singleton (new 'alistair)))))))
      
 (defmethod begin-scene :after ((cave southern-cave))
+  (mark-traversed cave)
   (resize-to-background-image cave)
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
+
+;; (defmethod run :after ((cave southern-cave))
+;;   (setf (field-value :barrier-y (current-scene)) nil)
 
 ;;; Second story cave
 
