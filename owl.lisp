@@ -15,7 +15,7 @@
 	     (narrate "You play the flute!")
 	     (when (find-owl)
 	       (setf (field-value :heard-flute (find-owl)) t)))
-      (bark (geoffrey) "I don't have enough neumes.")))
+      (bark (geoffrey) "I don't have any music to play.")))
 
 (defthing music-book :scale 0.8 :image "music-book.png" :stacking nil)
 
@@ -44,6 +44,7 @@
   :sprite-height 130
   :sprite-width 130
   :health 15
+  :description "giant owl"
   :image (random-choose *owl-images*))
 
 (defmethod can-pick ((owl owl)) nil)
@@ -59,7 +60,7 @@
 
 (defmethod enter-scene ((owl owl))
   (play-sample "owl.wav")
-  (bark (geoffrey) "I hear something!"))
+  (show-hint "You hear a strange bird-song."))
 
 (defmethod run ((owl owl))
   (percent-of-time 9
@@ -151,7 +152,7 @@ to the southeast. There's a cave just
 south of the Waystone near the ruins; go
 to the cave first! You'll find what you
 need to survive against the Wizards.
-Take these three ancient Gears; you can
+Take these ancient Gears; you can
 use them to unlock the cave. 
 Go now, Geoffrey!" :bye)
 
