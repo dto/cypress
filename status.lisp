@@ -208,13 +208,41 @@
 	  ((< points 87)
 	   "Slightly cold"))))
 
+(defun compass-direction (dir)
+  (ecase dir
+    (:here :here)
+    (:up :north)
+    (:down :south)
+    (:upright :northeast)
+    (:upleft :northwest)
+    (:downright :southeast)
+    (:downleft :southwest)
+    (:left :west)
+    (:right :east)))
+
 (defun status-lighter-string ()
   (concatenate 'string 
+	       (format nil "Attack +~S" (attack-rating (geoffrey)))
+	       "  " 
+	       (format nil "Defense +~S" (defense-rating (geoffrey)))
+	       "  "
+	       (format nil "Resist +~S" (resistance-rating (geoffrey)))
+	       "      "
+	       (if (or (null *travel-direction*)
+		       (eq :here *travel-direction*))
+		   ""
+		   (format nil "Headed ~A" (string-downcase (symbol-name (compass-direction *travel-direction*)))))
+	       (if (traversed (current-scene))
+		   " * "
+		   "   ")
+	       "     "
 	       (or (health-lighter-string (field-value :health (geoffrey))) "") 
 	       "     "
 	       (or (hunger-lighter-string (field-value :hunger (geoffrey))) "")
 	       "     "
 	       (or (cold-lighter-string (field-value :cold (geoffrey))) "")))
+
+	       
 
 (defun magic-description (points)
   (or (when (<= points 20)
