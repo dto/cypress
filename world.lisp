@@ -73,6 +73,9 @@
       `(defblock (,name thing) ,@body)
       `(defblock ,name ,@body)))
 
+(defmethod find-lore ((thing thing))
+  (field-value :lore thing))
+
 ;;; Default resizing to image
 
 (defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 130)))
@@ -760,10 +763,17 @@
   (bring-to-front self))
 
 (defmethod arrange ((self bubble))
-  (with-fields (anchor) self
+  (with-field-values (width height text font anchor) self
     (when anchor
+      (resize self  (+ 8 (font-text-width text font))  (+ 8 (font-height font)))
       (multiple-value-bind (x y) (right-of anchor)
-	(move-to self x y)))))
+	(move-to self 
+		 (min x
+		      (- (+ (window-x) *nominal-screen-width*)
+			 width))
+		 (min y 
+		      (- (+ (window-y) *nominal-screen-height*)
+			 height)))))))
 
 (defmethod draw ((self bubble))
   (with-field-values (x y text font) self
