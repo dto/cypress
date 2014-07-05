@@ -2,6 +2,7 @@
 
 (defresource (:name "oldania" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 20)))
 (defresource (:name "oldania-bold" :type :ttf :file "OldaniaADFStd-Bold.otf" :properties (:size 20)))
+(defresource (:name "oldania-italic" :type :ttf :file "OldaniaADFStd-Italic.otf" :properties (:size 16)))
 (defresource (:name "oldania-title" :type :ttf :file "OldaniaADFStd-Regular.otf" :properties (:size 22)))
 
 (defparameter *gump-font* "oldania")
@@ -97,7 +98,7 @@
 	    (* (image-width image) *hint-scale*)
 	    (* (image-height image) *hint-scale*))
     (move-to self 
-	     (+ (window-x) (units 43))
+	     (+ (window-x) (units 70))
 	     (+ (window-y) (units 1)))))
 
 (defmethod run ((self hint))
@@ -128,6 +129,9 @@
       (push text hints)
       (drop-object (current-buffer)
 		   (new 'hint :text text)))))
+
+(defmethod tap ((hint hint) x y)
+  (destroy hint))
 
 ;;; The scroll gump is for reading pages of text.
 
@@ -174,6 +178,15 @@
 			   :color *gump-color*
 			   :font *gump-font*)
 	  (incf y0 (font-height *gump-font*)))))))
+
+(defmethod draw :after ((self scroll-gump))
+  (with-fields (x y page-number pages) self
+    (unless (= page-number (- (length pages) 1))
+      (draw-string "continued..."
+		   (+ x (units 20))
+		   (+ y (units 32))
+		   :color *gump-color*
+		   :font "oldania-italic"))))
 
 (defmethod arrange ((self scroll-gump)) ()
   (with-fields (image) self
