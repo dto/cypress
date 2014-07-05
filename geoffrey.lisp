@@ -82,6 +82,14 @@ inventory and find something to eat.
       (damage monk (- (random-choose '(7 9))))
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
+(defmethod collide :after ((monk geoffrey) (enemy cryptghast))
+  (when (field-value :alive monk)
+    (percent-of-time 10
+      (narrate "The cryptghast bites Geoffrey!")
+      (bark (geoffrey) "Aaaaghh!")
+      (damage monk (- (random-choose '(2 5))))
+      (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
+
 (defmethod modify-health :after ((monk geoffrey) points)
   (with-fields (alive health) monk
     (when alive
