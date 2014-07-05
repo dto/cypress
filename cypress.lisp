@@ -87,7 +87,7 @@ them onto Geoffrey.")
   (background-image :initform (title-screen-image)))
 
 (defmethod initialize :after ((title title) &key)
-  (play-music "ancient-fanfare.ogg" :loop nil)
+  ;; (play-music "ancient-fanfare.ogg" :loop nil)
   (resize title *nominal-screen-width* *nominal-screen-height*))
 
 (defmethod tap ((title title) x y)
