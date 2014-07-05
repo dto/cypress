@@ -1,63 +1,6 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
-* Beta
-  
-** TODO [#A] Add hint about low magic: camping/ potion / flowers
-** TODO [#A] Add hint about white flowers
-** TODO [#A] Exchange leather and silver clothes
-** TODO [#A] add a *current-objective* string
-** TODO [#C] help scroll accessible at any time
-** TODO [#A] show quine summons hint
-** TODO [#A] show cemetery hint
-** TODO [#C] Show arrow hover indicator when enemy properly targeted
-
-** TODO [#C] auto stop walking when enemy very close
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#C] escape should close all gumps
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-
-** TODO [#B] Fix rendering bug with tooltip on map sector
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#B] text bubbles should not clip against the right edge of the screen
-
-** TODO [#B] Paint furs (and/or Protection from Cold tome found on wiz0rds)
-** TODO [#B] Magic arrow, (nightshade) single strong attack with crystal seeking arrow graphics
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#B] Add more townspeople
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
-** TODO [#B] should allow to click gear as well as plate to unlock puzzle
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#C] Add and repaint some different tree/shrub types
-   :PROPERTIES:
-   :Effort:   3:00
-   :END:
-** TODO [#A] don't allow spawning geoffrey in obstacle
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
-** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-** TODO [#A] Fix spellcasting/activating objects after dead
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-
-
 ** TODO [#A] Black Wizard battle scene
    :PROPERTIES:
    :Effort:   2:00
@@ -112,10 +55,58 @@
     :Effort:   0:30
     :END: 
 
-** TODO [#A] improve skull seance lore
+** TODO [#A] improve generic skull seance lore
 
 
+* Beta
+  
+0630 
+** TODO [#C] add a *current-objective* string
+** TODO [#C] help scroll accessible at any time
+** TODO [#B] show quine summons hint
+** TODO [#B] show cemetery hint
+** TODO [#C] Show arrow hover indicator when enemy properly targeted
 
+** TODO [#C] auto stop walking when enemy very close
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#C] escape should close all gumps
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+
+** TODO [#B] Fix rendering bug with tooltip on map sector
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#B] text bubbles should not clip against the right edge of the screen
+
+** TODO [#B] Paint furs (and/or Protection from Cold tome found on wiz0rds)
+** TODO [#B] Add more townspeople
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+** TODO [#B] should allow to click gear as well as plate to unlock puzzle
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+** TODO [#C] Add and repaint some different tree/shrub types
+   :PROPERTIES:
+   :Effort:   3:00
+   :END:
+** TODO [#A] don't allow spawning geoffrey in obstacle
+   :PROPERTIES:
+   :Effort:   0:30
+   :END:
+** TODO [#A] fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+** TODO [#A] Fix spellcasting/activating objects after dead
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
 
 
 * Should
@@ -637,4 +628,31 @@
    :ARCHIVE_OLPATH: Beta
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] Add hint about low magic: camping/ potion / flowers
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-05 Sat 06:42
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] Add hint about white flowers
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-05 Sat 06:42
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] Exchange leather and silver clothes
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-05 Sat 06:42
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Beta
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
    :END:

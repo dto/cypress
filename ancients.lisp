@@ -241,6 +241,7 @@
      
 (defmethod begin-scene :after ((cave southern-cave))
   (mark-traversed cave)
+  (clear-excursion)
   (resize-to-background-image cave)
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
 

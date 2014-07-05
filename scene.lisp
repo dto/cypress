@@ -36,6 +36,7 @@
   (switch-to-scene *previous-scene*)
   (move-to (geoffrey) *previous-x* *previous-y*)
   (snap-window-to-cursor (current-scene))
+  (mark-traversed (current-scene))
   (setf *previous-scene* nil
 	*previous-x* nil
 	*previous-y* nil))
@@ -43,6 +44,9 @@
 (defun restore-excursion-maybe ()
   (when (and *previous-scene* *previous-x* *previous-y*)
     (restore-excursion)))
+
+(defun clear-excursion ()
+  (setf *previous-y* nil *previous-x* nil *previous-scene* nil))
     
 (defparameter *use-music* t)
 

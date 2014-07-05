@@ -287,6 +287,12 @@
       (chill self +20)
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
+(defparameter *restart-hint*
+"Geoffrey has died. Press Control-R to
+reset the game. You can resume your
+saved progress at the Stone of
+Remembrance.")
+
 (defmethod die ((self monk))
   (when (field-value :alive self)
     (when (humanp self) 
@@ -296,6 +302,7 @@
       (drop self (new 'skull))
       (play-sample "death.wav")
       (send-to-back self)
+      (show-hint *restart-hint*)
       (setf (field-value :alive self) nil))))
 
 ;;; Control logic driven by the above (possibly overridden) methods.

@@ -255,6 +255,14 @@ Go now, Geoffrey!" :bye)
     (with-border (units 4) 
       (apply #'stacked-up-randomly rows))))
 
+(defparameter *cemetery-hint* 
+"An old cemetery. I wonder if anyone I
+know is buried here? I should look at
+the gravestones.")
+
+(defmethod begin-scene :after ((scene cemetery))
+  (show-hint *cemetery-hint*))
+
 (defmethod make-terrain ((cemetery cemetery))
   (with-border (units 10)
     (lined-up-randomly 
