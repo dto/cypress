@@ -537,12 +537,12 @@
   :basement nil)
 
 (defmethod activate ((self stone-stairwell))
-  (narrate "You descend the stairs and enter a moldering basement.")
-  (with-fields (basement) self
-    (when (null basement)
-      (setf basement (new 'basement)))
-    (save-excursion)
-    (switch-to-scene basement)))
+  (narrate "This stairway has crumbled beyond repair. You can't get in."))
+  ;; (with-fields (basement) self
+  ;;   (when (null basement)
+  ;;     (setf basement (new 'basement)))
+  ;;   (save-excursion)
+  ;;   (switch-to-scene basement)))
 
 (defparameter *crumbling-stair-images* (image-set "crumbling-stair" 2))
 
