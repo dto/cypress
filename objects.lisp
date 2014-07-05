@@ -127,6 +127,9 @@
 
 (defthing chest :image (random-choose *chest-images*))
 
+(defmethod activate ((chest chest))
+  (replace-gump chest (new 'browser :container chest)))
+
 (defmethod can-accept ((chest chest)) t)
 
 (defparameter *bag-images* (image-set "bag" 3))
@@ -201,7 +204,9 @@ nisi. Nam eget dui.")
 you click this scroll, you will advance
 to the next page. Use the right mouse
 button (or the Control key with the left
-button) to close scrolls.
+button) to close scrolls. You can also
+position scrolls by left-clicking and
+dragging them with the mouse. 
 
 Right-click a destination to move
 Geoffrey there. 
@@ -329,6 +334,9 @@ Press \"M\" to open the travel map.
 
 (defthing skull 
   :image (random-choose '("skull-1.png" "skull-2.png" "skull-3.png")))
+
+(defmethod find-lore ((skull skull))
+  (random-choose *skull-lore*))
 
 (defthing wolf-corpse :image (random-choose '("wolf-skull-1.png" "wolf-skull-2.png")))
 
