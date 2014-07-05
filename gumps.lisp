@@ -86,6 +86,8 @@
   :timer (seconds->frames 10)
   :lines nil)
 
+(defresource "hint.wav" :volume 6)
+
 (defmethod initialize ((self hint) &key text)
   (setf (field-value :lines self) 
 	(split-string-on-lines text)))
@@ -126,6 +128,7 @@
 (defun show-hint (text)
   (with-fields (hints) (geoffrey)
     (unless (find text hints :test 'equal)
+      (play-sample "hint.wav")
       (push text hints)
       (drop-object (current-buffer)
 		   (new 'hint :text text)))))
