@@ -78,7 +78,7 @@ inventory and find something to eat.
     (bring-to-front gump)))
 
 (defmethod collide :after ((monk geoffrey) (wolf black-wolf))
-  (when (field-value :alive monk)
+  (when (and (not *paused*) (field-value :alive monk))
     (percent-of-time 10
       (narrate "The wolf bites Geoffrey!")
       (bark (geoffrey) "Aaaaghh!")
@@ -86,7 +86,7 @@ inventory and find something to eat.
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod collide :after ((monk geoffrey) (enemy cryptghast))
-  (when (field-value :alive monk)
+  (when (and (not *paused*) (field-value :alive monk))
     (percent-of-time 10
       (narrate "The cryptghast bites Geoffrey!")
       (bark (geoffrey) "Aaaaghh!")

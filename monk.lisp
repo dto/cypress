@@ -261,13 +261,13 @@
 (defresource "unh-3.wav" :volume 20)
 
 (defmethod collide ((self monk) (enemy enemy))
-  (when (field-value :alive self)
+  (when (and (not *paused*) (field-value :alive self))
     (percent-of-time 10
       (damage self (- (random-choose '(2 3 3 5 7))))
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod collide ((self monk) (crack large-crack))
-  (when (field-value :alive self)
+  (when (and (not *paused*) (field-value :alive self))
     (percent-of-time 12
       (narrate "Your foot breaks through the ice! You are wet.")
       (show-hint "Watch out for cracks!")
@@ -276,7 +276,7 @@
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod collide ((self monk) (crack crack))
-  (when (field-value :alive self)
+  (when (and (not *paused*) (field-value :alive self))
     (percent-of-time 8
       (narrate "The ice cracks beneath your feet. You are splashed with frigid water.")
       (show-hint "Watch out for cracks!")
@@ -285,7 +285,7 @@
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
 (defmethod collide ((self monk) (puddle puddle))
-  (when (field-value :alive self)
+  (when (and (not *paused*) (field-value :alive self))
     (percent-of-time 6
       (narrate "You step into the water. You are wet!")
       (damage self (- (random-choose '(5 7))))

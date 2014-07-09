@@ -1,14 +1,18 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
-** TODO [#A] Fix crystal arrow crash
-** TODO [#A] Fix possible crash on making arrows without enough stuff 
-** TODO [#A] Fix erroneously dropping objects behind scroll gump when intending to put them inside
-** TODO [#A] Fix sometimes missing bow animation and fire animation
+** DONE [#A] Fix crystal arrow crash
+   CLOSED: [2014-07-09 Wed 11:14]
+** DONE [#A] Fix erroneously dropping objects behind scroll gump when intending to put them inside
+   CLOSED: [2014-07-09 Wed 11:14]
+** TODO [#A] Fix getting stuck at right/other edges of map
+*** TODO add heuristic to warp geoffrey a bit toward the center of the map if he becomes lodged
+
 ** TODO [#A] Fix bug where geoffrey dies if game paused while in contact w enemy
 ** TODO [#A] Fix alonso basement bug layout where corpse is out in dark
-** TODO [#A] Fix getting stuck at right/other edges of map
+** TODO [#B] Fix sometimes missing bow animation and fire animation
 ** TODO [#B] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+** TODO [#B] Fix possible crash on making arrows without enough stuff 
 
 ** TODO [#B] Coherent message when geoffrey's inventory full
 ** TODO [#B] Prompt to double-click arturo's house
