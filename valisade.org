@@ -12,7 +12,8 @@
 
 ** DONE [#A] Fix bug where geoffrey dies if game paused while in contact w enemy
    CLOSED: [2014-07-09 Wed 11:38]
-** TODO [#A] Fix alonso basement bug layout where corpse is out in dark
+** DONE [#A] Fix alonso basement bug layout where corpse is out in dark
+   CLOSED: [2014-07-09 Wed 11:42]
 ** TODO [#B] Fix sometimes missing bow animation and fire animation
 ** TODO [#B] Fix can't pathfind to near trees, give them smaller and rounder hitbox
 ** TODO [#B] Fix possible crash on making arrows without enough stuff 

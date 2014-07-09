@@ -101,7 +101,7 @@ them onto Geoffrey.")
 ;;; Main game
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "Cypress v1.0")
+  (setf *window-title* "Cypress v1.1")
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1680)
