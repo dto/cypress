@@ -17,11 +17,12 @@
 ;;; Finding all objects of a given class in a buffer
 
 (defun find-instances (buffer class-name)
-  (with-fields (objects) buffer
-    (when objects
-      (loop for thing being the hash-values in objects
-	    when (typep (find-object thing t) (find-class class-name))
-	      collect (find-object thing t)))))
+  (when (typep buffer (find-class 'buffer))
+    (with-fields (objects) buffer
+      (when objects
+	(loop for thing being the hash-values in objects
+	      when (typep (find-object thing t) (find-class class-name))
+		collect (find-object thing t))))))
 
 ;;; Fundamental object attributes in the world of Cypress
 

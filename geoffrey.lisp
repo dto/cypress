@@ -5,7 +5,7 @@
 (defvar *geoffrey* nil)
 
 (defun geoffrey () *geoffrey*)
-
+  
 (defthing (geoffrey monk) :description "Geoffrey" :hints nil)
 
 (defmethod after-revive ((geoffrey geoffrey))

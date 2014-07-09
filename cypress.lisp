@@ -125,7 +125,7 @@ them onto Geoffrey.")
     (index-pending-resources)
     ;; (preload-resources)
     (switch-to-buffer (new 'title))
-    ;;; (switch-to-buffer (new 'prologue))
+    ;; (switch-to-buffer (new 'prologue))
     (setf *font* "oldania")
     (start-session)))
 
