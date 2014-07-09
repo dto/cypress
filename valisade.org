@@ -5,10 +5,13 @@
    CLOSED: [2014-07-09 Wed 11:14]
 ** DONE [#A] Fix erroneously dropping objects behind scroll gump when intending to put them inside
    CLOSED: [2014-07-09 Wed 11:14]
-** TODO [#A] Fix getting stuck at right/other edges of map
-*** TODO add heuristic to warp geoffrey a bit toward the center of the map if he becomes lodged
+** DONE [#A] Fix getting stuck at right/other edges of map
+   CLOSED: [2014-07-09 Wed 11:38]
+*** DONE add heuristic to warp geoffrey a bit toward the center of the map if he becomes lodged
+    CLOSED: [2014-07-09 Wed 11:38]
 
-** TODO [#A] Fix bug where geoffrey dies if game paused while in contact w enemy
+** DONE [#A] Fix bug where geoffrey dies if game paused while in contact w enemy
+   CLOSED: [2014-07-09 Wed 11:38]
 ** TODO [#A] Fix alonso basement bug layout where corpse is out in dark
 ** TODO [#B] Fix sometimes missing bow animation and fire animation
 ** TODO [#B] Fix can't pathfind to near trees, give them smaller and rounder hitbox

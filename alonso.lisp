@@ -95,7 +95,7 @@ could be an illusion.
 (defmethod make-terrain ((scene alonso-basement))
   (with-border (units 12)
     (stacked-up (with-border (units 4) (singleton (new 'crumbling-stairwell)))
-		(lined-up (spray '(bone-dust bone-dust nightshade) :trim nil :count 4)
+		(lined-up (spray '(bone-dust bone-dust nightshade) :trim t :count 4)
 			  (singleton (new 'ruin-wall))
 			  (singleton (new 'alonso-corpse)))
 		(lined-up (singleton (new 'ruin-wall))
