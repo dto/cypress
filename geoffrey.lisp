@@ -189,6 +189,17 @@ inventory and find something to eat.
   (when (current-scene) 
     (remove-object (current-scene) self)))
 
+;;; Keeping geoffrey on the map
+
+(defmethod run :after ((geoffrey geoffrey))
+  (unless (bounding-box-contains (multiple-value-list (bounding-box (current-scene)))
+				 (multiple-value-list (bounding-box geoffrey)))
+    (stop-walking geoffrey)
+    (multiple-value-bind (gx gy) (center-point (geoffrey))
+      (multiple-value-bind (cx cy) (center-point (current-scene))
+	(let ((jerk-distance (/ (distance cx cy gx gy) 16)))
+	  (move geoffrey (find-heading gx gy cx cy) jerk-distance))))))
+
 ;;; Geoffrey's magic tent
 
 (defparameter *fire-images* (image-set "fire" 4))
