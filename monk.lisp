@@ -434,8 +434,7 @@ now, or you will freeze to death!")
   (or 
    (equipped-arrow monk)
    (find-inventory-item monk 'wooden-arrow)
-   (find-inventory-item monk 'silver-arrow)
-   (find-inventory-item monk 'crystal-arrow)))
+   (find-inventory-item monk 'silver-arrow)))
 
 (defmethod attack ((monk monk) (enemy thing))
   (if (not (find-arrow monk))
