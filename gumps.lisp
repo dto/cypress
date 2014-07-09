@@ -204,10 +204,11 @@
 (defparameter *icon-height* 85)
 (defparameter *icon-width* 85)
 
-(defthing icon target)
+(defthing icon target bag)
 
-(defmethod initialize ((icon icon) &key target)
-  (with-fields (height width) icon
+(defmethod initialize ((icon icon) &key target container)
+  (with-fields (height width bag) icon
+    (setf bag container)
     (setf height *icon-height*)
     (setf width *icon-width*)
     (setf (field-value :target icon) target)))
@@ -216,16 +217,23 @@
   (can-pick (field-value :target icon)))
 
 (defmethod can-accept ((icon icon))
-  (can-accept (field-value :target icon)))
+  (with-fields (target bag) icon
+    (or	(can-accept target)
+	(can-accept bag))))
 
 (defmethod accept ((icon icon) (thing thing))
-  (accept (field-value :target icon) thing))
+  (with-fields (target bag) icon
+    (if	(can-accept target)
+	(accept target thing)
+	(accept bag thing))))
 
 (defmethod accept :after ((icon icon) thing)
   (mapc #'refresh (find-gumps)))
 
 (defmethod will-accept ((icon icon) (thing thing))
-  (will-accept (field-value :target icon) thing))
+  (with-fields (target bag) icon
+    (or	(will-accept target thing)
+	(will-accept bag thing))))
 
 (defmethod draw ((icon icon))
   (with-fields (x y height width target) icon
@@ -367,8 +375,8 @@
 (defmethod destroy :before ((self browser))
   (mapc #'destroy (field-value :icons self)))
 
-(defun item-icon (item)
-  (new 'icon :target item))
+(defun item-icon (item container)
+  (new 'icon :target item :container container))
 
 (defmethod refresh ((browser browser))
   (clear browser)
@@ -377,7 +385,7 @@
       ;; only take max items
       (let ((items (subseq inventory
 			   0 (min *maximum-inventory-size* (length inventory)))))
-	(setf icons (mapcar #'item-icon items)))
+	(setf icons (mapcar #'(lambda (x) (item-icon x target)) items)))
       (layout browser))))
 
 (defmethod initialize ((browser browser) &key container)
