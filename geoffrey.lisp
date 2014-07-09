@@ -5,8 +5,11 @@
 (defvar *geoffrey* nil)
 
 (defun geoffrey () *geoffrey*)
-  
+
 (defthing (geoffrey monk) :description "Geoffrey" :hints nil)
+
+(defmethod after-revive ((geoffrey geoffrey))
+  (setf (field-value :tasks geoffrey) nil))
 
 (defmethod stomach-full-p ((monk monk))
   (<= (field-value :hunger monk) 12))
