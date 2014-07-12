@@ -256,7 +256,83 @@
 	;;  (clear-objects self)
 	;;  (drop-object self (new 'hero) -200 -300))
 	 
+;;; trailer
 
-	   
+(defvar *trailer* nil)
 
+(defthing card :height *nominal-screen-height* :width *nominal-screen-width*)
 
+(defmethod update ((card card))
+  (resize card *nominal-screen-width* *nominal-screen-height*)
+  (move-to card 0 0))
+
+(defthing (card-1 card) :image "card1.png")
+(defthing (card-2 card) :image "card2.png")
+(defthing (card-3 card) :image "card3.png")
+(defthing (card-4 card) :image "card4.png")
+(defthing (card-5 card) :image "card5.png")
+(defthing (card-6 card) :image "card6.png")
+(defthing (card-7 card) :image "card7.png")
+
+(define-buffer trailer
+  (start-time :initform *updates*)
+  (quadtree-depth :initform 4)
+  (background-color :initform "black"))
+
+(defmethod initialize :after ((self trailer) &key)
+  (setf *trailer* self)
+  (setf *use-music* nil)
+  (resize self *nominal-screen-width* *nominal-screen-height*)
+  (drop-object self (new 'card-1))
+  (play-music "traveler2.ogg" :loop nil))
+
+(defmethod momentp ((self trailer) time)
+  (= *updates* (+ time (field-value :start-time self))))
+
+(defmethod clear-objects ((self trailer))
+  (dolist (object (get-objects self))
+      (destroy object)))
+
+(defmethod switch-to-card ((self trailer) card)
+  (switch-to-buffer self)
+  (clear-objects self)
+  (let ((card-object (new card)))
+    (drop-object self card-object)
+    (update card-object)))
+
+(defun snapshot-file (n)
+  (xelf::find-project-file *project* (format nil "snapshot-~S.xelf" n)))
+
+(defun restore-snapshot (n)
+  (load-quest (snapshot-file n)))
+
+(defmethod elapsed-time ((self trailer))
+  (with-fields (start-time) self
+    (let ((delta (- *updates* start-time)))
+      (if (zerop (mod delta 30))
+	  (truncate (/ delta 30))
+	  (cfloat (/ delta 30))))))
+
+(defmethod update :after ((self trailer))
+  (case (elapsed-time self)
+    (6 (restore-snapshot 1)) ;; meeting lucius
+    (12 (restore-snapshot 3))  ;; making camp
+    (22 (switch-to-card self 'card-2))
+    (27 (restore-snapshot 2)) ;; wizards
+    (34 (switch-to-card self 'card-3))
+    (39 (restore-snapshot 5)) ;; wraiths
+    (46 (restore-snapshot 4)) ;; wiz
+    (51 (switch-to-card self 'card-4)    
+     (play-music "home.ogg" :loop nil))
+    (56 (restore-snapshot 6)) 
+    (61 (restore-snapshot 7))
+    (65 (switch-to-card self 'card-5))
+    (70 (switch-to-card self 'card-6))
+    (75 (switch-to-card self 'card-7))))
+
+;; (defmethod update :after ((geoffrey geoffrey))
+;;   (when *trailer*
+;;     (update *trailer*)))
+
+(defmethod release ((trailer trailer) x y &optional button))
+(defmethod press ((trailer trailer) x y &optional button))
