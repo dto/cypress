@@ -21,6 +21,7 @@
 (in-package :cypress)
 
 (defresource "ancient-fanfare.ogg" :volume 10)
+(defresource "presence.ogg" :volume 9)
 (defresource "passageway.ogg" :volume 20)
 (defresource "procession4.ogg" :volume 20)
 (defresource "home.ogg" :volume 08)
@@ -126,6 +127,7 @@ them onto Geoffrey.")
     ;; (preload-resources)
     (switch-to-buffer (new 'title))
     ;; (switch-to-buffer (new 'prologue))
+    ;; (switch-to-buffer (new 'trailer))
     (setf *font* "oldania")
     (start-session)))
 
