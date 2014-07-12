@@ -67,6 +67,7 @@
     ((:pause) toggle-pause)
     ((:r :control) reset-game)
     ((:space) toggle-pause)
+    ;; ((:f5) quicksave)
     ((:p) toggle-pause)
     ((:m) open-map)
     ((:s) open-spellbook)
@@ -74,10 +75,15 @@
   ;;
   :excluded-fields '(:quadtree :click-start :click-start-block :drag-origin :drag-start :drag-offset :focused-block                      :shell :drag :hover :highlight :inputs))
 
+(define-method quicksave scene ()
+  (save-quest))
+    
 (define-method toggle-pause scene ()
   (setf *paused* (if *paused* nil t)))
 
 (defmethod after-revive ((scene scene))
+  (unless (field-value :quadtree scene)
+    (install-quadtree scene))
   (bind-any-default-events scene))
 
 (defmethod initialize :after ((scene scene) &key)
