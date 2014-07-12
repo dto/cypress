@@ -97,7 +97,7 @@
 	(fire-magic-arrow wizard)))
     (percent-of-time 1
       (walk-to-thing wizard (geoffrey)))
-    (when (< (distance-to-cursor wizard) 300)
+    (when (< (distance-between wizard (geoffrey)) 300)
       (or (percent-of-time 2 (prog1 t (stop-walking wizard)))
 	  (or (percent-of-time 1 (prog1 t (walk-to-thing wizard (geoffrey))))
 	      (percent-of-time 1 (begin-attack wizard)))))))
@@ -166,3 +166,5 @@ the North to find the Prescient woman...
 										   (singleton (new 'ruin-wall)))
 			  (singleton (new 'ruined-house)) (dead-trees)))))
 
+
+(defmethod make-footstep-sound ((self black-wizard)) nil)

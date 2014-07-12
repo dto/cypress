@@ -1032,6 +1032,6 @@
 			 (unflatten (second variable))))
       (mapc #'after-revive objects)))) 
 	
-(defun load-quest ()
-  (expand-quest (first (read-sexp-from-file (cypress-save-file))))
+(defun load-quest (&optional (file (cypress-save-file)))
+  (expand-quest (first (read-sexp-from-file file)))
   (switch-to-buffer (current-scene)))
