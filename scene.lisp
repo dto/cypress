@@ -82,8 +82,8 @@
   (setf *paused* (if *paused* nil t)))
 
 (defmethod after-revive ((scene scene))
-  (unless (field-value :quadtree scene)
-    (install-quadtree scene))
+  ;; (unless (field-value :quadtree scene)
+  ;;   (install-quadtree scene))
   (bind-any-default-events scene))
 
 (defmethod initialize :after ((scene scene) &key)
