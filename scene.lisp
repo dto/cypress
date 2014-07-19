@@ -121,7 +121,7 @@
   (when (and (not (typep object 'enemy))
 	     (not (can-reach object (geoffrey))))
     (show-error (geoffrey) x y)
-    (narrate "You can't reach that from where you're standing.")))
+    (bark (geoffrey) "I can't reach that from here.")))
 
 (defmethod begin-region ((buffer scene)))
 
