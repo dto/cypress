@@ -3,20 +3,26 @@
 
 * 1.2
 
-** TODO [#A] Fix sometimes missing bow animation and fire animation, spellcasting anim
-** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+** DONE [#A] Fix missing spellcasting animation
+   CLOSED: [2014-07-19 Sat 17:32]
+** TODO [#A] Fix sometimes missing bow animation and fire animation
+
 ** TODO [#A] Fix items disappearing past 16th position in gump
+
 ** TODO [#A] Fix image stretching in inventory icons
    :PROPERTIES:
    :Effort:   1:00
    :END:
+
 ** TODO [#A] Fix rendering bug with tooltip on map sector
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#A] Fix can visit wizards early
-** TODO [#A] Fix missing animations
+
 ** TODO [#A] Fix side quest consumed skull bug
+** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+** TODO [#A] Fix can visit wizards early
+** TODO [#A] Fix missing bow/arrow animations
 ** TODO [#A] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
    :PROPERTIES:
    :Effort:   0:15
@@ -33,6 +39,7 @@
 
 ** TODO [#A] Fix can't pick up items partially obscured by geoffrey
 
+
 ** TODO [#A] Tell user which square is current, that they must click adjacent squares
 
 ** TODO [#A] disable opening remains when enemies are near
@@ -47,6 +54,7 @@
 ** TODO [#A] disable tent as container
 ** TODO [#A] don't allow dragging books into spellbook!
 ** TODO [#A] sextant should beep/notify point way to stone
+
 *** TODO [#A] correct Arturo's description of waystone/sextant
 ** TODO [#A] explain Resistance/Attack/Defense in-game
 *** TODO don't display ATK/RES/DEF until they change
