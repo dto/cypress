@@ -43,15 +43,23 @@ Or eat some Snowdrops.")
 ;;; Seance spell to get lore from skulls
 
 (defthing (seance spell)
-  :description "Seance (8 mp, 1 forget-me-not, 1 skull)"
+  :description "Seance (8 mp, 1 forget-me-not, skull catalyst)"
   :reagents '(:magic 8 forget-me-not 1)
   :image "danger-1.png")
 
-(defmethod cast ((caster thing) (spell seance))
+(defmethod cast ((caster thing) (spell seance)) nil)
+
+(defmethod use :around ((caster thing) (spell seance))
   (let ((skull (or (find-inventory-item caster 'roberto-skull)
 		   (find-inventory-item caster 'skull))))
     (if skull
-	(replace-gump caster (new 'scroll-gump :text (find-lore skull)))
+	(multiple-value-bind (x y)
+	    (gump-cascade-position)
+	  (drop-object (current-buffer) 
+		       (new 'scroll-gump :text (find-lore skull))
+		       x y)
+	  (call-next-method caster spell)
+	  (destroy skull))
 	(show-hint "You need a skull to conduct a seance."))))
 
 ;;; Spark spell to light fire 
@@ -175,7 +183,7 @@ Or eat some Snowdrops.")
 (defmethod can-pick ((book spellbook))
   (not (field-value :container book)))
 
-(defmethod can-accept ((book spellbook)) t)
+(defmethod can-accept ((book spellbook)) nil)
 (defmethod will-accept ((book spellbook) (thing thing)) nil)
 (defmethod will-accept ((book spellbook) (spell spell)) t)
 
