@@ -59,7 +59,7 @@ those woods?...
 
 (defmethod begin-scene :after ((scene hamlet-basement))
   (mark-traversed scene)
-  (cue-music scene (random-choose '("path.ogg" "believe-me2.ogg")))
+  (cue-music scene (random-choose '("path.ogg" "believe-me2.ogg" "lutey.ogg")))
   (resize-to-background-image scene))
 
 (defmethod starting-x ((self hamlet-basement) dir)
@@ -102,11 +102,11 @@ those woods?...
 			  (singleton (new 'cryptghast))))))
 
 (defthing (ruined-hamlet scene)
-  :background-images (random-choose *snowy-meadow-images*))
+  :background-image (random-choose *snowy-meadow-images*))
 
 (defmethod begin-scene :after ((scene ruined-hamlet))
   (show-hint "You found a ruined hamlet.")
-  (percent-of-time 50 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg")))))
+  (percent-of-time 20 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg")))))
 
 (defthing (roberto-wraith wraith) :description "Wraith")
 
