@@ -84,6 +84,9 @@ those woods?...
     (save-excursion)
     (switch-to-scene basement)))
 
+(defmethod run :after ((self hamlet-stairwell))
+  (bring-to-front self))
+
 (defthing (hamlet-chest chest) :description "wooden chest")
 
 (defmethod enter-scene :after ((chest hamlet-chest))
