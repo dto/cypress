@@ -450,12 +450,12 @@ now, or you will freeze to death!")
 	      (begin-firing monk)
 	      (modify-hunger monk 1))))))
 
-(defmethod will-accept ((self monk) (item thing))
-  (with-fields (inventory) self
-    (if (field-value :stacking item)
-	(or (search-inventory self (class-name (class-of item)))
-	    (not (fullp inventory)))
-	(not (fullp inventory)))))
+(defmethod will-accept ((self monk) (item thing)) t)
+  ;; (with-fields (inventory) self
+  ;;   (if (field-value :stacking item)
+  ;; 	(or (search-inventory self (class-name (class-of item)))
+  ;; 	    (not (fullp inventory)))
+  ;; 	(not (fullp inventory)))))
 
 ;;; Monk food and potions
 
