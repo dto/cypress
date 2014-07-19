@@ -372,6 +372,15 @@
 		 :color "saddle brown" 
 		 :font "oldania-title")))
 
+(defmethod draw :after ((self browser))
+  (with-fields (x y target) self
+    (when (> (length (inventory-items target)) 16)
+      (draw-string "container is overfull; some items hidden."
+		   (+ x (units 4.5))
+		   (+ y (units 33))
+		   :color "saddle brown"
+		   :font "oldania-bold"))))
+
 (defmethod destroy :before ((self browser))
   (mapc #'destroy (field-value :icons self)))
 
