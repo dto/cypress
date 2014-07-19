@@ -266,8 +266,8 @@
 
 (defmethod draw :after ((map map-screen))
   (mapc #'draw (z-sort (find-instances map 'bubble)))
-  (draw-string "Click to identify terrain; double-click to travel."
-	       630 900
+  (draw-string "Current terrain square blinks. Click to identify terrain; double-click adjacent squares to travel."
+	       455 900
 	       :color "burlywood4"
 	       :font "oldania"))
 
