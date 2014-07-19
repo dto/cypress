@@ -112,7 +112,7 @@
   (with-fields (x y width height terrain scene) sector
     (when (and (find-inventory-item (geoffrey) 'sextant)
 	       (find-instances scene 'waystone))
-      (draw-string "*" 
+      (draw-string "w" 
 		   (+ x width -22)
 		   (+ y height -22)
 		   :color "red"
