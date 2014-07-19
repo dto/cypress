@@ -316,7 +316,7 @@ Remembrance.")
 
 (defmethod standing-animation ((self monk)) *monk-stand*)
 (defmethod walking-animation ((self monk)) *monk-walk*)
-(defmethod casting-animation ((self monk)) *monk-stand*)
+(defmethod casting-animation ((self monk)) *monk-cast*)
 
 (defmethod update-bow ((monk monk))
   (with-fields (aiming-bow load-clock load-time bow-ready reload-time reload-clock) monk
