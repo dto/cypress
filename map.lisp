@@ -265,6 +265,7 @@
   (arrange map))
 
 (defmethod draw :after ((map map-screen))
+  (mapc #'draw (z-sort (find-instances map 'bubble)))
   (draw-string "Click to identify terrain; double-click to travel."
 	       630 900
 	       :color "burlywood4"
