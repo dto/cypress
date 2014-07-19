@@ -220,10 +220,9 @@ inventory and find something to eat.
   :image "tent-3.png"
   :tags '(:solid))
 
-(defmethod activate ((camp camp))
-  (replace-gump camp (new 'browser :container camp)))
+(defmethod activate ((camp camp)) nil)
 
-(defmethod can-accept ((camp camp)) t)
+(defmethod can-accept ((camp camp)) nil)
 
 (defmethod will-accept ((thing thing) (camp camp)) nil)
 
