@@ -152,6 +152,8 @@ the North to find the Prescient woman...
 (defthing (wizard-ruins scene)
   :background-image "paynes-meadow.png")
 
+(defmethod find-description ((ruins wizard-ruins)) "ruins")
+
 (defmethod begin-scene :after ((ruins wizard-ruins))
   (mark-traversed ruins)
   (cue-music ruins (random-choose '("procession4.ogg" "battle-1.ogg"))))
