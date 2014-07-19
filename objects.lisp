@@ -347,7 +347,9 @@ Press \"M\" to open the travel map.
 (defmethod can-accept ((remains remains)) t)
 
 (defmethod activate ((remains remains))
-  (replace-gump remains (new 'browser :container remains)))
+  (if (nearby-enemies-p)
+      (narrate "Cannot search remains while enemies are near.")
+      (replace-gump remains (new 'browser :container remains))))
 
 (defthing warrior-key :image "warrior-key.png")
 (defthing triangle-key :image "triangle-key.png")
