@@ -46,6 +46,7 @@ inventory and find something to eat.
   (add-inventory-item monk (new 'bag))
   (add-inventory-item monk (quantity-of 'ginseng 2))
   (add-inventory-item monk (quantity-of 'stone 2))
+  (add-inventory-item monk (quantity-of 'branch 6))
   (add-inventory-item monk (quantity-of 'white-bread 3))
   (add-inventory-item monk (quantity-of 'wooden-arrow 16))
   (add-inventory-item monk (make-scroll "Adventurer's guide" *help-text*))
