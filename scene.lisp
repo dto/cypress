@@ -490,7 +490,7 @@
 			  (dense-trees)))))
 
 (defmethod begin-scene :after ((forest forest))
-  (percent-of-time 8 (prog1 t (cue-music forest (random-choose '("path.ogg" "mountain.ogg" "lutey.ogg" "tumbling.ogg" "dusk.ogg" "believe-me2.ogg" "xolaros3.ogg"))))))
+  (percent-of-time 12 (prog1 t (cue-music forest (random-choose '("path.ogg" "mountain.ogg" "lutey.ogg" "tumbling.ogg" "traveler2.ogg"))))))
 
 ;;; Cold meadow
 
@@ -506,7 +506,10 @@
 					   (singleton (new 'black-wolf))) (flowers)))))
 
 (defmethod begin-scene :after ((meadow cold-meadow))
-  (percent-of-time 50 (cue-music meadow (random-choose '("lutey.ogg" "passageway.ogg")))))
+  (percent-of-time 12 
+    (cue-music meadow 
+	       (random-choose 
+		'("lutey.ogg" "passageway.ogg" "3-against-2.ogg" "dusk.ogg" "xolaros3.ogg")))))
 
 (defmethod expend-travel-cost ((meadow cold-meadow))
   (modify-hunger (geoffrey) +6)

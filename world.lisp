@@ -92,6 +92,13 @@
 (defmethod die ((self thing))
   (destroy self))
 
+;; (defmethod destroy :after ((self thing))
+;;   (with-fields (container) self
+;;     (when container
+;;       (let ((browser (get-gump container)))
+;; 	(when (typep browser (find-class 'browser))
+;; 	  (refresh browser))))))
+
 (defmethod initialize :after ((self thing) &key)
   (layout self))
 
