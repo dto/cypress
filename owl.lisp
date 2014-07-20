@@ -98,6 +98,9 @@ you've got the flute, and maybe I'll
 give you a hint about the music."
 :hint)
 
+(defmethod discuss :after ((owl owl) (topic (eql :music)))
+  (set-objective "Find music for the Screech Owl's test."))
+
 (define-topic hint owl 
   "Hmm. Well, seeing as you don't have
 the flute, I'll help you just a
@@ -160,6 +163,7 @@ Go now, Geoffrey!" :bye)
   (with-fields (given-gears) owl
     (when (not given-gears)
       (setf given-gears t)
+      (set-objective "Find the cave to the southeast.")
       (drop owl (quantity-of 'copper-gear 1)
 	    (units 5) (units 5))
       (drop owl (quantity-of 'copper-gear 1)

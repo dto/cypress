@@ -87,6 +87,7 @@ could be an illusion.
   (with-fields (activated) alonso
     (when (not activated)
       (setf activated t)
+      (set-objective "Return to Nothbehem with news for Arturo.")
       (add-inventory-item alonso (new 'copper-gear))
       (add-inventory-item alonso (make-scroll "Journal entries" *bird-notes*))
       (add-inventory-item alonso (new 'alonso-letter)))

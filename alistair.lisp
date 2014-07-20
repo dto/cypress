@@ -132,6 +132,7 @@ about?" :mecha :creators :wizards :quine :bye)
 	  (units 3) (units 3))
     (drop alistair (new 'bone-flute)
 	  (units 4) (units 4))
+    (set-objective "Find the Screech Owl in the forests to the North.")
     (setf (field-value :given-letter alistair) t)))
 
 (define-topic busy alistair 

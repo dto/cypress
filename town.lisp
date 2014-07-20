@@ -11,7 +11,8 @@
   :background-image "stone-road.png"
   :cold 0)
 
-(defmethod begin-scene :after ((scene nothbehem)) 
+(defmethod begin-scene :after ((scene nothbehem))
+  (set-objective "Find Arturo.")
   (cue-music scene (random-choose '("drum.ogg" "dusk.ogg"))))
 
 (define (pentaquin-house house)
@@ -22,6 +23,7 @@
 
 (defmethod unlock ((house pentaquin-house))
   (when (field-value :locked house)
+    (set-objective "Visit Arturo Pentaquin's house for supplies.")
     (setf (field-value :locked house) nil)
     (let ((bag (new 'bag)))
       (add-inventory-item bag  (quantity-of 'ginseng 2))
@@ -39,7 +41,9 @@
 (defmethod activate ((house pentaquin-house))
   (if (field-value :locked house)
       (narrate "You don't have permission to enter Arturo's house.")
-      (replace-gump house (new 'browser :container house))))
+      (progn 
+	(replace-gump house (new 'browser :container house))
+	(set-objective "Search the northwestern woods for Alonso."))))  
 
 (defun random-house ()
   (with-border (units 6) (singleton (new 'house))))

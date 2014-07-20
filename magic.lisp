@@ -115,6 +115,13 @@ Or eat some Snowdrops.")
   (add-inventory-item caster (quantity-of 'silver-arrow 6))
   (narrate "You crafted 6 silver arrows."))
 
+(defparameter *silver-arrow-hint*
+"Double-click silver arrows
+in inventory to equip them.")
+
+(defmethod cast :after ((caster thing) (spell craft-silver-arrows))
+  (show-hint *silver-arrow-hint*))
+
 ;;; Travel
 
 (defthing (travel spell)
@@ -124,9 +131,9 @@ Or eat some Snowdrops.")
 
 (defmethod use :around ((caster thing) (spell travel))
   (if (nearby-enemies-p)
-      (narrate "You cannot travel when enemies are near!")
+      (bark (geoffrey) "Not with enemies nearby!")
       (if (not (traversed (current-scene)))
-	  (narrate "You have not yet traveled far enough.")
+	  (bark (geoffrey) (format nil "I need to travel farther ~A first." (string-downcase (symbol-name (compass-direction *travel-direction*)))))
 	  (call-next-method caster spell))))
 
 (defmethod cast ((caster thing) (spell travel))

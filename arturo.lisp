@@ -59,6 +59,7 @@
   (with-fields (met-player has-letter) self
     (if (not met-player)
 	(progn (setf met-player t)
+	       (set-objective "Ask Arturo about Dr. Quine.")
 	       (discuss self :hello))
 	(cond
 	  ((and (field-value :discussed-woods self)
@@ -250,6 +251,7 @@ and I'll give you enough supplies to get
 started on your journey." :bye :house)
 
 (defmethod discuss :after ((self arturo) (topic (eql :woods)))
+  (set-objective "Ask Arturo to unlock his house for you.") 
   (setf (field-value :discussed-woods self) t))
 
 (define-topic house arturo 
@@ -312,17 +314,18 @@ wealthier than a King one day."
     (when letter
       (destroy letter)
       (setf (field-value :has-letter arturo) t)
+      (set-objective "Find the southern cave and open the gates.")
       (drop arturo (quantity-of 'copper-gear 1)
 	    (units 5) (units 5)))))
 
 (define-topic southern-cave arturo
   "There is a Waystone just to the west
-of that cave, and south of
-Nothbehem. Follow the sextant's needle,
-and you'll find the stone. I hope you
-succeed in your quest to find Dr. Quine,
-and to understand your Origins and the
-meaning of your becoming a Traveler."
+of that cave, and south of Nothbehem.
+Follow the sextant's needle, and you'll
+find the stone. I hope you succeed in
+your quest to find Dr. Quine, and to
+understand your Origins and the meaning
+of your becoming a Traveler."
   :goodbye)
 
 (define-topic goodbye arturo

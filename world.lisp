@@ -1,5 +1,15 @@
 (in-package :cypress)
 
+(defvar *current-objective* nil)
+(defvar *objectives* nil)
+
+(defun set-objective (string)
+  (unless (find string *objectives* :test 'equal) 
+    (narrate "New objective: ~A" string)
+    (push string *objectives*)
+    (magical-flourish)
+    (setf *current-objective* string)))
+
 (defparameter *paused* nil)
 
 (defun pause () 
@@ -948,6 +958,7 @@
 
 (defparameter *quest-variables* '(*travel-direction* *geoffrey*
 				  *lucius* *updates* 
+				  *current-objective*
 				  *status-line*
 				  *previous-scene*
 				  *previous-x*

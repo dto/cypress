@@ -10,7 +10,6 @@
    :Effort:   0:15
    :END: 
 
-
 ** TODO [#A] improve generic skull seance lore
 ** TODO [#A] show quine summons hint
    

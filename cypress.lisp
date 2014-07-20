@@ -117,6 +117,8 @@ them onto Geoffrey.")
   (setf *font-texture-scale* 2)
   (setf *default-texture-filter* :mipmap)
   (setf *frame-rate* 30)
+  (setf *current-objective* nil)
+  (setf *objectives* nil)
   
   ;;  (setf *font* "sans-mono-bold-9") 
   (with-session 
