@@ -1,24 +1,61 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
-* 1.2
+* Story 
+** TODO [#A] improve generic skull seance lore
+** TODO [#A] Show opening movie and quine explanation
+** TODO [#A] Fix can visit wizards early
+
+** TODO [#A] Improve connection between Alistair and Owl quest
+** TODO [#A] Improve pre-wizard cave scene between 
+
+** TODO [#A] VALISADE. move monastery valisade ruins to near town
+*** TODO [#A] correct lucius monastery dialogue
+*** TODO Valisade Ruins basement scene.
+** TODO [#A] Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
+*** TODO it has no name, for it comes from a time before Language existed.
+*** TODO its purposes and its modes of conception are completely foreign to us
+*** TODO it created the Anvil disaster on purpose (via the chess game with Shayol) in order to harvest souls 
+*** TODO if it emerges into this time to feed upon the souls, its power will expand to eat planet after planet
+*** TODO Dr. Quine attempts to banish the entity by means of Logic, actuated by a computing machine
+*** TODO Geoffrey saves cypress and becomes the new soul
+*** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
+
+** TODO [#A] sextant should beep/notify point way to stone
+*** TODO [#A] correct Arturo's description of waystone/sextant
+
+** TODO [#A] make it more obvious that lucius has /joined/left the party
+** TODO [#A] Add more townspeople
+   :PROPERTIES:
+   :Effort:   2:00
+   :END:
+
+** TODO [#A] make sure credits are readable in-game
+** TODO [#B] townspeople should help teach game
+
+** TODO [#B] bring ashes to cairn in sidequest
+** TODO [#B] find a use for bone dust
+** TODO [#B] Add curved stone mini gardens, curved-stone-1.png
+
+* Improvements
 
 ** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
-** TODO [#A] add a *current-objective* string
 ** TODO [#A] escape should close all gumps
    :PROPERTIES:
    :Effort:   0:15
    :END: 
-
-** TODO [#A] improve generic skull seance lore
 ** TODO [#A] show quine summons hint
    
 ** TODO [#A] Fix can't pick up items partially obscured by geoffrey
+** TODO [#B] have lucius tell player to keep his distance
+*** TODO [#B] auto stop walking when enemy very close
+    :PROPERTIES:
+    :Effort:   0:30
+    :END:
 ** TODO [#A] Fix image stretching in inventory icons
    :PROPERTIES:
    :Effort:   1:00
    :END:
-** TODO [#A] Fix can visit wizards early
 ** TODO [#A] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
    :PROPERTIES:
    :Effort:   0:15
@@ -32,35 +69,13 @@
    :PROPERTIES:
    :Effort:   0:15
    :END: 
-
-** TODO [#A] sextant should beep/notify point way to stone
-*** TODO [#A] correct Arturo's description of waystone/sextant
-** TODO [#A] explain Resistance/Attack/Defense in-game
-*** TODO don't display ATK/RES/DEF until they change
-** TODO [#A] make it more obvious that lucius has /joined/left the party
+** TODO [#B] don't display ATK/RES/DEF until they change
 ** TODO [#A] fix more drop-behind-scroll issues
 ** TODO [#A] add easier to read life meter
-
-* 1.3
-
-** TODO [#A] VALISADE. move monastery valisade ruins to near town
-*** TODO [#A] correct lucius monastery dialogue
-*** TODO Valisade Ruins basement scene.
-** TODO [#A] Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
-*** TODO it has no name, for it comes from a time before Language existed.
-*** TODO its purposes and its modes of conception are completely foreign to us
-*** TODO it created the Anvil disaster on purpose (via the chess game with Shayol) in order to harvest souls 
-*** TODO if it emerges into this time to feed upon the souls, its power will expand to eat planet after planet
-*** TODO Dr. Quine attempts to banish the entity by means of Logic, actuated by a computing machine
-*** TODO Geoffrey saves cypress and becomes the new soul
-*** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
 ** TODO [#A] suppress SDL-GFX error 
 ** TODO [#A] save to ~/Library/Application Support/Cypress/cypress.sav on mac
 ** TODO [#A] save game to ~/.cypress.xelf on linux
-** TODO [#A] Explain the souls wandering, dreamlike state
 ** TODO [#A] more camping tooltips
-** DONE [#A] music should be a little more frequent
-   CLOSED: [2014-07-19 Sat 19:59]
 ** TODO [#A] Prompt to double-click arturo's house
 ** TODO [#A] should show bubble with "container is full" when can't accept
    :PROPERTIES:
@@ -75,11 +90,6 @@
    :Effort:   1:00
    :END:
 ** TODO [#A] text bubbles should not clip against the right edge of the screen
-
-** TODO [#A] Add more townspeople
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
 ** TODO [#A] should allow to click gear as well as plate to unlock puzzle
    :PROPERTIES:
    :Effort:   0:15
@@ -92,24 +102,20 @@
    :PROPERTIES:
    :Effort:   0:30
    :END:
-** TODO [#A] make sure credits are readable in-game
-** TODO [#B] townspeople should help teach game
 ** TODO [#B] Weather, cloud shadows, snow, rainloop
 ** TODO [#B] add by-topic notebook for scrolls, journal entries
 ** TODO [#B] in-inventory multi-move of quantities
 ** TODO [#B] fix onscreen enemies not pursuing
-** TODO [#B] have lucius tell player to keep his distance
-** TODO [#B] have geoffrey bark "I can't reach that" on drag-fail
+** DONE [#B] have geoffrey bark "I can't reach that" on drag-fail
+   CLOSED: [2014-07-20 Sun 04:37]
 ** TODO [#B] remove all 2nd-person references
 ** TODO [#B] auto-letter-label carried bags
-** TODO [#B] find a use for bone dust
 ** TODO [#B] show NPC name at top of talk-gump
 ** TODO [#B] tell user about picking up stuff (maybe Lucius comments on things again?)
 ** TODO [#B] change garden near arturo's to frozen-garden
 ** TODO [#B] fix potions and herbs to not trigger color blindness issues
 ** TODO [#B] suppress extra application window on Windows
 ** TODO [#B] puddles should be obstacles and cracks should surround 
-** TODO [#B] bring ashes to cairn in sidequest
 ** TODO [#B] expand arturo's beginning conversations. 
 ** TODO [#B] larger font/scroll options for visually impaired
 ** TODO [#B] Always register right-click on scroll even when pointer moves
@@ -133,10 +139,6 @@
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#B] auto stop walking when enemy very close
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
 ** TODO [#B] double click should not reset bow timer
 ** TODO [#B] Implement bleeding and blood tracks in the snow
    :PROPERTIES:
@@ -144,7 +146,6 @@
    :END:
 ** TODO [#B] Reduce attack/defense when very hungry
 ** TODO [#B] Add slight aim jitter when shivering/freezing
-** TODO [#B] Add curved stone mini gardens, curved-stone-1.png
 ** TODO [#B] Lucius should avoid monsters (are they :solid)?
 ** TODO [#B] Protection (15 mana) (1 nightshade)
    :PROPERTIES:
@@ -940,4 +941,32 @@
    :ARCHIVE_OLPATH: 1.2
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#A] add a *current-objective* string
+   CLOSED: [2014-07-20 Sun 04:32]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-20 Sun 04:32
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] explain Resistance/Attack/Defense in-game
+   CLOSED: [2014-07-20 Sun 04:34]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-20 Sun 04:34
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] music should be a little more frequent
+   CLOSED: [2014-07-19 Sat 19:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-20 Sun 04:35
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
    :END:
