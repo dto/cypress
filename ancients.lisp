@@ -19,6 +19,7 @@
 (defmethod activate ((waystone waystone))
   ;; (cue-music (current-scene) "flutism.ogg")
   (narrate "You feel a sense of contact with ancient memories.")
+  (mark-traversed (current-scene))
   (discuss waystone :confirm))
 
 (define-topic confirm waystone
@@ -303,27 +304,4 @@
 
 (defmethod find-description ((scene eastern-cave))
   "cave")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
