@@ -254,6 +254,17 @@ ground, and then cast Ignite. The tent
 will automatically return to your
 inventory when you travel away.
 
+Geoffrey has three stats: Attack,
+Defense, and Resistance. When Attack
+power is raised by equipping a weapon or
+casting a spell, Geoffrey's arrows do
+more damage. When Defense power is
+raised, Geoffrey is more resilient in
+the face of attacks. When Resistance is
+up, your resistance to cold is
+increased. High resistance makes you
+almost immune to cold.
+
 Press \"I\" to see Geoffrey's inventory.
 Press \"S\" to open the spellbook.
 Press \"M\" to open the travel map.
