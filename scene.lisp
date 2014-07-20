@@ -68,6 +68,7 @@
     ((:r :control) reset-game)
     ((:space) toggle-pause)
     ;; ((:f5) quicksave)
+    ;; ((:f10) quickload)
     ((:p) toggle-pause)
     ((:m) open-map)
     ((:s) open-spellbook)
@@ -77,6 +78,9 @@
 
 (define-method quicksave scene ()
   (save-quest))
+
+(define-method quickload scene ()
+  (load-quest))
     
 (define-method toggle-pause scene ()
   (setf *paused* (if *paused* nil t)))

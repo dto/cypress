@@ -3,26 +3,23 @@
 
 * 1.2
 
-** DONE [#A] Fix missing spellcasting animation
-   CLOSED: [2014-07-19 Sat 17:32]
-** TODO [#A] Fix sometimes missing bow animation and fire animation
+** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+** TODO [#A] add a *current-objective* string
+** TODO [#A] escape should close all gumps
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
 
-** TODO [#A] Fix items disappearing past 16th position in gump
 
+** TODO [#A] improve generic skull seance lore
+** TODO [#A] show quine summons hint
+   
+** TODO [#A] Fix can't pick up items partially obscured by geoffrey
 ** TODO [#A] Fix image stretching in inventory icons
    :PROPERTIES:
    :Effort:   1:00
    :END:
-
-** TODO [#A] Fix rendering bug with tooltip on map sector
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-
-** TODO [#A] Fix side quest consumed skull bug
-** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
 ** TODO [#A] Fix can visit wizards early
-** TODO [#A] Fix missing bow/arrow animations
 ** TODO [#A] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
    :PROPERTIES:
    :Effort:   0:15
@@ -37,24 +34,7 @@
    :Effort:   0:15
    :END: 
 
-** TODO [#A] Fix can't pick up items partially obscured by geoffrey
-
-
-** TODO [#A] Tell user which square is current, that they must click adjacent squares
-
-** TODO [#A] disable opening remains when enemies are near
-** TODO [#A] Coherent message when geoffrey's inventory full
-** TODO [#A] escape should close all gumps
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-
-** TODO [#A] start player with small supply of 6 firewood
-** TODO [#A] indicate bag fullover on gump
-** TODO [#A] disable tent as container
-** TODO [#A] don't allow dragging books into spellbook!
 ** TODO [#A] sextant should beep/notify point way to stone
-
 *** TODO [#A] correct Arturo's description of waystone/sextant
 ** TODO [#A] explain Resistance/Attack/Defense in-game
 *** TODO don't display ATK/RES/DEF until they change
@@ -80,7 +60,8 @@
 ** TODO [#A] save game to ~/.cypress.xelf on linux
 ** TODO [#A] Explain the souls wandering, dreamlike state
 ** TODO [#A] more camping tooltips
-** TODO [#A] music should be a little more frequent
+** DONE [#A] music should be a little more frequent
+   CLOSED: [2014-07-19 Sat 19:59]
 ** TODO [#A] Prompt to double-click arturo's house
 ** TODO [#A] should show bubble with "container is full" when can't accept
    :PROPERTIES:
@@ -94,9 +75,6 @@
    :PROPERTIES:
    :Effort:   1:00
    :END:
-** TODO [#A] improve generic skull seance lore
-** TODO [#A] add a *current-objective* string
-** TODO [#A] show quine summons hint
 ** TODO [#A] text bubbles should not clip against the right edge of the screen
 
 ** TODO [#A] Add more townspeople
@@ -833,6 +811,134 @@
    :PROPERTIES:
    :ARCHIVE_TIME: 2014-07-19 Sat 11:57
    :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#A] Fix missing spellcasting animation
+   CLOSED: [2014-07-19 Sat 17:32]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 18:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix sometimes missing bow animation and fire animation
+   CLOSED: [2014-07-19 Sat 18:05]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 18:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix items disappearing past 16th position in gump
+   CLOSED: [2014-07-19 Sat 18:05]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 18:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix rendering bug with tooltip on map sector
+   CLOSED: [2014-07-19 Sat 18:05]
+   :PROPERTIES:
+   :Effort:   0:15
+   :ARCHIVE_TIME: 2014-07-19 Sat 18:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix missing bow/arrow animations
+   CLOSED: [2014-07-19 Sat 18:06]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 18:06
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] disable opening remains when enemies are near
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 18:06
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** TODO [#A] Coherent message when geoffrey's inventory full
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 18:06
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [#A] disable tent as container
+   CLOSED: [2014-07-19 Sat 18:57]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 19:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix side quest consumed skull bug
+   CLOSED: [2014-07-19 Sat 19:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 19:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Tell user which square is current, that they must click adjacent squares
+   CLOSED: [2014-07-19 Sat 18:57]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 19:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] start player with small supply of 6 firewood
+   CLOSED: [2014-07-19 Sat 18:57]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 19:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] indicate bag fullover on gump
+   CLOSED: [2014-07-19 Sat 18:57]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 19:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] don't allow dragging books into spellbook!
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-19 Sat 19:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: 1.2
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: TODO
    :END:
