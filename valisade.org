@@ -2,27 +2,27 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Story 
-** TODO [#A] improve generic skull seance lore
-** TODO [#A] Show opening movie and quine explanation
-** TODO [#A] Fix can visit wizards early
 
-** TODO [#A] Improve connection between Alistair and Owl quest
-** TODO [#A] Improve pre-wizard cave scene between 
+** TODO [#A] Show intro and quine explanation
 
-** TODO [#A] VALISADE. move monastery valisade ruins to near town
-*** TODO [#A] correct lucius monastery dialogue
-*** TODO Valisade Ruins basement scene.
-** TODO [#A] Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
+** TODO Improve connection between Alistair and Owl quest
+** TODO Improve pre-wizard cave scene between 
+*** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
 *** TODO it has no name, for it comes from a time before Language existed.
 *** TODO its purposes and its modes of conception are completely foreign to us
 *** TODO it created the Anvil disaster on purpose (via the chess game with Shayol) in order to harvest souls 
 *** TODO if it emerges into this time to feed upon the souls, its power will expand to eat planet after planet
 *** TODO Dr. Quine attempts to banish the entity by means of Logic, actuated by a computing machine
-*** TODO Geoffrey saves cypress and becomes the new soul
+*** TODO in chapter 2 Geoffrey saves cypress and becomes the new soul
 *** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
-
-** TODO [#A] sextant should beep/notify point way to stone
-*** TODO [#A] correct Arturo's description of waystone/sextant
+** TODO Fix can visit wizards early
+** TODO Improve wizard scene
+** TODO VALISADE. move monastery valisade ruins to near town
+*** TODO Correct lucius monastery dialogue
+*** TODO Valisade Ruins basement scene
+** TODO improve generic skull seance lore
+** TODO sextant should beep/notify point way to stone
+*** TODO correct Arturo's description of waystone/sextant
 
 ** TODO [#A] make it more obvious that lucius has /joined/left the party
 ** TODO [#A] Add more townspeople
