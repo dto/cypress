@@ -1,7 +1,11 @@
 (in-package :cypress)
 
 (defparameter *amalia-report*
-"In Nothbehem before the Western Wars,
+"Official Report 
+of the Expedition to the Abyss
+38th Council of Nothbehem
+
+In Nothbehem before the Western Wars,
 there was born a girl-child, Amalia,
 with the seeming power of Premonition.
 
