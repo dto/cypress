@@ -88,9 +88,9 @@ your friend?"
 (define-topic traveler arturo 
 "Oh Lord, this is absolutely incredible.
 I never thought I would actually see a
-Time Traveler. They say you can live a
-thousand years without one passing
-through your life."
+Time Traveler. Can it really be true?
+They say you can live a thousand years
+without one passing through your life."
 :time-travel)
 
 (define-topic time-travel arturo 
@@ -101,7 +101,11 @@ the traveler experiencing the time in
 between. The magicks behind such events
 are unknown to me, but I can see from
 the design of your robes that you have
-come to us from a distant year." 
+come to us from a distant year. Come to
+think of it, for all my years of travel,
+your speech is of a lilt I cannot quite
+recognize. I sense you are telling the
+Truth."
 :quine :garden :town)
 
 (define-topic quine arturo 
