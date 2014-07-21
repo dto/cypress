@@ -22,7 +22,7 @@ whether to cross the Abyss. I wanted to
 find Amalia just as badly, but was too
 cowardly to volunteer. I cannot blame
 you, then, for the death of Alfonse.
-That blame lies on these bones, not
+That burden lies on these bones, not
 yours.
 
 I leave also my Ancient key, in the hope
