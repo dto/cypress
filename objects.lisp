@@ -45,19 +45,6 @@
 
 (defthing bone-dust :image (random-choose *bone-dust-images*))
 
-(defparameter *ancient-road-images* (image-set "ancient-road" 10))
-
-(defthing ancient-road
-  :tags '(:fixed)
-  :scale 3
-  :image (random-choose *ancient-road-images*))
-
-(defparameter *ancient-road-debris-images* (image-set "ancient-road-debris" 5))
-
-(defthing ancient-road-debris
-  :tags '(:fixed)
-  :image (random-choose *ancient-road-debris-images*))
-
 (defparameter *black-wolf-images* (image-set "black-wolf" 2))
 
 (defparameter *campfire-image* "campfire.png")
@@ -362,9 +349,7 @@ Press \"M\" to open the travel map.
       (narrate "Cannot search remains while enemies are near.")
       (replace-gump remains (new 'browser :container remains))))
 
-(defthing warrior-key :image "warrior-key.png")
-(defthing triangle-key :image "triangle-key.png")
-(defthing circle-key :image "circle-key.png")
+;; (defthing circle-key :image "circle-key.png")
 
 ;;; ruin walls
 
@@ -372,9 +357,6 @@ Press \"M\" to open the travel map.
   :scale 2.0
   :image (random-choose *ruin-wall-images*)
   :tags '(:fixed :solid))
-
-(defthing coverstone :tags '(:solid :fixed) :image (random-choose
-'("triangle-coverstone.png" "warrior-coverstone.png")))
 
 ;;; Various prizes
 
