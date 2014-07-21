@@ -66,12 +66,16 @@
      (stacked-up-randomly (random-house) (dead-trees) 
 			  (stacked-up-randomly
 			   (pentaquin-house)
+			   (singleton (new 'maxwell))
+			   (with-border (units 4) (singleton (new 'stone-patio)))
 			   (singleton (new 'silverwood))
 			   (lined-up-randomly
 			    (spray 'ruin-wall :trim t :count 2)
 			    (spray 'silverwood :trim t :count 2)
 			    (singleton (new 'ruin-wall))
+			   (with-border (units 4) (singleton (new 'stone-patio)))
 			    (stacked-up (singleton (new 'well))
 					(with-border (units 4) (singleton (new 'waystone))))
 			    (spray 'silverwood :trim t :count 2))
+			   (with-border (units 4) (singleton (new 'stone-patio)))
 			   (flowers))))))
