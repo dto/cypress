@@ -2,14 +2,17 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Story 
-
 ** TODO [#A] Replay entire story and take notes
-** TODO enlarge wolf hitbox 
+** TODO wax cylinder and key should be found in north ruins
+*** TODO north ruins and area should not be too cold, but should have snowy background and just ruin-wall and cobble and small-ruin
 ** TODO Skeleton archer sidequest near northern ruins to find key
 *** TODO [#B] bring ashes to cairn in sidequest
-*** TODO [#B] find a use for bone dust
+*** TODO [#B] something about a buried monk, find his tombstone and dig up the key
+
+** TODO enlarge wolf hitbox 
 ** TODO add unexpected ghostly lights
 ** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
+*** TODO move bone flute to valisade
 *** TODO use warrior key to unseal document later at Valisade
 *** TODO get protection spell and info at valisade
 *** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
@@ -23,11 +26,11 @@
 ** TODO [#C] check for more unused art
 ** TODO [#C] incorporate illegible map
 
-** TODO Improve connection between Alistair and Owl quest---- why does owl know quine is not dead? yet letter doesn't
+** TODO Connect ruins quests back to Owl quest
 ** TODO Improve pre-wizard cave scene and wax cylinder letter / events
 ** TODO Letter should tell player to look for morbius tent
 ** TODO Fix can visit wizards early
-** TODO Improve wizard scene
+** TODO Improve owl and wizard scenes
 
 ** TODO sextant should beep/notify point way to stone
 *** TODO correct Arturo's description of waystone/sextant
