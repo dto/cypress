@@ -114,9 +114,6 @@
 (defthing (large-mountain scene))
 (defmethod can-be-visited ((scene large-mountain)) nil)
 
-(defthing (valisade scene))
-(defmethod can-be-visited ((scene valisade)) nil)
-
 (defmethod cue-music ((scene scene) music)
   (when *use-music*
     (play-music music)))
@@ -433,9 +430,9 @@
 (defmethod make-terrain ((meadow meadow))
   (with-border (units 12)
     (lined-up-randomly 
-     (stacked-up-randomly  (dead-tree) (flowers) (some-trees))
+     (stacked-up-randomly (dead-tree) (singleton (new 'small-ruin)) (flowers) (some-trees))
      (stacked-up-randomly (wood-pile) (flowers) (clearing) (meadow-debris))
-     (stacked-up-randomly (some-trees) (flowers) (flowers)))))
+     (stacked-up-randomly (some-trees) (singleton (new 'stone-patio)) (flowers) (flowers)))))
 
 (defmethod begin-scene :after ((meadow meadow))
   (let ((geoffrey (geoffrey)))
