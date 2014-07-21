@@ -33,9 +33,21 @@
   ;; (setf (field-value :gump waystone) nil)
   (save-quest))
 
+(defthing small-ruin 
+  :tags '(:fixed)
+  :image "small-ruin.png"
+  :description "strange stone ruin"
+  :scale 1.6)
+
+(defthing stone-patio 
+  :tags '(:fixed)
+  :image "ruined-patio.png"
+  :description "stone patio"
+  :scale 1.6)
+
 (defthing stone-of-remembrance 
-  :scale 1.2
-  :image "triangle-coverstone.png"
+  :scale 1.5
+  :image "curved-stone-1.png"
   :tags '(:fixed :solid)
   :description "stone of remembrance")
 
