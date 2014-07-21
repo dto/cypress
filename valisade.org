@@ -3,21 +3,15 @@
 
 * Story 
 
-** TODO get warrior key at foothills ruin
-** TODO get protection spell and info at valisade
-** DONE change stone of remembrance graphic to round stone; 
-   CLOSED: [2014-07-20 Sun 18:45]
-** TODO use warrior key to unseal document later
-** TODO unexpected lights
-
 ** TODO [#A] Replay entire story and take notes
-** DONE put small ruined building near stone of remembrance
-   CLOSED: [2014-07-20 Sun 19:14]
-** TODO check for more unused art
-** TODO incorporate illegible map
-** TODO VALISADE. move monastery valisade ruins to near town using old ochre road tiles on yellow grass
-*** TODO Correct lucius monastery dialogue
-*** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
+** TODO enlarge wolf hitbox 
+** TODO Skeleton archer sidequest near northern ruins to find key
+*** TODO [#B] bring ashes to cairn in sidequest
+*** TODO [#B] find a use for bone dust
+** TODO add unexpected ghostly lights
+** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
+*** TODO use warrior key to unseal document later at Valisade
+*** TODO get protection spell and info at valisade
 *** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
 **** TODO it has no name, for it comes from a time before Language existed.
 **** TODO its purposes and its modes of conception are completely foreign to us
@@ -26,17 +20,19 @@
 **** TODO Dr. Quine attempts to banish the entity by means of Logic, actuated by a computing machine
 **** TODO in chapter 2 Geoffrey saves cypress and becomes the new soul
 **** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
+** TODO [#C] check for more unused art
+** TODO [#C] incorporate illegible map
 
-** TODO [#A] Show intro blank screen with letter and scroll gump, (even just a card) and quine explanation
 ** TODO Improve connection between Alistair and Owl quest---- why does owl know quine is not dead? yet letter doesn't
 ** TODO Improve pre-wizard cave scene and wax cylinder letter / events
 ** TODO Letter should tell player to look for morbius tent
-** TODO Skeleton archer sidequest
 ** TODO Fix can visit wizards early
 ** TODO Improve wizard scene
-** TODO improve generic skull seance lore
+
 ** TODO sextant should beep/notify point way to stone
 *** TODO correct Arturo's description of waystone/sextant
+
+** TODO [#A] Show intro blank screen with letter and scroll gump, (even just a card) and quine explanation
 ** TODO [#A] make it more obvious that lucius has /joined/left the party
 ** TODO [#A] Add more townspeople
    :PROPERTIES:
@@ -45,8 +41,6 @@
 *** TODO [#B] townspeople should help teach game
 
 ** TODO [#A] make sure credits are readable in-game
-** TODO [#B] bring ashes to cairn in sidequest
-** TODO [#B] find a use for bone dust
 ** TODO [#B] Add curved stone mini gardens, curved-stone-1.png
 
 ** TODO how did wax cylinder survive fire? work this out...
@@ -984,3 +978,35 @@
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE change stone of remembrance graphic to round stone;
+   CLOSED: [2014-07-20 Sun 18:45]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-21 Mon 05:55
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE put small ruined building near stone of remembrance
+   CLOSED: [2014-07-20 Sun 19:14]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-21 Mon 05:55
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE VALISADE. move monastery valisade ruins to near town using old ochre road tiles on yellow grass
+   CLOSED: [2014-07-21 Mon 05:55]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-21 Mon 05:56
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE Correct lucius monastery dialogue
+    CLOSED: [2014-07-21 Mon 05:55]

@@ -12,6 +12,14 @@
 
 (defparameter *paused* nil)
 
+(defvar *events* nil)
+
+(defun add-event (key)
+  (pushnew key *events* :test 'eq))
+
+(defun event-occurred-p (key)
+  (find key *events* :test 'eq))
+
 (defun pause () 
   (setf *paused* t))
 
@@ -957,17 +965,10 @@
     results))
 
 (defparameter *quest-variables* '(*travel-direction* *geoffrey*
-				  *lucius* *updates* 
-				  *current-objective*
-				  *status-line*
-				  *previous-scene*
-				  *previous-x*
-				  *previous-y*
-				  *status-messages*
-				  *status-message-time*
-				  *last-status-message-time*
-				  *map-screen* *map-row* *map-column*
-				  *current-scene*))
+*lucius* *updates* *events* *current-objective*
+*status-line* *previous-scene* *previous-x* *previous-y*
+*status-messages* *status-message-time* *last-status-message-time*
+*map-screen* *map-row* *map-column* *current-scene*))
 
 (defun flatten-variable (sym)
   (list sym (flatten (symbol-value sym))))

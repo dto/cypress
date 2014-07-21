@@ -54,7 +54,14 @@
 (defmethod activate ((self maxwell))
   (destroy-gump self)
   (play-talk-sound self)
-  (discuss self :hello))
+  (if (event-occurred-p :completed-alonso-quest)
+      (discuss self :hello)
+      (discuss self :busy)))
+
+(define-topic busy maxwell 
+  "Oh, hello! So much to do. I'm
+terribly busy right now. Please come
+back later!" :bye)
 
 (define-topic hello maxwell "Good morning!" :name)
 (define-topic name maxwell 
@@ -163,5 +170,112 @@ your tankard, let the pages of my
 notebook fill with your stories, when
 you return!" :bye)
 
+;;; Madeline
 
+(defthing (madeline monk) 
+  :next-target nil
+  :description "Madeline")
 
+(defparameter *madeline-walk* 
+  '(:repeat t
+    :scale 1000
+    :frames (("woman-walk-1.png" 4)
+	     ("woman-walk-3.png" 4)
+	     ("woman-walk-2.png" 4)
+	     ("woman-walk-4.png" 4))))
+
+(defmethod walking-animation ((self madeline))
+  *madeline-walk*)
+
+(defparameter *madeline-stand*
+  '(:scale 1000
+    :frames (("woman-stand-1.png" 19)
+	     ("woman-stand-2.png" 16)
+	     ("woman-stand-3.png" 24))))
+
+(defmethod standing-animation ((self madeline))
+  *madeline-stand*)
+
+(defmethod choose-target ((self madeline))
+  (setf (field-value :next-target self)
+	(let ((targets (find-instances (current-scene) 'flower)))
+	  (when targets (random-choose targets)))))
+
+(defmethod run ((self madeline))
+  (with-fields (next-target gump waypoints) self
+    (call-next-method)
+    (unless gump (choose-target self))
+    (let ((distance (distance-between (geoffrey) self)))
+      (cond 
+	((and (> distance 500)
+	     (not gump))
+	 (when (and next-target (null waypoints))
+	   (percent-of-time 2 (walk-to-thing self next-target))))
+	((and (< distance 220) (> distance 200))
+	 (show-hint "Double-click Madeline to talk.")
+	 (when gump (walk-to-thing self (geoffrey))))
+	((or gump (<= distance 200))
+	 (setf waypoints nil))))))
+
+(defmethod activate ((self madeline))
+  (destroy-gump self)
+  (play-talk-sound self)
+  (discuss self :hello))
+
+(define-topic hello madeline 
+  "Well hello there! And who might you
+be?" :i-am-geoffrey-of-valisade)
+
+(define-topic i-am-geoffrey-of-valisade madeline 
+  "Good day to you, Geoffrey.
+My name is Madeline Montana. You must be
+from out of town? Um, oh, hum, I'm sorry
+but my daughter and I must be
+going. We're quite busy!" :bye)
+
+;;; Maribel
+
+(defthing (maribel monk) 
+  :next-target nil
+  :description "Maribel")
+
+(defparameter *maribel-walk* 
+  '(:repeat t
+    :scale 980
+    :frames (("girl-walk-1.png" 4)
+	     ("girl-walk-3.png" 4)
+	     ("girl-walk-2.png" 4)
+	     ("girl-walk-4.png" 4))))
+
+(defmethod walking-animation ((self maribel))
+  *maribel-walk*)
+
+(defparameter *maribel-stand*
+  '(:scale 980
+    :frames (("girl-stand-1.png" 19)
+	     ("girl-stand-2.png" 16)
+	     ("girl-stand-3.png" 24))))
+
+(defmethod standing-animation ((self maribel))
+  *maribel-stand*)
+
+(defmethod choose-target ((self maribel))
+  (setf (field-value :next-target self)
+	(let ((targets (find-instances (current-scene) 'madeline)))
+	  (when targets (random-choose targets)))))
+
+(defmethod run ((self maribel))
+  (with-fields (next-target gump waypoints) self
+    (call-next-method)
+    (unless gump (choose-target self))
+    (when next-target
+      (let ((distance (distance-between self next-target)))
+      (cond 
+	((> distance 320)
+	 (when (and next-target (null waypoints))
+	   (percent-of-time 2 (walk-to-thing self next-target))))
+	((or gump (<= distance 200))
+	 (setf waypoints nil)))))))
+
+(defmethod activate ((self maribel))
+  (bark self (random-choose '("I'm five years old!" "Hi there!" "Where's my teddy bear?" "I love birds." "Hey." "Hello."))))

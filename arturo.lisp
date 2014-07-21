@@ -318,6 +318,7 @@ wealthier than a King one day."
     (when letter
       (destroy letter)
       (setf (field-value :has-letter arturo) t)
+      (add-event :completed-alonso-quest)
       (set-objective "Find the southern cave and open the gates.")
       (drop arturo (quantity-of 'copper-gear 1)
 	    (units 5) (units 5)))))

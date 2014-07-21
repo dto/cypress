@@ -122,6 +122,7 @@ replies to him.
 (defmethod make-terrain ((scene ruined-hamlet))
   (with-border (units 10)
     (lined-up-randomly
+     (stacked-up-randomly (dead-trees) (singleton (new 'stone-patio)))
      (stacked-up-randomly (singleton (new 'ruin-wall)) (singleton (new 'ruined-house)) (singleton (new 'well)) (dead-trees))
      (stacked-up-randomly  (singleton (new 'ruined-house)) (singleton (new 'ruin-wall)) (hamlet-house) (singleton (new 'roberto-wraith)) (dead-trees)))))
 

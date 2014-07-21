@@ -78,4 +78,6 @@
 					(with-border (units 4) (singleton (new 'waystone))))
 			    (spray 'silverwood :trim t :count 2))
 			   (with-border (units 4) (singleton (new 'stone-patio)))
+			   (with-border (units 3) (lined-up (singleton (new 'madeline))
+							    (singleton (new 'maribel))))
 			   (flowers))))))

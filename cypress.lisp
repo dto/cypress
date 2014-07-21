@@ -118,6 +118,7 @@ them onto Geoffrey.")
   (setf *frame-rate* 30)
   (setf *current-objective* nil)
   (setf *objectives* nil)
+  (setf *events* nil)
   
   ;;  (setf *font* "sans-mono-bold-9") 
   (with-session 
