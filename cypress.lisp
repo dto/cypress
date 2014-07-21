@@ -73,7 +73,6 @@ them onto Geoffrey.")
 	  (ildron)
 	  (current-buffer)))))
 
-
 ;;; Title screen
 
 (defresource "title-sbcl.png")
@@ -102,7 +101,7 @@ them onto Geoffrey.")
 ;;; Main game
 
 (defun cypress (&optional (level 1))
-  (setf *window-title* "Cypress v1.2")
+  (setf *window-title* "Cypress v1.3")
   (setf *screen-width* 1280)
   (setf *screen-height* 720)
   (setf *nominal-screen-width* 1680)
