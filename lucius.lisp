@@ -205,15 +205,16 @@ because of the mountain trade
 routes. Now it's a frigid ruin, but
 Nothbehem and a few other towns remain
 in the warmer South. I've not been far
-to the northeast, but I bet my
-grandfather will know more."
+into the frigid regions up Northeast,
+but I bet my grandfather will know
+more."
 :name :town :grandfather :wraith)
 
 (define-topic job lucius 
-"I'm a librarian at the Nothbehem
-monastery. I'm also a maker and mender
-of shirts, shoes, pants, robes, and
-leather armor." :town :robes :quine :vale)
+"I'm a librarian, and jack-of-all-trades
+besides. I'm also a maker and mender of
+shirts, shoes, pants, robes, and leather
+armor." :town :robes :quine :vale)
 
 (define-topic quine lucius 
 "I don't think I've met anyone named
@@ -251,7 +252,7 @@ stories and read all the old books."
 (define-topic books lucius 
   "There are plenty of books, maps, and
 scrolls at the Library where I work. 
-You should visit the Monastery in town." 
+You should visit the town sometime!"
 :town)
 
 (define-topic town lucius 
