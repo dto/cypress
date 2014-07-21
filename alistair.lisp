@@ -73,8 +73,8 @@
 with Spirit. A Spirit I must work hard
 to maintain, seeing as my creators are
 long-gone, and my fellow mecha-monks are
-all so busy studying in other
-caves." :mecha :creators)
+all so busy studying in other caves." 
+:mecha :creators)
 
 (defmethod discuss :after ((alistair alistair) (topic (eql :name)))
   (setf (field-value :met-player alistair) t))
@@ -104,7 +104,7 @@ must warn you of at least that." :quine :creators :mecha)
   "Oh, that's a tricky one. I'll let
 Quine's letter explain the situation.
 As I said---I'm not allowed to jump
-ahead of the tale." :quine)
+ahead of the tale." :quine :wizards :mecha)
 
 (define-topic quine alistair 
   "I hold here a letter for Geoffrey of
@@ -114,10 +114,7 @@ arrival through the gate of the Southern
 Cave." :letter)
 
 (define-topic letter alistair
-  "Here it is! Oh, and there's a bone
-flute for you too. Not sure how that's
-going to be useful, but I'm sure you'll
-have fun with it! And that finishes my
+  "Here it is! And that finishes my
 duties for now. I'm quite busy,
 actually, organizing all these
 books. So.. umm...." :bye :talk-more)
@@ -128,10 +125,8 @@ about?" :mecha :creators :wizards :quine :bye)
 
 (defmethod discuss :after ((alistair alistair) (topic (eql :letter)))
   (when (not (field-value :given-letter alistair))
-    (drop alistair (make-scroll "First letter from Dr. Quine" *first-quine-letter*)
+    (drop alistair (make-scroll "Letter from Dr. Quine" *first-quine-letter*)
 	  (units 3) (units 3))
-    (drop alistair (new 'bone-flute)
-	  (units 4) (units 4))
     (set-objective "Find the Screech Owl in the forests to the North.")
     (setf (field-value :given-letter alistair) t)))
 

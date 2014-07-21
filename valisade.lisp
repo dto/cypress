@@ -34,7 +34,7 @@
 (defmethod make-terrain ((scene valisade-basement))
   (with-border (units 12)
     (lined-up (with-border (units 3) (singleton (new 'crumbling-stairwell)))
-		(lined-up (spray '(ruined-book silver-book) :trim t :count 6) (singleton (new 'item-box)))
+		(lined-up (spray '(ruined-book silver-book) :trim t :count 6) (singleton (new 'bone-flute)))
 		(singleton (new 'cryptghast)))))
 
 ;;; Warrior sigil gateway into valisade
@@ -186,7 +186,7 @@ enormous stone ruin.")
 
 (defmethod find-description ((self northern-ruins)) 
   (if (field-value :generated self)
-      "northern ruins"
+      "ruined outpost"
       "frozen clearing"))
 
 (defmethod map-icon ((self northern-ruins))
@@ -195,21 +195,31 @@ enormous stone ruin.")
       "frozen-forest-1.png"))
 
 (defparameter *outpost-hint*
-"This appears to be a ruined Balsalvan
-outpost or settlement.")
+"This appears to be a ruined outpost or
+settlement.")
 
 (defmethod begin-scene :after ((self northern-ruins))
   (percent-of-time 30 (cue-music self (random-choose '("ancient-fanfare.ogg" "kosmium.ogg" "monks.ogg" "passageway.ogg"))))
   (show-hint *outpost-hint*))
 
+(defmethod expend-travel-cost ((self northern-ruins))
+  (modify-hunger (geoffrey) +6)
+  (chill (geoffrey) +40))
+
 (defmethod make-terrain ((self northern-ruins))
   (with-border (units 15)
     (with-border (units 12)
-      (stacked-up
-       (singleton (new 'triangle-sigil))
-       (spray '(ancient-road-debris ancient-road ancient-road) 
+      (stacked-up-randomly
+       (spray '(ruin-wall ancient-road-debris dead-tree ancient-road cobblestone) 
 	      :trim t
-	      :count 15)))))
+	      :count 12)
+       (lined-up-randomly
+	(dead-trees) (singleton (new 'triangle-sigil)))
+       (spray '(ruin-wall ancient-road-debris dead-tree ancient-road cobblestone) 
+	      :trim t
+	      :count 12)))))
+
+
 
 
 
