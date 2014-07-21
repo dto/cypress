@@ -173,28 +173,22 @@ You stand on the soil of of a continent
 ten thousand years older than the land
 you left. 
 
-A continent whose very Souls are in
-peril! A land you must rescue, if
-Justice is to be brought, and if the
-Souls of Ildron are to be saved from
-wandering in Shadow.
-
-Your brother and I have begun to
-reconstruct what happened in the
-centuries after our disappearance. It
-would seem that Valisade became the seat
-of a vast imperial power due to its
-harnessing of the magic mineral
-Xalcium. Valisade's warrior-priest kings
-ruled over Ildron for a thousand years,
-but this was disrupted by a sudden
-catastrophe whose cause and nature are
-not yet fully clear to us. An explosion
-of some kind, perhaps a volcanic
-eruption, obliterated completely the
-isles of Einhall and Mir; much of the
-surrounding coastal areas were laid
-waste.
+With painstaking archaeological
+research, we have begun to reconstruct
+what happened in the centuries after our
+disappearance. It would seem that
+Valisade became the seat of a vast
+imperial power due to its harnessing of
+the magic mineral Xalcium. Valisade's
+warrior-priest kings ruled over Ildron
+for a thousand years, but this was
+disrupted by a sudden catastrophe whose
+cause and nature are not yet fully clear
+to us. An explosion of some kind,
+perhaps a volcanic eruption, obliterated
+completely the isles of Einhall and Mir;
+much of the surrounding coastal areas
+were laid waste.
 
 A rain of ash fell over the entire
 continent; this was followed by a year
@@ -204,16 +198,42 @@ clouds. The pollution of the water
 supply and failure of their crops led to
 widespread famine, disease, and death.
 
-We will tell you more in our next
-letter. In the meantime, you must seek
-out the Screech Owl; she will be waiting
-for you in a forest due North of here.
+We have yet to discern what dark Magicks
+conspired in the making of these events.
+We do know that the sudden rediscovery
+of Xalcium occurred soon after the
+famous appearance of a Traveler, whose
+name is variously given as Shane or
+Samuel.
+
+Though his motives are unknown, this
+\"Shane\" became a powerful Mage, and
+used Xalcium to extend his lifespan. For
+we find references to a Samuel and a
+Shamal, not only at the time of
+Xalcium's first harnessing, but also
+just before the great Disaster whose ash
+layer can be found everywhere beneath
+the soil.
+
+I must wait upon the ebbing of the river
+to dig more, uncover more ruins, and
+find more documents in order to
+understand what has happened to
+Ildron. In the meantime, I have
+entrusted three Copper Gears to the
+Order of the Screech Owls; seek them out
+in the forests to the North, and they
+will guide you to our next point of
+contact.
 
 -- Dr. Quine
 ")
 
 (defparameter *wax-cylinder-letter*
-"The alliance between the Black Wizards
+"(the top of the scroll is crumbled)
+
+The alliance between the Black Wizards
 and the Industrialists sparked the
 invention of a most extraordinary
 machine. The Wizards had secretly
