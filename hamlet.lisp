@@ -43,11 +43,6 @@ Cylindrophone when we split up the
 party, so you should send your
 replies to him. 
 
-We are concerned about that hermit up
-North of here. Can you tell us anything
-about him? Do you have any agents in
-those woods?...
-
  *the rest of the scroll is blackened*
 ")
 
