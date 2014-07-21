@@ -33,15 +33,16 @@
 
 (defparameter *terrain-classes* '(forest frozen-forest meadow cave
   grassy-meadow cold-meadow frozen-meadow ruins ruined-hamlet river
-  valisade highway alonso-ruins amalia-ruins nothbehem southern-cave
-  eastern-cave wizard-ruins garden southeastern-cave cemetery
-  owl-garden))
+  northern-ruins valisade highway alonso-ruins amalia-ruins nothbehem
+  southern-cave eastern-cave wizard-ruins garden southeastern-cave
+  cemetery owl-garden))
 
 (defparameter *terrain-icons* 
   (list 'forest *forest-icons*
 	'frozen-forest *frozen-forest-icons*
 	'nothbehem (list *home-image*)
 	'alonso-ruins *ruins-icons*
+	'northern-ruins *ruins-icons*
 	'amalia-ruins *frozen-forest-icons*
 	'southern-cave (list *road-image*)
 	'southeastern-cave (list *road-image*)
@@ -89,6 +90,13 @@
 
 (defun map-column ()
   *map-column*)
+
+(defmethod draw :before ((sector sector))
+  ;; silly hack
+  (when (or (typep (field-value :scene sector) (find-class 'valisade))
+	    (typep (field-value :scene sector) (find-class 'northern-ruins)))
+    (setf (field-value :image sector)
+	  (map-icon (field-value :scene sector)))))
 
 (defmethod draw ((sector sector))
   (with-fields (x y width height image row column) sector
@@ -159,12 +167,12 @@
      large-mountain large-mountain large-mountain
      large-mountain)
 
-    (large-mountain frozen-meadow cold-meadow 
-     cold-meadow frozen-forest frozen-meadow 
+    (large-mountain frozen-meadow frozen-meadow 
+     northern-ruins frozen-forest frozen-meadow 
      frozen-forest large-mountain amalia-ruins
-     valisade)
+     large-mountain)
 
-    (cold-meadow cold-meadow forest
+    (frozen-meadow frozen-forest frozen-forest
      frozen-meadow cold-meadow ruins 
      cemetery large-mountain river
      large-mountain)
@@ -179,7 +187,7 @@
      cold-meadow frozen-forest frozen-meadow
      large-mountain)
 
-     (ruined-hamlet cold-meadow cold-meadow
+     (ruined-hamlet cold-meadow valisade
       forest grassy-meadow forest
       cold-meadow forest frozen-forest
       large-mountain)
