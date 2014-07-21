@@ -203,11 +203,11 @@ those ages, the Sun was hotter than it
 is now, and Eavesbury was a busy town
 because of the mountain trade
 routes. Now it's a frigid ruin, but
-Nothbehem and a few other towns remain
-in the warmer South. I've not been far
-into the frigid regions up Northeast,
-but I bet my grandfather will know
-more."
+Nothbehem and a few other farming towns
+remain in the warmer South. I've not
+been far into the frigid regions up
+Northeast, but I bet my grandfather will
+know more."
 :name :town :grandfather :wraith)
 
 (define-topic job lucius 
