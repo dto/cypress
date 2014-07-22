@@ -174,6 +174,17 @@ in inventory to equip them.")
 	  (add-stasis target (random-choose '(12 14 17))))
 	(narrate "The enemy has fallen into stasis!")))))
 
+;;; Translation
+
+(defthing (translation spell)
+  :description "Translation (10 mp, 2 nightshade)"
+  :image "mind.png"
+  :reagents '(:magic 10 nightshade 2))
+
+(defmethod cast ((caster thing) (spell translation))
+  (narrate "You sense the ability to read ancient languages. (Duration: 90 seconds.)")
+  (enable-translation (geoffrey)))
+
 ;;; Spellbook 
 
 (defthing spellbook :image "notebook-2.png")

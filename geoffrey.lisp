@@ -6,7 +6,18 @@
 
 (defun geoffrey () *geoffrey*)
   
-(defthing (geoffrey monk) :description "Geoffrey" :hints nil)
+(defthing (geoffrey monk) :description "Geoffrey" :hints nil :translation-timer 0)
+
+(defmethod enable-translation ((self geoffrey))
+  (setf (field-value :translation-timer self) (seconds->frames 90)))
+
+(defmethod can-translate ((self geoffrey))
+  (plusp (field-value :translation-timer self)))
+
+(defmethod update-translation ((self geoffrey))
+  (with-fields (translation-timer) self
+    (when (plusp translation-timer)
+      (decf translation-timer))))
 
 (defmethod after-revive ((geoffrey geoffrey))
   (setf (field-value :path geoffrey) nil)
@@ -194,6 +205,7 @@ inventory and find something to eat.
 ;;; Keeping geoffrey on the map
 
 (defmethod run :after ((geoffrey geoffrey))
+  (update-translation geoffrey)
   (unless (bounding-box-contains (multiple-value-list (bounding-box (current-scene)))
 				 (multiple-value-list (bounding-box geoffrey)))
     (stop-walking geoffrey)
