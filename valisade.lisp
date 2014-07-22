@@ -15,7 +15,12 @@
 (defmethod activate ((book ancient-book))
   (bark (geoffrey) "I can't read this language."))
 
-;;; The basement
+;;; Monk keys
+
+(defthing warrior-key :image "warrior-key.png")
+(defthing triangle-key :image "triangle-key.png")
+
+;;; Valisade basement
 
 (defthing (valisade-basement scene)
   :darkness-image "darkness.png"
@@ -37,27 +42,24 @@
 		(lined-up (spray '(ruined-book silver-book) :trim t :count 6) (singleton (new 'bone-flute)))
 		(singleton (new 'cryptghast)))))
 
-;;; Warrior sigil gateway into valisade
+;;; Triangle sigil into valisade
 
-(defthing warrior-key :image "warrior-key.png")
-(defthing triangle-key :image "triangle-key.png")
-
-(defthing warrior-sigil
+(defthing triangle-sigil
   :tags '(:solid :fixed) 
-  :image "warrior-coverstone.png"
+  :image "triangle-coverstone.png"
   :scale 1.2
   :scene nil
   :open nil)
 
-(defmethod find-description ((self warrior-sigil))
+(defmethod find-description ((self triangle-sigil))
   (if (field-value :open self)
       "crumbling stairwell"
-      "warrior sigil"))
+      "triangle sigil"))
 
-(defmethod activate ((self warrior-sigil))
+(defmethod activate ((self triangle-sigil))
   (with-fields (open image scene) self
     (if (not open)
-	(when (find-inventory-item (geoffrey) 'warrior-key)
+	(when (find-inventory-item (geoffrey) 'triangle-key)
 	  (setf open t)
 	  (narrate "The ancient coverstone opens.")
 	  (setf image (random-choose *ancient-stairwell-images*)))
@@ -88,24 +90,24 @@
 	      (singleton (new 'warrior-key))
 	      (singleton (new 'silver-book)))))
 
-;;; Triangle sigil into outpost
+;;; Warrior sigil gateway into outpost
 
-(defthing triangle-sigil
+(defthing warrior-sigil
   :tags '(:solid :fixed) 
-  :image "triangle-coverstone.png"
+  :image "warrior-coverstone.png"
   :scale 1.2
   :scene nil
   :open nil)
 
-(defmethod find-description ((self triangle-sigil))
+(defmethod find-description ((self warrior-sigil))
   (if (field-value :open self)
       "crumbling stairwell"
-      "triangle sigil"))
+      "warrior sigil"))
 
-(defmethod activate ((self triangle-sigil))
+(defmethod activate ((self warrior-sigil))
   (with-fields (open image scene) self
     (if (not open)
-	(when (find-inventory-item (geoffrey) 'triangle-key)
+	(when (find-inventory-item (geoffrey) 'warrior-key)
 	  (setf open t)
 	  (narrate "The ancient coverstone opens.")
 	  (setf image (random-choose *ancient-stairwell-images*)))
