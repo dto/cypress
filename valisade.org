@@ -2,13 +2,18 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Story 
-** TODO [#A] Replay entire story and take notes
-** TODO wax cylinder and key should be found in north ruins
-*** TODO north ruins and area should not be too cold, but should have snowy background and just ruin-wall and cobble and small-ruin
+** TODO find an ancient silver book in the 
+*** TODO note to ask Maxwell
+*** TODO bring book to maxwell, he will speak of translation spell,
+*** TODO find translation spell
+*** TODO silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
+** TODO Replay entire story and take notes
+** TODO wax cylinder should be found in north ruins
+** TODO find ancient map
 ** TODO Skeleton archer sidequest near northern ruins to find key
 *** TODO [#B] bring ashes to cairn in sidequest
 *** TODO [#B] something about a buried monk, find his tombstone and dig up the key
-
+** TODO add cool enemy at outpost
 ** TODO enlarge wolf hitbox 
 ** TODO add unexpected ghostly lights
 ** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
@@ -1013,3 +1018,13 @@
    :END:
 *** DONE Correct lucius monastery dialogue
     CLOSED: [2014-07-21 Mon 05:55]
+
+** DONE north ruins and area should not be too cold, but should have snowy background and just ruin-wall and cobble and small-ruin
+   CLOSED: [2014-07-22 Tue 00:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-22 Tue 00:28
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story/wax cylinder and key should be found in north ruins
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
