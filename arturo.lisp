@@ -335,7 +335,15 @@ of your becoming a Traveler."
 
 (define-topic goodbye arturo
 "Fare thee well, Geoffrey. You will be
-in my prayers and meditations." :bye)
+in my prayers and meditations.
+
+Oh, one more thing! You should stop and
+talk to Maxwell before you leave
+town. He is an archaeologist, and knows
+more about the Ancients than
+anyone. Perhaps he will be able to help
+you.
+" :bye)
 
 
 	  
