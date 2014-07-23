@@ -33,9 +33,9 @@
 
 (defparameter *terrain-classes* '(forest frozen-forest meadow cave
   grassy-meadow cold-meadow frozen-meadow ruins ruined-hamlet river
-  northern-ruins valisade highway alonso-ruins amalia-ruins nothbehem
-  southern-cave eastern-cave wizard-ruins garden southeastern-cave
-  cemetery owl-garden))
+  retreat northern-ruins valisade highway alonso-ruins amalia-ruins
+  nothbehem southern-cave eastern-cave wizard-ruins garden
+  southeastern-cave cemetery owl-garden))
 
 (defparameter *terrain-icons* 
   (list 'forest *forest-icons*
@@ -53,6 +53,7 @@
 	'cold-meadow *cold-meadow-icons*
 	'frozen-meadow *frozen-meadow-icons*
 	'ruins *ruins-icons*
+	'retreat *frozen-meadow-icons*
 	'wizard-ruins *ruins-icons*
 	'ruined-hamlet *ruins-icons*
 	'river *river-icons*
@@ -94,6 +95,7 @@
 (defmethod draw :before ((sector sector))
   ;; silly hack
   (when (or (typep (field-value :scene sector) (find-class 'valisade))
+	    (typep (field-value :scene sector) (find-class 'retreat))
 	    (typep (field-value :scene sector) (find-class 'northern-ruins)))
     (setf (field-value :image sector)
 	  (map-icon (field-value :scene sector)))))
@@ -167,7 +169,7 @@
      large-mountain large-mountain large-mountain
      large-mountain)
 
-    (large-mountain frozen-meadow frozen-meadow 
+    (large-mountain retreat frozen-meadow
      northern-ruins frozen-forest frozen-meadow 
      frozen-forest large-mountain amalia-ruins
      large-mountain)
