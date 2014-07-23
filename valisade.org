@@ -2,10 +2,10 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Story 
-** TODO find an ancient silver book in the 
+** TODO have arturo give you a silver book whose contents are untranslated
 *** TODO note to ask Maxwell
 *** TODO bring book to maxwell, he will speak of translation spell,
-*** TODO find translation spell
+*** TODO get translation spell and explanation thereof from Alistair
 *** TODO silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
 ** TODO Replay entire story and take notes
 ** TODO wax cylinder should be found in north ruins
@@ -14,6 +14,7 @@
 *** TODO [#B] bring ashes to cairn in sidequest
 *** TODO [#B] something about a buried monk, find his tombstone and dig up the key
 ** TODO add cool enemy at outpost
+*** TODO add find maps at outpost
 ** TODO enlarge wolf hitbox 
 ** TODO add unexpected ghostly lights
 ** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
