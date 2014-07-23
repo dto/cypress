@@ -604,14 +604,14 @@
 (defmethod make-terrain ((forest frozen-forest))
   (with-border (units 10)
     (stacked-up-randomly 
-     (lined-up-randomly (rock-outcropping) (dead-trees-and-puddles) (pine-trees) (meadow-debris) (pine-trees))
+     (lined-up-randomly (rock-outcropping) (dead-trees) (pine-trees) (meadow-debris) (pine-trees))
      (lined-up-randomly (pine-trees) (or (percent-of-time 60 (lone-wraith))
 					 (singleton (new 'black-wolf))) (pine-trees))
-     (lined-up-randomly (dead-trees-and-puddles) (pack-of-wolves) (wood-pile)))))
+     (lined-up-randomly (dead-trees) (pack-of-wolves) (wood-pile)))))
 
 (defmethod expend-travel-cost ((forest frozen-forest))
   (modify-hunger (geoffrey) 15)
-  (chill (geoffrey) +50))
+  (chill (geoffrey) +40))
 
 ;; dense pine trees and some dead trees
 ;; wood piles and twigs and branches
