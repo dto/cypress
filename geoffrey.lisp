@@ -9,7 +9,7 @@
 (defthing (geoffrey monk) :description "Geoffrey" :hints nil :translation-timer 0)
 
 (defmethod enable-translation ((self geoffrey))
-  (setf (field-value :translation-timer self) (seconds->frames 90)))
+  (setf (field-value :translation-timer self) (seconds->frames 120)))
 
 (defmethod can-translate ((self geoffrey))
   (plusp (field-value :translation-timer self)))
