@@ -2,30 +2,34 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Story 
+*** TODO silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
+**** TODO Write silver journal entries, it's raining ash
 ** TODO [#A] Show intro blank screen with letter and scroll gump, (even just a card) and quine explanation
 *** TODO [#A] show quine summons hint
 ** TODO have maxwell give you a silver book whose contents are untranslated
 *** TODO arturo and madeline should mention maxwell as a source of information
-*** TODO bring book to maxwell, if have book get ^^book option, he will speak of translation spell,
-*** TODO get translation spell and explanation thereof from Alistair
-*** TODO silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
+*** TODO he will speak of translation spell,
+*** TODO get translation spell and explanation thereof and nightshade from Alistair
+
 ** TODO Skeleton archer sidequest near northern ruins to find key
 *** TODO [#B] bring ashes to cairn in sidequest
-*** TODO [#B] something about a buried monk, find his tombstone and dig up the key
+*** TODO [#B] something about a buried monk, find his ossuary and dig up the key 
+*** TODO [#B] require Translation to read/open graves in that cemetery
 ** TODO wax cylinder, map, and Shayol dossier should be found in north ruins
-** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
-*** TODO move bone flute to valisade
-*** TODO use warrior key to unseal document later at Valisade
-*** TODO get protection spell and info at valisade
 *** TODO Write encrypted ancient Shayol dossier letter from 5 KYA
-*** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
+*** TODO play foreboding music when discovering shayol dossier
+**** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
 **** TODO it has no name, for it comes from a time before Language existed.
 **** TODO its purposes and its modes of conception are completely foreign to us
 **** TODO it created the Anvil disaster on purpose (via the chess game with Shayol) in order to harvest souls 
 **** TODO if it emerges into this time to feed upon the souls, its power will expand to eat planet after planet
 **** TODO Dr. Quine attempts to banish the entity by means of Logic, actuated by a computing machine
-**** TODO in chapter 2 Geoffrey saves cypress and becomes the new soul
+**** TODO ildron's sun is dying
+**** TODO in chapter 2 Geoffrey saves cypress and becomes the new soul, 
 **** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
+** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
+*** TODO use triangle key to unseal documents and bone flute later at Valisade
+*** TODO get flute, protection spell and info at valisade
 ** TODO [#C] check for more unused art
 ** TODO [#C] incorporate illegible map
 
