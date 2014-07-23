@@ -112,6 +112,8 @@
 	  (setf met-player t)
 	  (bark self "Ho, stranger!")
 	  (set-objective "Talk to Lucius.")
+	  (setf next-flower nil)
+	  (stop-walking self)
 	  (show-hint "Double-click Lucius to begin talking.")
 	  (walk-to-thing self (geoffrey)))
 	(if (or leader gump)
