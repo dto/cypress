@@ -37,7 +37,7 @@
 
 (defmethod choose-target ((self alistair))
   (setf (field-value :next-target self)
-	(let ((targets (find-instances (current-scene) 'book)))
+	(let ((targets (find-instances (current-scene) 'ruined-book)))
 	  (when targets (random-choose targets)))))
 
 (defmethod run ((self alistair))
@@ -114,21 +114,30 @@ arrival through the gate of the Southern
 Cave." :letter)
 
 (define-topic letter alistair
-  "Here it is! And that finishes my
-duties for now. I'm quite busy,
-actually, organizing all these
-books. So.. umm...." :bye :talk-more)
+  "Here's the letter. 
 
-(define-topic talk-more alistair 
-"Very well, what would you like to talk
-about?" :mecha :creators :wizards :quine :bye)
+I will also bestow upon you the language
+of the Ancients, by means of their Spell
+of Translation. If you focus the mind by
+means of this spell, you will be able to
+read the ancient's writings for a short
+time. 
+
+And that finishes my duties for now. I'm
+quite busy, actually, organizing all
+these books. So.. umm...." :bye :talk-more)
 
 (defmethod discuss :after ((alistair alistair) (topic (eql :letter)))
   (when (not (field-value :given-letter alistair))
     (drop alistair (make-scroll "Letter from Dr. Quine" *first-quine-letter*)
 	  (units 3) (units 3))
+    (learn-spell (geoffrey) (new 'translation))
     (set-objective "Find the Screech Owl in the forests to the North.")
     (setf (field-value :given-letter alistair) t)))
+
+(define-topic talk-more alistair 
+"Very well, what would you like to talk
+about?" :mecha :creators :wizards :quine :bye)
 
 (define-topic busy alistair 
   "I'm very busy! I don't have time to talk." :bye :talk-more)
