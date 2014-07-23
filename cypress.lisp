@@ -73,6 +73,37 @@ them onto Geoffrey.")
 	  (ildron)
 	  (current-buffer)))))
 
+;;; Opening story card 
+
+(defthing opening-card :image "opening.png")
+
+(defmethod initialize :after ((opening-card opening-card) &key)
+  (resize opening-card *nominal-screen-width* *nominal-screen-height*)
+  (move-to opening-card 0 (- *nominal-screen-height* 100)))
+  
+(defmethod update ((card opening-card))
+  (with-fields (x y) card
+    (when (plusp y)
+      (move-to card x (- y 0.8)))))
+
+(defmethod tap ((opening-card opening-card) x y)
+  (magical-flourish)
+  (switch-to-scene (make-quest)))
+
+(define-buffer opening 
+  (quadtree-depth :initform 4))
+
+(defmethod initialize :after ((opening opening) &key)
+  (drop-object opening (new 'opening-card))
+  (resize opening *nominal-screen-width* *nominal-screen-height*))
+
+(defmethod tap ((opening opening) x y)
+  (magical-flourish)
+  (switch-to-scene (make-quest)))
+
+(defmethod scroll-tap ((opening opening) x y) nil)
+(defmethod alternate-tap ((opening opening) x y) nil)
+
 ;;; Title screen
 
 (defresource "title-sbcl.png")
@@ -93,7 +124,7 @@ them onto Geoffrey.")
 
 (defmethod tap ((title title) x y)
   (magical-flourish)
-  (switch-to-scene (make-quest)))
+  (switch-to-buffer (new 'opening)))
 
 (defmethod scroll-tap ((title title) x y) nil)
 (defmethod alternate-tap ((title title) x y) nil)
