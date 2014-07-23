@@ -545,6 +545,10 @@
 		   (make-sentence nil)))
     (update-parent-links self)))
 
+(defmethod destroy :before ((self talk-gump))
+  (with-fields (target) self
+    (setf (field-value :gump target) nil)))
+
 (defmethod flip ((self talk-gump) &optional p)
   (with-fields (inputs pages page-number) self
     (setf page-number 
