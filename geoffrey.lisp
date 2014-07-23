@@ -252,7 +252,7 @@ inventory and find something to eat.
 (defmethod recover ((monk monk))
   (modify-health monk +12)
   (modify-magic monk +50)
-  (modify-cold monk -100)
+  (modify-cold monk -75)
   (narrate "You rest at the campfire, and feel much better."))
   
 (defmethod ignite :after ((camp camp))
