@@ -67,6 +67,7 @@
     ((:pause) toggle-pause)
     ((:r :control) reset-game)
     ((:space) toggle-pause)
+    ((:escape) close-all-gumps)
     ;; ((:f5) quicksave)
     ;; ((:f10) quickload)
     ((:p) toggle-pause)
@@ -75,6 +76,10 @@
     ((:i) open-inventory))
   ;;
   :excluded-fields '(:quadtree :click-start :click-start-block :drag-origin :drag-start :drag-offset :focused-block                      :shell :drag :hover :highlight :inputs))
+
+(define-method close-all-gumps scene ()
+  (dolist (gump (find-gumps))
+    (destroy gump)))
 
 (define-method quicksave scene ()
   (save-quest))
