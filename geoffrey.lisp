@@ -92,7 +92,7 @@ inventory and find something to eat.
 
 (defmethod collide :after ((monk geoffrey) (wolf black-wolf))
   (when (and (not *paused*) (field-value :alive monk))
-    (percent-of-time 10
+    (percent-of-time 3
       (narrate "The wolf bites Geoffrey!")
       (bark (geoffrey) "Aaaaghh!")
       (damage monk (- (random-choose '(7 9))))
