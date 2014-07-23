@@ -82,9 +82,9 @@
 		 (new 'magic-arrow :heading (heading-to-cursor wizard))
 		 x y)))
 
-(defmethod collide ((wizard black-wizard) (other black-wizard))
-  (restore-location wizard)
-  (stop-walking wizard))
+(defmethod collide ((wizard black-wizard) (other black-wizard)) nil)
+  ;; (restore-location wizard)
+  ;; (stop-walking wizard))
 
 (defmethod run ((wizard black-wizard)) 
   (call-next-method)
