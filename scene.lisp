@@ -396,7 +396,7 @@
   (singleton (new 'wraith)))
 
 (defun pack-of-wolves ()
-  (spray 'wolf :trim t :count 2))
+  (lined-up (singleton (new 'wolf)) (singleton (new 'wolf))))
 
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 (defparameter *reagents* '(ginseng ginseng silverwood stone branch))
