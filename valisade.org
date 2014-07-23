@@ -2,20 +2,23 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Story 
-*** TODO silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
-**** TODO Write silver journal entries, it's raining ash
 ** TODO [#A] Show intro blank screen with letter and scroll gump, (even just a card) and quine explanation
 *** TODO [#A] show quine summons hint
-** TODO have maxwell give you a silver book whose contents are untranslated
-*** TODO arturo and madeline should mention maxwell as a source of information
-*** TODO he will speak of translation spell,
-*** TODO get translation spell and explanation thereof and nightshade from Alistair
 
 ** TODO Skeleton archer sidequest near northern ruins to find key
 *** TODO [#B] bring ashes to cairn in sidequest
-*** TODO [#B] something about a buried monk, find his ossuary and dig up the key 
-*** TODO [#B] require Translation to read/open graves in that cemetery
-** TODO wax cylinder, map, and Shayol dossier should be found in north ruins
+*** DONE [#B] something about a buried monk, find his ossuary and dig up the key 
+    CLOSED: [2014-07-23 Wed 17:37]
+
+** TODO explain why triangle key is on corpse in outpost via letter
+
+** TODO make combat not suck; show target cursor?
+*** DONE silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
+    CLOSED: [2014-07-23 Wed 17:59]
+**** DONE Write silver journal entries, it's raining ash
+     CLOSED: [2014-07-23 Wed 17:59]
+
+** TODO first wax cylinder, map, and Shayol dossier should be found in north ruins
 *** TODO Write encrypted ancient Shayol dossier letter from 5 KYA
 *** TODO play foreboding music when discovering shayol dossier
 **** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
@@ -27,19 +30,38 @@
 **** TODO ildron's sun is dying
 **** TODO in chapter 2 Geoffrey saves cypress and becomes the new soul, 
 **** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
+
+** TODO fix first quine letter to say he is making more gears and another cave. 
+
+** TODO Improve pre-wizard cave scene and wax cylinder letter / events
+*** TODO expand wax cylinder letter from dr. quine for southeastern cave
+**** TODO this should explain amalia connection somehow
+***** TODO They sought a Prescient woman for generations but missed amalia , who eluded htem to become the cypress, but became trapped
+****** TODO they wished to harness her ability
+
+** TODO revise owl scene
+
 ** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
 *** TODO use triangle key to unseal documents and bone flute later at Valisade
-*** TODO get flute, protection spell and info at valisade
+*** TODO get story item and or something at valisade
+*** TODO Move silver bow to Valisade ruins
+
+** TODO revise endgame to include Gray Archer
+*** TODO initially conversation!
+*** TODO we are fated to meet thus. for chess pieces must see one another. 
+*** TODO pen/inkwell/scroll found on him
+
 ** TODO [#C] check for more unused art
 ** TODO [#C] incorporate illegible map
 
-** TODO remove puddles from frozen meadow/forest
+** DONE remove puddles from frozen meadow/forest
+   CLOSED: [2014-07-23 Wed 18:06]
 ** TODO enlarge wolf hitbox 
 ** TODO add unexpected ghostly lights
 
-** TODO Connect ruins quests back to Owl quest
+** DONE Connect ruins quests back to Owl quest
+   CLOSED: [2014-07-23 Wed 17:59]
 
-** TODO Improve pre-wizard cave scene and wax cylinder letter / events
 ** TODO Letter should tell player to look for morbius tent
 
 ** TODO Fix can visit wizards early
@@ -57,8 +79,6 @@
 
 ** TODO [#A] make sure credits are readable in-game
 ** TODO [#B] Add curved stone mini gardens, curved-stone-1.png
-
-** TODO how did wax cylinder survive fire? work this out...
 
 * Improvements
 
@@ -1034,3 +1054,16 @@
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: DONE
    :END:
+
+** TODO have maxwell give you a silver book whose contents are untranslated
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-23 Wed 17:37
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+*** TODO arturo and madeline should mention maxwell as a source of information
+*** TODO he will speak of translation spell,
+*** TODO get translation spell and explanation thereof and nightshade from Alistair
+
