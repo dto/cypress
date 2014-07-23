@@ -2,21 +2,16 @@
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
 * Story 
+
+** TODO [#A] escape should close all gumps
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+
 ** TODO [#A] Show intro blank screen with letter and scroll gump, (even just a card) and quine explanation
 *** TODO [#A] show quine summons hint
 
-** TODO Skeleton archer sidequest near northern ruins to find key
-*** TODO [#B] bring ashes to cairn in sidequest
-*** DONE [#B] something about a buried monk, find his ossuary and dig up the key 
-    CLOSED: [2014-07-23 Wed 17:37]
-
 ** TODO explain why triangle key is on corpse in outpost via letter
-
-** TODO make combat not suck; show target cursor?
-*** DONE silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
-    CLOSED: [2014-07-23 Wed 17:59]
-**** DONE Write silver journal entries, it's raining ash
-     CLOSED: [2014-07-23 Wed 17:59]
 
 ** TODO first wax cylinder, map, and Shayol dossier should be found in north ruins
 *** TODO Write encrypted ancient Shayol dossier letter from 5 KYA
@@ -39,9 +34,7 @@
 ***** TODO They sought a Prescient woman for generations but missed amalia , who eluded htem to become the cypress, but became trapped
 ****** TODO they wished to harness her ability
 
-** TODO revise owl scene
-
-** TODO Valisade Ruins basement library scene requiring Warrior Time Key 
+** TODO Valisade Ruins basement library scene requiring Triangle Time Key 
 *** TODO use triangle key to unseal documents and bone flute later at Valisade
 *** TODO get story item and or something at valisade
 *** TODO Move silver bow to Valisade ruins
@@ -50,6 +43,14 @@
 *** TODO initially conversation!
 *** TODO we are fated to meet thus. for chess pieces must see one another. 
 *** TODO pen/inkwell/scroll found on him
+
+** TODO revise owl scene
+
+** TODO make combat not suck; show target cursor?
+*** DONE silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
+    CLOSED: [2014-07-23 Wed 17:59]
+**** DONE Write silver journal entries, it's raining ash
+     CLOSED: [2014-07-23 Wed 17:59]
 
 ** TODO [#C] check for more unused art
 ** TODO [#C] incorporate illegible map
@@ -83,11 +84,6 @@
 * Improvements
 
 ** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
-** TODO [#A] escape should close all gumps
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-   
 ** TODO [#A] Fix can't pick up items partially obscured by geoffrey
 ** TODO [#B] have lucius tell player to keep his distance
 *** TODO [#B] auto stop walking when enemy very close
