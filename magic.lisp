@@ -126,7 +126,7 @@ in inventory to equip them.")
 
 (defthing (travel spell)
   :description "Travel (3 magic, some hunger)"
-  :reagents '(:magic 3)
+  :reagents nil
   :image "mountain-5.png")
 
 (defmethod use :around ((caster thing) (spell travel))
@@ -182,7 +182,7 @@ in inventory to equip them.")
   :reagents '(:magic 10 nightshade 2))
 
 (defmethod cast ((caster thing) (spell translation))
-  (narrate "You sense the ability to read ancient languages. (Duration: 90 seconds.)")
+  (narrate "You sense the ability to read ancient languages.")
   (enable-translation (geoffrey)))
 
 ;;; Spellbook 
