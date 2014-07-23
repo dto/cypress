@@ -62,7 +62,7 @@
   (destroy self))
 
 (defmethod collide ((monk geoffrey) (arrow magic-arrow))
-  (damage (geoffrey) (random-choose '(-8 -12 -16)))
+  (damage (geoffrey) (random-choose '(-12 -16 -19)))
   (destroy arrow))
 
 (defmethod run :after ((arrow magic-arrow))
