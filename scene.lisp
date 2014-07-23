@@ -636,14 +636,23 @@
 
 (defmethod expend-travel-cost ((river river))  
   (modify-hunger (geoffrey) 14)
-  (chill (geoffrey) +50))
+  (chill (geoffrey) +85))
 
-(defthing (frozen-meadow river)
+(defthing (frozen-meadow frozen-forest)
   :background-image (random-choose *frozen-meadow-images*))
 
 (defmethod expend-travel-cost ((frozen-meadow frozen-meadow))  
   (modify-hunger (geoffrey) 25)
-  (chill (geoffrey) +80))
+  (chill (geoffrey) +60))
+
+(defmethod make-terrain ((self frozen-meadow))
+  (with-border (units 10)
+    (stacked-up-randomly 
+     (lined-up-randomly (rock-outcropping) (dead-trees) (meadow-debris) (spray '(cobblestone ruin-wall) :count 7))
+     (lined-up-randomly (dead-trees) (or (percent-of-time 60 (lone-wraith))
+					 (singleton (new 'black-wolf))) (spray '(crack large-crack) :count 5))
+     (lined-up-randomly (dead-trees) (spray '(crack large-crack) :count 6) (pack-of-wolves) (wood-pile)))))
+
 
 ;; pools of water
 ;; various ice cracks
