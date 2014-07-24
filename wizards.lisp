@@ -35,7 +35,7 @@
     :frames (("black-wizard-walk-2.png" 4)
 	     ("black-wizard-walk-4.png" 4)
 	     ("black-wizard-walk-1.png" 4)
-	     ("black-wizard-walk-3.png" 1))))
+	     ("black-wizard-walk-3.png" 3))))
 
 (defmethod standing-animation ((self black-wizard)) *black-wizard-stand*)
 
@@ -155,7 +155,7 @@ the North to find the Prescient woman...
 
 (defmethod begin-scene :after ((ruins wizard-ruins))
   (mark-traversed ruins)
-  (cue-music ruins (random-choose '("procession4.ogg" "battle-1.ogg"))))
+  (cue-music ruins (random-choose '("procession4.ogg"))))
 
 (defmethod make-terrain ((scene wizard-ruins))
   (with-border (units 18)
@@ -169,3 +169,164 @@ the North to find the Prescient woman...
 
 
 (defmethod make-footstep-sound ((self black-wizard)) nil)
+
+;;; Gray wizard
+
+(defthing (gray-wizard monk)
+  :description "Man in gray robes"
+  :magic 100
+  :clock 0
+  :health 82)
+
+(defparameter *gray-wizard-firing-time* (seconds->frames 0.7))
+
+(defparameter *gray-wizard-fire*
+  '(:scale 1000
+    :frames (("skeleton-archer-fire-1.png" 5)
+	     ("skeleton-archer-fire-2.png" 6)
+	     ("skeleton-archer-fire-3.png" 7))))
+
+(defparameter *gray-wizard-stand*
+  '(:scale 900
+    :frames (("skeleton-archer-stand-1.png" 19)
+	     ("skeleton-archer-stand-2.png" 24)
+	     ("skeleton-archer-stand-3.png" 18))))
+
+(defparameter *gray-wizard-walk* 
+  '(:repeat t
+    :scale 900
+    :frames (("skeleton-archer-walk-2.png" 4)
+	     ("skeleton-archer-walk-4.png" 4)
+	     ("skeleton-archer-walk-1.png" 4)
+	     ("skeleton-archer-walk-3.png" 3))))
+
+(defmethod standing-animation ((self gray-wizard)) *gray-wizard-stand*)
+
+(defmethod walking-animation ((self gray-wizard)) *gray-wizard-walk*)
+
+(defmethod casting-animation ((self gray-wizard)) *gray-wizard-fire*)
+
+(defmethod begin-attack ((wizard gray-wizard))
+  (stop-walking wizard)
+  (setf (field-value :heading wizard) (heading-to-cursor wizard))
+  (begin-animation wizard (casting-animation wizard))
+  (setf (field-value :clock wizard) *wizard-casting-time*))
+
+(defmethod fire-magic-arrow ((wizard gray-wizard))
+  (play-sample "bow.wav")
+  (multiple-value-bind (x y) (fire-location wizard)
+    (drop-object (current-scene)
+		 (new 'magic-arrow :heading (heading-to-cursor wizard))
+		 x y)))
+
+(defmethod run ((wizard gray-wizard))
+  (with-fields (clock waypoints) wizard
+    (if (event-occurred-p :final-battle)
+	;; fight 
+	(progn 
+	  (call-next-method)
+	  (when (zerop clock)
+		 (percent-of-time 0.7 (begin-attack wizard)))
+	       (when (plusp clock)
+		 (decf clock)
+		 (when (zerop clock)
+		   (fire-magic-arrow wizard)))
+	       (percent-of-time 1
+		 (walk-to-thing wizard (geoffrey)))
+	       (when (< (distance-between wizard (geoffrey)) 300)
+		 (or (percent-of-time 2 (prog1 t (stop-walking wizard)))
+		     (or (percent-of-time 1 (prog1 t (walk-to-thing wizard (geoffrey))))
+			 (percent-of-time 1 (begin-attack wizard))))))
+	  ;; talk
+	  (let ((distance (distance-between wizard (geoffrey))))
+	    (cond 
+	      ((< distance 500)
+	       (unless (event-occurred-p :wizard-meets-geoffrey)
+		 (add-event :wizard-meets-geoffrey)
+		 (walk-to-thing wizard (geoffrey))
+		 (bark wizard "Hold, Traveler. Let us speak.")))
+	      ((< distance 200)
+	       (stop-walking wizard)))
+	    (call-next-method)))))
+
+(defmethod update :before ((wizard gray-wizard))
+  (with-fields (stasis) wizard
+    (when (and stasis (plusp stasis))
+      (decf stasis 2))))
+
+(defmethod activate-maybe ((wizard gray-wizard))
+  (activate wizard))
+
+(defmethod activate ((wizard gray-wizard))
+  (resume)
+  (if (event-occurred-p :final-battle)
+      (attack (geoffrey) wizard)
+      (discuss wizard :hello)))
+
+(define-topic hello gray-wizard 
+  "Greetings, Geoffrey. Yes, I am a
+fellow Traveler. And you've arrived just
+in Time, as they say." :name)
+
+(define-topic name gray-wizard 
+"My name isn't important. Nor is the
+wretched body beneath these robes.
+What matters is the will of Shayol." :shayol)
+
+(define-topic shayol gray-wizard
+"Our master is sleeping at the moment.
+But he will rise soon enough." :prescient-woman)
+
+(define-topic prescient-woman gray-wizard 
+"Aha! She isn't here. We think she's
+long since died, actually." 
+:then-why-are-you-here?)
+
+(define-topic then-why-are-you-here? gray-wizard
+"Because we want to ask you something.
+
+Who is your true master? Whose Will do
+you serve?" :quine)
+
+(define-topic quine gray-wizard 
+"Nonsense! Aren't you a servant of
+Enceladus? You must be helping Her.
+There is no other explanation! Don't
+worry, I will deliver your Soul to her,
+just like all the souls in the
+Abyss!" :bye)
+
+(defmethod die ((self gray-wizard))
+  (play-sound self "death.wav")
+  (let ((remains (new 'remains)))
+    (add-inventory-item remains (new 'wax-cylinder))
+    (drop self remains))
+  (destroy self))
+
+(defmethod discuss :after ((self gray-wizard) (topic (eql :quine)))
+  (add-event :final-battle)
+  (cue-music (current-scene) "presence.ogg")
+  (pause))
+
+(defmethod collide ((self wooden-arrow) (enemy gray-wizard))
+  (damage enemy (random-choose '(-3 -5 -7)))
+  (destroy self))
+
+(defmethod collide ((self silver-arrow) (enemy gray-wizard))
+  (damage enemy (random-choose '(-8 -12 -17)))
+  (destroy self))
+
+
+		  
+
+
+
+
+
+
+
+
+
+
+
+

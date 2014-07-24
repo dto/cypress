@@ -30,14 +30,15 @@ form is that ... s..g de... sk....
 ")
 
 (defmethod activate ((cabin burnt-cabin))
-  (with-fields (activated) cabin
-    (when (not activated)
-      (setf activated t)
-      (add-inventory-item cabin (new 'wax-cylinder))
-      (add-inventory-item cabin (new 'inkwell))
-      (add-inventory-item cabin (new 'quill-pen))
-      (add-inventory-item cabin (make-scroll "scroll fragment" *amalia-prophecy*)))
-    (replace-gump cabin (new 'browser :container cabin))))
+  (if (find-enemies)
+      (bark (geoffrey) "Not with enemies nearby!")
+      (with-fields (activated) cabin
+	(when (not activated)
+	  (setf activated t)
+	  (add-inventory-item cabin (new 'inkwell))
+	  (add-inventory-item cabin (new 'quill-pen))
+	  (add-inventory-item cabin (make-scroll "scroll fragment" *amalia-prophecy*)))
+	(replace-gump cabin (new 'browser :container cabin)))))
 
 (defparameter *amalia-poem*
 "My name is Amalia.
@@ -78,6 +79,9 @@ of Heroes.")
 (defmethod make-terrain ((scene amalia-ruins))
   (with-border (units 10)
     (lined-up-randomly
-     (stacked-up-randomly (singleton (new 'ruin-wall)) (singleton (new 'burnt-cabin)) (singleton (new 'well)) (dead-trees))
+     (stacked-up-randomly (singleton (new 'ruin-wall)) 
+			  (lined-up (singleton (new 'burnt-cabin)) 
+				    (with-border (units 5) (singleton (new 'gray-wizard))))
+			  (singleton (new 'well)) (dead-trees))
      (stacked-up-randomly (singleton (new 'puddle)) (spray 'gray-rock :trim nil :count 5) (singleton (new 'white-cypress)) (singleton (new 'ruin-wall)) (dead-trees)))))
 
