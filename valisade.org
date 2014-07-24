@@ -3,17 +3,9 @@
 
 * Story 
 
-** TODO [#A] escape should close all gumps
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
+** TODO [#C] explain why triangle key is on corpse in outpost via letter
+** TODO [#C] Shayol dossier should be found in north ruins
 
-** TODO [#A] Show intro blank screen with letter and scroll gump, (even just a card) and quine explanation
-*** TODO [#A] show quine summons hint
-
-** TODO explain why triangle key is on corpse in outpost via letter
-
-** TODO first wax cylinder, map, and Shayol dossier should be found in north ruins
 *** TODO Write encrypted ancient Shayol dossier letter from 5 KYA
 *** TODO play foreboding music when discovering shayol dossier
 **** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
@@ -26,18 +18,11 @@
 **** TODO in chapter 2 Geoffrey saves cypress and becomes the new soul, 
 **** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
 
-** TODO fix first quine letter to say he is making more gears and another cave. 
-
-** TODO Improve pre-wizard cave scene and wax cylinder letter / events
-*** TODO expand wax cylinder letter from dr. quine for southeastern cave
-**** TODO this should explain amalia connection somehow
-***** TODO They sought a Prescient woman for generations but missed amalia , who eluded htem to become the cypress, but became trapped
-****** TODO they wished to harness her ability
-
-** TODO Valisade Ruins basement library scene requiring Triangle Time Key 
+** DONE Improve pre-wizard cave scene and wax cylinder letter / events
+   CLOSED: [2014-07-23 Wed 20:03]
+** TODO Valisade Ruins basement library scene requiring Triangle Key 
 *** TODO use triangle key to unseal documents and bone flute later at Valisade
 *** TODO get story item and or something at valisade
-*** TODO Move silver bow to Valisade ruins
 
 ** TODO revise endgame to include Gray Archer
 *** TODO initially conversation!
@@ -1062,4 +1047,63 @@
 *** TODO arturo and madeline should mention maxwell as a source of information
 *** TODO he will speak of translation spell,
 *** TODO get translation spell and explanation thereof and nightshade from Alistair
+
+** DONE [#A] escape should close all gumps
+   CLOSED: [2014-07-23 Wed 19:17]
+   :PROPERTIES:
+   :Effort:   0:15
+   :ARCHIVE_TIME: 2014-07-23 Wed 20:01
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Show intro blank screen with letter and scroll gump, (even just a card) and quine explanation
+   CLOSED: [2014-07-23 Wed 19:11]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-23 Wed 20:01
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE [#A] show quine summons hint
+    CLOSED: [2014-07-23 Wed 19:11]
+
+** DONE fix first quine letter to say he is making more gears and another cave.
+   CLOSED: [2014-07-23 Wed 19:19]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-23 Wed 20:01
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Move silver bow to Valisade ruins
+   CLOSED: [2014-07-23 Wed 20:03]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-23 Wed 20:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story/Valisade Ruins basement library scene requiring Triangle Key
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE expand wax cylinder letter from dr. quine for southeastern cave
+   CLOSED: [2014-07-23 Wed 20:01]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-23 Wed 20:03
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story/Improve pre-wizard cave scene and wax cylinder letter / events
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE this should explain amalia connection somehow
+    CLOSED: [2014-07-23 Wed 20:01]
+**** DONE They sought a Prescient woman for generations but missed amalia , who eluded htem to become the cypress, but became trapped
+     CLOSED: [2014-07-23 Wed 20:01]
+***** DONE they wished to harness her ability
+      CLOSED: [2014-07-23 Wed 20:01]
 
