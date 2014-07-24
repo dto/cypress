@@ -307,7 +307,7 @@
     (add-inventory-item box (quantity-of 'green-elixir 1))
     (add-inventory-item box (tome-of 'hold-creature))
     (add-inventory-item box (new 'silver-armor))
-    (add-inventory-item box (new 'silver-bow)))
+    (add-inventory-item box (make-scroll "crumbling scroll" *wax-cylinder-letter*)))
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
 
 ;;; Third story cave

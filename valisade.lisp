@@ -169,9 +169,12 @@ collect my thoughts.
 (defmethod make-terrain ((scene outpost-basement))
   (with-border (units 12)
     (lined-up (with-border (units 3) (singleton (new 'crumbling-stairwell)))
-	      (singleton (new 'triangle-key))
-	      (singleton (new 'corpse))
-	      (singleton (new 'silver-book)))))
+	      (with-border (units 2)
+		(lined-up-randomly (singleton (new 'triangle-key))
+				   (with-border (units 2) (singleton (new 'corpse)))
+				   (singleton (new 'silver-bow))
+				   (singleton (new 'elixir))))
+	      (spatter '(bone-dust nightshade) :trim t :count 7))))
 
 ;;; Warrior sigil gateway into outpost
 
