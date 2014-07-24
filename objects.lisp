@@ -255,6 +255,8 @@ almost immune to cold.
 Press \"I\" to see Geoffrey's inventory.
 Press \"S\" to open the spellbook.
 Press \"M\" to open the travel map.
+Press Spacebar to pause/unpause the game.
+Press Escape to close all open scrolls.
 ")
 
 (defthing (help-scroll scroll)
