@@ -345,6 +345,7 @@ anyone. Perhaps he will be able to help
 you.
 " :bye)
 
+(defmethod will-accept ((self arturo) (thing thing)) nil)
 
 	  
 			    
