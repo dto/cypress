@@ -220,23 +220,50 @@ I must wait upon the ebbing of the river
 to dig more, uncover more ruins, and
 find more documents in order to
 understand what has happened to
-Ildron. In the meantime, I have
-entrusted three Copper Gears to the
-Order of the Screech Owls; seek them out
-in the forests to the North, and they
-will guide you to our next point of
-contact.
+Ildron. I must also manufacture more
+Gears so that I can lock up the next
+cave for you when the time comes to
+share what I have learned.
+
+I will entrust the gears to the Order of
+the Screech Owls; seek them out in the
+forests to the North, and they will
+guide you to our next point of contact.
 
 -- Dr. Quine
 ")
 
 (defparameter *wax-cylinder-letter*
-"(the top of the scroll is crumbled)
+"Dear Geoffrey,
+
+Good news! It's quite likely that your
+brother and I are alive and well, as
+Travelers. It's also very likely,
+according to my calculations, that you
+and I shall be reunited! Though perhaps
+not in the present Age.
+
+In the years since my last letter,
+Francis and I have visited many sites,
+dug many a trench, and translated
+countless texts in order to shed light
+on the events surrounding the Great
+Disaster.
+
+Among the Black Wizards there was a
+child prodigy, a boy whose powers of
+clairvoyance and Prescience terrified
+and amazed his elders. We know now that
+this child became the being variously
+referred to as Shane, Samuel, and
+Shamal. His true name is Shayol, and is
+it he who set the calamity in motion.
 
 The alliance between the Black Wizards
 and the Industrialists sparked the
 invention of a most extraordinary
-machine. The Wizards had secretly
+machine. Thanks to the apparent genius
+of Shayol, the Wizards had secretly
 discovered a method for making very thin
 sheets of volcanic glass, with strange
 optical and vibrational properties.
@@ -276,7 +303,77 @@ domains of Being which had never
 heretofore been imagined, by even the
 Sages.
 
- (the rest of the scroll has crumbled.)")
+This was a grave development, for with
+this \"Cylindrophone\" the Wizards made
+contact with a strange Being, an Entity
+which had before influenced only Shayol
+himself. Of the Entity itself we hear
+only whispers, for it was forbidden to
+write or speak about. But we know that
+thousands became its slaves by the
+clever plans of Shayol.
+
+It is this Entity, not Shayol himself,
+that is our real problem.
+
+It is this Entity who made Valisade into
+an Empire for a thousand years, and then
+simply destroyed it. 
+
+For Shayol claimed another invention, a
+drilling device known as the Diamond
+Anvil. He promised them great stores of
+Xalcium and other precious metals, if
+only they would labor for decades to
+build the device and burrow deep beneath
+Mount Einhall.
+
+But the machine's true purpose was to
+destroy Ildron by igniting the Xalcium
+chamber within the dormant volcano.
+
+We haven't yet learned why the Entity
+should want this. But I will say one
+thing. The Entity is also a Traveler,
+and has covered an utterly vast
+timespan. It comes from a time more
+ancient than Ildron, older even than the
+Sun. It must have been formed in the
+very mists of primordial existence. It
+could be that this Being's purposes,
+even its forms of conception, will be
+entirely incomprehensible to us.
+
+Shayol does not need the cylindrophone
+to communicate telepathically, but his
+henchmen do. This \"beaureaucratic\"
+requirement has worked to our benefit as
+investigators, for we have been able to
+find some of the cylinders and thereby
+eavesdrop on their correspondence.
+
+They are urgently seeking a Prescient
+woman whose name I have not been able to
+find; they have peeked into many decades
+to find her, but to no avail thus
+far. (I suspect that she is not yet born
+at the time of this writing.) They
+appear to see her as some kind of
+threat, and are working at any cost to
+eliminate her.
+
+Unfortunately, they feel the same way
+about you, Geoffrey. Gather your
+strength, for you must find the
+Prescient woman and defeat Shayol's
+malevolent designs.
+
+We must move on from this encampment;
+it isn't safe here. Be well, Geoffrey.
+Be brave.
+
+-- Dr. Quine
+")
 
 (defthing scroll-fragment
   :stacking nil

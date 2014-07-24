@@ -145,8 +145,7 @@ the North to find the Prescient woman...
       (add-inventory-item tent (new 'silverwool-leggings))
       (add-inventory-item tent (new 'silverwool-shirt))
       (add-inventory-item tent (make-scroll "half-burnt letter" *half-burnt-letter*))
-      (add-inventory-item tent (new 'cylindrophone))
-      (add-inventory-item tent (make-scroll "crumbling scroll" *wax-cylinder-letter*)))
+      (add-inventory-item tent (new 'cylindrophone)))
     (replace-gump tent (new 'browser :container tent))))
 
 (defthing (wizard-ruins scene)
