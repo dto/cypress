@@ -327,6 +327,7 @@
   (let (enemies)
     (dolist (object (get-objects (current-buffer)))
       (when (or (typep object (find-class 'enemy))
+		(typep object (find-class 'gray-wizard))
 		(typep object (find-class 'black-wizard)))
 	(push object enemies)))
     enemies))
