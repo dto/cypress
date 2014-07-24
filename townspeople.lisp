@@ -4,6 +4,8 @@
   :next-target nil
   :description "Maxwell")
 
+(defmethod will-accept ((self maxwell) (thing thing)) nil)
+
 (defparameter *maxwell-walk* 
   '(:repeat t
     :scale 980
@@ -295,6 +297,8 @@ from out of town? Um, oh, hum, I'm sorry
 but my daughter and I must be
 going. We're quite busy!" :bye)
 
+(defmethod will-accept ((self madeline) (thing thing)) nil)
+
 ;;; Maribel
 
 (defthing (maribel monk) 
@@ -341,3 +345,5 @@ going. We're quite busy!" :bye)
 
 (defmethod activate ((self maribel))
   (bark self (random-choose '("I'm five years old!" "Hi there!" "Where's my teddy bear?" "I love birds." "Hey." "Hello."))))
+
+(defmethod will-accept ((self maribel) (thing thing)) nil)
