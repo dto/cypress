@@ -4,7 +4,7 @@
 * Story 
 
 ** TODO [#C] explain why triangle key is on corpse in outpost via letter
-** TODO [#C] Shayol dossier should be found in north ruins
+** TODO [#C] Shayol dossier should be found in valisade ruins
 
 *** TODO Write encrypted ancient Shayol dossier letter from 5 KYA
 *** TODO play foreboding music when discovering shayol dossier
