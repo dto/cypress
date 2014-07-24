@@ -154,7 +154,7 @@ collect my thoughts.
 
 (defthing (outpost-basement scene)
   :darkness-image "darkness.png"
-  :background-image *small-silver-basement-image*)
+  :background-image *large-silver-basement-image*)
 
 (defmethod begin-scene :after ((scene outpost-basement))
   (mark-traversed scene)
@@ -167,7 +167,7 @@ collect my thoughts.
   (units 8))
 
 (defmethod make-terrain ((scene outpost-basement))
-  (with-border (units 12)
+  (with-border (units 7)
     (lined-up (with-border (units 3) (singleton (new 'crumbling-stairwell)))
 	      (with-border (units 2)
 		(lined-up-randomly (singleton (new 'triangle-key))
@@ -204,6 +204,44 @@ collect my thoughts.
 
 ;;; Valisade basement
 
+(defparameter *dossier-text*
+"Notes on the Being.
+
+First we must realize that the Being has
+no name. For it comes from the abyss of
+Time that existed before names and
+naming, when phenomena themselves first
+began to peek out from hiding.
+
+So its designs have unfolded across the
+whole tapestry of Time. From this we can
+infer that the Being is very
+patient. But what does it wait for?
+When it plants a seed whose growth will
+take a thousand-thousand years, what
+shall the Being harvest when its plans
+come to fruition?
+
+What desires and purposes can a
+shapeless, mindless cosmic phantom have?
+In the Proto-Ildronian language he is
+called \"the devil with a thousand
+eyes.\" They say he looks upon a
+thousand Worlds.
+
+Perhaps this explains why Prescients
+were then called \"seers\". For no
+prophecy is so sure as that with
+fulfills itself. This Being is a demon,
+a deceiver, a Prince of Darkness; he
+speaks truth into one ear, and lies into
+the other.
+")
+
+(defthing (dossier ancient-book)
+  :description "Silver notebook"
+  :text *dossier-text*)
+
 (defthing (valisade-basement scene)
   :darkness-image "darkness.png"
   :background-image *large-silver-basement-image*)
@@ -221,7 +259,9 @@ collect my thoughts.
 (defmethod make-terrain ((scene valisade-basement))
   (with-border (units 12)
     (lined-up (with-border (units 3) (singleton (new 'crumbling-stairwell)))
-		(lined-up (spray '(ruined-book silver-book) :trim t :count 6) (singleton (new 'bone-flute)))
+	      (lined-up-randomly (singleton (new 'dossier))
+				 (spatter '(ruined-book nightshade twig) :trim t :count 12) 
+				 (singleton (new 'bone-flute)))
 		(singleton (new 'cryptghast)))))
 
 ;;; Triangle sigil into valisade
@@ -289,6 +329,7 @@ enormous stone ruin.")
      (spatter '(forget-me-not snowdrop snowdrop) :trim t :count 8)
      (spray 'cobblestone :trim t :count 7)
      (with-border (units 8) (singleton (new 'triangle-sigil)))
+     (singleton (new 'waystone))
      (spatter '(forget-me-not snowdrop snowdrop) :trim t :count 8)
      (spray 'cobblestone :trim t :count 7))
     (spray '(ancient-road-debris ancient-road ancient-road cobblestone)
@@ -328,11 +369,12 @@ settlement.")
   (with-border (units 15)
     (with-border (units 12)
       (stacked-up-randomly
-       (spray '(ruin-wall ancient-road-debris dead-tree ancient-road cobblestone) 
+       (lined-up-randomly (spray '(ruin-wall ancient-road-debris dead-tree ancient-road cobblestone) 
 	      :trim t
 	      :count 12)
+			  (dead-trees))
        (lined-up-randomly
-	(dead-trees) (singleton (new 'small-ruin)) (singleton (new 'warrior-sigil)))
+	(dead-trees) (stacked-up (singleton (new 'waystone)) (singleton (new 'small-ruin)) (singleton (new 'warrior-sigil))))
        (spray '(ruin-wall ancient-road-debris dead-tree ancient-road cobblestone) 
 	      :trim t
 	      :count 12)))))
