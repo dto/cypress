@@ -2,10 +2,14 @@
 
 (defthing cylindrophone :image "cylindrophone.png")
 
+(defparameter *cylinder-hint* 
+"Double-click the chosen cylinder to
+play the message.")
+
 (defmethod activate ((self cylindrophone))
   (if (not (find-inventory-item (geoffrey) 'wax-cylinder))
       (bark (geoffrey) "I don't have anything to use with this.")
-      (at-next-update (switch-to-buffer (new 'prologue)))))
+      (show-hint *cylinder-hint*)))
 
 (defthing (black-wizard monk)
   :description "Black Wizard"
@@ -120,23 +124,36 @@
 (defthing (morbius-tent tent) :description "Morbius' tent" :activated nil)
 
 (defparameter *half-burnt-letter* 
-"My Lord,
+"Lord Shayol,
 
-We are nearly ready to strike! We
-prepare our crystal potions by night.
-We shall follow the Traveler northward
-toward the Abyss, and sieze him as he
-crosses its black waters. 
+We are nearly ready to strike! For no
+one can outlast an archer with a
+bottomless quiver. We shall follow the
+Traveler northward toward the Abyss, and
+sieze him as he crosses its black
+waters.
 
 Thank you for the supply of Silverwool,
-my Lord. It has made our journey easier.
+my Lord. It will make our own crossing
+easier, seeing as we must make do with
+this wretched, tormenting flesh!
 
-After the Traveler, we will move on to
-the North to find the Prescient woman...
+After the Traveler, we will press onward
+to the first search area. We will burn
+you another report when the time comes.
+
+Before closing, if I may ask, what is
+the significance of the woman? If she is
+indeed dead, you should be able to
+search the river for her? A soul can't
+have traveled far in a just a few years,
 
  (the rest of the scroll is burnt)")
 
 (defthing wax-cylinder :image (random-choose '("wax-cylinder-1.png" "wax-cylinder-2.png")))
+
+(defthing (morbius-cylinder wax-cylinder))
+(defthing (shayol-cylinder wax-cylinder))
 
 (defmethod activate ((tent morbius-tent))
   (with-fields (activated) tent
@@ -145,6 +162,7 @@ the North to find the Prescient woman...
       (add-inventory-item tent (new 'silverwool-leggings))
       (add-inventory-item tent (new 'silverwool-shirt))
       (add-inventory-item tent (make-scroll "half-burnt letter" *half-burnt-letter*))
+      (add-inventory-item tent (new 'morbius-cylinder))
       (add-inventory-item tent (new 'cylindrophone)))
     (replace-gump tent (new 'browser :container tent))))
 
@@ -270,40 +288,108 @@ in Time, as they say." :name)
 
 (define-topic name gray-wizard 
 "My name isn't important. Nor is the
-wretched body beneath these robes.
-What matters is the will of Shayol." :shayol)
+wretched body beneath these robes. No,
+I'd rather talk about YOU.
 
-(define-topic shayol gray-wizard
-"Our master is sleeping at the moment.
-But he will rise soon enough." :prescient-woman)
+Why do you press on like this, Geoffrey?
 
-(define-topic prescient-woman gray-wizard 
-"Aha! She isn't here. We think she's
-long since died, actually." 
-:then-why-are-you-here?)
+Not much to live for, is there? Family
+and friends, all dead for Aeons. You
+could try to find a happy life here, but
+the Sun grows colder by the day. Not
+exactly the kind of place you'd want to
+raise a child, is it? 
 
-(define-topic then-why-are-you-here? gray-wizard
-"Because we want to ask you something.
+Of course, THEY don't know the Sun is
+doomed. But now YOU know." :why-are-you-telling-me-this?)
 
-Who is your true master? Whose Will do
-you serve?" :quine)
+(define-topic why-are-you-telling-me-this? gray-wizard
+"Because, I can help you, Geoffrey. You
+can be re-united with your family, as I
+have been. You can live for thousands of
+years, as I have. Everything you dream
+of is possible through the power of the
+Ur." :the-ur?)
 
-(define-topic quine gray-wizard 
-"Nonsense! Aren't you a servant of
-Enceladus? You must be helping Her.
-There is no other explanation! Don't
-worry, I will deliver your Soul to her,
-just like all the souls in the
-Abyss!" :bye)
+(define-topic the-ur? gray-wizard
+"Yes. This is not his true name, for he
+has none. \"The Ur\" is just one of the
+many names given to him by the early
+Humans of Ildron." 
+:where-is-the-prescient-woman?)
+
+(define-topic where-is-the-prescient-woman? gray-wizard 
+"She isn't here anymore."
+:then-why-are-you-still-here?)
+
+(define-topic then-why-are-you-still-here? gray-wizard
+"I came to see you, Geoffrey. 
+
+For if the Bishop is to take the Knight,
+they must meet on the chessboard
+sometime---isn't it so? 
+
+But there is an alternative to blood."
+:alternative)
+
+(define-topic alternative gray-wizard
+"My master has a proposal for you.
+His voice is recorded on the wax
+cylinder I hold. If you'll only listen
+to the message, all your questions will
+be answered." :no-way!)
+
+(define-topic no-way! gray-wizard
+"Think carefully about your decision,
+Geoffrey! Are you sure you don't want to
+listen?  
+
+So what if we fight, and you succeed in
+destroying this putrid flesh-puppet?
+Then you could simply take the cylinder!
+
+Won't you listen? Would you throw it
+away? Or burn it, without ever hearing
+the secrets engraved on its surface?
+
+Choose wisely, Geoffrey. For I will tell
+you one of the secrets in advance. Even
+if you best me in combat and destroy the
+cylinder, you and those you love will
+regardless one day be taken by the
+Ur. You and everyone else on this
+planet, such is its power. 
+
+It will be better for you, and for them,
+if you will simply listen to the message
+the cylinder contains.
+
+Just listen! What harm could it do to
+hear him out?" :no!)
+
+(define-topic no! gray-wizard
+"So I see. It was prophesied that you
+would refuse. It is also foretold that I
+will die here. 
+
+Only Amalia stopped writing, and died on
+the spot, before she could prophesy what
+you would do with the cylinder! The
+serum was too much for her aging body.
+
+So! Let us see if Fate obeys Amalia's
+gift!
+
+To the Death, now!")
 
 (defmethod die ((self gray-wizard))
   (play-sound self "death.wav")
   (let ((remains (new 'remains)))
-    (add-inventory-item remains (new 'wax-cylinder))
+    (add-inventory-item remains (new 'shayol-cylinder))
     (drop self remains))
   (destroy self))
 
-(defmethod discuss :after ((self gray-wizard) (topic (eql :quine)))
+(defmethod discuss :after ((self gray-wizard) (topic (eql :no!)))
   (add-event :final-battle)
   (cue-music (current-scene) "presence.ogg")
   (pause))
@@ -316,13 +402,83 @@ Abyss!" :bye)
   (damage enemy (random-choose '(-8 -12 -17)))
   (destroy self))
 
+(defparameter *morbius-letter* 
+  "Morbius! You must notify me the
+moment you have her in your possession!
+Tell Crito to keep a fire burning at the
+camp for this purpose.")
 
-		  
+(defparameter *traveler-letter*
+  "Listen to me, O Traveler!
+   
+When God created his first seven
+followers, they made for themselves a
+secret Language.
+
+The word for Time was itself a gateway
+to the future and past; the word for
+Killing could itself kill; and so on.
+
+I have chosen you now, to receive the
+Tongue!
+
+Close your eyes.
+
+I will now count backward from ten to
+one.
+
+Ten... nine... eight... seven...
+
+six... five... four...
+
+three... two... one...")
+
+(defresource "morbius-cylinder.wav" :volume 20)
+
+(defmethod activate ((cylinder morbius-cylinder))
+  (if (not (find-inventory-item (geoffrey) 'cylindrophone))
+      (bark (geoffrey) "I don't have anything to use with this.")
+      (progn
+	(play-sample "morbius-cylinder.wav")
+	(replace-gump cylinder (new 'scroll-gump :text *morbius-letter*)))))
+	    
+;;; Ending story screen 
+
+(defresource "shayol.ogg" :volume 30)
+
+(defthing ending-card :image "ending.png")
+
+(defmethod initialize :after ((ending-card ending-card) &key)
+  (resize ending-card *nominal-screen-width* *nominal-screen-height*)
+  (move-to ending-card 0 (- *nominal-screen-height* 100)))
+  
+(defmethod update ((card ending-card))
+  (with-fields (x y) card
+    (when (plusp y)
+      (move-to card x (- y 0.8)))))
+
+(define-buffer ending 
+  (quadtree-depth :initform 4))
+
+(defmethod initialize :after ((ending ending) &key)
+  (drop-object ending (new 'ending-card))
+  (play-music "shayol.ogg" :loop nil)
+  (resize ending *nominal-screen-width* *nominal-screen-height*))
+
+(defmethod tap ((ending ending) x y) nil)
+(defmethod tap ((ending-card ending-card) x y) nil)
+(defmethod scroll-tap ((ending ending) x y) nil)
+(defmethod alternate-tap ((ending ending) x y) nil)
+
+;;; Final game action
+
+(defmethod activate ((cylinder shayol-cylinder))
+  (if (not (find-inventory-item (geoffrey) 'cylindrophone))
+      (bark (geoffrey) "I don't have anything to use with this.")
+      (switch-to-buffer (new 'ending))))
 
 
-
-
-
+      
 
 
 

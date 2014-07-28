@@ -345,12 +345,19 @@ even its forms of conception, will be
 entirely incomprehensible to us.
 
 Shayol does not need the cylindrophone
-to communicate telepathically, but his
-henchmen do. This \"beaureaucratic\"
-requirement has worked to our benefit as
-investigators, for we have been able to
-find some of the cylinders and thereby
-eavesdrop on their correspondence.
+to communicate with the Entity, but his
+henchmen do. The contents of the message
+are written on a parchment, sealed with
+a special wax, and then burnt. The reply
+comes through the Aether, and is
+recorded on the cylinder.
+
+This \"beaureaucratic\" requirement has
+worked to our benefit as investigators.
+For while the outgoing letters are
+burnt, we have been able to find some of
+the cylinders, and thereby eavesdrop on
+the replies.
 
 They are urgently seeking a Prescient
 woman whose name I have not been able to
@@ -365,7 +372,8 @@ eliminate her.
 Unfortunately, they feel the same way
 about you, Geoffrey. Gather your
 strength, for you must find the
-Prescient woman and defeat Shayol's
+Prescient woman---in this Age, or after
+further Traveling---and defeat Shayol's
 malevolent designs.
 
 We must move on from this encampment;
@@ -385,5 +393,4 @@ Be brave.
 (defmethod activate ((self scroll-fragment))
   (drop self (new 'scroll-gump
 		  :text (field-value :text self))))
-
 
