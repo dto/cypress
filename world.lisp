@@ -95,13 +95,13 @@
 (defmethod find-lore ((thing thing))
   (field-value :lore thing))
 
-(defmethod colliding-with :around ((self thing) (other thing))
+(defmethod will-obstruct ((self thing) (other thing))
   (if (has-tag self :round)
       (let ((radius1 (/ (field-value :width self) 2))
 	    (radius2 (/ (field-value :width other) 2)))
 	(< (distance-between self other)
 	   (+ radius2 radius1)))
-      (call-next-method self other)))
+      (has-tag self :solid)))
       
 ;;; Default resizing to image
 
