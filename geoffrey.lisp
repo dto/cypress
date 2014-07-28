@@ -145,6 +145,7 @@ inventory and find something to eat.
 (defmethod walk-to :after ((monk geoffrey) x y)
   (with-fields (waypoints) monk
     (with-fields (barrier-y) (current-scene)
+      ;; (when (null waypoints) (return-to-safe-point monk))
       (when (or
 	     ;; pathfinding failed
 	     (null waypoints)
@@ -190,8 +191,6 @@ inventory and find something to eat.
     (multiple-value-bind (x y) (left-of self)
       (add-object (current-scene) (lucius) (- x 10) (- y 10)))))
 
-;; (defmethod add-object :after ((scene scene) (geoffrey geoffrey) &optional x y z) nil)
-
 (defmethod exit-scene ((self geoffrey))
   (stop-walking self)
   (when (typep (current-scene)
@@ -204,15 +203,35 @@ inventory and find something to eat.
 
 ;;; Keeping geoffrey on the map
 
-(defmethod run :after ((geoffrey geoffrey))
-  (update-translation geoffrey)
+(defmethod knock-toward-center ((geoffrey geoffrey))
+  (stop-walking geoffrey)
+  (multiple-value-bind (gx gy) (center-point (geoffrey))
+    (multiple-value-bind (cx cy) (center-point (current-scene))
+      (let ((jerk-distance (/ (distance cx cy gx gy) 16)))
+	(move geoffrey (find-heading gx gy cx cy) jerk-distance)))))
+
+(defmethod restrict-to-buffer ((geoffrey geoffrey))
   (unless (bounding-box-contains (multiple-value-list (bounding-box (current-scene)))
 				 (multiple-value-list (bounding-box geoffrey)))
-    (stop-walking geoffrey)
-    (multiple-value-bind (gx gy) (center-point (geoffrey))
-      (multiple-value-bind (cx cy) (center-point (current-scene))
-	(let ((jerk-distance (/ (distance cx cy gx gy) 16)))
-	  (move geoffrey (find-heading gx gy cx cy) jerk-distance))))))
+    (knock-toward-center geoffrey)))
+
+;; (defmethod knock-backward ((geoffrey geoffrey) (thing thing))
+;;   (multiple-value-bind (gx gy) (center-point (geoffrey))
+;;     (multiple-value-bind (cx cy) (center-point thing)
+;;       (let ((jerk-distance (/ (distance cx cy gx gy) 4)))
+;; 	(move geoffrey (find-heading gx gy cx cy) jerk-distance)))))
+
+;; (defmethod dig-out-maybe ((geoffrey geoffrey))
+;;   (let ((embed (some #'(lambda (x) (when (has-tag x :round) x))
+;; 		     (find-colliding-objects geoffrey))))
+;;     (when embed 
+;;       (knock-backward geoffrey embed))))
+
+(defmethod run :after ((geoffrey geoffrey))
+  (update-translation geoffrey)
+  (restrict-to-buffer geoffrey))
+  ;; (when (null (field-value :waypoints geoffrey))
+  ;;   (dig-out-maybe geoffrey)))
 
 ;;; Geoffrey's magic tent
 

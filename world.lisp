@@ -85,6 +85,8 @@
   ;; pathfinding
   (path :initform nil)
   (waypoints :initform nil)
+  (safe-x :initform nil)
+  (safe-y :initform nil)
   (goal-x :initform nil)
   (goal-y :initform nil))
 
@@ -168,9 +170,16 @@
   (when (current-scene) 
     (remove-object (current-scene) self))
   (setf (field-value :path self) nil)
+  (setf (field-value :safe-x self) nil)
+  (setf (field-value :safe-y self) nil)
   (setf (field-value :waypoints self) nil))
 
 ;;; Pathfinding 
+
+(defmethod find-colliding-objects ((self thing))
+  (loop for object being the hash-keys of (field-value :objects (current-scene))
+	when (colliding-with self (find-object object))
+	  collect (find-object object)))
 
 (defmethod next-waypoint ((self thing))
   (with-local-fields 
@@ -199,33 +208,23 @@
     (when (null waypoints) 
       (stop-walking self))
     waypoints))
-;; (save-quest)
+
+;; (defmethod return-to-safe-point ((self thing))
+;;   (with-local-fields 
+;;     (when (numberp %safe-x)
+;;       (prog1 t (move-to self %safe-x %safe-y)))))
+
+;; (defmethod save-safe-point-maybe ((self thing))
+;;   (with-local-fields 
+;;     (unless (find-colliding-objects self)
+;;       (setf %safe-x %x %safe-y %y))))
+
 ;; (defmethod will-obstruct ((self thing) (other thing))
 ;;   (if (has-tag self :round)
-;;       (with-fields (height width) self
+;;       (with-fields (width) self
 ;; 	(< (distance-between self other)
-;; 	   (/ (+ height width) 1)))
+;; 	   (+ (units 2) (/ width 2))))
 ;;       (has-tag self :solid)))
-
-;; (defmethod find-colliding-objects ((self thing))
-;;   (loop for object being the hash-keys of (field-value :objects (current-scene))
-;; 	when (colliding-with self (find-object object))
-;; 	  collect (find-object object)))
-
-;; (defmethod walk-to :around ((self thing) x1 y1)
-;;   (setf (field-value :colliding-objects self)
-;; 	(find-colliding-objects self))
-;;   (call-next-method))
-
-;; (defmethod will-obstruct :around ((self leafy-tree) (other geoffrey)) 
-;;   (let ((result (call-next-method)))
-;;     (prog1 result
-;;       (message "RESULT: ~S" result))))
-
-;; (defmethod will-obstruct :around ((self thing) (other thing))
-;;   ;; ignore objects that were colliding at the start of pathing
-;;   (unless (member other (field-value :colliding-objects self) :test 'eq)
-;;     (call-next-method)))
 
 (defmethod can-walk-to ((self thing) x1 y1)
   (with-fields (x y waypoints path) self
@@ -1082,3 +1081,18 @@
 (defun load-quest (&optional (file (cypress-save-file)))
   (expand-quest (first (read-sexp-from-file file)))
   (switch-to-buffer (current-scene)))
+
+;; (defmethod walk-to :around ((self thing) x1 y1)
+;;   (setf (field-value :colliding-objects self)
+;; 	(find-colliding-objects self))
+;;   (call-next-method))
+
+;; (defmethod will-obstruct :around ((self leafy-tree) (other geoffrey)) 
+;;   (let ((result (call-next-method)))
+;;     (prog1 result
+;;       (message "RESULT: ~S" result))))
+
+;; (defmethod will-obstruct :around ((self thing) (other thing))
+;;   ;; ignore objects that were colliding at the start of pathing
+;;   (unless (member other (field-value :colliding-objects self) :test 'eq)
+;;     (call-next-method)))

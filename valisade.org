@@ -1,6 +1,94 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
+* Verdsion 1.6
+
+
+** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+
+** TODO [#A] Auto-stop Geoffrey near wolf
+** TODO [#A] stop wolf when too close; bite and run BLOOD!
+
+** TODO [#A] make sure player doesn't miss savepoint dialog
+**** TODO have maxwell bring player to it or at least tell.
+** TODO [#A] fix sextant to remind player about savepoints
+**** TODO have arturo explain sextant better in game
+
+** TODO [#A] enlarge wolf hitbox 
+** TODO [#A] make combat not suck; show target cursor?
+
+** TODO [#A] Large print mode
+
+** TODO [#A] Fix can visit wizards early
+** TODO [#A] Letter should tell player to look for morbius tent
+
+** TODO [#A] Prompt to double-click arturo's house
+** TODO [#A] look for unused art for sidequests
+
+** TODO [#A] explain why triangle key is on corpse in outpost via letter
+
+** TODO [#A] make it more obvious that lucius has /joined/left the party
+
+** TODO [#A] have lucius tell player to keep his distance
+
+** TODO [#A] add easier to read life meters/ mana bars
+
+* Version 1.7 or later
+
+** TODO [#B] Fix image stretching in inventory icons
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+
+** TODO [#B] Close scrolls with X in corner, more intuitive
+
+
+** TODO [#B] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+** TODO [#B] Fix spellcasting/activating objects after dead
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+
+** TODO [#B] Integrate hintbook into game
+** TODO [#B] add more specific music events at add-objective points
+** TODO [#B] have Maxwell tell you about waystone before other convo
+
+** TODO [#B] add symbol or other decoration to waystone?
+** TODO [#B] restructure dialog paths to keep more topics available
+*** TODO [#C] possibly use vertical dialogue paths
+
+** DONE rewrite final wizard convo
+   CLOSED: [2014-07-28 Mon 17:57]
+** TODO [#B] black wizard bark sounds are pitched up proto-ildronian
+** TODO [#B] add system to make sure whole soundtrack is played
+** TODO [#B] add short battle cues and victory
+** TODO [#B] 3nd shayol dossier
+**** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
+**** TODO it has no name, for it comes from a time before Language existed.
+**** TODO its purposes and its modes of conception are completely foreign to us
+**** TODO it created the Anvil disaster on purpose (via the chess game with Shayol) in order to harvest souls 
+**** TODO if it emerges into this time to feed upon the souls, its power will expand to eat planet after planet
+**** TODO Dr. Quine attempts to banish the entity by means of Logic, actuated by a computing machine
+**** TODO ildron's sun is dying
+**** TODO in chapter 2 Geoffrey saves cypress and becomes the new soul, 
+**** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
+
+** TODO revise owl scene
+
+** TODO add unexpected ghostly lights
+
+** DONE Improve owl and wizard scenes
+   CLOSED: [2014-07-28 Mon 17:59]
+
+** TODO [#B] sextant should beep/notify point way to stone
+*** TODO correct Arturo's description of waystone/sextant
+
+** TODO [#B] make sure credits are readable in-game
+
+
 <dto> basically what i'm hearing generally is that the game needs some
       work. particularly movement/combat
 <dto> i'd like to focus hard on the problem after vacation, and finish things
@@ -24,150 +112,33 @@
       with tiny rune writing that indicate ranges of movement/attack/ spell ,
       and use additive blending and have them rotate   [22:14]
 
+** TODO [#B] Fix can't pick up items partially obscured by geoffrey
 
-* Bugfixes
-** DONE add wax cylinder to morbius tent
-   CLOSED: [2014-07-28 Mon 09:33]
-
-** DONE [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
-   CLOSED: [2014-07-28 Mon 09:33]
-
-** TODO [#A] Fix image stretching in inventory icons
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#A] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-** TODO [#A] Fix spellcasting/activating objects after dead
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-
-** TODO [#A] Close scrolls with X in corner, more intuitive
-** TODO [#A] Auto-stop Geoffrey near wolf
-** TODO [#A] stop wolf when too close; bite and run BLOOD!
-
-** TODO [#B] Integrate hintbook into game
-** TODO [#A] add more specific music events at add-objective points
-** TODO [#A] scale up font mode
-** TODO [#A] have Maxwell tell you about waystone before other convo
-
-** TODO [#B] add symbol or other decoration to waystone?
-** TODO [#B] restructure dialog paths to keep more topics available
-** TODO [#B] possibly use vertical dialogue paths
-
-* Feedback
-** TODO rewrite final wizard convo
-** TODO black wizard bark sounds are pitched up proto-ildronian
-** TODO make sure player doesn't miss savepoint dialog
-
-** TODO fix sextant to remind player about savepoints
-** TODO explain sextant in game
-** TODO add system to make sure whole soundtrack is played
-** TODO add short battle cues and victory
-** TODO look for unused art
-
-* Story 
-
-** TODO [#B] explain why triangle key is on corpse in outpost via letter
-
-*** TODO wax scroll movie with pitched-down chorused skull voice
-
-** TODO [#B] 2nd shayol dossier
-**** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
-**** TODO it has no name, for it comes from a time before Language existed.
-**** TODO its purposes and its modes of conception are completely foreign to us
-**** TODO it created the Anvil disaster on purpose (via the chess game with Shayol) in order to harvest souls 
-**** TODO if it emerges into this time to feed upon the souls, its power will expand to eat planet after planet
-**** TODO Dr. Quine attempts to banish the entity by means of Logic, actuated by a computing machine
-**** TODO ildron's sun is dying
-**** TODO in chapter 2 Geoffrey saves cypress and becomes the new soul, 
-**** TODO the souls are saved, but Ildron crumbles into dust and is destroyed
-
-** DONE Improve pre-wizard cave scene and wax cylinder letter / events
-   CLOSED: [2014-07-23 Wed 20:03]
-** TODO Valisade Ruins basement library scene requiring Triangle Key 
-*** TODO use triangle key to unseal documents and bone flute later at Valisade
-*** TODO get story item and or something at valisade
-
-** TODO revise endgame to include Gray Archer
-*** TODO initially conversation!
-*** TODO we are fated to meet thus. for we are both chess pieces must see one another. 
-*** TODO pen/inkwell/scroll found on him
-
-** TODO revise owl scene
-
-** TODO make combat not suck; show target cursor?
-*** DONE silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
-    CLOSED: [2014-07-23 Wed 17:59]
-**** DONE Write silver journal entries, it's raining ash
-     CLOSED: [2014-07-23 Wed 17:59]
-
-** TODO [#C] check for more unused art
-** TODO [#C] incorporate illegible map
-
-** DONE remove puddles from frozen meadow/forest
-   CLOSED: [2014-07-23 Wed 18:06]
-** TODO enlarge wolf hitbox 
-** TODO add unexpected ghostly lights
-
-** DONE Connect ruins quests back to Owl quest
-   CLOSED: [2014-07-23 Wed 17:59]
-
-** TODO Letter should tell player to look for morbius tent
-
-** TODO Fix can visit wizards early
-** TODO Improve owl and wizard scenes
-
-** TODO sextant should beep/notify point way to stone
-*** TODO correct Arturo's description of waystone/sextant
-
-** TODO [#A] make it more obvious that lucius has /joined/left the party
-** TODO [#A] Add more townspeople
-   :PROPERTIES:
-   :Effort:   2:00
-   :END:
-*** TODO [#B] townspeople should help teach game
-
-** TODO [#A] make sure credits are readable in-game
-** TODO [#B] Add curved stone mini gardens, curved-stone-1.png
-
-* Improvements
-
-** TODO [#A] Fix can't pick up items partially obscured by geoffrey
-** TODO [#B] have lucius tell player to keep his distance
-*** TODO [#B] auto stop walking when enemy very close
-    :PROPERTIES:
-    :Effort:   0:30
-    :END:
-
-** TODO [#A] Fix non-impelled arrows moving on their own
+** TODO [#B] Fix non-impelled arrows moving on their own
    :PROPERTIES:
    :Effort:   0:15
    :END: 
 ** TODO [#B] don't display ATK/RES/DEF until they change
-** TODO [#A] fix more drop-behind-scroll issues
-** TODO [#A] add easier to read life meter
-** TODO [#A] suppress SDL-GFX error 
-** TODO [#A] save to ~/Library/Application Support/Cypress/cypress.sav on mac
-** TODO [#A] save game to ~/.cypress.xelf on linux
-** TODO [#A] more camping tooltips
-** TODO [#A] Prompt to double-click arturo's house
-** TODO [#A] should show bubble with "container is full" when can't accept
+** TODO [#B] fix more drop-behind-scroll issues
+** TODO [#B] suppress SDL-GFX error 
+** TODO [#B] save to ~/Library/Application Support/Cypress/cypress.sav on mac
+** TODO [#B] save game to ~/.cypress.xelf on linux
+** TODO [#B] more camping tooltips
+** TODO [#B] should show bubble with "container is full" when can't accept
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#A] auto-close inventory windows on faraway objects if you move
+** TODO [#B] auto-close inventory windows on faraway objects if you move
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#A] implement conversation log / journal
+** TODO [#C] incorporate illegible map
+
+** TODO [#B] implement conversation log / journal
    :PROPERTIES:
    :Effort:   1:00
    :END:
-** TODO [#A] text bubbles should not clip against the right edge of the screen
+** TODO [#B] text bubbles should not clip against the right edge of the screen
 ** TODO [#A] should allow to click gear as well as plate to unlock puzzle
    :PROPERTIES:
    :Effort:   0:15
@@ -217,13 +188,13 @@
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#B] double click should not reset bow timer
-** TODO [#B] Implement bleeding and blood tracks in the snow
+** TODO [#A] Implement bleeding and blood tracks in the snow
    :PROPERTIES:
    :Effort:   1:00
    :END:
+** TODO [#B] double click should not reset bow timer
 ** TODO [#B] Reduce attack/defense when very hungry
-** TODO [#B] Add slight aim jitter when shivering/freezing
+** TODO [#A] Add slight aim jitter when shivering/freezing
 ** TODO [#B] Lucius should avoid monsters (are they :solid)?
 ** TODO [#B] Protection (15 mana) (1 nightshade)
    :PROPERTIES:
@@ -1174,3 +1145,91 @@
 
 *** DONE Write encrypted ancient Shayol dossier letter from 5 KYA
     CLOSED: [2014-07-26 Sat 20:00]
+
+** DONE add wax cylinder to morbius tent
+   CLOSED: [2014-07-28 Mon 09:33]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:57
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Improve pre-wizard cave scene and wax cylinder letter / events
+   CLOSED: [2014-07-23 Wed 20:03]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:58
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO Valisade Ruins basement library scene requiring Triangle Key
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:58
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+*** TODO use triangle key to unseal documents and bone flute later at Valisade
+*** TODO get story item and or something at valisade
+
+** TODO revise endgame to include Gray Archer
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:58
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+*** TODO initially conversation!
+*** TODO we are fated to meet thus. for we are both chess pieces must see one another. 
+*** TODO pen/inkwell/scroll found on him
+
+** DONE remove puddles from frozen meadow/forest
+   CLOSED: [2014-07-23 Wed 18:06]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE silver book tells you of secret small cemetery to west of Northern ruin, so go there get lay key, unlock north ruin
+   CLOSED: [2014-07-23 Wed 17:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: revise owl scene
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE Write silver journal entries, it's raining ash
+    CLOSED: [2014-07-23 Wed 17:59]
+
+** DONE Connect ruins quests back to Owl quest
+   CLOSED: [2014-07-23 Wed 17:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO [#A] Add more townspeople
+   :PROPERTIES:
+   :Effort:   2:00
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+*** TODO [#B] townspeople should help teach game
+
+** TODO [#B] Add curved stone mini gardens, curved-stone-1.png
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 17:59
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+
