@@ -141,6 +141,12 @@
 	    (when (= (field-value :channel plate) (field-value :channel door))
 	      (release-lock door thing))))))))
 		 
+(defmethod activate ((gear copper-gear))
+  (block colliding
+    (dolist (thing (find-colliding-objects gear))
+      (when (typep thing (find-class 'copper-plate))
+	(activate thing)))))
+
 (defmethod run ((door copper-door))
   (with-fields (y timer open image plate) door
     (when (not open)
