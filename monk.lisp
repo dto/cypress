@@ -439,7 +439,7 @@ now, or you will freeze to death!")
 (defmethod attack ((monk monk) (enemy thing))
   (if (not (find-arrow monk))
       (progn (show-error enemy)
-	     (narrate "You don't have any arrows!"))
+	     (bark (geoffrey) "I'm out of arrows!"))
       (with-fields (bow-ready) monk
 	(if (reloading-bow monk) 
 	    (progn

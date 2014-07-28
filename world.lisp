@@ -46,6 +46,7 @@
 
 (defblock thing 
   (excluded-fields :initform '(:quadtree-node :path))
+  (colliding-objects :initform nil)
   ;; world fields
   (quantity :initform 1)
   (stacking :initform t)
@@ -95,14 +96,6 @@
 (defmethod find-lore ((thing thing))
   (field-value :lore thing))
 
-(defmethod will-obstruct ((self thing) (other thing))
-  (if (has-tag self :round)
-      (let ((radius1 (/ (field-value :width self) 2))
-	    (radius2 (/ (field-value :width other) 2)))
-	(< (distance-between self other)
-	   (+ radius2 radius1)))
-      (has-tag self :solid)))
-      
 ;;; Default resizing to image
 
 (defparameter *default-thing-scale* (/ 1 (/ +dots-per-inch+ 130)))
@@ -206,6 +199,33 @@
     (when (null waypoints) 
       (stop-walking self))
     waypoints))
+;; (save-quest)
+;; (defmethod will-obstruct ((self thing) (other thing))
+;;   (if (has-tag self :round)
+;;       (with-fields (height width) self
+;; 	(< (distance-between self other)
+;; 	   (/ (+ height width) 1)))
+;;       (has-tag self :solid)))
+
+;; (defmethod find-colliding-objects ((self thing))
+;;   (loop for object being the hash-keys of (field-value :objects (current-scene))
+;; 	when (colliding-with self (find-object object))
+;; 	  collect (find-object object)))
+
+;; (defmethod walk-to :around ((self thing) x1 y1)
+;;   (setf (field-value :colliding-objects self)
+;; 	(find-colliding-objects self))
+;;   (call-next-method))
+
+;; (defmethod will-obstruct :around ((self leafy-tree) (other geoffrey)) 
+;;   (let ((result (call-next-method)))
+;;     (prog1 result
+;;       (message "RESULT: ~S" result))))
+
+;; (defmethod will-obstruct :around ((self thing) (other thing))
+;;   ;; ignore objects that were colliding at the start of pathing
+;;   (unless (member other (field-value :colliding-objects self) :test 'eq)
+;;     (call-next-method)))
 
 (defmethod can-walk-to ((self thing) x1 y1)
   (with-fields (x y waypoints path) self

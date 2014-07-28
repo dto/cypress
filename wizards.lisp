@@ -94,7 +94,7 @@ play the message.")
   (call-next-method)
   (with-fields (clock waypoints) wizard
     (when (zerop clock)
-      (percent-of-time 0.7 (begin-attack wizard)))
+      (percent-of-time 2 (begin-attack wizard)))
     (when (plusp clock)
       (decf clock)
       (when (zerop clock)
@@ -152,8 +152,8 @@ have traveled far in a just a few years,
 
 (defthing wax-cylinder :image (random-choose '("wax-cylinder-1.png" "wax-cylinder-2.png")))
 
-(defthing (morbius-cylinder wax-cylinder))
-(defthing (shayol-cylinder wax-cylinder))
+(defthing (morbius-cylinder wax-cylinder) :description "morbius' wax cylinder")
+(defthing (shayol-cylinder wax-cylinder) :description "shayol's wax cylinder")
 
 (defmethod activate ((tent morbius-tent))
   (with-fields (activated) tent
@@ -194,7 +194,7 @@ have traveled far in a just a few years,
   :description "Man in gray robes"
   :magic 100
   :clock 0
-  :health 82)
+  :health 100)
 
 (defparameter *gray-wizard-firing-time* (seconds->frames 0.7))
 
@@ -263,7 +263,7 @@ have traveled far in a just a few years,
 		 (add-event :wizard-meets-geoffrey)
 		 (walk-to-thing wizard (geoffrey))
 		 (bark wizard "Hold, Traveler. Let us speak.")))
-	      ((< distance 200)
+	      ((< distance 340)
 	       (stop-walking wizard)))
 	    (call-next-method)))))
 
@@ -380,7 +380,7 @@ serum was too much for her aging body.
 So! Let us see if Fate obeys Amalia's
 gift!
 
-To the Death, now!")
+To the Death, now!" :fight)
 
 (defmethod die ((self gray-wizard))
   (play-sound self "death.wav")
@@ -455,7 +455,7 @@ three... two... one...")
 (defmethod update ((card ending-card))
   (with-fields (x y) card
     (when (plusp y)
-      (move-to card x (- y 0.8)))))
+      (move-to card x (- y 0.6)))))
 
 (define-buffer ending 
   (quadtree-depth :initform 4))

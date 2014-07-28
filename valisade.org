@@ -26,9 +26,12 @@
 
 
 * Bugfixes
-** TODO add wax cylinder to morbius tent
+** DONE add wax cylinder to morbius tent
+   CLOSED: [2014-07-28 Mon 09:33]
 
-** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+** DONE [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+   CLOSED: [2014-07-28 Mon 09:33]
+
 ** TODO [#A] Fix image stretching in inventory icons
    :PROPERTIES:
    :Effort:   1:00
@@ -45,6 +48,7 @@
 ** TODO [#A] Close scrolls with X in corner, more intuitive
 ** TODO [#A] Auto-stop Geoffrey near wolf
 ** TODO [#A] stop wolf when too close; bite and run BLOOD!
+
 ** TODO [#B] Integrate hintbook into game
 ** TODO [#A] add more specific music events at add-objective points
 ** TODO [#A] scale up font mode
@@ -58,12 +62,12 @@
 ** TODO rewrite final wizard convo
 ** TODO black wizard bark sounds are pitched up proto-ildronian
 ** TODO make sure player doesn't miss savepoint dialog
+
 ** TODO fix sextant to remind player about savepoints
 ** TODO explain sextant in game
 ** TODO add system to make sure whole soundtrack is played
 ** TODO add short battle cues and victory
 ** TODO look for unused art
-
 
 * Story 
 

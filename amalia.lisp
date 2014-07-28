@@ -74,6 +74,9 @@ of Heroes.")
 (defthing (amalia-ruins scene)
   :background-image (random-choose *frozen-meadow-images*))
 
+(defmethod begin-scene :after ((scene amalia-ruins))
+  (cue-music scene "constellation.ogg"))
+
 (defmethod find-description ((scene amalia-ruins)) "Frozen forest")
 
 (defmethod make-terrain ((scene amalia-ruins))

@@ -21,7 +21,8 @@
 (in-package :cypress)
 
 (defresource "ancient-fanfare.ogg" :volume 10)
-(defresource "presence.ogg" :volume 9)
+(defresource "presence.ogg" :volume 11)
+(defresource "constellation.ogg" :volume 20)
 (defresource "passageway.ogg" :volume 20)
 (defresource "procession4.ogg" :volume 20)
 (defresource "home.ogg" :volume 08)
