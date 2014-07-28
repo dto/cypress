@@ -1,13 +1,77 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
+<dto> basically what i'm hearing generally is that the game needs some
+      work. particularly movement/combat
+<dto> i'd like to focus hard on the problem after vacation, and finish things
+      up by august  [22:06]
+<dto> what i'm considering is a change to a more truly turn-based strategy
+<dto> it really would not be an impossible task
+<dto> more likely, some small but high-impact changes will improve it enough
+      to be decent  [22:07]
+<dto> its a little disappointing but , i guess thats why they callit Beta
+<dto> also, movement problems could be solved that way. because i could use a
+      system like Phantom Brave where a circle casts around your character to
+      indicate where you can move radius  [22:10]
+<dto> hmm
+<dto> meanwhile im totally expecting the reviewer guy to nail me to the cross
+								        [22:11]
+<dto> but for example if the action is paused and you issue the order Attack
+      Enemy, and you don't presently have line of sight, it could easily
+      pathfind until it gets line of sight and then draw the bow to fire.  
+								        [22:12]
+>  <dto> i could paint some cool looking slightly glowing Sigils, circular rings
+      with tiny rune writing that indicate ranges of movement/attack/ spell ,
+      and use additive blending and have them rotate   [22:14]
+
+
+* Bugfixes
+** TODO add wax cylinder to morbius tent
+
+** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+** TODO [#A] Fix image stretching in inventory icons
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#A] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+** TODO [#A] Fix spellcasting/activating objects after dead
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+
+** TODO [#A] Close scrolls with X in corner, more intuitive
+** TODO [#A] Auto-stop Geoffrey near wolf
+** TODO [#A] stop wolf when too close; bite and run BLOOD!
+** TODO [#B] Integrate hintbook into game
+** TODO [#A] add more specific music events at add-objective points
+** TODO [#A] scale up font mode
+** TODO [#A] have Maxwell tell you about waystone before other convo
+
+** TODO [#B] add symbol or other decoration to waystone?
+** TODO [#B] restructure dialog paths to keep more topics available
+** TODO [#B] possibly use vertical dialogue paths
+
+* Feedback
+** TODO rewrite final wizard convo
+** TODO black wizard bark sounds are pitched up proto-ildronian
+** TODO make sure player doesn't miss savepoint dialog
+** TODO fix sextant to remind player about savepoints
+** TODO explain sextant in game
+** TODO add system to make sure whole soundtrack is played
+** TODO add short battle cues and victory
+** TODO look for unused art
+
+
 * Story 
 
-** TODO [#C] explain why triangle key is on corpse in outpost via letter
-** TODO [#C] Shayol dossier should be found in valisade ruins
+** TODO [#B] explain why triangle key is on corpse in outpost via letter
 
-*** TODO Write encrypted ancient Shayol dossier letter from 5 KYA
-*** TODO play foreboding music when discovering shayol dossier
+*** TODO wax scroll movie with pitched-down chorused skull voice
+
+** TODO [#B] 2nd shayol dossier
 **** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
 **** TODO it has no name, for it comes from a time before Language existed.
 **** TODO its purposes and its modes of conception are completely foreign to us
@@ -26,7 +90,7 @@
 
 ** TODO revise endgame to include Gray Archer
 *** TODO initially conversation!
-*** TODO we are fated to meet thus. for chess pieces must see one another. 
+*** TODO we are fated to meet thus. for we are both chess pieces must see one another. 
 *** TODO pen/inkwell/scroll found on him
 
 ** TODO revise owl scene
@@ -68,25 +132,12 @@
 
 * Improvements
 
-** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
 ** TODO [#A] Fix can't pick up items partially obscured by geoffrey
 ** TODO [#B] have lucius tell player to keep his distance
 *** TODO [#B] auto stop walking when enemy very close
     :PROPERTIES:
     :Effort:   0:30
     :END:
-** TODO [#A] Fix image stretching in inventory icons
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-** TODO [#A] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-** TODO [#A] Fix spellcasting/activating objects after dead
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
 
 ** TODO [#A] Fix non-impelled arrows moving on their own
    :PROPERTIES:
@@ -126,7 +177,7 @@
    :Effort:   0:30
    :END:
 ** TODO [#B] Weather, cloud shadows, snow, rainloop
-** TODO [#B] add by-topic notebook for scrolls, journal entries
+** TODO [#B] add by-topic notebook for scrolls, journal entries, hints
 ** TODO [#B] in-inventory multi-move of quantities
 ** TODO [#B] fix onscreen enemies not pursuing
 ** DONE [#B] have geoffrey bark "I can't reach that" on drag-fail
@@ -1107,3 +1158,15 @@
 ***** DONE they wished to harness her ability
       CLOSED: [2014-07-23 Wed 20:01]
 
+** DONE [#C] Shayol dossier should be found in valisade ruins
+   CLOSED: [2014-07-26 Sat 20:00]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-26 Sat 20:00
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Story
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+*** DONE Write encrypted ancient Shayol dossier letter from 5 KYA
+    CLOSED: [2014-07-26 Sat 20:00]
