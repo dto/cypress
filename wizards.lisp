@@ -108,7 +108,10 @@ play the message.")
 
 (defmethod die ((self black-wizard))
   (play-sound self "death.wav")
-  (destroy self))
+  (destroy self)
+  (unless (find-instances (current-scene) 'black-wizard)
+    (show-hint "Search the Wizards' campsite for clues.")
+    (set-objective "Search the Wizards' campsite for clues.")))
 
 (defmethod activate-maybe ((wizard black-wizard))
   (activate wizard))
