@@ -66,8 +66,9 @@
   (attack :initform 0)
   (defense :initform 0)
   (resistance :initform 0)
-  ;; time stop
+  ;; time stop and other conditions
   (stasis :initform nil)
+  (bleeding :initform nil)
   ;; conversation and lore fields
   (topics :initform '(:name :job :bye))
   (lore :initform nil)
@@ -708,11 +709,17 @@
 (defmethod cancel-stasis ((thing thing))
   (setf (field-value :stasis thing) nil))
 
+(defmethod add-bleeding ((thing thing) seconds)
+  (setf (field-value :bleeding thing) (seconds->frames seconds)))
+
+(defmethod cancel-bleeding ((thing thing))
+  (setf (field-value :bleeding thing) nil))
+
 (defmethod run ((self thing)))
 (defmethod arrange ((self thing)))
 
 (defmethod update ((self thing))
-  (with-fields (last-tap-time stasis) self
+  (with-fields (last-tap-time stasis bleeding) self
     ;; we actually catch the end of single-click here.
     (when (and last-tap-time
 	       (> (- *updates* last-tap-time)
@@ -726,6 +733,12 @@
       (decf stasis)
       (when (minusp stasis) 
 	(setf stasis nil)))
+    ;; handle bleeding counter
+    (when bleeding 
+      (percent-of-time 2 (bleed self))
+      (decf bleeding)
+      (when (minusp bleeding) 
+	(setf bleeding nil)))
     ;; possibly run world AI
     (unless (or stasis *paused*)
       ;;(run-tasks self)
@@ -1082,6 +1095,34 @@
   (expand-quest (first (read-sexp-from-file file)))
   (switch-to-buffer (current-scene)))
 
+;;; Blood
+
+(defparameter *blood-images* (image-set "blood" 8))
+
+(defthing blood 
+  :tags '(:fixed)
+  :scale 1.3
+  :image (random-choose *blood-images*))
+
+(defmethod enter-scene ((blood blood))
+  (send-to-back blood))
+
+(defun spray-blood (x y &optional 
+		      (count (+ 2 (random 4)))
+		      (radius (units 3)))
+  (dotimes (n count)
+    (drop-object (current-scene)
+		 (new 'blood)
+		 (+ x (- (random (* radius 2)) radius))
+		 (+ y (- (random (* radius 2)) radius)))))
+
+(defmethod bleed ((thing thing))
+  (multiple-value-bind (x y) (center-point thing)
+    (spray-blood x y)))
+
+(defmethod gash ((thing thing))
+  (add-bleeding thing 14.0))
+  
 ;; (defmethod walk-to :around ((self thing) x1 y1)
 ;;   (setf (field-value :colliding-objects self)
 ;; 	(find-colliding-objects self))

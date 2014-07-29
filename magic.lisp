@@ -91,6 +91,7 @@ Or eat some Snowdrops.")
 
 (defmethod cast ((caster thing) (spell cure))
   (modify-health caster (random-choose '(15 20 20 25)))
+  (cancel-bleeding caster)
   (narrate "Some of your wounds have been healed. You feel better."))
 
 ;;; Craft wooden arrows

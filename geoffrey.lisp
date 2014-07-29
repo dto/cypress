@@ -90,11 +90,24 @@ inventory and find something to eat.
   (when (field-value :waypoints monk)
     (bring-to-front gump)))
 
+(defmethod bleed :after ((monk geoffrey))
+  (damage monk (- (random-choose '(2 4 6))))
+  (bark monk "I'm bleeding!"))
+
+(defmethod collide :after ((monk geoffrey) (wolf wolf)) 
+  (when (and (not *paused*) (field-value :alive monk))
+    (percent-of-time 1
+      (narrate "You receive a deep gash!")
+      (run-away wolf)
+      (gash (geoffrey)))))
+
 (defmethod collide :after ((monk geoffrey) (wolf black-wolf))
   (when (and (not *paused*) (field-value :alive monk))
-    (percent-of-time 3
+    (percent-of-time 4
       (narrate "The wolf bites Geoffrey!")
+      (gash (geoffrey))
       (bark (geoffrey) "Aaaaghh!")
+      (run-away wolf)
       (damage monk (- (random-choose '(7 9))))
       (play-sample (random-choose '("unh-1.wav" "unh-2.wav" "unh-3.wav"))))))
 
@@ -269,6 +282,7 @@ inventory and find something to eat.
       (bring-to-front fire))))
 
 (defmethod recover ((monk monk))
+  (cancel-bleeding monk)
   (modify-health monk +12)
   (modify-magic monk +50)
   (modify-cold monk -75)
