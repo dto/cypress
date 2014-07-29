@@ -275,6 +275,9 @@ Geoffrey. And a safe return."
   (when (lucius) 
     (unfollow (lucius))
     (bark (lucius) "Good luck, Geoffrey!"))
+  (let ((house (find-pentaquin-house)))
+    (with-fields (x y width height) house
+      (walk-to self (+ x (units 5)) (+ y height (units 3)))))
   (show-hint "Visit Arturo's house.")
   (unlock (find-pentaquin-house)))
 
