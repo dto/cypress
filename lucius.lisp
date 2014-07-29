@@ -275,7 +275,12 @@ Shall we get moving?"
  :go-with-lucius :talk-more)
 
 (define-topic go-with-lucius lucius 
-  "Very well! Let's head North." :bye)
+  "Very well! Let's head North.
+
+Oh! You should pick a few white
+snowdrops before we leave. They're
+useful for recovering magic energy when
+you are feeling low." :bye)
 
 (defparameter *spellbook-hint*
 "Double-click Geoffrey to open his
@@ -284,11 +289,10 @@ Spellbook in the top left corner. You
 can also press the S key.")
 
 (defmethod discuss :after ((self lucius) (topic (eql :go-with-lucius)))
-  (destroy-gump self)
+  ;;(destroy-gump self)
   (follow self (geoffrey))
   (learn-spell (geoffrey) (new 'travel))
   (cue-music (current-scene) (random-choose '("home.ogg" "traveler2.ogg")))
-  (bark self "Excellent. Let's get moving!")
   (set-objective "Travel to Nothbehem with Lucius.")
   (show-hint *spellbook-hint*))
   ;; (activate (find-spellbook)))
