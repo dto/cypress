@@ -7,20 +7,23 @@
 ** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
 
 ** TODO [#A] Auto-stop Geoffrey near wolf
-** TODO [#A] stop wolf when too close; bite and run BLOOD!
+** DONE [#A] stop wolf when too close; bite and run BLOOD!
+   CLOSED: [2014-07-28 Mon 20:21]
 
 ** TODO [#A] make sure player doesn't miss savepoint dialog
 **** TODO have maxwell bring player to it or at least tell.
 ** TODO [#A] fix sextant to remind player about savepoints
 **** TODO have arturo explain sextant better in game
 
-** TODO [#A] enlarge wolf hitbox 
+** DONE [#A] enlarge wolf hitbox 
+   CLOSED: [2014-07-28 Mon 20:21]
 ** TODO [#A] make combat not suck; show target cursor?
 
 ** TODO [#A] Large print mode
 
 ** TODO [#A] Fix can visit wizards early
-** TODO [#A] Letter should tell player to look for morbius tent
+** DONE [#A] Letter should tell player to look for morbius tent
+   CLOSED: [2014-07-28 Mon 20:21]
 
 ** TODO [#A] Prompt to double-click arturo's house
 ** TODO [#A] look for unused art for sidequests
