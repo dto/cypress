@@ -4,40 +4,40 @@
 * Verdsion 1.6
 
 
-** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
-
-** TODO [#A] Auto-stop Geoffrey near wolf
-** DONE [#A] stop wolf when too close; bite and run BLOOD!
-   CLOSED: [2014-07-28 Mon 20:21]
-
-** TODO [#A] make sure player doesn't miss savepoint dialog
-**** TODO have maxwell bring player to it or at least tell.
 ** TODO [#A] fix sextant to remind player about savepoints
 **** TODO have arturo explain sextant better in game
 
+** TODO [#A] look for unused art for sidequests
+
+** TODO [#A] explain why triangle key is on corpse in outpost via letter---who is corpse? abbott?
+
+** DONE [#A] stop wolf when too close; bite and run BLOOD!
+   CLOSED: [2014-07-28 Mon 20:21]
+
 ** DONE [#A] enlarge wolf hitbox 
    CLOSED: [2014-07-28 Mon 20:21]
-** TODO [#A] make combat not suck; show target cursor?
 
-** TODO [#A] Large print mode
-
-** TODO [#A] Fix can visit wizards early
+** DONE [#A] Fix can visit wizards early
+   CLOSED: [2014-07-28 Mon 20:56]
 ** DONE [#A] Letter should tell player to look for morbius tent
    CLOSED: [2014-07-28 Mon 20:21]
 
-** TODO [#A] Prompt to double-click arturo's house
-** TODO [#A] look for unused art for sidequests
+** DONE [#A] make it more obvious that lucius has /joined/left the party
+   CLOSED: [2014-07-28 Mon 20:56]
 
-** TODO [#A] explain why triangle key is on corpse in outpost via letter
+** DONE [#A] have lucius tell player to keep his distance
+   CLOSED: [2014-07-28 Mon 20:53]
 
-** TODO [#A] make it more obvious that lucius has /joined/left the party
-
-** TODO [#A] have lucius tell player to keep his distance
-
-** TODO [#A] add easier to read life meters/ mana bars
 
 * Version 1.7 or later
 
+** TODO [#A] make combat not suck; show target cursor?
+** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
+
+
+** TODO [#A] Large print mode
+** TODO [#A] Prompt to double-click arturo's house
+** TODO [#A] add easier to read life meters/ mana bars
 ** TODO [#B] Fix image stretching in inventory icons
    :PROPERTIES:
    :Effort:   1:00
@@ -1235,4 +1235,14 @@
    :ARCHIVE_CATEGORY: valisade
    :ARCHIVE_TODO: TODO
    :END:
+
+** TODO [#A] make sure player doesn't miss savepoint dialog
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-28 Mon 20:58
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Verdsion 1.6
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: TODO
+   :END:
+**** TODO have maxwell bring player to it or at least tell.
 

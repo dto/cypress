@@ -22,6 +22,16 @@
   (mark-traversed (current-scene))
   (discuss waystone :confirm))
 
+(defparameter *waystone-hint*
+"You have discovered an 
+ancient Waystone. Save your
+quest progress here.")
+
+(defmethod run :after ((waystone waystone))
+  (when (< (distance-between waystone (geoffrey))
+	   500)
+    (show-hint *waystone-hint*)))
+
 (define-topic confirm waystone
   "Would you like to save your quest?" :save-progress :cancel)
 
