@@ -4,12 +4,14 @@
 * Verdsion 1.6
 
 
-** TODO [#A] fix sextant to remind player about savepoints
-**** TODO have arturo explain sextant better in game
-
 ** TODO [#A] look for unused art for sidequests
 
 ** TODO [#A] explain why triangle key is on corpse in outpost via letter---who is corpse? abbott?
+
+
+** DONE [#A] fix sextant to remind player about savepoints
+   CLOSED: [2014-07-28 Mon 21:02]
+**** TODO have arturo explain sextant better in game
 
 ** DONE [#A] stop wolf when too close; bite and run BLOOD!
    CLOSED: [2014-07-28 Mon 20:21]
