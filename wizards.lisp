@@ -159,9 +159,11 @@ have traveled far in a just a few years,
 (defthing (shayol-cylinder wax-cylinder) :description "shayol's wax cylinder")
 
 (defmethod activate ((tent morbius-tent))
+  (show-hint "Find Amalia.")
   (with-fields (activated) tent
     (when (not activated)
       (setf activated t)
+      (set-objective "Search for Amalia in the frigid North.")
       (add-inventory-item tent (new 'silverwool-leggings))
       (add-inventory-item tent (new 'silverwool-shirt))
       (add-inventory-item tent (make-scroll "half-burnt letter" *half-burnt-letter*))
