@@ -82,8 +82,13 @@ inventory and find something to eat.
 
 (defmethod humanp ((monk geoffrey)) t)
 
+(defparameter *summons-hint* 
+"Try reading the scrolls
+in your inventory.")
+
 (defmethod activate ((monk geoffrey))
   (resume)
+  (show-hint *summons-hint*)
   (replace-gump monk (new 'browser :container monk)))
 
 (defmethod collide :after ((monk geoffrey) (gump gump))
