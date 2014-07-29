@@ -135,6 +135,11 @@ found, either; he went to check up on
 the Retreat, and never returned. You
 can't go outside without the stuff
 getting in your eyes and mouth and ears.
+I might try to make a run for the Abbey;
+but I need to visit the Headmaster and
+see if he'll come with me. If we can
+find one of the old emergency shelters,
+he could let us in with his Key.
 
 7th Day. Can't get out. Everything is
 buried. I will try to meditate and
