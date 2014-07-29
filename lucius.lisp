@@ -59,7 +59,8 @@
     (percent-of-time 70
       (throw-pebble (lucius) (heading-to-thing (lucius) enemy)))))
 
-(defmethod collide ((monk lucius) (enemy enemy)) nil)
+(defmethod collide ((monk lucius) (enemy enemy)) 
+  (show-hint "Keep your distance from enemies!"))
 
 (defparameter *monk-2-walk* 
   '(:repeat t
