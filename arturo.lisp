@@ -271,6 +271,10 @@ apart for so long.  Farewell,
 Geoffrey. And a safe return."
 :bye)
 
+(defparameter *follow-arturo-hint*
+"Lucius has left the party.
+Follow Arturo to the house.")
+
 (defmethod discuss :after ((self arturo) (topic (eql :house)))
   (when (lucius) 
     (unfollow (lucius))
@@ -278,7 +282,7 @@ Geoffrey. And a safe return."
   (let ((house (find-pentaquin-house)))
     (with-fields (x y width height) house
       (walk-to self (+ x (units 5)) (+ y height (units 3)))))
-  (show-hint "Visit Arturo's house.")
+  (show-hint *follow-arturo-hint*)
   (unlock (find-pentaquin-house)))
 
 (define-topic farewell arturo 
