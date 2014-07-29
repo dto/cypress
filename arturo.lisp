@@ -324,13 +324,17 @@ wealthier than a King one day."
 	    (units 5) (units 5)))))
 
 (define-topic southern-cave arturo
-  "There is a Waystone just to the west
-of that cave, and south of Nothbehem.
-Follow the sextant's needle, and you'll
-find the stone. I hope you succeed in
-your quest to find Dr. Quine, and to
-understand your Origins and the meaning
-of your becoming a Traveler."
+  "There is a Waystone due west of that
+cave, and southeast of Nothbehem. 
+
+Remember, as long as you hold the
+Sextant, the Waystones you've found will
+show on your map as a red letter 'W'.
+
+I hope you succeed in your quest to find
+Dr. Quine, and to understand your
+Origins and the meaning of your becoming
+a Traveler."
   :goodbye)
 
 (define-topic goodbye arturo
