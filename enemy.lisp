@@ -178,12 +178,13 @@ or right-click Geoffrey.")
 
 (defthing (wolf enemy)
   :seen-player nil
+  :running-away nil
   :image-scale 1500
   :sprite-height 130
   :sprite-width 130
   :tags '(:enemy)
   :health 25
-  :speed 5.5
+  :speed 5.2
   :image (random-choose *wolf-images*))
 
 (defmethod die ((self wolf))
@@ -198,6 +199,21 @@ or right-click Geoffrey.")
 
 (defmethod random-frame ((wolf wolf))
   (random-choose *wolf-images*))
+
+(defmethod run-away ((self wolf))
+  (with-local-fields
+    (setf %running-away t)
+    (multiple-value-bind (x y) (center-point (current-scene))
+      (walk-to self x y))))
+
+(defmethod run :around ((self wolf))
+  (with-local-fields
+    (if (not %running-away)
+	(call-next-method)
+	(or (percent-of-time 1 (setf %running-away nil))
+	    (when (movement-heading self)
+	      (setf (field-value :heading self) (movement-heading self))
+	      (move self (movement-heading self) %speed))))))
 
 (defmethod run ((self wolf))
   (when (> (distance-to-cursor self) 1000) 
@@ -229,7 +245,10 @@ or right-click Geoffrey.")
 		    (walk-to self x y))))
 	      (when (movement-heading self)
 		(setf (field-value :heading self) (movement-heading self))
-		(move self (movement-heading self) speed))))))))
+		(move self (movement-heading self) speed)))))
+      ;; don't camp on player 
+      (when (< (distance-to-cursor self) 40)
+	(run-away self)))))
 
 ;; Blackwolves
 
@@ -240,7 +259,7 @@ or right-click Geoffrey.")
   :image (random-choose *black-wolf-images*)
   :sprite-height 130
   :sprite-width 130
-  :speed 6.3
+  :speed 5.6
   :health 45)
 
 (defmethod die ((self black-wolf))
