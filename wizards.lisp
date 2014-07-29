@@ -180,6 +180,9 @@ have traveled far in a just a few years,
   (mark-traversed ruins)
   (cue-music ruins (random-choose '("procession4.ogg"))))
 
+(defmethod can-be-visited ((ruins wizard-ruins))
+  (event-occurred-p :visited-southern-cave))
+
 (defmethod make-terrain ((scene wizard-ruins))
   (with-border (units 18)
     (lined-up-randomly

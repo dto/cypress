@@ -218,6 +218,7 @@
 
 (defmethod begin-scene :after ((scene cave))
   (mark-traversed scene)
+  (clear-excursion)
   (with-fields (height width) scene
     (resize-to-background-image scene)
     (percent-of-time 40 (cue-music scene (random-choose '("monks.ogg" "dusk.ogg" "spiritus.ogg"))))
@@ -314,6 +315,8 @@
     (add-inventory-item box (tome-of 'hold-creature))
     (add-inventory-item box (new 'silver-armor))
     (add-inventory-item box (make-scroll "crumbling scroll" *wax-cylinder-letter*)))
+  (add-event :visited-southern-cave)
+  (clear-excursion)
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
 
 ;;; Third story cave
