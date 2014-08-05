@@ -315,19 +315,19 @@ Press Escape to close all open scrolls.
   :image (random-choose *dead-tree-images*)
   :scale 3.0)
 
-(defparameter *leafy-tree-images* (image-set "leafy-tree" 12))
+(defparameter *leafy-tree-images* (image-set "leafy-tree" 23))
 
 (defthing leafy-tree 
   :tags '(:solid :fixed :round) 
   :image (random-choose *leafy-tree-images*)
-  :scale 1.5)
+  :scale 2.0)
 
 (defparameter *pine-tree-images* (image-set "pine-tree" 17))
 
 (defthing pine-tree 
   :tags '(:solid :fixed :round) 
   :image (random-choose *pine-tree-images*)
-  :scale 1.5)
+  :scale 2.0)
 
 (defthing gray-rock 
   :tags '(:solid :fixed) 
