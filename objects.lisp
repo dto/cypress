@@ -315,7 +315,7 @@ Press Escape to close all open scrolls.
   :image (random-choose *dead-tree-images*)
   :scale 3.0)
 
-(defparameter *leafy-tree-images* (image-set "leafy-tree" 14))
+(defparameter *leafy-tree-images* (image-set "leafy-tree" 12))
 
 (defthing leafy-tree 
   :tags '(:solid :fixed :round) 
