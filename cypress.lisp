@@ -108,7 +108,7 @@ them onto Geoffrey.")
 ;;; Title screen
 
 (defresource "title-sbcl.png")
-;; (defresource "title-ccl.png")
+(defresource "title-ccl.png")
 ;; (defresource "title-jp.png")
 
 (defun title-screen-image () 
