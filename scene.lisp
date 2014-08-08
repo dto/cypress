@@ -636,6 +636,9 @@
 (defthing (river scene)
   :background-image (random-choose *frozen-meadow-images*))
 
+(defmethod begin-scene :after ((river river))
+  (percent-of-time 60 (prog1 t (cue-music river (random-choose '("passageway.ogg" "spiritus.ogg"))))))
+
 (defun treacherous-trees ()
   (spray '(dead-tree large-crack dead-tree nightshade crack crack large-crack puddle)
 	 :trim nil
