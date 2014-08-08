@@ -145,12 +145,6 @@ After the Traveler, we will press onward
 to the first search area. We will burn
 you another report when the time comes.
 
-Before closing, if I may ask, what is
-the significance of the woman? If she is
-indeed dead, you should be able to
-search the river for her? A soul can't
-have traveled far in a just a few years,
-
  (the rest of the scroll is burnt)")
 
 (defthing wax-cylinder :image (random-choose '("wax-cylinder-1.png" "wax-cylinder-2.png")))
