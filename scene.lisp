@@ -204,7 +204,6 @@
     (when travel (use (geoffrey) travel))))
 
 (defmethod open-spellbook ((buffer scene))
-  (resume)
   (activate (find-spellbook)))
 
 (defmethod open-inventory ((buffer scene))
