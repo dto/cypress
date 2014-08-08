@@ -314,9 +314,14 @@ quest progress here.")
 	(spatter 'bone-dust))
       (spatter 'cryptghast :count 3)))))
        
+(defthing (quine-item-box item-box) :description "ornate silver box")
+
+(defmethod activate :after ((box quine-item-box))
+  (add-event :visited-southern-cave))
+
 (defmethod begin-scene :after ((cave southeastern-cave))
   (resize-to-background-image cave)
-  (let ((box (new 'item-box)))
+  (let ((box (new 'quine-item-box)))
     (drop-object cave box (units 30) (units 140))
     (add-inventory-item box (quantity-of 'copper-gear 2))
     (add-inventory-item box (quantity-of 'silver-elixir 2))
@@ -325,7 +330,6 @@ quest progress here.")
     (add-inventory-item box (tome-of 'hold-creature))
     (add-inventory-item box (new 'silver-armor))
     (add-inventory-item box (make-scroll "crumbling scroll" *wax-cylinder-letter*)))
-  (add-event :visited-southern-cave)
   (clear-excursion)
   (cue-music cave (random-choose '("monks.ogg" "spiritus.ogg" "dusk.ogg" "3-against-2.ogg"))))
 
