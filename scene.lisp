@@ -228,7 +228,7 @@
 	    (unless (field-value :quadtree buffer)
 	      (install-quadtree buffer))))))
     ;; adjust scrolling parameters 
-    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 2.8))
+    (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 2.3))
 	  (%horizontal-scrolling-margin buffer) 3/5
 	  (%vertical-scrolling-margin buffer) 4/7)
     ;;
@@ -370,7 +370,15 @@
     (labels ((nearby (a b)
 	       (> window-scrolling-speed (abs (- a b))))
 	     (jump (a b)
-	       (if (< a b) window-scrolling-speed (- window-scrolling-speed))))
+	       (let ((speed (if (and 
+				 (numberp window-x0)
+				 (numberp window-y0)
+				 (not (nearby window-x window-x0))
+				 (not (nearby window-y window-y0)))
+				;; tamp down diagonal scrolling speed a bit
+				(/ window-scrolling-speed (sqrt 2))
+				window-scrolling-speed)))
+		 (if (< a b) speed (- speed)))))
       (when (and window-x0 window-y0)
 	(if (nearby window-x window-x0)
 	    (setf window-x0 nil)
