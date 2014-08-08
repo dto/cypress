@@ -210,6 +210,11 @@
       (stop-walking self))
     waypoints))
 
+(defmethod walk-toward ((self thing) x y)
+  (with-fields (goal-x goal-y waypoints) self
+    (setf waypoints nil)
+    (setf goal-x x goal-y y)))
+
 ;; (defmethod return-to-safe-point ((self thing))
 ;;   (with-local-fields 
 ;;     (when (numberp %safe-x)

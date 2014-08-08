@@ -247,10 +247,10 @@
       ;; walk the monk's center point to the destination point
       (let ((height (- bottom top))
 	    (width (- right left)))
-	(walk-to (geoffrey)
-		 (- x (/ width 2))
-		 (- y (/ height 2)))))))
-
+	(let ((x1 (- x (/ width 2)))
+	      (y1 (- y (/ height 2))))
+	  (navigate-to (geoffrey) x1 y1))))))
+	    
 (defmethod scroll-tap ((buffer scene) x y)
   nil)
 

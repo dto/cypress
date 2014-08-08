@@ -160,19 +160,20 @@ in your inventory.")
 	      *monk-walk-bow*
 	      *monk-walk*))))
 
-(defmethod walk-to :after ((monk geoffrey) x y)
-  (with-fields (waypoints) monk
+(defmethod navigate-to ((monk geoffrey) x y)
+  (with-fields (waypoints goal-x goal-y) monk
     (with-fields (barrier-y) (current-scene)
-      ;; (when (null waypoints) (return-to-safe-point monk))
-      (when (or
-	     ;; pathfinding failed
-	     (null waypoints)
-	     ;; beyond invisible barrier
-	     (and barrier-y (> y barrier-y)))
-	(show-error monk x y)
-	(stop-walking monk)
-	(narrate "That destination is obstructed.")))))
-
+      (if (and barrier-y (> y barrier-y)) 
+	  (progn (show-error monk x y)
+		 (stop-walking monk)
+		 (bark monk "I can't get there from here."))
+	  (progn 
+	    ;; try pathfinding
+	    (walk-to monk x y)
+	    (when (null waypoints)
+		;; try walking in straight line
+	      (walk-toward monk x y)))))))
+		
 ;;; Learning new spells
 
 (defmethod learn-spell ((self geoffrey) (spell spell))
