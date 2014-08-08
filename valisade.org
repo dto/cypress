@@ -1,44 +1,51 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
-* Verdsion 1.6
+** TODO [#B] add short battle cues and victory
+
+** TODO [#A] Fix can't pathfind to near trees, 
+*** TODO give them smaller and rounder hitbox
+*** TODO or when can't pathfind to spot try: walking toward point in str8 line until stop or: shorten path
+
+** TODO when firing at enemy and don't have LOS, try pathfinding until LOS
+
+** TODO [#A] make combat not suck; show target cursor?
+
+** TODO add Encounter! sign
+** TODO add 3 brief combat musics
+
+
+** TODO [#A] fix laggy cam
+
+** TODO [#A] explain why triangle key is on corpse in outpost via letter---who is corpse? abbott?
+
+** TODO [#B] sextant should beep/notify point way to stone
+*** TODO correct Arturo's description of waystone/sextant
 
 
 ** TODO [#A] look for unused art for sidequests
 
-** TODO [#A] explain why triangle key is on corpse in outpost via letter---who is corpse? abbott?
-
-
-** DONE [#A] fix sextant to remind player about savepoints
-   CLOSED: [2014-07-28 Mon 21:02]
-**** TODO have arturo explain sextant better in game
-
-** DONE [#A] stop wolf when too close; bite and run BLOOD!
-   CLOSED: [2014-07-28 Mon 20:21]
-
-** DONE [#A] enlarge wolf hitbox 
-   CLOSED: [2014-07-28 Mon 20:21]
-
-** DONE [#A] Fix can visit wizards early
-   CLOSED: [2014-07-28 Mon 20:56]
-** DONE [#A] Letter should tell player to look for morbius tent
-   CLOSED: [2014-07-28 Mon 20:21]
-
-** DONE [#A] make it more obvious that lucius has /joined/left the party
-   CLOSED: [2014-07-28 Mon 20:56]
-
-** DONE [#A] have lucius tell player to keep his distance
-   CLOSED: [2014-07-28 Mon 20:53]
-
-
-* Version 1.7 or later
-
-** TODO [#A] make combat not suck; show target cursor?
-** TODO [#A] Fix can't pathfind to near trees, give them smaller and rounder hitbox
-
 
 ** TODO [#A] Large print mode
+
+** TODO [#B] have Maxwell tell you about waystone before other convo
+** TODO [#B] add symbol or other decoration to waystone?
+
+** TODO [#B] add more specific music events at add-objective points
+** TODO [#B] add system to make sure whole soundtrack is played
+
+** TODO [#B] Integrate hintbook into game
+
+** TODO [#B] Fix spellcasting/activating objects after dead
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+
 ** TODO [#A] Prompt to double-click arturo's house
+** TODO parchment maps which turn into a story for opening movie
+** TODO use swatches of very old unreadable map for opening movie.
+** TODO show skull map later with words edited out
+
 ** TODO [#A] add easier to read life meters/ mana bars
 ** TODO [#B] Fix image stretching in inventory icons
    :PROPERTIES:
@@ -47,29 +54,18 @@
 
 ** TODO [#B] Close scrolls with X in corner, more intuitive
 
-
 ** TODO [#B] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
    :PROPERTIES:
    :Effort:   0:15
    :END: 
-** TODO [#B] Fix spellcasting/activating objects after dead
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
 
-** TODO [#B] Integrate hintbook into game
-** TODO [#B] add more specific music events at add-objective points
-** TODO [#B] have Maxwell tell you about waystone before other convo
 
-** TODO [#B] add symbol or other decoration to waystone?
 ** TODO [#B] restructure dialog paths to keep more topics available
 *** TODO [#C] possibly use vertical dialogue paths
 
 ** DONE rewrite final wizard convo
    CLOSED: [2014-07-28 Mon 17:57]
 ** TODO [#B] black wizard bark sounds are pitched up proto-ildronian
-** TODO [#B] add system to make sure whole soundtrack is played
-** TODO [#B] add short battle cues and victory
 ** TODO [#B] 3nd shayol dossier
 **** TODO Explain the stakes: the villain Shayol is preparing the way for an evil Traveler from billions of years ago, a primordial horror
 **** TODO it has no name, for it comes from a time before Language existed.
@@ -1247,4 +1243,76 @@
    :ARCHIVE_TODO: TODO
    :END:
 **** TODO have maxwell bring player to it or at least tell.
+
+** DONE [#A] fix sextant to remind player about savepoints
+   CLOSED: [2014-07-28 Mon 21:02]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-30 Wed 17:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Verdsion 1.6
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+**** TODO have arturo explain sextant better in game
+
+** DONE [#A] stop wolf when too close; bite and run BLOOD!
+   CLOSED: [2014-07-28 Mon 20:21]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-30 Wed 17:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Verdsion 1.6
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] enlarge wolf hitbox
+   CLOSED: [2014-07-28 Mon 20:21]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-30 Wed 17:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Verdsion 1.6
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Fix can visit wizards early
+   CLOSED: [2014-07-28 Mon 20:56]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-30 Wed 17:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Verdsion 1.6
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Letter should tell player to look for morbius tent
+   CLOSED: [2014-07-28 Mon 20:21]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-30 Wed 17:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Verdsion 1.6
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] make it more obvious that lucius has /joined/left the party
+   CLOSED: [2014-07-28 Mon 20:56]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-30 Wed 17:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Verdsion 1.6
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] have lucius tell player to keep his distance
+   CLOSED: [2014-07-28 Mon 20:53]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-07-30 Wed 17:05
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_OLPATH: Verdsion 1.6
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
 
