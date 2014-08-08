@@ -733,17 +733,18 @@
       ;; display object's class name (by default on single click)
       (look self))
     (arrange self)
-    ;; handle stasis counter
-    (when stasis 
-      (decf stasis)
-      (when (minusp stasis) 
-	(setf stasis nil)))
-    ;; handle bleeding counter
-    (when bleeding 
-      (percent-of-time 2 (bleed self))
-      (decf bleeding)
-      (when (minusp bleeding) 
-	(setf bleeding nil)))
+    (unless *paused*
+      ;; handle stasis counter
+      (when stasis 
+	(decf stasis)
+	(when (minusp stasis) 
+	  (setf stasis nil)))
+      ;; handle bleeding counter
+      (when bleeding 
+	(percent-of-time 2 (bleed self))
+	(decf bleeding)
+	(when (minusp bleeding) 
+	  (setf bleeding nil))))
     ;; possibly run world AI
     (unless (or stasis *paused*)
       ;;(run-tasks self)
