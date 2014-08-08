@@ -220,5 +220,9 @@ Double-click the mountain symbol to cast
 the Travel spell, or press M.")
   (replace-gump spellbook (new 'browser :container spellbook)))
 
+(defmethod activate :after ((book spellbook))
+  (when (nearby-enemies-p)
+    (pause)))
+
 (defun find-spellbook ()
   (find-inventory-item (geoffrey) 'spellbook))

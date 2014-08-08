@@ -87,9 +87,12 @@ inventory and find something to eat.
 in your inventory.")
 
 (defmethod activate ((monk geoffrey))
-  ;; (resume)
   (show-hint *summons-hint*)
   (replace-gump monk (new 'browser :container monk)))
+
+(defmethod activate :after ((monk geoffrey))
+  (when (nearby-enemies-p)
+    (pause)))
 
 (defmethod collide :after ((monk geoffrey) (gump gump))
   (when (field-value :waypoints monk)
