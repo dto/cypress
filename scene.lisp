@@ -339,7 +339,8 @@
      *enemy-near-distance*))
 
 (defun nearby-enemies-p ()
-  (some #'near-geoffrey (find-enemies)))
+  (or (find-instances (current-buffer) 'black-wizard)
+      (some #'near-geoffrey (find-enemies))))
 
 ;;; Camera control
 
