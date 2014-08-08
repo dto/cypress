@@ -248,8 +248,6 @@ in your inventory.")
 (defmethod run :after ((geoffrey geoffrey))
   (update-translation geoffrey)
   (restrict-to-buffer geoffrey))
-  ;; (when (null (field-value :waypoints geoffrey))
-  ;;   (dig-out-maybe geoffrey)))
 
 ;;; Geoffrey's magic tent
 
