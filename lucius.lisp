@@ -117,7 +117,8 @@
 	  (stop-walking self)
 	  (show-hint "Double-click Lucius to begin talking.")
 	  (walk-to-thing self (geoffrey)))
-	(if (or leader gump)
+	(if (or (and met-player (typep (current-scene) (find-class 'meadow)))
+		leader gump)
 	    ;; follow geoffrey
 	    (progn (when (> distance 150)
 		     (unless (or waypoints (plusp clock))
