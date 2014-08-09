@@ -146,7 +146,7 @@ settlement. Could it be Alonso's?")
 (defmethod begin-scene :after ((scene alonso-ruins))
   (mark-traversed scene)
   (show-hint *alonso-hint*)
-  (percent-of-time 50 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg" "rain.ogg")))))
+  (percent-of-time 50 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg")))))
 
 (defmethod find-description ((scene alonso-ruins)) "forest")
 
