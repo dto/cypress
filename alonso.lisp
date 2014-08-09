@@ -118,7 +118,7 @@ could be an illusion.
     (when (null basement)
       (setf basement (new 'alonso-basement)))
     (save-excursion)
-    (switch-to-scene basement)))
+    (load-scene basement)))
 
 (defmethod starting-x ((self alonso-basement) dir)
   (units 8))

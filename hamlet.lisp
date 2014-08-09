@@ -77,7 +77,7 @@ replies to him.
     (when (null basement)
       (setf basement (new 'hamlet-basement)))
     (save-excursion)
-    (switch-to-scene basement)))
+    (load-scene basement)))
 
 (defmethod run :after ((self hamlet-stairwell))
   (bring-to-front self))

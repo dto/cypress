@@ -205,7 +205,7 @@ collect my thoughts.
 	(progn (when (null scene)
 		 (setf scene (new 'outpost-basement)))
 	       (save-excursion)
-	       (switch-to-scene scene)))))
+	       (load-scene scene)))))
 
 ;;; Valisade basement
 
@@ -293,7 +293,7 @@ the other.
 	(progn (when (null scene)
 		 (setf scene (new 'valisade-basement)))
 	       (save-excursion)
-	       (switch-to-scene scene)))))
+	       (load-scene scene)))))
 
 ;;; Valisade ruins scene
 

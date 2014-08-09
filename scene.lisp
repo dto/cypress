@@ -22,6 +22,27 @@
   (begin-scene buffer)
   (enter-scene (geoffrey)))
 
+(defthing (loading buffer) 
+  :background-image "loading.png" 
+  :width *nominal-screen-width*
+  :height *nominal-screen-height*
+  :scene nil 
+  :clock 20)
+
+(defmethod initialize ((self loading) &key scene)
+  (call-next-method)
+  (setf (field-value :scene self) scene))
+
+(defmethod update ((self loading))
+  (with-fields (clock scene) self
+    (decf clock)
+    (when (zerop clock)
+      (destroy self)
+      (at-next-update (switch-to-scene scene)))))
+
+(defun load-scene (scene)
+  (start-alone (new 'loading :scene scene)))
+
 (defvar *previous-scene* nil)
 (defvar *previous-x* nil)
 (defvar *previous-y* nil)
@@ -314,7 +335,7 @@
 (define-method reset-game scene ()
   (let ((buffer (current-buffer)))
     (at-next-update 
-      (switch-to-scene (make-quest))
+      (load-scene (make-quest))
       (destroy buffer))))
 
 (defun find-camp ()

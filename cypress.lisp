@@ -89,7 +89,7 @@ them onto Geoffrey.")
 
 (defmethod tap ((opening-card opening-card) x y)
   (magical-flourish)
-  (switch-to-scene (make-quest)))
+  (load-scene (make-quest)))
 
 (define-buffer opening 
   (quadtree-depth :initform 4))
@@ -100,7 +100,7 @@ them onto Geoffrey.")
 
 (defmethod tap ((opening opening) x y)
   (magical-flourish)
-  (switch-to-scene (make-quest)))
+  (load-scene (make-quest)))
 
 (defmethod scroll-tap ((opening opening) x y) nil)
 (defmethod alternate-tap ((opening opening) x y) nil)

@@ -149,7 +149,7 @@
       (expend-travel-cost scene))
     ;; go
     (setf *map-row* row *map-column* column)
-    (switch-to-scene scene)))
+    (load-scene scene)))
 
 (defmethod activate-maybe ((sector sector))
   (activate sector))
