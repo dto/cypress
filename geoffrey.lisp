@@ -6,7 +6,7 @@
 
 (defun geoffrey () *geoffrey*)
   
-(defthing (geoffrey monk) :description "Geoffrey" :hints nil :translation-timer 0)
+(defthing (geoffrey monk) :description "Geoffrey" :hints nil :translation-timer 0 :playtime 0)
 
 (defmethod enable-translation ((self geoffrey))
   (setf (field-value :translation-timer self) (seconds->frames 120)))
@@ -98,8 +98,14 @@ in your inventory.")
   (when (field-value :waypoints monk)
     (bring-to-front gump)))
 
+(defparameter *bleeding-hint*
+"Cast your healing spell
+or light a campfire
+to stop bleeding.")
+
 (defmethod bleed :after ((monk geoffrey))
   (damage monk (- (random-choose '(2 4 6))))
+  (show-hint *bleeding-hint*)
   (bark monk "I'm bleeding!"))
 
 (defmethod collide :after ((monk geoffrey) (wolf wolf)) 
@@ -252,6 +258,10 @@ in your inventory.")
 (defmethod run :after ((geoffrey geoffrey))
   (update-translation geoffrey)
   (restrict-to-buffer geoffrey))
+
+(defmethod update :after ((geoffrey geoffrey))
+  (with-fields (playtime) geoffrey
+    (incf playtime)))
 
 ;;; Geoffrey's magic tent
 

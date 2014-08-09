@@ -43,6 +43,11 @@ quest progress here.")
   ;; (setf (field-value :gump waystone) nil)
   (save-quest))
 
+(defmethod discuss :after ((waystone waystone) (topic (eql :save-progress))) 
+  (with-fields (playtime) (geoffrey)
+    (let ((seconds (/ playtime 30)))
+    (narrate "Saved progress with ~$ hours played." (/ seconds (* 60 60))))))
+
 (defthing small-ruin 
   :tags '(:fixed)
   :image "small-ruin.png"
