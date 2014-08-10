@@ -336,3 +336,39 @@
 
 (defmethod release ((trailer trailer) x y &optional button))
 (defmethod press ((trailer trailer) x y &optional button))
+
+;;; Opening movie
+
+(define mountain)
+
+(defmethod initialize ((self mountain) &key)
+  (with-fields (image) self 
+    (resize self (image-width image) (image-height image))))
+
+(defmethod update ((self mountain))
+  (move-toward self :up (field-value :speed self)))
+
+(defresource "mist-1.png" :wrap-r :clamp-to-border :wrap-s :clamp-to-border)
+(defresource "mist-2.png" :wrap-r :clamp-to-border :wrap-s :clamp-to-border)
+(defresource "mist-3.png" :wrap-r :clamp-to-border :wrap-s :clamp-to-border)
+(defresource "mist-4.png" :wrap-r :clamp-to-border :wrap-s :clamp-to-border)
+
+(define (m1 mountain) :image "mist-1.png" :speed 0.2)
+(define (m2 mountain) :image "mist-2.png" :speed 0.23)
+(define (m3 mountain) :image "mist-3.png" :speed 0.28)
+(define (m4 mountain) :image "mist-4.png" :speed 0.31)
+
+(define (movie buffer))
+
+(defmethod initialize :after ((self movie) &key)
+  (play-music "passageway.ogg" :loop t)
+  (resize self *nominal-screen-width* *nominal-screen-height*)
+  (drop-object self (new 'm1) 0 -400)
+  (drop-object self (new 'm2) 0 500)
+  (drop-object self (new 'm3) 0 700)
+  (drop-object self (new 'm4) 0 1000))
+
+
+
+
+
