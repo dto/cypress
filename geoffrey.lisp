@@ -228,6 +228,7 @@ to stop bleeding.")
 ;;; Party members
 
 (defmethod enter-scene ((self geoffrey))
+  (close-all-gumps (current-scene))
   (when (lucius-in-party-p)
     (multiple-value-bind (x y) (left-of self)
       (add-object (current-scene) (lucius) (- x 10) (- y 10)))))
