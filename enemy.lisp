@@ -22,6 +22,31 @@ or right-click Geoffrey.")
 
 (defsprite enemy)
 
+;; (defmethod encountered ((enemy enemy)) 
+;;   (field-value :encountered enemy))
+
+;; (defmethod end-encounter ((enemy enemy))
+;;   (setf (field-value :encountered enemy) nil))
+
+;; (defmethod encounter-hint ((enemy enemy))
+;;   (format nil (random-choose '("The ~A is attacking!"
+;; 			       "The ~A draws near!"
+;; 			       "~A is approaching!"))
+;; 	  (find-description enemy)))
+
+;; (defmethod begin-encounter ((enemy enemy))
+;;   (setf (field-value :encountered enemy) t)
+;;   (pause)
+;;   (show-hint (encounter-hint enemy) :force))
+
+;; (defparameter *encounter-distance* 340)
+
+;; (defmethod run :after ((enemy enemy))
+;;   (when (and (not (encountered enemy))
+;; 	     (< (distance-between enemy (geoffrey))
+;; 		*encounter-distance*))
+;;     (begin-encounter enemy)))
+
 (defmethod draw :after ((enemy thing))
   (with-fields (stasis) enemy
     (when stasis
