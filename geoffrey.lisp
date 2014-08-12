@@ -6,7 +6,12 @@
 
 (defun geoffrey () *geoffrey*)
   
-(defthing (geoffrey monk) :description "Geoffrey" :hints nil :translation-timer 0 :playtime 0)
+(defthing (geoffrey monk) 
+  :description "Geoffrey" 
+  :hints nil 
+  :notes nil
+  :translation-timer 0 
+  :playtime 0)
 
 (defmethod enable-translation ((self geoffrey))
   (setf (field-value :translation-timer self) (seconds->frames 120)))
@@ -31,6 +36,14 @@
 		      '("I'm full now." "My stomach is full." "I feel full.")
 		      '("Very good!" "That's much better." "Delicious!"))))
     (bark monk (random-choose messages))))
+
+(defun add-note (text)
+  (with-fields (notes) (geoffrey)
+    (unless (find text notes :test 'equal)
+      (push text notes))))
+
+(defun notes ()
+  (field-value :notes (geoffrey)))
 
 (defparameter *hunger-hint* 
 "Double-click Geoffrey to open the
