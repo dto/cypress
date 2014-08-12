@@ -346,3 +346,16 @@ to stop bleeding.")
       (unless (plusp timer)
 	(douse camp)))))
 
+(define-topic confirm-quit geoffrey
+  "Would you like to quit the game? 
+Any unsaved progress will be lost." :quit-the-game :never-mind)
+
+(defmethod discuss :after ((geoffrey geoffrey) (topic (eql :quit-the-game)))
+  (quit))
+
+(define-topic confirm-reset geoffrey 
+  "Are you sure you want to reset the
+game? Any unsaved progress will be lost." :reset-the-game :never-mind)
+
+(defmethod discuss :after ((geoffrey geoffrey) (topic (eql :reset-the-game)))
+  (reset-game (current-scene)))

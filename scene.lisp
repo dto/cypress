@@ -86,7 +86,8 @@
   :default-events
   '(
     ((:pause) toggle-pause)
-    ((:r :control) reset-game)
+    ((:r :control) geoffrey-reset-game)
+    ((:q :control) geoffrey-quit-game)
     ((:space) toggle-pause)
     ((:escape) close-all-gumps)
     ;; ((:f5) quicksave)
@@ -337,6 +338,12 @@
     (at-next-update 
       (load-scene (make-quest))
       (destroy buffer))))
+
+(define-method geoffrey-reset-game scene ()
+  (discuss (geoffrey) :confirm-reset))
+
+(define-method geoffrey-quit-game scene ()
+  (discuss (geoffrey) :confirm-quit))
 
 (defun find-camp ()
   (dolist (object (get-objects (current-buffer)))
