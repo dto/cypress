@@ -257,6 +257,8 @@ Press \"S\" to open the spellbook.
 Press \"M\" to open the travel map.
 Press Spacebar to pause/unpause the game.
 Press Escape to close all open scrolls.
+Press Control-R to reset the game.
+Press Control-Q to quit the game.
 ")
 
 (defthing (help-scroll scroll)
