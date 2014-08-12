@@ -17,6 +17,8 @@ play the message.")
   :clock 0
   :health 55)
 
+(defmethod can-pick ((enemy black-wizard)) nil)
+
 (defparameter *wizard-casting-time* (seconds->frames 0.7))
 
 (defparameter *black-wizard-cast*
