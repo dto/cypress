@@ -145,15 +145,6 @@
   (when *use-music*
     (play-music music)))
 
-(defmethod drag-fail ((scene scene) (object thing) x y)
-  ;; ugly hack
-  (when (and (not (typep object 'enemy))
-	     (not (typep object 'black-wizard))
-	     (not (typep object 'gray-wizard))
-	     (not (can-reach object (geoffrey))))
-    (show-error (geoffrey) x y)
-    (bark (geoffrey) "I can't reach that from here.")))
-
 (defmethod begin-region ((buffer scene)))
 
 (defmethod mark-camped ((buffer scene))
