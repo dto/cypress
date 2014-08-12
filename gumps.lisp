@@ -126,9 +126,9 @@
 			   :font *gump-font*)
 	  (incf y0 (font-height *gump-font*)))))))
 
-(defun show-hint (text)
+(defun show-hint (text &optional force)
   (with-fields (hints) (geoffrey)
-    (unless (find text hints :test 'equal)
+    (unless (or force (find text hints :test 'equal))
       (play-sample "hint.wav")
       (push text hints)
       (drop-object (current-buffer)
