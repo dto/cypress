@@ -1,37 +1,61 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
+** TODO Auto-pause when an enemy approaches for first time
+** TODO reset dialog box when dead
+** TODO allow Control-Q dialog to quit game
+** DONE add opening movie
+   CLOSED: [2014-08-11 Mon 18:10]
+** DONE destroy all gumps after exiting any scene
+   CLOSED: [2014-08-11 Mon 19:21]
+
+** TODO [#A] implement quest journal
+*** TODO journal book should open gump of simple list of strings, display in reverse order
+*** TODO add objectives and notes (wraith etc) to it
+*** TODO rework Objectives to 40-column notes
+** TODO [#A] Add a sidequest or two
+*** TODO [#A] look for unused art for sidequests
+*** TODO [#A] add ruined town sidequest and secret stuff north of cemetery
+**** TODO protection spell
+** TODO [#A] Accessibility: Large print mode 
+** TODO [#A] Accessibility: Adjust colors/shapes of herbs/potions for color vision impairment
+** TODO [#A] Fix tent inelegance. allow double click tent and/or easy return
+** TODO [#A] Fix image stretching in inventory icons
+   :PROPERTIES:
+   :Effort:   1:00
+   :END:
+** TODO [#A] Explain why triangle key is on corpse in outpost via letter---who is corpse? abbott?
+** TODO [#A] Close scrolls with X in corner, more intuitive
+** TODO [#A] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
+
+** TODO [#B] save game to ~/.cypress.xelf on linux and mac
+** TODO [#B] make sure credits are readable in-game
+** TODO [#B] Always register right-click on scroll even when pointer moves
+** TODO [#B] add by-topic notebook for scrolls, journal entries, hints
+
+** TODO [#C] save to ~/Library/Application Support/Cypress/cypress.sav on mac
+** TODO [#B] toggle spellbook / inventory with S I not just open
+   :PROPERTIES:
+   :Effort:   0:15
+   :END:
+
+
+** TODO [#B] Add easier to read life meters/ mana bars
+** TODO [#B] Add slight aim jitter when shivering/freezing
 ** TODO [#B] add short battle cues and victory
+** TODO [#B] Increase ice crack/pond danger
 
-** TODO [#A] Fix can't pathfind to near trees, 
-*** TODO give them smaller and rounder hitbox
-*** TODO or when can't pathfind to spot try: walking toward point in str8 line until stop or: shorten path
+** TODO [#B] Fix can't pick up items partially obscured by geoffrey
 
-** TODO when firing at enemy and don't have LOS, try pathfinding until LOS
-
-** TODO [#A] make combat not suck; show target cursor?
-
-** TODO add Encounter! sign
-** TODO add 3 brief combat musics
+** TODO [#B] Fix non-impelled arrows moving on their own
+   :PROPERTIES:
+   :Effort:   0:15
+   :END: 
 
 
-** TODO [#A] fix laggy cam
-
-** TODO [#A] explain why triangle key is on corpse in outpost via letter---who is corpse? abbott?
-
-** TODO [#B] sextant should beep/notify point way to stone
-*** TODO correct Arturo's description of waystone/sextant
-
-
-** TODO [#A] look for unused art for sidequests
-
-
-** TODO [#A] Large print mode
-
-** TODO [#B] have Maxwell tell you about waystone before other convo
-** TODO [#B] add symbol or other decoration to waystone?
-
-** TODO [#B] add more specific music events at add-objective points
 ** TODO [#B] add system to make sure whole soundtrack is played
 
 ** TODO [#B] Integrate hintbook into game
@@ -41,24 +65,20 @@
    :Effort:   0:15
    :END:
 
-** TODO [#A] Prompt to double-click arturo's house
+
+
+** TODO [#B] Prompt to double-click arturo's house
+** TODO [#B] show target cursor?
+** TODO [#B] sextant should beep/notify point way to stone
+*** TODO correct Arturo's description of waystone/sextant
+
+** TODO [#B] have Maxwell tell you about waystone before other convo
+** TODO [#B] add symbol or other decoration to waystone?
+
+** TODO [#B] add more specific music events at add-objective points
 ** TODO parchment maps which turn into a story for opening movie
 ** TODO use swatches of very old unreadable map for opening movie.
 ** TODO show skull map later with words edited out
-
-** TODO [#A] add easier to read life meters/ mana bars
-** TODO [#B] Fix image stretching in inventory icons
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
-
-** TODO [#B] Close scrolls with X in corner, more intuitive
-
-** TODO [#B] Fix wrong displayed arrow stock amount on modeline when arrows in sub-bag
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
-
 
 ** TODO [#B] restructure dialog paths to keep more topics available
 *** TODO [#C] possibly use vertical dialogue paths
@@ -87,43 +107,9 @@
 ** TODO [#B] sextant should beep/notify point way to stone
 *** TODO correct Arturo's description of waystone/sextant
 
-** TODO [#B] make sure credits are readable in-game
-
-
-<dto> basically what i'm hearing generally is that the game needs some
-      work. particularly movement/combat
-<dto> i'd like to focus hard on the problem after vacation, and finish things
-      up by august  [22:06]
-<dto> what i'm considering is a change to a more truly turn-based strategy
-<dto> it really would not be an impossible task
-<dto> more likely, some small but high-impact changes will improve it enough
-      to be decent  [22:07]
-<dto> its a little disappointing but , i guess thats why they callit Beta
-<dto> also, movement problems could be solved that way. because i could use a
-      system like Phantom Brave where a circle casts around your character to
-      indicate where you can move radius  [22:10]
-<dto> hmm
-<dto> meanwhile im totally expecting the reviewer guy to nail me to the cross
-								        [22:11]
-<dto> but for example if the action is paused and you issue the order Attack
-      Enemy, and you don't presently have line of sight, it could easily
-      pathfind until it gets line of sight and then draw the bow to fire.  
-								        [22:12]
->  <dto> i could paint some cool looking slightly glowing Sigils, circular rings
-      with tiny rune writing that indicate ranges of movement/attack/ spell ,
-      and use additive blending and have them rotate   [22:14]
-
-** TODO [#B] Fix can't pick up items partially obscured by geoffrey
-
-** TODO [#B] Fix non-impelled arrows moving on their own
-   :PROPERTIES:
-   :Effort:   0:15
-   :END: 
 ** TODO [#B] don't display ATK/RES/DEF until they change
 ** TODO [#B] fix more drop-behind-scroll issues
 ** TODO [#B] suppress SDL-GFX error 
-** TODO [#B] save to ~/Library/Application Support/Cypress/cypress.sav on mac
-** TODO [#B] save game to ~/.cypress.xelf on linux
 ** TODO [#B] more camping tooltips
 ** TODO [#B] should show bubble with "container is full" when can't accept
    :PROPERTIES:
@@ -133,27 +119,8 @@
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#C] incorporate illegible map
-
-** TODO [#B] implement conversation log / journal
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
 ** TODO [#B] text bubbles should not clip against the right edge of the screen
-** TODO [#A] should allow to click gear as well as plate to unlock puzzle
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#A] Add and repaint some different tree/shrub types
-   :PROPERTIES:
-   :Effort:   3:00
-   :END:
-** TODO [#A] don't allow spawning geoffrey in obstacle
-   :PROPERTIES:
-   :Effort:   0:30
-   :END:
 ** TODO [#B] Weather, cloud shadows, snow, rainloop
-** TODO [#B] add by-topic notebook for scrolls, journal entries, hints
 ** TODO [#B] in-inventory multi-move of quantities
 ** TODO [#B] fix onscreen enemies not pursuing
 ** DONE [#B] have geoffrey bark "I can't reach that" on drag-fail
@@ -168,12 +135,7 @@
 ** TODO [#B] puddles should be obstacles and cracks should surround 
 ** TODO [#B] expand arturo's beginning conversations. 
 ** TODO [#B] larger font/scroll options for visually impaired
-** TODO [#B] Always register right-click on scroll even when pointer moves
 ** TODO [#B] destroy bubbles when closing gumps
-   :PROPERTIES:
-   :Effort:   0:15
-   :END:
-** TODO [#B] toggle spellbook / inventory with S I not just open
    :PROPERTIES:
    :Effort:   0:15
    :END:
@@ -189,13 +151,8 @@
    :PROPERTIES:
    :Effort:   0:15
    :END:
-** TODO [#A] Implement bleeding and blood tracks in the snow
-   :PROPERTIES:
-   :Effort:   1:00
-   :END:
 ** TODO [#B] double click should not reset bow timer
 ** TODO [#B] Reduce attack/defense when very hungry
-** TODO [#A] Add slight aim jitter when shivering/freezing
 ** TODO [#B] Lucius should avoid monsters (are they :solid)?
 ** TODO [#B] Protection (15 mana) (1 nightshade)
    :PROPERTIES:
@@ -207,6 +164,9 @@
 ** TODO [#B] Allow specified map-row and map-col "specials" and allow one special per map (default is twig or something)
 ** TODO [#B] Spirit of Warrior (marks good hunting zones)
 ** TODO [#B] Abandoned well / ruin
+** TODO [#C] when firing at enemy and don't have LOS, try pathfinding until LOS
+** TODO [#C] incorporate illegible map
+
 ** TODO [#C] write design doc for tenebrae deep station
 ** TODO [#C] consider scaling down to save resolution
 ** TODO [#C] call NSSearchPathForDirectoriesInDomains to    find the application support folder
@@ -287,7 +247,8 @@
    :PROPERTIES:
    :Effort:   3:00
    :END:
-** TODO [#C] Paint some nicer pine trees
+** DONE [#C] Paint some nicer pine trees
+   CLOSED: [2014-08-09 Sat 08:29]
    :PROPERTIES:
    :Effort:   1:00
    :END:
@@ -1315,4 +1276,52 @@
    :ARCHIVE_TODO: DONE
    :END:
 
+** DONE [#A] Fix can't pathfind to near trees,
+   CLOSED: [2014-08-09 Sat 08:27]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-08-09 Sat 08:27
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+*** TODO give them smaller and rounder hitbox
+*** DONE or when can't pathfind to spot try: walking toward point in str8 line until stop or: shorten path
+    CLOSED: [2014-08-09 Sat 08:27]
 
+** DONE [#A] Implement bleeding and blood tracks in the snow
+   CLOSED: [2014-08-09 Sat 08:28]
+   :PROPERTIES:
+   :Effort:   1:00
+   :ARCHIVE_TIME: 2014-08-09 Sat 08:30
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] fix laggy cam
+   CLOSED: [2014-08-09 Sat 08:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-08-09 Sat 08:30
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] Should allow to click gear as well as plate to unlock puzzle
+   CLOSED: [2014-08-09 Sat 08:40]
+   :PROPERTIES:
+   :Effort:   0:15
+   :ARCHIVE_TIME: 2014-08-09 Sat 08:40
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#A] add subtle Now Loading screen graphic
+   CLOSED: [2014-08-09 Sat 16:17]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2014-08-09 Sat 16:17
+   :ARCHIVE_FILE: ~/cypress/valisade.org
+   :ARCHIVE_CATEGORY: valisade
+   :ARCHIVE_TODO: DONE
+   :END:
