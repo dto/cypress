@@ -74,36 +74,33 @@ them onto Geoffrey.")
 	  (ildron)
 	  (current-buffer)))))
 
-;;; Opening story card 
+;;; Loading story card 
 
-(defthing opening-card :image "opening.png")
+(defthing loading-card :image "loading.png")
 
-(defmethod initialize :after ((opening-card opening-card) &key)
-  (resize opening-card *nominal-screen-width* *nominal-screen-height*)
-  (move-to opening-card 0 (- *nominal-screen-height* 100)))
+(defmethod initialize :after ((loading-card loading-card) &key)
+  (resize loading-card *nominal-screen-width* *nominal-screen-height*)
+  (move-to loading-card 0 0))
   
-(defmethod update ((card opening-card))
-  (with-fields (x y) card
-    (when (plusp y)
-      (move-to card x (- y 0.8)))))
+(defmethod tap ((loading-card loading-card) x y) nil)
 
-(defmethod tap ((opening-card opening-card) x y)
-  (magical-flourish)
-  (load-scene (make-quest)))
-
-(define-buffer opening 
+(define-buffer loading-movie
+  (clock :initform 40)
   (quadtree-depth :initform 4))
 
-(defmethod initialize :after ((opening opening) &key)
-  (drop-object opening (new 'opening-card))
-  (resize opening *nominal-screen-width* *nominal-screen-height*))
+(defmethod initialize :after ((loading-movie loading-movie) &key)
+  (drop-object loading-movie (new 'loading-card))
+  (resize loading-movie *nominal-screen-width* *nominal-screen-height*))
 
-(defmethod tap ((opening opening) x y)
-  (magical-flourish)
-  (load-scene (make-quest)))
+(defmethod update :after ((loading-movie loading-movie))
+  (with-fields (clock) loading-movie
+    (decf clock)
+    (unless (plusp clock)
+      (at-next-update (switch-to-buffer (new 'movie))))))
 
-(defmethod scroll-tap ((opening opening) x y) nil)
-(defmethod alternate-tap ((opening opening) x y) nil)
+(defmethod tap ((loading-movie loading-movie) x y) nil)
+(defmethod scroll-tap ((loading-movie loading-movie) x y) nil)
+(defmethod alternate-tap ((loading-movie loading-movie) x y) nil)
 
 ;;; Title screen
 
@@ -125,7 +122,7 @@ them onto Geoffrey.")
 
 (defmethod tap ((title title) x y)
   (magical-flourish)
-  (at-next-update (switch-to-buffer (new 'movie))))
+  (at-next-update (switch-to-buffer (new 'loading-movie))))
 
 (defmethod scroll-tap ((title title) x y) nil)
 (defmethod alternate-tap ((title title) x y) nil)

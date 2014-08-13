@@ -1,6 +1,36 @@
 #+PROPERTY: Effort_ALL 0:15 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 #+COLUMNS: %60ITEM(Task) %12Effort(Estimated Effort){:} %CLOCKSUM
 
+** TODO fix game freezing for a while when geoffrey's destination causes pathfind to exhaust map
+
+** TODO adventurers guide should say something about talking
+	
+** TODO Fix error on quit on Win
+    debugger invoked on a CL-OPENGL-BINDINGS:OPENGL-ERROR in thread
+    #<THREAD "main thread" RUNNING {25BAB621}>:
+      OpenGL signalled (1282 . INVALID-OPERATION) from DELETE-TEXTURES.
+     
+    Type HELP for debugger help, or (SB-EXT:EXIT) to exit from SBCL.
+     
+    restarts (invokable by number or by possibly-abbreviated name):
+      0: [CONTINUE] Continue
+     
+    (CL-OPENGL-BINDINGS:CHECK-ERROR #<unavailable argument>)
+    0]
+Backtrace for: #<SB-THREAD:THREAD "main thread" RUNNING {25BAB621}>
+0: (CL-OPENGL-BINDINGS:CHECK-ERROR #<unavailable argument>)
+1: (CL-OPENGL:DELETE-TEXTURES (14))
+2: (XELF:CLEAR-TEXT-IMAGE-CACHE :DELETE-TEXTURES T)
+3: (XELF:SHUT-DOWN)
+4: ((LAMBDA NIL :IN "Z:/home/dto/xelf/build-sbcl.lisp"))
+5: ((FLET #:WITHOUT-INTERRUPTS-BODY-42 :IN SAVE-LISP-AND-DIE))
+6: ((LABELS SB-IMPL::RESTART-LISP :IN SAVE-LISP-AND-DIE))
+7: ("foreign function: #x429740")
+8: ("foreign function: #x41670C")
+ 
+** TODO Fix no indication of click during long movie loading time
+
+
 ** TODO Auto-pause when an enemy approaches for first time
 ** TODO reset dialog box when dead
 ** TODO allow Control-Q dialog to quit game
