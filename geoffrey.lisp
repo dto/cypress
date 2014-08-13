@@ -183,6 +183,7 @@ to stop bleeding.")
 	      *monk-walk*))))
 
 (defmethod navigate-to ((monk geoffrey) x y)
+  (stop-walking monk)
   (with-fields (waypoints goal-x goal-y) monk
     (with-fields (barrier-y) (current-scene)
       (if (and barrier-y (> y barrier-y)) 
