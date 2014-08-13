@@ -195,12 +195,16 @@ button) to close scrolls. You can also
 position scrolls by left-clicking and
 dragging them with the mouse. 
 
+Left-click any object to see its name.
+
 Right-click a destination to move
 Geoffrey there. 
 
 Right-click Geoffrey (or press Spacebar)
 to pause and unpause the game. Issuing
 any command resumes the game.
+
+Double-click people to talk.
 
 Click an object to show its name.
 Drag objects to move them.
