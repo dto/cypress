@@ -437,8 +437,13 @@
 (defparameter *flowers* '(violet forget-me-not snowdrop))
 (defparameter *reagents* '(ginseng ginseng silverwood stone branch))
 
+(defmethod show-help-maybe ((scene scene)) nil)
+
 (defthing (meadow scene)
   :background-image (random-choose '("stone-road.png" "meadow.png")))
+
+(defmethod show-help-maybe ((meadow meadow)) 
+  (drop-object meadow (new 'scroll-gump :text *help-text*) (units 68) (units 16)))
 
 (defun meadow-debris () (spatter '(silverwood stone twig ginseng ginseng stone twig branch branch silverwood)
 			       :trim t :count (+ 2 (random 4))))
