@@ -66,11 +66,22 @@ quest progress here.")
   :tags '(:fixed :solid)
   :description "stone of remembrance")
 
+(defun save-file-exists ()
+  (probe-file (xelf::database-file)))
+
 (defmethod activate ((stone stone-of-remembrance))
-  (if (probe-file (xelf::database-file))
+  (if (save-file-exists)
       (progn (narrate "You feel as if Time itself is vibrating.")
 	     (discuss stone :confirm))
       (narrate "There are no stored memories here.")))
+
+(defmethod draw :after ((stone stone-of-remembrance))
+  (when (save-file-exists)
+    (with-fields (x y) stone
+      (draw-string "Double-click the Stone of Remembrance to resume your quest."
+		   (- x (units 2)) (- y (units 2))
+		   :color "saddle brown"
+		   :font "oldania-bold"))))
 
 (define-topic confirm stone-of-remembrance 
   "Continue your saved quest?" :continue-quest :cancel)
