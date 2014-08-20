@@ -298,8 +298,6 @@ to stop bleeding.")
   :image "tent-3.png"
   :tags '(:solid))
 
-(defmethod activate ((camp camp)) nil)
-
 (defmethod can-accept ((camp camp)) nil)
 
 (defmethod will-accept ((thing thing) (camp camp)) nil)
@@ -325,12 +323,10 @@ to stop bleeding.")
 (defmethod ignite :after ((camp camp))
   (recover (geoffrey)))
 
-(defmethod douse ((camp camp))
-  (with-fields (fire timer) camp
-    (when fire
-      (destroy fire)
-      (setf fire nil)
-      (setf timer nil))))
+(defmethod activate ((camp camp))
+  (when (not (find-container camp)) 
+    (let ((spark (find-spell 'spark)))
+      (when spark (use (geoffrey) spark)))))
 
 (defmethod can-pick ((camp camp)) 
   (not (null (field-value :container camp))))
@@ -341,6 +337,16 @@ to stop bleeding.")
     (when fire
       (remove-object (current-scene) fire))
     (add-inventory-item (geoffrey) camp)))
+
+(defmethod douse ((camp camp))
+  (with-fields (fire timer) camp
+    (when fire
+      (destroy fire)
+      (setf fire nil)
+      (setf timer nil))))
+
+;; (defmethod douse :after ((camp camp))
+;;   (return-to-geoffrey camp))
 
 (defmethod run ((camp camp))
   (with-fields (fire timer) camp
