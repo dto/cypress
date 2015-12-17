@@ -93,7 +93,7 @@
   (setf (field-value :lines self) 
 	(split-string-on-lines text)))
   
-(defparameter *hint-scale* (/ 1 1.8))
+(defparameter *hint-scale* (/ 1 1.6))
 
 (defmethod arrange :after ((self hint))
   (with-fields (image width) self
@@ -101,20 +101,27 @@
 	    (* (image-width image) *hint-scale*)
 	    (* (image-height image) *hint-scale*))
     (move-to self 
-	     (+ (window-x) (units 70))
-	     (+ (window-y) (units 1)))))
+	     (+ (window-x) (units 40))
+	     (+ (window-y) (units 25)))))
 
 (defmethod run ((self hint))
   (with-fields (timer) self
     (decf timer)
-    (unless (plusp timer)
+    (when (or (zerop timer) (not *paused*))
       (destroy self))))
+
+(defmethod update :after ((hint hint))
+  (when (colliding-with hint (geoffrey))
+    (with-fields (x y) (geoffrey)
+      (move-to hint (+ x (units 10)) (+ y (units 2))))))
 
 (defmethod draw ((self hint))
   (call-next-method)
   (with-fields (x y width height image lines) self
     (let ((x0 (+ x (* 0.15 width)))
-	  (y0 (+ y (* 0.19 height))))
+	  (y0 (+ y (* 0.21 height))))
+      (draw-string "Press SPACEBAR to continue..."
+		   (+ x0 29) (+ y0 140) :color *gump-color* :font "oldania-italic")
       (let ((text-lines lines))
 	(loop while text-lines do
 	  (draw-string (let ((line (pop text-lines)))
@@ -129,6 +136,7 @@
 (defun show-hint (text &optional force)
   (with-fields (hints) (geoffrey)
     (unless (or force (find text hints :test 'equal))
+      (setf *paused* t)
       (play-sample "hint.wav")
       (push text hints)
       (drop-object (current-buffer)
@@ -136,6 +144,9 @@
 
 (defmethod tap ((hint hint) x y)
   (destroy hint))
+
+(defmethod destroy :after ((hint hint))
+  (setf *paused* nil))
 
 ;;; The scroll gump is for reading pages of text.
 

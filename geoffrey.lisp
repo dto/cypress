@@ -13,6 +13,10 @@
   :translation-timer 0 
   :playtime 0)
 
+(defmethod run-tasks :around ((geoffrey geoffrey))
+  (unless *paused*
+    (call-next-method)))
+
 (defmethod enable-translation ((self geoffrey))
   (setf (field-value :translation-timer self) (seconds->frames 120)))
 
@@ -78,6 +82,7 @@ inventory and find something to eat.
   (equip monk (find-arrow monk)))
 
 (define-method show-movement-hint geoffrey ()
+  (look self)
   (show-hint *movement-hint*))
 
 (define-method show-object-hint geoffrey ()

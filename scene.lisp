@@ -40,6 +40,9 @@
       (destroy self)
       (at-next-update (switch-to-scene scene)))))
 
+(defmethod tap ((self loading) x y) nil)
+(defmethod alternate-tap ((self loading) x y) nil)
+
 (defun load-scene (scene)
   (start-alone (new 'loading :scene scene)))
 
@@ -108,7 +111,7 @@
 
 (define-method quickload scene ()
   (load-quest))
-    
+
 (define-method toggle-pause scene ()
   (setf *paused* (if *paused* nil t)))
 
@@ -440,10 +443,10 @@
 (defmethod show-help-maybe ((scene scene)) nil)
 
 (defthing (meadow scene)
-  :background-image (random-choose '("stone-road.png" "meadow.png")))
+  :background-image "stone-road.png")
 
-(defmethod show-help-maybe ((meadow meadow)) 
-  (drop-object meadow (new 'scroll-gump :text *help-text*) (units 68) (units 16)))
+(defmethod show-help-maybe ((meadow meadow)) nil)
+;; (drop-object meadow (new 'scroll-gump :text *help-text*) (units 80) (units 10)))
 
 (defun meadow-debris () (spatter '(silverwood stone twig ginseng ginseng stone twig branch branch silverwood)
 			       :trim t :count (+ 2 (random 4))))
