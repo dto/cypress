@@ -1020,10 +1020,15 @@
 
 (defun cypress-save-file () (xelf::database-file))
 
-(defmethod save-quest ()
+(defun cypress-autosave-file () (xelf::find-project-file "cypress" "autosave.xelf"))
+
+(defmethod save-quest (&optional (file (cypress-save-file)))
   (let ((quest (flatten-quest)))
     (prog1 quest
-      (write-sexp-to-file (cypress-save-file) quest))))
+      (write-sexp-to-file file quest))))
+
+(defun autosave-quest ()
+  (save-quest (cypress-autosave-file)))
 
 (defun unflatten-hash (data test)
     (let ((plist data)
@@ -1100,8 +1105,9 @@
       (mapc #'after-revive objects)))) 
 	
 (defun load-quest (&optional (file (cypress-save-file)))
-  (expand-quest (first (read-sexp-from-file file)))
-  (switch-to-buffer (current-scene)))
+  (when (probe-file file)
+    (expand-quest (first (read-sexp-from-file file)))
+    (switch-to-buffer (current-scene))))
 
 ;;; Blood
 

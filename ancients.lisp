@@ -46,7 +46,7 @@ quest progress here.")
 (defmethod discuss :after ((waystone waystone) (topic (eql :save-progress))) 
   (with-fields (playtime) (geoffrey)
     (let ((seconds (/ playtime 30)))
-    (narrate "Saved progress with ~$ hours played." (/ seconds (* 60 60))))))
+      (narrate "Saved ~$ hours progress to ~A." (/ seconds (* 60 60)) (cypress-save-file)))))
 
 (defthing small-ruin 
   :tags '(:fixed)
@@ -67,7 +67,7 @@ quest progress here.")
   :description "stone of remembrance")
 
 (defun save-file-exists ()
-  (probe-file (xelf::database-file)))
+  (probe-file (cypress-save-file)))
 
 (defmethod activate ((stone stone-of-remembrance))
   (if (save-file-exists)
@@ -84,14 +84,21 @@ quest progress here.")
 		   :font "oldania-bold"))))
 
 (define-topic confirm stone-of-remembrance 
-  "Continue your saved quest?" :continue-quest :cancel)
+  "Continue your saved quest?" :load-saved-quest :load-autosave :cancel)
   
-(define-topic continue-quest stone-of-remembrance 
-  "Restoring quest...")
+(define-topic load-saved-quest stone-of-remembrance 
+  "Loading quest...")
 
 (defmethod discuss :after 
-    ((stone stone-of-remembrance) (topic (eql :continue-quest)))
+    ((stone stone-of-remembrance) (topic (eql :load-saved-quest)))
   (load-quest))
+
+(define-topic load-autosave stone-of-remembrance 
+  "Loading autosave file...")
+
+(defmethod discuss :after 
+    ((stone stone-of-remembrance) (topic (eql :load-autosave)))
+  (load-quest (cypress-autosave-file)))
 
 (defparameter *copper-gear-images* (image-set "copper-lock" 5))
 

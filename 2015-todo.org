@@ -1,0 +1,17 @@
+** DONE enable autosave
+   CLOSED: [2015-12-16 Wed 23:36]
+
+** DONE Auto-pause when tooltip scroll appears
+   CLOSED: [2015-12-16 Wed 22:05]
+** DONE remove opening text scroll
+   CLOSED: [2015-12-16 Wed 22:11]
+** DONE open hints nearer to middle of screen?
+   CLOSED: [2015-12-16 Wed 22:05]
+** DONE fix loading screen right click bug
+   CLOSED: [2015-12-16 Wed 22:17]
+
+** TODO move/wobble hint scroll?
+** TODO Add :after tooltip hints to some scrolls after closing
+
+** TODO enable previous savefile backups
+** TODO debug / recover from savefile issues 

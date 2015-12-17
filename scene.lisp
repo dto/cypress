@@ -20,7 +20,8 @@
   (snap-window-to-cursor (current-scene))
   (follow-with-camera (current-scene) (geoffrey))
   (begin-scene buffer)
-  (enter-scene (geoffrey)))
+  (enter-scene (geoffrey))
+  (autosave-maybe (current-scene)))
 
 (defthing (loading buffer) 
   :background-image "loading.png" 
@@ -101,6 +102,10 @@
     ((:i) open-inventory))
   ;;
   :excluded-fields '(:quadtree :click-start :click-start-block :drag-origin :drag-start :drag-offset :focused-block                      :shell :drag :hover :highlight :inputs))
+
+(defmethod autosave-maybe ((scene scene))
+  (autosave-quest)
+  (narrate "Autosaved progress to ~A" (cypress-autosave-file)))
 
 (define-method close-all-gumps scene ()
   (dolist (gump (find-gumps))
@@ -447,6 +452,8 @@
 
 (defmethod show-help-maybe ((meadow meadow)) nil)
 ;; (drop-object meadow (new 'scroll-gump :text *help-text*) (units 80) (units 10)))
+
+(defmethod autosave-maybe ((meadow meadow)) nil)
 
 (defun meadow-debris () (spatter '(silverwood stone twig ginseng ginseng stone twig branch branch silverwood)
 			       :trim t :count (+ 2 (random 4))))
