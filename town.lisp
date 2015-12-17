@@ -11,8 +11,13 @@
   :background-image "stone-road.png"
   :cold 0)
 
+(defparameter *ask-lucius-hint*
+  "Talk to Lucius for help on finding
+his grandfather, Arturo.")
+
 (defmethod begin-scene :after ((scene nothbehem))
   (set-objective "Find Arturo.")
+  (bark (lucius) "Hey, let's talk.") 
   (cue-music scene (random-choose '("drum.ogg" "dusk.ogg"))))
 
 (define (pentaquin-house house)

@@ -112,15 +112,14 @@
 
 (defmethod update :after ((hint hint))
   (when (colliding-with hint (geoffrey))
-    (with-fields (x y) (geoffrey)
-      (move-to hint (+ x (units 10)) (+ y (units 2))))))
+    (move-to hint (+ (window-x) (units 70)) (+ (window-y) (units 10)))))
 
 (defmethod draw ((self hint))
   (call-next-method)
   (with-fields (x y width height image lines) self
     (let ((x0 (+ x (* 0.15 width)))
 	  (y0 (+ y (* 0.21 height))))
-      (draw-string "Press SPACEBAR to continue..."
+      (draw-string "Press SPACEBAR (or click here) to continue..."
 		   (+ x0 29) (+ y0 140) :color *gump-color* :font "oldania-italic")
       (let ((text-lines lines))
 	(loop while text-lines do

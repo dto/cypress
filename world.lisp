@@ -996,6 +996,8 @@
 	      :fields plist)))))
 
 (defmethod flatten-database (&optional (database xelf::*database*))
+  (dolist (gump (find-gumps))
+    (destroy gump))
   (let (results)
     (labels ((each (uuid object)
 	       (push (flatten-and-store object) results)))
