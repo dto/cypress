@@ -117,6 +117,7 @@
 				(colliding-with (find-object thing) hint))
 		       (return-from touching? t))))
 	    (maphash #'touching-p (field-value :objects (current-scene)))))
+    (set-target-position hint (+ (window-x) (units 70)) (+ (window-y) (units 10)))
     (move-to hint (+ (window-x) (units 70)) (+ (window-y) (units 10)))))
 
 (defmethod draw ((self hint))
@@ -143,8 +144,9 @@
       (setf *paused* t)
       (play-sample "hint.wav")
       (push text hints)
-      (drop-object (current-buffer)
-		   (new 'hint :text text)))))
+      (let ((hint (new 'hint :text text)))
+	(drop-object (current-buffer) hint)
+	(update hint)))))
 
 (defmethod tap ((hint hint) x y)
   (destroy hint))
