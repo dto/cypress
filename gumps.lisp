@@ -101,7 +101,7 @@
 	    (* (image-width image) *hint-scale*)
 	    (* (image-height image) *hint-scale*))
     (move-to self 
-	     (+ (window-x) (units 40))
+	     (+ (window-x) (units 42))
 	     (+ (window-y) (units 25)))))
 
 (defmethod run ((self hint))
@@ -111,7 +111,12 @@
       (destroy self))))
 
 (defmethod update :after ((hint hint))
-  (when (colliding-with hint (geoffrey))
+  (when (block touching?
+	  (labels ((touching-p (thing ignored)
+		     (when (and (typep (find-object thing) (find-class 'monk))
+				(colliding-with (find-object thing) hint))
+		       (return-from touching? t))))
+	    (maphash #'touching-p (field-value :objects (current-scene)))))
     (move-to hint (+ (window-x) (units 70)) (+ (window-y) (units 10)))))
 
 (defmethod draw ((self hint))

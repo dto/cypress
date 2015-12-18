@@ -1,6 +1,19 @@
+** TODO show blinking thinger in corner when new journal entries are unread
+** TODO rewrite 1st person hints file sections into variables at 40 column text
+** TODO expand skull lore
+** TODO add "new quest hint" notifications 
+
+** TODO add hint hotkey or some button to click for a hint
+** TODO pop up current hint scrolls
+** TODO collect hint scrolls into a journal?
+** TODO play through entire quest
+** TODO make note of little improvements / opportunities for sidequests
+
+** TODO [#A] fix lucius first hint not appearing at opening of game
+** TODO [#C] move/wobble hint scroll slightly upon appearing?
+
 ** DONE enable autosave
    CLOSED: [2015-12-16 Wed 23:36]
-
 ** DONE Auto-pause when tooltip scroll appears
    CLOSED: [2015-12-16 Wed 22:05]
 ** DONE remove opening text scroll
@@ -9,9 +22,3 @@
    CLOSED: [2015-12-16 Wed 22:05]
 ** DONE fix loading screen right click bug
    CLOSED: [2015-12-16 Wed 22:17]
-
-** TODO move/wobble hint scroll?
-** TODO Add :after tooltip hints to some scrolls after closing
-
-** TODO enable previous savefile backups
-** TODO debug / recover from savefile issues 

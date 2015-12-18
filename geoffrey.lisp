@@ -70,6 +70,7 @@ inventory and find something to eat.
   ;; (learn-spell (geoffrey) (new 'travel))
   ;; 
   (add-inventory-item monk (new 'spellbook))
+  (add-inventory-item monk (new 'hintbook))
   (add-inventory-item monk (new 'camp))
   (add-inventory-item monk (new 'bag))
   (add-inventory-item monk (quantity-of 'ginseng 2))
@@ -80,6 +81,12 @@ inventory and find something to eat.
   (add-inventory-item monk (make-scroll "Adventurer's guide" *help-text*))
   (add-inventory-item monk (make-scroll "Summons from Dr. Quine" *quine-summons*))
   (equip monk (find-arrow monk)))
+
+(defmethod show-first-journal-entry ((geoffrey geoffrey))
+  (add-journal-entry *first-journal-entry*))
+
+(defmethod show-journal-hint ((geoffrey geoffrey))
+  (activate (find-journal)))
 
 (define-method show-movement-hint geoffrey ()
   (look self)

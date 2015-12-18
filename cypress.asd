@@ -26,4 +26,5 @@
 	       (:file "map" :depends-on ("amalia"))
 	       (:file "lore" :depends-on ("map"))
 	       (:file "story" :depends-on ("lore"))
-	       (:file "cypress" :depends-on ("story"))))
+	       (:file "journal" :depends-on ("story"))
+	       (:file "cypress" :depends-on ("journal"))))

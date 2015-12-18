@@ -1005,7 +1005,7 @@
     results))
 
 (defparameter *quest-variables* '(*travel-direction* *geoffrey*
-*lucius* *updates* *events* *current-objective*
+*journal* *lucius* *updates* *events* *current-objective*
 *status-line* *previous-scene* *previous-x* *previous-y*
 *status-messages* *status-message-time* *last-status-message-time*
 *map-screen* *map-row* *map-column* *current-scene*))

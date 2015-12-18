@@ -295,6 +295,7 @@ can also press the S key.")
   (learn-spell (geoffrey) (new 'travel))
   (cue-music (current-scene) (random-choose '("home.ogg" "traveler2.ogg")))
   (set-objective "Travel to Nothbehem with Lucius.")
+  (add-journal-entry *journey-to-nothbehem*)
   (show-hint *spellbook-hint*))
   ;; (activate (find-spellbook)))
 

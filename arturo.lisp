@@ -283,6 +283,7 @@ Follow Arturo to the house.")
     (with-fields (x y width height) house
       (walk-to self (+ x (units 5)) (+ y height (units 3)))))
   (show-hint *follow-arturo-hint*)
+  (add-journal-entry *after-arturo*)
   (unlock (find-pentaquin-house)))
 
 (define-topic farewell arturo 

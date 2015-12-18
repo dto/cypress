@@ -17,7 +17,7 @@ his grandfather, Arturo.")
 
 (defmethod begin-scene :after ((scene nothbehem))
   (set-objective "Find Arturo.")
-  (bark (lucius) "Hey, let's talk.") 
+  (add-journal-entry *arrival-in-nothbehem*)
   (cue-music scene (random-choose '("drum.ogg" "dusk.ogg"))))
 
 (define (pentaquin-house house)
