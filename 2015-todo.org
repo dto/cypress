@@ -1,15 +1,12 @@
-** TODO show blinking thinger in corner when new journal entries are unread
-** TODO rewrite 1st person hints file sections into variables at 40 column text
-** TODO expand skull lore
-** TODO add "new quest hint" notifications 
 
+** DONE [#A] fix lucius first hint not appearing at opening of game
+   CLOSED: [2015-12-18 Fri 01:36]
+** TODO [#A] rewrite 1st person hints file sections into variables at 40 column text
+** TODO [#B] expand skull lore
+   
 ** TODO add hint hotkey or some button to click for a hint
-** TODO pop up current hint scrolls
-** TODO collect hint scrolls into a journal?
 ** TODO play through entire quest
 ** TODO make note of little improvements / opportunities for sidequests
-
-** TODO [#A] fix lucius first hint not appearing at opening of game
 ** TODO [#C] move/wobble hint scroll slightly upon appearing?
 
 ** DONE enable autosave
@@ -22,3 +19,42 @@
    CLOSED: [2015-12-16 Wed 22:05]
 ** DONE fix loading screen right click bug
    CLOSED: [2015-12-16 Wed 22:17]
+
+* Archived Entries
+
+** DONE pop up current hint scrolls
+   CLOSED: [2015-12-18 Fri 01:20]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-18 Fri 01:20
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE collect hint scrolls into a journal?
+   CLOSED: [2015-12-18 Fri 01:20]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-18 Fri 01:20
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#B] show status line lighter when new entries are unread
+   CLOSED: [2015-12-18 Fri 01:20]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-18 Fri 01:20
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE add "new quest hint" notifications
+   CLOSED: [2015-12-18 Fri 01:19]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-18 Fri 01:20
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+

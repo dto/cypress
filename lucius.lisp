@@ -98,6 +98,10 @@
 (defmethod unfollow ((self lucius))
   (setf (field-value :leader self) nil))
 
+(defmethod show-first-hint ((self lucius))
+  (setf *paused* t)
+  (show-hint "Double-click Lucius to begin talking."))
+
 (defmethod run ((self lucius))
   (with-fields (next-flower leader met-player gump waypoints clock) self
     (call-next-method)
@@ -115,7 +119,7 @@
 	  (set-objective "Talk to Lucius.")
 	  (setf next-flower nil)
 	  (stop-walking self)
-	  (show-hint "Double-click Lucius to begin talking.")
+	  (later 2.2 (show-first-hint self))
 	  (walk-to-thing self (geoffrey)))
 	(if (or (and met-player (typep (current-scene) (find-class 'meadow)))
 		leader gump)

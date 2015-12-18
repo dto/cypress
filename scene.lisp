@@ -98,6 +98,7 @@
     ;; ((:f10) quickload)
     ((:p) toggle-pause)
     ((:m) open-map)
+    ((:j) open-journal)
     ((:s) open-spellbook)
     ((:i) open-inventory))
   ;;
@@ -229,6 +230,9 @@
 
 (defmethod open-spellbook ((buffer scene))
   (activate (find-spellbook)))
+
+(defmethod open-journal ((buffer scene))
+  (activate (find-journal)))
 
 (defmethod open-inventory ((buffer scene))
   (activate (geoffrey)))

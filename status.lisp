@@ -238,7 +238,8 @@
 	       (or (hunger-lighter-string (field-value :hunger (geoffrey))) "")
 	       "     "
 	       (or (cold-lighter-string (field-value :cold (geoffrey))) "")
-	       (if (unread-p (find-journal))
+	       (if (and (unread-p (find-journal))
+			(plusp (sin (/ *updates* 9))))
 		   " (New Journal Entry) "
 		   " ")
 	       ))

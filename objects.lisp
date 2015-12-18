@@ -257,6 +257,7 @@ increased. High resistance makes you
 almost immune to cold.
 
 Press \"I\" to see Geoffrey's inventory.
+Press \"J\" to open the quest journal.
 Press \"S\" to open the spellbook.
 Press \"M\" to open the travel map.
 Press Spacebar to pause/unpause the game.
