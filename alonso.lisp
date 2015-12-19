@@ -84,6 +84,7 @@ could be an illusion.
 (defmethod can-accept ((alonso alonso-corpse)) t)
 
 (defmethod activate ((alonso alonso-corpse))
+  (add-journal-entry *after-alonso*)
   (with-fields (activated) alonso
     (when (not activated)
       (setf activated t)
@@ -145,6 +146,7 @@ settlement. Could it be Alonso's?")
 
 (defmethod begin-scene :after ((scene alonso-ruins))
   (mark-traversed scene)
+  (add-journal-entry *after-alonso*)
   (show-hint *alonso-hint*)
   (percent-of-time 50 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg")))))
 

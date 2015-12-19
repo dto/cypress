@@ -47,6 +47,7 @@ his grandfather, Arturo.")
   (if (field-value :locked house)
       (narrate "You don't have permission to enter Arturo's house.")
       (progn 
+	(add-journal-entry *before-woods*)
 	(replace-gump house (new 'browser :container house))
 	(set-objective "Search the northwestern woods for Alonso."))))  
 

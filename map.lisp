@@ -238,12 +238,26 @@
 (defmethod begin-scene ((self map-screen)))
 
 (defmethod find-sector ((map map-screen) row column)
-  (with-fields (sectors) map
-    (when (<= row (length sectors))
-      (let ((ss (nth row sectors)))
-	(when (<= column (length ss))
-	  (nth column ss))))))
-  
+  (when (and (plusp row) (plusp column))
+    (with-fields (sectors) map
+      (when (<= row (length sectors))
+	(let ((ss (nth row sectors)))
+	  (when (<= column (length ss))
+	    (nth column ss)))))))
+
+(defmethod find-neighbors ((map map-screen) r c)
+  (let (neighbors)
+    (dolist (coords '((-1 -1) (-1 0) (-1 1) (0 -1) (1 1) (1 -1) (1 0) (0 1)))
+      (destructuring-bind (dr dc) coords
+	(push (find-sector map (+ r dr) (+ c dc)) neighbors)))
+    (delete nil neighbors)))
+
+(defmethod travel-to :after ((sector sector))
+  (with-fields (row column) sector
+    (dolist (neighbor (find-neighbors (ildron) row column))
+      (when (can-be-visited (field-value :scene neighbor))
+	(generate-maybe (field-value :scene sector))))))
+
 (defmethod arrange ((map-screen map-screen))
   ;; lay out the items
   (let ((x0 *map-screen-left-margin*)

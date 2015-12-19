@@ -156,14 +156,15 @@
 
 (defmethod activate ((self lucius))
   (destroy-gump self)
-  (play-talk-sound self)
-  (if (nothbehem-p)
-      (if (field-value :locked (find-pentaquin-house))
-	  (discuss self :house)
-	  (discuss self :farewell))
-      (if (null (field-value :leader self))
-	  (discuss self :hello)
-	  (discuss self :chat))))
+  (unless (nearby-enemies-p)
+    (play-talk-sound self)
+    (if (nothbehem-p)
+	(if (field-value :locked (find-pentaquin-house))
+	    (discuss self :house)
+	    (discuss self :farewell))
+	(if (null (field-value :leader self))
+	    (discuss self :hello)
+	    (discuss self :chat)))))
 
 (define-topic hello lucius
 "Greetings, brother! Well met. I don't

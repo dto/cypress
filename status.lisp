@@ -240,7 +240,7 @@
 	       (or (cold-lighter-string (field-value :cold (geoffrey))) "")
 	       (if (and (unread-p (find-journal))
 			(plusp (sin (/ *updates* 9))))
-		   " (New Journal Entry) "
+		   "     (New Journal Entry) "
 		   " ")
 	       ))
 

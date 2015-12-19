@@ -51,8 +51,10 @@
 	((and (< distance 220) (> distance 200))
 	 (show-hint "Double-click Arturo to talk.")
 	 (walk-to-thing self (geoffrey)))
-	((or gump (<= distance 200))
-	 (setf waypoints nil))))))
+	((or gump (<= distance 270))
+	 (setf waypoints nil))
+	((search-inventory (geoffrey) 'alonso-letter)
+	 (percent-of-time 4 (walk-to-thing self (geoffrey))))))))
 
 (defmethod activate ((self arturo))
   (play-talk-sound self)
@@ -89,8 +91,9 @@ your friend?"
 "Oh Lord, this is absolutely incredible.
 I never thought I would actually see a
 Time Traveler. Can it really be true?
-They say you can live a thousand years
-without one passing through your life."
+They say you can live a hundred thousand
+years without one passing through your
+life."
 :time-travel)
 
 (define-topic time-travel arturo 
@@ -240,9 +243,10 @@ valuable help." :alonso)
 (define-topic alonso arturo
 "My brother became a hermit as he
 aged. Last I heard, he built a cabin in
-the Wilmont Woods, to the northwest.
-Perhaps if you can find him, you'll find
-the key.
+the Wilmont Woods, far to the northwest,
+just north of another Waystone. Perhaps
+if you can find him, you'll find the
+key.
 
 If you return with news of my brother,
 I'll give you the other gear. For I am

@@ -239,21 +239,24 @@
 
 (defvar *travel-direction* :downright)
 
+(defmethod generate-maybe ((scene scene))
+  (with-fields (generated) scene
+    (when (not generated)
+      (setf generated t)
+      (let ((terrain (make-terrain scene)))
+	(when terrain
+	  (paste-from scene terrain)
+	  (destroy terrain)
+	  (resize scene (field-value :width terrain) (field-value :height terrain))
+	  (unless (field-value :quadtree scene)
+	    (install-quadtree scene)))))))
+
 (defmethod begin-scene ((buffer scene))
   (with-buffer buffer
     (unmark-traversed buffer)
     (setf *status-line*
 	  (find-object (new 'status-line)))
-    (with-fields (generated) buffer
-      (when (not generated)
-	(setf generated t)
-	(let ((terrain (make-terrain buffer)))
-	  (when terrain
-	    (paste-from buffer terrain)
-	    (destroy terrain)
-	    (resize buffer (field-value :width terrain) (field-value :height terrain))
-	    (unless (field-value :quadtree buffer)
-	      (install-quadtree buffer))))))
+    (generate-maybe buffer)
     ;; adjust scrolling parameters 
     (setf (%window-scrolling-speed buffer) (cfloat (/ *monk-speed* 2.3))
 	  (%horizontal-scrolling-margin buffer) 3/5

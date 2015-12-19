@@ -48,6 +48,9 @@ replies to him.
 
 (defmethod find-lore ((skull roberto-skull)) *roberto-lore*)
 
+(defmethod find-lore :after ((skull roberto-skull))
+  (add-journal-entry *after-roberto*))
+
 (defthing (hamlet-basement scene)
   :darkness-image "darkness.png"
   :background-image (random-choose *basement-images*))
@@ -90,6 +93,9 @@ replies to him.
     (add-inventory-item chest (quantity-of 'nightshade 2)) 
     (add-inventory-item chest (make-scroll "partly-burned letter" *burned-letter*))))
 
+(defmethod activate :after ((chest hamlet-chest))
+  (add-journal-entry *after-hamlet*))
+
 (defmethod make-terrain ((scene hamlet-basement))
   (with-border (units 12)
     (stacked-up (with-border (units 4) (singleton (new 'crumbling-stairwell)))
@@ -104,6 +110,7 @@ replies to him.
 
 (defmethod begin-scene :after ((scene ruined-hamlet))
   (show-hint "You found a ruined hamlet.")
+  (add-journal-entry *before-hamlet*)
   (percent-of-time 20 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg")))))
 
 (defthing (roberto-wraith wraith) :description "Wraith")
