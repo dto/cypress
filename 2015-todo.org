@@ -1,10 +1,7 @@
 ** TODO fix arturo walking away and leaving gear somewhere during conversation
-
 ** TODO [#A] rewrite 1st person hints file sections into journal entries at 40 column text
-
 ** TODO [#B] expand skull lore
 *** TODO add skull quests
-
 ** TODO play through entire quest
 ** TODO make note of little improvements / opportunities for sidequests
 

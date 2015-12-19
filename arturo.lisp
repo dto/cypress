@@ -164,14 +164,14 @@ places to stop, rest, and collect your
 thoughts and memories before continuing
 a journey. There's a Waystone here in
 town, over by the stone well."
- :sextant)
+ :sextant :wolves)
 
 (define-topic sextant arturo
   "I almost forgot, I happen to have an
 extra one! It will help you find your
 way in the forest. You are welcome to
 grab it from my house before you leave
-town." :town)
+town." :town :wolves)
 
 (define-topic town arturo
 "Nothbehem is one of the few remaining
@@ -181,7 +181,7 @@ grew cold. That was a hundred years
 ago---and in fact, your robes are not
 decked out with fur. I reckon you've
 been gone for more than a century."
-:cold :ancients)
+:cold :ancients :wolves)
 
 (define-topic cold arturo
 "You'll have to wear something warmer if
@@ -193,11 +193,11 @@ plating, are related somehow to the
 appearance of Travelers. You'll have to
 travel through snowy regions to reach
 most of these caves."
-:caves :clothing)
+:caves :clothing :ancients)
 
 (define-topic clothing arturo
 "I can give you something from my house
-to wear, before you leave town." :caves)
+to wear, before you leave town." :caves :ancients)
 
 (define-topic caves arturo
 "The cave entrances are decorated with
@@ -208,7 +208,7 @@ doors, and strange copper plates whose
 workings have never been deciphered.
 What sleeps beyond the sealed doors,
 none have ever found."
-:plates)
+:plates :ancients)
 
 (define-topic plates arturo
 "Some caves have two plates, and some
@@ -225,20 +225,20 @@ this day, we each hold one gear, and are
 bitterly estranged. If you want to find
 Dr. Quine, you'd better find my
 brother's gear first."
-:alonso :expedition)
+:alonso :expedition :ancients)
 
 (define-topic expedition arturo
 "We went in search of a woman of
 Nothbehem, named Amalia, who had run
 away from town. But we never found her.
 By chance we found an ancient crypt with
-a copper key buried inside." :alonso :amalia)
+a copper key buried inside." :alonso :amalia :ancients)
 
 (define-topic amalia arturo
 "I'll give you the written expedition
 report before you leave for your
 journey. I'm sure it will contain much
-valuable help." :alonso)
+valuable help." :alonso :ancients)
 
 (define-topic alonso arturo
 "My brother became a hermit as he
@@ -251,12 +251,12 @@ key.
 If you return with news of my brother,
 I'll give you the other gear. For I am
 an old man now, too weak to undertake
-the journey to the Gates." :woods)
+the journey to the Gates." :woods :ancients)
 
 (define-topic woods arturo
 "Come to my house before you leave town,
 and I'll give you enough supplies to get
-started on your journey." :bye :house)
+started on your journey." :bye :ancients :house)
 
 (defmethod discuss :after ((self arturo) (topic (eql :woods)))
   (set-objective "Ask Arturo to unlock his house for you.") 

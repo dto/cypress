@@ -140,7 +140,7 @@ them onto Geoffrey.")
   ;; (setf *nominal-screen-width* (* 1280 4))
   ;; (setf *nominal-screen-height* (* 720 4))
 
-  (setf *use-music* nil)
+  (setf *use-music* t)
   (setf *scale-output-to-window* t) 
   (setf *use-antialiased-text* t)
   (setf *font-texture-filter* :mipmap)
