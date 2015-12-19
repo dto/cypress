@@ -1,24 +1,23 @@
+** TODO fix arturo walking away and leaving gear somewhere during conversation
 
-** DONE [#A] fix lucius first hint not appearing at opening of game
-   CLOSED: [2015-12-18 Fri 01:36]
-** TODO [#A] rewrite 1st person hints file sections into variables at 40 column text
+** TODO [#A] rewrite 1st person hints file sections into journal entries at 40 column text
+
 ** TODO [#B] expand skull lore
-   
-** TODO add hint hotkey or some button to click for a hint
+*** TODO add skull quests
+
 ** TODO play through entire quest
 ** TODO make note of little improvements / opportunities for sidequests
-** TODO [#C] move/wobble hint scroll slightly upon appearing?
 
-** DONE enable autosave
-   CLOSED: [2015-12-16 Wed 23:36]
-** DONE Auto-pause when tooltip scroll appears
-   CLOSED: [2015-12-16 Wed 22:05]
-** DONE remove opening text scroll
-   CLOSED: [2015-12-16 Wed 22:11]
-** DONE open hints nearer to middle of screen?
-   CLOSED: [2015-12-16 Wed 22:05]
-** DONE fix loading screen right click bug
-   CLOSED: [2015-12-16 Wed 22:17]
+
+** DONE add Roberto skull hint
+   CLOSED: [2015-12-19 Sat 01:57]
+** DONE [#A] fix lucius first hint not appearing at opening of game
+   CLOSED: [2015-12-18 Fri 01:36]
+** DONE don't allow lucius convo when enemies near
+   CLOSED: [2015-12-18 Fri 18:00]
+** DONE adjacent waystones shown on map before discovery?
+   CLOSED: [2015-12-18 Fri 17:44]
+   
 
 * Archived Entries
 
@@ -53,6 +52,51 @@
    CLOSED: [2015-12-18 Fri 01:19]
    :PROPERTIES:
    :ARCHIVE_TIME: 2015-12-18 Fri 01:20
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE enable autosave
+   CLOSED: [2015-12-16 Wed 23:36]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Auto-pause when tooltip scroll appears
+   CLOSED: [2015-12-16 Wed 22:05]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE remove opening text scroll
+   CLOSED: [2015-12-16 Wed 22:11]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE open hints nearer to middle of screen?
+   CLOSED: [2015-12-16 Wed 22:05]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
+   :ARCHIVE_FILE: ~/cypress/2015-todo.org
+   :ARCHIVE_CATEGORY: 2015-todo
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE fix loading screen right click bug
+   CLOSED: [2015-12-16 Wed 22:17]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
    :ARCHIVE_FILE: ~/cypress/2015-todo.org
    :ARCHIVE_CATEGORY: 2015-todo
    :ARCHIVE_TODO: DONE
