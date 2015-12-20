@@ -140,7 +140,7 @@
 
 (defun show-hint (text &optional force)
   (with-fields (hints) (geoffrey)
-    (unless (or force (find text hints :test 'equal))
+    (when (or force (not (find text hints :test 'equal)))
       (setf *paused* t)
       (play-sample "hint.wav")
       (push text hints)

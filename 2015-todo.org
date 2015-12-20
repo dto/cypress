@@ -1,10 +1,19 @@
-** TODO fix arturo walking away and leaving gear somewhere during conversation
+** DONE fix arturo walking away and leaving gear somewhere during conversation
+   CLOSED: [2015-12-19 Sat 19:05]
+** DONE fix arturo not going to house to unlock it
+   CLOSED: [2015-12-19 Sat 20:49]
+** TODO [#B] Debug journal entry notification not appearing
 ** TODO [#A] rewrite 1st person hints file sections into journal entries at 40 column text
-** TODO [#B] expand skull lore
-*** TODO add skull quests
+
+** TODO make it so that amalia's papers survived in the silver box
+** TODO support "chapter saves" at certain points.
+** TODO add another northwest ruin with Book of Sun fragment
+** TODO make sure all conversation topics can be explored. 
 ** TODO play through entire quest
 ** TODO make note of little improvements / opportunities for sidequests
-
+** TODO [#B] expand skull lore
+*** TODO add skull quests
+** TODO look in pngs for unused art
 
 ** DONE add Roberto skull hint
    CLOSED: [2015-12-19 Sat 01:57]

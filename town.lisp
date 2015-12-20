@@ -40,7 +40,7 @@ his grandfather, Arturo.")
       (add-inventory-item house (new 'leather-shirt))
       (add-inventory-item house (tome-of 'craft-silver-arrows))
       (add-inventory-item house (tome-of 'cure-meat))
-      (add-inventory-item house (make-scroll "Expedition report" *amalia-report*))
+      (add-inventory-item house (make-scroll "Expedition report" *amalia-report* *after-amalia-report*))
       (add-inventory-item house (new 'sextant)))))
 
 (defmethod activate ((house pentaquin-house))

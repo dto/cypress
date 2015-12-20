@@ -85,8 +85,8 @@ inventory and find something to eat.
 (defmethod show-first-journal-entry ((geoffrey geoffrey))
   (add-journal-entry *first-journal-entry*))
 
-(defmethod show-journal-hint ((geoffrey geoffrey))
-  (activate (find-journal)))
+;; (defmethod show-journal-hint ((geoffrey geoffrey))
+;;   (activate (find-journal)))
 
 (define-method show-movement-hint geoffrey ()
   (look self)
@@ -241,12 +241,10 @@ to stop bleeding.")
 ;;; Party members
 
 (defmethod enter-scene ((self geoffrey))
-  (close-all-gumps (current-scene))
   (show-help-maybe (current-scene))
   (when (lucius-in-party-p)
     (multiple-value-bind (x y) (left-of self)
       (add-object (current-scene) (lucius) (- x 10) (- y 10)))))
-
 
 (defmethod exit-scene ((self geoffrey))
   (stop-walking self)

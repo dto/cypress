@@ -1,5 +1,15 @@
 (in-package :cypress)
 
+(defparameter *after-alonso*
+"So Alonso has passed onward to the Land
+of the Dead; Arturo will be crestfallen,
+I'm sure. I'll camp here tonight and set
+out for Nothbehem tomorrow to deliver
+this letter. Perhaps the message of
+forgiveness it carries will soften the
+blow.
+")
+
 (defparameter *alonso-letter* 
 "Arturo,
 
@@ -79,12 +89,12 @@ could be an illusion.
 
 (defthing (alonso-letter scroll)
   :text *alonso-letter*
+  :journal *after-alonso*
   :description "Letter to Arturo")
 
 (defmethod can-accept ((alonso alonso-corpse)) t)
 
 (defmethod activate ((alonso alonso-corpse))
-  (add-journal-entry *after-alonso*)
   (with-fields (activated) alonso
     (when (not activated)
       (setf activated t)

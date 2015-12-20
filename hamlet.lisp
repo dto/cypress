@@ -91,9 +91,9 @@ replies to him.
   (when (null (field-value :inventory chest))
     (add-inventory-item chest (tome-of 'seance))
     (add-inventory-item chest (quantity-of 'nightshade 2)) 
-    (add-inventory-item chest (make-scroll "partly-burned letter" *burned-letter*))))
+    (add-inventory-item chest (make-scroll "partly-burned letter" *burned-letter* *after-morbius-letter*))))
 
-(defmethod activate :after ((chest hamlet-chest))
+(defmethod activate :after ((chest hamlet-chest)) 
   (add-journal-entry *after-hamlet*))
 
 (defmethod make-terrain ((scene hamlet-basement))

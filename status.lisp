@@ -239,12 +239,10 @@
 	       "     "
 	       (or (cold-lighter-string (field-value :cold (geoffrey))) "")
 	       (if (and (unread-p (find-journal))
-			(plusp (sin (/ *updates* 9))))
+			(plusp (sin (/ *updates* 6))))
 		   "     (New Journal Entry) "
 		   " ")
 	       ))
-
-	       
 
 (defun magic-description (points)
   (or (when (<= points 20)

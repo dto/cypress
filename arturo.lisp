@@ -43,18 +43,19 @@
     (call-next-method)
     (unless gump (choose-target self))
     (let ((distance (distance-to-cursor self)))
-      (cond 
-	((or (> distance 500)
-	     (not (field-value :locked (find-pentaquin-house))))
-	 (when (and next-target (null waypoints))
-	   (percent-of-time 4 (walk-to-thing self next-target))))
-	((and (< distance 220) (> distance 200))
-	 (show-hint "Double-click Arturo to talk.")
-	 (walk-to-thing self (geoffrey)))
-	((or gump (<= distance 270))
-	 (setf waypoints nil))
-	((search-inventory (geoffrey) 'alonso-letter)
-	 (percent-of-time 4 (walk-to-thing self (geoffrey))))))))
+      (unless (field-value :discussed-woods self)
+	(cond 
+	  ((or (> distance 500)
+	       (not (field-value :locked (find-pentaquin-house))))
+	   (when (and next-target (null waypoints))
+	     (percent-of-time 4 (walk-to-thing self next-target))))
+	  ((and (< distance 220) (> distance 200))
+	   (show-hint "Double-click Arturo to talk.")
+	   (walk-to-thing self (geoffrey)))
+	  ((or gump (<= distance 270))
+	   (setf waypoints nil))
+	  ((search-inventory (geoffrey) 'alonso-letter)
+	   (percent-of-time 4 (walk-to-thing self (geoffrey)))))))))
 
 (defmethod activate ((self arturo))
   (play-talk-sound self)
@@ -322,7 +323,14 @@ the Ancients kept, but rather the riches
 of Knowledge.
 
 I suspect, in that regard, you shall be
-wealthier than a King one day."
+wealthier than a King one day. For if I
+follow aright the Logic of these events,
+I can see that you are one of the
+Ancients. If you can somehow reverse
+these Magicks and return to your own
+Time, you would be inheriting a Golden
+Age.
+"
 :southern-cave)
 
 (defmethod discuss :after ((arturo arturo) (topic (eql :give-letter)))
@@ -351,14 +359,17 @@ a Traveler."
 
 (define-topic goodbye arturo
 "Fare thee well, Geoffrey. You will be
-in my prayers and meditations.
+in my prayers and meditations, for while
+I have been content to die little by
+little, you have seen the death of your
+old life in an instant. I pray you will
+keep your Spirits up and not lose hope.
 
-Oh, one more thing! You should stop and
-talk to Maxwell before you leave
-town. He is an archaeologist, and knows
-more about the Ancients than
-anyone. Perhaps he will be able to help
-you.
+You should stop and talk to Maxwell
+before you leave town. He is an
+archaeologist, and knows more about the
+Ancients than anyone alive. Perhaps he
+will be able to help you.
 " :bye)
 
 (defmethod will-accept ((self arturo) (thing thing)) nil)

@@ -104,6 +104,12 @@
   ;;
   :excluded-fields '(:quadtree :click-start :click-start-block :drag-origin :drag-start :drag-offset :focused-block                      :shell :drag :hover :highlight :inputs))
 
+;; (defmethod float-journal-entry ((scene scene) string)
+;;   (show-hint *journal-hint*)
+;;   (push string *journal*)
+;;   (set-unread-p (find-journal) t)
+;;   (magical-flourish))
+
 (defmethod autosave-maybe ((scene scene))
   (autosave-quest)
   (narrate "Autosaved progress to ~A" (cypress-autosave-file)))
@@ -253,6 +259,7 @@
 
 (defmethod begin-scene ((buffer scene))
   (with-buffer buffer
+    (close-all-gumps buffer)
     (unmark-traversed buffer)
     (setf *status-line*
 	  (find-object (new 'status-line)))
@@ -495,8 +502,8 @@
 (defmethod begin-scene :after ((meadow meadow))
   (let ((geoffrey (geoffrey)))
     (later 2.5 (show-movement-hint geoffrey))
-    (later 5.5 (show-first-journal-entry geoffrey))
-    (later 8.0 (show-journal-hint geoffrey)))
+    (later 5.5 (show-first-journal-entry geoffrey)))
+    ;; (later 8.0 (show-journal-hint geoffrey)))
   (mark-traversed meadow)
   (drop-object meadow (new 'stone-of-remembrance)
 	       (units 25)

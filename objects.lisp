@@ -172,17 +172,22 @@ nisi. Nam eget dui.")
 
 (defthing scroll
   :stacking nil
+  :journal nil
   :text *lorem-ipsum*
   :image (random-choose *scroll-images*)
   :description "Blank scroll")
 
 (defmethod activate ((self scroll))
   (let ((gump (new 'scroll-gump :text (field-value :text self))))
-    (replace-gump self gump)))
+    (replace-gump self gump))
+  (with-fields (journal) self
+    (when journal 
+      (add-journal-entry journal))))
 
-(defun make-scroll (description text)
+(defun make-scroll (description text &optional journal)
   (let ((scroll (new 'scroll)))
     (setf (field-value :description scroll) description)
+    (setf (field-value :journal scroll) journal)
     (setf (field-value :text scroll) text)
     scroll))
 

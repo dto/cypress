@@ -100,16 +100,7 @@ way of saying what today is called
 :balsalva)
 
 (define-topic balsalva maxwell
-"Ahh... I see.
-
-Now I understand your look of pain, when
-we speak of the vanished Empire. For
-everything you knew has long since
-crumbled to dust; it must be a terrible
-weight on your Soul to have lost all
-your friends and loved ones.
-
-Strictly speaking, all the stones I
+"Strictly speaking, all the stones I
 catalogue for the Society are ruins of
 the Balsalva; even the old stone walls
 and patios here in town. But I suspect
@@ -154,7 +145,16 @@ symbol can manifest a white light of
 spiritual protection." :abbey)
 
 (define-topic abbey maxwell 
-"You will find the ruins of the Abbey to
+"Ahh... I see.
+
+Now I understand your look of pain, when
+we speak of the vanished Empire. For
+everything you knew has long since
+disappeared; it must be a terrible
+weight on your Soul to have lost your
+friends and loved ones.
+
+You will find the ruins of the Abbey to
 the north of town. Beware, Geoffrey.
 Sometimes glowing lights have been seen
 in that clearing from afar; perhaps
@@ -189,7 +189,7 @@ happening.
 "You must return soon! If you will but
 allow me to question you for knowledge
 of your Times, and of the people of
-Balsalva, a great deal of Good might be
+Balsalva, a great deal of good might be
 done. For some of us at the Library
 believe that the world is in a Dark Age;
 we are sworn to preserve the histories
@@ -210,7 +210,7 @@ Oh, and please take this with you. It's
 one of the Ancients' silver books, with
 their special silvery paper that lasts
 forever.  It's a little hand-written
-journal, mostly blank but with a few
+diary, mostly blank but with a few
 pages of writing at the start. I found
 it in the Northern ruins I told you
 about, and I've carried it since then as

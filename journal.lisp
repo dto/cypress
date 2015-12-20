@@ -21,9 +21,15 @@
 (defun find-journal ()
   (find-inventory-item (geoffrey) 'hintbook))
 
+(defparameter *journal-hint* 
+"Geoffrey made a new journal entry.
+Press J to read it, or double-click the
+Journal in your inventory. (Press I to
+open the inventory.)")
+
 (defun add-journal-entry (string)
   (unless (find string *journal* :test 'equal) 
-    (bark (geoffrey) "I've made a new journal entry.")
+    (show-hint *journal-hint* :force)
     (push string *journal*)
     (set-unread-p (find-journal) t)
     (magical-flourish)))
@@ -128,6 +134,11 @@ have to keep things fresh in my mind, if
 I'm to succeed.
 ")
 
+(defparameter *after-amalia-report*
+"Perhaps if this Amalia could see the
+future, she can also see the past?
+")
+
 (defparameter *before-hamlet* 
 "How frigid the weather has become! And
 a hamlet where life must have ended ere
@@ -157,11 +168,13 @@ inhabit the Wraith are but friendly
 passersby, compared with these wicked
 crawling skulls, with their fingerbones
 for legs and their soot-black sockets!
+")
 
-And who is the Morbius mentioned in this
+(defparameter *after-morbius-letter*
+"Who is the Morbius mentioned in this
 letter? What sort of Lord does he
-address? Why was it left here, and not
-delivered?
+address? Why was the letter left here,
+and not delivered?
 
 Perhaps I might find the Wraith nearby
 who took the Skull they were searching
@@ -196,20 +209,30 @@ in the trees! Could this have been
 Alonso's home?
 ")
 
-(defparameter *after-alonso*
-"So Alonso has passed onward to the Land
-of the Dead; Arturo will be crestfallen,
-I'm sure. I'll camp here tonight and set
-out for Nothbehem tomorrow to deliver
-this letter. Perhaps the message of
-forgiveness it carries will soften the
-blow.")
+(defparameter *anytime-valisade*
+"So this is what remains of Valisade.
+Its towers have fallen, and its grand
+plaza has become a patch of gravel.
+")
 
-;; (defparameter *before-maxwell* express sadness at Arturo's loss, and compare to self... talk about seeing maxwell
+(defparameter *before-maxwell*
+"I've got to stop thinking about it, and
+find Maxwell.")
 
-;; (defparameter *after-maxwell*  discuss abbey, sigils, ruins to North at foothills of Pisgah, going to southern cave
+(defparameter *after-maxwell* 
+"Very well. Whatever hopes I have are
+now pinned to these two copper gears in
+my satchel. I should rest and gather my
+supplies before heading southeast to the
+ancient cave, and into the Unknown.")
 
-;; (defparameter *after-alistair* ;;; translation of book
+(defparameter *after-quine-letter* 
+"
+")
+
+(defparameter *after-translation* 
+"
+")
 
 ;; (defparameter *after-owl* ;;; refer to book and hint at where flute might be
 
@@ -223,7 +246,6 @@ blow.")
 
 ;; (defparameter *after-outpost-basement*
 
-;; (defparameter *anytime-valisade*
 
 ;; (defparameter *before-valisade* 
 
@@ -242,3 +264,5 @@ blow.")
 ;; (defparameter *before-crossing*
 
 ;; (defparameter *after-crossing*
+
+;; (defparameter *after-shayol*
