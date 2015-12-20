@@ -3,11 +3,10 @@
 ** TODO [#A] fix roberto skull issue 
 ** TODO [#A] fix alonso and hamlet missing hints
 
-
-** DONE [#A] add Geoffrey's quest journal
-   CLOSED: [2015-12-20 Sun 17:20]
-** TODO [#A] make it so that amalia's papers survived in the silver box
-*** TODO add note about preservation boxes?
+** TODO final music should fade in
+** TODO fix inventory quantity display (raise slightly)
+# ** TODO [#A] make it so that amalia's papers survived in the silver box
+# *** TODO add note about preservation boxes?
 
 ** TODO [#B] adjust music cues so that more tracks are certain to play
 ** TODO [#B] expand skull lore a bit more, make sure lore never reappears
@@ -18,6 +17,10 @@
 ** TODO [#C] support "chapter saves" at certain points.
 ** TODO [#C] make note of little improvements / opportunities for sidequests
 
+** DONE [#A] Fix black border on right side of final level
+   CLOSED: [2015-12-20 Sun 17:51]
+** DONE [#A] add Geoffrey's quest journal
+   CLOSED: [2015-12-20 Sun 17:20]
 ** DONE longer journal entries must be written at next camp
 ** DONE add a degree of auto-aim for help in battle
 ** DONE add valisade camp thoughts

@@ -155,7 +155,6 @@ you another report when the time comes.
 (defthing (shayol-cylinder wax-cylinder) :description "shayol's wax cylinder")
 
 (defmethod activate ((tent morbius-tent))
-  (show-hint "Find Amalia.")
   (with-fields (activated) tent
     (when (not activated)
       (setf activated t)
@@ -386,11 +385,19 @@ gift!
 
 To the Death, now!" :fight)
 
+(defparameter *victory-hint*
+"I am victorious! The man in grey robes
+has been vanquished. But what of the
+burnt-out cabin I saw nearby? Could that
+be the place Amalia fled to?
+")
+
 (defmethod die ((self gray-wizard))
   (play-sound self "death.wav")
   (let ((remains (new 'remains)))
     (add-inventory-item remains (new 'shayol-cylinder))
     (drop self remains))
+  (show-hint *victory-hint*)
   (destroy self))
 
 (defmethod discuss :after ((self gray-wizard) (topic (eql :no!)))

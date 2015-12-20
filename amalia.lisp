@@ -79,6 +79,11 @@ of Heroes.")
 
 (defmethod find-description ((scene amalia-ruins)) "Frozen forest")
 
+(defmethod update :after ((scene amalia-ruins))
+  (with-fields (height width) scene
+    (when (< width *nominal-screen-width*) 
+      (resize scene (+ width 100) height))))
+
 (defmethod make-terrain ((scene amalia-ruins))
   (with-border (units 10)
     (lined-up-randomly
