@@ -3,9 +3,13 @@
 ** TODO [#A] fix roberto skull issue 
 ** TODO [#A] fix alonso and hamlet missing hints
 
-** TODO [#A] add Geoffrey's quest journal (about 1/2 done now)
+
+** DONE [#A] add Geoffrey's quest journal
+   CLOSED: [2015-12-20 Sun 17:20]
 ** TODO [#A] make it so that amalia's papers survived in the silver box
 *** TODO add note about preservation boxes?
+
+** TODO [#B] adjust music cues so that more tracks are certain to play
 ** TODO [#B] expand skull lore a bit more, make sure lore never reappears
 ** TODO [#B] add another northwest ruin with Book of Sun fragment
 *** TODO look in pngs for unused art

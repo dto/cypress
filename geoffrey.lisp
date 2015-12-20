@@ -83,7 +83,7 @@ inventory and find something to eat.
   (equip monk (find-arrow monk)))
 
 (defmethod show-first-journal-entry ((geoffrey geoffrey))
-  (add-journal-entry *first-journal-entry*))
+  (add-journal-entry (current-scene) *first-journal-entry*))
 
 ;; (defmethod show-journal-hint ((geoffrey geoffrey))
 ;;   (activate (find-journal)))

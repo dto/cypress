@@ -162,7 +162,7 @@ you another report when the time comes.
       (set-objective "Search for Amalia in the frigid North.")
       (add-inventory-item tent (new 'silverwool-leggings))
       (add-inventory-item tent (new 'silverwool-shirt))
-      (add-inventory-item tent (make-scroll "half-burnt letter" *half-burnt-letter*))
+      (add-inventory-item tent (make-scroll "half-burnt letter" *half-burnt-letter* *find-amalia*))
       (add-inventory-item tent (new 'morbius-cylinder))
       (add-inventory-item tent (new 'cylindrophone)))
     (replace-gump tent (new 'browser :container tent))))

@@ -156,7 +156,7 @@ settlement. Could it be Alonso's?")
 
 (defmethod begin-scene :after ((scene alonso-ruins))
   (mark-traversed scene)
-  (add-journal-entry *before-alonso*)
+  (later 5.0 (add-journal-entry scene *before-alonso*))
   (show-hint *alonso-hint*)
   (percent-of-time 50 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg")))))
 

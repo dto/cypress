@@ -37,7 +37,9 @@
 (defmethod activate ((self ancient-book))
   (if (not (can-translate (geoffrey)))
       (bark (geoffrey) "I can't read this language.")
-      (replace-gump self (new 'scroll-gump :text (field-value :text self)))))
+      (progn 
+	(replace-gump self (new 'scroll-gump :text (field-value :text self)))
+	(add-journal-entry (current-scene) *after-translation*))))
 
 (defun make-ancient-book (description text)
   (let ((ancient-book (new 'ancient-book)))
@@ -103,6 +105,12 @@ exercise, and contemplating the
 temporary nature of things. Just trying
 to remain quiet. 
 
+Still, I can't imagine just a plain old
+box of bones for me! I want the neumes
+carven upon my headstones, so that Death
+with his pipes might lull me to rest
+when that day comes.
+
 2nd Day, Month of Cypress. They were
 going to give me Alfred's spare key, but
 now Iggy says he can't find it. I'm
@@ -155,6 +163,9 @@ collect my thoughts.
 (defthing warrior-key :image "warrior-key.png")
 (defthing triangle-key :image "triangle-key.png")
 
+(defmethod accept :after ((thing thing) (key triangle-key))
+  (add-journal-entry (current-buffer) *after-outpost-basement*))
+
 ;;; The outpost basement 
 
 (defthing (outpost-basement scene)
@@ -195,6 +206,9 @@ collect my thoughts.
       "crumbling stairwell"
       "warrior sigil"))
 
+(defmethod find-description :after ((self warrior-sigil))
+  (add-journal-entry (current-scene) *after-warrior-sigil*))
+
 (defmethod activate ((self warrior-sigil))
   (with-fields (open image scene) self
     (if (not open)
@@ -206,6 +220,9 @@ collect my thoughts.
 		 (setf scene (new 'outpost-basement)))
 	       (save-excursion)
 	       (load-scene scene)))))
+
+(defmethod activate :after ((self warrior-sigil))
+  (add-journal-entry (current-scene) *after-warrior-sigil*))
 
 ;;; Valisade basement
 
@@ -319,10 +336,10 @@ enormous stone ruin.")
 (defmethod begin-scene :after ((self valisade))
   (percent-of-time 40 (cue-music self (random-choose '("spiritus.ogg" "kosmium.ogg" "monks.ogg"))))
   (show-hint *ruin-hint*)
-  (add-journal-entry *anytime-valisade*)
+  (later 7.0 (add-journal-entry self *anytime-valisade*))
   (when (search-inventory (geoffrey) 'journal)
-    (cue-music self "ruin.ogg")
-    (add-thought *remembering-valisade*)))
+    (cue-music self "ruins.ogg")
+    (add-thought self *remembering-valisade*)))
  
 (defmethod make-terrain ((self valisade))
   (with-border (units 15)

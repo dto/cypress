@@ -99,7 +99,8 @@ give you a hint about the music."
 :hint)
 
 (defmethod discuss :after ((owl owl) (topic (eql :music)))
-  (set-objective "Find music for the Screech Owl's test."))
+  (add-thought (current-scene) *after-owl*)
+  (set-objective "Find the Bone Flute, and 3 pieces of music for the Screech Owl's test."))
 
 (define-topic hint owl 
   "Hmm. Well, seeing as you don't have
@@ -160,6 +161,7 @@ use them to unlock the cave.
 Go now, Geoffrey!" :bye)
 
 (defmethod discuss :after ((owl owl) (topic (eql :where-are-they?)))
+  (add-journal-entry (current-buffer) *before-cave*)
   (with-fields (given-gears) owl
     (when (not given-gears)
       (setf given-gears t)

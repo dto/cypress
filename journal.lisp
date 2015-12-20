@@ -34,14 +34,14 @@ Journal at the next campfire. Press I to
 open your inventory, then drag the tent
 to an open area and double-click it.")
 
-(defun add-journal-entry (string &optional (hint *journal-hint*))
+(defmethod add-journal-entry ((scene scene) string &optional (hint *journal-hint*))
   (unless (find string *journal* :test 'equal) 
     (when hint (show-hint hint :force))
     (push string *journal*)
     (set-unread-p (find-journal) t)
     (magical-flourish)))
 
-(defun add-thought (string)
+(defmethod add-thought ((scene scene) string)
   (unless (find string *thoughts* :test 'equal)
     (show-hint *thought-hint* :force)
     (push string *thoughts*)
@@ -57,7 +57,7 @@ inventory.")
   (when *thoughts*
     (close-all-gumps (current-scene))
     (dolist (entry (reverse *thoughts*))
-      (add-journal-entry entry nil))
+      (add-journal-entry (current-scene) entry nil))
     (setf *thoughts* nil)
     (pause)
     (show-hint *update-journal-hint* :force (seconds->frames 10))))
@@ -293,37 +293,78 @@ mysterious Screech Owls.
 ")
 
 (defparameter *after-translation* 
-"
+"Could this silver diary be a record
+of the events that destroyed Valisade?
 ")
 
-;; (defparameter *after-owl* ;;; refer to book and hint at where flute might be
+(defparameter *after-owl*
+"How extraordinary to find a talking
+Owl! And how frustrating that he won't
+help me without interposing silly games
+and riddles. But I suppose Dr. Quine
+knew---I mean knows!--- what he is
+doing.
 
-;; (defparameter *before-outpost*
+But where can I look for this Flute? And
+once I have it, what sort of music
+should I play?
 
-;; (defparameter *after-outpost*
+According to the birds above, there are
+ruins about, near this garden, and I
+think I see a cemetery on the side of
+the high hills to the northeast. Mayhaps
+exploring there, I could learn more
+about the funerary rites of this
+Age. 
 
-;; (defparameter *before-retreat*
+But I must watch out for Spirit
+trouble---who knows what sadnesses and
+angers might fester in a cemetery whose
+ghosts have no one to visit them?
 
-;; (defparameter *after-retreat*
+Maxwell also spoke of ruins to the
+extreme North of his town, against the
+frozen foothills of Mount Pisgah.
 
-;; (defparameter *after-outpost-basement*
+  `To reach the outpost ruins, head due
+  North from town until you reach the
+  mountains; then head East until you
+  see the stones.'
 
-;; (defparameter *before-valisade* 
+If I'm to head into the frozen wastes, I
+must gather my supplies---and my wits.
+")
 
-;; (defparameter *after-valisade*
+(defparameter *after-warrior-sigil* 
+"So this must be the hooked spear and
+shield of the Warrior Sigil. But how to
+open it? I must explore further. Perhaps
+the ruins of the Western Retreat still
+exist?
+")
 
-;; (defparameter *before-neumes*
+(defparameter *after-outpost-basement* 
+"I've seen this triangular Sigil before!
+At the ruins of Valisade, due North of
+Nothbehem town.
+")
 
-;; (defparameter *after-neumes*
+(defparameter *before-cave*
+"Very well---it's to the southeastern
+Ancient cave I must go, and discover
+what's become of Francis and Dr. Quine.
+")
 
-;; (defparameter *before-cave*
+(defparameter *find-amalia*
+"I've got to bundle up, gather my
+supplies, and head North across the
+frozen river---to find Amalia.
+")
 
-;; (defparameter *after-cave*
+(defparameter *after-wizards* " ")
 
-;; (defparameter *after-wizards*
+(defparameter *before-crossing* " ")
 
-;; (defparameter *before-crossing*
+(defparameter *after-crossing* " ")
 
-;; (defparameter *after-crossing*
-
-;; (defparameter *after-shayol*
+(defparameter *after-shayol* " ")

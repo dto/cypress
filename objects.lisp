@@ -182,7 +182,7 @@ nisi. Nam eget dui.")
     (replace-gump self gump))
   (with-fields (journal) self
     (when journal 
-      (add-journal-entry journal))))
+      (add-journal-entry (current-scene) journal))))
 
 (defun make-scroll (description text &optional journal)
   (let ((scroll (new 'scroll)))

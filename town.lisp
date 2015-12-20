@@ -17,7 +17,7 @@ his grandfather, Arturo.")
 
 (defmethod begin-scene :after ((scene nothbehem))
   (set-objective "Find Arturo.")
-  (add-journal-entry *arrival-in-nothbehem*)
+  (later 5.0 (add-journal-entry scene *arrival-in-nothbehem*))
   (cue-music scene (random-choose '("drum.ogg" "dusk.ogg"))))
 
 (define (pentaquin-house house)
@@ -48,7 +48,7 @@ his grandfather, Arturo.")
       (narrate "You don't have permission to enter Arturo's house.")
       (progn 
 	(show-hint *equip-hint*)
-	(add-thought *before-woods*)
+	(add-thought (current-scene) *before-woods*)
 	(replace-gump house (new 'browser :container house))
 	(set-objective "Search the northwestern woods for Alonso."))))  
 

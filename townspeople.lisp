@@ -167,7 +167,13 @@ but perhaps you will be able to learn
 something there. There are probably
 other ruins in the Northwest, but we
 know very little, owing to the extreme
-cold conditions now prevailing there."
+cold conditions now prevailing there.
+
+To reach the outpost ruins, head due
+North from town until you reach the
+mountains; then head East until you see
+the stones.
+"
 :cold)
 
 (define-topic cold maxwell 
