@@ -148,6 +148,15 @@ before I go, I should give my thanks to
 Lucius, and bid him goodbye.
 ")
 
+(defparameter *equip-hint*
+"Equip clothing by dragging it into your
+inventory and double-clicking.")
+
+(defparameter *arrow-hint* 
+"Equip your new Silver arrows by
+double-clicking their icon in your
+inventory.")
+
 (defparameter *before-woods*
 "The Wilmont Woods are far to the
 Northwest; I should look for the other
@@ -172,10 +181,10 @@ future, she can also see the past?
 a hamlet where life must have ended ere
 a century past. 
 
-I doubted the old man's story at first,
-but now it seems difficult to deny---
-the world I knew has crumbled away into
-dust. 
+I doubted Arturo's story at first, but
+now it seems difficult to deny--- the
+world I knew has crumbled away into
+dust.
 
 What became of my family?  What about
 Francis and Dr. Quine? Still, I soldier

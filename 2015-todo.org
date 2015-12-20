@@ -1,121 +1,39 @@
-** TODO [#A] add Geoffrey's quest journal
-*** TODO should player camp before getting longer entries?
+* Version 2.4 (FINAL RC)
 
-** TODO add a degree of auto-aim
+** TODO [#A] fix roberto skull issue 
+** TODO [#A] fix alonso and hamlet missing hints
 
+** TODO [#A] add Geoffrey's quest journal (about 1/2 done now)
 ** TODO [#A] make it so that amalia's papers survived in the silver box
 *** TODO add note about preservation boxes?
-
-** TODO [#A] expand skull lore a bit more, make sure lore never reappears
-
+** TODO [#B] expand skull lore a bit more, make sure lore never reappears
 ** TODO [#B] add another northwest ruin with Book of Sun fragment
-** TODO [#B] debug adjacent waystones shown on map before discovery?
-
-** DONE add valisade camp thoughts
-   CLOSED: [2015-12-20 Sun 11:39]
-
+*** TODO look in pngs for unused art
+** TODO [#B] fix adjacent waystones not shown on map before discovery
 ** TODO [#C] add skull quests
 ** TODO [#C] support "chapter saves" at certain points.
 ** TODO [#C] make note of little improvements / opportunities for sidequests
-** TODO [#C] look in pngs for unused art
 
+** DONE longer journal entries must be written at next camp
+** DONE add a degree of auto-aim for help in battle
+** DONE add valisade camp thoughts
 ** DONE show journal notifications as hints
-   CLOSED: [2015-12-20 Sun 10:28]
-** DONE [#B] make sure all conversation topics can be explored
-   CLOSED: [2015-12-20 Sun 10:33]
+** DONE fix disappearing conversation topics
 ** DONE fix arturo walking away and leaving gear somewhere during conversation
-   CLOSED: [2015-12-19 Sat 19:05]
+** DONE fix lucius first hint not appearing at opening of game
 ** DONE fix arturo not going to house to unlock it
-   CLOSED: [2015-12-19 Sat 20:49]
-** DONE [#B] Debug journal entry notification not appearing
-   CLOSED: [2015-12-20 Sun 10:27]
-** DONE add Roberto skull hint
-   CLOSED: [2015-12-19 Sat 01:57]
-** DONE [#A] fix lucius first hint not appearing at opening of game
-   CLOSED: [2015-12-18 Fri 01:36]
+** DONE fix journal entry notification not appearing
 ** DONE don't allow lucius convo when enemies near
-   CLOSED: [2015-12-18 Fri 18:00]
+** DONE add Roberto skull hint
 
-* Archived Entries
+* Version 2.3 (released)
 
 ** DONE pop up current hint scrolls
-   CLOSED: [2015-12-18 Fri 01:20]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-18 Fri 01:20
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
-
 ** DONE collect hint scrolls into a journal?
-   CLOSED: [2015-12-18 Fri 01:20]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-18 Fri 01:20
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE [#B] show status line lighter when new entries are unread
-   CLOSED: [2015-12-18 Fri 01:20]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-18 Fri 01:20
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
-
+** DONE show status line blinker when new entries are unread
 ** DONE add "new quest hint" notifications
-   CLOSED: [2015-12-18 Fri 01:19]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-18 Fri 01:20
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
-
 ** DONE enable autosave
-   CLOSED: [2015-12-16 Wed 23:36]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
-
 ** DONE Auto-pause when tooltip scroll appears
-   CLOSED: [2015-12-16 Wed 22:05]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE remove opening text scroll
-   CLOSED: [2015-12-16 Wed 22:11]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
-
-** DONE open hints nearer to middle of screen?
-   CLOSED: [2015-12-16 Wed 22:05]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
-
+** DONE don't open Adventurer's guide on startup
 ** DONE fix loading screen right click bug
-   CLOSED: [2015-12-16 Wed 22:17]
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2015-12-19 Sat 01:58
-   :ARCHIVE_FILE: ~/cypress/2015-todo.org
-   :ARCHIVE_CATEGORY: 2015-todo
-   :ARCHIVE_TODO: DONE
-   :END:
 

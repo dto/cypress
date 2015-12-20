@@ -2,7 +2,7 @@
 
 ;;; Hamlet
 
-(defthing roberto-skull :description "Roberto's skull" :image (random-choose '("skull-1.png" "skull-2.png" "skull-3.png")))
+(defthing (roberto-skull skull) :description "Roberto's skull" :image (random-choose '("skull-1.png" "skull-2.png" "skull-3.png")))
 
 (defparameter *roberto-lore*
 "...is someone there? I haven't much time,
@@ -109,7 +109,6 @@ replies to him.
   :background-image (random-choose *snowy-meadow-images*))
 
 (defmethod begin-scene :after ((scene ruined-hamlet))
-  (show-hint "You found a ruined hamlet.")
   (add-journal-entry *before-hamlet*)
   (percent-of-time 20 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg")))))
 

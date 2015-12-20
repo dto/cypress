@@ -58,8 +58,8 @@ Or eat some Snowdrops.")
 	  (drop-object (current-buffer) 
 		       (new 'scroll-gump :text (find-lore skull))
 		       x y)
-	  (call-next-method caster spell)
-	  (destroy skull))
+	  (destroy skull)
+	  (call-next-method caster spell))
 	(show-hint "You need a skull to conduct a seance."))))
 
 ;;; Spark spell to light fire 
@@ -114,6 +114,7 @@ Or eat some Snowdrops.")
   
 (defmethod cast ((caster thing) (spell craft-silver-arrows))
   (add-inventory-item caster (quantity-of 'silver-arrow 6))
+  (show-hint *arrow-hint* nil (seconds->frames 8))
   (narrate "You crafted 6 silver arrows."))
 
 (defparameter *silver-arrow-hint*

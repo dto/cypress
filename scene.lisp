@@ -221,7 +221,7 @@
 	  (mark-traversed buffer)
 	  (with-fields (width height) (current-scene)
 	    (when (> (distance-from-starting-point (geoffrey))
-		     (/ (+ width height) 4))
+		     (/ (+ width height) 3.65))
 	      (narrate "You have traversed the current scene, and may now travel.")
 	      (mark-traversed buffer))))))
 	 

@@ -136,7 +136,7 @@ to stop bleeding.")
 
 (defmethod bleed :after ((monk geoffrey))
   (damage monk (- (random-choose '(2 4 6))))
-  (show-hint *bleeding-hint*)
+  (show-hint *bleeding-hint* nil (seconds->frames 5))
   (bark monk "I'm bleeding!"))
 
 (defmethod collide :after ((monk geoffrey) (wolf wolf)) 
