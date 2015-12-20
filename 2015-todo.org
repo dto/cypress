@@ -1,29 +1,38 @@
+** TODO [#A] add Geoffrey's quest journal
+*** TODO should player camp before getting longer entries?
+
+** TODO [#A] make it so that amalia's papers survived in the silver box
+*** TODO add note about preservation boxes?
+
+** TODO [#A] expand skull lore a bit more, make sure lore never reappears
+
+** TODO [#B] add another northwest ruin with Book of Sun fragment
+** TODO [#B] debug adjacent waystones shown on map before discovery?
+
+** DONE add valisade camp thoughts
+   CLOSED: [2015-12-20 Sun 11:39]
+
+** TODO [#C] add skull quests
+** TODO [#C] support "chapter saves" at certain points.
+** TODO [#C] make note of little improvements / opportunities for sidequests
+** TODO [#C] look in pngs for unused art
+
+** DONE show journal notifications as hints
+   CLOSED: [2015-12-20 Sun 10:28]
+** DONE [#B] make sure all conversation topics can be explored
+   CLOSED: [2015-12-20 Sun 10:33]
 ** DONE fix arturo walking away and leaving gear somewhere during conversation
    CLOSED: [2015-12-19 Sat 19:05]
 ** DONE fix arturo not going to house to unlock it
    CLOSED: [2015-12-19 Sat 20:49]
-** TODO [#B] Debug journal entry notification not appearing
-** TODO [#A] rewrite 1st person hints file sections into journal entries at 40 column text
-
-** TODO make it so that amalia's papers survived in the silver box
-** TODO support "chapter saves" at certain points.
-** TODO add another northwest ruin with Book of Sun fragment
-** TODO make sure all conversation topics can be explored. 
-** TODO play through entire quest
-** TODO make note of little improvements / opportunities for sidequests
-** TODO [#B] expand skull lore
-*** TODO add skull quests
-** TODO look in pngs for unused art
-
+** DONE [#B] Debug journal entry notification not appearing
+   CLOSED: [2015-12-20 Sun 10:27]
 ** DONE add Roberto skull hint
    CLOSED: [2015-12-19 Sat 01:57]
 ** DONE [#A] fix lucius first hint not appearing at opening of game
    CLOSED: [2015-12-18 Fri 01:36]
 ** DONE don't allow lucius convo when enemies near
    CLOSED: [2015-12-18 Fri 18:00]
-** DONE adjacent waystones shown on map before discovery?
-   CLOSED: [2015-12-18 Fri 17:44]
-   
 
 * Archived Entries
 

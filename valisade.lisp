@@ -319,8 +319,10 @@ enormous stone ruin.")
 (defmethod begin-scene :after ((self valisade))
   (percent-of-time 40 (cue-music self (random-choose '("spiritus.ogg" "kosmium.ogg" "monks.ogg"))))
   (show-hint *ruin-hint*)
-  (add-journal-entry *anytime-valisade*))
-
+  (add-journal-entry *anytime-valisade*)
+  (when (search-inventory (geoffrey) 'journal)
+    (add-thought *remembering-valisade*)))
+ 
 (defmethod make-terrain ((self valisade))
   (with-border (units 15)
     (lined-up-randomly

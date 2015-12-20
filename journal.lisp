@@ -1,6 +1,7 @@
 (in-package :cypress)
 
 (defvar *journal* nil)
+(defvar *thoughts* nil)
 
 (defparameter *journal-image* "notebook-3.png")
 
@@ -22,10 +23,16 @@
   (find-inventory-item (geoffrey) 'hintbook))
 
 (defparameter *journal-hint* 
-"Geoffrey made a new journal entry.
-Press J to read it, or double-click the
-Journal in your inventory. (Press I to
-open the inventory.)")
+"Geoffrey has written a note in his
+Journal. Press J to read it, or
+double-click the Journal in your
+inventory. (Press I to browse.)")
+
+(defparameter *thought-hint* 
+"Geoffrey will write a new entry in his
+Journal at the next campfire. Press I to
+open your inventory, then drag the tent
+to an open area and double-click it.")
 
 (defun add-journal-entry (string)
   (unless (find string *journal* :test 'equal) 
@@ -33,6 +40,17 @@ open the inventory.)")
     (push string *journal*)
     (set-unread-p (find-journal) t)
     (magical-flourish)))
+
+(defun add-thought (string)
+  (unless (find string *thoughts* :test 'equal)
+    (show-hint *thought-hint* :force)
+    (push string *thoughts*)
+    (magical-flourish)))
+
+(defun update-journal ()
+  (when *thoughts*
+    (mapc #'add-journal-entry (reverse *thoughts*))
+    (setf *thoughts* nil)))
 
 (defparameter *journal-footer* " ....................................................... ")
 
@@ -210,9 +228,28 @@ Alonso's home?
 ")
 
 (defparameter *anytime-valisade*
-"So this is what remains of Valisade.
+"What a desolate place this is. It seems
+as if a small city once stood here.
+I feel as if I am being watched.
+")
+
+(defparameter *remembering-valisade*
+"So this is what remains of Valisade...
 Its towers have fallen, and its grand
 plaza has become a patch of gravel.
+
+Unlike most Ordained, I have never seen
+the grave of my parents. But this place
+is the grave of my true Family, the Holy
+Order of Valisade. 
+
+While I slept, I felt an unusual
+silence, as if a minstrel had suddenly
+fallen mute.  For the first time I feel
+like one of the Ordained---somehow the
+shame of being an orphan has been
+dispelled. 'Tis a shame that the loss of
+my Spiritual family was the price.
 ")
 
 (defparameter *before-maxwell*
@@ -227,7 +264,13 @@ supplies before heading southeast to the
 ancient cave, and into the Unknown.")
 
 (defparameter *after-quine-letter* 
-"
+"To hear from Francis and Dr. Quine has
+filled me with hope! But this is
+tempered with trepidation at hearing of
+this \"dark horse\", Samuel.  
+
+I must head due North and find these
+mysterious Screech Owls.
 ")
 
 (defparameter *after-translation* 

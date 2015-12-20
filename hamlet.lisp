@@ -49,7 +49,7 @@ replies to him.
 (defmethod find-lore ((skull roberto-skull)) *roberto-lore*)
 
 (defmethod find-lore :after ((skull roberto-skull))
-  (add-journal-entry *after-roberto*))
+  (add-thought *after-roberto*))
 
 (defthing (hamlet-basement scene)
   :darkness-image "darkness.png"
@@ -94,7 +94,7 @@ replies to him.
     (add-inventory-item chest (make-scroll "partly-burned letter" *burned-letter* *after-morbius-letter*))))
 
 (defmethod activate :after ((chest hamlet-chest)) 
-  (add-journal-entry *after-hamlet*))
+  (add-thought *after-hamlet*))
 
 (defmethod make-terrain ((scene hamlet-basement))
   (with-border (units 12)

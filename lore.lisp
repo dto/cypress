@@ -51,7 +51,7 @@ Amalia; for just as much as they desired
 to know the future, they also feared her
 Gift, and wished to hear only good
 things from it. For what is Fear, if not
-the dread of future events?
+the dread of future events? 
 
 Our expedition was short, so far as
 Paladins' typical jaunts go. While it
@@ -117,7 +117,6 @@ trapped beneath Mount Einhall
 their voices came to us... through the
 Wizards' magic glass..."))
 
-
 (defparameter *quine-summons*
 "Dear Geoffrey,
 
@@ -173,22 +172,23 @@ You stand on the soil of of a continent
 ten thousand years older than the land
 you left. 
 
-With painstaking archaeological
-research, we have begun to reconstruct
-what happened in the centuries after our
+With years of archaeological research,
+we have begun to reconstruct what
+happened in the centuries after our
 disappearance. It would seem that
 Valisade became the seat of a vast
 imperial power due to its harnessing of
 the magic mineral Xalcium. Valisade's
-warrior-priest kings ruled over Ildron
-for a thousand years, but this was
-disrupted by a sudden catastrophe whose
-cause and nature are not yet fully clear
-to us. An explosion of some kind,
-perhaps a volcanic eruption, obliterated
-completely the isles of Einhall and Mir;
-much of the surrounding coastal areas
-were laid waste.
+warrior-priest kings ruled with Justice
+over Ildron for a thousand years, but
+this was disrupted by a sudden
+catastrophe whose cause and nature are
+not yet fully clear to us. An explosion
+of some kind, perhaps a volcanic
+eruption, obliterated completely the
+isles of Einhall and Mir; much of the
+surrounding coastal areas were laid
+waste.
 
 A rain of ash fell over the entire
 continent; this was followed by a year
@@ -209,12 +209,14 @@ Samuel.
 Though his motives are unknown, this
 \"Shane\" became a powerful Mage, and
 used Xalcium to extend his lifespan. For
-we find references to a Samuel and a
-Shamal, not only at the time of
-Xalcium's first harnessing, but also
-just before the great Disaster whose ash
-layer can be found everywhere beneath
-the soil.
+we find unmistakable descriptions of
+this man (named variously as Samuel,
+Shamal, or Sheyal) not only at the time
+of Xalcium's first harnessing, but also
+before many pivotal events and changes
+throughout the millennium before the
+great Disaster whose ash layer can be
+found everywhere beneath the soil.
 
 I must wait upon the ebbing of the river
 to dig more, uncover more ruins, and
@@ -227,8 +229,9 @@ share what I have learned.
 
 I will entrust the gears to the Order of
 the Screech Owls; seek them out in the
-forests to the North, and they will
-guide you to our next point of contact.
+forests to the North of this place, and
+they will guide you to our next point of
+contact.
 
 -- Dr. Quine
 ")
@@ -282,8 +285,8 @@ wooden cylinder, which has been
 beforehand coated with a thin layer of
 wax, the spiritual or magical
 vibrations, as such, are actually
-recorded in the subtle wigglings of the
-spiral left on the cylinder's
+recorded in the subtle meanderings of
+the spiral trace left on the cylinder's
 surface. By means of another similar
 machine, these wigglings are magically
 transformed into sound by vibrating
@@ -314,7 +317,7 @@ thousands became its slaves by the
 clever plans of Shayol.
 
 It is this Entity, not Shayol himself,
-that is our real problem.
+that presents our real problem.
 
 It is this Entity who made Valisade into
 an Empire for a thousand years, and then
@@ -366,7 +369,7 @@ to find her, but to no avail thus
 far. (I suspect that she is not yet born
 at the time of this writing.) They
 appear to see her as some kind of
-threat, and are working at any cost to
+threat, and they labor at any cost to
 eliminate her.
 
 Unfortunately, they feel the same way
@@ -374,7 +377,7 @@ about you, Geoffrey. Gather your
 strength, for you must find the
 Prescient woman---in this Age, or after
 further Traveling---and defeat Shayol's
-malevolent designs.
+cruel designings.
 
 We must move on from this encampment;
 it isn't safe here. Be well, Geoffrey.

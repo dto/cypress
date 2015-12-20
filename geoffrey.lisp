@@ -317,6 +317,7 @@ to stop bleeding.")
 (defmethod ignite ((camp camp))
   (with-fields (fire timer) camp
     (when (not fire)
+      (update-journal)
       (mark-camped (current-scene))
       (setf fire (new 'fire))
       (setf timer (seconds->frames 15))

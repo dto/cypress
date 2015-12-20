@@ -289,18 +289,17 @@ useful for recovering magic energy when
 you are feeling low." :bye)
 
 (defparameter *spellbook-hint*
-"Double-click Geoffrey to open his
+"Press S to open the Spellbook.
+Or, double-click Geoffrey to open his
 inventory, then double-click the
-Spellbook in the top left corner. You
-can also press the S key.")
+Spellbook in the top left corner.")
 
 (defmethod discuss :after ((self lucius) (topic (eql :go-with-lucius)))
   ;;(destroy-gump self)
   (follow self (geoffrey))
   (learn-spell (geoffrey) (new 'travel))
-  (cue-music (current-scene) (random-choose '("home.ogg" "traveler2.ogg")))
+  (cue-music (current-scene) "traveler2.ogg")
   (set-objective "Travel to Nothbehem with Lucius.")
-  (add-journal-entry *journey-to-nothbehem*)
   (show-hint *spellbook-hint*))
   ;; (activate (find-spellbook)))
 
@@ -310,8 +309,8 @@ about?" :quine :vale :grandfather :west :town)
 
 (define-topic chat lucius
   "Let's keep moving. We don't have time
-to sit around and talk, with the sun
-setting." :bye)
+to sit around and talk, with these
+wolves about." :bye)
 
 (define-topic house lucius 
   "Here's my hometown! I'm so excited to
