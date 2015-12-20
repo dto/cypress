@@ -99,7 +99,6 @@
   (setf (field-value :leader self) nil))
 
 (defmethod show-first-hint ((self lucius))
-  (setf *paused* t)
   (show-hint "Double-click Lucius to begin talking."))
 
 (defmethod run ((self lucius))
@@ -113,7 +112,7 @@
 	  (walk-to-thing self (geoffrey)))
 	;; handle first meeting
 	(when (and (not met-player)
-		   (< distance 400))
+		   (< distance 580))
 	  (setf met-player t)
 	  (bark self "Ho, stranger!")
 	  (set-objective "Talk to Lucius.")
@@ -277,16 +276,18 @@ above. If you open your spellbook and
 speak the incantation, you'll gain the
 presence of mind required to travel in
 this inhospitable clime.
-Shall we get moving?"
- :go-with-lucius :talk-more)
-
-(define-topic go-with-lucius lucius 
-  "Very well! Let's head North.
+Shall we get moving?
 
 Oh! You should pick a few white
 snowdrops before we leave. They're
 useful for recovering magic energy when
-you are feeling low." :bye)
+you are feeling low."
+ :go-with-lucius :talk-more)
+
+(define-topic go-with-lucius lucius 
+  "Very well! Let's make camp and head
+North!
+" :bye)
 
 (defparameter *spellbook-hint*
 "Press S to open the Spellbook.
@@ -300,7 +301,7 @@ Spellbook in the top left corner.")
   (learn-spell (geoffrey) (new 'travel))
   (cue-music (current-scene) "traveler2.ogg")
   (set-objective "Travel to Nothbehem with Lucius.")
-  (show-hint *spellbook-hint*))
+  (add-thought *journey-to-nothbehem*))
   ;; (activate (find-spellbook)))
 
 (define-topic talk-more lucius 

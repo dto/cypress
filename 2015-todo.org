@@ -1,6 +1,8 @@
 ** TODO [#A] add Geoffrey's quest journal
 *** TODO should player camp before getting longer entries?
 
+** TODO add a degree of auto-aim
+
 ** TODO [#A] make it so that amalia's papers survived in the silver box
 *** TODO add note about preservation boxes?
 

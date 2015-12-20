@@ -502,7 +502,7 @@
 (defmethod begin-scene :after ((meadow meadow))
   (let ((geoffrey (geoffrey)))
     (later 2.5 (show-movement-hint geoffrey))
-    (later 5.5 (show-first-journal-entry geoffrey)))
+    (later 7.5 (show-first-journal-entry geoffrey)))
     ;; (later 8.0 (show-journal-hint geoffrey)))
   (mark-traversed meadow)
   (drop-object meadow (new 'stone-of-remembrance)

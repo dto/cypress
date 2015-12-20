@@ -143,6 +143,7 @@
   (aiming-bow :initform nil)
   (bow-ready :initform nil)
   (aim-heading :initform nil)
+  (aim-enemy :initform nil)
   (fire-direction :initform :up)
   (last-fire-time :initform 0)
   ;; human status
@@ -319,7 +320,7 @@ Remembrance.")
 (defmethod casting-animation ((self monk)) *monk-cast*)
 
 (defmethod update-bow ((monk monk))
-  (with-fields (aiming-bow load-clock load-time bow-ready reload-time reload-clock) monk
+  (with-fields (aim-enemy aiming-bow load-clock load-time bow-ready reload-time reload-clock) monk
     (if (plusp reload-clock)
 	;; we're reloading. 
 	(when (plusp reload-clock)
@@ -330,10 +331,13 @@ Remembrance.")
 	    (if (plusp load-clock)
 		;; no, still reloading
 		(progn 
+		  (when (xelfp aim-enemy)
+		    (percent-of-time 12 (aim monk (heading-between monk aim-enemy))))
 		  (decf load-clock)
 		  (setf bow-ready nil))
 		;; yes
 		(setf bow-ready t
+		      aim-enemy nil
 		      aiming-bow nil))))))
 
 (defparameter *camp-hint* 
@@ -447,6 +451,7 @@ now, or you will freeze to death!")
 	      (narrate "Cannot fire while reloading."))
 	    (progn 
 	      (aim monk (heading-between monk enemy))
+	      (setf (field-value :aim-enemy monk) enemy)
 	      (begin-firing monk)
 	      (modify-hunger monk 1))))))
 

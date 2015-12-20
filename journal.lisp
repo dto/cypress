@@ -24,9 +24,9 @@
 
 (defparameter *journal-hint* 
 "Geoffrey has written a note in his
-Journal. Press J to read it, or
-double-click the Journal in your
-inventory. (Press I to browse.)")
+Journal. Press J to read it, or press I
+and then double-click the Journal in
+your inventory.")
 
 (defparameter *thought-hint* 
 "Geoffrey will write a new entry in his
@@ -34,9 +34,9 @@ Journal at the next campfire. Press I to
 open your inventory, then drag the tent
 to an open area and double-click it.")
 
-(defun add-journal-entry (string)
+(defun add-journal-entry (string &optional (hint *journal-hint*))
   (unless (find string *journal* :test 'equal) 
-    (show-hint *journal-hint* :force)
+    (when hint (show-hint hint :force))
     (push string *journal*)
     (set-unread-p (find-journal) t)
     (magical-flourish)))
@@ -47,10 +47,20 @@ to an open area and double-click it.")
     (push string *thoughts*)
     (magical-flourish)))
 
+(defparameter *update-journal-hint*
+"Geoffrey wrote a new journal entry.
+Press J to read it, or press I and then
+double-click the Journal in your
+inventory.")
+
 (defun update-journal ()
   (when *thoughts*
-    (mapc #'add-journal-entry (reverse *thoughts*))
-    (setf *thoughts* nil)))
+    (close-all-gumps (current-scene))
+    (dolist (entry (reverse *thoughts*))
+      (add-journal-entry entry nil))
+    (setf *thoughts* nil)
+    (pause)
+    (show-hint *update-journal-hint* :force (seconds->frames 10))))
 
 (defparameter *journal-footer* " ....................................................... ")
 
@@ -288,7 +298,6 @@ mysterious Screech Owls.
 ;; (defparameter *after-retreat*
 
 ;; (defparameter *after-outpost-basement*
-
 
 ;; (defparameter *before-valisade* 
 

@@ -321,6 +321,7 @@ enormous stone ruin.")
   (show-hint *ruin-hint*)
   (add-journal-entry *anytime-valisade*)
   (when (search-inventory (geoffrey) 'journal)
+    (cue-music self "ruin.ogg")
     (add-thought *remembering-valisade*)))
  
 (defmethod make-terrain ((self valisade))
@@ -459,18 +460,5 @@ browse contents.")
        (spray '(ruin-wall dead-tree gray-rock cobblestone) 
 	      :trim nil
 	      :count 8))))
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

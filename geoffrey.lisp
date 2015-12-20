@@ -108,10 +108,16 @@ inventory and find something to eat.
 (defmethod humanp ((monk geoffrey)) t)
 
 (defparameter *summons-hint* 
-"Try reading the scrolls
-in your inventory.")
+"Try reading the scrolls in your inventory.
+Double-click a scroll to read it. You
+can also drag the Magic Tent out to an
+open area of ground, and ignite the fire 
+by double-clicking the camp.
+")
 
-(defmethod activate ((monk geoffrey))
+(defmethod
+activate ((monk
+geoffrey))
   (show-hint *summons-hint*)
   (replace-gump monk (new 'browser :container monk)))
 

@@ -84,41 +84,33 @@
 (defthing (hint gump)
   :image "talk-scroll.png"
   :image-scale 600
-  :timer (seconds->frames 10)
+  :timer (seconds->frames 1)
   :lines nil)
 
 (defresource "hint.wav" :volume 6)
 
-(defmethod initialize ((self hint) &key text)
+(defmethod initialize ((self hint) &key text timer)
+  (when timer (setf (field-value :timer self) timer))
   (setf (field-value :lines self) 
 	(split-string-on-lines text)))
   
 (defparameter *hint-scale* (/ 1 1.6))
 
-(defmethod arrange :after ((self hint))
-  (with-fields (image width) self
-    (resize self 
-	    (* (image-width image) *hint-scale*)
-	    (* (image-height image) *hint-scale*))
-    (move-to self 
-	     (+ (window-x) (units 42))
-	     (+ (window-y) (units 25)))))
+(defmethod update :after ((self hint))
+  (let ((left (units 72)))
+    (with-fields (image width) self
+      (resize self 
+	      (* (image-width image) *hint-scale*)
+	      (* (image-height image) *hint-scale*))
+      (move-to self 
+	       (+ (window-x) left)
+		  (+ (window-y) (units 25))))))
 
 (defmethod run ((self hint))
   (with-fields (timer) self
     (decf timer)
-    (when (or (zerop timer) (not *paused*))
+    (when (and (zerop timer) (not *paused*))
       (destroy self))))
-
-(defmethod update :after ((hint hint))
-  (when (block touching?
-	  (labels ((touching-p (thing ignored)
-		     (when (and (typep (find-object thing) (find-class 'monk))
-				(colliding-with (find-object thing) hint))
-		       (return-from touching? t))))
-	    (maphash #'touching-p (field-value :objects (current-scene)))))
-    (set-target-position hint (+ (window-x) (units 70)) (+ (window-y) (units 10)))
-    (move-to hint (+ (window-x) (units 70)) (+ (window-y) (units 10)))))
 
 (defmethod draw ((self hint))
   (call-next-method)
@@ -138,15 +130,22 @@
 			   :font *gump-font*)
 	  (incf y0 (font-height *gump-font*)))))))
 
-(defun show-hint (text &optional force)
+;; (defmethod move-to-safe-position ((hint hint))
+;;   (when (block touching?
+;; 	  (labels ((touching-p (thing ignored)
+;; 		     (when (and (typep (find-object thing) (find-class 'monk))
+;; 				(colliding-with (find-object thing) hint))
+;; 		       (return-from touching? t))))
+;; 	    (maphash #'touching-p (field-value :objects (current-scene)))))
+
+(defun show-hint (text &optional force timer)
   (with-fields (hints) (geoffrey)
     (when (or force (not (find text hints :test 'equal)))
-      (setf *paused* t)
       (play-sample "hint.wav")
       (push text hints)
-      (let ((hint (new 'hint :text text)))
-	(drop-object (current-buffer) hint)
-	(update hint)))))
+      (let ((hint (new 'hint :text text :timer timer)))
+	(pause)
+	(drop-object (current-buffer) hint)))))
 
 (defmethod tap ((hint hint) x y)
   (destroy hint))

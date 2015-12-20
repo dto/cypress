@@ -129,7 +129,7 @@ these books. So.. umm...." :bye :talk-more)
 
 (defmethod discuss :after ((alistair alistair) (topic (eql :letter)))
   (when (not (field-value :given-letter alistair))
-    (drop alistair (make-scroll "Letter from Dr. Quine" *first-quine-letter* *after-alistair*)
+    (drop alistair (make-scroll "Letter from Dr. Quine" *first-quine-letter* *after-quine-letter*)
 	  (units 3) (units 3))
     (learn-spell (geoffrey) (new 'translation))
     (set-objective "Find the Screech Owl in the forests to the North.")
