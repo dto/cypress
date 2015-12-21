@@ -109,7 +109,7 @@ replies to him.
   :background-image (random-choose *snowy-meadow-images*))
 
 (defmethod begin-scene :after ((scene ruined-hamlet))
-  (later 7.0 (add-note (geoffrey) *before-hamlet*))
+  (later 7.0 (notice (geoffrey) *before-hamlet*))
   (percent-of-time 20 (cue-music scene (random-choose '("passageway.ogg" "lutey.ogg" "dusk.ogg")))))
 
 (defthing (roberto-wraith wraith) :description "Wraith")

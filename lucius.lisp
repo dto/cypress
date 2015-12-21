@@ -317,7 +317,12 @@ wolves about." :bye)
   "Here's my hometown! I'm so excited to
 find out what my grandfather thinks of
 you! Let's get to his house; it's the
-fancy one with the three skylights." :bye)
+fancy one with the three skylights.
+
+If he isn't there, we should look by the
+old stone well, where he may be tending
+his Silverwood garden.
+" :bye)
 
 (define-topic farewell lucius 
   "Best of luck on your journey, Geoffrey.

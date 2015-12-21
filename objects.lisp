@@ -438,6 +438,9 @@ Press Control-Q to quit the game.
 
 (defthing leather-leggings :stacking nil :image "leather-leggings.png" :defense 1 :resistance 1)
 
+(defmethod accept :after ((thing thing) (leggings leather-leggings))
+  (show-hint *equip-hint*))
+
 (defmethod activate ((self leather-leggings))
   (toggle-equipped (geoffrey) self))
 
@@ -445,6 +448,9 @@ Press Control-Q to quit the game.
   "Geoffrey is wearing leather leggings.")
 
 (defthing leather-shirt :stacking nil :image "leather-shirt.png" :defense 1 :resistance 1)
+
+(defmethod accept :after ((thing thing) (shirt leather-shirt))
+  (show-hint *equip-hint*))
 
 (defmethod equipment-description ((self leather-shirt))
   "Geoffrey is wearing a leather shirt.")

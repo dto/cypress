@@ -152,8 +152,8 @@ Lucius, and bid him goodbye.
 ")
 
 (defparameter *equip-hint*
-"Equip clothing by dragging it into your
-inventory and double-clicking.")
+"Equip clothing by double-clicking
+the item's inventory icon.")
 
 (defparameter *arrow-hint* 
 "Equip your new Silver arrows by
