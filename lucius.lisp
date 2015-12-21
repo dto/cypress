@@ -301,7 +301,7 @@ Spellbook in the top left corner.")
   (learn-spell (geoffrey) (new 'travel))
   (cue-music (current-scene) "traveler2.ogg")
   (set-objective "Travel to Nothbehem with Lucius.")
-  (add-thought *journey-to-nothbehem*))
+  (add-thought (current-buffer) *journey-to-nothbehem*))
   ;; (activate (find-spellbook)))
 
 (define-topic talk-more lucius 
