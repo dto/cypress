@@ -13,6 +13,9 @@
   :translation-timer 0 
   :playtime 0)
 
+(defmethod add-note ((geoffrey geoffrey) note)
+  (add-journal-entry (current-scene) note))
+
 (defmethod run-tasks :around ((geoffrey geoffrey))
   (unless *paused*
     (call-next-method)))

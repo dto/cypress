@@ -1,5 +1,10 @@
 * Version 2.4 (FINAL RC)
 
+** DONE [#A] fix arturo talk crash
+   CLOSED: [2015-12-21 Mon 11:35]
+** TODO [#A] fix missing hints
+** DONE fix gumps closing after journal update
+   CLOSED: [2015-12-21 Mon 11:52]
 ** TODO [#A] fix roberto skull issue 
 ** TODO [#A] fix alonso and hamlet missing hints
 

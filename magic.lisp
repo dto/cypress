@@ -55,6 +55,7 @@ Or eat some Snowdrops.")
     (if skull
 	(multiple-value-bind (x y)
 	    (gump-cascade-position)
+	  (close-all-gumps (current-scene))
 	  (drop-object (current-buffer) 
 		       (new 'scroll-gump :text (find-lore skull))
 		       x y)
@@ -121,8 +122,8 @@ Or eat some Snowdrops.")
 "Double-click silver arrows
 in inventory to equip them.")
 
-(defmethod cast :after ((caster thing) (spell craft-silver-arrows))
-  (show-hint *silver-arrow-hint*))
+;; (defmethod cast :after ((caster thing) (spell craft-silver-arrows))
+;;   (show-hint *silver-arrow-hint*))
 
 ;;; Travel
 

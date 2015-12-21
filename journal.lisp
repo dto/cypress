@@ -1,6 +1,6 @@
 (in-package :cypress)
 
-(defvar *journal* nil)
+(defvar *journal* nil) 
 (defvar *thoughts* nil)
 
 (defparameter *journal-image* "notebook-3.png")
@@ -36,16 +36,19 @@ to an open area and double-click it.")
 
 (defmethod add-journal-entry ((scene scene) string &optional (hint *journal-hint*))
   (unless (find string *journal* :test 'equal) 
-    (when hint (show-hint hint :force))
+    (when hint 
+      (show-hint hint :force)     
+      (pause))
     (push string *journal*)
     (set-unread-p (find-journal) t)
     (magical-flourish)))
 
 (defmethod add-thought ((scene scene) string)
-  (unless (find string *thoughts* :test 'equal)
-    (show-hint *thought-hint* :force)
-    (push string *thoughts*)
-    (magical-flourish)))
+ (unless (find string *thoughts* :test 'equal)
+   (pause)
+   (show-hint *thought-hint* :force (seconds->frames 10))
+   (push string *thoughts*)
+   (magical-flourish)))
 
 (defparameter *update-journal-hint*
 "Geoffrey wrote a new journal entry.
@@ -55,8 +58,8 @@ inventory.")
 
 (defun update-journal ()
   (when *thoughts*
-    (close-all-gumps (current-scene))
-    (dolist (entry (reverse *thoughts*))
+    ;; (close-all-gumps (current-scene))
+    (dolist (entry *thoughts*)
       (add-journal-entry (current-scene) entry nil))
     (setf *thoughts* nil)
     (pause)

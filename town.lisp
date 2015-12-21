@@ -17,7 +17,7 @@ his grandfather, Arturo.")
 
 (defmethod begin-scene :after ((scene nothbehem))
   (set-objective "Find Arturo.")
-  (later 5.0 (add-journal-entry scene *arrival-in-nothbehem*))
+  (later 7.0 (add-note (geoffrey) *arrival-in-nothbehem*))
   (cue-music scene (random-choose '("drum.ogg" "dusk.ogg"))))
 
 (define (pentaquin-house house)
